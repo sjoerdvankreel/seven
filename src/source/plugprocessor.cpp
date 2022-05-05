@@ -41,6 +41,7 @@
 #include "pluginterfaces/base/ibstream.h"
 #include "pluginterfaces/vst/ivstparameterchanges.h"
 #include "pluginterfaces/vst/ivstaudioprocessor.h"
+#include "pluginterfaces/vst/ivstevents.h"
 #include <cmath>
 
 namespace Steinberg {
@@ -63,7 +64,8 @@ tresult PLUGIN_API PlugProcessor::initialize (FUnknown* context)
 
 	//---create Audio In/Out buses------
 	// we want a stereo Input and a Stereo Output
-	addAudioOutput (STR16 ("AudioOutput"), Vst::SpeakerArr::kStereo);
+  addEventInput(STR16("Event In"), 1);
+	addAudioOutput (STR16 ("Stereo Out"), Vst::SpeakerArr::kStereo);
 
 	return kResultTrue;
 }
@@ -144,14 +146,57 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 
   //test
 
+  static bool on = false;
+  static int note = -1;
+
+  //---2) Read input events-------------
+  Steinberg::Vst::IEventList* eventList = data.inputEvents;
+  if (eventList)
+  {
+    int32 numEvent = eventList->getEventCount();
+    for (int32 i = 0; i < numEvent; i++)
+    {
+      Steinberg::Vst::Event event;
+      if (eventList->getEvent(i, event) == kResultOk)
+      {
+        switch (event.type)
+        {
+          //----------------------
+        case Steinberg::Vst::Event::kNoteOnEvent:
+        {
+          on = true;
+          note = event.noteOn.pitch;
+          //mLastNoteOnPitch = event.noteOn.pitch;
+          //mLastNoteOnId = event.noteOn.noteId;
+          /*String str;
+          str.printf (STR("noteON %d"), event.noteOff.noteId);
+          sendTextMessage (str);*/
+        }
+        break;
+
+        //----------------------
+        case Steinberg::Vst::Event::kNoteOffEvent:
+          on = false;
+          note = -1;
+        {
+          /*	String str;
+            str.printf (STR("noteOff %d"), event.noteOff.noteId);
+            sendTextMessage (str);
+          */}
+        break;
+        }
+      }
+    }
+  }
+
   static float phase = 0;
-	if (data.numSamples > 0)
+	if (on &&  data.numSamples > 0)
 	{
     for (int i = 0; i < data.numSamples; i++)
     {
       data.outputs[0].channelBuffers32[0][i] = std::sinf(2.0f * 3.14 * phase);
       data.outputs[0].channelBuffers32[1][i] = std::sinf(2.0f * 3.14 * phase);
-      phase += 440.0f / processSetup.sampleRate;
+      phase += (note * 100.0f) / processSetup.sampleRate;
       if(phase>=1.0f)phase-=1.0f;
     }
 
