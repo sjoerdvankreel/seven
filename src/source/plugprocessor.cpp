@@ -194,8 +194,8 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 	{
     for (int i = 0; i < data.numSamples; i++)
     {
-      data.outputs[0].channelBuffers32[0][i] = std::sinf(2.0f * 3.14 * phase);
-      data.outputs[0].channelBuffers32[1][i] = std::sinf(2.0f * 3.14 * phase);
+      data.outputs[0].channelBuffers32[0][i] = std::sinf(2.0f * 3.14 * phase) * mParam1;
+      data.outputs[0].channelBuffers32[1][i] = std::sinf(2.0f * 3.14 * phase) * mParam1;
       phase += (note * 100.0f) / processSetup.sampleRate;
       if(phase>=1.0f)phase-=1.0f;
     }
