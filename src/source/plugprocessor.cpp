@@ -142,6 +142,8 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 		return kResultOk;
 	}
 
+  //test
+
   static float phase = 0;
 	if (data.numSamples > 0)
 	{
