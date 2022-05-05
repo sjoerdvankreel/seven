@@ -61,7 +61,6 @@ tresult PLUGIN_API PlugProcessor::initialize (FUnknown* context)
 
 	//---create Audio In/Out buses------
 	// we want a stereo Input and a Stereo Output
-	addAudioInput (STR16 ("AudioInput"), Vst::SpeakerArr::kStereo);
 	addAudioOutput (STR16 ("AudioOutput"), Vst::SpeakerArr::kStereo);
 
 	return kResultTrue;

@@ -41,7 +41,7 @@
 #include "../include/plugids.h"			// for uids
 #include "../include/version.h"			// for version and naming
 
-#define stringSubCategory	"Fx"	// Subcategory for this Plug-in (to be changed if needed, see PlugType in ivstaudioprocessor.h)
+#define stringSubCategory	"Instrument"	// Subcategory for this Plug-in (to be changed if needed, see PlugType in ivstaudioprocessor.h)
 
 BEGIN_FACTORY_DEF (stringCompanyName, stringCompanyWeb,	stringCompanyEmail)
 
