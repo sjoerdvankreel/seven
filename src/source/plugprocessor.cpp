@@ -128,16 +128,6 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 						    kResultTrue)
 							mParam1 = value;
 						break;
-					case HelloWorldParams::kParamOnId:
-						if (paramQueue->getPoint (numPoints - 1, sampleOffset, value) ==
-						    kResultTrue)
-							mParam2 = value > 0 ? 1 : 0;
-						break;
-					case HelloWorldParams::kBypassId:
-						if (paramQueue->getPoint (numPoints - 1, sampleOffset, value) ==
-						    kResultTrue)
-							mBypass = (value > 0.5f);
-						break;
 				}
 			}
 		}
@@ -174,17 +164,7 @@ tresult PLUGIN_API PlugProcessor::setState (IBStream* state)
 	if (streamer.readFloat (savedParam1) == false)
 		return kResultFalse;
 
-	int32 savedParam2 = 0;
-	if (streamer.readInt32 (savedParam2) == false)
-		return kResultFalse;
-
-	int32 savedBypass = 0;
-	if (streamer.readInt32 (savedBypass) == false)
-		return kResultFalse;
-
 	mParam1 = savedParam1;
-	mParam2 = savedParam2 > 0 ? 1 : 0;
-	mBypass = savedBypass > 0;
 
 	return kResultOk;
 }
@@ -195,13 +175,9 @@ tresult PLUGIN_API PlugProcessor::getState (IBStream* state)
 	// here we need to save the model (preset or project)
 
 	float toSaveParam1 = mParam1;
-	int32 toSaveParam2 = mParam2;
-	int32 toSaveBypass = mBypass ? 1 : 0;
 
 	IBStreamer streamer (state, kLittleEndian);
 	streamer.writeFloat (toSaveParam1);
-	streamer.writeInt32 (toSaveParam2);
-	streamer.writeInt32 (toSaveBypass);
 
 	return kResultOk;
 }

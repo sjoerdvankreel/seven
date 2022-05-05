@@ -64,8 +64,6 @@ public:
 
 protected:
 	Vst::ParamValue mParam1 = 0;
-	int16 mParam2 = 0;
-	bool mBypass = false;
 };
 
 //------------------------------------------------------------------------
