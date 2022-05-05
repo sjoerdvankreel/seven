@@ -42,6 +42,8 @@
 #include "pluginterfaces/vst/ivstparameterchanges.h"
 #include "pluginterfaces/vst/ivstaudioprocessor.h"
 #include "pluginterfaces/vst/ivstevents.h"
+
+#include "public.sdk/source/vst/utility/processdataslicer.h"
 #include <cmath>
 
 namespace Steinberg {
@@ -52,6 +54,7 @@ PlugProcessor::PlugProcessor ()
 {
 	// register its editor class
 	setControllerClass (MyControllerUID);
+  parm1SA.setParamID(HelloWorldParams::kParamVolId);
 }
 
 //-----------------------------------------------------------------------------
@@ -111,35 +114,34 @@ tresult PLUGIN_API PlugProcessor::setActive (TBool state)
 //-----------------------------------------------------------------------------
 tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 {
+  bool beganchanges = false; 
+
 	//--- Read inputs parameter changes-----------
 	if (data.inputParameterChanges)
 	{
-		int32 numParamsChanged = data.inputParameterChanges->getParameterCount ();
-		for (int32 index = 0; index < numParamsChanged; index++)
-		{
-			Vst::IParamValueQueue* paramQueue =
-			    data.inputParameterChanges->getParameterData (index);
-			if (paramQueue)
-			{
-				Vst::ParamValue value;
-				int32 sampleOffset;
-				int32 numPoints = paramQueue->getPointCount ();
-				switch (paramQueue->getParameterId ())
-				{
-					case HelloWorldParams::kParamVolId:
-						if (paramQueue->getPoint (numPoints - 1, sampleOffset, value) ==
-						    kResultTrue)
-							mParam1 = value;
-						break;
-				}
-			}
-		}
+    int32 changeCount = data.inputParameterChanges->getParameterCount();
+    for (auto i = 0; i < changeCount; ++i)
+    {
+      if (auto queue = data.inputParameterChanges->getParameterData(i))
+      {
+        auto paramID = queue->getParameterId();
+        if (paramID == HelloWorldParams::kParamVolId)
+        {
+          parm1SA.beginChanges(queue);
+          beganchanges = true;
+        }
+      }
+    }
 	}
 
 	//--- Process Audio---------------------
 	//--- ----------------------------------
 	if (data.numOutputs == 0)
 	{
+    if (beganchanges)
+    {
+      parm1SA.endChanges();
+    }
 		// nothing to do
 		return kResultOk;
 	}
@@ -192,19 +194,32 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
   static float phase = 0;
 	if (on &&  data.numSamples > 0)
 	{
-    for (int i = 0; i < data.numSamples; i++)
-    {
-      data.outputs[0].channelBuffers32[0][i] = std::sinf(2.0f * 3.14 * phase) * mParam1;
-      data.outputs[0].channelBuffers32[1][i] = std::sinf(2.0f * 3.14 * phase) * mParam1;
-      phase += (note * 100.0f) / processSetup.sampleRate;
-      if(phase>=1.0f)phase-=1.0f;
-    }
+    Steinberg::Vst::ProcessDataSlicer slicer(8);
 
+    auto doProcessing = [this](Steinberg::Vst::ProcessData& data) {
+      // get the gain value for this block
+      auto gain = parm1SA.advance(data.numSamples);
 
+      for (int i = 0; i < data.numSamples; i++)
+      {
+        data.outputs[0].channelBuffers32[0][i] = std::sinf(2.0f * 3.14 * phase) * gain;
+        data.outputs[0].channelBuffers32[1][i] = std::sinf(2.0f * 3.14 * phase) * gain;
+        phase += (note * 100.0f) / processSetup.sampleRate;
+        if (phase >= 1.0f)phase -= 1.0f;
+      }
+    };
+
+    slicer.process<Steinberg::Vst::SymbolicSampleSizes::kSample32>(data, doProcessing);
 		// Process Algorithm
 		// Ex: algo.process (data.inputs[0].channelBuffers32, data.outputs[0].channelBuffers32,
 		// data.numSamples);
 	}
+
+  if (beganchanges)
+  {
+    parm1SA.endChanges();
+  }
+
 	return kResultOk;
 }
 

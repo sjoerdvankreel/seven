@@ -37,6 +37,7 @@
 #pragma once
 
 #include "public.sdk/source/vst/vstaudioeffect.h"
+#include "public.sdk/source/vst/utility/sampleaccurate.h"
 
 namespace Steinberg {
 namespace HelloWorld {
@@ -64,6 +65,7 @@ public:
 
 protected:
 	Vst::ParamValue mParam1 = 0;
+  Vst::SampleAccurate::Parameter parm1SA;
 };
 
 //------------------------------------------------------------------------
