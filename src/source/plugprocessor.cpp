@@ -40,6 +40,8 @@
 #include "base/source/fstreamer.h"
 #include "pluginterfaces/base/ibstream.h"
 #include "pluginterfaces/vst/ivstparameterchanges.h"
+#include "pluginterfaces/vst/ivstaudioprocessor.h"
+#include <cmath>
 
 namespace Steinberg {
 namespace HelloWorld {
@@ -134,19 +136,43 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 
 	//--- Process Audio---------------------
 	//--- ----------------------------------
-	if (data.numInputs == 0 || data.numOutputs == 0)
+	if (data.numOutputs == 0)
 	{
 		// nothing to do
 		return kResultOk;
 	}
 
+  static float phase = 0;
 	if (data.numSamples > 0)
 	{
+    for (int i = 0; i < data.numSamples; i++)
+    {
+      data.outputs[0].channelBuffers32[0][i] = std::sinf(2.0f * 3.14 * phase);
+      data.outputs[0].channelBuffers32[1][i] = std::sinf(2.0f * 3.14 * phase);
+      phase += 440.0f / processSetup.sampleRate;
+      if(phase>=1.0f)phase-=1.0f;
+    }
+
+
 		// Process Algorithm
 		// Ex: algo.process (data.inputs[0].channelBuffers32, data.outputs[0].channelBuffers32,
 		// data.numSamples);
 	}
 	return kResultOk;
+}
+
+
+//------------------------------------------------------------------------
+tresult PLUGIN_API PlugProcessor::canProcessSampleSize(int32 symbolicSampleSize)
+{
+  if (symbolicSampleSize == Steinberg::Vst:: kSample32)
+    return kResultTrue;
+
+  // we support double processing
+  if (symbolicSampleSize == Steinberg::Vst::kSample64)
+    return kResultFalse;
+
+  return kResultFalse;
 }
 
 //------------------------------------------------------------------------
