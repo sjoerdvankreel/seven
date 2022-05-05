@@ -45,6 +45,17 @@ using namespace VSTGUI;
 namespace Steinberg {
 namespace HelloWorld {
 
+tresult PLUGIN_API 
+PlugController::getMidiControllerAssignment(int32 busIndex, int16 channel, Steinberg::Vst::CtrlNumber midiControllerNumber, Steinberg::Vst::ParamID& id/*out*/)
+{
+  if (busIndex == 0 && channel == 0 && midiControllerNumber == 0)
+  {
+      id = kParamVolId;
+      return kResultTrue;
+  }
+  return kResultFalse;
+}
+
 //-----------------------------------------------------------------------------
 tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 {
