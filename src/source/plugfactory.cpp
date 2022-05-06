@@ -7,7 +7,7 @@
 // Description : HelloWorld Example for VST 3
 //
 //-----------------------------------------------------------------------------
-// LICENSE
+// LICENSE  
 // (c) 2021, Steinberg Media Technologies GmbH, All Rights Reserved
 //-----------------------------------------------------------------------------
 // Redistribution and use in source and binary forms, with or without modification,
