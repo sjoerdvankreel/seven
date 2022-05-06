@@ -1,8 +1,8 @@
-//------------------------------------------------------------------------
+///------------------------------------------------------------------------
 // Project     : VST SDK
 //
 // Category    : Examples
-// Filename    : plugcontroller.cpp
+// Filename    : plugcontroller.h
 // Created by  : Steinberg, 01/2018
 // Description : HelloWorld Example for VST 3
 //
@@ -34,61 +34,41 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 //-----------------------------------------------------------------------------
 
-#include "../include/plugcontroller.h"
-#include "../include/plugids.h"
+#pragma once
 
-#include "base/source/fstreamer.h"
-#include "pluginterfaces/base/ibstream.h"
+#include "public.sdk/source/vst/vsteditcontroller.h"
+#include "pluginterfaces/vst/vsttypes.h"
+#include "vstgui/plugin-bindings/vst3editor.h"
+#include <svn/vst/plugids.h>
+#include <svn/unit_generator.hpp>
 
-using namespace VSTGUI;
 
-namespace Steinberg {   
+namespace Steinberg {
 namespace HelloWorld {
 
 //-----------------------------------------------------------------------------
-tresult PLUGIN_API PlugController::initialize (FUnknown* context)
+class PlugController : public Vst::EditController, public VSTGUI::VST3EditorDelegate
 {
-	tresult result = EditController::initialize (context);
-	if (result == kResultTrue)
+public:
+//------------------------------------------------------------------------
+	// create function required for Plug-in factory,
+	// it will be called to create new instances of this controller
+//------------------------------------------------------------------------
+	static FUnknown* createInstance (void*)
 	{
-		//---Create Parameters------------
-		parameters.addParameter (STR16 ("Parameter 1"), STR16 ("dB"), 0, .5,
-		                         Vst::ParameterInfo::kCanAutomate, HelloWorldParams::kParamVolId, 0,
-		                         STR16 ("Param1"));
+		return (Vst::IEditController*)new PlugController ();
 	}
-	return kResultTrue;
-}
+
+	//---from IPluginBase--------
+	tresult PLUGIN_API initialize (FUnknown* context) SMTG_OVERRIDE;
+
+	//---from EditController-----
+	IPlugView* PLUGIN_API createView (const char* name) SMTG_OVERRIDE;
+	tresult PLUGIN_API setComponentState (IBStream* state) SMTG_OVERRIDE;
+
+
+};
 
 //------------------------------------------------------------------------
-IPlugView* PLUGIN_API PlugController::createView (const char* name)
-{
-	// someone wants my editor
-	if (name && strcmp (name, "editor") == 0)
-	{
-		auto* view = new VST3Editor (this, "view", "plug.uidesc");
-		return view;
-	}
-	return nullptr;
-}
-
-//------------------------------------------------------------------------
-tresult PLUGIN_API PlugController::setComponentState (IBStream* state)
-{
-	// we receive the current state of the component (processor part)
-	// we read our parameters and bypass value...
-	if (!state)
-		return kResultFalse;
-
-	IBStreamer streamer (state, kLittleEndian);
-
-	float savedParam1 = 0.f;
-	if (streamer.readFloat (savedParam1) == false)
-		return kResultFalse;
-	setParamNormalized (HelloWorldParams::kParamVolId, savedParam1);
-
-	return kResultOk;
-}
-
-//------------------------------------------------------------------------
-} // namespace
+} // namespace HelloWorld
 } // namespace Steinberg

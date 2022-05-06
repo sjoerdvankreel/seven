@@ -34,8 +34,10 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 //-----------------------------------------------------------------------------
 
-#include "../include/plugprocessor.h"
-#include "../include/plugids.h"
+#include <svn/unit_generator.hpp>
+
+#include "plugprocessor.h"
+#include "plugids.h"
 
 #include "base/source/fstreamer.h"
 #include "pluginterfaces/base/ibstream.h"
@@ -145,6 +147,8 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
 		// nothing to do
 		return kResultOk;
 	}
+
+  svn::unit_generate();
 
   //test
 

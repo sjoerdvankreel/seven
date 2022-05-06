@@ -1,13 +1,13 @@
-///------------------------------------------------------------------------
+//------------------------------------------------------------------------
 // Project     : VST SDK
 //
 // Category    : Examples
-// Filename    : plugcontroller.h
+// Filename    : plugfactory.cpp
 // Created by  : Steinberg, 01/2018
 // Description : HelloWorld Example for VST 3
 //
 //-----------------------------------------------------------------------------
-// LICENSE
+// LICENSE  
 // (c) 2021, Steinberg Media Technologies GmbH, All Rights Reserved
 //-----------------------------------------------------------------------------
 // Redistribution and use in source and binary forms, with or without modification,
@@ -34,38 +34,36 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 //-----------------------------------------------------------------------------
 
-#pragma once
+#include "public.sdk/source/main/pluginfactory.h"
 
-#include "public.sdk/source/vst/vsteditcontroller.h"
-#include "pluginterfaces/vst/vsttypes.h"
-#include "vstgui/plugin-bindings/vst3editor.h"
+#include "plugcontroller.h"	// for createInstance
+#include "plugprocessor.h"	// for createInstance
+#include "plugids.h"			// for uids
+#include "version.h"			// for version and naming
 
-namespace Steinberg {
-namespace HelloWorld {
+#define stringSubCategory	"Instrument"	// Subcategory for this Plug-in (to be changed if needed, see PlugType in ivstaudioprocessor.h)
 
-//-----------------------------------------------------------------------------
-class PlugController : public Vst::EditController, public VSTGUI::VST3EditorDelegate
-{
-public:
-//------------------------------------------------------------------------
-	// create function required for Plug-in factory,
-	// it will be called to create new instances of this controller
-//------------------------------------------------------------------------
-	static FUnknown* createInstance (void*)
-	{
-		return (Vst::IEditController*)new PlugController ();
-	}
+BEGIN_FACTORY_DEF (stringCompanyName, stringCompanyWeb,	stringCompanyEmail)
 
-	//---from IPluginBase--------
-	tresult PLUGIN_API initialize (FUnknown* context) SMTG_OVERRIDE;
+	DEF_CLASS2 (INLINE_UID_FROM_FUID(Steinberg::HelloWorld::MyProcessorUID),
+				PClassInfo::kManyInstances,	// cardinality  
+				kVstAudioEffectClass,	// the component category (do not changed this)
+				stringPluginName,		// here the Plug-in name (to be changed)
+				Vst::kDistributable,	// means that component and controller could be distributed on different computers
+				stringSubCategory,		// Subcategory for this Plug-in (to be changed)
+				FULL_VERSION_STR,		// Plug-in version (to be changed)
+				kVstVersionString,		// the VST 3 SDK version (do not changed this, use always this define)
+				Steinberg::HelloWorld::PlugProcessor::createInstance)	// function pointer called when this component should be instantiated
 
-	//---from EditController-----
-	IPlugView* PLUGIN_API createView (const char* name) SMTG_OVERRIDE;
-	tresult PLUGIN_API setComponentState (IBStream* state) SMTG_OVERRIDE;
+	DEF_CLASS2 (INLINE_UID_FROM_FUID(Steinberg::HelloWorld::MyControllerUID),
+				PClassInfo::kManyInstances,  // cardinality   
+				kVstComponentControllerClass,// the Controller category (do not changed this)
+				stringPluginName "Controller",	// controller name (could be the same than component name)
+				0,						// not used here
+				"",						// not used here
+				FULL_VERSION_STR,		// Plug-in version (to be changed)
+				kVstVersionString,		// the VST 3 SDK version (do not changed this, use always this define)
+				Steinberg::HelloWorld::PlugController::createInstance)// function pointer called when this component should be instantiated
 
+END_FACTORY
 
-};
-
-//------------------------------------------------------------------------
-} // namespace HelloWorld
-} // namespace Steinberg

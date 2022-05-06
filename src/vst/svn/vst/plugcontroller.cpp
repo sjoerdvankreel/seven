@@ -2,12 +2,12 @@
 // Project     : VST SDK
 //
 // Category    : Examples
-// Filename    : plugfactory.cpp
+// Filename    : plugcontroller.cpp
 // Created by  : Steinberg, 01/2018
 // Description : HelloWorld Example for VST 3
 //
 //-----------------------------------------------------------------------------
-// LICENSE  
+// LICENSE
 // (c) 2021, Steinberg Media Technologies GmbH, All Rights Reserved
 //-----------------------------------------------------------------------------
 // Redistribution and use in source and binary forms, with or without modification,
@@ -34,36 +34,61 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 //-----------------------------------------------------------------------------
 
-#include "public.sdk/source/main/pluginfactory.h"
+#include "plugcontroller.h"
+#include "plugids.h"
 
-#include "../include/plugcontroller.h"	// for createInstance
-#include "../include/plugprocessor.h"	// for createInstance
-#include "../include/plugids.h"			// for uids
-#include "../include/version.h"			// for version and naming
+#include "base/source/fstreamer.h"
+#include "pluginterfaces/base/ibstream.h"
 
-#define stringSubCategory	"Instrument"	// Subcategory for this Plug-in (to be changed if needed, see PlugType in ivstaudioprocessor.h)
+using namespace VSTGUI;
 
-BEGIN_FACTORY_DEF (stringCompanyName, stringCompanyWeb,	stringCompanyEmail)
+namespace Steinberg {   
+namespace HelloWorld {
 
-	DEF_CLASS2 (INLINE_UID_FROM_FUID(Steinberg::HelloWorld::MyProcessorUID),
-				PClassInfo::kManyInstances,	// cardinality  
-				kVstAudioEffectClass,	// the component category (do not changed this)
-				stringPluginName,		// here the Plug-in name (to be changed)
-				Vst::kDistributable,	// means that component and controller could be distributed on different computers
-				stringSubCategory,		// Subcategory for this Plug-in (to be changed)
-				FULL_VERSION_STR,		// Plug-in version (to be changed)
-				kVstVersionString,		// the VST 3 SDK version (do not changed this, use always this define)
-				Steinberg::HelloWorld::PlugProcessor::createInstance)	// function pointer called when this component should be instantiated
+//-----------------------------------------------------------------------------
+tresult PLUGIN_API PlugController::initialize (FUnknown* context)
+{
+	tresult result = EditController::initialize (context);
+	if (result == kResultTrue)
+	{
+		//---Create Parameters------------
+		parameters.addParameter (STR16 ("Parameter 1"), STR16 ("dB"), 0, .5,
+		                         Vst::ParameterInfo::kCanAutomate, HelloWorldParams::kParamVolId, 0,
+		                         STR16 ("Param1"));
+	}
+	return kResultTrue;
+}
 
-	DEF_CLASS2 (INLINE_UID_FROM_FUID(Steinberg::HelloWorld::MyControllerUID),
-				PClassInfo::kManyInstances,  // cardinality   
-				kVstComponentControllerClass,// the Controller category (do not changed this)
-				stringPluginName "Controller",	// controller name (could be the same than component name)
-				0,						// not used here
-				"",						// not used here
-				FULL_VERSION_STR,		// Plug-in version (to be changed)
-				kVstVersionString,		// the VST 3 SDK version (do not changed this, use always this define)
-				Steinberg::HelloWorld::PlugController::createInstance)// function pointer called when this component should be instantiated
+//------------------------------------------------------------------------
+IPlugView* PLUGIN_API PlugController::createView (const char* name)
+{
+	// someone wants my editor
+	if (name && strcmp (name, "editor") == 0)
+	{
+		auto* view = new VST3Editor (this, "view", "plug.uidesc");
+		return view;
+	}
+	return nullptr;
+}
 
-END_FACTORY
+//------------------------------------------------------------------------
+tresult PLUGIN_API PlugController::setComponentState (IBStream* state)
+{
+	// we receive the current state of the component (processor part)
+	// we read our parameters and bypass value...
+	if (!state)
+		return kResultFalse;
 
+	IBStreamer streamer (state, kLittleEndian);
+
+	float savedParam1 = 0.f;
+	if (streamer.readFloat (savedParam1) == false)
+		return kResultFalse;
+	setParamNormalized (HelloWorldParams::kParamVolId, savedParam1);
+
+	return kResultOk;
+}
+
+//------------------------------------------------------------------------
+} // namespace
+} // namespace Steinberg
