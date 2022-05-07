@@ -29,6 +29,7 @@ find_library(VSTGUI_UIDESCRIPTION_LIB_Release vstgui_uidescription PATHS "${VST_
 set(SVN_SRC_DIR "src/svn")
 file(GLOB_RECURSE SVN_SRC "${SVN_SRC_DIR}/*.*")
 add_library(seven STATIC ${SVN_SRC})
+source_group(TREE "../${SVN_SRC_DIR}" FILES ${SVN_SRC})
 target_include_directories(seven PRIVATE ${SVN_SRC_DIR})
 
 # Svn VST bindings.
