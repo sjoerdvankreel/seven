@@ -9,6 +9,7 @@ struct audio_sample
   sample_type left;
   sample_type right;
 
+  void clear();
   audio_sample<float> to_float() const;
   audio_sample<double> to_double() const;
 
@@ -28,56 +29,56 @@ audio_sample<sample_type>&
 operator+(
   audio_sample<sample_type> x,
   sample_type y) {
-  return { x.left + y, x.right + y; } }
+  return { x.left + y, x.right + y }; }
 
 template <typename sample_type>
 audio_sample<sample_type>& 
 operator-(
   audio_sample<sample_type> x,
   sample_type y) {
-  return { x.left - y, x.right - y; } }
+  return { x.left - y, x.right - y }; }
 
 template <typename sample_type>
 audio_sample<sample_type>& 
 operator*(
   audio_sample<sample_type> x,
   sample_type y) {
-  return { x.left * y, x.right * y; } }
+  return { x.left * y, x.right * y }; }
 
 template <typename sample_type>
 audio_sample<sample_type>& 
 operator/(
   audio_sample<sample_type> x,
   sample_type y) {
-  return { x.left / y, x.right / y; } }
+  return { x.left / y, x.right / y }; }
 
 template <typename sample_type>
 audio_sample<sample_type>& 
 operator+(
   sample_type x,
   audio_sample<sample_type> y) {
-  return { x + y.left, x + y.right; } }
+  return { x + y.left, x + y.right }; }
 
 template <typename sample_type>
 audio_sample<sample_type>& 
 operator-(
   sample_type x,
   audio_sample<sample_type> y) {
-  return { x - y.left, x - y.right; } }
+  return { x - y.left, x - y.right }; }
 
 template <typename sample_type>
 audio_sample<sample_type>& 
 operator*(
   sample_type x,
   audio_sample<sample_type> y) {
-  return { x * y.left, x * y.right; } }
+  return { x * y.left, x * y.right }; }
 
 template <typename sample_type>
 audio_sample<sample_type>& 
 operator/(
   sample_type x,
   audio_sample<sample_type> y) {
-  return { x / y.left, x / y.right; } }
+  return { x / y.left, x / y.right }; }
 
 template <typename sample_type>
 audio_sample<sample_type>&
@@ -108,28 +109,28 @@ audio_sample<sample_type>&
 operator+(
   audio_sample<sample_type> x,
   audio_sample<sample_type> y) {
-  return { x.left + y.left, x.right + y.right; } }
+  return { x.left + y.left, x.right + y.right }; }
 
 template <typename sample_type>
 audio_sample<sample_type>& 
 operator-(
   audio_sample<sample_type> x,
   audio_sample<sample_type> y) {
-  return { x.left - y.left, x.right - y.right; } }
+  return { x.left - y.left, x.right - y.right }; }
 
 template <typename sample_type>
 audio_sample<sample_type>& 
 operator*(
   audio_sample<sample_type> x,
   audio_sample<sample_type> y) {
-  return { x.left * y.left, x.right * y.right; } }
+  return { x.left * y.left, x.right * y.right }; }
 
 template <typename sample_type>
 audio_sample<sample_type>& 
 operator/(
   audio_sample<sample_type> x,
   audio_sample<sample_type> y) {
-  return { x.left / y.left, x.right / y.right; } }
+  return { x.left / y.left, x.right / y.right }; }
 
 template <typename sample_type>
 audio_sample<sample_type>&
@@ -154,6 +155,11 @@ audio_sample<sample_type>&
 audio_sample<sample_type>::operator/=(
   audio_sample<sample_type> y) {
   left /= y.left; right /= y.right; return *this; }
+
+template <typename sample_type>
+void
+audio_sample<sample_type>::clear() {
+  left = right = static_cast<sample_type>(0.0); }
 
 template <>
 audio_sample<float>

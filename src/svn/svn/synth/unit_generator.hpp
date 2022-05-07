@@ -1,21 +1,29 @@
-#ifndef SVN_UNIT_GENERATOR_HPP
-#define SVN_UNIT_GENERATOR_HPP
+#ifndef SVN_SYNTH_UNIT_GENERATOR_HPP
+#define SVN_SYNTH_UNIT_GENERATOR_HPP
 
-#include <svn/types.hpp>
-#include <svn/audio_buffer.hpp>
+#include <svn/param/synth_params.hpp>
+#include <svn/support/audio_buffer.hpp>
+#include <svn/automation/automation_data.hpp>
+#include <cstddef>
 
 namespace svn {
 
 template <typename sample_type>
-struct unit_generator 
+class unit_generator 
 {
+  std::size_t const _index;
+  sample_type _gain = synth_params::unit_gain_default;
+  sample_type _panning = synth_params::unit_panning_default;
+public:
+  unit_generator(
+    std::size_t index);
+public:
   void
   process_buffer(
-    automation_data_t<sample_type> automation_data,
-    audio_buffer<sample_type>& output_buffer, 
     sample_type sample_rate,
-    size_t buffer_size);
+    audio_buffer<sample_type>& buffer,
+    automation_data<sample_type> const& automation);
 };
 
 } // namespace svn
-#endif // SVN_UNIT_GENERATOR_HPP
+#endif // SVN_SYNTH_UNIT_GENERATOR_HPP
