@@ -1,6 +1,19 @@
-#include <svn/event/unit_automation_buffer.hpp>
+#include <svn/synth/unit_automation_buffer.hpp>
 
 namespace svn {
+
+template <typename sample_type>
+void unit_automation_buffer<sample_type>::
+process(std::int32_t sample_index, param_state_t& param_state)
+{
+  for (std::int32_t p = 0; p < param_count; p++)
+  {
+    param_id id = params[p];
+    auto transform = synth_params::all[id].info.norm_to_real;
+    param_state.normalized[id] = samples[p][sample_index];
+    param_state.values[id] = transform(param_state.normalized[id]);
+  }
+}
 
 template <typename sample_type>
 void unit_automation_buffer<sample_type>::
@@ -12,7 +25,7 @@ setup(
   automation_buffer<sample_type> const* automation)
 {
   param_count = 0;
-  std::int32_t offset = unit_index * (last - first + 1);
+  offset = unit_index * (last - first + 1);
   for(std::int32_t i = 0; i < automation_count; i++)
   {
     param_id id = automation[i].param;

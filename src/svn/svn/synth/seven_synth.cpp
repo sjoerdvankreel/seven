@@ -4,17 +4,24 @@ namespace svn {
 
 template <typename sample_type>
 seven_synth<sample_type>::
-seven_synth(
-  sample_type sample_rate, 
-  std::int32_t max_sample_count):
-_units(),
-_sample_rate(sample_rate),
-_max_sample_count(max_sample_count),
-_audio_scratch(max_sample_count),
+seven_synth(param_state_t* state):
+_param_state(state),
+_audio_scratch(),
 _unit_automation_id_scratch(param_id::count),
 _unit_automation_sample_scratch(param_id::count) {}
 
-template <typename sample_type> 
+template <typename sample_type>
+void seven_synth<sample_type>::
+init(
+  sample_type sample_rate,
+  std::int32_t max_sample_count)
+{
+  _sample_rate = sample_rate;
+  _max_sample_count = max_sample_count;
+  _audio_scratch.resize(max_sample_count);
+}
+
+template <typename sample_type>
 void seven_synth<sample_type>::
 process_buffer(
   std::int32_t sample_count,

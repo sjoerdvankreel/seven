@@ -3,6 +3,7 @@
 
 #include <svn/param/param_id.hpp>
 #include <svn/event/event_buffer.hpp>
+#include <svn/synth/param_state.hpp>
 #include <svn/synth/unit_generator.hpp>
 #include <svn/support/audio_buffer.hpp>
 
@@ -19,16 +20,18 @@ public:
 private:
   unit_generator<sample_type> _units[unit_count];
 private:
-  std::int32_t _max_sample_count;
-  sample_type const _sample_rate;
-  std::vector<audio_sample<sample_type>> _audio_scratch;
+  sample_type _sample_rate = 0.0f;
+  param_state_t* const _param_state;
+  std::int32_t _max_sample_count = 0;
   std::vector<param_id> _unit_automation_id_scratch;
+  std::vector<audio_sample<sample_type>> _audio_scratch;
   std::vector<sample_type const*> _unit_automation_sample_scratch;
 public:
-  seven_synth(
-    sample_type sample_rate, 
-    std::int32_t max_buffer_size);
+  seven_synth(param_state_t* state);
 public:
+  void init(
+    sample_type sample_rate, 
+    std::int32_t max_sample_count);
   void process_buffer(
     std::int32_t sample_count,
     audio_buffer<sample_type>& audio,

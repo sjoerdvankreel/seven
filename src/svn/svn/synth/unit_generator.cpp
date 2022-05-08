@@ -5,26 +5,6 @@ namespace svn {
 
 template <typename sample_type>
 void unit_generator<sample_type>::
-process_automation(
-  std::int32_t unit_index,
-  std::int32_t sample_index,
-  unit_automation_buffer<sample_type>& unit_automation)
-{
-  for (std::int32_t p = 0; p < unit_automation.param_count; p++)
-  {
-    param_id id = unit_automation.params[p];
-    sample_type sample = unit_automation.samples[p][sample_index];
-    switch (id)
-    {
-    case param_id::unit1_gain: _gain = sample; break;
-    case param_id::unit1_panning: _panning = sample; break;
-    default: assert(false); break;
-    }
-  }
-}
-
-template <typename sample_type>
-void unit_generator<sample_type>::
 process_buffer(
   process_info<sample_type> const& info,
   audio_buffer<sample_type>& audio,
@@ -40,9 +20,11 @@ process_buffer(
   sample_type frequency = info.unit_index == 0 ? 440.0f : 880.0f;
   for (std::int32_t s = 0; s < info.sample_count; s++)
   {
-    process_automation(info.unit_index, s, unit_automation);
     sample_type sample = std::sin(_phase);
-    audio.samples[s] = { (one - _panning) * sample, _panning * sample };
+    unit_automation.process(s, *info.param_state);
+    sample_type gain = unit_automation.value(param_id::unit1_gain, *info.param_state);
+    sample_type panning = unit_automation.value(param_id::unit1_panning, *info.param_state);
+    audio.samples[s] = { (one - panning) * sample, panning * sample };
     _phase += frequency / info.sample_rate;
     _phase -= static_cast<std::int32_t>(_phase);
   }
