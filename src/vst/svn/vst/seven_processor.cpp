@@ -9,16 +9,20 @@
 #include <pluginterfaces/vst/ivstparameterchanges.h>
 #include <public.sdk/source/vst/utility/processdataslicer.h>
 
-namespace svn::vst {
+using namespace Steinberg;
+using namespace Steinberg::Vst;
 
-  static FUnknown* PlugProcessor::createInstance(void*) { return (Vst::IAudioProcessor*)new PlugProcessor(); }
+namespace Svn::Vst {
 
-//-----------------------------------------------------------------------------
-PlugProcessor::PlugProcessor ()
+FUnknown* 
+SevenProcessor::createInstance(void* context) 
+{ return static_cast<IAudioProcessor*>(new SevenProcessor); }
+
+SevenProcessor::
+SevenProcessor()
 {
-	// register its editor class
-	setControllerClass (MyControllerUID);
-  parm1SA.setParamID(HelloWorldParams::kParamVolId);
+	setControllerClass(ControllerId);
+  //parm1SA.setParamID(HelloWorldParams::kParamVolId);
 }
 
 //-----------------------------------------------------------------------------
@@ -235,6 +239,4 @@ tresult PLUGIN_API PlugProcessor::getState (IBStream* state)
 	return kResultOk;
 }
 
-//------------------------------------------------------------------------
-} // namespace
-} // namespace Steinberg
+} // namespace Svn::Vst
