@@ -37,7 +37,7 @@ process_buffer(
   for (std::int32_t i = 0; i < unit_count; i++)
   {
     info.unit_index = i;
-    _units[i].process_buffer(audio_scratch, info, automation, unit_automation);
+    _units[i].process_buffer(info, audio_scratch, automation, unit_automation);
     audio.add(sample_count, audio_scratch);
   }
 }

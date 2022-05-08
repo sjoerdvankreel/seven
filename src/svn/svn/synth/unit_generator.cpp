@@ -26,8 +26,8 @@ process_automation(
 template <typename sample_type>
 void unit_generator<sample_type>::
 process_buffer(
-  audio_buffer<sample_type>& audio,
   process_info<sample_type> const& info,
+  audio_buffer<sample_type>& audio,
   automation_buffer<sample_type> const& automation,
   unit_automation_buffer<sample_type>& unit_automation)
 {

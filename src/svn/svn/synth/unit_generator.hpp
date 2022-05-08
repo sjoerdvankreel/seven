@@ -23,8 +23,8 @@ private:
     unit_automation_buffer<sample_type>& unit_automation);
 public:
   void process_buffer(
-    audio_buffer<sample_type>& audio,
     process_info<sample_type> const& info,
+    audio_buffer<sample_type>& audio,
     automation_buffer<sample_type> const& automation,
     unit_automation_buffer<sample_type>& unit_automation);
 };
