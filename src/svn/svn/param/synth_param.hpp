@@ -8,9 +8,10 @@ namespace svn {
 struct synth_param
 {
   param_id const id;
-  double const default_value;
   char const* const name;
   char const* const description;
+  char const* const unit;
+  double const default_value;
 };
 
 } // namespace svn
