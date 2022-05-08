@@ -15,31 +15,32 @@ FUnknown*
 SevenController::createInstance(void* context)
 { return static_cast<IEditController*>(new SevenController); }
 
+tresult PLUGIN_API
+SevenController::setComponentState(IBStream * state)
+{
+  float value;
+  if (state == nullptr) return kResultFalse;
+  IBStreamer streamer(state, kLittleEndian);
+
+  if (!streamer.readFloat(value)) return kResultFalse;
+  setParamNormalized(svn::param_id::unit1_gain, value);
+  return kResultOk;
+}
+
 tresult PLUGIN_API 
 SevenController::initialize(FUnknown* context)
 {
 	tresult result = EditController::initialize(context);
 	if(result != kResultTrue) return result;
-  parameters.addParameter(
-    svn::synth_params::unit1_gain.long_name,
-    svn::synth_params::unit1_gain.info.unit, 0,
-    svn::synth_params::unit1_gain.info.default_value,
-    ParameterInfo::kCanAutomate, 
-    svn::synth_params::unit1_gain.id, 0,
-		svn::synth_params::unit1_gain.info.short_name);
+  for(std::size_t i = 0; i < svn::synth_params::all.size(); i++)
+    parameters.addParameter(
+      svn::synth_params::all[i].long_name,
+      svn::synth_params::all[i].info.unit, 0,
+      svn::synth_params::all[i].info.default_value,
+      ParameterInfo::kCanAutomate, 
+      svn::synth_params::all[i].id, 0,
+      svn::synth_params::all[i].info.short_name);
 	return kResultTrue;
-}
-
-tresult PLUGIN_API 
-SevenController::setComponentState(IBStream* state)
-{
-  float value;
-  if(state == nullptr) return kResultFalse;
-	IBStreamer streamer(state, kLittleEndian);
-
-	if(!streamer.readFloat(value)) return kResultFalse;
-	setParamNormalized(svn::param_id::unit1_gain, value);
-	return kResultOk;
 }
 
 IPlugView* PLUGIN_API
