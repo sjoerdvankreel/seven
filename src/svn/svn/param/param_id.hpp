@@ -1,11 +1,13 @@
 #ifndef SVN_PARAM_PARAM_ID_HPP
 #define SVN_PARAM_PARAM_ID_HPP
 
+#include <cstdint>
+
 namespace svn {
 
 struct param_id_t
 {
-  enum value
+  enum value: std::uint32_t
   {
     unit1_gain,
     unit1_panning,
