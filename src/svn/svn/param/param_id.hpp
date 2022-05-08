@@ -10,7 +10,8 @@ struct param_id_t
     unit1_gain,
     unit1_panning,
     unit2_gain,
-    unit2_panning
+    unit2_panning,
+    count
   };
 };
 

@@ -3,7 +3,7 @@
 
 #include <svn/support/audio_sample.hpp>
 #include <cassert>
-#include <cstddef>
+#include <cstdint>
 
 namespace svn {
 
@@ -12,23 +12,23 @@ struct audio_buffer
 {
   audio_sample<sample_type>* samples;
 public:  
-  void clear(std::size_t sample_count);
-  void add(std::size_t sample_count, audio_buffer y);
+  void clear(std::int32_t sample_count);
+  void add(std::int32_t sample_count, audio_buffer y);
 };
 
 template <typename sample_type>
 void audio_buffer<sample_type>::
-clear(std::size_t sample_count)
+clear(std::int32_t sample_count)
 {
-  for(std::size_t i = 0; i < sample_count; i++)
+  for(std::int32_t i = 0; i < sample_count; i++)
     samples[i].clear();
 }
 
 template <typename sample_type>
 void audio_buffer<sample_type>::
-add(std::size_t sample_count, audio_buffer<sample_type> y)
+add(std::int32_t sample_count, audio_buffer<sample_type> y)
 {
-  for(std::size_t i = 0; i < sample_count; i++)
+  for(std::int32_t i = 0; i < sample_count; i++)
     samples[i] += y.samples[i];
 }
 

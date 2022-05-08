@@ -130,12 +130,12 @@ operator/(audio_sample<sample_type> x, audio_sample<sample_type> y)
 { return { x.left / y.left, x.right / y.right }; }
 
 template <>
-audio_sample<float> audio_sample<double>::
+inline audio_sample<float> audio_sample<double>::
 to_float() const 
 { return { static_cast<float>(left), static_cast<float>(right) }; }
 
 template <>
-audio_sample<double> audio_sample<float>::
+inline audio_sample<double> audio_sample<float>::
 to_double() const 
 { return { static_cast<double>(left), static_cast<double>(right) }; }
 
