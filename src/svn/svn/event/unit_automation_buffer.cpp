@@ -1,4 +1,4 @@
-#include <svn/automation/unit_automation_buffer.hpp>
+#include <svn/event/unit_automation_buffer.hpp>
 
 namespace svn {
 
@@ -8,17 +8,18 @@ setup(
   param_id first,
   param_id last,
   std::int32_t unit_index,
-  automation_buffer<sample_type> const& automation)
+  std::int32_t automation_count,
+  automation_buffer<sample_type> const* automation)
 {
   param_count = 0;
   std::int32_t offset = unit_index * (last - first + 1);
-  for(std::int32_t i = 0; i < automation.param_count; i++)
+  for(std::int32_t i = 0; i < automation_count; i++)
   {
-    param_automation_buffer<sample_type> const& param = automation.params[i];
-    if (first + offset <= param.id && param.id <= last + offset)
+    param_id id = automation[i].param;
+    if (first + offset <= id && id <= last + offset)
     {
-      params[param_count] = param.id;
-      samples[param_count] = param.samples;
+      params[param_count] = id;
+      samples[param_count] = automation[i].samples;
       ++param_count;
     }
   }

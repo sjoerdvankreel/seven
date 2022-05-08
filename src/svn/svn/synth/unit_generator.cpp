@@ -28,13 +28,13 @@ void unit_generator<sample_type>::
 process_buffer(
   process_info<sample_type> const& info,
   audio_buffer<sample_type>& audio,
-  automation_buffer<sample_type> const& automation,
+  event_buffer<sample_type> const& events,
   unit_automation_buffer<sample_type>& unit_automation)
 {
   unit_automation.setup(
     param_id::unit1_gain, 
-    param_id::unit1_panning, 
-    info.unit_index, automation);
+    param_id::unit1_panning, info.unit_index, 
+    events.automation_count, events.automation);
 
   auto one = static_cast<sample_type>(1.0);
   sample_type frequency = info.unit_index == 0 ? 440.0f : 880.0f;

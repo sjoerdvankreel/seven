@@ -2,9 +2,9 @@
 #define SVN_SYNTH_SEVEN_SYNTH_HPP
 
 #include <svn/param/param_id.hpp>
+#include <svn/event/event_buffer.hpp>
 #include <svn/synth/unit_generator.hpp>
 #include <svn/support/audio_buffer.hpp>
-#include <svn/automation/automation_buffer.hpp>
 
 #include <vector>
 #include <cstdint>
@@ -32,7 +32,7 @@ public:
   void process_buffer(
     std::int32_t sample_count,
     audio_buffer<sample_type>& audio,
-    automation_buffer<sample_type> const& automation);
+    event_buffer<sample_type> const& events);
 };
 
 } // namespace svn

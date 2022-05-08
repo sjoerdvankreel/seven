@@ -4,8 +4,8 @@
 #include <svn/param/synth_params.hpp>
 #include <svn/support/process_info.hpp>
 #include <svn/support/audio_buffer.hpp>
-#include <svn/automation/automation_buffer.hpp>
-#include <svn/automation/unit_automation_buffer.hpp>
+#include <svn/event/event_buffer.hpp>
+#include <svn/event/unit_automation_buffer.hpp>
 #include <cstdint>
 
 namespace svn {
@@ -25,7 +25,7 @@ public:
   void process_buffer(
     process_info<sample_type> const& info,
     audio_buffer<sample_type>& audio,
-    automation_buffer<sample_type> const& automation,
+    event_buffer<sample_type> const& events,
     unit_automation_buffer<sample_type>& unit_automation);
 };
 

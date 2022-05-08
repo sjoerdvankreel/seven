@@ -19,7 +19,7 @@ void seven_synth<sample_type>::
 process_buffer(
   std::int32_t sample_count,
   audio_buffer<sample_type>& audio,
-  automation_buffer<sample_type> const& automation)
+  event_buffer<sample_type> const& events)
 {
   process_info<sample_type> info;
   info.sample_rate = _sample_rate;
@@ -37,7 +37,7 @@ process_buffer(
   for (std::int32_t i = 0; i < unit_count; i++)
   {
     info.unit_index = i;
-    _units[i].process_buffer(info, audio_scratch, automation, unit_automation);
+    _units[i].process_buffer(info, audio_scratch, events, unit_automation);
     audio.add(sample_count, audio_scratch);
   }
 }
