@@ -1,7 +1,10 @@
 #ifndef SVN_VST_SEVEN_PROCESSOR_HPP
 #define SVN_VST_SEVEN_PROCESSOR_HPP
 
+#include <svn/param/param_id.hpp>
 #include <public.sdk/source/vst/vstaudioeffect.h>
+#include <public.sdk/source/vst/utility/sampleaccurate.h>
+#include <array>
 
 namespace Svn::Vst {
 
@@ -14,7 +17,10 @@ public Steinberg::Vst::AudioEffect
   using IBStream = Steinberg::IBStream;
   using ProcessData = Steinberg::Vst::ProcessData;
   using ProcessSetup = Steinberg::Vst::ProcessSetup;
+  using Parameter = Steinberg::Vst::SampleAccurate::Parameter;
   using SpeakerArrangement = Steinberg::Vst::SpeakerArrangement;
+private:
+  std::array<SampleAccurate::Parameter, svn::param_id::count> _parameters;
 public:
   SevenProcessor();
   static FUnknown* createInstance(void* context);

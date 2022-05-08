@@ -9,6 +9,8 @@
 #include <pluginterfaces/vst/ivstparameterchanges.h>
 #include <public.sdk/source/vst/utility/processdataslicer.h>
 
+#include <cstdint>
+
 using namespace Steinberg;
 using namespace Steinberg::Vst;
 
@@ -19,40 +21,31 @@ SevenProcessor::createInstance(void* context)
 { return static_cast<IAudioProcessor*>(new SevenProcessor); }
 
 SevenProcessor::
-SevenProcessor()
+SevenProcessor():
+_parameters()
 {
 	setControllerClass(ControllerId);
-  //parm1SA.setParamID(HelloWorldParams::kParamVolId);
+  for(std::uint32_t i = 0; i < svn::param_id::count; i++)
+    _parameters[i].setParamID(i);
 }
 
-//-----------------------------------------------------------------------------
-tresult PLUGIN_API PlugProcessor::initialize (FUnknown* context)
+tresult PLUGIN_API 
+SevenProcessor::initialize(FUnknown* context)
 {
-	//---always initialize the parent-------
-	tresult result = AudioEffect::initialize (context);
-	if (result != kResultTrue)
-		return kResultFalse;
-
-	//---create Audio In/Out buses------
-	// we want a stereo Input and a Stereo Output
+	tresult result = AudioEffect::initialize(context);
+	if (result != kResultTrue) return kResultFalse;
   addEventInput(STR16("Event In"), 1);
-	addAudioOutput (STR16 ("Stereo Out"), Vst::SpeakerArr::kStereo);
-
+	addAudioOutput (STR16 ("Stereo Out"), SpeakerArr::kStereo);
 	return kResultTrue;
 }
 
-//-----------------------------------------------------------------------------
-tresult PLUGIN_API PlugProcessor::setBusArrangements (Vst::SpeakerArrangement* inputs,
-                                                            int32 numIns,
-                                                            Vst::SpeakerArrangement* outputs,
-                                                            int32 numOuts)
+tresult PLUGIN_API 
+SevenProcessor::setBusArrangements(
+  SpeakerArrangement* inputs, int32 inputCount,
+  SpeakerArrangement* outputs, int32 outputCount)
 {
-	// we only support one in and output bus and these buses must have the same number of channels
-	if (numIns == 1 && numOuts == 1 && inputs[0] == outputs[0])
-	{
-		return AudioEffect::setBusArrangements (inputs, numIns, outputs, numOuts);
-	}
-	return kResultFalse;
+	if(inputCount != 0 || outputCount != 1 || outputs[0] != 2) return kResultFalse;
+  return AudioEffect::setBusArrangements(inputs, inputCount, outputs, outputCount);
 }
 
 //-----------------------------------------------------------------------------
