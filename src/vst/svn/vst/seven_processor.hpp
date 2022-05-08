@@ -3,9 +3,9 @@
 
 #include <public.sdk/source/vst/vstaudioeffect.h>
 
-namespace svn::vst {
+namespace Svn::Vst {
 
-class seven_processor : 
+class SevenProcessor : 
 public Steinberg::Vst::AudioEffect
 {
   using TBool = Steinberg::TBool;
@@ -16,7 +16,7 @@ public Steinberg::Vst::AudioEffect
   using ProcessSetup = Steinberg::Vst::ProcessSetup;
   using SpeakerArrangement = Steinberg::Vst::SpeakerArrangement;
 public:
-  seven_processor();
+  SevenProcessor();
   static FUnknown* createInstance(void* context);
 public:
 	tresult PLUGIN_API setActive(TBool active) override;
@@ -31,5 +31,5 @@ public:
     SpeakerArrangement* outputs, int32 outputCount) override;
 };
 
-} // namespace svn::vst
+} // namespace Svn::Vst
 #endif // SVN_VST_SEVEN_PROCESSOR_HPP

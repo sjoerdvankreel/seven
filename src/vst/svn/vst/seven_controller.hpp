@@ -6,9 +6,9 @@
 #include <vstgui/plugin-bindings/vst3editor.h>
 #include <public.sdk/source/vst/vsteditcontroller.h>
 
-namespace svn::vst {
+namespace Svn::Vst {
 
-class seven_controller: 
+class SevenController: 
 public Steinberg::Vst::EditController, 
 public VSTGUI::VST3EditorDelegate
 {
@@ -23,5 +23,5 @@ public:
 	tresult PLUGIN_API setComponentState(IBStream* state) override;
 };
 
-} // namespace svn::vst
+} // namespace Svn::Vst
 #endif // SVN_VST_SEVEN_CONTROLLER_HPP

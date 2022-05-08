@@ -2,7 +2,7 @@
 <vstgui-ui-description version="1">
 	<bitmaps>
 		<bitmap name="background" path="background.png"/>
-		<bitmap name="animation_knob" path="animation_knob.png"/>
+		<bitmap name="knob_orange" path="knob_orange.png"/>
 	</bitmaps>
 	<control-tags>
 		<control-tag name="ParamVol" tag="102"/>

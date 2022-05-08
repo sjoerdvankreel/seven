@@ -44,7 +44,7 @@ using namespace VSTGUI;
 
 namespace Steinberg {   
 namespace HelloWorld {
-  static FUnknown* createInstance(void*)
+  static FUnknown* create_instance(void*)
   {
     return (Vst::IEditController*)new PlugController();
   }
