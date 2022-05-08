@@ -4,6 +4,7 @@
 #include <svn/param/param_id.hpp>
 #include <svn/param/param_info.hpp>
 #include <svn/param/synth_param.hpp>
+#include <vector>
 
 namespace svn::synth_params {
 
@@ -15,7 +16,7 @@ inline synth_param unit1_panning { param_id::unit1_panning, L"Unit 1 panning", u
 inline synth_param unit2_gain { param_id::unit2_gain, L"Unit 2 gain", unit_gain_info };
 inline synth_param unit2_panning { param_id::unit2_panning, L"Unit 2 panning", unit_panning_info };
 
-inline synth_param all[] = {
+inline std::vector<synth_param> all = {
   unit1_gain,
   unit1_panning,
   unit2_gain,
