@@ -2,7 +2,7 @@
 // Project     : VST SDK
 //
 // Category    : Examples
-// Filename    : plugids.h
+// Filename    : plugcontroller.cpp
 // Created by  : Steinberg, 01/2018
 // Description : HelloWorld Example for VST 3
 //
@@ -34,28 +34,64 @@
 // OF THE POSSIBILITY OF SUCH DAMAGE.
 //-----------------------------------------------------------------------------
 
-#pragma once
+#include "plugcontroller.h"
+#include "plugids.h"
 
-namespace Steinberg {
+#include "base/source/fstreamer.h"
+#include "pluginterfaces/base/ibstream.h"
+
+using namespace VSTGUI;
+
+namespace Steinberg {   
 namespace HelloWorld {
-
-// HERE are defined the parameter Ids which are exported to the host
-enum HelloWorldParams : Vst::ParamID
+  static FUnknown* createInstance(void*)
+  {
+    return (Vst::IEditController*)new PlugController();
+  }
+//-----------------------------------------------------------------------------
+tresult PLUGIN_API PlugController::initialize (FUnknown* context)
 {
-	kParamVolId = 102,
-};
-
-
-// HERE you have to define new unique class ids: for processor and for controller
-// you can use GUID creator tools like https://www.guidgenerator.com/
-#ifdef NDEBUG
-static const FUID MyProcessorUID(0xE576A3A3, 0xB01240E0, 0x9FB6D08A, 0x3F4538AD);
-static const FUID MyControllerUID(0xF0A5357D, 0x1EA74ABC, 0x903F3616, 0x496F1000);
-#else
-static const FUID MyProcessorUID(0xFBFCEDA8, 0x782047CE, 0xA12E8A8C, 0x8C3407E9);
-static const FUID MyControllerUID(0x57068B2B, 0x63374143, 0x85FA79D9, 0xAC8A38A5);
-#endif
+	tresult result = EditController::initialize (context);
+	if (result == kResultTrue)
+	{
+		//---Create Parameters------------
+		parameters.addParameter (STR16 ("Parameter 1"), STR16 ("dB"), 0, .5,
+		                         Vst::ParameterInfo::kCanAutomate, HelloWorldParams::kParamVolId, 0,
+		                         STR16 ("Param1"));
+	}
+	return kResultTrue;
+}
 
 //------------------------------------------------------------------------
-} // namespace HelloWorld
+IPlugView* PLUGIN_API PlugController::createView (const char* name)
+{
+	// someone wants my editor
+	if (name && strcmp (name, "editor") == 0)
+	{
+		auto* view = new VST3Editor (this, "view", "plug.uidesc");
+		return view;
+	}
+	return nullptr;
+}
+
+//------------------------------------------------------------------------
+tresult PLUGIN_API PlugController::setComponentState (IBStream* state)
+{
+	// we receive the current state of the component (processor part)
+	// we read our parameters and bypass value...
+	if (!state)
+		return kResultFalse;
+
+	IBStreamer streamer (state, kLittleEndian);
+
+	float savedParam1 = 0.f;
+	if (streamer.readFloat (savedParam1) == false)
+		return kResultFalse;
+	setParamNormalized (HelloWorldParams::kParamVolId, savedParam1);
+
+	return kResultOk;
+}
+
+//------------------------------------------------------------------------
+} // namespace
 } // namespace Steinberg
