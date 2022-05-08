@@ -9,7 +9,7 @@ namespace svn {
 struct synth_param
 {
   param_id const id;
-  char const* const long_name;
+  wchar_t const* const long_name;
   param_info const info;
 };
 

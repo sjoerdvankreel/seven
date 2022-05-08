@@ -5,8 +5,8 @@ namespace svn {
 
 struct param_info
 {
-  char const* const short_name;
-  char const* const unit;
+  wchar_t const* const short_name;
+  wchar_t const* const unit;
   double const default_value;
 };
 
