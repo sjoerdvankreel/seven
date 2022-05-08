@@ -7,7 +7,7 @@ struct param_info
 {
   wchar_t const* const short_name;
   wchar_t const* const unit;
-  double const default_value;
+  float const default_value;
 };
 
 } // namespace svn

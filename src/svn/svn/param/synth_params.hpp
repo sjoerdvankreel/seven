@@ -8,8 +8,8 @@
 
 namespace svn::synth_params {
 
-inline param_info unit_gain_info = { L"Gain", L"dB", 1.0 };
-inline param_info unit_panning_info = { L"Panning", L"%", 0.5 };
+inline param_info unit_gain_info = { L"Gain", L"dB", 1.0f };
+inline param_info unit_panning_info = { L"Panning", L"%", 0.5f };
 
 inline synth_param unit1_gain { param_id::unit1_gain, L"Unit 1 gain", unit_gain_info };
 inline synth_param unit1_panning { param_id::unit1_panning, L"Unit 1 panning", unit_panning_info };
