@@ -4,11 +4,11 @@ namespace svn {
 
 template <typename sample_type>
 seven_synth<sample_type>::
-seven_synth(sample_type sample_rate, std::size_t max_buffer_size):
+seven_synth(sample_type sample_rate, std::size_t max_sample_count):
 _units(),
 _sample_rate(sample_rate),
-_max_buffer_size(max_buffer_size),
-_audio_scratch(max_buffer_size)
+_max_sample_count(max_sample_count),
+_audio_scratch(max_sample_count)
 {
   for(std::size_t i = 0; i < unit_count; i++)
     _units[i].init(i);
@@ -17,18 +17,18 @@ _audio_scratch(max_buffer_size)
 template <typename sample_type> 
 void seven_synth<sample_type>::
 process_buffer(
-  std::size_t size,
+  std::size_t sample_count,
   audio_buffer<sample_type>& audio,
-  automation_buffer<sample_type> const& automation)
+  automation_data<sample_type> const& automation)
 {
-  audio.clear(size);
+  audio.clear(sample_count);
   audio_buffer<sample_type> audio_scratch;
   audio_scratch.samples = _audio_scratch.data();
 
   for (std::size_t i = 0; i < unit_count; i++)
   {
-    _units[i].process_buffer(size, _sample_rate, audio_scratch, automation);
-    audio.add(size, audio_scratch);
+    _units[i].process_buffer(_sample_rate, sample_count, audio_scratch, automation);
+    audio.add(sample_count, audio_scratch);
   }
 }
 

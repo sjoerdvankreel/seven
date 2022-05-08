@@ -3,13 +3,18 @@
 
 namespace svn {
 
-enum class param_id
+struct param_id_t
 {
-  unit1_gain,
-  unit1_panning,
-  unit2_gain,
-  unit2_panning
+  enum value
+  {
+    unit1_gain,
+    unit1_panning,
+    unit2_gain,
+    unit2_panning
+  };
 };
+
+typedef param_id_t::value param_id;
 
 } // namespace svn
 #endif // SVN_PARAM_PARAM_ID_HPP

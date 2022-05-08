@@ -2,7 +2,6 @@
 #define SVN_SUPPORT_AUTOMATION_BUFFER_HPP
 
 #include <svn/param/param_id.hpp>
-#include <cstddef>
 
 namespace svn {
 
