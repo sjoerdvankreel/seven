@@ -2,20 +2,14 @@
 #include <svn/vst/seven_processor.hpp>
 #include <svn/synth/seven_synth.hpp>
 
-#include "plugprocessor.h"
-#include "plugids.h"
+#include <base/source/fstreamer.h>
+#include <pluginterfaces/base/ibstream.h>
+#include <pluginterfaces/vst/ivstevents.h>
+#include <pluginterfaces/vst/ivstaudioprocessor.h>
+#include <pluginterfaces/vst/ivstparameterchanges.h>
+#include <public.sdk/source/vst/utility/processdataslicer.h>
 
-#include "base/source/fstreamer.h"
-#include "pluginterfaces/base/ibstream.h"
-#include "pluginterfaces/vst/ivstparameterchanges.h"
-#include "pluginterfaces/vst/ivstaudioprocessor.h"
-#include "pluginterfaces/vst/ivstevents.h"
-
-#include "public.sdk/source/vst/utility/processdataslicer.h"
-#include <cmath>
-
-namespace Steinberg {
-namespace HelloWorld {
+namespace svn::vst {
 
   static FUnknown* PlugProcessor::createInstance(void*) { return (Vst::IAudioProcessor*)new PlugProcessor(); }
 
