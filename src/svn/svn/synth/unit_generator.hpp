@@ -14,8 +14,8 @@ template <typename sample_type>
 class unit_generator 
 {
   sample_type _phase = 0.0f;
-  sample_type _gain = synth_params::unit_gain_default;
-  sample_type _panning = synth_params::unit_panning_default;
+  sample_type _gain = synth_params::unit_gain_info.default_value;
+  sample_type _panning = synth_params::unit_panning_info.default_value;
 private:
   void process_automation(
     std::int32_t unit_index,
