@@ -26,7 +26,7 @@ private:
   svn::param_state_t _state;
   std::unique_ptr<svn::seven_synth<float>> _synth32;
   std::unique_ptr<svn::seven_synth<double>> _synth64;
-  std::array<SampleAccurate::Parameter, svn::param_id::count> _parameters;
+  std::array<Parameter, svn::param_id::count> _accurateParameters;
 public:
   SevenProcessor();
   static FUnknown* createInstance(void* context);
