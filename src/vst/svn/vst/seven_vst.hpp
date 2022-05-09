@@ -12,9 +12,9 @@
 #define SVN_VST_ORIGINAL_FILENAME "seven.vst3"
 #define SVN_VST_CONTROLLER_NAME "SevenController"
 #else
-#define SVN_VST_PLUGIN_NAME "Seven (Debug)"
+#define SVN_VST_PLUGIN_NAME "Seven_Debug"
 #define SVN_VST_ORIGINAL_FILENAME "seven.debug.vst3"
-#define SVN_VST_CONTROLLER_NAME "SevenController (Debug)"
+#define SVN_VST_CONTROLLER_NAME "Seven_DebugController"
 #endif
 
 #endif // SVN_VST_SEVEN_VST_HPP

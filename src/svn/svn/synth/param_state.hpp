@@ -19,7 +19,7 @@ param_state_t():
 values(),
 normalized()
 {
-  for(std::size_t i = 0; synth_params::all.size(); i++)
+  for(std::size_t i = 0; i < synth_params::all.size(); i++)
   {
     normalized[i] = synth_params::all[i].info.default_value;
     values[i] = synth_params::all[i].info.norm_to_real(normalized[i]);
