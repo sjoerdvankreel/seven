@@ -22,11 +22,23 @@ SevenProcessor::createInstance(void* context)
 
 SevenProcessor::
 SevenProcessor():
+_state(),
+_synth32(),
+_synth64(),
 _parameters()
 {
 	setControllerClass(ControllerId);
   for(std::uint32_t i = 0; i < svn::param_id::count; i++)
     _parameters[i].setParamID(i);
+}
+
+tresult PLUGIN_API
+SevenProcessor::getState(IBStream* state)
+{
+  IBStreamer streamer(state, kLittleEndian);
+  for (std::int32_t i = 0; i < svn::param_id::count; i++)
+    streamer.writeFloat(_state.normalized[i]);
+  return kResultOk;
 }
 
 tresult PLUGIN_API 
@@ -40,6 +52,24 @@ SevenProcessor::initialize(FUnknown* context)
 }
 
 tresult PLUGIN_API 
+SevenProcessor::setState(IBStream* state)
+{
+  float value;
+  if (state == nullptr) return kResultFalse;
+
+  IBStreamer streamer(state, kLittleEndian);
+  for(std::int32_t i = 0; i < svn::param_id::count; i++)
+    if(!streamer.readFloat(value)) 
+      return kResultFalse;
+    else
+    {
+      _state.normalized[i] = value;
+      _state.values[i] = svn::synth_params::all[i].info.norm_to_real(value);
+    }
+  return kResultOk;
+}
+
+tresult PLUGIN_API 
 SevenProcessor::setBusArrangements(
   SpeakerArrangement* inputs, int32 inputCount,
   SpeakerArrangement* outputs, int32 outputCount)
@@ -48,28 +78,23 @@ SevenProcessor::setBusArrangements(
   return AudioEffect::setBusArrangements(inputs, inputCount, outputs, outputCount);
 }
 
-//-----------------------------------------------------------------------------
-tresult PLUGIN_API PlugProcessor::setupProcessing (Vst::ProcessSetup& setup)
+tresult PLUGIN_API
+SevenProcessor::canProcessSampleSize(int32 symbolicSampleSize)
 {
-	// here you get, with setup, information about:
-	// sampleRate, processMode, maximum number of samples per audio block
-	return AudioEffect::setupProcessing (setup);
+  if (symbolicSampleSize == kSample32 || symbolicSampleSize == kSample64) return kResultTrue;
+  return kResultFalse;
 }
 
-//-----------------------------------------------------------------------------
-tresult PLUGIN_API PlugProcessor::setActive (TBool state)
+tresult PLUGIN_API 
+SevenProcessor::setupProcessing(ProcessSetup& setup)
 {
-	if (state) // Initialize
-	{
-		// Allocate Memory Here
-		// Ex: algo.create ();
-	}
-	else // Release
-	{
-		// Free Memory if still allocated
-		// Ex: if(algo.isCreated ()) { algo.destroy (); }
-	}
-	return AudioEffect::setActive (state);
+  _synth32.reset();
+  _synth64.reset();
+  if (setup.symbolicSampleSize == kSample32)
+    _synth32.reset(new svn::seven_synth<float>(&_state, setup.sampleRate, setup.maxSamplesPerBlock));
+  if (setup.symbolicSampleSize == kSample64)
+    _synth64.reset(new svn::seven_synth<double>(&_state, setup.sampleRate, setup.maxSamplesPerBlock));
+	return AudioEffect::setupProcessing(setup);
 }
 
 //-----------------------------------------------------------------------------
@@ -182,52 +207,6 @@ tresult PLUGIN_API PlugProcessor::process (Vst::ProcessData& data)
   {
     parm1SA.endChanges();
   }
-
-	return kResultOk;
-}
-
-
-//------------------------------------------------------------------------
-tresult PLUGIN_API PlugProcessor::canProcessSampleSize(int32 symbolicSampleSize)
-{
-  if (symbolicSampleSize == Steinberg::Vst:: kSample32)
-    return kResultTrue;
-
-  // we support double processing
-  if (symbolicSampleSize == Steinberg::Vst::kSample64)
-    return kResultFalse;
-
-  return kResultFalse;
-}
-
-//------------------------------------------------------------------------
-tresult PLUGIN_API PlugProcessor::setState (IBStream* state)
-{
-	if (!state)
-		return kResultFalse;
-
-	// called when we load a preset or project, the model has to be reloaded
-
-	IBStreamer streamer (state, kLittleEndian);
-
-	float savedParam1 = 0.f;
-	if (streamer.readFloat (savedParam1) == false)
-		return kResultFalse;
-
-	mParam1 = savedParam1;
-
-	return kResultOk;
-}
-
-//------------------------------------------------------------------------
-tresult PLUGIN_API PlugProcessor::getState (IBStream* state)
-{
-	// here we need to save the model (preset or project)
-
-	float toSaveParam1 = mParam1;
-
-	IBStreamer streamer (state, kLittleEndian);
-	streamer.writeFloat (toSaveParam1);
 
 	return kResultOk;
 }

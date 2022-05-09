@@ -2,9 +2,12 @@
 #define SVN_VST_SEVEN_PROCESSOR_HPP
 
 #include <svn/param/param_id.hpp>
+#include <svn/synth/seven_synth.hpp>
 #include <public.sdk/source/vst/vstaudioeffect.h>
 #include <public.sdk/source/vst/utility/sampleaccurate.h>
+
 #include <array>
+#include <memory>
 
 namespace Svn::Vst {
 
@@ -20,12 +23,14 @@ public Steinberg::Vst::AudioEffect
   using Parameter = Steinberg::Vst::SampleAccurate::Parameter;
   using SpeakerArrangement = Steinberg::Vst::SpeakerArrangement;
 private:
+  svn::param_state_t _state;
+  std::unique_ptr<svn::seven_synth<float>> _synth32;
+  std::unique_ptr<svn::seven_synth<double>> _synth64;
   std::array<SampleAccurate::Parameter, svn::param_id::count> _parameters;
 public:
   SevenProcessor();
   static FUnknown* createInstance(void* context);
 public:
-	tresult PLUGIN_API setActive(TBool active) override;
 	tresult PLUGIN_API setState(IBStream* state) override;
 	tresult PLUGIN_API getState(IBStream* state) override;
   tresult PLUGIN_API process(ProcessData& data) override;
