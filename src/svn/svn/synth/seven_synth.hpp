@@ -20,18 +20,18 @@ public:
 private:
   unit_generator<sample_type> _units[unit_count];
 private:
-  sample_type _sample_rate = 0.0f;
+  sample_type const _sample_rate;
   param_state_t* const _param_state;
-  std::int32_t _max_sample_count = 0;
+  std::int32_t const _max_sample_count;
   std::vector<param_id> _unit_automation_id_scratch;
   std::vector<audio_sample<sample_type>> _audio_scratch;
   std::vector<sample_type const*> _unit_automation_sample_scratch;
 public:
-  seven_synth(param_state_t* state);
-public:
-  void init(
-    sample_type sample_rate, 
+  seven_synth(
+    param_state_t* state,
+    sample_type sample_rate,
     std::int32_t max_sample_count);
+public:
   void process_buffer(
     std::int32_t sample_count,
     audio_buffer<sample_type>& audio,
