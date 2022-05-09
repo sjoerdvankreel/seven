@@ -1,3 +1,4 @@
+#include <svn/vst/seven_ids.hpp>
 #include <svn/vst/seven_vst.hpp>
 #include <svn/vst/seven_processor.hpp>
 #include <svn/synth/seven_synth.hpp>

@@ -1,3 +1,4 @@
+#include <svn/vst/seven_ids.hpp>
 #include <svn/vst/seven_processor.hpp>
 #include <svn/vst/seven_controller.hpp>
 #include <pluginterfaces/base/ftypes.h>

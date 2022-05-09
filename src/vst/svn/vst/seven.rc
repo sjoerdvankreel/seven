@@ -1,14 +1,11 @@
 #include <windows.h>
-#include "version.h"
+#include <svn/vst/seven_vst.hpp>
 
 #define APSTUDIO_READONLY_SYMBOLS
 
-/////////////////////////////////////////////////////////////////////////////
-// Version
-/////////////////////////////////////////////////////////////////////////////
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION MAJOR_VERSION_INT,SUB_VERSION_INT,RELEASE_NUMBER_INT,BUILD_NUMBER_INT
- PRODUCTVERSION MAJOR_VERSION_INT,SUB_VERSION_INT,RELEASE_NUMBER_INT,BUILD_NUMBER_INT
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1, 0, 0, 0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -23,18 +20,11 @@ BEGIN
     BEGIN
         BLOCK "040004e4"
         BEGIN
-            VALUE "FileVersion",      FULL_VERSION_STR
-            VALUE "ProductVersion",   FULL_VERSION_STR
-            VALUE "OriginalFilename", stringOriginalFilename
-            VALUE "FileDescription",  stringFileDescription
-            VALUE "InternalName",     stringFileDescription
-            VALUE "ProductName",      stringFileDescription
-            VALUE "CompanyName",      stringCompanyName
-            VALUE "LegalCopyright",   stringLegalCopyright
-            VALUE "LegalTrademarks",  stringLegalTrademarks
-            //VALUE "PrivateBuild",     " \0"
-            //VALUE "SpecialBuild",     " \0"
-            //VALUE "Comments",         " \0"
+            VALUE "ProductName", SVN_VST_PLUGIN_NAME
+            VALUE "CompanyName", SVN_VST_COMPANY_NAME
+            VALUE "FileVersion", SVN_VST_PLUGIN_VERSION
+            VALUE "ProductVersion", SVN_VST_PLUGIN_VERSION
+            VALUE "OriginalFilename", SVN_VST_ORIGINAL_FILENAME
         END
     END
     BLOCK "VarFileInfo"
