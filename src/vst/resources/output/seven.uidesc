@@ -23,8 +23,8 @@
 	</control-tags>
 	<template bitmap="background_image" class="CViewContainer" name="view" size="800, 600">
 		<view class="CViewContainer" origin="5, 5" size="105, 75" background-color="black_50">
-			<view class="CViewContainer" origin="0, 0" size="105, 20" background-color="black">
-				<view class="CTextLabel" origin="0, 0" size="105, 20" text-alignment="left" font="~ NormalFontSmall" font-color="orange" title=" Unit 1" />
+			<view class="CViewContainer" origin="0, 0" size="105, 20" background-color="black_50">
+				<view class="CTextLabel" origin="0, 0" size="105, 20" text-alignment="left" font="~ NormalFontSmall" font-color="orange" title=" Unit 1" transparent="true" />
 			</view>
 			<view class="CViewContainer" origin="5, 25" size="100, 50" transparent="true">
 				<view class="CAnimKnob" origin="0, 0" size="20, 20" control-tag="unit1_level" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
@@ -38,8 +38,8 @@
 			</view>
 		</view>
 		<view class="CViewContainer" origin="5, 85" size="105, 75" background-color="black_50">
-			<view class="CViewContainer" origin="0, 0" size="105, 20" background-color="black">
-				<view class="CTextLabel" origin="0, 0" size="105, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title=" Unit 2" />
+			<view class="CViewContainer" origin="0, 0" size="105, 20" background-color="black_50">
+				<view class="CTextLabel" origin="0, 0" size="105, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title=" Unit 2" transparent="true" />
 			</view>
 			<view class="CViewContainer" origin="5, 25" size="100, 50" transparent="true">
 				<view class="CAnimKnob" origin="0, 0" size="20, 20" control-tag="unit2_level" bitmap="knob_green" angle-start="20" angle-range="320" height-of-one-image="20"/>
