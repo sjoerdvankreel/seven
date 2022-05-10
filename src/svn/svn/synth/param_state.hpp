@@ -10,20 +10,15 @@ namespace svn {
 struct param_state_t
 {
   std::array<float, param_id::count> values;
-  std::array<float, param_id::count> normalized;
   param_state_t();
 };
 
 inline param_state_t::
 param_state_t():
-values(),
-normalized()
+values()
 {
   for(std::size_t i = 0; i < synth_params::all.size(); i++)
-  {
-    normalized[i] = synth_params::all[i].info.default_value;
-    values[i] = synth_params::all[i].info.norm_to_real(normalized[i]);
-  }
+    values[i] = synth_params::all[i].info.default_value;
 }
 
 } // namespace svn

@@ -36,7 +36,7 @@ inline sample_type unit_automation_buffer<sample_type>::
 value(
   param_id id,
   param_state_t const& param_state) const
-{ return param_state.values[id + offset]; }
+{ return static_cast<sample_type>(param_state.values[id + offset]); }
 
 } // namespace svn
 #endif // SVN_SYNTH_UNIT_AUTOMATION_BUFFER_HPP

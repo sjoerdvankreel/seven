@@ -38,7 +38,7 @@ SevenProcessor::getState(IBStream* state)
 {
   IBStreamer streamer(state, kLittleEndian);
   for (std::int32_t i = 0; i < svn::param_id::count; i++)
-    streamer.writeFloat(_state.normalized[i]);
+    streamer.writeFloat(_state.values[i]);
   return kResultOk;
 }
 
@@ -57,16 +57,12 @@ SevenProcessor::setState(IBStream* state)
 {
   float value;
   if (state == nullptr) return kResultFalse;
-
   IBStreamer streamer(state, kLittleEndian);
   for(std::int32_t i = 0; i < svn::param_id::count; i++)
     if(!streamer.readFloat(value)) 
       return kResultFalse;
     else
-    {
-      _state.normalized[i] = value;
-      _state.values[i] = svn::synth_params::all[i].info.norm_to_real(value);
-    }
+      _state.values[i] = value;
   return kResultOk;
 }
 
@@ -101,6 +97,14 @@ SevenProcessor::setupProcessing(ProcessSetup& setup)
 tresult PLUGIN_API 
 SevenProcessor::process(ProcessData& data)
 {
+  int32 index;
+  ParamValue value;
+  IParamValueQueue* queue;
+  if (data.inputParameterChanges != nullptr)
+    for(int32 i = 0; i < data.inputParameterChanges->getParameterCount(); i++)
+      if ((queue = data.inputParameterChanges->getParameterData(i)) != nullptr)
+        if(queue->getPoint(queue->getPointCount() - 1, index, value) == kResultTrue)
+          _state.values[queue->getParameterId()] = value;
 	return kResultOk;
 }
 

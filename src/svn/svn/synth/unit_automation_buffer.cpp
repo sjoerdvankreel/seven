@@ -7,12 +7,7 @@ void unit_automation_buffer<sample_type>::
 process(std::int32_t sample_index, param_state_t& param_state)
 {
   for (std::int32_t p = 0; p < param_count; p++)
-  {
-    param_id id = params[p];
-    auto transform = synth_params::all[id].info.norm_to_real;
-    param_state.normalized[id] = samples[p][sample_index];
-    param_state.values[id] = transform(param_state.normalized[id]);
-  }
+    param_state.values[params[p]] = samples[p][sample_index];
 }
 
 template <typename sample_type>
