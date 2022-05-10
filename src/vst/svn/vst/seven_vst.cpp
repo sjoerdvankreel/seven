@@ -9,7 +9,7 @@
 extern bool InitModule();
 extern bool DeinitModule();
 void* moduleHandle = nullptr;
-
+  
 BOOL WINAPI
 DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 {

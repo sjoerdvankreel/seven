@@ -5,9 +5,12 @@
 		<bitmap name="knob_orange" path="knob_orange.png"/>
 	</bitmaps>
 	<control-tags>
-		<control-tag name="ParamVol" tag="102"/>
+		<control-tag name="unit1_gain" tag="0"/>
+		<control-tag name="unit1_panning" tag="1"/>
+		<control-tag name="unit2_gain" tag="2"/>
+		<control-tag name="unit2_panning" tag="3"/>
 	</control-tags>
 	<template background-color="~ BlackCColor" background-color-draw-style="filled and stroked" bitmap="background" class="CViewContainer" mouse-enabled="true" name="view" opacity="1" origin="0, 0" size="800, 600" transparent="false" wants-focus="false">
-		<view angle-range="320" angle-start="20" background-offset="0, 0" bitmap="animation_knob" circle-drawing="false" class="CAnimKnob" control-tag="ParamVol" corona-color="~ WhiteCColor" corona-dash-dot="false" corona-drawing="false" corona-from-center="false" corona-inset="0" corona-inverted="false" corona-line-cap-butt="false" corona-outline="false" corona-outline-width-add="2" default-value="0.5" handle-color="~ WhiteCColor" handle-line-width="1" handle-shadow-color="~ GreyCColor" height-of-one-image="20" inverse-bitmap="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="227, 4" size="20, 20" skip-handle-drawing="false" sub-pixmaps="14" tooltip="This is my Volume" transparent="false" value-inset="0" wants-focus="true" wheel-inc-value="0.1" zoom-factor="1.5"/>
+		<view angle-range="320" angle-start="20" background-offset="0, 0" bitmap="knob_orange" circle-drawing="false" class="CAnimKnob" control-tag="unit1_gain" corona-color="~ WhiteCColor" corona-dash-dot="false" corona-drawing="false" corona-from-center="false" corona-inset="0" corona-inverted="false" corona-line-cap-butt="false" corona-outline="false" corona-outline-width-add="2" default-value="0.5" handle-color="~ WhiteCColor" handle-line-width="1" handle-shadow-color="~ GreyCColor" height-of-one-image="20" inverse-bitmap="false" max-value="1" min-value="0" mouse-enabled="true" opacity="1" origin="227, 4" size="20, 20" skip-handle-drawing="false" sub-pixmaps="14" tooltip="This is my Volume" transparent="false" value-inset="0" wants-focus="true" wheel-inc-value="0.1" zoom-factor="1.5"/>
 	</template>
 </vstgui-ui-description>
