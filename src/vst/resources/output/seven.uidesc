@@ -8,7 +8,7 @@
 	<colors>
 		<color name="green" rgba="#00FF80FF"/>
 		<color name="orange" rgba="#FF8000FF"/>
-		<color name="background" rgba="#000000C0"/>
+		<color name="background" rgba="#00000080"/>
 	</colors>
 	<control-tags>
 		<control-tag name="unit1_level" tag="0"/>
