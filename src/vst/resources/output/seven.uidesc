@@ -4,6 +4,9 @@
 		<bitmap name="background" path="background.png"/>
 		<bitmap name="knob_orange" path="knob_orange.png"/>
 	</bitmaps>
+	<colors>
+		<color name="orange" rgba="#FF8000FF"/>
+	</colors>
 	<control-tags>
 		<control-tag name="unit1_gain" tag="0"/>
 		<control-tag name="unit1_panning" tag="1"/>
@@ -11,9 +14,10 @@
 		<control-tag name="unit2_panning" tag="3"/>
 	</control-tags>
 	<template bitmap="background" class="CViewContainer" name="view" size="800, 600">
-		<view control-tag="unit1_gain" origin="5, 5" size="20, 20" class="CAnimKnob" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
-		<view control-tag="unit1_panning" origin="5, 30" size="20, 20" class="CAnimKnob" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
-		<view control-tag="unit2_gain" origin="5, 55" size="20, 20" class="CAnimKnob" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
-		<view control-tag="unit2_panning" origin="5, 80" size="20, 20" class="CAnimKnob" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+		<view origin="5, 5" size="20, 20" class="CAnimKnob" control-tag="unit1_gain" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+		<view origin="30, 5" size="20, 20" class="CTextLabel" font="~ NormalFontSmaller" font-color="orange" title="Gain" transparent="true" />
+		<view origin="5, 30" size="20, 20" class="CAnimKnob" control-tag="unit1_panning" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+		<view origin="5, 55" size="20, 20" class="CAnimKnob" control-tag="unit2_gain" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+		<view origin="5, 80" size="20, 20" class="CAnimKnob" control-tag="unit2_panning" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
 	</template>
 </vstgui-ui-description>

@@ -31,7 +31,7 @@ SevenController::initialize(FUnknown* context)
 	return kResultTrue;
 }
 
-tresult PLUGIN_API
+tresult PLUGIN_API 
 SevenController::setComponentState(IBStream* state)
 {
   float value;
