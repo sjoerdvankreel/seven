@@ -8,7 +8,8 @@
 	<colors>
 		<color name="green" rgba="#00FF80FF"/>
 		<color name="orange" rgba="#FF8000FF"/>
-		<color name="background" rgba="#00000080"/>
+		<color name="black" rgba="#000000FF"/>
+		<color name="black_50" rgba="#00000080"/>
 	</colors>
 	<control-tags>
 		<control-tag name="unit1_level" tag="0"/>
@@ -21,8 +22,11 @@
 		<control-tag name="unit2_pulse_width" tag="7"/>
 	</control-tags>
 	<template bitmap="background_image" class="CViewContainer" name="view" size="800, 600">
-		<view class="CViewContainer" origin="5, 5" size="105, 55" background-color="background">
-			<view class="CViewContainer" origin="5, 5" size="100, 50" transparent="true">
+		<view class="CViewContainer" origin="5, 5" size="105, 75" background-color="black_50">
+			<view class="CViewContainer" origin="0, 0" size="105, 20" background-color="black">
+				<view class="CTextLabel" origin="0, 0" size="105, 20" text-alignment="left" font="~ NormalFont" font-color="orange" title="Unit1" />
+			</view>
+			<view class="CViewContainer" origin="5, 25" size="100, 50" transparent="true">
 				<view class="CAnimKnob" origin="0, 0" size="20, 20" control-tag="unit1_level" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
 				<view class="CTextLabel" origin="25, 0" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="orange" title="Lvl" transparent="true" />
 				<view class="CAnimKnob" origin="50, 0" size="20, 20" control-tag="unit1_detune" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
@@ -33,8 +37,11 @@
 				<view class="CTextLabel" origin="75, 25" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="orange" title="Pw" transparent="true" />
 			</view>
 		</view>
-		<view class="CViewContainer" origin="5, 65" size="105, 55" background-color="background">
-			<view class="CViewContainer" origin="5, 5" size="100, 50" transparent="true">
+		<view class="CViewContainer" origin="5, 85" size="105, 75" background-color="black_50">
+			<view class="CViewContainer" origin="0, 0" size="105, 20" background-color="black">
+				<view class="CTextLabel" origin="0, 0" size="105, 20" text-alignment="left" font="~ NormalFont" font-color="green" title="Unit2" />
+			</view>
+			<view class="CViewContainer" origin="5, 25" size="100, 50" transparent="true">
 				<view class="CAnimKnob" origin="0, 0" size="20, 20" control-tag="unit2_level" bitmap="knob_green" angle-start="20" angle-range="320" height-of-one-image="20"/>
 				<view class="CTextLabel" origin="25, 0" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="Lvl" transparent="true" />
 				<view class="CAnimKnob" origin="50, 0" size="20, 20" control-tag="unit2_detune" bitmap="knob_green" angle-start="20" angle-range="320" height-of-one-image="20"/>
