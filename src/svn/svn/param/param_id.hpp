@@ -9,10 +9,14 @@ struct param_id_t
 {
   enum value: std::uint32_t
   {
-    unit1_gain,
+    unit1_level,
+    unit1_detune,
     unit1_panning,
-    unit2_gain,
+    unit1_pulse_width,
+    unit2_level,
+    unit2_detune,
     unit2_panning,
+    unit2_pulse_width,
     count
   };
 };

@@ -12,8 +12,8 @@ process_buffer(
   unit_automation_buffer<sample_type>& unit_automation)
 {
   unit_automation.setup(
-    param_id::unit1_gain, 
-    param_id::unit1_panning, info.unit_index, 
+    param_id::unit1_level, 
+    param_id::unit1_pulse_width, info.unit_index,
     events.automation_count, events.automation);
 
   auto one = static_cast<sample_type>(1.0);
@@ -22,7 +22,7 @@ process_buffer(
   {
     sample_type sample = std::sin(_phase);
     unit_automation.process(s, *info.param_state);
-    sample_type gain = unit_automation.value(param_id::unit1_gain, *info.param_state);
+    sample_type level = unit_automation.value(param_id::unit1_level, *info.param_state);
     sample_type panning = unit_automation.value(param_id::unit1_panning, *info.param_state);
     audio.samples[s] = { (one - panning) * sample, panning * sample };
     _phase += frequency / info.sample_rate;

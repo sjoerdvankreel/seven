@@ -9,7 +9,7 @@ using namespace VSTGUI;
 using namespace Steinberg;
 using namespace Steinberg::Vst;
 
-namespace Svn::Vst {
+namespace Svn::Vst {   
 
 FUnknown* 
 SevenController::createInstance(void* context)

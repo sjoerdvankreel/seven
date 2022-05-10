@@ -8,16 +8,35 @@
 		<color name="orange" rgba="#FF8000FF"/>
 	</colors>
 	<control-tags>
-		<control-tag name="unit1_gain" tag="0"/>
-		<control-tag name="unit1_panning" tag="1"/>
-		<control-tag name="unit2_gain" tag="2"/>
-		<control-tag name="unit2_panning" tag="3"/>
+		<control-tag name="unit1_level" tag="0"/>
+		<control-tag name="unit1_detune" tag="1"/>
+		<control-tag name="unit1_panning" tag="2"/>
+		<control-tag name="unit1_pulse_width" tag="3"/>
+		<control-tag name="unit2_level" tag="4"/>
+		<control-tag name="unit2_detune" tag="5"/>
+		<control-tag name="unit2_panning" tag="6"/>
+		<control-tag name="unit2_pulse_width" tag="7"/>
 	</control-tags>
 	<template bitmap="background" class="CViewContainer" name="view" size="800, 600">
-		<view origin="5, 5" size="20, 20" class="CAnimKnob" control-tag="unit1_gain" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
-		<view origin="30, 5" size="20, 20" class="CTextLabel" font="~ NormalFontSmaller" font-color="orange" title="Gain" transparent="true" />
-		<view origin="5, 30" size="20, 20" class="CAnimKnob" control-tag="unit1_panning" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
-		<view origin="5, 55" size="20, 20" class="CAnimKnob" control-tag="unit2_gain" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
-		<view origin="5, 80" size="20, 20" class="CAnimKnob" control-tag="unit2_panning" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+		<view class="CViewContainer" origin="5, 5" size="100, 50" transparent="true">
+			<view origin="0, 0" size="20, 20" class="CAnimKnob" control-tag="unit1_level" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+			<view origin="25, 0" size="20, 20" class="CTextLabel" text-alignment="left" font="~ NormalFontSmaller" font-color="orange" title="Lvl" transparent="true" />
+			<view origin="50, 0" size="20, 20" class="CAnimKnob" control-tag="unit1_detune" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+			<view origin="75, 0" size="20, 20" class="CTextLabel" text-alignment="left" font="~ NormalFontSmaller" font-color="orange" title="Dtn" transparent="true" />
+			<view origin="0, 25" size="20, 20" class="CAnimKnob" control-tag="unit1_panning" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+			<view origin="25, 25" size="20, 20" class="CTextLabel" text-alignment="left" font="~ NormalFontSmaller" font-color="orange" title="Pan" transparent="true" />
+			<view origin="50, 25" size="20, 20" class="CAnimKnob" control-tag="unit1_pulse_width" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+			<view origin="75, 25" size="20, 20" class="CTextLabel" text-alignment="left" font="~ NormalFontSmaller" font-color="orange" title="PW" transparent="true" />
+		</view>
+		<view class="CViewContainer" origin="5, 55" size="100, 50" transparent="true">
+			<view origin="0, 0" size="20, 20" class="CAnimKnob" control-tag="unit2_level" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+			<view origin="25, 0" size="20, 20" class="CTextLabel" text-alignment="left" font="~ NormalFontSmaller" font-color="orange" title="Lvl" transparent="true" />
+			<view origin="50, 0" size="20, 20" class="CAnimKnob" control-tag="unit2_detune" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+			<view origin="75, 0" size="20, 20" class="CTextLabel" text-alignment="left" font="~ NormalFontSmaller" font-color="orange" title="Dtn" transparent="true" />
+			<view origin="0, 25" size="20, 20" class="CAnimKnob" control-tag="unit2_panning" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+			<view origin="25, 25" size="20, 20" class="CTextLabel" text-alignment="left" font="~ NormalFontSmaller" font-color="orange" title="Pan" transparent="true" />
+			<view origin="50, 25" size="20, 20" class="CAnimKnob" control-tag="unit2_pulse_width" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+			<view origin="75, 25" size="20, 20" class="CTextLabel" text-alignment="left" font="~ NormalFontSmaller" font-color="orange" title="PW" transparent="true" />
+		</view>
 	</template>
 </vstgui-ui-description>

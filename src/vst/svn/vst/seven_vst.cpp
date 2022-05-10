@@ -6,7 +6,7 @@
 #include <windows.h>
 #include <cstdint>
 
-extern bool InitModule();  
+extern bool InitModule();   
 extern bool DeinitModule();
 void* moduleHandle = nullptr;
   
