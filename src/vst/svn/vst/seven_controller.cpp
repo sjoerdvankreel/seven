@@ -40,7 +40,7 @@ SevenController::setComponentState(IBStream* state)
   for (std::size_t i = 0; i < svn::synth_params::all.size(); i++)
     if (!streamer.readFloat(value))
       return kResultFalse;
-    else
+    else 
       setParamNormalized(svn::synth_params::all[i].id, value);
   return kResultOk;
 }

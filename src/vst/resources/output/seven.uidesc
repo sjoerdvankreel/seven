@@ -11,9 +11,9 @@
 		<control-tag name="unit2_panning" tag="3"/>
 	</control-tags>
 	<template bitmap="background" class="CViewContainer" name="view" size="800, 600">
-		<view control-tag="unit1_gain" origin="0, 0" size="20, 20" class="CAnimKnob" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
-		<view control-tag="unit1_panning" origin="0, 20" size="20, 20" class="CAnimKnob" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
-		<view control-tag="unit2_gain" origin="0, 40" size="20, 20" class="CAnimKnob" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
-		<view control-tag="unit2_panning" origin="0, 60" size="20, 20" class="CAnimKnob" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+		<view control-tag="unit1_gain" origin="5, 5" size="20, 20" class="CAnimKnob" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+		<view control-tag="unit1_panning" origin="5, 30" size="20, 20" class="CAnimKnob" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+		<view control-tag="unit2_gain" origin="5, 55" size="20, 20" class="CAnimKnob" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+		<view control-tag="unit2_panning" origin="5, 80" size="20, 20" class="CAnimKnob" bitmap="knob_orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
 	</template>
 </vstgui-ui-description>
