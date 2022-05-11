@@ -7,7 +7,8 @@
 
 using namespace VSTGUI;
 using namespace Steinberg;
-using namespace Steinberg::Vst;                
+using namespace Steinberg::Vst;                  
+
 
 namespace Svn::Vst {   
 
