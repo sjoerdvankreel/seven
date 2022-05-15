@@ -3,20 +3,17 @@
 
 namespace svn {
 
-template <typename sample_type>
 struct audio_sample
 {
-  sample_type left;
-  sample_type right;
+  float left;
+  float right;
 
   void clear();
-  audio_sample<float> to_float() const;
-  audio_sample<double> to_double() const;
 
-  audio_sample& operator+=(sample_type y);
-  audio_sample& operator-=(sample_type y);
-  audio_sample& operator*=(sample_type y);
-  audio_sample& operator/=(sample_type y);
+  audio_sample& operator+=(float y);
+  audio_sample& operator-=(float y);
+  audio_sample& operator*=(float y);
+  audio_sample& operator/=(float y);
 
   audio_sample& operator+=(audio_sample y);
   audio_sample& operator-=(audio_sample y);
@@ -24,120 +21,74 @@ struct audio_sample
   audio_sample& operator/=(audio_sample y);
 };
 
-template <typename sample_type>
-void
-audio_sample<sample_type>::clear() 
-{ left = right = static_cast<sample_type>(0.0); }
+inline void
+audio_sample::clear() 
+{ left = right = 0.0f; }
 
-template <typename sample_type>
-audio_sample<sample_type>& 
-operator+(audio_sample<sample_type> x, sample_type y) 
+inline audio_sample
+operator+(audio_sample x, float y)
 { return { x.left + y, x.right + y }; }
-
-template <typename sample_type>
-audio_sample<sample_type>& 
-operator-(audio_sample<sample_type> x, sample_type y) 
+inline audio_sample
+operator-(audio_sample x, float y)
 { return { x.left - y, x.right - y }; }
-
-template <typename sample_type>
-audio_sample<sample_type>& 
-operator*(audio_sample<sample_type> x, sample_type y) 
+inline audio_sample
+operator*(audio_sample x, float y)
 { return { x.left * y, x.right * y }; }
-
-template <typename sample_type>
-audio_sample<sample_type>& 
-operator/(audio_sample<sample_type> x, sample_type y) 
+inline audio_sample
+operator/(audio_sample x, float y)
 { return { x.left / y, x.right / y }; }
 
-template <typename sample_type>
-audio_sample<sample_type>& 
-operator+(sample_type x, audio_sample<sample_type> y) 
+inline audio_sample
+operator+(float x, audio_sample y)
 { return { x + y.left, x + y.right }; }
-
-template <typename sample_type>
-audio_sample<sample_type>& 
-operator-(sample_type x, audio_sample<sample_type> y) 
+inline audio_sample
+operator-(float x, audio_sample y)
 { return { x - y.left, x - y.right }; }
-
-template <typename sample_type>
-audio_sample<sample_type>& 
-operator*(sample_type x, audio_sample<sample_type> y) 
+inline audio_sample
+operator*(float x, audio_sample y)
 { return { x * y.left, x * y.right }; }
-
-template <typename sample_type>
-audio_sample<sample_type>& 
-operator/(sample_type x, audio_sample<sample_type> y) 
+inline audio_sample
+operator/(float x, audio_sample y)
 { return { x / y.left, x / y.right }; }
 
-template <typename sample_type>
-audio_sample<sample_type>& audio_sample<sample_type>::
-operator+=(sample_type y) 
+inline audio_sample& 
+audio_sample::operator+=(float y)
 { left += y; right += y; return *this; }
-
-template <typename sample_type>
-audio_sample<sample_type>& audio_sample<sample_type>::
-operator-=(sample_type y) 
+inline audio_sample& 
+audio_sample::operator-=(float y)
 { left -= y; right -= y; return *this; }
-
-template <typename sample_type>
-audio_sample<sample_type>& audio_sample<sample_type>::
-operator*=(sample_type y) 
+inline audio_sample& 
+audio_sample::operator*=(float y)
 { left *= y; right *= y; return *this; }
-
-template <typename sample_type>
-audio_sample<sample_type>& audio_sample<sample_type>::
-operator/=(sample_type y) 
+inline audio_sample& 
+audio_sample::operator/=(float y)
 { left /= y; right /= y; return *this; }
 
-template <typename sample_type>
-audio_sample<sample_type>& audio_sample<sample_type>::
-operator+=(audio_sample<sample_type> y) 
-{ left += y.left; right += y.right; return *this; }
-
-template <typename sample_type>
-audio_sample<sample_type>& audio_sample<sample_type>::
-operator-=(audio_sample<sample_type> y) 
-{ left -= y.left; right -= y.right; return *this; }
-
-template <typename sample_type>
-audio_sample<sample_type>& audio_sample<sample_type>::
-operator*=(audio_sample<sample_type> y) 
-{ left *= y.left; right *= y.right; return *this; }
-
-template <typename sample_type>
-audio_sample<sample_type>& audio_sample<sample_type>::
-operator/=(audio_sample<sample_type> y) 
-{ left /= y.left; right /= y.right; return *this; }
-  
-template <typename sample_type>
-audio_sample<sample_type>& 
-operator+(audio_sample<sample_type> x, audio_sample<sample_type> y) 
+inline audio_sample
+operator+(audio_sample x, audio_sample y) 
 { return { x.left + y.left, x.right + y.right }; }
-
-template <typename sample_type>
-audio_sample<sample_type>& 
-operator-(audio_sample<sample_type> x, audio_sample<sample_type> y) 
+inline audio_sample
+operator-(audio_sample x, audio_sample y) 
 { return { x.left - y.left, x.right - y.right }; }
-
-template <typename sample_type>
-audio_sample<sample_type>& 
-operator*(audio_sample<sample_type> x, audio_sample<sample_type> y) 
+inline audio_sample
+operator*(audio_sample x, audio_sample y) 
 { return { x.left * y.left, x.right * y.right }; }
-
-template <typename sample_type>
-audio_sample<sample_type>& 
-operator/(audio_sample<sample_type> x, audio_sample<sample_type> y) 
+inline audio_sample
+operator/(audio_sample x, audio_sample y) 
 { return { x.left / y.left, x.right / y.right }; }
 
-template <>
-inline audio_sample<float> audio_sample<double>::
-to_float() const 
-{ return { static_cast<float>(left), static_cast<float>(right) }; }
-
-template <>
-inline audio_sample<double> audio_sample<float>::
-to_double() const 
-{ return { static_cast<double>(left), static_cast<double>(right) }; }
+inline audio_sample& 
+audio_sample::operator+=(audio_sample y) 
+{ left += y.left; right += y.right; return *this; }
+inline audio_sample& 
+audio_sample::operator-=(audio_sample y) 
+{ left -= y.left; right -= y.right; return *this; }
+inline audio_sample& 
+audio_sample::operator*=(audio_sample y) 
+{ left *= y.left; right *= y.right; return *this; }
+inline audio_sample& 
+audio_sample::operator/=(audio_sample y) 
+{ left /= y.left; right /= y.right; return *this; }  
 
 } // namespace svn
 #endif // SVN_SUPPORT_AUDIO_SAMPLE_HPP
