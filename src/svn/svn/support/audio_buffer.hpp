@@ -2,7 +2,6 @@
 #define SVN_SUPPORT_AUDIO_BUFFER_HPP
 
 #include <svn/support/audio_sample.hpp>
-#include <cassert>
 #include <cstdint>
 
 namespace svn {
