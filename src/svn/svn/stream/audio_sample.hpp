@@ -1,5 +1,5 @@
-#ifndef SVN_SUPPORT_AUDIO_SAMPLE_HPP
-#define SVN_SUPPORT_AUDIO_SAMPLE_HPP
+#ifndef SVN_STREAM_AUDIO_SAMPLE_HPP
+#define SVN_STREAM_AUDIO_SAMPLE_HPP
 
 namespace svn {
 
@@ -91,4 +91,4 @@ audio_sample::operator/=(audio_sample y)
 { left /= y.left; right /= y.right; return *this; }  
 
 } // namespace svn
-#endif // SVN_SUPPORT_AUDIO_SAMPLE_HPP
+#endif // SVN_STREAM_AUDIO_SAMPLE_HPP
