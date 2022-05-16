@@ -5,10 +5,26 @@
 
 namespace svn {
 
+namespace detail {
+
+struct topology_init 
+{
+  topology_init();
+  static topology_init init;
+};
+
+} // namespace detail;
+
 struct param_item
 {
   char const* name;
   char const* detail;
+};
+
+struct topology_t
+{
+  struct part const* part;
+  struct param const* param;
 };
 
 struct part
@@ -45,6 +61,9 @@ inline std::int32_t constexpr filter_count = 1;
 extern part const parts[];
 extern param const unit_params[];
 extern param const filter_params[]; 
+
+extern topology_t const* topology;
+extern std::int32_t const* topology_bounds;
 
 struct part_type_t { enum value { unit, filter, count }; };
 struct param_type_t { enum value { real, list, toggle, discrete, count }; };
