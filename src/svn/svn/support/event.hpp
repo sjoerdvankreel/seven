@@ -1,5 +1,5 @@
-#ifndef SVN_SUPPORT_EVENT_BUFFER_HPP
-#define SVN_SUPPORT_EVENT_BUFFER_HPP
+#ifndef SVN_SUPPORT_EVENT_HPP
+#define SVN_SUPPORT_EVENT_HPP
 
 #include <svn/support/topology.hpp>
 #include <cstdint>
@@ -29,4 +29,4 @@ struct event_buffer
 };
 
 } // namespace svn
-#endif // SVN_SUPPORT_EVENT_BUFFER_HPP
+#endif // SVN_SUPPORT_EVENT_HPP

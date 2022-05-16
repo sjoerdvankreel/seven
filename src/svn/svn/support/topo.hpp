@@ -1,27 +1,27 @@
-#ifndef SVN_SUPPORT_TOPOLOGY_HPP
-#define SVN_SUPPORT_TOPOLOGY_HPP
+#ifndef SVN_SUPPORT_TOPO_HPP
+#define SVN_SUPPORT_TOPO_HPP
 
 #include <cstdint>
 
 namespace svn {
 
-namespace detail {
+namespace topo_detail {
 
-struct topology_init 
+struct init_t 
 {
-  topology_init();
-  static topology_init init;
+  init_t();
+  static init_t init;
 };
 
-} // namespace detail;
+} // namespace topo_detail;
 
-struct param_item
+struct item
 {
   char const* name;
   char const* detail;
 };
 
-struct topology_t
+struct topo_t
 {
   struct part const* part;
   struct param const* param;
@@ -45,13 +45,13 @@ struct param
   {
     struct { float default_; } real;
     struct { bool default_; } toggle;
-    struct { param_item const* items; std::int32_t count; } list;
+    struct { item const* items; std::int32_t count; } list;
     struct { std::int32_t min; std::int32_t max; std::int32_t default_; } discrete;
   } bounds;
 
   param(char const* name, char const* detail, bool default_);
   param(char const* name, char const* detail, float default_);
-  param(char const* name, char const* detail, param_item const* items, std::int32_t count);
+  param(char const* name, char const* detail, item const* items, std::int32_t count);
   param(char const* name, char const* detail, std::int32_t min, std::int32_t max, std::int32_t default_);
 };
 
@@ -62,8 +62,8 @@ extern part const parts[];
 extern param const unit_params[];
 extern param const filter_params[]; 
 
-extern topology_t const* topology;
-extern std::int32_t const* topology_bounds;
+extern topo_t const* topo;
+extern std::int32_t const* topo_bounds;
 
 struct part_type_t { enum value { unit, filter, count }; };
 struct param_type_t { enum value { real, list, toggle, discrete, count }; };
@@ -81,4 +81,4 @@ typedef unit_param_t::value unit_param;
 typedef filter_param_t::value filter_param;
 
 } // namespace svn
-#endif // SVN_SUPPORT_TOPOLOGY_HPP
+#endif // SVN_SUPPORT_TOPO_HPP
