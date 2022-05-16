@@ -1,7 +1,7 @@
 #ifndef SVN_SUPPORT_EVENT_BUFFER_HPP
 #define SVN_SUPPORT_EVENT_BUFFER_HPP
 
-#include <svn/topology/param_id.hpp>
+#include <svn/support/topology.hpp>
 #include <cstdint>
 
 namespace svn {

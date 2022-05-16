@@ -46,7 +46,9 @@ extern part const parts[];
 extern param const unit_params[];
 extern param const filter_params[]; 
 
+struct part_type_t { enum value { unit, filter, count }; };
 struct param_type_t { enum value { real, list, toggle, discrete, count }; };
+typedef part_type_t::value part_type;
 typedef param_type_t::value param_type;
 
 struct unit_type_t { enum value { blep, blamp, dsf, count }; };
