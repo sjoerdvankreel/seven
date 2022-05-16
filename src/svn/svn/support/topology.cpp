@@ -1,4 +1,4 @@
-#include <svn/topo/param.hpp>
+#include <svn/support/topology.hpp>
 
 namespace svn {
 
@@ -55,6 +55,13 @@ filter_params[filter_param::count] =
   { "Type", "Type", filter_types, filter_type::count },
   { "Frq", "Frequency", 0.5f },
   { "Res", "Resonance", 0.0f }
+};
+
+part const
+parts[] =
+{
+  { "Unit", "Unit generator", unit_count, unit_params, unit_param::count },
+  { "Filter", "Filter", filter_count, filter_params, filter_param::count }
 };
 
 } // namespace svn
