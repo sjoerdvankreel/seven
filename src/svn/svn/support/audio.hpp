@@ -1,5 +1,5 @@
-#ifndef SVN_SUPPORT_AUDIO_BUFFER_HPP
-#define SVN_SUPPORT_AUDIO_BUFFER_HPP
+#ifndef SVN_SUPPORT_AUDIO_HPP
+#define SVN_SUPPORT_AUDIO_HPP
 
 #include <cstdint>
 
@@ -114,4 +114,4 @@ audio_sample::operator/=(audio_sample y)
 { left /= y.left; right /= y.right; return *this; }  
 
 } // namespace svn
-#endif // SVN_SUPPORT_AUDIO_BUFFER_HPP
+#endif // SVN_SUPPORT_AUDIO_HPP
