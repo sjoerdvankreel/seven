@@ -28,6 +28,7 @@ struct output_buffer
   audio_sample* audio;
   struct param_value* param_values;
 
+  void clear(std::int32_t sample_count);
   float param_real(std::int32_t param) const;
   std::int32_t param_discrete(std::int32_t param) const;
   void param_real(std::int32_t param, float val);
@@ -47,6 +48,13 @@ struct input_buffer
   float param_real(std::int32_t param, std::int32_t sample) const;
   std::int32_t param_discrete(std::int32_t param, std::int32_t sample) const;
 };
+
+inline void
+output_buffer::clear(std::int32_t sample_count)
+{
+  for(std::int32_t s = 0; s < sample_count; s++)
+    audio[s].left = audio[s].right = 0.0f;
+}
 
 inline float
 output_buffer::param_real(std::int32_t param) const
