@@ -28,10 +28,10 @@ struct output_buffer
   audio_sample* audio;
   struct param_value* param_values;
 
-  float real_param(std::int32_t param) const;
-  std::int32_t discrete_param(std::int32_t param) const;
-  void real_param(std::int32_t param, float val);
-  void discrete_param(std::int32_t param, std::int32_t val);
+  float param_real(std::int32_t param) const;
+  std::int32_t param_discrete(std::int32_t param) const;
+  void param_real(std::int32_t param, float val);
+  void param_discrete(std::int32_t param, std::int32_t val);
 };
 
 struct input_buffer
@@ -43,29 +43,33 @@ struct input_buffer
   std::int32_t sample_count;
   void const* const* automation;
 
-  float real_param(std::int32_t param, std::int32_t sample) const;
-  std::int32_t discrete_param(std::int32_t param, std::int32_t sample) const;
+  bool automated(std::int32_t param) const;
+  float param_real(std::int32_t param, std::int32_t sample) const;
+  std::int32_t param_discrete(std::int32_t param, std::int32_t sample) const;
 };
 
 inline float
-output_buffer::real_param(std::int32_t param) const
+output_buffer::param_real(std::int32_t param) const
 { return param_values[param].real; }
 inline std::int32_t
-output_buffer::discrete_param(std::int32_t param) const
+output_buffer::param_discrete(std::int32_t param) const
 { return param_values[param].discrete; }
 
 inline void
-output_buffer::real_param(std::int32_t param, float val)
+output_buffer::param_real(std::int32_t param, float val)
 { param_values[param].real = val; }
 inline void
-output_buffer::discrete_param(std::int32_t param, std::int32_t val)
+output_buffer::param_discrete(std::int32_t param, std::int32_t val)
 { param_values[param].discrete = val; }
 
+inline bool
+input_buffer::automated(std::int32_t param) const
+{ return automation[param] != nullptr; }
 inline float 
-input_buffer::real_param(std::int32_t param, std::int32_t sample) const
+input_buffer::param_real(std::int32_t param, std::int32_t sample) const
 { return static_cast<float const*>(automation[param])[sample]; }
 inline std::int32_t
-input_buffer::discrete_param(std::int32_t param, std::int32_t sample) const
+input_buffer::param_discrete(std::int32_t param, std::int32_t sample) const
 { return static_cast<std::int32_t const*>(automation[param])[sample]; }
 
 } // namespace svn
