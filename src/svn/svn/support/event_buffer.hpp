@@ -1,5 +1,6 @@
 #ifndef SVN_SUPPORT_INPUT_BUFFER_HPP
 #define SVN_SUPPORT_INPUT_BUFFER_HPP
+
 #include <cstdint>
 
 namespace svn {
