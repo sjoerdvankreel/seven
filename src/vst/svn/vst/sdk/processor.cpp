@@ -77,8 +77,15 @@ Processor::setBusArrangements(
 }
 
 tresult PLUGIN_API 
-SevenProcessor::process(ProcessData& data)
+Processor::process(ProcessData& data)
 {
+  if (data.numSamples == 0 || data.numOutputs == 0)
+  {
+
+  }
+  return kResultOk;
+
+  /*
   int32 index;
   ParamValue value;
   IParamValueQueue* queue;
@@ -86,8 +93,9 @@ SevenProcessor::process(ProcessData& data)
     for(int32 i = 0; i < data.inputParameterChanges->getParameterCount(); i++)
       if ((queue = data.inputParameterChanges->getParameterData(i)) != nullptr)
         if(queue->getPoint(queue->getPointCount() - 1, index, value) == kResultTrue)
-          _state.values[queue->getParameterId()] = value;
+          _state[queue->getParameterId()] = value;
 	return kResultOk;
+  */
 }
 
 } // namespace Svn::Vst
