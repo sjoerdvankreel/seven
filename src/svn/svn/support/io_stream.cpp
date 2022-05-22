@@ -39,7 +39,11 @@ io_stream::load(io_stream& stream, param_value* param_values)
   float real;
   std::wstring part_name;
   std::wstring param_name;
+
+  std::int32_t min;
+  std::int32_t max;
   std::int32_t val;
+  std::int32_t count;
   std::int32_t discrete;
   std::int32_t part_index;
   std::int32_t param_real;
@@ -71,10 +75,21 @@ io_stream::load(io_stream& stream, param_value* param_values)
       if(param_real == 1) continue;
       switch (synth_params[rp].info->type)
       {
-      case param_type::toggle: param_values[rp].discrete = std::clamp(discrete, 0, 1); break;
-      case param_type::list: param_values[rp].discrete = std::clamp(discrete, 0, param->bounds.list.count); break;
-      case param_type::discrete: param_values[rp].discrete = std::clamp(discrete, param->bounds.discrete.min, param->bounds.discrete.max); break;
-      default: assert(false); break;
+      case param_type::toggle: 
+        param_values[rp].discrete = std::clamp(discrete, 0, 1); 
+        break;
+      case param_type::list: 
+        count = param->bounds.list.count;
+        param_values[rp].discrete = std::clamp(discrete, 0, count); 
+        break;
+      case param_type::discrete: 
+        min = param->bounds.discrete.min;
+        max = param->bounds.discrete.max;
+        param_values[rp].discrete = std::clamp(discrete, min, max); 
+        break;
+      default: 
+        assert(false); 
+        break;
       }
     }
   }
