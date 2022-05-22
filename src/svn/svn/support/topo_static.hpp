@@ -7,8 +7,8 @@ namespace svn {
 
 struct item_info
 {
-  char const* name;
-  char const* detail;
+  wchar_t const* name;
+  wchar_t const* detail;
 };
 
 struct part_info
@@ -26,15 +26,15 @@ struct param_info
   union
   {
     struct { std::int32_t default_; } toggle;
-    struct { char const* unit; float default_; } real;
+    struct { wchar_t const* unit; float default_; } real;
     struct { item_info const* items; std::int32_t count; } list;
-    struct { char const* unit; std::int32_t min; std::int32_t max; std::int32_t default_; } discrete;
+    struct { wchar_t const* unit; std::int32_t min; std::int32_t max; std::int32_t default_; } discrete;
   } bounds;
 
   param_info(item_info item, std::int32_t default_);
-  param_info(item_info item, char const* unit, float default_);
+  param_info(item_info item, wchar_t const* unit, float default_);
   param_info(item_info item, item_info const* items, std::int32_t count);
-  param_info(item_info item, char const* unit, std::int32_t min, std::int32_t max, std::int32_t default_);
+  param_info(item_info item, wchar_t const* unit, std::int32_t min, std::int32_t max, std::int32_t default_);
 };
 
 extern part_info const part_infos[];
