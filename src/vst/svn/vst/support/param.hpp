@@ -15,7 +15,12 @@ paramStepCount(std::int32_t param)
 }
 
 double
-paramNormalizeDefault(std::int32_t param);
+paramNormalizeDefault(std::int32_t param)
+{
+  auto const& info = *svn::synth_params[param].info;
+  if (info.type == svn::param_type::real) return static_cast<double>(info.default_.real);
+  return info.max.discrete - info.min.discrete;
+}
 
 double
 paramNormalizeReal(std::int32_t param, float val);
