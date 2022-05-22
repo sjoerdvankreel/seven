@@ -26,12 +26,14 @@ Controller::initialize(FUnknown* context)
 	if(result != kResultTrue) return result;
   for(std::int32_t p = 0; p < svn::synth_param_count; p++)
   {
+    auto flag = ParameterInfo::kCanAutomate;
+    auto listFlag = ParameterInfo::kCanAutomate | ParameterInfo::kIsList;
     auto const& param = svn::synth_params[p].info;
+    auto flags = param->type == svn::param_type::list? listFlag: flag;
     parameters.addParameter(
       param->item.detail, param->unit,
       paramStepCount(p), paramNormalizeDefault(p),
-      ParameterInfo::kCanAutomate, -1L, 0L,
-      param->item.name);
+      flags, -1L, 0L, param->item.name);
   }
 	return kResultTrue;
 }
@@ -49,7 +51,7 @@ Controller::setComponentState(IBStream* state)
 
   for(std::int32_t p = 0; p < svn::synth_param_count; p++)
     if(svn::synth_params[p].info->type == svn::param_type::real)
-      setParamNormalized(p, paramNormalizeReal(p, values[p].real));
+      setParamNormalized(p, values[p].real);
     else
       setParamNormalized(p, paramNormalizeDiscrete(p, values[p].discrete));
   return kResultOk;
