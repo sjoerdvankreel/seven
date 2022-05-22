@@ -77,6 +77,26 @@ Processor::setBusArrangements(
   return AudioEffect::setBusArrangements(inputs, inputCount, outputs, outputCount);
 }
 
+tresult PLUGIN_API
+Processor::process(ProcessData& data)
+{
+  auto& input = _synth->input();
+  input.sample_count = data.numSamples;
+  input.bpm = static_cast<float>(data.processContext->tempo);
+  input.sample_rate = static_cast<float>(data.processContext->sampleRate);
+
+  if (data.numSamples == 0 || data.numOutputs == 0) return processNoAudio(data);
+  processNoteEvents(data);
+  processAutomation(data);
+  svn::audio_sample* audio = _synth->process();
+
+  for (std::int32_t s = 0; s < data.numSamples; s++)
+  {
+    data.outputs[0].channelBuffers32[0][s] = audio[s].left;
+    data.outputs[0].channelBuffers32[1][s] = audio[s].right;
+  }
+}
+
 void
 Processor::processNoteEvent(std::int32_t index, Event const& event)
 {
@@ -112,6 +132,29 @@ Processor::processNoteEvents(ProcessData const& data)
         processNoteEvent(input.note_count++, event);
 }
 
+void
+Processor::processAutomation(ProcessData const& data)
+{
+  IParamValueQueue* queue;
+  auto& input = _synth->input();
+  auto changes = data.inputParameterChanges;
+
+  for (std::int32_t p = 0; p < svn::synth_param_count; p++)
+    if (svn::synth_params[p].info->type == svn::param_type::real)
+      for (std::int32_t s = 0; s < data.numSamples; s++)
+        static_cast<float*>(input.automation[p])[s] = static_cast<float>(_state[p].real);
+    else
+      for (std::int32_t s = 0; s < data.numSamples; s++)
+        static_cast<std::int32_t*>(input.automation[p])[s] = _state[p].discrete;
+
+  if (changes == nullptr) return;
+  for (std::int32_t i = 0; i < changes->getParameterCount(); i++)
+    if ((queue = changes->getParameterData(i)) != nullptr)
+    {
+
+    }
+}
+
 tresult
 Processor::processNoAudio(ProcessData const& data)
 {
@@ -128,32 +171,6 @@ Processor::processNoAudio(ProcessData const& data)
         else
           _state[queue->getParameterId()].discrete = paramDenormalizeDiscrete(queue->getParameterId(), value);
   return kResultOk;
-}
-
-void
-Processor::processAutomation(ProcessData const& data)
-{
-
-}
-
-tresult PLUGIN_API 
-Processor::process(ProcessData& data)
-{
-  auto& input = _synth->input();
-  input.sample_count = data.numSamples;
-  input.bpm = static_cast<float>(data.processContext->tempo);
-  input.sample_rate = static_cast<float>(data.processContext->sampleRate);
-
-  if (data.numSamples == 0 || data.numOutputs == 0) return processNoAudio(data);
-  processNoteEvents(data);
-  processAutomation(data);
-  svn::audio_sample* audio = _synth->process();
-
-  for (std::int32_t s = 0; s < data.numSamples; s++)
-  {
-    data.outputs[0].channelBuffers32[0][s] = audio[s].left;
-    data.outputs[0].channelBuffers32[1][s] = audio[s].right;
-  }
 }
 
 } // namespace Svn::Vst
