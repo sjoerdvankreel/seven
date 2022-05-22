@@ -2,6 +2,7 @@
 #define SVN_VST_SDK_PROCESSOR_HPP
 
 #include <svn/dsp/synth.hpp>
+#include <pluginterfaces/vst/ivstevents.h>
 #include <public.sdk/source/vst/vstaudioeffect.h>
 #include <public.sdk/source/vst/utility/sampleaccurate.h>
 #include <svn/support/param_value.hpp>
@@ -17,6 +18,7 @@ public Steinberg::Vst::AudioEffect
   using TBool = Steinberg::TBool;
   using int32 = Steinberg::int32;
   using tresult = Steinberg::tresult;
+  using Event = Steinberg::Vst::Event;
   using IBStream = Steinberg::IBStream;
   using ProcessData = Steinberg::Vst::ProcessData;
   using ProcessSetup = Steinberg::Vst::ProcessSetup;
@@ -26,6 +28,11 @@ private:
   std::unique_ptr<svn::synth> _synth;
   std::vector<svn::param_value> _state;
   std::vector<Parameter> _accurateParameters;
+private:
+  tresult processNoAudio(ProcessData const& data);
+  void processAutomation(ProcessData const& data);
+  void processNoteEvents(ProcessData const& data);
+  void processNoteEvent(std::int32_t index, Event const& event);
 public:
   Processor();
   static FUnknown* createInstance(void* context);

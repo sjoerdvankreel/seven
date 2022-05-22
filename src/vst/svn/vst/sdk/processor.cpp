@@ -6,11 +6,11 @@
 
 #include <base/source/fstreamer.h>
 #include <pluginterfaces/base/ibstream.h>
-#include <pluginterfaces/vst/ivstevents.h>
 #include <pluginterfaces/vst/ivstaudioprocessor.h>
 #include <pluginterfaces/vst/ivstparameterchanges.h>
 #include <public.sdk/source/vst/utility/processdataslicer.h>
 
+#include <cassert>
 #include <cstdint>
 
 using namespace Steinberg;
@@ -77,53 +77,83 @@ Processor::setBusArrangements(
   return AudioEffect::setBusArrangements(inputs, inputCount, outputs, outputCount);
 }
 
+void
+Processor::processNoteEvent(std::int32_t index, Event const& event)
+{
+  auto& input = _synth->input();
+  input.notes[index].sample_index = event.sampleOffset;
+  switch (event.type)
+  {
+  case Event::kNoteOffEvent:
+    input.notes[index].midi = svn::note_off;
+    break;
+  case Event::kNoteOnEvent:
+    input.notes[index].midi = event.noteOn.pitch;
+    input.notes[index].velocity = event.noteOn.velocity;
+    break;
+  default:
+    assert(false);
+    break;
+  }
+}
+
+void 
+Processor::processNoteEvents(ProcessData const& data)
+{
+  Event event;
+  std::int32_t index = 0;
+  auto& input = _synth->input();
+
+  input.note_count = 0;
+  if (data.inputEvents == nullptr) return;
+  for (std::int32_t i = 0; i < data.inputEvents->getEventCount(); i++)
+    if (data.inputEvents->getEvent(i, event) == kResultOk)
+      if(event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent) 
+        processNoteEvent(input.note_count++, event);
+}
+
+tresult
+Processor::processNoAudio(ProcessData const& data)
+{
+  int32 index;
+  ParamValue value;
+  IParamValueQueue* queue;
+  auto changes = data.inputParameterChanges;
+  if (changes == nullptr) return kResultOk;
+  for (int32 i = 0; i < changes->getParameterCount(); i++)
+    if ((queue = changes->getParameterData(i)) != nullptr)
+      if (queue->getPoint(queue->getPointCount() - 1, index, value) == kResultTrue)
+        if (svn::synth_params[queue->getParameterId()].info->type == svn::param_type::real)
+          _state[queue->getParameterId()].real = value;
+        else
+          _state[queue->getParameterId()].discrete = paramDenormalizeDiscrete(queue->getParameterId(), value);
+  return kResultOk;
+}
+
+void
+Processor::processAutomation(ProcessData const& data)
+{
+
+}
+
 tresult PLUGIN_API 
 Processor::process(ProcessData& data)
 {
-  if (data.numSamples == 0 || data.numOutputs == 0)
-  {
-    int32 index;
-    ParamValue value;
-    IParamValueQueue* queue;
-    auto changes = data.inputParameterChanges;
-    if(changes == nullptr) return kResultOk;
-    for (int32 i = 0; i < changes->getParameterCount(); i++)
-      if ((queue = changes->getParameterData(i)) != nullptr)
-        if (queue->getPoint(queue->getPointCount() - 1, index, value) == kResultTrue)
-          if(svn::synth_params[queue->getParameterId()].info->type == svn::param_type::real)
-            _state[queue->getParameterId()].real = value;
-          else
-            _state[queue->getParameterId()].discrete = paramDenormalizeDiscrete(queue->getParameterId(), value);
-    return kResultOk;
-  }
-
   auto& input = _synth->input();
-  input.note_count = 0;
   input.sample_count = data.numSamples;
   input.bpm = static_cast<float>(data.processContext->tempo);
   input.sample_rate = static_cast<float>(data.processContext->sampleRate);
 
-  Event event;
-  std::int32_t note = 0;
-  if (data.inputEvents != nullptr)
-    for(std::int32_t i = 0; i < data.inputEvents->getEventCount(); i++)
-      if (data.inputEvents->getEvent(i, event) == kResultOk)
-      {
-        switch (event.type)
-        {
-        case Event::kNoteOffEvent:
-          input.notes[input.note_count].midi = svn::note_off;
-          break;
-        case Event::kNoteOnEvent:
-          input.notes[input.note_count].midi = event.noteOn.pitch;
-          input.notes[input.note_count].velocity = event.noteOn.velocity;
-          break;
-        default:
-          break;
-        }    
-        input.notes[input.note_count].sample_index = event.sampleOffset;
-        ++input.note_count;
-      }
+  if (data.numSamples == 0 || data.numOutputs == 0) return processNoAudio(data);
+  processNoteEvents(data);
+  processAutomation(data);
+  svn::audio_sample* audio = _synth->process();
+
+  for (std::int32_t s = 0; s < data.numSamples; s++)
+  {
+    data.outputs[0].channelBuffers32[0][s] = audio[s].left;
+    data.outputs[0].channelBuffers32[1][s] = audio[s].right;
+  }
 }
 
 } // namespace Svn::Vst
