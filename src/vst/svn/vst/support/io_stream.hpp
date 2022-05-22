@@ -28,6 +28,10 @@ public:
   bool write_wstring(std::wstring const& val) override;
 };
 
+inline IOStream::
+IOStream(IBStreamer* streamer):
+_streamer(streamer) {}
+
 inline bool 
 IOStream::read_float(float& val)
 { return _streamer->readFloat(val); }
