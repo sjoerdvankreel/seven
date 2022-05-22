@@ -1,11 +1,16 @@
 #include <svn/vst/support/ids.hpp>
 #include <svn/vst/support/param.hpp>
+#include <svn/vst/support/io_stream.hpp>
 #include <svn/vst/sdk/controller.hpp>
+
+#include <svn/support/io_stream.hpp>
 #include <svn/support/topo_rt.hpp>
 #include <svn/support/topo_static.hpp>
 
 #include <base/source/fstreamer.h>
 #include <pluginterfaces/base/ibstream.h>
+
+#include <vector>
 #include <cstring>
 #include <cstdint>
 
@@ -34,14 +39,19 @@ Controller::initialize(FUnknown* context)
 tresult PLUGIN_API 
 Controller::setComponentState(IBStream* state)
 {
-  float value;
+  svn::param_value value;
+  std::vector<svn::param_value> values(svn::synth_param_count, value);
+  
   if (state == nullptr) return kResultFalse;
   IBStreamer streamer(state, kLittleEndian);
-  for (std::size_t i = 0; i < svn::synth_params::all.size(); i++)
-    if (!streamer.readFloat(value))
-      return kResultFalse;
-    else 
-      setParamNormalized(svn::synth_params::all[i].id, value);
+  IOStream stream(&streamer);
+  if(!svn::io_stream::load(stream, values.data())) return false;
+
+  for(std::int32_t p = 0; p < svn::synth_param_count; p++)
+    if(svn::synth_params[p].info->type == svn::param_type::real)
+      setParamNormalized(p, paramNormalizeReal(p, values[p].real));
+    else
+      setParamNormalized(p, paramNormalizeDiscrete(p, values[p].discrete));
   return kResultOk;
 }
 
