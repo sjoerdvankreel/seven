@@ -1,5 +1,5 @@
 #include <windows.h>
-#include <svn/vst/seven_vst.hpp>
+#include <svn/vst/support/info.hpp>
 
 #define APSTUDIO_READONLY_SYMBOLS
 
