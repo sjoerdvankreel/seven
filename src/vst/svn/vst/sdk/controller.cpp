@@ -1,6 +1,6 @@
-#include <svn/vst/ids.hpp>
-#include <svn/vst/param.hpp>
-#include <svn/vst/controller.hpp>
+#include <svn/vst/support/ids.hpp>
+#include <svn/vst/support/param.hpp>
+#include <svn/vst/sdk/controller.hpp>
 #include <svn/support/topo_rt.hpp>
 #include <svn/support/topo_static.hpp>
 
@@ -9,15 +9,10 @@
 #include <cstring>
 #include <cstdint>
 
-using namespace VSTGUI;
 using namespace Steinberg;
 using namespace Steinberg::Vst;                  
 
 namespace Svn::Vst {   
-
-FUnknown* 
-Controller::createInstance(void* context)
-{ return static_cast<IEditController*>(new Controller); }
 
 tresult PLUGIN_API 
 Controller::initialize(FUnknown* context)
@@ -48,13 +43,6 @@ Controller::setComponentState(IBStream* state)
     else 
       setParamNormalized(svn::synth_params::all[i].id, value);
   return kResultOk;
-}
-
-IPlugView* PLUGIN_API
-Controller::createView(char const* name)
-{
-  if (name == nullptr || std::strcmp(name, "editor") != 0) return nullptr;
-  return new VST3Editor(this, "view", "seven.uidesc");
 }
 
 } // namespace Svn::Vst

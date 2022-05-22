@@ -2,14 +2,12 @@
 #define SVN_VST_SDK_CONTROLLER_HPP
 
 #include <pluginterfaces/vst/vsttypes.h>
-#include <vstgui/plugin-bindings/vst3editor.h>
 #include <public.sdk/source/vst/vsteditcontroller.h>
 
 namespace Svn::Vst {
 
 class Controller: 
-public Steinberg::Vst::EditController, 
-public VSTGUI::VST3EditorDelegate
+public Steinberg::Vst::EditController
 {
   using tresult = Steinberg::tresult;
   using IBStream = Steinberg::IBStream;
@@ -18,9 +16,12 @@ public:
 	static FUnknown* createInstance(void* context);
 public:
 	tresult PLUGIN_API initialize(FUnknown* context) override;
-	IPlugView* PLUGIN_API createView(char const* name) override;
 	tresult PLUGIN_API setComponentState(IBStream* state) override;
 };
+
+inline FUnknown* 
+Controller::createInstance(void* context)
+{ return static_cast<IEditController*>(new Controller); }
 
 } // namespace Svn::Vst
 #endif // SVN_VST_SDK_CONTROLLER_HPP
