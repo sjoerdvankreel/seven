@@ -30,61 +30,50 @@ _accurateParameters(static_cast<std::size_t>(svn::synth_param_count))
 }
 
 tresult PLUGIN_API
+Processor::initialize(FUnknown* context)
+{
+  tresult result = AudioEffect::initialize(context);
+  if (result != kResultTrue) return kResultFalse;
+  addEventInput(STR16("Event In"), 1);
+  addAudioOutput(STR16("Stereo Out"), SpeakerArr::kStereo);
+  return kResultTrue;
+}
+
+tresult PLUGIN_API
 Processor::getState(IBStream* state)
 {
   if(state == nullptr) return kResultFalse;
   IBStreamer streamer(state, kLittleEndian);
   IOStream stream(&streamer);
-  if(!svn::io_stream::save(stream, _synth->para
-
-  for (std::int32_t i = 0; i < svn::param_id::count; i++)
-    streamer.writeFloat(_state.values[i]);
+  if(!svn::io_stream::save(stream, _state.data())) return kResultFalse;
   return kResultOk;
 }
 
 tresult PLUGIN_API 
-SevenProcessor::initialize(FUnknown* context)
-{
-	tresult result = AudioEffect::initialize(context);
-	if (result != kResultTrue) return kResultFalse;
-  addEventInput(STR16("Event In"), 1);
-	addAudioOutput (STR16 ("Stereo Out"), SpeakerArr::kStereo);
-	return kResultTrue;
-}
-
-tresult PLUGIN_API 
-SevenProcessor::setState(IBStream* state)
+Processor::setState(IBStream* state)
 {
   float value;
   if (state == nullptr) return kResultFalse;
   IBStreamer streamer(state, kLittleEndian);
-  for(std::int32_t i = 0; i < svn::param_id::count; i++)
-    if(!streamer.readFloat(value)) 
-      return kResultFalse;
-    else
-      _state.values[i] = value;
+  IOStream stream(&streamer);
+  if(!svn::io_stream::load(stream, _state.data())) return kResultFalse;
   return kResultOk;
 }
 
+tresult PLUGIN_API
+Processor::setupProcessing(ProcessSetup& setup)
+{
+  _synth.reset(new svn::synth(_state.data(), setup.maxSamplesPerBlock));
+  return AudioEffect::setupProcessing(setup);
+}
+
 tresult PLUGIN_API 
-SevenProcessor::setBusArrangements(
+Processor::setBusArrangements(
   SpeakerArrangement* inputs, int32 inputCount,
   SpeakerArrangement* outputs, int32 outputCount)
 {
 	if(inputCount != 0 || outputCount != 1 || outputs[0] != 2) return kResultFalse;
   return AudioEffect::setBusArrangements(inputs, inputCount, outputs, outputCount);
-}
-
-tresult PLUGIN_API 
-SevenProcessor::setupProcessing(ProcessSetup& setup)
-{
-  _synth32.reset();
-  _synth64.reset();
-  if (setup.symbolicSampleSize == kSample32)
-    _synth32.reset(new svn::seven_synth<float>(&_state, setup.sampleRate, setup.maxSamplesPerBlock));
-  if (setup.symbolicSampleSize == kSample64)
-    _synth64.reset(new svn::seven_synth<double>(&_state, setup.sampleRate, setup.maxSamplesPerBlock));
-	return AudioEffect::setupProcessing(setup);
 }
 
 tresult PLUGIN_API 
