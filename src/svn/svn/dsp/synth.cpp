@@ -1,6 +1,7 @@
 #include <svn/dsp/synth.hpp>
 #include <svn/support/topo_rt.hpp>
 #include <cstdint>
+#include <cassert>
 
 namespace svn {
 
@@ -17,10 +18,28 @@ _automation_discrete(static_cast<std::size_t>(synth_param_count),
   std::vector<std::int32_t>(static_cast<std::size_t>(max_sample_count)))
 {
   for (std::int32_t p = 0; p < synth_param_count; p++)
-    if(synth_params[p].info->type == param_type::real)
-      _automation[p] = _automation_real[p].data();
-    else
+    switch (synth_params[p].info->type)
+    {
+    case param_type::list:
       _automation[p] = _automation_discrete[p].data();
+      _output_params[p].discrete = 0;
+      break;
+    case param_type::real:
+      _automation[p] = _automation_real[p].data();
+      _output_params[p].real = synth_params[p].info->bounds.real.default_;
+      break;
+    case param_type::toggle:
+      _automation[p] = _automation_discrete[p].data();
+      _output_params[p].discrete = synth_params[p].info->bounds.toggle.default_;
+      break;
+    case param_type::discrete:
+      _automation[p] = _automation_discrete[p].data();
+      _output_params[p].discrete = synth_params[p].info->bounds.discrete.default_;
+      break;
+    default:
+      assert(false);
+      break;
+    }
 
   _input.notes = _input_notes.data();
   _input.automation = _automation.data();
@@ -28,7 +47,7 @@ _automation_discrete(static_cast<std::size_t>(synth_param_count),
   _output.param_values = _output_params.data();
 }
 
-output_buffer
+audio_sample*
 synth::process()
 {
   output_buffer part_output;
@@ -51,7 +70,7 @@ synth::process()
     _output.add_audio(part_output.audio, _input.sample_count);
   }
 
-  return _output;
+  return _output.audio;
 }
 
 } // namespace svn

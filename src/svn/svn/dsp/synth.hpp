@@ -25,12 +25,17 @@ public:
   synth(std::int32_t max_sample_count);
 public:
   input_buffer& input();
-  output_buffer process();
+  param_value* params();
+  audio_sample* process();
 };
 
 inline input_buffer&
 synth::input()
 { return _input; }
+
+inline param_value*
+synth::params()
+{ return _output.param_values; }
 
 } // namespace svn
 #endif // SVN_DSP_SYNTH_HPP
