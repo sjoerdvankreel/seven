@@ -37,10 +37,12 @@ init_t()
   }
   synth_bounds = synth_bounds_.data();
 
-  std::int32_t part_index = 0;
   for(std::int32_t t = 0; t < part_type::count; t++)
+  {
+    std::int32_t part_index = 0;
     for(std::int32_t i = 0; i < part_infos[t].count; i++)
       synth_parts_.push_back({ part_index++, &part_infos[t] });
+  }
   synth_parts = synth_parts_.data();
   synth_part_count = static_cast<std::int32_t>(synth_parts_.size());
 
