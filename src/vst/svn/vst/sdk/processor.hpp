@@ -10,7 +10,7 @@
 
 namespace Svn::Vst {
 
-class SevenProcessor : 
+class Processor : 
 public Steinberg::Vst::AudioEffect
 {
   using TBool = Steinberg::TBool;
@@ -25,7 +25,7 @@ private:
   std::unique_ptr<svn::synth> _synth;
   std::vector<Parameter> _accurateParameters;
 public:
-  SevenProcessor();
+  Processor();
   static FUnknown* createInstance(void* context);
 public:
 	tresult PLUGIN_API setState(IBStream* state) override;
