@@ -9,7 +9,7 @@ struct param_value
 {
   union
   {
-    float real;
+    double real;
     std::int32_t discrete;
   };
 };

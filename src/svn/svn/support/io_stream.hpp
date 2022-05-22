@@ -8,11 +8,11 @@ namespace svn {
 
 struct io_stream
 {
-  virtual bool read_float(float& val) = 0;
+  virtual bool read_double(double& val) = 0;
   virtual bool read_int32(std::int32_t& val) = 0;
   virtual bool read_wstring(std::wstring& val) = 0;
 
-  virtual bool write_float(float val) = 0;
+  virtual bool write_double(double val) = 0;
   virtual bool write_int32(std::int32_t val) = 0;
   virtual bool write_wstring(std::wstring const& val) = 0;
 

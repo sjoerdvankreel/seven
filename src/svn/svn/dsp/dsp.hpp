@@ -34,7 +34,7 @@ automate_real(
   std::int32_t sample)
 {
   auto automation = static_cast<float*>(input.automation[param]);
-  return state[param].real = automation[sample];
+  return static_cast<float>(state[param].real = automation[sample]);
 }
 
 inline float

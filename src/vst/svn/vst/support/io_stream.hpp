@@ -19,11 +19,11 @@ private:
 public:
   IOStream(IBStreamer* streamer);
 
-  bool read_float(float& val) override;
+  bool read_double(double& val) override;
   bool read_int32(std::int32_t& val) override;
   bool read_wstring(std::wstring& val) override;
 
-  bool write_float(float val) override;
+  bool write_double(double val) override;
   bool write_int32(std::int32_t val) override;
   bool write_wstring(std::wstring const& val) override;
 };
@@ -33,12 +33,12 @@ IOStream(IBStreamer* streamer):
 _streamer(streamer) {}
 
 inline bool 
-IOStream::read_float(float& val)
-{ return _streamer->readFloat(val); }
+IOStream::read_double(double& val)
+{ return _streamer->readDouble(val); }
 
 inline bool 
-IOStream::write_float(float val)
-{ return _streamer->writeFloat(val); }
+IOStream::write_double(double val)
+{ return _streamer->writeDouble(val); }
 
 inline bool 
 IOStream::write_int32(std::int32_t val)

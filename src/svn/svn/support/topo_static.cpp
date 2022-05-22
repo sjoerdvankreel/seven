@@ -13,12 +13,12 @@ min(), max(), default_(), items(nullptr)
 }
 
 param_info::
-param_info(item_info item, wchar_t const* unit, float default_):
+param_info(item_info item, wchar_t const* unit, double default_):
 type(param_type::real), item(item), unit(unit),
 min(), max(), default_(), items(nullptr)
 {
-  min.real = 0.0f;
-  max.real = 0.0f;
+  min.real = 0.0;
+  max.real = 0.0;
   this->default_.real = default_;
 }
 
@@ -62,10 +62,10 @@ unit_params[unit_param::count] =
 {
   { { L"On", L"Enabled" }, 0 },
   { { L"Type", L"Type" }, unit_types, unit_type::count },
-  { { L"Lvl", L"Level" }, L"dB", 1.0f },
+  { { L"Lvl", L"Level" }, L"dB", 1.0 },
   { { L"Dtn", L"Detune" }, L"Cent", -50, 50, 0},
-  { { L"Pan", L"Panning" }, L"%", 0.5f },
-  { { L"Pw", L"Pulse width" }, L"%", 1.0f }
+  { { L"Pan", L"Panning" }, L"%", 0.5 },
+  { { L"Pw", L"Pulse width" }, L"%", 1.0 }
 };
 
 param_info const
@@ -73,8 +73,8 @@ filter_params[filter_param::count] =
 {
   { { L"On", L"Enabled" }, 0 },
   { { L"Type", L"Type" }, filter_types, filter_type::count },
-  { { L"Frq", L"Frequency" }, L"Hz", 0.5f },
-  { { L"Res", L"Resonance" }, L"", 0.0f }
+  { { L"Frq", L"Frequency" }, L"Hz", 0.5 },
+  { { L"Res", L"Resonance" }, L"", 0.0 }
 };
 
 part_info const

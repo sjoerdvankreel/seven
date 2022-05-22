@@ -25,7 +25,7 @@ io_stream::save(io_stream& stream, param_value* param_values)
     if(!stream.write_int32(part->index)) return false;
     if(!stream.write_wstring(param->item.name)) return false;
     if(!stream.write_int32(real? 1: 0)) return false;
-    if(real && !stream.write_float(param_values[p].real)) return false;
+    if(real && !stream.write_double(param_values[p].real)) return false;
     if(!real && !stream.write_int32(param_values[p].discrete)) return false;
   }
   return true;
@@ -34,7 +34,7 @@ io_stream::save(io_stream& stream, param_value* param_values)
 bool
 io_stream::load(io_stream& stream, param_value* param_values)
 {
-  float real;
+  double real;
   std::wstring part_name;
   std::wstring param_name;
   
@@ -54,7 +54,7 @@ io_stream::load(io_stream& stream, param_value* param_values)
     if(!stream.read_int32(part_index)) return false;
     if(!stream.read_wstring(param_name)) return false;
     if(!stream.read_int32(param_real) || param_real != 0 || param_real != 1) return false;
-    if(param_real == 1 && !stream.read_float(real)) return false;
+    if(param_real == 1 && !stream.read_double(real)) return false;
     if(param_real == 0 && !stream.read_int32(discrete)) return false;
 
     for (std::int32_t rp = 0; rp < synth_param_count; rp++)
@@ -66,7 +66,7 @@ io_stream::load(io_stream& stream, param_value* param_values)
       if(part_index != part->index) continue;
       if(param_name != param->item.name) continue;
       if(param_real == 1 && param->type != param_type::real) continue;
-      if(param_real == 1) param_values[rp].real = std::clamp(real, 0.0f, 1.0f);
+      if(param_real == 1) param_values[rp].real = std::clamp(real, 0.0, 1.0);
       if(param_real == 0) param_values[rp].discrete = std::clamp(discrete, param->min.discrete, param->max.discrete);
     }
   }
