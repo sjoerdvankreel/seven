@@ -1,7 +1,7 @@
 #include <svn/support/topo_rt.hpp>
 #include <svn/support/io_stream.hpp>
+#include <svn/support/param_value.hpp>
 #include <svn/support/topo_static.hpp>
-#include <svn/support/event_buffer.hpp>
 #include <algorithm>
 
 namespace svn {

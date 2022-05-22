@@ -1,7 +1,7 @@
 #ifndef SVN_SUPPORT_TOPO_STATIC_HPP
 #define SVN_SUPPORT_TOPO_STATIC_HPP
 
-#include <svn/support/event_buffer.hpp>
+#include <svn/support/param_value.hpp>
 #include <cstdint>
 
 namespace svn {

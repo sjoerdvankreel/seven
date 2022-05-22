@@ -4,38 +4,34 @@
 #include <svn/dsp/unit.hpp>
 #include <svn/support/topo_static.hpp>
 #include <svn/support/audio_sample.hpp>
-#include <svn/support/event_buffer.hpp>
+#include <svn/support/input_buffer.hpp>
+#include <svn/support/param_value.hpp>
 #include <vector>
 
 namespace svn {
 
 class synth
 {
-  input_buffer _input;
-  output_buffer _output;
   unit _units[unit_count];
-  std::vector<audio_sample> _part_audio;
-  std::vector<note_event> _input_notes;
-  std::vector<audio_sample> _output_audio;
-  std::vector<param_value> _output_params;
+
+  param_value* _state;
+  input_buffer _input;
   std::vector<void*> _automation;
+  std::vector<note_event> _notes;
+  std::vector<audio_sample> _audio;
+  std::vector<audio_sample> _part_audio;
   std::vector<std::vector<float>> _automation_real;
   std::vector<std::vector<std::int32_t>> _automation_discrete;
 public:
-  synth(std::int32_t max_sample_count);
+  synth(param_value* state, std::int32_t max_sample_count);
 public:
   input_buffer& input();
-  param_value* params();
   audio_sample* process();
 };
 
 inline input_buffer&
 synth::input()
 { return _input; }
-
-inline param_value*
-synth::params()
-{ return _output.param_values; }
 
 } // namespace svn
 #endif // SVN_DSP_SYNTH_HPP

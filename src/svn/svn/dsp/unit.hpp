@@ -2,7 +2,9 @@
 #define SVN_DSP_UNIT_HPP
 
 #include <svn/support/topo_static.hpp>
-#include <svn/support/event_buffer.hpp>
+#include <svn/support/param_value.hpp>
+#include <svn/support/audio_sample.hpp>
+#include <svn/support/input_buffer.hpp>
 
 namespace svn {
 
@@ -10,7 +12,7 @@ class unit
 {
   float _phase = 0.0f;
 public:
-  void process(input_buffer const& input, output_buffer& output);
+  void process(input_buffer const& input, audio_sample* audio, param_value* state);
 };
 
 } // namespace svn

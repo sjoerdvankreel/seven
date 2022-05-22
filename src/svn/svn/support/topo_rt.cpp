@@ -1,4 +1,5 @@
 #include <svn/support/topo_rt.hpp>
+#include <svn/support/param_value.hpp>
 #include <svn/support/topo_static.hpp>
 #include <vector>
 
@@ -10,6 +11,17 @@ std::int32_t synth_param_count;
 synth_part const* synth_parts;
 synth_param const* synth_params;
 std::int32_t const* const* synth_bounds;
+
+void
+init_defaults(param_value* state)
+{
+  for (std::int32_t p = 0; p < synth_param_count; p++)
+    switch (synth_params[p].info->type)
+    {
+    case param_type::real: state[p].real = synth_params[p].info->default_.real; break;
+    default: state[p].discrete = synth_params[p].info->default_.discrete; break;
+    }
+}
 
 namespace {
 
