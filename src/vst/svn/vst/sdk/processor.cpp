@@ -1,7 +1,7 @@
-#include <svn/vst/seven_ids.hpp>
-#include <svn/vst/seven_vst.hpp>
-#include <svn/vst/seven_processor.hpp>
-#include <svn/synth/seven_synth.hpp>
+#include <svn/support/topo_rt.hpp>
+#include <svn/vst/sdk/processor.hpp>
+#include <svn/vst/support/ids.hpp>
+#include <svn/vst/support/io_stream.hpp>
 
 #include <base/source/fstreamer.h>
 #include <pluginterfaces/base/ibstream.h>
@@ -17,26 +17,24 @@ using namespace Steinberg::Vst;
 
 namespace Svn::Vst {
 
-FUnknown* 
-SevenProcessor::createInstance(void* context) 
-{ return static_cast<IAudioProcessor*>(new SevenProcessor); }
-
-SevenProcessor::
-SevenProcessor():
-_state(),
-_synth32(),
-_synth64(),
-_accurateParameters()
+Processor::
+Processor():
+_synth(),
+_accurateParameters(static_cast<std::size_t>(svn::synth_param_count))
 {
 	setControllerClass(ControllerId);
-  for(std::uint32_t i = 0; i < svn::param_id::count; i++)
+  for(std::int32_t i = 0; i < svn::synth_param_count; i++)
     _accurateParameters[i].setParamID(i);
 }
 
 tresult PLUGIN_API
-SevenProcessor::getState(IBStream* state)
+Processor::getState(IBStream* state)
 {
+  if(state == nullptr) return kResultFalse;
   IBStreamer streamer(state, kLittleEndian);
+  IOStream stream(&streamer);
+  if(!svn::io_stream::save(stream, _synth->para
+
   for (std::int32_t i = 0; i < svn::param_id::count; i++)
     streamer.writeFloat(_state.values[i]);
   return kResultOk;
@@ -73,13 +71,6 @@ SevenProcessor::setBusArrangements(
 {
 	if(inputCount != 0 || outputCount != 1 || outputs[0] != 2) return kResultFalse;
   return AudioEffect::setBusArrangements(inputs, inputCount, outputs, outputCount);
-}
-
-tresult PLUGIN_API
-SevenProcessor::canProcessSampleSize(int32 symbolicSampleSize)
-{
-  if (symbolicSampleSize == kSample32 || symbolicSampleSize == kSample64) return kResultTrue;
-  return kResultFalse;
 }
 
 tresult PLUGIN_API 

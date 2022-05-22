@@ -39,5 +39,13 @@ public:
     SpeakerArrangement* outputs, int32 outputCount) override;
 };
 
+inline Steinberg::FUnknown* 
+Processor::createInstance(void* context) 
+{ return static_cast<Steinberg::Vst::IAudioProcessor*>(new Processor); }
+
+inline Steinberg::tresult PLUGIN_API
+Processor::canProcessSampleSize(int32 symbolicSampleSize)
+{ return symbolicSampleSize == Steinberg::Vst::kSample32? kResultTrue: kResultFalse; }
+
 } // namespace Svn::Vst
 #endif // SVN_VST_SDK_PROCESSOR_HPP

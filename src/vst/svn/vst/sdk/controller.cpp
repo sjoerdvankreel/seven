@@ -45,7 +45,7 @@ Controller::setComponentState(IBStream* state)
   if (state == nullptr) return kResultFalse;
   IBStreamer streamer(state, kLittleEndian);
   IOStream stream(&streamer);
-  if(!svn::io_stream::load(stream, values.data())) return false;
+  if(!svn::io_stream::load(stream, values.data())) return kResultFalse;
 
   for(std::int32_t p = 0; p < svn::synth_param_count; p++)
     if(svn::synth_params[p].info->type == svn::param_type::real)
