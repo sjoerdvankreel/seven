@@ -3,6 +3,9 @@
 #include <svn/support/topo_static.hpp>
 #include <svn/support/event_buffer.hpp>
 
+#include <cassert>
+#include <algorithm>
+
 namespace svn {
 
 static std::int32_t const version = 1;
@@ -17,10 +20,12 @@ io_stream::save(io_stream& stream, param_value* param_values)
 
   for (std::int32_t p = 0; p < synth_param_count; p++)
   {
-    bool real = synth_params[p].info->type == param_type::real;
-    if(!stream.write_wstring(synth_params[p].part->info->item.name)) return false;
-    if(!stream.write_int32(synth_params[p].part->index)) return false;
-    if(!stream.write_wstring(synth_params[p].info->item.name)) return false;
+    auto const& part = synth_params[p].part;
+    auto const& param = synth_params[p].info;
+    bool real = param->type == param_type::real;
+    if(!stream.write_wstring(part->info->item.name)) return false;
+    if(!stream.write_int32(part->index)) return false;
+    if(!stream.write_wstring(param->item.name)) return false;
     if(!stream.write_int32(real? 1: 0)) return false;
     if(real && !stream.write_float(param_values[p].real)) return false;
     if(!real && !stream.write_int32(param_values[p].discrete)) return false;
@@ -55,12 +60,22 @@ io_stream::load(io_stream& stream, param_value* param_values)
 
     for (std::int32_t rp = 0; rp < synth_param_count; rp++)
     {
-      if(part_name != synth_params[rp].part->info->item.name) continue;
-      if(part_index != synth_params[rp].part->index) continue;
-      if(param_name != synth_params[rp].info->item.name) continue;
-      if(param_real == 1 && synth_params[rp].info->type != param_type::real) continue;
-      if(param_real == 1) param_values[rp].real = real;
-      else param_values[rp].discrete = discrete;
+      auto const& part = synth_params[rp].part;
+      auto const& param = synth_params[rp].info;
+
+      if(part_name != part->info->item.name) continue;
+      if(part_index != part->index) continue;
+      if(param_name != param->item.name) continue;
+      if(param_real == 1 && param->type != param_type::real) continue;
+      if(param_real == 1) param_values[rp].real = std::clamp(real, 0.0f, 1.0f);
+      if(param_real == 1) continue;
+      switch (synth_params[rp].info->type)
+      {
+      case param_type::toggle: param_values[rp].discrete = std::clamp(discrete, 0, 1); break;
+      case param_type::list: param_values[rp].discrete = std::clamp(discrete, 0, param->bounds.list.count); break;
+      case param_type::discrete: param_values[rp].discrete = std::clamp(discrete, param->bounds.discrete.min, param->bounds.discrete.max); break;
+      default: assert(false); break;
+      }
     }
   }
 
