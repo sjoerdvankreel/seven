@@ -36,6 +36,7 @@ target_include_directories(seven PRIVATE ${SVN_SRC_DIR})
 set(SVN_VST_SRC_DIR "src/vst")
 file(GLOB_RECURSE SVN_VST_SRC "${SVN_VST_SRC_DIR}/*.*")
 add_library(seven.vst SHARED ${SVN_VST_SRC})
+source_group(TREE "../${SVN_VST_SRC_DIR}" FILES ${SVN_VST_SRC})
 
 target_include_directories(seven.vst PRIVATE ${SVN_SRC_DIR})
 target_include_directories(seven.vst PRIVATE ${SVN_VST_SRC_DIR})

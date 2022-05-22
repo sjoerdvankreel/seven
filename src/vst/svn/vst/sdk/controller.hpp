@@ -1,14 +1,13 @@
-#ifndef SVN_VST_SEVEN_CONTROLLER_HPP
-#define SVN_VST_SEVEN_CONTROLLER_HPP
+#ifndef SVN_VST_SDK_CONTROLLER_HPP
+#define SVN_VST_SDK_CONTROLLER_HPP
 
-#include <svn/vst/seven_vst.hpp>
 #include <pluginterfaces/vst/vsttypes.h>
 #include <vstgui/plugin-bindings/vst3editor.h>
 #include <public.sdk/source/vst/vsteditcontroller.h>
 
 namespace Svn::Vst {
 
-class SevenController: 
+class Controller: 
 public Steinberg::Vst::EditController, 
 public VSTGUI::VST3EditorDelegate
 {
@@ -24,4 +23,4 @@ public:
 };
 
 } // namespace Svn::Vst
-#endif // SVN_VST_SEVEN_CONTROLLER_HPP
+#endif // SVN_VST_SDK_CONTROLLER_HPP

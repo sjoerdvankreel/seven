@@ -1,6 +1,6 @@
-#include <svn/vst/seven.hpp>
-#include <svn/vst/seven_vst.hpp>
-#include <svn/vst/seven_controller.hpp>
+#include <svn/vst/ids.hpp>
+#include <svn/vst/param.hpp>
+#include <svn/vst/controller.hpp>
 #include <svn/support/topo_rt.hpp>
 #include <svn/support/topo_static.hpp>
 
@@ -16,11 +16,11 @@ using namespace Steinberg::Vst;
 namespace Svn::Vst {   
 
 FUnknown* 
-SevenController::createInstance(void* context)
-{ return static_cast<IEditController*>(new SevenController); }
+Controller::createInstance(void* context)
+{ return static_cast<IEditController*>(new Controller); }
 
 tresult PLUGIN_API 
-SevenController::initialize(FUnknown* context)
+Controller::initialize(FUnknown* context)
 {
 	tresult result = EditController::initialize(context);
 	if(result != kResultTrue) return result;
@@ -37,7 +37,7 @@ SevenController::initialize(FUnknown* context)
 }
 
 tresult PLUGIN_API 
-SevenController::setComponentState(IBStream* state)
+Controller::setComponentState(IBStream* state)
 {
   float value;
   if (state == nullptr) return kResultFalse;
@@ -51,7 +51,7 @@ SevenController::setComponentState(IBStream* state)
 }
 
 IPlugView* PLUGIN_API
-SevenController::createView(char const* name)
+Controller::createView(char const* name)
 {
   if (name == nullptr || std::strcmp(name, "editor") != 0) return nullptr;
   return new VST3Editor(this, "view", "seven.uidesc");

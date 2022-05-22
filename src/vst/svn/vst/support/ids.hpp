@@ -1,8 +1,7 @@
-#ifndef SVN_VST_SEVEN_HPP
-#define SVN_VST_SEVEN_HPP
+#ifndef SVN_VST_SUPPORT_IDS_HPP
+#define SVN_VST_SUPPORT_IDS_HPP
 
 #include <pluginterfaces/base/funknown.h>
-#include <cstdint>
 
 namespace Svn::Vst {
 
@@ -14,14 +13,5 @@ static Steinberg::FUID const ProcessorId(0xFBFCEDA8, 0x782047CE, 0xA12E8A8C, 0x8
 static Steinberg::FUID const ControllerId(0x57068B2B, 0x63374143, 0x85FA79D9, 0xAC8A38A5);
 #endif
 
-std::int32_t
-paramStepCount(std::int32_t param);
-double
-paramNormalizeDefault(std::int32_t param);
-double
-paramNormalizeReal(std::int32_t param, float val);
-double
-paramNormalizeDiscrete(std::int32_t param, std::int32_t val);
-
 } // namespace Svn::Vst
-#endif // SVN_VST_SEVEN_HPP
+#endif // SVN_VST_SUPPORT_IDS_HPP

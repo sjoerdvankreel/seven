@@ -1,13 +1,12 @@
-#ifndef SVN_VST_SEVEN_PROCESSOR_HPP
-#define SVN_VST_SEVEN_PROCESSOR_HPP
+#ifndef SVN_VST_SDK_PROCESSOR_HPP
+#define SVN_VST_SDK_PROCESSOR_HPP
 
 #include <svn/dsp/synth.hpp>
-#include <svn/support/topo_static.hpp>
 #include <public.sdk/source/vst/vstaudioeffect.h>
 #include <public.sdk/source/vst/utility/sampleaccurate.h>
 
-#include <array>
 #include <memory>
+#include <vector>
 
 namespace Svn::Vst {
 
@@ -41,4 +40,4 @@ public:
 };
 
 } // namespace Svn::Vst
-#endif // SVN_VST_SEVEN_PROCESSOR_HPP
+#endif // SVN_VST_SDK_PROCESSOR_HPP
