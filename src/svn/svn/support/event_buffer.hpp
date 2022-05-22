@@ -27,10 +27,10 @@ struct input_buffer
 {
   float bpm;
   float sample_rate;
-  note_event const* notes;
+  void** automation;
+  note_event* notes;
   std::int32_t note_count;
   std::int32_t sample_count;
-  void const* const* automation;
 };
 
 struct output_buffer
@@ -59,14 +59,14 @@ output_buffer::add_audio(audio_sample* other, std::int32_t sample_count)
 inline float
 param_real(input_buffer const& input, output_buffer& output, std::int32_t param, std::int32_t sample)
 {
-  auto automation = static_cast<float const*>(input.automation[param]);
+  auto automation = static_cast<float*>(input.automation[param]);
   return output.param_values[param].real = automation[sample];
 }
 
 inline float
 param_discrete(input_buffer const& input, output_buffer& output, std::int32_t param, std::int32_t sample)
 {
-  auto automation = static_cast<std::int32_t const*>(input.automation[param]);
+  auto automation = static_cast<std::int32_t*>(input.automation[param]);
   return output.param_values[param].discrete = automation[sample];
 }
 
