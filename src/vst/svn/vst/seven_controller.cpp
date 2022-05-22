@@ -1,14 +1,17 @@
+#include <svn/vst/seven.hpp>
 #include <svn/vst/seven_vst.hpp>
 #include <svn/vst/seven_controller.hpp>
-#include <svn/param/synth_params.hpp>
+#include <svn/support/topo_rt.hpp>
+#include <svn/support/topo_static.hpp>
+
 #include <base/source/fstreamer.h>
 #include <pluginterfaces/base/ibstream.h>
 #include <cstring>
+#include <cstdint>
 
 using namespace VSTGUI;
 using namespace Steinberg;
 using namespace Steinberg::Vst;                  
-
 
 namespace Svn::Vst {   
 
@@ -21,14 +24,15 @@ SevenController::initialize(FUnknown* context)
 {
 	tresult result = EditController::initialize(context);
 	if(result != kResultTrue) return result;
-  for(std::size_t i = 0; i < svn::synth_params::all.size(); i++)
+  for(std::int32_t p = 0; p < svn::synth_param_count; p++)
+  {
+    auto const& param = svn::synth_params[p].info;
     parameters.addParameter(
-      svn::synth_params::all[i].long_name,
-      svn::synth_params::all[i].info.unit, 0,
-      svn::synth_params::all[i].info.default_value,
-      ParameterInfo::kCanAutomate, 
-      svn::synth_params::all[i].id, 0,
-      svn::synth_params::all[i].info.short_name);
+      param->item.detail, param->unit,
+      paramStepCount(p), paramNormalizeDefault(p),
+      ParameterInfo::kCanAutomate, -1L, 0L,
+      param->item.name);
+  }
 	return kResultTrue;
 }
 

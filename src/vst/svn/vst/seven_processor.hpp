@@ -1,8 +1,8 @@
 #ifndef SVN_VST_SEVEN_PROCESSOR_HPP
 #define SVN_VST_SEVEN_PROCESSOR_HPP
 
-#include <svn/param/param_id.hpp>
-#include <svn/synth/seven_synth.hpp>
+#include <svn/dsp/synth.hpp>
+#include <svn/support/topo_static.hpp>
 #include <public.sdk/source/vst/vstaudioeffect.h>
 #include <public.sdk/source/vst/utility/sampleaccurate.h>
 
@@ -23,10 +23,8 @@ public Steinberg::Vst::AudioEffect
   using Parameter = Steinberg::Vst::SampleAccurate::Parameter;
   using SpeakerArrangement = Steinberg::Vst::SpeakerArrangement;
 private:
-  svn::param_state_t _state;
-  std::unique_ptr<svn::seven_synth<float>> _synth32;
-  std::unique_ptr<svn::seven_synth<double>> _synth64;
-  std::array<Parameter, svn::param_id::count> _accurateParameters;
+  std::unique_ptr<svn::synth> _synth;
+  std::vector<Parameter> _accurateParameters;
 public:
   SevenProcessor();
   static FUnknown* createInstance(void* context);
