@@ -9,6 +9,7 @@ inline std::int32_t constexpr note_off = -1;
 
 struct note_event
 {
+  float velocity;
   std::int32_t midi;
   std::int32_t sample_index;
 };

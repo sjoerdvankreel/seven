@@ -96,6 +96,34 @@ Processor::process(ProcessData& data)
             _state[queue->getParameterId()].discrete = paramDenormalizeDiscrete(queue->getParameterId(), value);
     return kResultOk;
   }
+
+  auto& input = _synth->input();
+  input.note_count = 0;
+  input.sample_count = data.numSamples;
+  input.bpm = static_cast<float>(data.processContext->tempo);
+  input.sample_rate = static_cast<float>(data.processContext->sampleRate);
+
+  Event event;
+  std::int32_t note = 0;
+  if (data.inputEvents != nullptr)
+    for(std::int32_t i = 0; i < data.inputEvents->getEventCount(); i++)
+      if (data.inputEvents->getEvent(i, event) == kResultOk)
+      {
+        switch (event.type)
+        {
+        case Event::kNoteOffEvent:
+          input.notes[input.note_count].midi = svn::note_off;
+          break;
+        case Event::kNoteOnEvent:
+          input.notes[input.note_count].midi = event.noteOn.pitch;
+          input.notes[input.note_count].velocity = event.noteOn.velocity;
+          break;
+        default:
+          break;
+        }    
+        input.notes[input.note_count].sample_index = event.sampleOffset;
+        ++input.note_count;
+      }
 }
 
 } // namespace Svn::Vst
