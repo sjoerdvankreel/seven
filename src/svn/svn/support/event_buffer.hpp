@@ -38,14 +38,22 @@ struct output_buffer
   audio_sample* audio;
   struct param_value* param_values;
 
-  void clear(std::int32_t sample_count);
+  void clear_audio(std::int32_t sample_count);
+  void add_audio(audio_sample* other, std::int32_t sample_count);
 };
 
 inline void
-output_buffer::clear(std::int32_t sample_count)
+output_buffer::clear_audio(std::int32_t sample_count)
 {
   for(std::int32_t s = 0; s < sample_count; s++)
     audio[s].left = audio[s].right = 0.0f;
+}
+
+inline void
+output_buffer::add_audio(audio_sample* other, std::int32_t sample_count)
+{
+  for (std::int32_t s = 0; s < sample_count; s++)
+    audio[s] += other[s];
 }
 
 inline float
