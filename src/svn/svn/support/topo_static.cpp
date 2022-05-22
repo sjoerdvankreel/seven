@@ -4,23 +4,23 @@ namespace svn {
 
 param_info::
 param_info(item_info item, std::int32_t default_):
-type(param_type::toggle), item(item), bounds()
+type(param_type::toggle), item(item), unit(L""), bounds()
 { bounds.toggle = { default_ }; }
 
 param_info::
 param_info(item_info item, wchar_t const* unit, float default_):
-type(param_type::real), item(item), bounds()
-{ bounds.real = { unit, default_ }; }
+type(param_type::real), item(item), unit(unit), bounds()
+{ bounds.real = { default_ }; }
 
 param_info::
 param_info(item_info item, item_info const* items, std::int32_t count):
-type(param_type::list), item(item), bounds()
+type(param_type::list), item(item), unit(L""), bounds()
 { bounds.list = { items, count }; }
 
 param_info::
 param_info(item_info item, wchar_t const* unit, std::int32_t min, std::int32_t max, std::int32_t default_):
-type(param_type::discrete), item(item), bounds()
-{ bounds.discrete = { unit, min, max, default_ }; }
+type(param_type::discrete), item(item), unit(unit), bounds()
+{ bounds.discrete = { min, max, default_ }; }
 
 static item_info const
 filter_types[filter_type::count] =
