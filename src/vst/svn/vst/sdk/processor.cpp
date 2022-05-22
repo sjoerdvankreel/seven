@@ -97,6 +97,8 @@ Processor::process(ProcessData& data)
     data.outputs[0].channelBuffers32[0][s] = audio[s].left;
     data.outputs[0].channelBuffers32[1][s] = audio[s].right;
   }
+
+  return kResultOk;
 }
 
 void
@@ -145,30 +147,6 @@ Processor::clearAutomation(std::int32_t sampleCount)
         static_cast<float*>(input.automation[p])[s] = static_cast<float>(_state[p].real);
 }
 
-void
-Processor::processAutomation(ProcessData const& data)
-{
-  IParamValueQueue* queue;
-  auto& input = _synth->input();
-  auto changes = data.inputParameterChanges;  
-  if (changes == nullptr) return;
-  for (std::int32_t i = 0; i < changes->getParameterCount(); i++)
-    if ((queue = changes->getParameterData(i)) != nullptr)
-    {
-      auto id = queue->getParameterId();
-      if (svn::synth_params[i].info->type == svn::param_type::real)
-        _accurateParameters[id].setValue(_state[id].real);
-      else
-        _accurateParameters[id].setValue(paramNormalizeDiscrete(id, _state[id].discrete));
-      _accurateParameters[id].beginChanges(queue);
-      for (std::int32_t s = 0; s < data.numSamples; s++)
-      {
-
-      }
-      _accurateParameters[id].endChanges(queue);
-    }
-}
-
 tresult
 Processor::processNoAudio(ProcessData const& data)
 {
@@ -185,6 +163,31 @@ Processor::processNoAudio(ProcessData const& data)
         else
           _state[queue->getParameterId()].discrete = paramDenormalizeDiscrete(queue->getParameterId(), value);
   return kResultOk;
+}
+
+void
+Processor::processAutomation(ProcessData const& data)
+{
+  IParamValueQueue* queue;
+  auto& input = _synth->input();
+  auto changes = data.inputParameterChanges;  
+  if (changes == nullptr) return;
+  for (std::int32_t i = 0; i < changes->getParameterCount(); i++)
+    if ((queue = changes->getParameterData(i)) != nullptr)
+    {
+      auto id = queue->getParameterId();
+      if (svn::synth_params[id].info->type == svn::param_type::real)
+        _accurateParameters[id].setValue(_state[id].real);
+      else
+        _accurateParameters[id].setValue(paramNormalizeDiscrete(id, _state[id].discrete));
+      _accurateParameters[id].beginChanges(queue);
+      for (std::int32_t s = 0; s < data.numSamples; s++)
+        if (svn::synth_params[id].info->type == svn::param_type::real)
+          static_cast<float*>(input.automation[id])[s] = _accurateParameters[id].advance(1);
+        else
+          static_cast<std::int32_t*>(input.automation[id])[s] = paramDenormalizeDiscrete(id, _accurateParameters[id].advance(1));
+      _accurateParameters[id].endChanges();
+    }
 }
 
 } // namespace Svn::Vst
