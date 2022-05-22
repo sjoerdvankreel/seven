@@ -20,9 +20,11 @@ namespace Svn::Vst {
 Processor::
 Processor():
 _synth(),
+_state(static_cast<std::size_t>(svn::synth_param_count)),
 _accurateParameters(static_cast<std::size_t>(svn::synth_param_count))
 {
 	setControllerClass(ControllerId);
+  svn::init_defaults(_state.data());
   for(std::int32_t i = 0; i < svn::synth_param_count; i++)
     _accurateParameters[i].setParamID(i);
 }

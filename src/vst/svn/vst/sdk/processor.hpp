@@ -4,6 +4,7 @@
 #include <svn/dsp/synth.hpp>
 #include <public.sdk/source/vst/vstaudioeffect.h>
 #include <public.sdk/source/vst/utility/sampleaccurate.h>
+#include <svn/support/param_value.hpp>
 
 #include <memory>
 #include <vector>
@@ -23,6 +24,7 @@ public Steinberg::Vst::AudioEffect
   using SpeakerArrangement = Steinberg::Vst::SpeakerArrangement;
 private:
   std::unique_ptr<svn::synth> _synth;
+  std::vector<svn::param_value> _state;
   std::vector<Parameter> _accurateParameters;
 public:
   Processor();
