@@ -29,6 +29,7 @@ private:
   std::vector<svn::param_value> _state;
   std::vector<Parameter> _accurateParameters;
 private:
+  void clearAutomation(std::int32_t sampleCount);
   tresult processNoAudio(ProcessData const& data);
   void processAutomation(ProcessData const& data);
   void processNoteEvents(ProcessData const& data);

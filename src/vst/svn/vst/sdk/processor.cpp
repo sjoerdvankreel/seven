@@ -81,11 +81,13 @@ tresult PLUGIN_API
 Processor::process(ProcessData& data)
 {
   auto& input = _synth->input();
+  input.note_count = 0;
   input.sample_count = data.numSamples;
   input.bpm = static_cast<float>(data.processContext->tempo);
   input.sample_rate = static_cast<float>(data.processContext->sampleRate);
 
   if (data.numSamples == 0 || data.numOutputs == 0) return processNoAudio(data);
+  clearAutomation(data.numSamples);
   processNoteEvents(data);
   processAutomation(data);
   svn::audio_sample* audio = _synth->process();
@@ -123,8 +125,6 @@ Processor::processNoteEvents(ProcessData const& data)
   Event event;
   std::int32_t index = 0;
   auto& input = _synth->input();
-
-  input.note_count = 0;
   if (data.inputEvents == nullptr) return;
   for (std::int32_t i = 0; i < data.inputEvents->getEventCount(); i++)
     if (data.inputEvents->getEvent(i, event) == kResultOk)
@@ -133,25 +133,39 @@ Processor::processNoteEvents(ProcessData const& data)
 }
 
 void
+Processor::clearAutomation(std::int32_t sampleCount)
+{
+  auto& input = _synth->input();
+  for (std::int32_t p = 0; p < svn::synth_param_count; p++)
+    if (svn::synth_params[p].info->type != svn::param_type::real)
+      for (std::int32_t s = 0; s < sampleCount; s++)
+        static_cast<std::int32_t*>(input.automation[p])[s] = _state[p].discrete;
+    else
+      for (std::int32_t s = 0; s < sampleCount; s++)
+        static_cast<float*>(input.automation[p])[s] = static_cast<float>(_state[p].real);
+}
+
+void
 Processor::processAutomation(ProcessData const& data)
 {
   IParamValueQueue* queue;
   auto& input = _synth->input();
-  auto changes = data.inputParameterChanges;
-
-  for (std::int32_t p = 0; p < svn::synth_param_count; p++)
-    if (svn::synth_params[p].info->type == svn::param_type::real)
-      for (std::int32_t s = 0; s < data.numSamples; s++)
-        static_cast<float*>(input.automation[p])[s] = static_cast<float>(_state[p].real);
-    else
-      for (std::int32_t s = 0; s < data.numSamples; s++)
-        static_cast<std::int32_t*>(input.automation[p])[s] = _state[p].discrete;
-
+  auto changes = data.inputParameterChanges;  
   if (changes == nullptr) return;
   for (std::int32_t i = 0; i < changes->getParameterCount(); i++)
     if ((queue = changes->getParameterData(i)) != nullptr)
     {
+      auto id = queue->getParameterId();
+      if (svn::synth_params[i].info->type == svn::param_type::real)
+        _accurateParameters[id].setValue(_state[id].real);
+      else
+        _accurateParameters[id].setValue(paramNormalizeDiscrete(id, _state[id].discrete));
+      _accurateParameters[id].beginChanges(queue);
+      for (std::int32_t s = 0; s < data.numSamples; s++)
+      {
 
+      }
+      _accurateParameters[id].endChanges(queue);
     }
 }
 
