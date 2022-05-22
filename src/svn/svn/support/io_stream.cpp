@@ -2,8 +2,6 @@
 #include <svn/support/io_stream.hpp>
 #include <svn/support/topo_static.hpp>
 #include <svn/support/event_buffer.hpp>
-
-#include <cassert>
 #include <algorithm>
 
 namespace svn {
@@ -39,11 +37,8 @@ io_stream::load(io_stream& stream, param_value* param_values)
   float real;
   std::wstring part_name;
   std::wstring param_name;
-
-  std::int32_t min;
-  std::int32_t max;
+  
   std::int32_t val;
-  std::int32_t count;
   std::int32_t discrete;
   std::int32_t part_index;
   std::int32_t param_real;
@@ -72,25 +67,7 @@ io_stream::load(io_stream& stream, param_value* param_values)
       if(param_name != param->item.name) continue;
       if(param_real == 1 && param->type != param_type::real) continue;
       if(param_real == 1) param_values[rp].real = std::clamp(real, 0.0f, 1.0f);
-      if(param_real == 1) continue;
-      switch (synth_params[rp].info->type)
-      {
-      case param_type::toggle: 
-        param_values[rp].discrete = std::clamp(discrete, 0, 1); 
-        break;
-      case param_type::list: 
-        count = param->bounds.list.count;
-        param_values[rp].discrete = std::clamp(discrete, 0, count); 
-        break;
-      case param_type::discrete: 
-        min = param->bounds.discrete.min;
-        max = param->bounds.discrete.max;
-        param_values[rp].discrete = std::clamp(discrete, min, max); 
-        break;
-      default: 
-        assert(false); 
-        break;
-      }
+      if(param_real == 0) param_values[rp].discrete = std::clamp(discrete, param->min.discrete, param->max.discrete);
     }
   }
 

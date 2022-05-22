@@ -4,23 +4,43 @@ namespace svn {
 
 param_info::
 param_info(item_info item, std::int32_t default_):
-type(param_type::toggle), item(item), unit(L""), bounds()
-{ bounds.toggle = { default_ }; }
+type(param_type::toggle), item(item), unit(L""), 
+min(), max(), default_(), items(nullptr)
+{
+  min.discrete = 0;
+  max.discrete = 1;
+  this->default_.discrete = default_;
+}
 
 param_info::
 param_info(item_info item, wchar_t const* unit, float default_):
-type(param_type::real), item(item), unit(unit), bounds()
-{ bounds.real = { default_ }; }
+type(param_type::real), item(item), unit(unit),
+min(), max(), default_(), items(nullptr)
+{
+  min.real = 0.0f;
+  max.real = 0.0f;
+  this->default_.real = default_;
+}
 
 param_info::
 param_info(item_info item, item_info const* items, std::int32_t count):
-type(param_type::list), item(item), unit(L""), bounds()
-{ bounds.list = { items, count }; }
+type(param_type::list), item(item), unit(L""),
+min(), max(), default_(), items(items)
+{
+  min.discrete = 0;
+  max.discrete = count - 1;
+  this->default_.discrete = 0;
+}
 
 param_info::
 param_info(item_info item, wchar_t const* unit, std::int32_t min, std::int32_t max, std::int32_t default_):
-type(param_type::discrete), item(item), unit(unit), bounds()
-{ bounds.discrete = { min, max, default_ }; }
+type(param_type::discrete), item(item), unit(unit),
+min(), max(), default_(), items(nullptr)
+{
+  this->min.discrete = min;
+  this->max.discrete = max;
+  this->default_.discrete = default_;
+}
 
 static item_info const
 filter_types[filter_type::count] =

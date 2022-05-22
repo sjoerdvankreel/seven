@@ -1,6 +1,7 @@
 #ifndef SVN_SUPPORT_TOPO_STATIC_HPP
 #define SVN_SUPPORT_TOPO_STATIC_HPP
 
+#include <svn/support/event_buffer.hpp>
 #include <cstdint>
 
 namespace svn {
@@ -24,13 +25,10 @@ struct param_info
   std::int32_t type;
   item_info item;
   wchar_t const* unit;
-  union
-  {
-    struct { float default_; } real;
-    struct { std::int32_t default_; } toggle;
-    struct { item_info const* items; std::int32_t count; } list;
-    struct { std::int32_t min; std::int32_t max; std::int32_t default_; } discrete;
-  } bounds;
+  param_value min;
+  param_value max;
+  param_value default_;
+  item_info const* items; 
 
   param_info(item_info item, std::int32_t default_);
   param_info(item_info item, wchar_t const* unit, float default_);

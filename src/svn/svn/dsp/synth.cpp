@@ -1,7 +1,6 @@
 #include <svn/dsp/synth.hpp>
 #include <svn/support/topo_rt.hpp>
 #include <cstdint>
-#include <cassert>
 
 namespace svn {
 
@@ -20,24 +19,13 @@ _automation_discrete(static_cast<std::size_t>(synth_param_count),
   for (std::int32_t p = 0; p < synth_param_count; p++)
     switch (synth_params[p].info->type)
     {
-    case param_type::list:
-      _automation[p] = _automation_discrete[p].data();
-      _output_params[p].discrete = 0;
-      break;
     case param_type::real:
       _automation[p] = _automation_real[p].data();
-      _output_params[p].real = synth_params[p].info->bounds.real.default_;
-      break;
-    case param_type::toggle:
-      _automation[p] = _automation_discrete[p].data();
-      _output_params[p].discrete = synth_params[p].info->bounds.toggle.default_;
-      break;
-    case param_type::discrete:
-      _automation[p] = _automation_discrete[p].data();
-      _output_params[p].discrete = synth_params[p].info->bounds.discrete.default_;
+      _output_params[p].real = synth_params[p].info->default_.real;
       break;
     default:
-      assert(false);
+      _automation[p] = _automation_discrete[p].data();
+      _output_params[p].discrete = synth_params[p].info->default_.discrete;
       break;
     }
 
