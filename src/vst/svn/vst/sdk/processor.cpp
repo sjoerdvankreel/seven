@@ -1,5 +1,6 @@
 #include <svn/support/topo_rt.hpp>
 #include <svn/vst/sdk/processor.hpp>
+#include <svn/vst/support/param.hpp>
 #include <svn/vst/support/ids.hpp>
 #include <svn/vst/support/io_stream.hpp>
 
@@ -81,21 +82,20 @@ Processor::process(ProcessData& data)
 {
   if (data.numSamples == 0 || data.numOutputs == 0)
   {
-
+    int32 index;
+    ParamValue value;
+    IParamValueQueue* queue;
+    auto changes = data.inputParameterChanges;
+    if(changes == nullptr) return kResultOk;
+    for (int32 i = 0; i < changes->getParameterCount(); i++)
+      if ((queue = changes->getParameterData(i)) != nullptr)
+        if (queue->getPoint(queue->getPointCount() - 1, index, value) == kResultTrue)
+          if(svn::synth_params[queue->getParameterId()].info->type == svn::param_type::real)
+            _state[queue->getParameterId()].real = value;
+          else
+            _state[queue->getParameterId()].discrete = paramDenormalizeDiscrete(queue->getParameterId(), value);
+    return kResultOk;
   }
-  return kResultOk;
-
-  /*
-  int32 index;
-  ParamValue value;
-  IParamValueQueue* queue;
-  if (data.inputParameterChanges != nullptr)
-    for(int32 i = 0; i < data.inputParameterChanges->getParameterCount(); i++)
-      if ((queue = data.inputParameterChanges->getParameterData(i)) != nullptr)
-        if(queue->getPoint(queue->getPointCount() - 1, index, value) == kResultTrue)
-          _state[queue->getParameterId()] = value;
-	return kResultOk;
-  */
 }
 
 } // namespace Svn::Vst
