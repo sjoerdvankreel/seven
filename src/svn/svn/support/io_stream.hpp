@@ -16,7 +16,7 @@ struct io_stream
   virtual bool write_int32(std::int32_t val) = 0;
   virtual bool write_string(std::string const& val) = 0;
 
-  virtual ~io_stream();
+  virtual ~io_stream() = default;
   static bool load(io_stream& stream, struct param_value* param_values);
   static bool save(io_stream& stream, struct param_value* param_values);
 };
