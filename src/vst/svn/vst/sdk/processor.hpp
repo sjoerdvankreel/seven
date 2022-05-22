@@ -45,7 +45,7 @@ Processor::createInstance(void* context)
 
 inline Steinberg::tresult PLUGIN_API
 Processor::canProcessSampleSize(int32 symbolicSampleSize)
-{ return symbolicSampleSize == Steinberg::Vst::kSample32? kResultTrue: kResultFalse; }
+{ return symbolicSampleSize == Steinberg::Vst::kSample32? Steinberg::kResultTrue: Steinberg::kResultFalse; }
 
 } // namespace Svn::Vst
 #endif // SVN_VST_SDK_PROCESSOR_HPP
