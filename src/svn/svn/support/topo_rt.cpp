@@ -12,10 +12,10 @@ synth_part const* synth_parts = nullptr;
 synth_param const* synth_params = nullptr;
 std::int32_t const* const* synth_bounds = nullptr;
 
-std::vector<synth_part> synth_parts_;
-std::vector<synth_param> synth_params_;
-std::vector<std::int32_t const*> synth_bounds_;
-std::vector<std::vector<std::int32_t>> param_bounds_;
+static std::vector<synth_part> synth_parts_;
+static std::vector<synth_param> synth_params_;
+static std::vector<std::int32_t const*> synth_bounds_;
+static std::vector<std::vector<std::int32_t>> param_bounds_;
 
 void
 destroy_topology()
