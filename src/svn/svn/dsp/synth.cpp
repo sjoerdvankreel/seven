@@ -6,10 +6,11 @@
 namespace svn {
 
 synth::
-synth(param_value* state, std::int32_t max_sample_count):
+synth(param_value* state, float sample_rate, std::int32_t max_sample_count):
 _units(),
 _input(),
 _state(state),
+_sample_rate(sample_rate),
 _part_audio(static_cast<std::size_t>(max_sample_count)),
 _notes(static_cast<std::size_t>(max_sample_count)),
 _audio(static_cast<std::size_t>(max_sample_count)),
@@ -36,8 +37,8 @@ synth::process()
   input_buffer part_input;
   part_input.bpm = _input.bpm;
   part_input.notes = _input.notes;
+  part_input.sample_rate = _sample_rate;
   part_input.note_count = _input.note_count;
-  part_input.sample_rate = _input.sample_rate;
   part_input.sample_count = _input.sample_count;
 
   clear_audio(_audio.data(), _input.sample_count);

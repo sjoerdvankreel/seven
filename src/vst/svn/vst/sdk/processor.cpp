@@ -64,7 +64,8 @@ Processor::setState(IBStream* state)
 tresult PLUGIN_API
 Processor::setupProcessing(ProcessSetup& setup)
 {
-  _synth.reset(new svn::synth(_state.data(), setup.maxSamplesPerBlock));
+  float sampleRate = static_cast<float>(setup.sampleRate);
+  _synth.reset(new svn::synth(_state.data(), setup.sampleRate, setup.maxSamplesPerBlock));
   return AudioEffect::setupProcessing(setup);
 }
 
@@ -81,10 +82,12 @@ tresult PLUGIN_API
 Processor::process(ProcessData& data)
 {
   auto& input = _synth->input();
+  input.bpm = 0.0f;
   input.note_count = 0;
-  input.sample_count = data.numSamples;
-  input.bpm = static_cast<float>(data.processContext->tempo);
-  input.sample_rate = static_cast<float>(data.processContext->sampleRate);
+  input.sample_rate = 0.0f;
+  input.sample_count = data.numSamples;  
+  if(data.processContext != nullptr && data.processContext->kTempoValid) 
+    input.bpm = static_cast<float>(data.processContext->tempo);
 
   if (data.numSamples == 0 || data.numOutputs == 0) return processNoAudio(data);
   clearAutomation(data.numSamples);
