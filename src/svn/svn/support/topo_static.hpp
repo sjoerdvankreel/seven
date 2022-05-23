@@ -2,7 +2,10 @@
 #define SVN_SUPPORT_TOPO_STATIC_HPP
 
 #include <svn/support/param_value.hpp>
+
+#include <memory>
 #include <cstdint>
+#include <cstddef>
 
 namespace svn {
 
@@ -20,6 +23,12 @@ struct part_info
   std::int32_t param_count;
 };
 
+struct param_formatter
+{
+  virtual void 
+  format(param_value value, wchar_t* buffer, std::size_t size) const = 0;
+};
+
 struct param_info
 {
   std::int32_t type;
@@ -28,12 +37,12 @@ struct param_info
   param_value min;
   param_value max;
   param_value default_;
-  item_info const* items; 
+  std::unique_ptr<param_formatter> formatter;
 
-  param_info(item_info item, std::int32_t default_);
-  param_info(item_info item, wchar_t const* unit, double default_);
+  param_info(item_info item, bool default_);
   param_info(item_info item, item_info const* items, std::int32_t count);
   param_info(item_info item, wchar_t const* unit, std::int32_t min, std::int32_t max, std::int32_t default_);
+  param_info(item_info item, wchar_t const* unit, double default_, std::unique_ptr<param_formatter>&& formatter);
 };
 
 extern part_info const part_infos[];
