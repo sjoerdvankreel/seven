@@ -35,17 +35,18 @@ Controller::initialize(FUnknown* context)
   for(std::int32_t p = 0; p < svn::synth_param_count; p++)
   {
     auto const& param = svn::synth_params[p].info;
+    wchar_t const* detail = svn::synth_params[p].detail.c_str();
     std::int32_t part_index = svn::synth_params[p].part_index + 1;
     switch (param->type)
     {
     case svn::param_type::real:
       parameters.addParameter(
-        param->item.detail, param->unit, 0L, param->default_.real, 
+        detail, param->unit, 0L, param->default_.real,
         ParameterInfo::kCanAutomate, p, part_index, param->item.name);
       break;
     case svn::param_type::list:
       listParameter = new StringListParameter(
-        param->item.detail, p, param->unit, 
+        detail, p, param->unit,
         ParameterInfo::kCanAutomate | ParameterInfo::kIsList, 
         part_index, param->item.name);
       for(std::int32_t i = 0; i <= param->max.discrete; i++)
@@ -54,7 +55,7 @@ Controller::initialize(FUnknown* context)
       break;
     default:
       parameters.addParameter(new RangeParameter(
-        param->item.detail, p, param->unit,
+        detail, p, param->unit,
         param->min.discrete, param->max.discrete, param->default_.discrete,
         param->max.discrete - param->min.discrete, 
         ParameterInfo::kCanAutomate, part_index, param->item.name));

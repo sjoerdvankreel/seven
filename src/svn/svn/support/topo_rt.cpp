@@ -59,21 +59,27 @@ init_topology()
   for(std::int32_t t = 0; t < part_type::count; t++)
   {
     std::int32_t part_index = 0;
-    std::wstring name(part_infos[t].item.name);
+    std::wstring type_name(part_infos[t].item.name);
     for(std::int32_t i = 0; i < part_infos[t].count; i++)
     {
-      std::wstring part_name = name;
-      if(part_infos[t].count > 1) part_name += std::wstring(L" ") + std::to_wstring(i + 1);
-      synth_parts_.push_back({ part_name, part_index++, &part_infos[t]});
+      std::wstring name = type_name;
+      if(part_infos[t].count > 1) name += std::wstring(L" ") + std::to_wstring(i + 1);
+      synth_parts_.push_back({ name, part_index++, &part_infos[t]});
     }
   }
-
   synth_parts = synth_parts_.data();
   synth_part_count = static_cast<std::int32_t>(synth_parts_.size());
 
   for(std::int32_t sp = 0; sp < synth_part_count; sp++)
+  {
+    std::wstring part_name = synth_parts[sp].name;
     for(std::int32_t p = 0; p < synth_parts[sp].info->param_count; p++)
-      synth_params_.push_back({ &synth_parts[sp], sp, &synth_parts[sp].info->params[p] });
+    {
+      auto const& param = synth_parts[sp].info->params[p];
+      std::wstring detail = part_name + L" " + param.item.detail;
+      synth_params_.push_back({ detail, &synth_parts[sp], sp, &param });
+    }
+  }
   synth_params = synth_params_.data();
   synth_param_count = static_cast<std::int32_t>(synth_params_.size());
 }

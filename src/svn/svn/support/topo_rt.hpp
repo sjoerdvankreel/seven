@@ -15,6 +15,7 @@ struct synth_part
 
 struct synth_param
 {
+  std::wstring detail;
   synth_part const* part;
   std::int32_t part_index;
   struct param_info const* info;
