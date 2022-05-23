@@ -1,3 +1,4 @@
+#include <svn/support/topo_rt.hpp>
 #include <svn/vst/support/ids.hpp>
 #include <svn/vst/support/info.hpp>
 #include <svn/vst/sdk/processor.hpp>
@@ -27,16 +28,21 @@ static std::int32_t SvnModuleCounter = 0;
 SMTG_EXPORT_SYMBOL 
 bool InitDll()
 {
-	if (++SvnModuleCounter == 1) return InitModule();
-	return true;
+	if (++SvnModuleCounter != 1) return true;
+  if(!InitModule()) return false;
+  svn::init_topology();
+  return true;
 }
 
 SMTG_EXPORT_SYMBOL 
 bool ExitDll()
 {
-	if(--SvnModuleCounter == 0) return DeinitModule();
-	else if(SvnModuleCounter < 0) return false;
-	else return true;
+  --SvnModuleCounter;
+  if (SvnModuleCounter > 0) return true;
+  if (SvnModuleCounter < 0) return false;
+  if(!DeinitModule()) return false;
+  svn::destroy_topology();
+  return true;
 }
 
 } // extern "C"

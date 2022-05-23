@@ -24,8 +24,9 @@ extern std::int32_t synth_part_count;
 extern std::int32_t synth_param_count;
 extern std::int32_t const* const* synth_bounds;
 
-void
-init_defaults(struct param_value* state);
+void init_topology();
+void destroy_topology();
+void init_defaults(struct param_value* state);
 
 } // namespace svn
 #endif // SVN_SUPPORT_TOPO_RT_HPP

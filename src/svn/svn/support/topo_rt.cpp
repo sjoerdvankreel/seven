@@ -8,33 +8,29 @@ namespace svn {
 std::int32_t synth_part_count;
 std::int32_t synth_param_count;
 
-synth_part const* synth_parts;
-synth_param const* synth_params;
-std::int32_t const* const* synth_bounds;
+synth_part const* synth_parts = nullptr;
+synth_param const* synth_params = nullptr;
+std::int32_t const* const* synth_bounds = nullptr;
+
+std::vector<synth_part> synth_parts_;
+std::vector<synth_param> synth_params_;
+std::vector<std::int32_t const*> synth_bounds_;
+std::vector<std::vector<std::int32_t>> param_bounds_;
 
 void
-init_defaults(param_value* state)
+destroy_topology()
 {
-  for (std::int32_t p = 0; p < synth_param_count; p++)
-    switch (synth_params[p].info->type)
-    {
-    case param_type::real: state[p].real = synth_params[p].info->default_.real; break;
-    default: state[p].discrete = synth_params[p].info->default_.discrete; break;
-    }
+  synth_parts_.clear();
+  synth_params_.clear();
+  synth_bounds_.clear();
+  param_bounds_.clear();
+  synth_parts = nullptr;
+  synth_params = nullptr;
+  synth_bounds = nullptr;
 }
 
-namespace {
-
-struct init_t { init_t(); };
-static init_t init_;
-
-static std::vector<synth_part> synth_parts_;
-static std::vector<synth_param> synth_params_;
-static std::vector<std::int32_t const*> synth_bounds_;
-static std::vector<std::vector<std::int32_t>> param_bounds_;
-
-init_t::
-init_t()
+void 
+init_topology()
 {
   std::int32_t param_index = 0;
   for (std::int32_t t = 0; t < part_type::count; t++)
@@ -65,5 +61,15 @@ init_t()
   synth_param_count = static_cast<std::int32_t>(synth_params_.size());
 }
 
-} // namespace anonymous
+void
+init_defaults(param_value* state)
+{
+  for (std::int32_t p = 0; p < synth_param_count; p++)
+    switch (synth_params[p].info->type)
+    {
+    case param_type::real: state[p].real = synth_params[p].info->default_.real; break;
+    default: state[p].discrete = synth_params[p].info->default_.discrete; break;
+    }
+}
+
 } // namespace svn
