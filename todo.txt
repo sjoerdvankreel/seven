@@ -1,2 +1,2 @@
-handle bpm
+handle bpm+default bpm
 handle vst units
