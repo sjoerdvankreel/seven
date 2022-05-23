@@ -51,12 +51,13 @@ init_topology()
     for(std::int32_t i = 0; i < part_infos[t].count; i++)
       synth_parts_.push_back({ part_index++, &part_infos[t] });
   }
+
   synth_parts = synth_parts_.data();
   synth_part_count = static_cast<std::int32_t>(synth_parts_.size());
 
   for(std::int32_t sp = 0; sp < synth_part_count; sp++)
     for(std::int32_t p = 0; p < synth_parts[sp].info->param_count; p++)
-      synth_params_.push_back({ &synth_parts[sp], &synth_parts[sp].info->params[p] });
+      synth_params_.push_back({ &synth_parts[sp], sp, &synth_parts[sp].info->params[p] });
   synth_params = synth_params_.data();
   synth_param_count = static_cast<std::int32_t>(synth_params_.size());
 }

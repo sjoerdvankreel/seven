@@ -7,7 +7,7 @@
 namespace Svn::Vst {
 
 class Controller: 
-public Steinberg::Vst::EditController
+public Steinberg::Vst::EditControllerEx1
 {
   using tresult = Steinberg::tresult;
   using IBStream = Steinberg::IBStream;

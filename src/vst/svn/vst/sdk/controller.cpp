@@ -26,21 +26,28 @@ Controller::initialize(FUnknown* context)
 	tresult result = EditController::initialize(context);
 	if(result != kResultTrue) return result;
 
+  for (std::int32_t p = 0; p < svn::synth_part_count; p++)
+  {
+    auto const& part = svn::synth_parts[p].info;
+    addUnit(new Unit(part->item.name, p + 1, kRootUnitId));
+  }
+
   for(std::int32_t p = 0; p < svn::synth_param_count; p++)
   {
     auto const& param = svn::synth_params[p].info;
+    std::int32_t part_index = svn::synth_params[p].part_index + 1;
     switch (param->type)
     {
     case svn::param_type::real:
       parameters.addParameter(
         param->item.detail, param->unit, 0L, param->default_.real, 
-        ParameterInfo::kCanAutomate, p, 0L, param->item.name);
+        ParameterInfo::kCanAutomate, p, part_index, param->item.name);
       break;
     case svn::param_type::list:
       listParameter = new StringListParameter(
         param->item.detail, p, param->unit, 
         ParameterInfo::kCanAutomate | ParameterInfo::kIsList, 
-        0L, param->item.name);
+        part_index, param->item.name);
       for(std::int32_t i = 0; i <= param->max.discrete; i++)
         listParameter->appendString(param->items[i].detail);
       parameters.addParameter(listParameter);
@@ -50,7 +57,7 @@ Controller::initialize(FUnknown* context)
         param->item.detail, p, param->unit,
         param->min.discrete, param->max.discrete, param->default_.discrete,
         param->max.discrete - param->min.discrete, 
-        ParameterInfo::kCanAutomate, 0L, param->item.name));
+        ParameterInfo::kCanAutomate, part_index, param->item.name));
       break;
     }
   }
