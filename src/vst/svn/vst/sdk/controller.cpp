@@ -22,18 +22,37 @@ namespace Svn::Vst {
 tresult PLUGIN_API 
 Controller::initialize(FUnknown* context)
 {
+  StringListParameter* listParameter = nullptr;
 	tresult result = EditController::initialize(context);
 	if(result != kResultTrue) return result;
+
   for(std::int32_t p = 0; p < svn::synth_param_count; p++)
   {
-    auto flag = ParameterInfo::kCanAutomate;
-    auto listFlag = ParameterInfo::kCanAutomate | ParameterInfo::kIsList;
     auto const& param = svn::synth_params[p].info;
-    auto flags = param->type == svn::param_type::list? listFlag: flag;
-    parameters.addParameter(
-      param->item.detail, param->unit,
-      paramStepCount(p), paramNormalizeDefault(p),
-      flags, -1L, 0L, param->item.name);
+    switch (param->type)
+    {
+    case svn::param_type::real:
+      parameters.addParameter(
+        param->item.detail, param->unit, 0L, param->default_.real, 
+        ParameterInfo::kCanAutomate, p, 0L, param->item.name);
+      break;
+    case svn::param_type::list:
+      listParameter = new StringListParameter(
+        param->item.detail, p, param->unit, 
+        ParameterInfo::kCanAutomate | ParameterInfo::kIsList, 
+        0L, param->item.name);
+      for(std::int32_t i = 0; i <= param->max.discrete; i++)
+        listParameter->appendString(param->items[i].detail);
+      parameters.addParameter(listParameter);
+      break;
+    default:
+      parameters.addParameter(new RangeParameter(
+        param->item.detail, p, param->unit,
+        param->min.discrete, param->max.discrete, param->default_.discrete,
+        param->max.discrete - param->min.discrete, 
+        ParameterInfo::kCanAutomate, 0L, param->item.name));
+      break;
+    }
   }
 	return kResultTrue;
 }
