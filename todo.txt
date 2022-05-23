@@ -1,3 +1,4 @@
 handle bpm+default bpm
 handle vst units
 fix discrete param ranges
+drop the param header
