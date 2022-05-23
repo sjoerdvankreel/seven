@@ -50,7 +50,7 @@ Controller::initialize(FUnknown* context)
         ParameterInfo::kCanAutomate | ParameterInfo::kIsList, 
         part_index, param->item.name);
       for(std::int32_t i = 0; i <= param->max.discrete; i++)
-        listParameter->appendString(param->items[i].detail);
+        listParameter->appendString(param->items[i].name);
       parameters.addParameter(listParameter);
       break;
     default:
