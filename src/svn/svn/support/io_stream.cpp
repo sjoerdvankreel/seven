@@ -2,6 +2,8 @@
 #include <svn/support/io_stream.hpp>
 #include <svn/support/param_value.hpp>
 #include <svn/support/topo_static.hpp>
+
+#include <cassert>
 #include <algorithm>
 
 namespace svn {
@@ -12,6 +14,7 @@ static std::int32_t const magic = 192235685;
 bool
 io_stream::save(io_stream& stream, param_value* param_values)
 {
+  assert(param_values != nullptr);
   if(!stream.write_int32(magic)) return false;
   if(!stream.write_int32(version)) return false;
   if(!stream.write_int32(synth_param_count)) return false;
@@ -44,6 +47,7 @@ io_stream::load(io_stream& stream, param_value* param_values)
   std::int32_t param_real;
   std::int32_t param_count;
 
+  assert(param_values != nullptr);
   if(!stream.read_int32(val) || val != magic) return false;
   if(!stream.read_int32(val) || val > version || val <= 0) return false;
   if(!stream.read_int32(param_count) || param_count <= 0) return false;
