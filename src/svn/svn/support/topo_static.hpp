@@ -30,7 +30,7 @@ struct param_info
   param_value default_;
   item_info const* items; 
 
-  param_info(item_info item, std::int32_t default_);
+  param_info(item_info item, bool default_);
   param_info(item_info item, wchar_t const* unit, double default_);
   param_info(item_info item, item_info const* items, std::int32_t count);
   param_info(item_info item, wchar_t const* unit, std::int32_t min, std::int32_t max, std::int32_t default_);
