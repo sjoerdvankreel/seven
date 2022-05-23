@@ -29,6 +29,17 @@ destroy_topology()
   synth_bounds = nullptr;
 }
 
+void
+init_defaults(param_value* state)
+{
+  for (std::int32_t p = 0; p < synth_param_count; p++)
+    switch (synth_params[p].info->type)
+    {
+    case param_type::real: state[p].real = synth_params[p].info->default_.real; break;
+    default: state[p].discrete = synth_params[p].info->default_.discrete; break;
+    }
+}
+
 void 
 init_topology()
 {
@@ -48,8 +59,13 @@ init_topology()
   for(std::int32_t t = 0; t < part_type::count; t++)
   {
     std::int32_t part_index = 0;
+    std::wstring name(part_infos[t].item.name);
     for(std::int32_t i = 0; i < part_infos[t].count; i++)
-      synth_parts_.push_back({ part_index++, &part_infos[t] });
+    {
+      std::wstring part_name = name;
+      if(part_infos[t].count > 1) part_name += std::wstring(L" ") + std::to_wstring(i + 1);
+      synth_parts_.push_back({ part_name, part_index++, &part_infos[t]});
+    }
   }
 
   synth_parts = synth_parts_.data();
@@ -60,17 +76,6 @@ init_topology()
       synth_params_.push_back({ &synth_parts[sp], sp, &synth_parts[sp].info->params[p] });
   synth_params = synth_params_.data();
   synth_param_count = static_cast<std::int32_t>(synth_params_.size());
-}
-
-void
-init_defaults(param_value* state)
-{
-  for (std::int32_t p = 0; p < synth_param_count; p++)
-    switch (synth_params[p].info->type)
-    {
-    case param_type::real: state[p].real = synth_params[p].info->default_.real; break;
-    default: state[p].discrete = synth_params[p].info->default_.discrete; break;
-    }
 }
 
 } // namespace svn

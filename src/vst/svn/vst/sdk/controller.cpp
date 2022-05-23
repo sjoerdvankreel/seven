@@ -28,8 +28,8 @@ Controller::initialize(FUnknown* context)
 
   for (std::int32_t p = 0; p < svn::synth_part_count; p++)
   {
-    auto const& part = svn::synth_parts[p].info;
-    addUnit(new Unit(part->item.name, p + 1, kRootUnitId));
+    auto const& part = svn::synth_parts[p];
+    addUnit(new Unit(part.name.c_str(), p + 1, kRootUnitId));
   }
 
   for(std::int32_t p = 0; p < svn::synth_param_count; p++)

@@ -1,12 +1,14 @@
 #ifndef SVN_SUPPORT_TOPO_RT_HPP
 #define SVN_SUPPORT_TOPO_RT_HPP
 
+#include <string>
 #include <cstdint>
 
 namespace svn {
 
 struct synth_part
 {
+  std::wstring name;
   std::int32_t index;
   struct part_info const* info;
 }; 
