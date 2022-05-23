@@ -36,6 +36,17 @@ _automation_discrete(static_cast<std::size_t>(synth_param_count),
   _input.automation = _automation.data();
 }
 
+void
+seven_synth::state_check()
+{
+  for(std::int32_t i = 0; i < synth_param_count; i++)
+    if(synth_params[i].info->type == param_type::real)
+      assert(0.0 <= _state[i].real && _state[i].real <= 1.0);
+    else
+      assert(synth_params[i].info->min.discrete <= _state[i].discrete && 
+        _state[i].discrete <= synth_params[i].info->max.discrete);
+}
+
 audio_sample*
 seven_synth::process()
 {
@@ -46,7 +57,10 @@ seven_synth::process()
   part_input.note_count = _input.note_count;
   part_input.sample_count = _input.sample_count;
 
+  state_check();
+  automation_check(_input.sample_count);
   clear_audio(_audio.data(), _input.sample_count);
+
   for (std::int32_t i = 0; i < unit_count; i++)
   {
     std::int32_t offset = synth_bounds[part_type::unit][i];
@@ -55,7 +69,21 @@ seven_synth::process()
     add_audio(_audio.data(), _part_audio.data(), _input.sample_count);
   }
 
+  state_check();
   return _audio.data();
+}
+
+void
+seven_synth::automation_check(std::int32_t sample_count)
+{
+  for (std::int32_t p = 0; p < synth_param_count; p++)
+    for (std::int32_t s = 0; s < sample_count; s++)
+      if (synth_params[p].info->type == param_type::real)
+        assert(0.0f <= static_cast<float*>(_input.automation[p])[s] &&
+          static_cast<float*>(_input.automation[p])[s] <= 1.0f);
+      else
+        assert(synth_params[p].info->min.discrete <= static_cast<std::int32_t*>(_input.automation[p])[s] &&
+          static_cast<std::int32_t*>(_input.automation[p])[s] <= synth_params[p].info->max.discrete);
 }
 
 } // namespace svn

@@ -2,6 +2,7 @@
 #include <svn/dsp/unit_generator.hpp>
 
 #include <cmath>
+#include <cassert>
 #include <numbers>
 #include <cstdint>
 
@@ -10,6 +11,9 @@ namespace svn {
 void
 unit_generator::process(input_buffer const& input, audio_sample* audio, param_value* state)
 {
+  assert(state != nullptr);
+  assert(audio != nullptr);
+
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
     float level = automate_real(input, state, unit_param::level, s);

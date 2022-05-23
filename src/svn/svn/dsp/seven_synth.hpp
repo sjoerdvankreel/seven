@@ -12,10 +12,11 @@ namespace svn {
 
 class seven_synth
 {
+private:
   float const _sample_rate;
   param_value* const _state;
   unit_generator _unit_generators[unit_count];
-
+private:
   input_buffer _input;
   std::vector<void*> _automation;
   std::vector<note_event> _notes;
@@ -23,6 +24,9 @@ class seven_synth
   std::vector<audio_sample> _part_audio;
   std::vector<std::vector<float>> _automation_real;
   std::vector<std::vector<std::int32_t>> _automation_discrete;
+private:
+  void state_check();
+  void automation_check(std::int32_t sample_count);
 public:
   seven_synth(param_value* state, float sample_rate, std::int32_t max_sample_count);
 public:
