@@ -1,7 +1,9 @@
 #include <svn/support/topo_rt.hpp>
 #include <svn/support/param_value.hpp>
 #include <svn/support/topo_static.hpp>
+
 #include <vector>
+#include <cassert>
 
 namespace svn {
 
@@ -43,6 +45,8 @@ init_defaults(param_value* state)
 void 
 init_topology()
 {
+  assert(synth_parts == nullptr);
+
   std::int32_t param_index = 0;
   for (std::int32_t t = 0; t < part_type::count; t++)
   {
