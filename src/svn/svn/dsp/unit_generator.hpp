@@ -1,5 +1,5 @@
-#ifndef SVN_DSP_UNIT_HPP
-#define SVN_DSP_UNIT_HPP
+#ifndef SVN_DSP_UNIT_GENERATOR_HPP
+#define SVN_DSP_UNIT_GENERATOR_HPP
 
 #include <svn/support/topo_static.hpp>
 #include <svn/support/param_value.hpp>
@@ -8,7 +8,7 @@
 
 namespace svn {
 
-class unit
+class unit_generator
 {
   float _phase = 0.0f;
 public:
@@ -16,4 +16,4 @@ public:
 };
 
 } // namespace svn
-#endif // SVN_DSP_UNIT_HPP
+#endif // SVN_DSP_UNIT_GENERATOR_HPP

@@ -1,5 +1,5 @@
-#include <svn/dsp/dsp.hpp>
-#include <svn/dsp/unit.hpp>
+#include <svn/dsp/shared_dsp.hpp>
+#include <svn/dsp/unit_generator.hpp>
 
 #include <cmath>
 #include <numbers>
@@ -8,7 +8,7 @@
 namespace svn {
 
 void
-unit::process(input_buffer const& input, audio_sample* audio, param_value* state)
+unit_generator::process(input_buffer const& input, audio_sample* audio, param_value* state)
 {
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {

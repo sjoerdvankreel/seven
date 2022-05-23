@@ -1,7 +1,7 @@
 #ifndef SVN_VST_SDK_PROCESSOR_HPP
 #define SVN_VST_SDK_PROCESSOR_HPP
 
-#include <svn/dsp/synth.hpp>
+#include <svn/dsp/seven_synth.hpp>
 #include <pluginterfaces/vst/ivstevents.h>
 #include <public.sdk/source/vst/vstaudioeffect.h>
 #include <public.sdk/source/vst/utility/sampleaccurate.h>
@@ -25,7 +25,7 @@ public Steinberg::Vst::AudioEffect
   using Parameter = Steinberg::Vst::SampleAccurate::Parameter;
   using SpeakerArrangement = Steinberg::Vst::SpeakerArrangement;
 private:
-  std::unique_ptr<svn::synth> _synth;
+  std::unique_ptr<svn::seven_synth> _synth;
   std::vector<svn::param_value> _state;
   std::vector<Parameter> _accurateParameters;
 private:

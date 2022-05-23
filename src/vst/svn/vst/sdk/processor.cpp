@@ -65,7 +65,7 @@ tresult PLUGIN_API
 Processor::setupProcessing(ProcessSetup& setup)
 {
   float sampleRate = static_cast<float>(setup.sampleRate);
-  _synth.reset(new svn::synth(_state.data(), setup.sampleRate, setup.maxSamplesPerBlock));
+  _synth.reset(new svn::seven_synth(_state.data(), setup.sampleRate, setup.maxSamplesPerBlock));
   return AudioEffect::setupProcessing(setup);
 }
 

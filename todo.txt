@@ -2,3 +2,10 @@ handle bpm+default bpm
 handle vst units
 fix discrete param ranges
 drop the param header
+do generic parameters
+param_transformer
+param_formatter
+discrete = 0..N
+real = 0..1
+handle nans and denormals
+list items without detail
