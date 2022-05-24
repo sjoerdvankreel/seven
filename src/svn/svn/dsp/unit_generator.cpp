@@ -9,7 +9,7 @@
 namespace svn {
 
 void
-unit_generator::process(input_buffer const& input, audio_sample* audio, param_value* state)
+unit_generator::process_block(input_buffer const& input, audio_sample* audio, param_value* state)
 {
   assert(state != nullptr);
   assert(audio != nullptr);

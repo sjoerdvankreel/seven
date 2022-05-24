@@ -48,7 +48,7 @@ seven_synth::state_check()
 }
 
 audio_sample*
-seven_synth::process()
+seven_synth::process_block()
 {
   input_buffer part_input;
   part_input.bpm = _input.bpm;
@@ -65,12 +65,25 @@ seven_synth::process()
   {
     std::int32_t offset = synth_bounds[part_type::unit][i];
     part_input.automation = _input.automation + offset;
-    _unit_generators[i].process(part_input, _part_audio.data(), _state + offset);
+    _unit_generators[i].process_block(part_input, _part_audio.data(), _state + offset);
     add_audio(_audio.data(), _part_audio.data(), _input.sample_count);
   }
 
   state_check();
   return _audio.data();
+}
+
+input_buffer&
+seven_synth::prepare_block(std::int32_t sample_count)
+{
+  for (std::int32_t p = 0; p < svn::synth_param_count; p++)
+    if (svn::synth_params[p].info->type != svn::param_type::real)
+      for (std::int32_t s = 0; s < sample_count; s++)
+        static_cast<std::int32_t*>(_input.automation[p])[s] = _state[p].discrete;
+    else
+      for (std::int32_t s = 0; s < sample_count; s++)
+        static_cast<float*>(_input.automation[p])[s] = static_cast<float>(_state[p].real);
+  return _input;
 }
 
 void

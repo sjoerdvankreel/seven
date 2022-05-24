@@ -12,7 +12,7 @@ class unit_generator
 {
   float _phase = 0.0f;
 public:
-  void process(input_buffer const& input, audio_sample* audio, param_value* state);
+  void process_block(input_buffer const& input, audio_sample* audio, param_value* state);
 };
 
 } // namespace svn

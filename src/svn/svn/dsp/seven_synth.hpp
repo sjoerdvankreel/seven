@@ -30,13 +30,9 @@ private:
 public:
   seven_synth(param_value* state, float sample_rate, std::int32_t max_sample_count);
 public:
-  input_buffer& input();
-  audio_sample* process();
+  audio_sample* process_block();
+  input_buffer& prepare_block(std::int32_t sample_count);
 };
-
-inline input_buffer&
-seven_synth::input()
-{ return _input; }
 
 } // namespace svn
 #endif // SVN_DSP_SEVEN_SYNTH_HPP

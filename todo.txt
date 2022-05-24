@@ -6,3 +6,6 @@ do generic parameters
 param_transformer
 param_formatter
 handle nans and denormals
+drop wchar_t
+(de)init synth_part_count
+2d arrays in continuous memory

@@ -29,11 +29,10 @@ private:
   std::vector<svn::param_value> _state;
   std::vector<Parameter> _accurateParameters;
 private:
-  void clearAutomation(std::int32_t sampleCount);
   tresult processNoAudio(ProcessData const& data);
-  void processAutomation(ProcessData const& data);
-  void processNoteEvents(ProcessData const& data);
-  void processNoteEvent(std::int32_t index, Event const& event);
+  void processAutomation(svn::input_buffer& input, ProcessData const& data);
+  void processNoteEvents(svn::input_buffer& input, ProcessData const& data);
+  void processNoteEvent(svn::input_buffer& input, std::int32_t index, Event const& event);
 public:
   Processor();
   static FUnknown* createInstance(void* context);

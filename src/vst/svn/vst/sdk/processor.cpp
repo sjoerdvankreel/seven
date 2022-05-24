@@ -81,7 +81,7 @@ Processor::setBusArrangements(
 tresult PLUGIN_API
 Processor::process(ProcessData& data)
 {
-  auto& input = _synth->input();
+  svn::input_buffer& input = _synth->prepare_block(data.numSamples);
   input.bpm = 0.0f;
   input.note_count = 0;
   input.sample_rate = 0.0f;
@@ -89,12 +89,11 @@ Processor::process(ProcessData& data)
   if(data.processContext != nullptr && data.processContext->kTempoValid) 
     input.bpm = static_cast<float>(data.processContext->tempo);
 
-  if (data.numSamples == 0 || data.numOutputs == 0) return processNoAudio(data);
-  clearAutomation(data.numSamples);
-  processNoteEvents(data);
-  processAutomation(data);
-  svn::audio_sample* audio = _synth->process();
-
+  if (data.numSamples == 0 || data.numOutputs == 0) 
+    return processNoAudio(data);
+  processNoteEvents(input, data);
+  processAutomation(input, data);
+  svn::audio_sample* audio = _synth->process_block();
   for (std::int32_t s = 0; s < data.numSamples; s++)
   {
     data.outputs[0].channelBuffers32[0][s] = audio[s].left;
@@ -105,9 +104,20 @@ Processor::process(ProcessData& data)
 }
 
 void
-Processor::processNoteEvent(std::int32_t index, Event const& event)
+Processor::processNoteEvents(svn::input_buffer& input, ProcessData const& data)
 {
-  auto& input = _synth->input();
+  Event event;
+  std::int32_t index = 0;
+  if (data.inputEvents == nullptr) return;
+  for (std::int32_t i = 0; i < data.inputEvents->getEventCount(); i++)
+    if (data.inputEvents->getEvent(i, event) == kResultOk)
+      if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
+        processNoteEvent(input, input.note_count++, event);
+}
+
+void
+Processor::processNoteEvent(svn::input_buffer& input, std::int32_t index, Event const& event)
+{
   input.notes[index].sample_index = event.sampleOffset;
   switch (event.type)
   {
@@ -122,32 +132,6 @@ Processor::processNoteEvent(std::int32_t index, Event const& event)
     assert(false);
     break;
   }
-}
-
-void 
-Processor::processNoteEvents(ProcessData const& data)
-{
-  Event event;
-  std::int32_t index = 0;
-  auto& input = _synth->input();
-  if (data.inputEvents == nullptr) return;
-  for (std::int32_t i = 0; i < data.inputEvents->getEventCount(); i++)
-    if (data.inputEvents->getEvent(i, event) == kResultOk)
-      if(event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent) 
-        processNoteEvent(input.note_count++, event);
-}
-
-void
-Processor::clearAutomation(std::int32_t sampleCount)
-{
-  auto& input = _synth->input();
-  for (std::int32_t p = 0; p < svn::synth_param_count; p++)
-    if (svn::synth_params[p].info->type != svn::param_type::real)
-      for (std::int32_t s = 0; s < sampleCount; s++)
-        static_cast<std::int32_t*>(input.automation[p])[s] = _state[p].discrete;
-    else
-      for (std::int32_t s = 0; s < sampleCount; s++)
-        static_cast<float*>(input.automation[p])[s] = static_cast<float>(_state[p].real);
 }
 
 tresult
@@ -169,10 +153,9 @@ Processor::processNoAudio(ProcessData const& data)
 }
 
 void
-Processor::processAutomation(ProcessData const& data)
+Processor::processAutomation(svn::input_buffer& input, ProcessData const& data)
 {
   IParamValueQueue* queue;
-  auto& input = _synth->input();
   auto changes = data.inputParameterChanges;  
   if (changes == nullptr) return;
   for (std::int32_t i = 0; i < changes->getParameterCount(); i++)
