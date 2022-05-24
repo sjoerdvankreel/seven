@@ -7,8 +7,8 @@
 
 namespace svn {
 
-std::int32_t synth_part_count;
-std::int32_t synth_param_count;
+std::int32_t synth_part_count = 0;
+std::int32_t synth_param_count = 0;
 
 synth_part const* synth_parts = nullptr;
 synth_param const* synth_params = nullptr;
@@ -22,6 +22,8 @@ static std::vector<std::vector<std::int32_t>> param_bounds_;
 void
 destroy_topology()
 {
+  synth_part_count = 0;
+  synth_param_count = 0;
   synth_parts_.clear();
   synth_params_.clear();
   synth_bounds_.clear();
@@ -29,17 +31,6 @@ destroy_topology()
   synth_parts = nullptr;
   synth_params = nullptr;
   synth_bounds = nullptr;
-}
-
-void
-init_defaults(param_value* state)
-{
-  for (std::int32_t p = 0; p < synth_param_count; p++)
-    switch (synth_params[p].info->type)
-    {
-    case param_type::real: state[p].real = synth_params[p].info->default_.real; break;
-    default: state[p].discrete = synth_params[p].info->default_.discrete; break;
-    }
 }
 
 void 
@@ -86,6 +77,17 @@ init_topology()
   }
   synth_params = synth_params_.data();
   synth_param_count = static_cast<std::int32_t>(synth_params_.size());
+}
+
+void
+init_defaults(param_value* state)
+{
+  for (std::int32_t p = 0; p < synth_param_count; p++)
+    switch (synth_params[p].info->type)
+    {
+    case param_type::real: state[p].real = synth_params[p].info->default_.real; break;
+    default: state[p].discrete = synth_params[p].info->default_.discrete; break;
+    }
 }
 
 } // namespace svn
