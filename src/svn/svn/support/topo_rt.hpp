@@ -21,11 +21,13 @@ struct synth_param
   struct param_info const* info;
 };
 
-extern synth_part const* synth_parts;
-extern synth_param const* synth_params;
-
 extern std::int32_t synth_part_count;
 extern std::int32_t synth_param_count;
+extern std::int32_t real_param_count;
+extern std::int32_t discrete_param_count;
+
+extern synth_part const* synth_parts;
+extern synth_param const* synth_params;
 extern std::int32_t const* const* synth_bounds;
 
 void init_topology();

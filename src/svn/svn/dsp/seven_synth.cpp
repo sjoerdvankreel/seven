@@ -17,19 +17,19 @@ _part_audio(static_cast<std::size_t>(max_sample_count)),
 _notes(static_cast<std::size_t>(max_sample_count)),
 _audio(static_cast<std::size_t>(max_sample_count)),
 _automation(static_cast<std::size_t>(synth_param_count)),
-_automation_real(static_cast<std::size_t>(synth_param_count), 
-  std::vector<float>(static_cast<std::size_t>(max_sample_count))),
-_automation_discrete(static_cast<std::size_t>(synth_param_count), 
-  std::vector<std::int32_t>(static_cast<std::size_t>(max_sample_count)))
+_automation_real(static_cast<std::size_t>(real_param_count * max_sample_count)),
+_automation_discrete(static_cast<std::size_t>(discrete_param_count * max_sample_count))
 {
   assert(state != nullptr);
   assert(sample_rate > 0.0);
 
+  std::int32_t real_p = 0;
+  std::int32_t discrete_p = 0;
   for (std::int32_t p = 0; p < synth_param_count; p++)
     switch (synth_params[p].info->type)
     {
-    case param_type::real: _automation[p] = _automation_real[p].data(); break;
-    default: _automation[p] = _automation_discrete[p].data(); break;
+    case param_type::real: _automation[p] = _automation_real.data() + real_p++ * max_sample_count; break;
+    default: _automation[p] = _automation_discrete.data() + discrete_p++ * max_sample_count; break;
     }
 
   _input.notes = _notes.data();

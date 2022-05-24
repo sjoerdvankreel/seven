@@ -9,6 +9,8 @@ namespace svn {
 
 std::int32_t synth_part_count = 0;
 std::int32_t synth_param_count = 0;
+std::int32_t real_param_count = 0;
+std::int32_t discrete_param_count = 0;
 
 synth_part const* synth_parts = nullptr;
 synth_param const* synth_params = nullptr;
@@ -22,15 +24,19 @@ static std::vector<std::vector<std::int32_t>> param_bounds_;
 void
 destroy_topology()
 {
-  synth_part_count = 0;
-  synth_param_count = 0;
   synth_parts_.clear();
   synth_params_.clear();
   synth_bounds_.clear();
   param_bounds_.clear();
+
   synth_parts = nullptr;
   synth_params = nullptr;
   synth_bounds = nullptr;
+
+  synth_part_count = 0;
+  synth_param_count = 0;
+  real_param_count = 0;
+  discrete_param_count = 0;
 }
 
 void 
@@ -73,6 +79,8 @@ init_topology()
       auto const& param = synth_parts[sp].info->params[p];
       std::wstring detail = part_name + L" " + param.item.detail;
       synth_params_.push_back({ detail, &synth_parts[sp], sp, &param });
+      if(param.type == param_type::real) ++real_param_count;
+      else ++discrete_param_count;
     }
   }
   synth_params = synth_params_.data();

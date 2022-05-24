@@ -18,12 +18,12 @@ private:
   unit_generator _unit_generators[unit_count];
 private:
   input_buffer _input;
-  std::vector<void*> _automation;
   std::vector<note_event> _notes;
   std::vector<audio_sample> _audio;
   std::vector<audio_sample> _part_audio;
-  std::vector<std::vector<float>> _automation_real;
-  std::vector<std::vector<std::int32_t>> _automation_discrete;
+  std::vector<void*> _automation;
+  std::vector<float> _automation_real;
+  std::vector<std::int32_t> _automation_discrete;
 private:
   void state_check();
   void automation_check(std::int32_t sample_count);
