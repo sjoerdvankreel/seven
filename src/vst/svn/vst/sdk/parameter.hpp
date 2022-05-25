@@ -44,7 +44,7 @@ Parameter::toDiscrete(svn::param_info const& info, double val)
 { 
   std::int32_t min = info.min.discrete;
   std::int32_t max = info.max.discrete;
-  return min + std::clamp(static_cast<std::int32_t>(val * (max - min + 1)), min, max);
+  return min + std::clamp(static_cast<std::int32_t>(val * (max - min + 1)), 0, max - min);
 }
 
 } // namespace Svn::Vst
