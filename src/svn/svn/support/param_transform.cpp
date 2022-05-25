@@ -8,10 +8,11 @@ param_value
 param_to_display(param_info const& info, param_value val)
 {
   param_value result;
+  real_info const& ri = info.real;
   switch (info.type)
   {
   case param_type::real: result.real = param_real_to_range(
-    info.real.slope, val.real, info.real.min, info.real.max); break;
+    ri.slope, val.real, ri.display_min, ri.display_max); break;
   default: result.discrete = val.discrete; break;
   }
   return result;
@@ -21,10 +22,11 @@ param_value
 param_from_display(param_info const& info, param_value val)
 {
   param_value result;
+  real_info const& ri = info.real;
   switch (info.type)
   {
   case param_type::real: result.real = param_real_from_range(
-    info.real.slope, val.real, info.real.min, info.real.max); break;
+    ri.slope, val.real, ri.display_min, ri.display_max); break;
   default: result.discrete = val.discrete; break;
   }
   return result;
