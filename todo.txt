@@ -6,4 +6,3 @@ do generic parameters
 param_transformer
 param_formatter
 handle nans and denormals
-drop wchar_t
