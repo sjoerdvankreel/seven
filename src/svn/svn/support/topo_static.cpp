@@ -84,7 +84,7 @@ unit_params[unit_param::count] =
 {
   { { L"On", L"Enabled" }, false },
   { { L"Type", L"Type" }, unit_types, unit_type::count },
-  { { L"Lvl", L"Level" }, L"dB", 1.0, { param_slope::linear, 0.0, 1.0, }, { param_slope::db, -std::numeric_limits<double>::infinity(), 0.0 } },
+  { { L"Lvl", L"Level" }, L"dB", 1.0, { param_slope::linear, 0.0, 1.0, }, { param_slope::decibel, -std::numeric_limits<double>::infinity(), 0.0 } },
   { { L"Dtn", L"Detune" }, L"Cent", 0, -50, 50 },
   { { L"Dt2", L"Detune2" }, L"Cent", 0.5, { param_slope::linear, -0.5, 0.5, }, { param_slope::linear, -50.0, 50.0 } },
   { { L"Pan", L"Panning" }, L"%", 0.5, { param_slope::linear, 0.0, 1.0, }, { param_slope::linear, -100.0, 100.0 } },
