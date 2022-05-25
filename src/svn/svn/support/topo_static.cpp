@@ -80,6 +80,15 @@ part_infos[] =
 };
 
 param_info const
+filter_params[filter_param::count] =
+{
+  { { L"On", L"Enabled" }, false },
+  { { L"Type", L"Type" }, filter_types, filter_type::count },
+  { { L"Frq", L"Frequency" }, L"Hz", 0.5, { param_slope::quadratic, 20.0, 20000.0, }, { param_slope::quadratic, 20.0, 20000.0 } },
+  { { L"Res", L"Resonance" }, L"", 0.0, { param_slope::linear, 0.0, 1.0 }, { param_slope::linear, 0.0, 1.0 } }
+};
+
+param_info const
 unit_params[unit_param::count] =
 {
   { { L"On", L"Enabled" }, false },
@@ -89,15 +98,6 @@ unit_params[unit_param::count] =
   { { L"Dt2", L"Detune2" }, L"Cent", 0.5, { param_slope::linear, -0.5, 0.5, }, { param_slope::linear, -50.0, 50.0 } },
   { { L"Pan", L"Panning" }, L"%", 0.5, { param_slope::linear, 0.0, 1.0, }, { param_slope::linear, -100.0, 100.0 } },
   { { L"Pw", L"Pulse width" }, L"%", 1.0, { param_slope::linear, 0.0, 0.5, }, { param_slope::linear, 0.0, 100.0 } }
-};
-
-param_info const
-filter_params[filter_param::count] =
-{
-  { { L"On", L"Enabled" }, false },
-  { { L"Type", L"Type" }, filter_types, filter_type::count },
-  { { L"Frq", L"Frequency" }, L"Hz", 0.5, { param_slope::quadratic, 20.0, 20000.0, }, { param_slope::quadratic, 20.0, 20000.0 } },
-  { { L"Res", L"Resonance" }, L"", 0.0, { param_slope::linear, 0.0, 1.0 }, { param_slope::linear, 0.0, 1.0 } }
 };
 
 } // namespace svn
