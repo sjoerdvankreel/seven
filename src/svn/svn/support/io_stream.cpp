@@ -72,6 +72,7 @@ io_stream::load(io_stream& stream, param_value* param_values)
       if(param_real == 1 && param->type != param_type::real) continue;
       if(param_real == 1) param_values[rp].real = std::clamp(real, 0.0, 1.0);
       if(param_real == 0) param_values[rp].discrete = std::clamp(discrete, param->min.discrete, param->max.discrete);
+      break;
     }
   }
 
