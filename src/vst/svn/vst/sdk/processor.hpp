@@ -29,7 +29,7 @@ private:
   std::vector<svn::param_value> _state;
   std::vector<Parameter> _accurateParameters;
 private:
-  tresult processNoAudio(ProcessData const& data);
+  tresult processParameters(ProcessData const& data);
   void processAutomation(svn::input_buffer& input, ProcessData const& data);
   void processNoteEvents(svn::input_buffer& input, ProcessData const& data);
   void processNoteEvent(svn::input_buffer& input, std::int32_t index, Event const& event);

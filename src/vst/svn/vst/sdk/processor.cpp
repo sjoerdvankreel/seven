@@ -90,7 +90,8 @@ Processor::process(ProcessData& data)
     input.bpm = static_cast<float>(data.processContext->tempo);
 
   if (data.numSamples == 0 || data.numOutputs == 0) 
-    return processNoAudio(data);
+    return processParameters(data);
+
   processNoteEvents(input, data);
   processAutomation(input, data);
   svn::audio_sample* audio = _synth->process_block();
@@ -100,7 +101,7 @@ Processor::process(ProcessData& data)
     data.outputs[0].channelBuffers32[1][s] = audio[s].right;
   }
 
-  return kResultOk;
+  return processParameters(data);
 }
 
 void
@@ -135,7 +136,7 @@ Processor::processNoteEvent(svn::input_buffer& input, std::int32_t index, Event 
 }
 
 tresult
-Processor::processNoAudio(ProcessData const& data)
+Processor::processParameters(ProcessData const& data)
 {
   int32 index;
   ParamValue value;
