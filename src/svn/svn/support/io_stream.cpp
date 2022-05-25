@@ -57,7 +57,7 @@ io_stream::load(io_stream& stream, param_value* param_values)
     if(!stream.read_wstring(part_name)) return false;
     if(!stream.read_int32(part_index)) return false;
     if(!stream.read_wstring(param_name)) return false;
-    if(!stream.read_int32(param_real) || param_real != 0 || param_real != 1) return false;
+    if(!stream.read_int32(param_real) || param_real != 0 && param_real != 1) return false;
     if(param_real == 1 && !stream.read_double(real)) return false;
     if(param_real == 0 && !stream.read_int32(discrete)) return false;
 
