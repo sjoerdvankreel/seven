@@ -80,16 +80,7 @@ Parameter::toNormalized(ParamValue plain) const
   }
 }
 
-bool
-Parameter::fromString(TChar const* string, ParamValue& normalized) const
-{
-  svn::param_value value;
-  if (!svn::param_parse(*_param->info, string, value)) return false;
-  normalized = toNormalized(value.real);
-  return true;
-}
-
-void 
+void
 Parameter::toString(ParamValue normalized, String128 string) const
 {
   svn::param_value value;
@@ -99,6 +90,19 @@ Parameter::toString(ParamValue normalized, String128 string) const
   default: value.discrete = toDiscrete(*_param->info, normalized); break;
   }
   svn::param_format(*_param->info, value, string, 128);
+}
+
+bool
+Parameter::fromString(TChar const* string, ParamValue& normalized) const
+{
+  svn::param_value value;
+  if (!svn::param_parse(*_param->info, string, value)) return false;
+  switch (_param->info->type)
+  {
+  case svn::param_type::real: normalized = toNormalized(value.real); break;
+  default: normalized = fromDiscrete(*_param->info, value.discrete); break;
+  }
+  return true;
 }
 
 } // namespace Svn::Vst

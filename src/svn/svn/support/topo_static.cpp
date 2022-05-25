@@ -33,7 +33,7 @@ min(), max(), default_(), items(nullptr), real(real)
 {
   assert(unit != nullptr);
   assert(real.min < real.max);
-  assert(real.display_max < real.display_max);
+  assert(real.display_min < real.display_max);
   assert(0.0 <= default_ && default_ <= 1.0);
   assert(0 <= real.slope && real.slope <= param_slope::count);
 

@@ -1,7 +1,6 @@
 #include <svn/support/param_transform.hpp>
 #include <cwchar>
 #include <sstream>
-#include <iomanip>
 
 namespace svn {
 
@@ -72,9 +71,9 @@ param_format(param_info const& info, param_value val, wchar_t* buffer, std::size
   std::wstringstream str;
   switch (info.type)
   {
+  case param_type::real: str << val.real; break;
   case param_type::discrete: str << val.discrete; break;
   case param_type::list: str << info.items[val.discrete].detail; break;
-  case param_type::real: str << std::setprecision(4) << val.real; break;
   case param_type::toggle: str << (val.discrete == 0 ? L"Off" : L"On"); break;
   default: assert(false); break;
   }
