@@ -51,7 +51,7 @@ param_parse(param_info const& info, wchar_t const* buffer, param_value& val)
     return false;
   case param_type::list:
     for(std::int32_t i = 0; i <= info.max.discrete; i++)
-      if(!std::wcscmp(info.items[i].detail, buffer)) 
+      if(!std::wcscmp(info.items[i].name, buffer))
         return val.discrete = i, true;
     return false;
   case param_type::real:
@@ -73,7 +73,7 @@ param_format(param_info const& info, param_value val, wchar_t* buffer, std::size
   {
   case param_type::real: str << val.real; break;
   case param_type::discrete: str << val.discrete; break;
-  case param_type::list: str << info.items[val.discrete].detail; break;
+  case param_type::list: str << info.items[val.discrete].name; break;
   case param_type::toggle: str << (val.discrete == 0 ? L"Off" : L"On"); break;
   default: assert(false); break;
   }
