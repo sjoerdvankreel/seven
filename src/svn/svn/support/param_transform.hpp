@@ -16,23 +16,25 @@ bool param_parse(param_info const& info, wchar_t const* buffer, param_value& val
 void param_format(param_info const& info, param_value val, wchar_t* buffer, std::size_t size);
 
 inline float 
-param_real_to_range(std::int32_t slope, float val, float min, float max)
+param_real_to_range(param_bounds const& bounds, float val)
 {
-  switch (slope)
+  switch (bounds.slope)
   {
-  case param_slope::linear: return min + (max - min) * val;
-  case param_slope::quadratic: return min + (max - min) * val * val;
+  case param_slope::db: return 20.0f * std::log10(val);
+  case param_slope::linear: return bounds.min + (bounds.max - bounds.min) * val;
+  case param_slope::quadratic: return bounds.min + (bounds.max - bounds.min) * val * val;
   default: assert(false); return 0.0f;
   }
 }
 
 inline float
-param_real_from_range(std::int32_t slope, float val, float min, float max)
+param_real_from_range(param_bounds const& bounds, float val)
 {
-  switch (slope)
+  switch (bounds.slope)
   {
-  case param_slope::linear: return (val - min) / (max - min);
-  case param_slope::quadratic: return std::sqrt((val - min) / (max - min));
+  case param_slope::db: return std::expf(std::log(10.0f) * val / 20.0f);
+  case param_slope::linear: return (val - bounds.min) / (bounds.max - bounds.min);
+  case param_slope::quadratic: return std::sqrt((val - bounds.min) / (bounds.max - bounds.min));
   default: assert(false); return 0.0f;
   }
 }

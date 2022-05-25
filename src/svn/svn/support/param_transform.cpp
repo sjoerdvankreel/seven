@@ -4,34 +4,6 @@
 
 namespace svn {
 
-param_value 
-param_to_display(param_info const& info, param_value val)
-{
-  param_value result;
-  real_info const& ri = info.real;
-  switch (info.type)
-  {
-  case param_type::real: result.real = param_real_to_range(
-    ri.slope, val.real, ri.display_min, ri.display_max); break;
-  default: result.discrete = val.discrete; break;
-  }
-  return result;
-}
-
-param_value 
-param_from_display(param_info const& info, param_value val)
-{
-  param_value result;
-  real_info const& ri = info.real;
-  switch (info.type)
-  {
-  case param_type::real: result.real = param_real_from_range(
-    ri.slope, val.real, ri.display_min, ri.display_max); break;
-  default: result.discrete = val.discrete; break;
-  }
-  return result;
-}
-
 bool 
 param_parse(param_info const& info, wchar_t const* buffer, param_value& val)
 {
@@ -58,7 +30,7 @@ param_parse(param_info const& info, wchar_t const* buffer, param_value& val)
     return false;
   case param_type::real:
     str >> real;
-    if(info.real.display_min <= real && real <= info.real.display_max) 
+    if(info.display.min <= real && real <= info.display.max)
       return val.real = real, true;
     return false;
   default:
@@ -80,6 +52,31 @@ param_format(param_info const& info, param_value val, wchar_t* buffer, std::size
   default: assert(false); break;
   }
   std::wcsncpy(buffer, str.str().c_str(), size - 1);
+}
+
+param_value
+param_to_display(param_info const& info, param_value val)
+{
+  param_value result;
+  param_bounds const& bounds = info.display;
+  switch (info.type)
+  {
+  case param_type::real: result.real = param_real_to_range(info.display, val.real); break;
+  default: result.discrete = val.discrete; break;
+  }
+  return result;
+}
+
+param_value
+param_from_display(param_info const& info, param_value val)
+{
+  param_value result;
+  switch (info.type)
+  {
+  case param_type::real: result.real = param_real_from_range(info.display, val.real); break;
+  default: result.discrete = val.discrete; break;
+  }
+  return result;
 }
 
 } // namespace svn

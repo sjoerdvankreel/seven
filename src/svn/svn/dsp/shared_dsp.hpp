@@ -59,10 +59,10 @@ automate_real(
   assert(param >= 0);
   assert(sample >= 0);
   assert(state != nullptr);
-  auto const& real_info = synth_params[param].info->real;
+  auto const& bounds = synth_params[param].info->dsp;
   auto automation = static_cast<float*>(input.automation[param]);
   float result = static_cast<float>(state[param].real = automation[sample]);
-  return param_real_to_range(real_info.slope, result, real_info.min, real_info.max);
+  return param_real_to_range(bounds, result);
 }
 
 } // namespace svn

@@ -6,13 +6,11 @@
 
 namespace svn {
 
-struct real_info
+struct param_bounds
 {
   std::int32_t slope;
   double min;
   double max;
-  double display_min;
-  double display_max;
 };
 
 struct item_info
@@ -38,12 +36,13 @@ struct param_info
   param_value min;
   param_value max;
   item_info const* items;
-  real_info real;
+  param_bounds dsp;
+  param_bounds display;
 
   param_info(item_info item, bool default_);
   param_info(item_info item, item_info const* items, std::int32_t count);
-  param_info(item_info item, wchar_t const* unit, double default_, real_info const& real);
   param_info(item_info item, wchar_t const* unit, std::int32_t default_, std::int32_t min, std::int32_t max);
+  param_info(item_info item, wchar_t const* unit, double default_, param_bounds const& dsp, param_bounds const& display);
 };
 
 extern part_info const part_infos[];
@@ -54,7 +53,7 @@ inline std::int32_t constexpr unit_count = 2;
 inline std::int32_t constexpr filter_count = 1; 
 
 struct part_type_t { enum value { unit, filter, count }; };
-struct param_slope_t { enum value { linear, quadratic, count }; };
+struct param_slope_t { enum value { linear, quadratic, db, count }; };
 struct param_type_t { enum value { real, list, toggle, discrete, count }; };
 typedef part_type_t::value part_type;
 typedef param_type_t::value param_type;
