@@ -1,6 +1,6 @@
 #include <svn/support/topo_rt.hpp>
 #include <svn/vst/sdk/processor.hpp>
-#include <svn/vst/support/param.hpp>
+#include <svn/vst/sdk/parameter.hpp>
 #include <svn/vst/support/ids.hpp>
 #include <svn/vst/support/io_stream.hpp>
 
@@ -148,7 +148,8 @@ Processor::processNoAudio(ProcessData const& data)
         if (svn::synth_params[queue->getParameterId()].info->type == svn::param_type::real)
           _state[queue->getParameterId()].real = value;
         else
-          _state[queue->getParameterId()].discrete = paramDenormalizeDiscrete(queue->getParameterId(), value);
+          _state[queue->getParameterId()].discrete = Svn::Vst::Parameter::toDiscrete(
+            *svn::synth_params[queue->getParameterId()].info, value);
   return kResultOk;
 }
 
@@ -165,13 +166,15 @@ Processor::processAutomation(svn::input_buffer& input, ProcessData const& data)
       if (svn::synth_params[id].info->type == svn::param_type::real)
         _accurateParameters[id].setValue(_state[id].real);
       else
-        _accurateParameters[id].setValue(paramNormalizeDiscrete(id, _state[id].discrete));
+        _accurateParameters[id].setValue(Svn::Vst::Parameter::fromDiscrete(
+          *svn::synth_params[id].info, _state[id].discrete));
       _accurateParameters[id].beginChanges(queue);
       for (std::int32_t s = 0; s < data.numSamples; s++)
         if (svn::synth_params[id].info->type == svn::param_type::real)
           static_cast<float*>(input.automation[id])[s] = _accurateParameters[id].advance(1);
         else
-          static_cast<std::int32_t*>(input.automation[id])[s] = paramDenormalizeDiscrete(id, _accurateParameters[id].advance(1));
+          static_cast<std::int32_t*>(input.automation[id])[s] = Svn::Vst::Parameter::toDiscrete(
+            *svn::synth_params[id].info, _accurateParameters[id].advance(1));
       _accurateParameters[id].endChanges();
     }
 }

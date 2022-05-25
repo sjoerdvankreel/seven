@@ -1,8 +1,2 @@
 handle bpm+default bpm
-handle vst units
-fix discrete param ranges
-drop the param header
-do generic parameters
-param_transformer
-param_formatter
 handle nans and denormals

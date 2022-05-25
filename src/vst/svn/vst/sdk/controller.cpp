@@ -1,6 +1,6 @@
 #include <svn/vst/support/ids.hpp>
-#include <svn/vst/support/param.hpp>
 #include <svn/vst/support/io_stream.hpp>
+#include <svn/vst/sdk/parameter.hpp>
 #include <svn/vst/sdk/controller.hpp>
 
 #include <svn/support/io_stream.hpp>
@@ -22,7 +22,6 @@ namespace Svn::Vst {
 tresult PLUGIN_API 
 Controller::initialize(FUnknown* context)
 {
-  StringListParameter* listParameter = nullptr;
 	tresult result = EditController::initialize(context);
 	if(result != kResultTrue) return result;
 
@@ -33,35 +32,8 @@ Controller::initialize(FUnknown* context)
   }
 
   for(std::int32_t p = 0; p < svn::synth_param_count; p++)
-  {
-    auto const& param = svn::synth_params[p].info;
-    wchar_t const* detail = svn::synth_params[p].detail.c_str();
-    std::int32_t part_index = svn::synth_params[p].part_index + 1;
-    switch (param->type)
-    {
-    case svn::param_type::real:
-      parameters.addParameter(
-        detail, param->unit, 0L, param->default_.real,
-        ParameterInfo::kCanAutomate, p, part_index, param->item.name);
-      break;
-    case svn::param_type::list:
-      listParameter = new StringListParameter(
-        detail, p, param->unit,
-        ParameterInfo::kCanAutomate | ParameterInfo::kIsList, 
-        part_index, param->item.name);
-      for(std::int32_t i = 0; i <= param->max.discrete; i++)
-        listParameter->appendString(param->items[i].name);
-      parameters.addParameter(listParameter);
-      break;
-    default:
-      parameters.addParameter(new RangeParameter(
-        detail, p, param->unit,
-        param->min.discrete, param->max.discrete, param->default_.discrete,
-        param->max.discrete - param->min.discrete, 
-        ParameterInfo::kCanAutomate, part_index, param->item.name));
-      break;
-    }
-  }
+    parameters.addParameter(new Parameter(p, &svn::synth_params[p]));
+
 	return kResultTrue;
 }
 
@@ -80,7 +52,7 @@ Controller::setComponentState(IBStream* state)
     if(svn::synth_params[p].info->type == svn::param_type::real)
       setParamNormalized(p, values[p].real);
     else
-      setParamNormalized(p, paramNormalizeDiscrete(p, values[p].discrete));
+      setParamNormalized(p, Parameter::fromDiscrete(*svn::synth_params[p].info, values[p].discrete));
   return kResultOk;
 }
 
