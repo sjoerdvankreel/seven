@@ -2,10 +2,10 @@
 #define SVN_DSP_SHARED_DSP_HPP
 
 #include <svn/support/topo_rt.hpp>
-#include <svn/support/topo_static.hpp>
 #include <svn/support/param_value.hpp>
 #include <svn/support/audio_sample.hpp>
 #include <svn/support/input_buffer.hpp>
+#include <svn/support/param_transform.hpp>
 
 #include <cassert>
 
@@ -36,23 +36,6 @@ add_audio(
 }
 
 inline float
-param_real_to_actual(std::int32_t param, float val)
-{
-  param_value result;
-  param_info const& info = *synth_params[param].info;
-  float min = info.real.min;
-  float range = info.real.max - min;
-  assert(info.type == param_type::real);
-
-  switch (info.real.slope)
-  {
-  case param_slope::linear: return min + range * val;
-  case param_slope::quadratic: return min + range * val * val;
-  default: assert(false); return 0.0f;
-  }
-}
-
-inline float
 automate_discrete(
   input_buffer const& input,
   param_value* state,
@@ -76,8 +59,10 @@ automate_real(
   assert(param >= 0);
   assert(sample >= 0);
   assert(state != nullptr);
+  auto const& real_info = synth_params[param].info->real;
   auto automation = static_cast<float*>(input.automation[param]);
-  return param_real_to_actual(param, static_cast<float>(state[param].real = automation[sample]));
+  float result = static_cast<float>(state[param].real = automation[sample]);
+  return param_real_to_range(real_info.slope, result, real_info.min, real_info.max);
 }
 
 } // namespace svn

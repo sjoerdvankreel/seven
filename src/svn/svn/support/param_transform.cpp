@@ -1,10 +1,35 @@
 #include <svn/support/param_transform.hpp>
-#include <cmath>
 #include <cwchar>
 #include <sstream>
 #include <iomanip>
 
 namespace svn {
+
+param_value 
+param_to_display(param_info const& info, param_value val)
+{
+  param_value result;
+  switch (info.type)
+  {
+  case param_type::real: result.real = param_real_to_range(
+    info.real.slope, val.real, info.real.min, info.real.max); break;
+  default: result.discrete = val.discrete; break;
+  }
+  return result;
+}
+
+param_value 
+param_from_display(param_info const& info, param_value val)
+{
+  param_value result;
+  switch (info.type)
+  {
+  case param_type::real: result.real = param_real_from_range(
+    info.real.slope, val.real, info.real.min, info.real.max); break;
+  default: result.discrete = val.discrete; break;
+  }
+  return result;
+}
 
 bool 
 param_parse(param_info const& info, wchar_t const* buffer, param_value& val)
@@ -54,46 +79,6 @@ param_format(param_info const& info, param_value val, wchar_t* buffer, std::size
   default: assert(false); break;
   }
   std::wcsncpy(buffer, str.str().c_str(), size - 1);
-}
-
-param_value 
-param_to_display(param_info const& info, param_value val)
-{
-  param_value result;
-  float min = info.real.display_min;
-  float range = info.real.display_max - min;
-  switch (info.type)
-  {
-  case param_type::real:
-    switch (info.real.slope)
-    {
-    case param_slope::linear: result.real = min + range * val.real; break;
-    case param_slope::quadratic: result.real = min + range * val.real * val.real; break;
-    default: assert(false); break;
-    }
-  default: result.discrete = val.discrete; break;
-  }
-  return result;
-}
-
-param_value 
-param_from_display(param_info const& info, param_value val)
-{
-  param_value result;
-  float min = info.real.display_min;
-  float range = info.real.display_max - min;
-  switch (info.type)
-  {
-  case param_type::real:
-    switch (info.real.slope)
-    {
-    case param_slope::linear: result.real = (val.real - min) / range; break;
-    case param_slope::quadratic: result.real = std::sqrt((val.real - min) / range); break;
-    default: assert(false); break;
-    }
-  default: result.discrete = val.discrete; break;
-  }
-  return result;
 }
 
 } // namespace svn
