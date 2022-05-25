@@ -30,6 +30,7 @@ param_parse(param_info const& info, wchar_t const* buffer, param_value& val)
     return false;
   case param_type::real:
     str >> real;
+    if(!std::wcscmp(L"-inf", buffer)) real = -std::numeric_limits<double>::infinity();
     if(info.display.min <= real && real <= info.display.max)
       return val.real = real, true;
     return false;
