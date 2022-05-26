@@ -25,12 +25,21 @@ find_library(VSTGUI_LIB_Release vstgui PATHS "${VST_SDK_374_BUILD_DIR}/lib/Relea
 find_library(VSTGUI_SUPPORT_LIB_Release vstgui_support PATHS "${VST_SDK_374_BUILD_DIR}/lib/Release")
 find_library(VSTGUI_UIDESCRIPTION_LIB_Release vstgui_uidescription PATHS "${VST_SDK_374_BUILD_DIR}/lib/Release")
 
-# Svn dsp library.
-set(SVN_SRC_DIR "src/svn")
-file(GLOB_RECURSE SVN_SRC "${SVN_SRC_DIR}/*.*")
-add_library(seven STATIC ${SVN_SRC})
-source_group(TREE "../${SVN_SRC_DIR}" FILES ${SVN_SRC})
-target_include_directories(seven PRIVATE ${SVN_SRC_DIR})
+# Svn base library.
+set(SVN_BASE_SRC_DIR "src/svn.base")
+file(GLOB_RECURSE SVN_BASE_SRC "${SVN_BASE_SRC_DIR}/*.*")
+add_library(seven.base STATIC ${SVN_BASE_SRC})
+source_group(TREE "../${SVN_BASE_SRC_DIR}" FILES ${SVN_BASE_SRC})
+target_include_directories(seven.base PRIVATE ${SVN_BASE_SRC_DIR})
+
+# Svn synth library.
+set(SVN_SYNTH_SRC_DIR "src/svn.synth")
+file(GLOB_RECURSE SVN_SYNTH_SRC "${SVN_SYNTH_SRC_DIR}/*.*")
+add_library(seven.synth STATIC ${SVN_SYNTH_SRC})
+source_group(TREE "../${SVN_SYNTH_SRC_DIR}" FILES ${SVN_SYNTH_SRC})
+target_include_directories(seven.synth PRIVATE ${SVN_BASE_SRC_DIR})
+target_include_directories(seven.synth PRIVATE ${SVN_SYNTH_SRC_DIR})
+target_link_libraries(seven.synth seven.base)
 
 # Svn VST bindings.
 set(SVN_VST_SRC_DIR "src/vst")

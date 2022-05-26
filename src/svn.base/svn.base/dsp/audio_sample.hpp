@@ -1,9 +1,7 @@
-#ifndef SVN_SUPPORT_AUDIO_SAMPLE_HPP
-#define SVN_SUPPORT_AUDIO_SAMPLE_HPP
+#ifndef SVN_BASE_DSP_AUDIO_SAMPLE_HPP
+#define SVN_BASE_DSP_AUDIO_SAMPLE_HPP
 
-#include <cstdint>
-
-namespace svn {
+namespace svn::base {
 
 struct audio_sample
 {
@@ -86,5 +84,5 @@ inline audio_sample&
 audio_sample::operator/=(audio_sample y)
 { left /= y.left; right /= y.right; return *this; }  
 
-} // namespace svn
-#endif // SVN_SUPPORT_AUDIO_SAMPLE_HPP
+} // namespace svn::base
+#endif // SVN_BASE_DSP_AUDIO_SAMPLE_HPP
