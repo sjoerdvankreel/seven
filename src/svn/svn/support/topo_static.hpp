@@ -49,8 +49,11 @@ extern part_info const part_infos[];
 extern param_info const unit_params[];
 extern param_info const filter_params[];
 
+extern param_bounds const bounds_decibel;
+extern param_bounds const bounds_linear_unit;
+
 inline std::int32_t constexpr unit_count = 2;
-inline std::int32_t constexpr filter_count = 1; 
+inline std::int32_t constexpr filter_count = 1;
 
 struct part_type_t { enum value { unit, filter, count }; };
 struct param_slope_t { enum value { linear, quadratic, decibel, count }; };
