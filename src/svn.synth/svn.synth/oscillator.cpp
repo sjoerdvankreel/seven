@@ -23,8 +23,8 @@ oscillator::process_block(
   {
     float level = automate_real(oscillator_params, input, state, oscillator_param::level, s);
     float panning = automate_real(oscillator_params, input, state, oscillator_param::panning, s);
-
     float sample = std::sin(2.0f * std::numbers::pi * _phase);
+
     audio[s].left = (1.0f - panning) * sample;
     audio[s].right = 1.0f * sample;   
     _phase += 440.0f / input.sample_rate;
