@@ -14,9 +14,9 @@ struct runtime_topology
 {
   std::int32_t const real_count; // Real valued runtime parameter count.
   std::int32_t const discrete_count; // Discrete valued runtime parameter count.
-  std::vector<runtime_part> const parts; // Runtime part descriptor array, e.g. unit 1, unit 2, filter 1, filter 2.
-  std::vector<runtime_param> const params; // Runtime parameter descriptor array, e.g. unit 1 wave, unit 1 amp, unit 2 wave, etc.
-  std::vector<std::vector<std::int32_t>> const bounds; // Runtime parameter bounds, e.g. bounds[part_type::unit][1] points to unit 2 wave.
+  std::vector<runtime_part> const parts; // Runtime part descriptor array, e.g. osc 1, osc 2, filter 1, filter 2.
+  std::vector<runtime_param> const params; // Runtime parameter descriptor array, e.g. osc 1 wave, osc 1 amp, osc 2 wave, etc.
+  std::vector<std::vector<std::int32_t>> const bounds; // Runtime parameter bounds, e.g. bounds[part_type::osc][1] points to osc 2 wave.
 
   runtime_topology(
     std::vector<runtime_part> const& parts,
