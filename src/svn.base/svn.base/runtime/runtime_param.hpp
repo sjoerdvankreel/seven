@@ -14,10 +14,8 @@ struct runtime_param
   struct param_descriptor const* descriptor; // Pointer to static parameter information.
 
   runtime_param(
-    std::int32_t part_index,
-    std::wstring const& runtime_name,
-    struct runtime_part const* part,
-    struct param_descriptor const* descriptor);
+    std::int32_t part_index, std::wstring const& runtime_name,
+    struct runtime_part const* part, struct param_descriptor const* descriptor);
 };
 
 } // namespace svn::base

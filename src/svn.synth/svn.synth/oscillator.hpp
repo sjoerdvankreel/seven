@@ -13,8 +13,7 @@ class oscillator
 public:
   void process_block(
     base::input_buffer const& input, 
-    base::audio_sample* audio, 
-    base::param_value* state);
+    base::audio_sample* audio, base::param_value* state);
 };
 
 } // namespace svn::synth

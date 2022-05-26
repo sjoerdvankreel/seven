@@ -15,12 +15,16 @@ private:
   oscillator _oscillators[oscillator_count];
 public:
   seven_synth(
-    struct base::runtime_topology const* topology,
-    float sample_rate, 
-    std::int32_t max_sample_count,
-    base::param_value* state);
-public:
-  struct base::audio_sample const* process_block();
+    struct base::runtime_topology const* topology, float sample_rate,
+    std::int32_t max_sample_count, base::param_value* state);
+protected:
+  void
+  process_block(
+    struct base::runtime_topology const& topology, 
+    base::input_buffer const& input,
+    struct base::audio_sample* audio, 
+    struct base::audio_sample* part_audio, 
+    union base::param_value* state) override;
 };
 
 } // namespace svn::synth

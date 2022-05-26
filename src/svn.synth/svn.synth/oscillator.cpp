@@ -13,8 +13,7 @@ namespace svn::synth {
 void
 oscillator::process_block(
   input_buffer const& input, 
-  audio_sample* audio, 
-  param_value* state)
+  audio_sample* audio, param_value* state)
 {
   assert(state != nullptr);
   assert(audio != nullptr);

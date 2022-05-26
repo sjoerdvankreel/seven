@@ -5,10 +5,8 @@ namespace svn::base {
 
 runtime_param::
 runtime_param(
-  std::int32_t part_index,
-  std::wstring const& runtime_name,
-  struct runtime_part const* part,
-  struct param_descriptor const* descriptor):
+  std::int32_t part_index, std::wstring const& runtime_name,
+  struct runtime_part const* part, struct param_descriptor const* descriptor):
 part_index(part_index), runtime_name(runtime_name),
 part(part), descriptor(descriptor)
 {

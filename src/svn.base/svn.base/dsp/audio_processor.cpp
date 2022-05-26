@@ -8,11 +8,8 @@ namespace svn::base {
 
 audio_processor::
 audio_processor(
-  processor_type type,
-  runtime_topology const* topology,
-  float sample_rate, 
-  std::int32_t max_sample_count,
-  base::param_value* state):
+  processor_type type, runtime_topology const* topology,
+  float sample_rate, std::int32_t max_sample_count, base::param_value* state):
 _input(),
 _notes(static_cast<std::size_t>(max_sample_count)),
 _audio(static_cast<std::size_t>(max_sample_count)),
@@ -26,7 +23,10 @@ _state(state),
 _topology(topology)
 {
   assert(state != nullptr);
-  assert(sample_rate > 0.0);
+  assert(sample_rate > 0.0f);
+  assert(topology != nullptr);
+  assert(max_sample_count > 0);
+  assert(0 <= type && type <= processor_type::count);
 
   std::int32_t real_p = 0;
   std::int32_t discrete_p = 0;
@@ -51,7 +51,7 @@ audio_processor::process_block()
   state_check();
   automation_check(_input.sample_count);
   clear_audio(_audio.data(), _input.sample_count);
-  process_block(_input, _audio.data(), _state);
+  process_block(*_topology, _input, _audio.data(), _part_audio.data(), _state);
   state_check();
   return _audio.data();
 }

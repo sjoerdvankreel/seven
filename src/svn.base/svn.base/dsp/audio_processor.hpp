@@ -31,23 +31,19 @@ private:
 private:
   void state_check();
   void automation_check(std::int32_t sample_count);
-protected:
-  virtual void 
-  process_block(
-    input_buffer const& input,
-    audio_sample* audio,
-    param_value* state) = 0;
 public:
-  audio_processor(
-    processor_type type,
-    struct runtime_topology const* topology,
-    float sample_rate,
-    std::int32_t max_sample_count,
-    param_value* state);
-public: 
   processor_type type() const;
   struct audio_sample const* process_block();
-  input_buffer& prepare_block(std::int32_t sample_count);  
+  input_buffer& prepare_block(std::int32_t sample_count);
+public:
+  audio_processor(
+    processor_type type, struct runtime_topology const* topology,
+    float sample_rate, std::int32_t max_sample_count, param_value* state);
+protected:
+  virtual void
+  process_block(
+    struct runtime_topology const& topology, input_buffer const& input,
+    audio_sample* audio, audio_sample* part_audio, param_value* state) = 0;
 };
 
 } // namespace svn::base
