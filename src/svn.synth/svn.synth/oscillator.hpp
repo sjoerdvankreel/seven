@@ -1,19 +1,21 @@
-#ifndef SVN_DSP_UNIT_GENERATOR_HPP
-#define SVN_DSP_UNIT_GENERATOR_HPP
+#ifndef SVN_SYNTH_OSCILLATOR_HPP
+#define SVN_SYNTH_OSCILLATOR_HPP
 
-#include <svn/support/topo_static.hpp>
-#include <svn/support/param_value.hpp>
-#include <svn/support/audio_sample.hpp>
-#include <svn/support/input_buffer.hpp>
+#include <svn.base/dsp/input_buffer.hpp>
+#include <svn.base/dsp/audio_sample.hpp>
+#include <svn.base/support/param_value.hpp>
 
-namespace svn {
+namespace svn::synth {
 
-class unit_generator
+class oscillator
 {
   float _phase = 0.0f;
 public:
-  void process_block(input_buffer const& input, audio_sample* audio, param_value* state);
+  void process_block(
+    base::input_buffer const& input, 
+    base::audio_sample* audio, 
+    base::param_value* state);
 };
 
-} // namespace svn
-#endif // SVN_DSP_UNIT_GENERATOR_HPP
+} // namespace svn::synth
+#endif // SVN_SYNTH_OSCILLATOR_HPP
