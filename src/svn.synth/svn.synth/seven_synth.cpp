@@ -40,16 +40,7 @@ _topology(topology)
   _input.automation = _automation.data();
 }
 
-void
-seven_synth::state_check()
-{
-  for(std::int32_t i = 0; i < synth_param_count; i++)
-    if(synth_params[i].info->type == param_type::real)
-      assert(0.0 <= _state[i].real && _state[i].real <= 1.0);
-    else
-      assert(synth_params[i].info->min.discrete <= _state[i].discrete && 
-        _state[i].discrete <= synth_params[i].info->max.discrete);
-}
+
 
 audio_sample*
 seven_synth::process_block()
@@ -75,32 +66,6 @@ seven_synth::process_block()
 
   state_check();
   return _audio.data();
-}
-
-input_buffer&
-seven_synth::prepare_block(std::int32_t sample_count)
-{
-  for (std::int32_t p = 0; p < svn::synth_param_count; p++)
-    if (svn::synth_params[p].info->type != svn::param_type::real)
-      for (std::int32_t s = 0; s < sample_count; s++)
-        static_cast<std::int32_t*>(_input.automation[p])[s] = _state[p].discrete;
-    else
-      for (std::int32_t s = 0; s < sample_count; s++)
-        static_cast<float*>(_input.automation[p])[s] = static_cast<float>(_state[p].real);
-  return _input;
-}
-
-void
-seven_synth::automation_check(std::int32_t sample_count)
-{
-  for (std::int32_t p = 0; p < synth_param_count; p++)
-    for (std::int32_t s = 0; s < sample_count; s++)
-      if (synth_params[p].info->type == param_type::real)
-        assert(0.0f <= static_cast<float*>(_input.automation[p])[s] &&
-          static_cast<float*>(_input.automation[p])[s] <= 1.0f);
-      else
-        assert(synth_params[p].info->min.discrete <= static_cast<std::int32_t*>(_input.automation[p])[s] &&
-          static_cast<std::int32_t*>(_input.automation[p])[s] <= synth_params[p].info->max.discrete);
 }
 
 } // namespace svn::synth

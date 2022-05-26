@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-namespace svn {
+namespace svn::base {
 
 inline std::int32_t constexpr note_off = -1;
 
@@ -14,5 +14,5 @@ struct note_event
   std::int32_t sample_index; // Index in the process block where the event occurs.
 };
 
-} // namespace svn
+} // namespace svn::base
 #endif // SVN_BASE_DSP_NOTE_EVENT_HPP
