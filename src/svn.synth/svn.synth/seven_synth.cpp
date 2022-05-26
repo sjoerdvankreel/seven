@@ -1,24 +1,28 @@
-#include <svn/dsp/shared_dsp.hpp>
-#include <svn/dsp/seven_synth.hpp>
-#include <svn/support/topo_rt.hpp>
-
+#include <svn.synth/seven_synth.hpp>
+#include <svn.base/runtime/runtime_topology.hpp>
 #include <cassert>
-#include <cstdint>
 
-namespace svn {
+using namespace svn::base;
+
+namespace svn::synth {
 
 seven_synth::
-seven_synth(param_value* state, float sample_rate, std::int32_t max_sample_count):
+seven_synth(
+  runtime_topology const* topology,
+  float sample_rate, 
+  std::int32_t max_sample_count,
+  base::param_value* state):
 _input(),
-_state(state),
-_unit_generators(),
-_sample_rate(sample_rate),
-_part_audio(static_cast<std::size_t>(max_sample_count)),
 _notes(static_cast<std::size_t>(max_sample_count)),
 _audio(static_cast<std::size_t>(max_sample_count)),
+_part_audio(static_cast<std::size_t>(max_sample_count)),
 _automation(static_cast<std::size_t>(synth_param_count)),
-_automation_real(static_cast<std::size_t>(real_param_count * max_sample_count)),
-_automation_discrete(static_cast<std::size_t>(discrete_param_count * max_sample_count))
+_automation_real(static_cast<std::size_t>(real_param_count* max_sample_count)),
+_automation_discrete(static_cast<std::size_t>(discrete_param_count* max_sample_count)),
+_sample_rate(sample_rate),
+_state(state),
+_oscillators(),
+_topology(topology)
 {
   assert(state != nullptr);
   assert(sample_rate > 0.0);
@@ -99,4 +103,4 @@ seven_synth::automation_check(std::int32_t sample_count)
           static_cast<std::int32_t*>(_input.automation[p])[s] <= synth_params[p].info->max.discrete);
 }
 
-} // namespace svn
+} // namespace svn::synth

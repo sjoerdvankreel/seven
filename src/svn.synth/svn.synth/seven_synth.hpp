@@ -1,38 +1,43 @@
-#ifndef SVN_DSP_SEVEN_SYNTH_HPP
-#define SVN_DSP_SEVEN_SYNTH_HPP
+#ifndef SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
+#define SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
 
-#include <svn/dsp/unit_generator.hpp>
-#include <svn/support/topo_static.hpp>
-#include <svn/support/audio_sample.hpp>
-#include <svn/support/input_buffer.hpp>
-#include <svn/support/param_value.hpp>
+#include <svn.synth/topology.hpp>
+#include <svn.synth/oscillator.hpp>
+#include <svn.base/dsp/input_buffer.hpp>
+
 #include <vector>
+#include <cstdint>
 
-namespace svn {
+namespace svn::synth {
 
 class seven_synth
 {
 private:
-  float const _sample_rate;
-  param_value* const _state;
-  unit_generator _unit_generators[unit_count];
-private:
-  input_buffer _input;
-  std::vector<note_event> _notes;
-  std::vector<audio_sample> _audio;
-  std::vector<audio_sample> _part_audio;
+  base::input_buffer _input;
+  std::vector<base::note_event> _notes;
+  std::vector<base::audio_sample> _audio;
+  std::vector<base::audio_sample> _part_audio;
   std::vector<void*> _automation;
   std::vector<float> _automation_real;
   std::vector<std::int32_t> _automation_discrete;
 private:
+  float const _sample_rate;
+  union base::param_value* const _state;
+  oscillator _oscillators[oscillator_count];
+  struct base::runtime_topology const* const _topology;
+private:
   void state_check();
   void automation_check(std::int32_t sample_count);
 public:
-  seven_synth(param_value* state, float sample_rate, std::int32_t max_sample_count);
+  seven_synth(
+    struct base::runtime_topology const* topology,
+    float sample_rate, 
+    std::int32_t max_sample_count,
+    base::param_value* state);
 public:
-  audio_sample* process_block();
-  input_buffer& prepare_block(std::int32_t sample_count);
+  struct base::audio_sample const* process_block();
+  base::input_buffer& prepare_block(std::int32_t sample_count);
 };
 
-} // namespace svn
-#endif // SVN_DSP_SEVEN_SYNTH_HPP
+} // namespace svn::synth
+#endif // SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
