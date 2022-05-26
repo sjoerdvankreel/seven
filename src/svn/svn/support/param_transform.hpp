@@ -22,7 +22,7 @@ param_real_to_range(param_bounds const& bounds, float val)
   {
   case param_slope::decibel: return 20.0f * std::log10(val);
   case param_slope::linear: return bounds.min + (bounds.max - bounds.min) * val;
-  case param_slope::quadratic: return bounds.min + (bounds.max - bounds.min) * val * val;
+  case param_slope::logarithmic: return std::pow(val, bounds.exponent) * (bounds.max - bounds.min) + bounds.min;
   default: assert(false); return 0.0f;
   }
 }
@@ -34,7 +34,7 @@ param_real_from_range(param_bounds const& bounds, float val)
   {
   case param_slope::decibel: return std::expf(std::log(10.0f) * val / 20.0f);
   case param_slope::linear: return (val - bounds.min) / (bounds.max - bounds.min);
-  case param_slope::quadratic: return std::sqrt((val - bounds.min) / (bounds.max - bounds.min));
+  case param_slope::logarithmic: return std::pow((val - bounds.min) / (bounds.max - bounds.min), 1.0 / bounds.exponent);
   default: assert(false); return 0.0f;
   }
 }

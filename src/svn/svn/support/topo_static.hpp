@@ -2,6 +2,8 @@
 #define SVN_SUPPORT_TOPO_STATIC_HPP
 
 #include <svn/support/param_value.hpp>
+#include <cmath>
+#include <limits>
 #include <cstdint>
 
 namespace svn {
@@ -11,6 +13,7 @@ struct param_bounds
   std::int32_t slope;
   double min;
   double max;
+  double exponent;
 };
 
 struct item_info
@@ -49,18 +52,32 @@ extern part_info const part_infos[];
 extern param_info const unit_params[];
 extern param_info const filter_params[];
 
-extern param_bounds const bounds_decibel;
-extern param_bounds const bounds_linear_unit;
+struct param_slope_t { enum value { linear, logarithmic, decibel, count }; };
+typedef param_slope_t::value param_slope;
+
+inline param_bounds constexpr 
+bounds_linear_unit =
+{ param_slope::linear, 0.0, 1.0, };
+
+inline param_bounds constexpr 
+bounds_decibel =
+{ param_slope::decibel, -std::numeric_limits<double>::infinity(), 0.0 };
+
+inline param_bounds 
+bounds_linear(double min, double max)
+{ return { param_slope::linear, min, max, 0.0 }; }
+
+inline param_bounds
+bounds_logarithmic(double min, double max, double reference)
+{ return { param_slope::logarithmic, min, max, std::log((reference - min) / (max - min)) / std::log(0.5) }; }
 
 inline std::int32_t constexpr unit_count = 2;
 inline std::int32_t constexpr filter_count = 1;
 
 struct part_type_t { enum value { unit, filter, count }; };
-struct param_slope_t { enum value { linear, quadratic, decibel, count }; };
 struct param_type_t { enum value { real, list, toggle, discrete, count }; };
 typedef part_type_t::value part_type;
 typedef param_type_t::value param_type;
-typedef param_slope_t::value param_slope;
 
 struct unit_type_t { enum value { blep, blamp, dsf, count }; };
 struct filter_type_t { enum value { ladder, state_variable, count }; };
