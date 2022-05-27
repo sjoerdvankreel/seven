@@ -17,7 +17,6 @@ private:
 protected:
   void
   process_block(
-    struct base::runtime_topology const& topology, 
     base::input_buffer const& input,
     struct base::audio_sample* audio, 
     struct base::audio_sample* part_audio, 

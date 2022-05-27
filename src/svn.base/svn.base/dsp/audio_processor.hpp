@@ -10,9 +10,6 @@
 
 namespace svn::base {
 
-struct processor_type_t { enum value { synth, fx, count }; };
-typedef processor_type_t::value processor_type;
-
 class audio_processor
 {
 private:
@@ -25,7 +22,6 @@ private:
   std::vector<std::int32_t> _automation_discrete;
 
   float const _sample_rate;
-  processor_type const _type;
   union param_value* const _state;
   struct runtime_topology const* const _topology;
 
@@ -33,20 +29,25 @@ private:
   void automation_check(std::int32_t sample_count);
 
 public:
-  processor_type type() const;
   struct audio_sample const* process_block();
+  struct runtime_topology const& topology() const;
   input_buffer& prepare_block(std::int32_t sample_count);
 
+  virtual ~audio_processor() = default;
   audio_processor(
-    processor_type type, struct runtime_topology const* topology,
+    struct runtime_topology const* topology,
     float sample_rate, std::int32_t max_sample_count, param_value* state);
 
 protected:
   virtual void
   process_block(
-    struct runtime_topology const& topology, input_buffer const& input,
-    audio_sample* audio, audio_sample* part_audio, param_value* state) = 0;
+    input_buffer const& input, audio_sample* audio, 
+    audio_sample* part_audio, param_value* state) = 0;
 };
+
+inline runtime_topology const& 
+audio_processor::topology() const
+{ return *_topology; }
 
 } // namespace svn::base
 #endif // SVN_BASE_DSP_AUDIO_PROCESSOR_HPP
