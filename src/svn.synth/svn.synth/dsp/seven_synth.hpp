@@ -1,8 +1,8 @@
 #ifndef SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
 #define SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
 
-#include <svn.synth/topology.hpp>
-#include <svn.synth/oscillator.hpp>
+#include <svn.synth/dsp/oscillator.hpp>
+#include <svn.synth/static/topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
 #include <cstdint>
 

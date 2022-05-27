@@ -1,5 +1,5 @@
-#ifndef SVN_SYNTH_OSCILLATOR_HPP
-#define SVN_SYNTH_OSCILLATOR_HPP
+#ifndef SVN_SYNTH_DSP_OSCILLATOR_HPP
+#define SVN_SYNTH_DSP_OSCILLATOR_HPP
 
 #include <svn.base/dsp/input_buffer.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
@@ -17,4 +17,4 @@ public:
 };
 
 } // namespace svn::synth
-#endif // SVN_SYNTH_OSCILLATOR_HPP
+#endif // SVN_SYNTH_DSP_OSCILLATOR_HPP

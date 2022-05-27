@@ -1,5 +1,5 @@
-#ifndef SVN_SYNTH_TOPOLOGY_HPP
-#define SVN_SYNTH_TOPOLOGY_HPP
+#ifndef SVN_SYNTH_STATIC_TOPOLOGY_HPP
+#define SVN_SYNTH_STATIC_TOPOLOGY_HPP
 
 #include <svn.base/static/part_descriptor.hpp>
 #include <svn.base/static/param_descriptor.hpp>
@@ -26,4 +26,4 @@ typedef oscillator_type_t::value oscillator_type;
 typedef oscillator_param_t::value oscillator_param;
 
 } // namespace svn::synth
-#endif // SVN_SYNTH_TOPOLOGY_HPP
+#endif // SVN_SYNTH_STATIC_TOPOLOGY_HPP

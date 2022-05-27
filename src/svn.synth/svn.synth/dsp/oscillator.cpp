@@ -1,6 +1,6 @@
 #include <svn.base/dsp/dsp.hpp>
-#include <svn.synth/topology.hpp>
-#include <svn.synth/oscillator.hpp>
+#include <svn.synth/dsp/oscillator.hpp>
+#include <svn.synth/static/topology.hpp>
 
 #include <cmath>
 #include <cassert>

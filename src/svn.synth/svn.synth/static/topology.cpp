@@ -1,4 +1,4 @@
-#include <svn.synth/topology.hpp>
+#include <svn.synth/static/topology.hpp>
 #include <svn.base/static/item_name.hpp>
 
 using namespace svn::base;

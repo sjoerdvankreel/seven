@@ -1,5 +1,5 @@
 #include <svn.base/dsp/dsp.hpp>
-#include <svn.synth/seven_synth.hpp>
+#include <svn.synth/dsp/seven_synth.hpp>
 #include <svn.base/runtime/runtime_topology.hpp>
 #include <cassert>
 
