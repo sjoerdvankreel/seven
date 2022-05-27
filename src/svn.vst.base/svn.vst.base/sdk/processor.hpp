@@ -4,6 +4,7 @@
 #include <pluginterfaces/vst/ivstevents.h>
 #include <public.sdk/source/vst/vstaudioeffect.h>
 #include <public.sdk/source/vst/utility/sampleaccurate.h>
+
 #include <svn.base/dsp/input_buffer.hpp>
 #include <svn.base/runtime/runtime_topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
@@ -28,14 +29,7 @@ private:
   using Parameter = Steinberg::Vst::SampleAccurate::Parameter;
   using SpeakerArrangement = Steinberg::Vst::SpeakerArrangement;
 
-public:
-  typedef std::unique_ptr<svn::base::audio_processor> (*
-    audio_processor_factory)(
-      svn::base::runtime_topology const* topology, 
-      ProcessSetup const& setup);
-
 private:
-  audio_processor_factory _factory;
   std::vector<svn::base::param_value> _state;
   std::vector<Parameter> _accurateParameters;
   svn::base::runtime_topology const* const _topology;
@@ -44,8 +38,7 @@ private:
 public:
   processor(
     Steinberg::FUID controller_id,
-    svn::base::runtime_topology const* topology,
-    audio_processor_factory factory);
+    svn::base::runtime_topology const* topology);
 
 	tresult PLUGIN_API setState(IBStream* state) override;
 	tresult PLUGIN_API getState(IBStream* state) override;

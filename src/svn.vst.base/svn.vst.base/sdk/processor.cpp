@@ -6,6 +6,7 @@
 
 #include <svn.vst.base/sdk/processor.hpp>
 #include <svn.vst.base/sdk/parameter.hpp>
+#include <svn.vst.base/support/vst_init.hpp>
 #include <svn.vst.base/support/vst_io_stream.hpp>
 #include <svn.base/static/param_descriptor.hpp>
 #include <svn.base/runtime/runtime_topology.hpp>
@@ -22,9 +23,7 @@ namespace svn::vst::base {
 processor::
 processor(
   Steinberg::FUID controller_id,
-  runtime_topology const* topology,
-  audio_processor_factory factory):
-_factory(factory),
+  runtime_topology const* topology):
 _state(static_cast<std::size_t>(topology->params.size())),
 _accurateParameters(static_cast<std::size_t>(topology->params.size())),
 _topology(topology),
@@ -44,13 +43,6 @@ processor::canProcessSampleSize(int32 symbolic_size)
 }
 
 tresult PLUGIN_API
-processor::setupProcessing(ProcessSetup& setup)
-{
-  _processor.reset(_factory(_topology, setup).release());
-  return AudioEffect::setupProcessing(setup);
-}
-
-tresult PLUGIN_API
 processor::initialize(FUnknown* context)
 {
   tresult result = AudioEffect::initialize(context);
@@ -58,6 +50,13 @@ processor::initialize(FUnknown* context)
   addEventInput(STR16("Event In"), 1);
   addAudioOutput(STR16("Stereo Out"), SpeakerArr::kStereo);
   return kResultTrue;
+}
+
+tresult PLUGIN_API
+processor::setupProcessing(ProcessSetup& setup)
+{
+  _processor.reset(create_audio_processor(_topology, setup).release());
+  return AudioEffect::setupProcessing(setup);
 }
 
 tresult PLUGIN_API
