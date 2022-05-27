@@ -9,33 +9,31 @@ namespace svn::base {
 audio_processor::
 audio_processor(
   runtime_topology const* topology, float sample_rate, 
-  std::int32_t polyphony, std::int32_t max_sample_count, base::param_value* state):
+  std::int32_t max_sample_count, base::param_value* state):
 _input(),
 _audio(static_cast<std::size_t>(max_sample_count)),
 _part_audio(static_cast<std::size_t>(max_sample_count)),
-_notes(static_cast<std::size_t>(max_sample_count * polyphony)),
+_notes(static_cast<std::size_t>(max_sample_count * topology->polyphony)),
 _sample_notes(static_cast<std::size_t>(max_sample_count)),
 _sample_note_counts(static_cast<std::size_t>(max_sample_count)),
 _automation(topology->params.size()),
 _automation_real(topology->real_count * max_sample_count),
 _automation_discrete(topology->discrete_count * max_sample_count),
 _sample_rate(sample_rate),
-_polyphony(polyphony),
 _state(state),
 _topology(topology)
 {
-  assert(polyphony >= 0);
   assert(state != nullptr);
   assert(sample_rate > 0.0f);
   assert(topology != nullptr);
   assert(max_sample_count > 0);
 
   for (std::int32_t s = 0; s < max_sample_count; s++)
-    _sample_notes[s] = _notes.data() + s * polyphony;
+    _sample_notes[s] = _notes.data() + s * topology->polyphony;
   _input.sample_rate = sample_rate;
   _input.automation = _automation.data();
-  _input.notes = polyphony == 0? nullptr: _sample_notes.data();
-  _input.note_count = polyphony == 0 ? nullptr : _sample_note_counts.data();
+  _input.notes = topology->polyphony == 0? nullptr: _sample_notes.data();
+  _input.note_count = topology->polyphony == 0 ? nullptr : _sample_note_counts.data();
 
   std::int32_t real_p = 0;
   std::int32_t discrete_p = 0;

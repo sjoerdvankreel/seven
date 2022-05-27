@@ -13,6 +13,7 @@ namespace svn::base {
 
 struct runtime_topology
 {
+  std::int32_t polyphony = 0; // Also determines max note events.
   std::int32_t real_count = 0; // Real valued runtime parameter count.
   std::int32_t discrete_count = 0; // Discrete valued runtime parameter count.
   std::vector<runtime_part> parts; // Runtime part descriptor array, e.g. osc 1, osc 2, filter 1, filter 2.
@@ -25,7 +26,7 @@ struct runtime_topology
 
   void init_defaults(union param_value* state) const;
   static std::unique_ptr<runtime_topology> create(
-    struct part_descriptor const* static_parts, std::int32_t count);
+    struct part_descriptor const* static_parts, std::int32_t count, std::int32_t polyphony);
 };
 
 } // namespace svn::base

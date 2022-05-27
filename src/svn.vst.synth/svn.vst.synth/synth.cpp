@@ -31,7 +31,7 @@ init_get_controller_id()
 
 std::unique_ptr<runtime_topology>
 init_create_topology()
-{ return runtime_topology::create(part_descriptors, part_type::count); }
+{ return runtime_topology::create(part_descriptors, part_type::count, synth_polyphony); }
 
 std::unique_ptr<svn::base::audio_processor>
 init_create_audio_processor(

@@ -47,7 +47,7 @@ processor::initialize(FUnknown* context)
 {
   tresult result = AudioEffect::initialize(context);
   if (result != kResultTrue) return kResultFalse;
-  addEventInput(STR16("Event In"), 1);
+  addEventInput(STR16("Event In"), _topology->polyphony);
   addAudioOutput(STR16("Stereo Out"), SpeakerArr::kStereo);
   return kResultTrue;
 }
@@ -175,7 +175,7 @@ processor::process_notes(input_buffer& input, ProcessData const& data)
   for (std::int32_t i = 0; i < count; i++)
     if (data.inputEvents->getEvent(i, event) == kResultOk)
       if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
-        if (input.note_count[event.sampleOffset] < _processor->polyphony())
+        if (input.note_count[event.sampleOffset] < _processor->topology().polyphony)
         {
           auto& note = input.notes[event.sampleOffset][input.note_count[event.sampleOffset]];
           if (event.type == Event::kNoteOffEvent) note.midi = note_off;
