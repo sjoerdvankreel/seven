@@ -10,7 +10,7 @@ runtime_param(
 part_index(part_index), runtime_name(runtime_name),
 part(part), descriptor(descriptor)
 {
-  assert(part_index > 0);
+  assert(part_index >= 0);
   assert(part != nullptr);
   assert(descriptor != nullptr);
 }

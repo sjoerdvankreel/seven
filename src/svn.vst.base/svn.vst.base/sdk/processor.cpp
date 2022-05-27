@@ -53,22 +53,12 @@ processor::initialize(FUnknown* context)
 }
 
 tresult PLUGIN_API
-processor::setupProcessing(ProcessSetup& setup)
-{
-  float sample_rate = static_cast<float>(setup.sampleRate);
-  std::int32_t max_sample_count = setup.maxSamplesPerBlock;
-  _processor.reset(init_create_audio_processor(
-    _topology, sample_rate, max_sample_count, _state.data()).release());
-  return AudioEffect::setupProcessing(setup);
-}
-
-tresult PLUGIN_API
 processor::getState(IBStream* state)
 {
   if(state == nullptr) return kResultFalse;
   IBStreamer streamer(state, kLittleEndian);
   vst_io_stream stream(&streamer);
-  if(!stream.save(_processor->topology(), _state.data())) return kResultFalse;
+  if(!stream.save(*_topology, _state.data())) return kResultFalse;
   return kResultOk;
 }
 
@@ -79,8 +69,18 @@ processor::setState(IBStream* state)
   if (state == nullptr) return kResultFalse;
   IBStreamer streamer(state, kLittleEndian);
   vst_io_stream stream(&streamer);
-  if(!stream.load(_processor->topology(), _state.data())) return kResultFalse;
+  if(!stream.load(*_topology, _state.data())) return kResultFalse;
   return kResultOk;
+}
+
+tresult PLUGIN_API
+processor::setupProcessing(ProcessSetup& setup)
+{
+  float sample_rate = static_cast<float>(setup.sampleRate);
+  std::int32_t max_sample_count = setup.maxSamplesPerBlock;
+  _processor.reset(init_create_audio_processor(
+    _topology, sample_rate, max_sample_count, _state.data()).release());
+  return AudioEffect::setupProcessing(setup);
 }
 
 tresult PLUGIN_API 

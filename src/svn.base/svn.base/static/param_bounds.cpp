@@ -6,7 +6,7 @@ param_bounds::
 param_bounds(param_slope slope, float min, float max, float exp) :
 slope(slope), min(min), max(max), exp(exp)
 {
-  assert(min < max);
+  assert(min <= max);
   assert(slope == param_slope::logarithmic || exp == 0.0f);
 }
 
