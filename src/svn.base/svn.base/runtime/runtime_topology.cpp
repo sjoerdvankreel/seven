@@ -7,22 +7,6 @@
 
 namespace svn::base {
 
-runtime_topology::
-runtime_topology(
-  std::vector<runtime_part> const& parts,
-  std::vector<runtime_param> const& params,
-  std::vector<std::vector<std::int32_t>> const& bounds,
-  std::int32_t real_count,
-  std::int32_t discrete_count):
-parts(parts), params(params), bounds(bounds),
-real_count(real_count), discrete_count(discrete_count)
-{
-  assert(parts.size() > 0);
-  assert(params.size() > 0);
-  assert(bounds.size() > 0);
-  assert(real_count + discrete_count == params.size());
-}
-
 void 
 runtime_topology::init_defaults(param_value* state) const
 {
@@ -37,42 +21,42 @@ runtime_topology::init_defaults(param_value* state) const
 std::unique_ptr<runtime_topology>
 runtime_topology::create(part_descriptor const* static_parts, std::int32_t count)
 {
-  std::int32_t real_count = 0;
-  std::int32_t discrete_count = 0;
-  std::vector<runtime_part> parts;
-  std::vector<runtime_param> params;
-  std::vector<std::vector<std::int32_t>> bounds;
+  auto result = std::make_unique<runtime_topology>();
 
   std::int32_t param_index = 0;
   for (std::int32_t t = 0; t < count; t++)
   {
     std::int32_t type_index = 0;
-    bounds.push_back(std::vector<std::int32_t>());
+    result->bounds.push_back(std::vector<std::int32_t>());
     std::wstring type_name(static_parts[t].static_name.short_);
     for (std::int32_t i = 0; i < static_parts[t].part_count; i++)
     {
-      bounds[t].push_back(param_index);
+      result->bounds[t].push_back(param_index);
       std::wstring runtime_name = type_name;
       param_index += static_parts[t].param_count;
       if (static_parts[t].part_count > 1) runtime_name += std::wstring(L" ") + std::to_wstring(i + 1);
-      parts.push_back(runtime_part(type_index++, runtime_name, &static_parts[t]));
+      result->parts.push_back(runtime_part(type_index++, runtime_name, &static_parts[t]));
     }
   }
 
-  for (std::size_t part = 0; part < parts.size(); part++)
+  for (std::size_t part = 0; part < result->parts.size(); part++)
   {
-    std::wstring part_name = parts[part].runtime_name;
-    for (std::int32_t param = 0; param < parts[part].descriptor->param_count; param++)
+    std::wstring part_name = result->parts[part].runtime_name;
+    for (std::int32_t param = 0; param < result->parts[part].descriptor->param_count; param++)
     {
-      auto const& descriptor = parts[part].descriptor->params[param];
+      auto const& descriptor = result->parts[part].descriptor->params[param];
       std::wstring runtime_name = part_name + L" " + descriptor.static_name.detail;
-      params.push_back(runtime_param(part, runtime_name, &parts[part], &descriptor));
-      if (descriptor.type == param_type::real) ++real_count;
-      else ++discrete_count;
+      result->params.push_back(runtime_param(part, runtime_name, &result->parts[part], &descriptor));
+      if (descriptor.type == param_type::real) ++result->real_count;
+      else ++result->discrete_count;
     }
   }
 
-  return std::make_unique<runtime_topology>(parts, params, bounds, real_count, discrete_count);
+  assert(result->parts.size() > 0);
+  assert(result->params.size() > 0);
+  assert(result->bounds.size() > 0);
+  assert(result->real_count + result->discrete_count == result->params.size());
+  return result;
 }
 
 } // namespace svn::base
