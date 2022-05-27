@@ -4,6 +4,8 @@
 #include <svn.synth/dsp/oscillator.hpp>
 #include <svn.synth/static/topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
+
+#include <array>
 #include <cstdint>
 
 namespace svn::synth {
@@ -12,7 +14,7 @@ class seven_synth:
 public base::audio_processor
 {
 private:
-  oscillator _oscillators[oscillator_count];
+  std::array<oscillator, oscillator_count> _oscillators;
 
 protected:
   void

@@ -36,6 +36,7 @@ _topology(topology)
     }
 
   _input.notes = _notes.data();
+  _input.sample_rate = sample_rate;
   _input.automation = _automation.data();
 }
 

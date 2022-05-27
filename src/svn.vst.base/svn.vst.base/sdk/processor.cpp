@@ -98,7 +98,6 @@ processor::process(ProcessData& data)
   input_buffer& input = _processor->prepare_block(data.numSamples);
   input.bpm = 0.0f;
   input.note_count = 0;
-  input.sample_rate = 0.0f;
   input.sample_count = data.numSamples;  
 
   if(data.processContext != nullptr && data.processContext->kTempoValid) 
