@@ -6,6 +6,7 @@
 namespace svn::base {
 
 inline std::int32_t constexpr note_off = -1;
+inline std::int32_t constexpr note_none = -2;
 
 struct note_event
 {
