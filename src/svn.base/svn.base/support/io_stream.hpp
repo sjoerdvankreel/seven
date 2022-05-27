@@ -6,8 +6,9 @@
 
 namespace svn::base {
 
-struct io_stream
+class io_stream
 {
+public:
   virtual bool read_float(float& val) = 0;
   virtual bool read_int32(std::int32_t& val) = 0;
   virtual bool read_wstring(std::wstring& val) = 0;
@@ -17,8 +18,8 @@ struct io_stream
   virtual bool write_wstring(std::wstring const& val) = 0;
 
   virtual ~io_stream() = default;
-  static bool load(io_stream& stream, struct runtime_topology const& topology, union param_value* state);
-  static bool save(io_stream& stream, struct runtime_topology const& topology, union param_value const* state);
+  bool load(struct runtime_topology const& topology, union param_value* state);
+  bool save(struct runtime_topology const& topology, union param_value const* state);
 };
 
 } // namespace svn::base

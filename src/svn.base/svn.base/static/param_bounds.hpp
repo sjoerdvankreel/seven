@@ -21,7 +21,7 @@ struct param_bounds
   float from_range(float val) const;
   param_bounds(param_slope slope, float min, float max, float exp);
 
-  static param_bounds none();
+  static param_bounds none(); // For discrete valued parameters.
   static param_bounds decibel();
   static param_bounds linear_unit();
   static param_bounds linear(float min, float max);

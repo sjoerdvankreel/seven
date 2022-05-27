@@ -13,30 +13,30 @@ static std::int32_t const version = 1;
 static std::int32_t const magic = 192235685;
 
 bool
-io_stream::save(io_stream& stream, runtime_topology const& topology, param_value const* state)
+io_stream::save(runtime_topology const& topology, param_value const* state)
 {
   assert(state != nullptr);
-  if(!stream.write_int32(magic)) return false;
-  if(!stream.write_int32(version)) return false;
-  if(!stream.write_int32(static_cast<std::int32_t>(topology.params.size()))) return false;
+  if(!write_int32(magic)) return false;
+  if(!write_int32(version)) return false;
+  if(!write_int32(static_cast<std::int32_t>(topology.params.size()))) return false;
 
   for (std::size_t p = 0; p < topology.params.size(); p++)
   {
     auto const& part = topology.params[p].part;
     auto const& param = topology.params[p].descriptor;
     bool real = param->type == param_type::real;
-    if(!stream.write_wstring(part->descriptor->static_name.short_)) return false;
-    if(!stream.write_int32(part->type_index)) return false;
-    if(!stream.write_wstring(param->static_name.short_)) return false;
-    if(!stream.write_int32(real? 1: 0)) return false;
-    if(real && !stream.write_float(state[p].real)) return false;
-    if(!real && !stream.write_int32(state[p].discrete)) return false;
+    if(!write_wstring(part->descriptor->static_name.short_)) return false;
+    if(!write_int32(part->type_index)) return false;
+    if(!write_wstring(param->static_name.short_)) return false;
+    if(!write_int32(real? 1: 0)) return false;
+    if(real && !write_float(state[p].real)) return false;
+    if(!real && !write_int32(state[p].discrete)) return false;
   }
   return true;
 }
 
 bool
-io_stream::load(io_stream& stream, runtime_topology const& topology, param_value* state)
+io_stream::load(runtime_topology const& topology, param_value* state)
 {
   param_value value;
   std::wstring part_name;
@@ -48,18 +48,18 @@ io_stream::load(io_stream& stream, runtime_topology const& topology, param_value
   std::int32_t param_count;
 
   assert(state != nullptr);
-  if(!stream.read_int32(temp) || temp != magic) return false;
-  if(!stream.read_int32(temp) || temp > version || temp <= 0) return false;
-  if(!stream.read_int32(param_count) || param_count <= 0) return false;
+  if(!read_int32(temp) || temp != magic) return false;
+  if(!read_int32(temp) || temp > version || temp <= 0) return false;
+  if(!read_int32(param_count) || param_count <= 0) return false;
 
   for (std::int32_t sp = 0; sp < param_count; sp++)
   {
-    if(!stream.read_wstring(part_name)) return false;
-    if(!stream.read_int32(type_index)) return false;
-    if(!stream.read_wstring(param_name)) return false;
-    if(!stream.read_int32(param_real) || param_real != 0 && param_real != 1) return false;
-    if(param_real == 1 && !stream.read_float(value.real)) return false;
-    if(param_real == 0 && !stream.read_int32(value.discrete)) return false;
+    if(!read_wstring(part_name)) return false;
+    if(!read_int32(type_index)) return false;
+    if(!read_wstring(param_name)) return false;
+    if(!read_int32(param_real) || param_real != 0 && param_real != 1) return false;
+    if(param_real == 1 && !read_float(value.real)) return false;
+    if(param_real == 0 && !read_int32(value.discrete)) return false;
 
     for (std::size_t rp = 0; rp < topology.params.size(); rp++)
     {
