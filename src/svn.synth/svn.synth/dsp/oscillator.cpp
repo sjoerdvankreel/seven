@@ -20,14 +20,27 @@ oscillator::process_block(
 
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
-    float level = automate_real(oscillator_params, input, state, oscillator_param::level, s);
-    float panning = automate_real(oscillator_params, input, state, oscillator_param::panning, s);
-    float sample = std::sin(2.0f * std::numbers::pi * _phase);
+    if (input.note_count[s] > 0)
+    {
+      if (input.notes[s][0].midi == note_off) _midi_note = note_none;
+      else if (input.notes[s][0].midi >= 0)
+      {
+        _midi_note = input.notes[s][0].midi;
+        _frequency = 440.0f * std::pow(2.0f, (_midi_note - 69) / 12.0f);
+      }
+    }
 
-    audio[s].left = (1.0f - panning) * sample;
-    audio[s].right = panning * sample;
-    _phase += 440.0f / input.sample_rate;
-    _phase -= std::floor(_phase);
+    if(_midi_note >= 0)
+    {
+      float level = automate_real(oscillator_params, input, state, oscillator_param::level, s);
+      float panning = automate_real(oscillator_params, input, state, oscillator_param::panning, s);
+      float sample = std::sin(2.0f * std::numbers::pi * _phase);
+
+      audio[s].left = (1.0f - panning) * sample;
+      audio[s].right = panning * sample;
+      _phase += _frequency / input.sample_rate;
+      _phase -= std::floor(_phase);
+    }
   }
 }
 
