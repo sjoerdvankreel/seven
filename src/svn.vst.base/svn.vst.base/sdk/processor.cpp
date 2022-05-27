@@ -97,7 +97,6 @@ processor::process(ProcessData& data)
 {
   input_buffer& input = _processor->prepare_block(data.numSamples);
   input.bpm = 0.0f;
-  input.note_count = 0;
   input.sample_count = data.numSamples;  
 
   if(data.processContext != nullptr && data.processContext->kTempoValid) 
@@ -114,38 +113,6 @@ processor::process(ProcessData& data)
     data.outputs[0].channelBuffers32[1][s] = audio[s].right;
   }
   return process_parameters(data);
-}
-
-void
-processor::process_note(
-  input_buffer& input, std::int32_t index, Event const& event)
-{
-  input.notes[index].sample_index = event.sampleOffset;
-  switch (event.type)
-  {
-  case Event::kNoteOffEvent:
-    input.notes[index].midi = note_off;
-    break;
-  case Event::kNoteOnEvent:
-    input.notes[index].midi = event.noteOn.pitch;
-    input.notes[index].velocity = event.noteOn.velocity;
-    break;
-  default:
-    assert(false);
-    break;
-  }
-}
-
-void
-processor::process_notes(input_buffer& input, ProcessData const& data)
-{
-  Event event;
-  std::int32_t index = 0;
-  if (data.inputEvents == nullptr) return;
-  for (std::int32_t i = 0; i < data.inputEvents->getEventCount(); i++)
-    if (data.inputEvents->getEvent(i, event) == kResultOk)
-      if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
-        process_note(input, input.note_count++, event);
 }
 
 tresult
@@ -196,6 +163,27 @@ processor::process_automation(input_buffer& input, ProcessData const& data)
             = parameter::vst_normalized_to_discrete(param, _accurateParameters[id].advance(1));
       _accurateParameters[id].endChanges();
     }
+}
+
+void
+processor::process_notes(input_buffer& input, ProcessData const& data)
+{
+  Event event;
+  if (data.inputEvents == nullptr) return;
+  for (std::int32_t i = 0; i < data.inputEvents->getEventCount(); i++)
+    if (data.inputEvents->getEvent(i, event) == kResultOk)
+      if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
+        if (input.note_count[event.sampleOffset] < _processor->polyphony())
+        {
+          if (event.type == Event::kNoteOffEvent)
+            input.notes[input.note_count[event.sampleOffset]]->midi = note_off;
+          else
+          {
+            input.notes[input.note_count[event.sampleOffset]]->midi = event.noteOn.pitch;
+            input.notes[input.note_count[event.sampleOffset]]->velocity = event.noteOn.velocity;
+          }
+          input.note_count[event.sampleOffset]++;
+        }
 }
 
 } // namespace svn::vst::base

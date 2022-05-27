@@ -54,7 +54,6 @@ private:
   tresult process_parameters(ProcessData const& data);
   void process_notes(svn::base::input_buffer& input, ProcessData const& data);
   void process_automation(svn::base::input_buffer& input, ProcessData const& data);
-  void process_note(svn::base::input_buffer& input, std::int32_t index, Event const& event);
 };
 
 } // namespace svn::vst::base

@@ -24,7 +24,9 @@ private:
   std::vector<std::int32_t> _automation_discrete;
 
   float const _sample_rate;
+  // Implementation defined, but also determines the maximum number of concurrent events for a single sample.
   std::int32_t const _polyphony;
+  // Solely defines the component's runtime state.
   union param_value* const _state;
   struct runtime_topology const* const _topology;
 
