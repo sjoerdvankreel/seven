@@ -11,8 +11,8 @@ seven_synth::
 seven_synth(
   struct base::runtime_topology const* topology, float sample_rate,
   std::int32_t max_sample_count, base::param_value* state):
-audio_processor(
-  topology, sample_rate, max_sample_count, state),
+audio_processor(topology, sample_rate, 
+  synth_polyphony, max_sample_count, state),
 _oscillators() {}
 
 void

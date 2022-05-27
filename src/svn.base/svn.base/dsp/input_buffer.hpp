@@ -12,8 +12,10 @@ struct input_buffer
   // Float* for real parameters, std::int32_t* for discrete. 
   // Points to the first runtime parameter for the runtime part (e.g. to filter 2 frequency for a filter component).
   void** automation; 
-  struct note_event* notes;
-  std::int32_t note_count;
+  // Midi note events, sample * polyphony.
+  struct note_event** notes;
+  // Midi note event count per sample.
+  std::int32_t* note_count;
   std::int32_t sample_count;
 };
 

@@ -14,14 +14,17 @@ class audio_processor
 {
 private:
   input_buffer _input;
-  std::vector<note_event> _notes;
   std::vector<audio_sample> _audio;
   std::vector<audio_sample> _part_audio;
+  std::vector<note_event> _notes;
+  std::vector<note_event*> _sample_notes;
+  std::vector<std::int32_t> _sample_note_counts;
   std::vector<void*> _automation;
   std::vector<float> _automation_real;
   std::vector<std::int32_t> _automation_discrete;
 
   float const _sample_rate;
+  std::int32_t const _polyphony;
   union param_value* const _state;
   struct runtime_topology const* const _topology;
 
@@ -29,14 +32,15 @@ private:
   void automation_check(std::int32_t sample_count);
 
 public:
+  std::int32_t polyphony() const;
   struct audio_sample const* process_block();
   struct runtime_topology const& topology() const;
   input_buffer& prepare_block(std::int32_t sample_count);
 
   virtual ~audio_processor() = default;
   audio_processor(
-    struct runtime_topology const* topology,
-    float sample_rate, std::int32_t max_sample_count, param_value* state);
+    struct runtime_topology const* topology, float sample_rate, 
+    std::int32_t polyphony, std::int32_t max_sample_count, param_value* state);
 
 protected:
   virtual void
@@ -48,6 +52,10 @@ protected:
 inline runtime_topology const& 
 audio_processor::topology() const
 { return *_topology; }
+
+inline std::int32_t
+audio_processor::polyphony() const
+{ return _polyphony; }
 
 } // namespace svn::base
 #endif // SVN_BASE_DSP_AUDIO_PROCESSOR_HPP

@@ -10,9 +10,8 @@ inline std::int32_t constexpr note_none = -2;
 
 struct note_event
 {
-  float velocity;
-  std::int32_t midi; // Midi note index.
-  std::int32_t sample_index; // Index in the process block where the event occurs.
+  float velocity = 0.0f;
+  std::int32_t midi = note_none;
 };
 
 } // namespace svn::base

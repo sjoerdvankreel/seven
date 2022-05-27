@@ -6,6 +6,7 @@
 
 namespace svn::synth {
 
+inline std::int32_t synth_polyphony = 16;
 inline std::int32_t constexpr filter_count = 1;
 inline std::int32_t constexpr oscillator_count = 2;
 
