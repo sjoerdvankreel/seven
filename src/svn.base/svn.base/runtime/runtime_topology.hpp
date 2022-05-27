@@ -6,6 +6,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include <cstdint>
 
 namespace svn::base {
@@ -26,7 +27,8 @@ struct runtime_topology
     std::int32_t discrete_count);
 
   void init_defaults(union param_value* state) const;
-  static runtime_topology create(struct part_descriptor const* static_parts, std::int32_t count);
+  static std::unique_ptr<runtime_topology> create(
+    struct part_descriptor const* static_parts, std::int32_t count);
 };
 
 } // namespace svn::base

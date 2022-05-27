@@ -55,7 +55,10 @@ processor::initialize(FUnknown* context)
 tresult PLUGIN_API
 processor::setupProcessing(ProcessSetup& setup)
 {
-  _processor.reset(create_audio_processor(_topology, setup).release());
+  float sample_rate = static_cast<float>(setup.sampleRate);
+  std::int32_t max_sample_count = setup.maxSamplesPerBlock;
+  _processor.reset(init_create_audio_processor(
+    _topology, sample_rate, max_sample_count, _state.data()).release());
   return AudioEffect::setupProcessing(setup);
 }
 

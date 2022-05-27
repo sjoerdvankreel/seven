@@ -34,7 +34,7 @@ runtime_topology::init_defaults(param_value* state) const
     }
 }
 
-runtime_topology
+std::unique_ptr<runtime_topology>
 runtime_topology::create(part_descriptor const* static_parts, std::int32_t count)
 {
   std::int32_t real_count = 0;
@@ -72,7 +72,7 @@ runtime_topology::create(part_descriptor const* static_parts, std::int32_t count
     }
   }
 
-  return runtime_topology(parts, params, bounds, real_count, discrete_count);
+  return std::make_unique<runtime_topology>(parts, params, bounds, real_count, discrete_count);
 }
 
 } // namespace svn::base
