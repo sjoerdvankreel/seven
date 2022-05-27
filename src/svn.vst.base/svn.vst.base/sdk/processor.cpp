@@ -123,7 +123,8 @@ processor::process_parameters(ProcessData const& data)
   IParamValueQueue* queue;
   auto changes = data.inputParameterChanges;
   if (changes == nullptr) return kResultOk;
-  for (int32 i = 0; i < changes->getParameterCount(); i++)
+  int32 count = changes->getParameterCount();
+  for (int32 i = 0; i < count; i++)
     if ((queue = changes->getParameterData(i)) != nullptr)
     {
       ParamID id = queue->getParameterId();
@@ -170,7 +171,8 @@ processor::process_notes(input_buffer& input, ProcessData const& data)
 {
   Event event;
   if (data.inputEvents == nullptr) return;
-  for (std::int32_t i = 0; i < data.inputEvents->getEventCount(); i++)
+  int32 count = data.inputEvents->getEventCount();
+  for (std::int32_t i = 0; i < count; i++)
     if (data.inputEvents->getEvent(i, event) == kResultOk)
       if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
         if (input.note_count[event.sampleOffset] < _processor->polyphony())
