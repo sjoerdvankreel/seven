@@ -23,22 +23,24 @@ private:
   std::vector<void*> _automation;
   std::vector<float> _automation_real;
   std::vector<std::int32_t> _automation_discrete;
-private:
+
   float const _sample_rate;
   processor_type const _type;
   union param_value* const _state;
   struct runtime_topology const* const _topology;
-private:
+
   void state_check();
   void automation_check(std::int32_t sample_count);
+
 public:
   processor_type type() const;
   struct audio_sample const* process_block();
   input_buffer& prepare_block(std::int32_t sample_count);
-public:
+
   audio_processor(
     processor_type type, struct runtime_topology const* topology,
     float sample_rate, std::int32_t max_sample_count, param_value* state);
+
 protected:
   virtual void
   process_block(

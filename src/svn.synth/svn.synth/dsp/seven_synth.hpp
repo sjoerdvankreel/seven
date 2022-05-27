@@ -13,10 +13,7 @@ public base::audio_processor
 {
 private:
   oscillator _oscillators[oscillator_count];
-public:
-  seven_synth(
-    struct base::runtime_topology const* topology, float sample_rate,
-    std::int32_t max_sample_count, base::param_value* state);
+
 protected:
   void
   process_block(
@@ -25,6 +22,11 @@ protected:
     struct base::audio_sample* audio, 
     struct base::audio_sample* part_audio, 
     union base::param_value* state) override;
+
+public:
+  seven_synth(
+    struct base::runtime_topology const* topology, float sample_rate,
+    std::int32_t max_sample_count, base::param_value* state);
 };
 
 } // namespace svn::synth

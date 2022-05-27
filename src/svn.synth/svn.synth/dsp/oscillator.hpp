@@ -10,6 +10,7 @@ namespace svn::synth {
 class oscillator
 {
   float _phase = 0.0f;
+
 public:
   void process_block(
     base::input_buffer const& input, 

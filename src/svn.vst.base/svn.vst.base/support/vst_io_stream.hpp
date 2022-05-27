@@ -9,11 +9,12 @@
 
 namespace svn::vst::base {
 
-struct vst_io_stream:
+class vst_io_stream:
 public svn::base::io_stream
 {
 private:
   Steinberg::IBStreamer* const _streamer;
+
 public:
   vst_io_stream(Steinberg::IBStreamer* streamer);
 
