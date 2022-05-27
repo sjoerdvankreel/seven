@@ -20,12 +20,12 @@ oscillator::process_block(
 
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
-    if (input.note_count[s] > 0)
+    for(std::uint32_t n = 0; n < input.note_count[s]; n++)
     {
-      if (input.notes[s][0].midi == note_off) _midi_note = note_none;
-      else if (input.notes[s][0].midi >= 0)
+      if (input.notes[s][n].midi == note_off) _midi_note = note_none;
+      else if (input.notes[s][n].midi >= 0)
       {
-        _midi_note = input.notes[s][0].midi;
+        _midi_note = input.notes[s][n].midi;
         _frequency = 440.0f * std::pow(2.0f, (_midi_note - 69) / 12.0f);
       }
     }

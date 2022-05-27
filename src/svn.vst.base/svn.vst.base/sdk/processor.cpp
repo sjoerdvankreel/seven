@@ -177,13 +177,9 @@ processor::process_notes(input_buffer& input, ProcessData const& data)
       if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
         if (input.note_count[event.sampleOffset] < _processor->polyphony())
         {
-          if (event.type == Event::kNoteOffEvent)
-            input.notes[input.note_count[event.sampleOffset]]->midi = note_off;
-          else
-          {
-            input.notes[input.note_count[event.sampleOffset]]->midi = event.noteOn.pitch;
-            input.notes[input.note_count[event.sampleOffset]]->velocity = event.noteOn.velocity;
-          }
+          auto& note = input.notes[event.sampleOffset][input.note_count[event.sampleOffset]];
+          if (event.type == Event::kNoteOffEvent) note.midi = note_off;
+          else note.midi = event.noteOn.pitch, note.velocity = event.noteOn.velocity;
           input.note_count[event.sampleOffset]++;
         }
 }
