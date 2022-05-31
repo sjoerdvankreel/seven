@@ -2,7 +2,7 @@
 #define SVN_BASE_DSP_AUDIO_PROCESSOR_HPP
 
 #include <svn.base/dsp/note_event.hpp>
-#include <svn.base/dsp/block_input.hpp>
+#include <svn.base/dsp/input_buffer.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
 
 #include <vector>
@@ -13,7 +13,7 @@ namespace svn::base {
 class audio_processor
 {
 private:
-  block_input _input;
+  input_buffer _input;
   std::vector<audio_sample> _audio;
   std::vector<note_event> _notes;
   std::vector<note_event*> _sample_notes;
@@ -31,13 +31,13 @@ private:
 
 protected:
   virtual void
-  process_block(block_input const& input,
+  process_block(input_buffer const& input, 
     param_value* state, audio_sample* audio) = 0;
 
 public:
   struct audio_sample const* process_block();
   struct runtime_topology const& topology() const;
-  block_input& prepare_block(std::int32_t sample_count);
+  input_buffer& prepare_block(std::int32_t sample_count);
 
   virtual ~audio_processor() = default;
   audio_processor(

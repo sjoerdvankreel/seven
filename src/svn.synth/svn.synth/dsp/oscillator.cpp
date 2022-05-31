@@ -17,13 +17,13 @@ _sample_rate(sample_rate)
 
 void
 oscillator::process_block(
-  block_input const& input, 
+  input_buffer const& input, 
   audio_sample* audio, param_value* state)
 {
   assert(state != nullptr);
   assert(audio != nullptr);
 
-  for (std::int32_t s = 0; s < input.global.sample_count; s++)
+  for (std::int32_t s = 0; s < input.sample_count; s++)
   {
     for(std::uint32_t n = 0; n < input.note_count[s]; n++)
     {
@@ -37,8 +37,8 @@ oscillator::process_block(
 
     if(_midi_note >= 0)
     {
-      float level = automate_real(input, oscillator_params, state, oscillator_param::level, s);
-      float panning = automate_real(input, oscillator_params, state, oscillator_param::panning, s);
+      float level = automate_real(oscillator_params, input, state, oscillator_param::level, s);
+      float panning = automate_real(oscillator_params, input, state, oscillator_param::panning, s);
       float sample = level * std::sin(2.0f * std::numbers::pi * _phase);
 
       audio[s].left = (1.0f - panning) * sample;

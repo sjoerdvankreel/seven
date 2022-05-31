@@ -47,8 +47,8 @@ audio_sample const*
 audio_processor::process_block()
 {
   state_check();
-  automation_check(_input.global.sample_count);
-  clear_audio(_audio.data(), _input.global.sample_count);
+  automation_check(_input.sample_count);
+  clear_audio(_audio.data(), _input.sample_count);
   process_block(_input, _state, _audio.data());
   state_check();
   return _audio.data();
@@ -65,7 +65,7 @@ audio_processor::state_check()
         _state[i].discrete <= _topology->params[i].descriptor->max.discrete);
 }
 
-block_input&
+input_buffer&
 audio_processor::prepare_block(std::int32_t sample_count)
 {
   for(std::int32_t s = 0; s < sample_count; s++)

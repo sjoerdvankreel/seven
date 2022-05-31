@@ -17,17 +17,17 @@ _oscillators()
 { _oscillators.fill(oscillator(sample_rate)); }
 
 void
-seven_synth::process_block(block_input const& input,
+seven_synth::process_block(input_buffer const& input, 
   param_value* state, audio_sample* audio)
 {
-  block_input part_input = input;
+  input_buffer part_input = input;
   for (std::int32_t i = 0; i < oscillator_count; i++)
   {
-    clear_audio(_part_audio.data(), input.global.sample_count);
+    clear_audio(_part_audio.data(), input.sample_count);
     std::int32_t offset = topology().bounds[part_type::oscillator][i];
     part_input.automation = input.automation + offset;
     _oscillators[i].process_block(part_input, _part_audio.data(), state + offset);
-    add_audio(audio, _part_audio.data(), input.global.sample_count);
+    add_audio(audio, _part_audio.data(), input.sample_count);
   }
 }
 
