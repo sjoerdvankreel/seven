@@ -35,7 +35,7 @@ struct param_descriptor
   param_value to_display(param_value val) const;
   param_value from_display(param_value val) const;
   bool parse(wchar_t const* buffer, param_value& val) const;
-  void format(param_value val, wchar_t* buffer, std::size_t size) const;
+  std::size_t format(param_value val, wchar_t* buffer, std::size_t size) const;
 };
 
 } // namespace svn::base

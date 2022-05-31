@@ -1,6 +1,7 @@
 #include <svn.base/static/param_descriptor.hpp>
 #include <cassert>
 #include <sstream>
+#include <algorithm>
 
 namespace svn::base {
 
@@ -98,19 +99,23 @@ param_descriptor::parse(wchar_t const* buffer, param_value& val) const
   }
 }
 
-void 
+std::size_t 
 param_descriptor::format(param_value val, wchar_t* buffer, std::size_t size) const
 {
-  std::wstringstream str;
+  std::wstringstream stream;
   switch (type)
   {
-  case param_type::real: str << val.real; break;
-  case param_type::discrete: str << val.discrete; break;
-  case param_type::list: str << list[val.discrete].short_; break;
-  case param_type::toggle: str << (val.discrete == 0 ? L"Off" : L"On"); break;
+  case param_type::real: stream << val.real; break;
+  case param_type::discrete: stream << val.discrete; break;
+  case param_type::list: stream << list[val.discrete].short_; break;
+  case param_type::toggle: stream << (val.discrete == 0 ? L"Off" : L"On"); break;
   default: assert(false); break;
   }
-  std::wcsncpy(buffer, str.str().c_str(), size - 1);
+  std::wstring str = stream.str();
+  if(buffer == nullptr || size == 0) return str.length() + 1;
+  std::memset(buffer, 0, size * sizeof(wchar_t));
+  std::wcsncpy(buffer, str.c_str(), size - 1);
+  return str.length() + 1;
 }
 
 } // namespace svn::base

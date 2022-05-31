@@ -4,6 +4,7 @@
 #include <svn.base/static/param_descriptor.hpp>
 #include <svn.base/runtime/runtime_topology.hpp>
 
+#include <vector>
 #include <cassert>
 #include <algorithm>
 
@@ -15,22 +16,42 @@ static std::int32_t const magic = 192235685;
 bool
 io_stream::save(runtime_topology const& topology, param_value const* state)
 {
+  std::size_t chars;
+  std::vector<wchar_t> str;
   assert(state != nullptr);
+
   if(!write_int32(magic)) return false;
   if(!write_int32(version)) return false;
   if(!write_int32(static_cast<std::int32_t>(topology.params.size()))) return false;
 
   for (std::size_t p = 0; p < topology.params.size(); p++)
   {
-    auto const& part = topology.params[p].part;
-    auto const& param = topology.params[p].descriptor;
-    bool real = param->type == param_type::real;
-    if(!write_wstring(part->descriptor->static_name.short_)) return false;
-    if(!write_int32(part->type_index)) return false;
-    if(!write_wstring(param->static_name.short_)) return false;
-    if(!write_int32(real? 1: 0)) return false;
-    if(real && !write_float(state[p].real)) return false;
-    if(!real && !write_int32(state[p].discrete)) return false;
+    auto const& part = *topology.params[p].part;
+    auto const& param = *topology.params[p].descriptor;
+    if(!write_wstring(part.descriptor->static_name.short_)) return false;
+    if(!write_int32(part.type_index)) return false;
+    if(!write_wstring(param.static_name.short_)) return false;
+    if(!write_int32(param.type)) return false;
+
+    switch (param.type)
+    {
+    case param_type::real: 
+      if(!write_float(state[p].real)) return false;
+      break;
+    case param_type::toggle:
+    case param_type::discrete:
+      if(!write_int32(state[p].discrete)) return false;
+      break;
+    case param_type::list: 
+      chars = param.format(state[p], nullptr, 0);
+      str.reserve(chars);
+      param.format(state[p], str.data(), chars);
+      if(!write_wstring(std::wstring(str.data()))) return false;
+      break;
+    default:
+      assert(false);
+      break;
+    }
   }
   return true;
 }
@@ -38,13 +59,14 @@ io_stream::save(runtime_topology const& topology, param_value const* state)
 bool
 io_stream::load(runtime_topology const& topology, param_value* state)
 {
+  std::int32_t type;
   param_value value;
+  std::wstring str_value;
   std::wstring part_name;
   std::wstring param_name;
   
   std::int32_t temp;
   std::int32_t type_index;
-  std::int32_t param_real;
   std::int32_t param_count;
 
   assert(state != nullptr);
@@ -57,21 +79,51 @@ io_stream::load(runtime_topology const& topology, param_value* state)
     if(!read_wstring(part_name)) return false;
     if(!read_int32(type_index)) return false;
     if(!read_wstring(param_name)) return false;
-    if(!read_int32(param_real) || param_real != 0 && param_real != 1) return false;
-    if(param_real == 1 && !read_float(value.real)) return false;
-    if(param_real == 0 && !read_int32(value.discrete)) return false;
+    if(!read_int32(type)) return false;
+    if(type < 0 || type >= param_type::count) return false;
+
+    switch (type)
+    {
+    case param_type::real:
+      if(!read_float(value.real)) return false;
+      break;
+    case param_type::list:
+      if (!read_wstring(str_value)) return false;
+      break;
+    case param_type::toggle:
+    case param_type::discrete:
+      if(!read_int32(value.discrete)) return false;
+      break;
+    default:
+      assert(false);
+      break;
+    }
 
     for (std::size_t rp = 0; rp < topology.params.size(); rp++)
     {
       auto const& part = topology.params[rp].part;
       auto const& param = topology.params[rp].descriptor;
-
       if(part_name != part->descriptor->static_name.short_) continue;
       if(type_index != part->type_index) continue;
       if(param_name != param->static_name.short_) continue;
-      if(param_real == 1 && param->type != param_type::real) continue;
-      if(param_real == 1) state[rp].real = std::clamp(value.real, 0.0f, 1.0f);
-      if(param_real == 0) state[rp].discrete = std::clamp(value.discrete, param->min.discrete, param->max.discrete);
+      if(type != param->type) continue;
+
+      switch (type)
+      {
+      case param_type::real:  
+        state[rp].real = std::clamp(value.real, 0.0f, 1.0f);
+        break;
+      case param_type::toggle:
+      case param_type::discrete:
+        state[rp].discrete = std::clamp(value.discrete, param->min.discrete, param->max.discrete);
+        break;
+      case param_type::list:
+        if(param->parse(str_value.data(), value)) state[rp] = value;
+        break;
+      default:
+        assert(false);
+        break;
+      }
       break;
     }
   }
