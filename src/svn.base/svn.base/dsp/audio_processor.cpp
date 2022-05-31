@@ -12,7 +12,6 @@ audio_processor(
   std::int32_t max_sample_count, base::param_value* state):
 _input(),
 _audio(static_cast<std::size_t>(max_sample_count)),
-_part_audio(static_cast<std::size_t>(max_sample_count)),
 _notes(static_cast<std::size_t>(max_sample_count * topology->polyphony)),
 _sample_notes(static_cast<std::size_t>(max_sample_count)),
 _sample_note_counts(static_cast<std::size_t>(max_sample_count)),
@@ -50,7 +49,7 @@ audio_processor::process_block()
   state_check();
   automation_check(_input.sample_count);
   clear_audio(_audio.data(), _input.sample_count);
-  process_block(_input, _audio.data(), _part_audio.data(), _state);
+  process_block(_input, _state, _audio.data());
   state_check();
   return _audio.data();
 }

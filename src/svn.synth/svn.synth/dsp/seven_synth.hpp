@@ -16,15 +16,15 @@ class seven_synth:
 public base::audio_processor
 {
 private:
+  std::vector<audio_sample> _part_audio;
   std::array<oscillator, oscillator_count> _oscillators;
 
 protected:
   void
   process_block(
     base::input_buffer const& input,
-    struct base::audio_sample* audio, 
-    struct base::audio_sample* part_audio, 
-    union base::param_value* state) override;
+    union base::param_value* state,
+    struct base::audio_sample* audio) override;
 
 public:
   seven_synth(

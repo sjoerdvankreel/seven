@@ -15,7 +15,6 @@ class audio_processor
 private:
   input_buffer _input;
   std::vector<audio_sample> _audio;
-  std::vector<audio_sample> _part_audio;
   std::vector<note_event> _notes;
   std::vector<note_event*> _sample_notes;
   std::vector<std::int32_t> _sample_note_counts;
@@ -32,9 +31,8 @@ private:
 
 protected:
   virtual void
-  process_block(
-    input_buffer const& input, audio_sample* audio, 
-    audio_sample* part_audio, param_value* state) = 0;
+  process_block(input_buffer const& input, 
+    param_value* state, audio_sample* audio) = 0;
 
 public:
   struct audio_sample const* process_block();
