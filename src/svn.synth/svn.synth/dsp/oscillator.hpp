@@ -12,9 +12,13 @@ class oscillator
 {
   float _phase = 0.0f;
   float _frequency = 0.0f;
+  float _sample_rate = 0.0f;
   std::int32_t _midi_note = base::note_none;
 
 public:
+  oscillator() = default;
+  oscillator(float sample_rate);
+
   void process_block(
     base::input_buffer const& input, 
     base::audio_sample* audio, base::param_value* state);

@@ -30,7 +30,6 @@ _topology(topology)
 
   for (std::int32_t s = 0; s < max_sample_count; s++)
     _sample_notes[s] = _notes.data() + s * topology->polyphony;
-  _input.sample_rate = sample_rate;
   _input.automation = _automation.data();
   _input.notes = topology->polyphony == 0? nullptr: _sample_notes.data();
   _input.note_count = topology->polyphony == 0 ? nullptr : _sample_note_counts.data();

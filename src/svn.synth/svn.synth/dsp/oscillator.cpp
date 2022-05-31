@@ -10,6 +10,11 @@ using namespace svn::base;
 
 namespace svn::synth {
 
+oscillator::
+oscillator(float sample_rate):
+_sample_rate(sample_rate)
+{ assert(sample_rate > 0.0f); }
+
 void
 oscillator::process_block(
   input_buffer const& input, 
@@ -38,7 +43,7 @@ oscillator::process_block(
 
       audio[s].left = (1.0f - panning) * sample;
       audio[s].right = panning * sample;
-      _phase += _frequency / input.sample_rate;
+      _phase += _frequency / _sample_rate;
       _phase -= std::floor(_phase);
     }
   }

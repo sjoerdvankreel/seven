@@ -8,7 +8,6 @@ namespace svn::base {
 struct input_buffer
 {
   float bpm;
-  float sample_rate;
   // Float* for real parameters, std::int32_t* for discrete. 
   // Points to the first runtime parameter for the runtime part (e.g. to filter 2 frequency for a filter component).
   void** automation; 
