@@ -95,12 +95,12 @@ processor::setBusArrangements(
 tresult PLUGIN_API
 processor::process(ProcessData& data)
 {
-  input_buffer& input = _processor->prepare_block(data.numSamples);
-  input.bpm = 0.0f;
-  input.sample_count = data.numSamples;  
+  block_input& input = _processor->prepare_block(data.numSamples);
+  input.global.bpm = 0.0f;
+  input.global.sample_count = data.numSamples;  
 
   if(data.processContext != nullptr && data.processContext->kTempoValid) 
-    input.bpm = static_cast<float>(data.processContext->tempo);
+    input.global.bpm = static_cast<float>(data.processContext->tempo);
   if (data.numSamples == 0 || data.numOutputs == 0) 
     return process_parameters(data);
 
@@ -139,7 +139,7 @@ processor::process_parameters(ProcessData const& data)
 }
 
 void
-processor::process_automation(input_buffer& input, ProcessData const& data)
+processor::process_automation(block_input& input, ProcessData const& data)
 {
   IParamValueQueue* queue;
   auto changes = data.inputParameterChanges;  
@@ -167,7 +167,7 @@ processor::process_automation(input_buffer& input, ProcessData const& data)
 }
 
 void
-processor::process_notes(input_buffer& input, ProcessData const& data)
+processor::process_notes(block_input& input, ProcessData const& data)
 {
   Event event;
   if (data.inputEvents == nullptr) return;
