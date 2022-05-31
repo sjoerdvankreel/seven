@@ -16,7 +16,6 @@ class seven_synth:
 public base::audio_processor
 {
 private:
-  std::int32_t _midi_note = note_none;
   std::array<oscillator, oscillator_count> _oscillators;
 
 protected:

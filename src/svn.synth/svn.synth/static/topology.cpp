@@ -36,7 +36,8 @@ oscillator_params[oscillator_param::count] =
   { { L"Dtn", L"Detune" }, L"Cent", 0, -50, 50 },
   { { L"Dt2", L"Detune2" }, L"Cent", 0.5, param_bounds::linear(-0.5, 0.5), param_bounds::linear(-50.0, 50.0) },
   { { L"Pan", L"Panning" }, L"%", 0.5, param_bounds::linear_unit(), param_bounds::linear(-100.0, 100.0) },
-  { { L"Pw", L"Pulse width" }, L"%", 1.0, param_bounds::linear(0.0, 0.5), param_bounds::linear(0.0, 100.0) }
+  { { L"Pw", L"Pulse width" }, L"%", 1.0, param_bounds::linear(0.0, 0.5), param_bounds::linear(0.0, 100.0) },
+  { { L"Rel", L"Release" }, L"Sec", 0.0, param_bounds::linear_unit(), param_bounds::linear_unit() }
 };
 
 param_descriptor const
