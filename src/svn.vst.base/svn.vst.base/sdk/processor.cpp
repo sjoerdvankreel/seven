@@ -139,24 +139,6 @@ processor::process_parameters(ProcessData const& data)
 }
 
 void
-processor::process_notes(input_buffer& input, ProcessData const& data)
-{
-  Event event;
-  if (data.inputEvents == nullptr) return;
-  int32 count = data.inputEvents->getEventCount();
-  for (std::int32_t i = 0; i < count; i++)
-    if (data.inputEvents->getEvent(i, event) == kResultOk)
-      if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
-        if (input.note_count[event.sampleOffset] < _processor->topology().polyphony)
-        {
-          auto& note = input.notes[event.sampleOffset][input.note_count[event.sampleOffset]];
-          if (event.type == Event::kNoteOffEvent) note.midi = note_off;
-          else note.midi = event.noteOn.pitch, note.velocity = event.noteOn.velocity;
-          input.note_count[event.sampleOffset]++;
-        }
-}
-
-void
 processor::process_automation(input_buffer& input, ProcessData const& data)
 {
   IParamValueQueue* queue;
@@ -182,6 +164,35 @@ processor::process_automation(input_buffer& input, ProcessData const& data)
             = parameter::vst_normalized_to_discrete(param, _accurateParameters[id].advance(1));
       _accurateParameters[id].endChanges();
     }
+}
+
+void
+processor::process_notes(input_buffer& input, ProcessData const& data)
+{
+  Event event;
+  if (data.inputEvents == nullptr) return;
+  int32 count = data.inputEvents->getEventCount();
+  for (std::int32_t i = 0; i < count; i++)
+    if (data.inputEvents->getEvent(i, event) == kResultOk)
+      if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
+        if (input.note_count[event.sampleOffset] < _processor->topology().polyphony)
+        {
+          auto& note = input.notes[event.sampleOffset][input.note_count[event.sampleOffset]];
+          switch (event.type)
+          {
+          case Event::kNoteOnEvent:
+            note.midi = event.noteOn.pitch;
+            note.correlation = event.noteOn.noteId == -1 ? event.noteOn.pitch : event.noteOn.noteId;
+            break;
+          case Event::kNoteOffEvent:
+            note.midi = note_off;
+            note.correlation = event.noteOff.noteId == -1 ? event.noteOff.pitch : event.noteOff.noteId;
+            break;
+          default:
+            break;
+          }
+          input.note_count[event.sampleOffset]++;
+        }
 }
 
 } // namespace svn::vst::base

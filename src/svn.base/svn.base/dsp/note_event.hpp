@@ -12,6 +12,7 @@ struct note_event
 {
   float velocity = 0.0f;
   std::int32_t midi = note_none;
+  std::int32_t correlation = -1;
 };
 
 } // namespace svn::base
