@@ -6,9 +6,9 @@
 
 namespace svn::synth {
 
-inline std::int32_t synth_polyphony = 32;
 inline std::int32_t constexpr filter_count = 1;
 inline std::int32_t constexpr oscillator_count = 2;
+inline std::int32_t constexpr synth_polyphony = 32;
 
 extern base::part_descriptor const part_descriptors[];
 extern base::param_descriptor const filter_params[];
