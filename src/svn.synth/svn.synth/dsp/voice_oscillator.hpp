@@ -17,7 +17,8 @@ class voice_oscillator
 
 public:
   voice_oscillator() = default;
-  voice_oscillator(float sample_rate, float frequency);
+  voice_oscillator(
+    float sample_rate, float frequency);
 
   std::int32_t process_block(
     base::block_input const& input, 

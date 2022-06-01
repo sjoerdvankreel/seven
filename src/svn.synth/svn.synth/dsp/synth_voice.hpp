@@ -34,7 +34,7 @@ public:
   synth_voice(
     struct base::runtime_topology const* topology,
     struct base::audio_sample* part_audio, 
-    float sample_rate, float frequency, float velocity);
+    float sample_rate, float frequency);
 };
 
 } // namespace svn::synth

@@ -1,7 +1,7 @@
 #ifndef SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
 #define SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
 
-#include <svn.synth/dsp/oscillator.hpp>
+#include <svn.synth/dsp/synth_voice.hpp>
 #include <svn.synth/static/topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
 
@@ -17,7 +17,7 @@ public base::audio_processor
 {
 private:
   std::vector<audio_sample> _part_audio;
-  std::array<oscillator, oscillator_count> _oscillators;
+  std::array<synth_voice, synth_polyphony> _oscillators;
 
 protected:
   void
