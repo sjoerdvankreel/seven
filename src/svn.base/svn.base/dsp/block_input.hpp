@@ -1,11 +1,11 @@
-#ifndef SVN_BASE_DSP_INPUT_BUFFER_HPP
-#define SVN_BASE_DSP_INPUT_BUFFER_HPP
+#ifndef SVN_BASE_DSP_BLOCK_INPUT_HPP
+#define SVN_BASE_DSP_BLOCK_INPUT_HPP
 
 #include <cstdint>
 
 namespace svn::base {
 
-struct input_buffer
+struct block_input
 {
   float bpm;
   // Float* for real parameters, std::int32_t* for discrete. 
@@ -19,4 +19,4 @@ struct input_buffer
 };
 
 } // namespace svn::base
-#endif // SVN_BASE_DSP_INPUT_BUFFER_HPP
+#endif // SVN_BASE_DSP_BLOCK_INPUT_HPP

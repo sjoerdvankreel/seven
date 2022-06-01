@@ -22,7 +22,7 @@ private:
 protected:
   void
   process_block(
-    base::input_buffer const& input,
+    base::block_input const& input,
     union base::param_value* state,
     struct base::audio_sample* audio) override;
 

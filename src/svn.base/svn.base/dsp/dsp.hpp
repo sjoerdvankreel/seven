@@ -1,7 +1,7 @@
 #ifndef SVN_BASE_DSP_DSP_HPP
 #define SVN_BASE_DSP_DSP_HPP
 
-#include <svn.base/dsp/input_buffer.hpp>
+#include <svn.base/dsp/block_input.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
 #include <svn.base/support/param_value.hpp>
 #include <svn.base/runtime/runtime_param.hpp>
@@ -38,7 +38,7 @@ add_audio(
 
 inline float
 automate_discrete(
-  input_buffer const& input, // With automation offset for the current runtime part.
+  block_input const& input, // With automation offset for the current runtime part.
   param_value* state, // With offset for the current runtime part.
   std::int32_t param, // Static param id, e.g. filter_param::resonance.
   std::int32_t sample) // Sample index in the current process block.
@@ -52,8 +52,8 @@ automate_discrete(
 
 inline float
 automate_real(
+  block_input const& input, // With automation offset for the current runtime part.
   param_descriptor const* descriptor, // Pointer to static parameter descriptor array, e.g. start of filter parameters.
-  input_buffer const& input, // With automation offset for the current runtime part.
   param_value* state, // With offset for the current runtime part.
   std::int32_t param, // Static param id, e.g. filter_param::resonance.
   std::int32_t sample) // Sample index in the current process block.

@@ -5,7 +5,7 @@
 #include <public.sdk/source/vst/vstaudioeffect.h>
 #include <public.sdk/source/vst/utility/sampleaccurate.h>
 
-#include <svn.base/dsp/input_buffer.hpp>
+#include <svn.base/dsp/block_input.hpp>
 #include <svn.base/runtime/runtime_topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
 #include <svn.base/support/param_value.hpp>
@@ -52,8 +52,8 @@ public:
 
 private:
   tresult process_parameters(ProcessData const& data);
-  void process_notes(svn::base::input_buffer& input, ProcessData const& data);
-  void process_automation(svn::base::input_buffer& input, ProcessData const& data);
+  void process_notes(svn::base::block_input& input, ProcessData const& data);
+  void process_automation(svn::base::block_input& input, ProcessData const& data);
 };
 
 } // namespace svn::vst::base

@@ -65,7 +65,7 @@ audio_processor::state_check()
         _state[i].discrete <= _topology->params[i].descriptor->max.discrete);
 }
 
-input_buffer&
+block_input&
 audio_processor::prepare_block(std::int32_t sample_count)
 {
   for(std::int32_t s = 0; s < sample_count; s++)
