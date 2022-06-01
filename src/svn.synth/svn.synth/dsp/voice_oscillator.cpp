@@ -46,7 +46,7 @@ voice_oscillator::process_block(
       _released++;
     }
 
-    float sample = level[s] * std::sin(2.0f * std::numbers::pi * _phase);
+    float sample = decay_level * level[s] * std::sin(2.0f * std::numbers::pi * _phase);
     audio[s].left = (1.0f - panning[s]) * sample;
     audio[s].right = panning[s] * sample;
     _phase += _frequency / _sample_rate;
