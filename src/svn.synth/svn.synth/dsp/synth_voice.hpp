@@ -24,6 +24,7 @@ public:
   // block. Returns total number of samples rendered, which equals input 
   // sample count if the voice did not finish within the current block. Release 
   // sample is nonnegative if voice is released within the current block.
+  // Automation should be fixed to the last active value if this voice is released.
   std::int32_t
   process_block(
     base::block_input const& input,
