@@ -4,6 +4,7 @@
 #include <svn.synth/dsp/synth_voice.hpp>
 #include <svn.synth/static/topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
+#include <svn.base/dsp/automation_buffer.hpp>
 
 #include <array>
 #include <cstdint>
@@ -12,11 +13,17 @@ using namespace svn::base;
 
 namespace svn::synth {
 
+// Note: release = note off, but still actively tracking automation until deactivation.
+// Deactivation = channel is now occupied by another voice, no longer actively 
+// tracking automation but automation is instead fixed to the last active value.
 class seven_synth:
 public base::audio_processor
 {
 private:
-  std::vector<audio_sample> _part_audio;
+  // Same as synth automation when voice is active,
+  // filled with automation state at moment of deactivation otherwise.
+  automation_buffer _automation_scratch;
+  std::vector<audio_sample> _audio_scratch;
   std::array<synth_voice, synth_polyphony> _voices;
 
 protected:

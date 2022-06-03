@@ -11,14 +11,14 @@ namespace svn::synth {
 synth_voice::
 synth_voice(
   base::runtime_topology const* topology,
-  base::audio_sample* part_audio,
+  base::audio_sample* audio_scratch,
   float sample_rate, float frequency):
 _topology(topology),
-_part_audio(part_audio), 
+_audio_scratch(audio_scratch),
 _oscillators()
 { 
   assert(topology != nullptr);
-  assert(part_audio != nullptr);
+  assert(audio_scratch != nullptr);
   _oscillators.fill(voice_oscillator(sample_rate, frequency));
 }
 
@@ -38,11 +38,11 @@ synth_voice::process_block(
 
   for (std::int32_t i = 0; i < oscillator_count; i++)
   {
-    clear_audio(_part_audio, input.sample_count);
+    clear_audio(_audio_scratch, input.sample_count);
     std::int32_t offset = _topology->bounds[part_type::oscillator][i];
     part_input.automation = input.automation + offset;
-    part_samples = _oscillators[i].process_block(part_input, _part_audio, release_sample);
-    add_audio(audio, _part_audio, input.sample_count);
+    part_samples = _oscillators[i].process_block(part_input, _audio_scratch, release_sample);
+    add_audio(audio, _audio_scratch, input.sample_count);
     result = std::max(result, part_samples);
   }
   return result;

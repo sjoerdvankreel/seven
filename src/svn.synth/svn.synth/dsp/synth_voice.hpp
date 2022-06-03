@@ -15,7 +15,8 @@ namespace svn::synth {
 class synth_voice
 {
 private:
-  struct audio_sample* _part_audio;
+  // Scratch space.
+  struct audio_sample* _audio_scratch;
   struct base::runtime_topology const* _topology;
   std::array<voice_oscillator, oscillator_count> _oscillators;
 
@@ -24,7 +25,8 @@ public:
   // block. Returns total number of samples rendered, which equals input 
   // sample count if the voice did not finish within the current block. Release 
   // sample is nonnegative if voice is released within the current block.
-  // Automation should be fixed to the last active value if this voice is released.
+  // Automation should be fixed to the last active value if this voice is deactivated,
+  // this is handled globally by the synth class.
   std::int32_t
   process_block(
     base::block_input const& input,
@@ -34,7 +36,7 @@ public:
   synth_voice() = default;
   synth_voice(
     struct base::runtime_topology const* topology,
-    struct base::audio_sample* part_audio, 
+    struct base::audio_sample* audio_scratch,
     float sample_rate, float frequency);
 };
 
