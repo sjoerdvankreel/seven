@@ -40,7 +40,6 @@ audio_processor::process_block()
   clear_audio(_audio.data(), _input.sample_count);
   transform_automation();
   process_block(_input, _audio.data());
-  state_check();
   return _audio.data();
 }
 
