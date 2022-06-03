@@ -10,7 +10,7 @@ struct block_input
   float bpm;
   // Float* for real parameters, std::int32_t* for discrete. 
   // Points to the first runtime parameter for the runtime part (e.g. to filter 2 frequency for a filter component).
-  void** automation; 
+  void* const* automation; 
   // Midi note events, sample * polyphony.
   struct note_event** notes;
   // Midi note event count per sample.
