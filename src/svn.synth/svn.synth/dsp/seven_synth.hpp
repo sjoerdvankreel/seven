@@ -17,7 +17,7 @@ public base::audio_processor
 {
 private:
   std::vector<audio_sample> _part_audio;
-  std::array<synth_voice, synth_polyphony> _oscillators;
+  std::array<synth_voice, synth_polyphony> _voices;
 
 protected:
   void

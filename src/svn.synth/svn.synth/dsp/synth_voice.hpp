@@ -15,12 +15,11 @@ namespace svn::synth {
 class synth_voice
 {
 private:
-  struct audio_sample* const _part_audio;
-  struct base::runtime_topology const* const _topology;
+  struct audio_sample* _part_audio;
+  struct base::runtime_topology const* _topology;
   std::array<voice_oscillator, oscillator_count> _oscillators;
 
 public:
-
   // With input and audio offset to the start of the voice within the current 
   // block. Returns total number of samples rendered, which equals input 
   // sample count if the voice did not finish within the current block. Release 
@@ -31,6 +30,7 @@ public:
     struct base::audio_sample* audio,
     std::int32_t release_sample);
 
+  synth_voice() = default;
   synth_voice(
     struct base::runtime_topology const* topology,
     struct base::audio_sample* part_audio, 
