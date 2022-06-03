@@ -49,9 +49,21 @@ audio_processor::process_block()
   state_check();
   automation_check(_input.sample_count);
   clear_audio(_audio.data(), _input.sample_count);
-  process_block(_input, _state, _audio.data());
+  transform_automation();
+  process_block(_input, _audio.data());
   state_check();
   return _audio.data();
+}
+
+void 
+audio_processor::transform_automation()
+{
+  for(std::size_t p = 0; p < _topology->params.size(); p++)
+  {
+    auto automation = static_cast<float*>(_input.automation[p]);
+    for(std::int32_t s = 0; s < _input.sample_count; s++)
+      automation[s] = _topology->params[p].descriptor->dsp.to_range(automation[s]);
+  }
 }
 
 void

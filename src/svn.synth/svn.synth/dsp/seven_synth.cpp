@@ -22,8 +22,8 @@ _voices()
 }
 
 void
-seven_synth::process_block(block_input const& input,
-  param_value* state, audio_sample* audio)
+seven_synth::process_block(
+  block_input const& input, audio_sample* audio)
 { 
 }
 

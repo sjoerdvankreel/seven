@@ -27,16 +27,20 @@ private:
   struct runtime_topology const* const _topology;
 
   void state_check();
+  void transform_automation();
   void automation_check(std::int32_t sample_count);
 
 protected:
   virtual void
-  process_block(block_input const& input,
-    param_value* state, audio_sample* audio) = 0;
+  process_block(
+    block_input const& input, audio_sample* audio) = 0;
 
 public:
   struct audio_sample const* process_block();
   struct runtime_topology const& topology() const;
+
+  // Caller writes either discrete or normalized (0..1) values to automation.
+  // Process block call overwrites real valued automation with actual range.
   block_input& prepare_block(std::int32_t sample_count);
 
   virtual ~audio_processor() = default;
