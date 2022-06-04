@@ -45,10 +45,13 @@ controller::initialize(FUnknown* context)
 {
   tresult result = EditControllerEx1::initialize(context);
   if (result != kResultTrue) return result;
+  std::int32_t input_count = static_cast<std::int32_t>(_topology->params.size());
   for (std::size_t p = 0; p < _topology->parts.size(); p++)
     addUnit(new Unit(_topology->parts[p].runtime_name.c_str(), p + 1, kRootUnitId));
   for (std::size_t p = 0; p < _topology->params.size(); p++)
     parameters.addParameter(new parameter(static_cast<std::int32_t>(p), &_topology->params[p]));
+  for(std::int32_t p = 0; p < _topology->output_param_count; p++)
+    parameters.addParameter(new parameter(static_cast<std::int32_t>(input_count + p), &_topology->output_params[p]));
   return kResultTrue;
 }
 

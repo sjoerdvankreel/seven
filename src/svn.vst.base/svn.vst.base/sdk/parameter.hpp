@@ -17,12 +17,21 @@ private:
   using TChar = Steinberg::Vst::TChar;
   using String128 = Steinberg::Vst::String128;
   using ParamValue = Steinberg::Vst::ParamValue;
-  svn::base::runtime_param const* const _param;
+  svn::base::param_descriptor const* const _descriptor;
 
 public:
+
+  // Creates an input parameter.
   parameter(
     std::int32_t index, 
     svn::base::runtime_param const* param);
+
+  // Creates an output parameter.
+  // Index starts counting from input parameter count.
+  parameter(
+    std::int32_t index,
+    svn::base::param_descriptor const* descriptor);
+
   static std::int32_t vst_normalized_to_discrete(
     svn::base::param_descriptor const& param, double val);
   static double discrete_to_vst_normalized(

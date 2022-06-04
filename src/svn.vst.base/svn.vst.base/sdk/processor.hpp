@@ -54,6 +54,7 @@ private:
   void process_input_parameters(ProcessData const& data);
   void process_notes(svn::base::block_input& input, ProcessData const& data);
   void process_automation(svn::base::block_input& input, ProcessData const& data);
+  void process_output_parameters(svn::base::block_output const& output, ProcessData& data);
 };
 
 } // namespace svn::vst::base

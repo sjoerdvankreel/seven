@@ -29,43 +29,60 @@ param_default_to_vst_normalized(param_descriptor const& param)
 }
 
 static int32
-param_flags(param_type type)
+param_flags(param_type type, bool output)
 {
+  int32 flags = output? ParameterInfo::kIsReadOnly: ParameterInfo::kCanAutomate;
   switch (type)
   {
-  case param_type::list: return ParameterInfo::kCanAutomate | ParameterInfo::kIsList;
-  default: return ParameterInfo::kCanAutomate;
+  case param_type::list: return flags | ParameterInfo::kIsList;
+  default: return flags;
   }
 }
 
+// For output params.
 parameter::
-parameter(std::int32_t index, svn::base::runtime_param const* param):
+parameter(std::int32_t index, svn::base::param_descriptor const* descriptor):
 Parameter(
-  param->runtime_name.c_str(), index, param->descriptor->unit, 
-  param_default_to_vst_normalized(*param->descriptor),
-  param_step_count(*param->descriptor), 
-  param_flags(param->descriptor->type),
-  param->part_index + 1, 
-  param->descriptor->static_name.short_),
-_param(param)
+  descriptor->static_name.detail, index, descriptor->unit,
+  param_default_to_vst_normalized(*descriptor),
+  param_step_count(*descriptor),
+  param_flags(descriptor->type, true),
+  0, 
+  descriptor->static_name.short_),
+  _descriptor(descriptor)
 { 
+  assert(index >= 0);
+  assert(descriptor != nullptr);
+}
+
+// For input params.
+parameter::
+parameter(std::int32_t index, svn::base::runtime_param const* param) :
+  Parameter(
+    param->runtime_name.c_str(), index, param->descriptor->unit,
+    param_default_to_vst_normalized(*param->descriptor),
+    param_step_count(*param->descriptor),
+    param_flags(param->descriptor->type, false),
+    param->part_index + 1,
+    param->descriptor->static_name.short_),
+  _descriptor(param->descriptor)
+{
   assert(index >= 0);
   assert(param != nullptr);
 }
 
-ParamValue 
+ParamValue
 parameter::toPlain(ParamValue normalized) const
 {
   param_value value;
-  switch (_param->descriptor->type)
+  switch (_descriptor->type)
   {
   case param_type::real: 
     value.real = normalized;
-    return _param->descriptor->to_display(value).real;
+    return _descriptor->to_display(value).real;
   default:
-    value.discrete = vst_normalized_to_discrete(
-      *_param->descriptor, normalized);
-    return _param->descriptor->to_display(value).discrete;
+    value.discrete = vst_normalized_to_discrete(*_descriptor, normalized);
+    return _descriptor->to_display(value).discrete;
   }
 }
 
@@ -73,14 +90,14 @@ ParamValue
 parameter::toNormalized(ParamValue plain) const
 {
   param_value value;
-  switch (_param->descriptor->type)
+  switch (_descriptor->type)
   {
   case param_type::real:
     value.real = plain;
-    return _param->descriptor->from_display(value).real;
+    return _descriptor->from_display(value).real;
   default:
     value.discrete = static_cast<std::int32_t>(plain);
-    return _param->descriptor->from_display(value).discrete;
+    return _descriptor->from_display(value).discrete;
   }
 }
 
@@ -88,25 +105,23 @@ void
 parameter::toString(ParamValue normalized, String128 string) const
 {
   param_value value;
-  switch (_param->descriptor->type)
+  switch (_descriptor->type)
   {
   case param_type::real: value.real = toPlain(normalized); break;
-  default: value.discrete = vst_normalized_to_discrete(
-    *_param->descriptor, normalized); break;
+  default: value.discrete = vst_normalized_to_discrete(*_descriptor, normalized); break;
   }
-  _param->descriptor->format(value, string, 128);
+  _descriptor->format(value, string, 128);
 }
 
 bool
 parameter::fromString(TChar const* string, ParamValue& normalized) const
 {
   param_value value;
-  if (!_param->descriptor->parse(string, value)) return false;
-  switch (_param->descriptor->type)
+  if (!_descriptor->parse(string, value)) return false;
+  switch (_descriptor->type)
   {
   case param_type::real: normalized = toNormalized(value.real); break;
-  default: normalized = discrete_to_vst_normalized(
-    *_param->descriptor, value.discrete); break;
+  default: normalized = discrete_to_vst_normalized(*_descriptor, value.discrete); break;
   }
   return true;
 }

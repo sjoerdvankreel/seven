@@ -120,7 +120,43 @@ processor::process(ProcessData& data)
     data.outputs[0].channelBuffers32[1][s] = output.audio[s].right;
   }
   process_input_parameters(data);
+  process_output_parameters(output, data);
   return kResultOk;
+}
+
+void
+processor::process_notes(block_input& input, ProcessData const& data)
+{
+  Event event;
+  if (data.inputEvents == nullptr) return;
+  int32 count = data.inputEvents->getEventCount();
+  std::int32_t capacity = _processor->topology()->max_note_events;
+  for (std::int32_t i = 0; i < count; i++)
+    if (data.inputEvents->getEvent(i, event) == kResultOk)
+      if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
+        if (input.note_count == capacity) break;
+        else
+        {
+          auto& note = input.notes[input.note_count++];
+          switch (event.type)
+          {
+          case Event::kNoteOnEvent:
+            note.note_on = true;
+            note.midi = event.noteOn.pitch;
+            note.velocity = event.noteOn.velocity;
+            note.sample_index = event.sampleOffset;
+            break;
+          case Event::kNoteOffEvent:
+            note.note_on = false;
+            note.velocity = 0.0f;
+            note.midi = event.noteOff.pitch;
+            note.sample_index = event.sampleOffset;
+            break;
+          default:
+            assert(false);
+            break;
+          }
+        }
 }
 
 void
@@ -174,38 +210,26 @@ processor::process_automation(block_input& input, ProcessData const& data)
 }
 
 void
-processor::process_notes(block_input& input, ProcessData const& data)
+processor::process_output_parameters(
+  svn::base::block_output const& output, ProcessData& data)
 {
-  Event event;
-  if (data.inputEvents == nullptr) return;
-  int32 count = data.inputEvents->getEventCount();
-  std::int32_t capacity = _processor->topology()->max_note_events;
-  for (std::int32_t i = 0; i < count; i++)
-    if (data.inputEvents->getEvent(i, event) == kResultOk)
-      if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
-        if(input.note_count == capacity) break;
-        else
-        {
-          auto& note = input.notes[input.note_count++];
-          switch (event.type)
-          {
-          case Event::kNoteOnEvent:
-            note.note_on = true;
-            note.midi = event.noteOn.pitch;
-            note.velocity = event.noteOn.velocity;
-            note.sample_index = event.sampleOffset;
-            break;
-          case Event::kNoteOffEvent:
-            note.note_on = false;
-            note.velocity = 0.0f;
-            note.midi = event.noteOff.pitch;
-            note.sample_index = event.sampleOffset;
-            break;
-          default:
-            assert(false);
-            break;
-          }
-        }
+  int32 index;
+  double normalized;
+  if (!data.outputParameterChanges) return;
+  std::int32_t input_count = static_cast<std::int32_t>(_processor->topology()->params.size());
+
+  for (std::int32_t p = 0; p < _processor->topology()->output_param_count; p++)
+  {
+    IParamValueQueue* queue = data.outputParameterChanges->addParameterData(input_count + p, index);
+    if (queue == nullptr) continue;
+    auto const& descriptor = _processor->topology()->output_params[p];
+    param_value value = output.output_params[p];
+    if(descriptor.type == param_type::real)
+      normalized = descriptor.dsp.from_range(value.real);
+    else
+      normalized = parameter::discrete_to_vst_normalized(descriptor, value.discrete);
+    queue->addPoint(0, normalized, index);
+  }
 }
 
 } // namespace svn::vst::base
