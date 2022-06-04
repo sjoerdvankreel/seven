@@ -9,6 +9,10 @@ struct voice_state
 {
   // True if processing any audio during current buffer.
   bool in_use = false;
+  // True if already released.
+  bool released_previous_buffer = false;
+  // True if to be released in current buffer.
+  bool release_this_buffer = false;
   // Find voice from midi note.
   std::int32_t midi = -1;
   // Start position in stream, used for recycling oldest voice when running out.

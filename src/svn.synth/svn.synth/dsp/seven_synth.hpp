@@ -24,8 +24,8 @@ public base::audio_processor
 private:
   std::vector<audio_sample> _voice_audio;
   std::vector<audio_sample> _voice_audio_scratch;
-  // Pointers into _automation_fixed_buffer.
   // Of size total voice count.
+  // Pointers into _automation_fixed_buffer.
   std::vector<base::param_value*> _automation_fixed;
   // Contiguous array of size total voice count * total param count.
   std::vector<base::param_value> _automation_fixed_buffer;
