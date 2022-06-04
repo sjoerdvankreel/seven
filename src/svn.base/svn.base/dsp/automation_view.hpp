@@ -20,6 +20,7 @@ class automation_view
   std::int32_t _part_param_offset;
   std::int32_t _sample_count;
   std::int32_t _sample_offset;
+  std::int32_t _sample_fixed_at;
 
 public:
   automation_view(
@@ -29,7 +30,8 @@ public:
     std::int32_t part_param_count,
     std::int32_t part_param_offset,
     std::int32_t sample_count,
-    std::int32_t sample_offset);
+    std::int32_t sample_offset,
+    std::int32_t sample_fixed_at);
 
   automation_view rearrange_samples(
     std::int32_t sample_offset,
@@ -38,9 +40,6 @@ public:
     std::int32_t part_param_count,
     std::int32_t part_param_offset) const;
 
-  // Fix to given sample.
-  // Used for deactivated voices (i.e. channel reuse).
-  void fix(std::int32_t sample);
   param_value get(std::int32_t param, std::int32_t sample) const;
 };
 
@@ -60,7 +59,8 @@ _total_param_count(total_param_count),
 _part_param_count(part_param_count),
 _part_param_offset(part_param_offset),
 _sample_count(sample_count),
-_sample_offset(sample_offset)
+_sample_offset(sample_offset),
+_sample_fixed_at(sample_fixed_at)
 {
   assert(fixed != nullptr);
   assert(automation != nullptr);
@@ -72,18 +72,8 @@ _sample_offset(sample_offset)
   assert(sample_count > 0);
   assert(sample_offset >= 0);
   assert(sample_offset < sample_count);
-  assert(sample_fixed_at <= sample_count);
-  assert(sample_fixed_at >= sample_offset);
-}
-
-inline void
-automation_view::fix(std::int32_t sample)
-{
-  assert(sample >= 0);
-  assert(sample < _sample_count - _sample_offset);
-  for (std::int32_t p = 0; p < _total_param_count; p++)
-    _fixed[p] = _automation[p][sample];
-  _automation = nullptr;
+  assert(sample_fixed_at >= 0);
+  assert(sample_fixed_at <= sample_count - sample_offset);
 }
 
 inline automation_view 
@@ -93,7 +83,7 @@ automation_view::rearrange_samples(
 { 
   return automation_view(_fixed, _automation, 
    _total_param_count, _part_param_count, _part_param_offset, 
-   _sample_count, sample_offset); 
+   _sample_count, sample_offset, _sample_fixed_at);
 }
 
 inline automation_view
@@ -103,7 +93,7 @@ automation_view::rearrange_params(
 {
   return automation_view(_fixed, _automation,
     _total_param_count, part_param_count, part_param_offset,
-    _sample_count, _sample_offset);
+    _sample_count, _sample_offset, _sample_fixed_at);
 }
 
 inline param_value
@@ -113,7 +103,7 @@ automation_view::get(std::int32_t param, std::int32_t sample) const
   assert(param < _part_param_count);
   assert(sample >= 0);
   assert(sample < _sample_count - _sample_offset);
-  if(_automation == nullptr) return _fixed[_part_param_offset + param];
+  if(sample >= _sample_fixed_at) return _fixed[_part_param_offset + param];
   return _automation[param + _part_param_offset][sample + _sample_offset];
 }
 

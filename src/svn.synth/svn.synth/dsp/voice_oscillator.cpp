@@ -41,15 +41,15 @@ voice_oscillator::process_block(
     if(s == release_sample) _released = 0;
     if (_released >= 0)
     {
-      float decay_seconds = input.automation.get<float>(oscillator_param::decay, s);
+      float decay_seconds = input.automation.get(oscillator_param::decay, s).real;
       float decay_samples = decay_seconds * _sample_rate;
       if(_released >= decay_samples) return s;
       decay_level = 1.0f - (_released / decay_samples);
       _released++;
     }
 
-    float level = input.automation.get<float>(oscillator_param::level, s);
-    float panning = input.automation.get<float>(oscillator_param::panning, s);
+    float level = input.automation.get(oscillator_param::level, s).real;
+    float panning = input.automation.get(oscillator_param::panning, s).real;
     float sample = std::sin(2.0f * std::numbers::pi * _phase);
     float scaled = base::sanity(_velocity * decay_level * level * sample);
     audio[s].left = (1.0f - panning) * scaled;

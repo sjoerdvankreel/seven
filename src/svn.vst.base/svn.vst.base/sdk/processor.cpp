@@ -162,9 +162,9 @@ processor::process_automation(block_input& input, ProcessData const& data)
       _accurateParameters[id].beginChanges(queue);
       for (std::int32_t s = 0; s < data.numSamples; s++)
         if (param.type == param_type::real)
-          static_cast<float*>(input.automation[id])[s] = _accurateParameters[id].advance(1);
+          input.automation[id][s].real = _accurateParameters[id].advance(1);
         else
-          static_cast<std::int32_t*>(input.automation[id])[s] 
+          input.automation[id][s].discrete 
             = parameter::vst_normalized_to_discrete(param, _accurateParameters[id].advance(1));
       _accurateParameters[id].endChanges();
     }
