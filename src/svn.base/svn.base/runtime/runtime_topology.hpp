@@ -14,8 +14,6 @@ namespace svn::base {
 struct runtime_topology
 {
   std::int32_t max_note_events = 0; // Not the same as polyphony.
-  std::int32_t real_count = 0; // Real valued runtime parameter count.
-  std::int32_t discrete_count = 0; // Discrete valued runtime parameter count.
   std::vector<runtime_part> parts; // Runtime part descriptor array, e.g. osc 1, osc 2, filter 1, filter 2.
   std::vector<runtime_param> params; // Runtime parameter descriptor array, e.g. osc 1 wave, osc 1 amp, osc 2 wave, etc.
   std::vector<std::vector<std::int32_t>> bounds; // Runtime parameter bounds, e.g. bounds[part_type::osc][1] points to osc 2 wave.

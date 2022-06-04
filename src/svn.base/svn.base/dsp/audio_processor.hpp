@@ -4,6 +4,7 @@
 #include <svn.base/dsp/note_event.hpp>
 #include <svn.base/dsp/block_input.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
+#include <svn.base/support/param_value.hpp>
 
 #include <vector>
 #include <cstdint>
@@ -21,13 +22,10 @@ private:
   union param_value* const _state;
   struct runtime_topology const* const _topology;
 
-  // Float* for real, std::int32_t* for discrete. 
   // Of size total runtime parameter count in topology.
-  std::vector<void*> _automation_buffer;
-  // Contiguous float array of size total real parameters in topology * max_sample_count.
-  std::vector<float> _automation_real;
-  // Contiguous std::int32_t array of size total discrete parameters in topology * max_sample_count.
-  std::vector<std::int32_t> _automation_discrete;
+  std::vector<param_value*> _automation;
+  // Contiguous array of size total parameters in topology * max_sample_count.
+  std::vector<param_value> _automation_buffer;
 
   void state_check();
   void transform_automation();

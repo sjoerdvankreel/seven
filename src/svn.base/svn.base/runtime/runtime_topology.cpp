@@ -50,15 +50,12 @@ runtime_topology::create(
       auto const& descriptor = result->parts[part].descriptor->params[param];
       std::wstring runtime_name = part_name + L" " + descriptor.static_name.detail;
       result->params.push_back(runtime_param(part, runtime_name, &result->parts[part], &descriptor));
-      if (descriptor.type == param_type::real) ++result->real_count;
-      else ++result->discrete_count;
     }
   }
 
   assert(result->parts.size() > 0);
   assert(result->params.size() > 0);
   assert(result->bounds.size() > 0);
-  assert(result->real_count + result->discrete_count == result->params.size());
   return result;
 }
 
