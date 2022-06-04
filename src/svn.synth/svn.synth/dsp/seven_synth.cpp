@@ -27,8 +27,19 @@ _voice_states()
 }
 
 void
+seven_synth::setup_voice_release(
+  note_event const& note)
+{
+  for (std::int32_t v = 0; v < synth_polyphony; v++)
+    if (_voice_states[v].in_use &&
+      _voice_states[v].midi == note.midi &&
+      _voice_states[v].release_position_buffer == -1)
+      _voice_states[v].release_position_buffer = note.sample_index;
+}
+
+void
 seven_synth::setup_voice(
-  struct note_event const& note, 
+  note_event const& note, 
   std::int64_t stream_position)
 {
   std::int32_t slot = -1;
@@ -50,8 +61,8 @@ seven_synth::setup_voice(
 
   _voice_states[slot].in_use = true;
   _voice_states[slot].finished = false;
-  _voice_states[slot].correlation = note.correlation;
-  _voice_states[slot].deactivation_position_buffer = -1;
+  _voice_states[slot].midi = note.midi;
+  _voice_states[slot].release_position_buffer = -1;
   _voice_states[slot].start_position_buffer = note.sample_index;
   _voice_states[slot].start_position_stream = stream_position + note.sample_index;
   _voices[slot] = synth_voice(topology(), sample_rate(), -1.0f, note.velocity);
@@ -61,10 +72,12 @@ void
 seven_synth::process_block(
   block_input const& input, audio_sample* audio)
 {
-  // Set up (de)activation state.
+  // Set up activation and release state.
   for(std::int32_t n = 0; n < input.note_count; n++)
-    if(input.notes[n].midi != base::note_off)
+    if(input.notes[n].note_on)
       setup_voice(input.notes[n], input.stream_position);
+    else
+      setup_voice_release(input.notes[n]);
 }
 
 } // namespace svn::synth

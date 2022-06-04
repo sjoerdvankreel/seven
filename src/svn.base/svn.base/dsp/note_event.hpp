@@ -5,17 +5,16 @@
 
 namespace svn::base {
 
-inline std::int32_t constexpr note_off = -1;
-
 struct note_event
 {
+  // Note on/off.
+  bool note_on = false;
+  // Velocity in case of note on.
   float velocity = 0.0f;
-  // Midi note or note off.
-  std::int32_t midi = -2;
+  // Midi note index for both on and off events.
+  std::int32_t midi = -1;
   // Index in current buffer.
-  std::int32_t sample_index;
-  // Either channel or pitch.
-  std::int32_t correlation = -1;
+  std::int32_t sample_index = -1;
 };
 
 } // namespace svn::base

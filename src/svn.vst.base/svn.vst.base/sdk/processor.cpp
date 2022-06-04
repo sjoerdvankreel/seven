@@ -187,15 +187,16 @@ processor::process_notes(block_input& input, ProcessData const& data)
           switch (event.type)
           {
           case Event::kNoteOnEvent:
+            note.note_on = true;
             note.midi = event.noteOn.pitch;
             note.velocity = event.noteOn.velocity;
             note.sample_index = event.sampleOffset;
-            note.correlation = event.noteOn.noteId == -1 ? event.noteOn.pitch : event.noteOn.noteId;
             break;
           case Event::kNoteOffEvent:
-            note.midi = note_off;
+            note.note_on = false;
+            note.velocity = 0.0f;
+            note.midi = event.noteOff.pitch;
             note.sample_index = event.sampleOffset;
-            note.correlation = event.noteOff.noteId == -1 ? event.noteOff.pitch : event.noteOff.noteId;
             break;
           default:
             assert(false);

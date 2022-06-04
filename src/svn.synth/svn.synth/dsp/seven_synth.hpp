@@ -14,15 +14,17 @@ using namespace svn::base;
 
 namespace svn::synth {
 
-// Note: release = note off, but still actively tracking automation until deactivation.
-// Deactivation = channel is now occupied by another voice, no longer actively 
-// tracking automation but automation is instead fixed to the last active value.
+// Note: release = both note off and no longer tracking automation.
+// Could be improved by differentiating note off and channel reuse using
+// VST3 noteId, but this currently seems unsupported by my host of choice (renoise).
+// Unfortunately this also means a note off event for a specific midi note means
+// releasing all voices playing that note.
 class seven_synth:
 public base::audio_processor
 {
 private:
   // Same as synth automation when voice is active,
-  // filled with automation state at moment of deactivation otherwise.
+  // filled with automation state at moment of release otherwise.
   automation_buffer _automation_scratch;
   std::vector<audio_sample> _audio_scratch;
 
@@ -38,6 +40,8 @@ private:
   void setup_voice(
     struct note_event const& note, 
     std::int64_t stream_position);
+  void setup_voice_release(
+    struct note_event const& note);
 
 protected:
   void
