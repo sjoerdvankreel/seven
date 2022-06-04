@@ -23,6 +23,7 @@ private:
   struct runtime_topology const* const _topology;
 
   // Of size total runtime parameter count in topology.
+  // Pointers into _automation_buffer.
   std::vector<param_value*> _automation;
   // Contiguous array of size total parameters in topology * max_sample_count.
   std::vector<param_value> _automation_buffer;

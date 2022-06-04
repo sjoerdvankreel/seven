@@ -12,17 +12,18 @@ namespace svn::base {
 // View into automation buffer.
 class automation_view
 {
-  param_value* _fixed;
-  param_value* const* _automation;
+  param_value* _fixed = nullptr;
+  param_value* const* _automation = nullptr;
 
-  std::int32_t _total_param_count;
-  std::int32_t _part_param_count;
-  std::int32_t _part_param_offset;
-  std::int32_t _sample_count;
-  std::int32_t _sample_offset;
-  std::int32_t _sample_fixed_at;
+  std::int32_t _total_param_count = 0;
+  std::int32_t _part_param_count = 0;
+  std::int32_t _part_param_offset = 0;
+  std::int32_t _sample_count = 0;
+  std::int32_t _sample_offset = 0;
+  std::int32_t _sample_fixed_at = 0;
 
 public:
+  automation_view() = default;
   automation_view(
     param_value* fixed,
     param_value* const* automation,

@@ -15,6 +15,7 @@ namespace svn::synth {
 class synth_voice
 {
 private:
+  std::vector<audio_sample> _audio_scratch;
   struct base::runtime_topology const* _topology;
   std::array<voice_oscillator, oscillator_count> _oscillators;
 

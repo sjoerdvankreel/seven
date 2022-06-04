@@ -9,8 +9,6 @@ struct voice_state
 {
   // True if processing any audio during current buffer.
   bool in_use = false;
-  // True when done producing audio.
-  bool finished = false;
   // Find voice from midi note.
   std::int32_t midi = -1;
   // Start position in stream, used for recycling oldest voice when running out.

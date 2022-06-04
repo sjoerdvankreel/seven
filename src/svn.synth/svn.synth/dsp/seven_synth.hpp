@@ -22,7 +22,14 @@ class seven_synth:
 public base::audio_processor
 {
 private:
-  std::vector<audio_sample> _audio_scratch;
+  std::vector<audio_sample> _voice_audio;
+  std::vector<audio_sample> _voice_audio_scratch;
+  // Pointers into _automation_fixed_buffer.
+  // Of size total voice count.
+  std::vector<base::param_value*> _automation_fixed;
+  // Contiguous array of size total voice count * total param count.
+  std::vector<base::param_value> _automation_fixed_buffer;
+
   // Voice management. 
   // If a voice is activated within the current buffer,
   // it is considered taken from the beginning of the buffer.
@@ -32,11 +39,13 @@ private:
   std::array<voice_state, synth_polyphony> _voice_states;
 
   // Oldest voice is recycled first.
+  void return_voice(
+    std::int32_t voice);
   void setup_voice(
     struct note_event const& note, 
-    std::int64_t stream_position);
+    std::int32_t sample_count, std::int64_t stream_position);
   void setup_voice_release(
-    struct note_event const& note);
+    struct note_event const& note, std::int32_t sample_count);
 
 protected:
   void
