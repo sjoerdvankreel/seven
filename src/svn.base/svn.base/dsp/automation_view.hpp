@@ -67,7 +67,7 @@ _sample_fixed_at(sample_fixed_at)
   assert(automation != nullptr);
   assert(part_param_count > 0);
   assert(total_param_count > 0);
-  assert(part_param_offset > 0);
+  assert(part_param_offset >= 0);
   assert(part_param_offset < total_param_count);
   assert(total_param_count >= part_param_count);
   assert(sample_count > 0);
