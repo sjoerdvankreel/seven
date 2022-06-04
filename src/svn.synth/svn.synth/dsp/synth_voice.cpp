@@ -2,6 +2,7 @@
 #include <svn.base/dsp/audio_sample.hpp>
 #include <svn.base/runtime/runtime_topology.hpp>
 #include <svn.synth/dsp/synth_voice.hpp>
+#include <svn.synth/dsp/voice_input.hpp>
 
 #include <cassert>
 #include <algorithm>
@@ -24,7 +25,7 @@ _oscillators()
 
 std::int32_t
 synth_voice::process_block(
-  base::block_input const& input,
+  voice_input const& input,
   base::audio_sample* audio_scratch,
   base::audio_sample* audio,
   std::int32_t release_sample)
@@ -36,7 +37,7 @@ synth_voice::process_block(
 
   std::int32_t result = 0;
   std::int32_t part_samples = 0;
-  block_input part_input = input;
+  voice_input part_input = input;
 
   for (std::int32_t i = 0; i < oscillator_count; i++)
   {

@@ -22,7 +22,7 @@ public:
     float frequency, float velocity);
 
   std::int32_t process_block(
-    base::block_input const& input, 
+    struct voice_input const& input, 
     base::audio_sample* audio,
     std::int32_t release_sample);
 };

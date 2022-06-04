@@ -27,7 +27,7 @@ public:
   // this is handled globally by the synth class.
   std::int32_t
   process_block(
-    base::block_input const& input,
+    struct voice_input const& input,
     struct base::audio_sample* audio_scratch,
     struct base::audio_sample* audio,
     std::int32_t release_sample);
