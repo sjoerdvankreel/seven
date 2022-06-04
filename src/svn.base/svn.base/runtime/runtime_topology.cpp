@@ -20,14 +20,21 @@ runtime_topology::init_defaults(param_value* state) const
 
 std::unique_ptr<runtime_topology>
 runtime_topology::create(
-  part_descriptor const* static_parts, std::int32_t count, std::int32_t max_note_events)
+  part_descriptor const* static_parts, std::int32_t part_count, 
+  param_descriptor const* output_params, std::int32_t output_param_count,
+  std::int32_t max_note_events)
 {
   assert(max_note_events >= 0);
+  assert(output_param_count >= 0);
+  assert(output_params == nullptr || output_param_count > 0);
+
   auto result = std::make_unique<runtime_topology>();
   result->max_note_events = max_note_events;
+  result->output_params = output_params;
+  result->output_param_count = output_param_count;
 
   std::int32_t param_index = 0;
-  for (std::int32_t t = 0; t < count; t++)
+  for (std::int32_t t = 0; t < part_count; t++)
   {
     std::int32_t type_index = 0;
     result->bounds.push_back(std::vector<std::int32_t>());

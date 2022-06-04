@@ -51,7 +51,7 @@ public:
     SpeakerArrangement* outputs, int32 output_count) override;
 
 private:
-  tresult process_parameters(ProcessData const& data);
+  void process_input_parameters(ProcessData const& data);
   void process_notes(svn::base::block_input& input, ProcessData const& data);
   void process_automation(svn::base::block_input& input, ProcessData const& data);
 };

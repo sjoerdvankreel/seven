@@ -25,8 +25,10 @@ private:
   // Of size total runtime parameter count in topology.
   // Pointers into _automation_buffer.
   std::vector<param_value*> _automation;
-  // Contiguous array of size total parameters in topology * max_sample_count.
+  // Contiguous array of size total input parameters in topology * max_sample_count.
   std::vector<param_value> _automation_buffer;
+  // Output parameter values of size total output parameters in topology.
+  std::vector<param_value> _output_param_buffer;
 
   void state_check();
   void transform_automation();

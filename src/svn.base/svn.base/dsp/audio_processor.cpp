@@ -17,7 +17,8 @@ _sample_rate(sample_rate),
 _state(state),
 _topology(topology),
 _automation(topology->params.size()),
-_automation_buffer(topology->params.size() * max_sample_count)
+_automation_buffer(topology->params.size() * max_sample_count),
+_output_param_buffer(static_cast<std::size_t>(topology->output_param_count))
 {
   assert(state != nullptr);
   assert(sample_rate > 0.0f);

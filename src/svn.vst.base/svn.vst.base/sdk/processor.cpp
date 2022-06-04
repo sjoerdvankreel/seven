@@ -106,7 +106,10 @@ processor::process(ProcessData& data)
   if(data.processContext != nullptr && data.processContext->kTempoValid) 
     input.bpm = static_cast<float>(data.processContext->tempo);
   if (data.numSamples == 0 || data.numOutputs == 0) 
-    return process_parameters(data);
+  {
+    process_input_parameters(data);
+    return kResultOk;
+  }
 
   process_notes(input, data);
   process_automation(input, data);
@@ -116,17 +119,18 @@ processor::process(ProcessData& data)
     data.outputs[0].channelBuffers32[0][s] = audio[s].left;
     data.outputs[0].channelBuffers32[1][s] = audio[s].right;
   }
-  return process_parameters(data);
+  process_input_parameters(data);
+  return kResultOk;
 }
 
-tresult
-processor::process_parameters(ProcessData const& data)
+void
+processor::process_input_parameters(ProcessData const& data)
 {
   int32 index;
   ParamValue value;
   IParamValueQueue* queue;
   auto changes = data.inputParameterChanges;
-  if (changes == nullptr) return kResultOk;
+  if (changes == nullptr) return;
   int32 count = changes->getParameterCount();
   for (int32 i = 0; i < count; i++)
     if ((queue = changes->getParameterData(i)) != nullptr)
@@ -139,7 +143,6 @@ processor::process_parameters(ProcessData const& data)
         else
           _state[id].discrete = parameter::vst_normalized_to_discrete(param, value);
     }
-  return kResultOk;
 }
 
 void

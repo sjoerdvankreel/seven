@@ -20,8 +20,15 @@ oscillator_types[oscillator_type::count] =
   { L"Dsf", L"Discrete summation formulae" }
 };
 
+param_descriptor const 
+output_params[output_param::count] =
+{
+  { { L"Clip", L"Clip" }, false },
+  { { L"Voices", L"Voice count" }, L"", 0, 0, synth_polyphony }
+};
+
 part_descriptor const
-part_descriptors[] =
+part_descriptors[part_type::count] =
 {
   { part_type::oscillator, { L"Osc", L"Oscillator" }, oscillator_count, oscillator_params, oscillator_param::count },
   { part_type::filter, { L"Filter", L"Filter" }, filter_count, filter_params, filter_param::count }
