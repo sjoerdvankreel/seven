@@ -11,6 +11,7 @@ audio_processor(
   runtime_topology const* topology, float sample_rate, 
   std::int32_t max_sample_count, base::param_value* state):
 _input(),
+_output(),
 _notes(static_cast<std::size_t>(topology->max_note_events)),
 _audio(static_cast<std::size_t>(max_sample_count)),
 _sample_rate(sample_rate),
@@ -25,25 +26,28 @@ _output_param_buffer(static_cast<std::size_t>(topology->output_param_count))
   assert(topology != nullptr);
   assert(max_sample_count > 0);
 
+  _output.audio = _audio.data();
+  _output.output_params = _output_param_buffer.data();
+
   _input.note_count = 0;
   _input.automation = _automation.data();
   _input.notes = topology->max_note_events == 0? nullptr: _notes.data();
-
+  
   std::int32_t real_p = 0;
   std::int32_t discrete_p = 0;
   for (std::size_t p = 0; p < topology->params.size(); p++)
     _automation[p] = _automation_buffer.data() + p * max_sample_count;
 }
 
-audio_sample const*
+block_output const&
 audio_processor::process_block()
 {
   state_check();
   automation_check(_input.sample_count);
   clear_audio(_audio.data(), _input.sample_count);
   transform_automation();
-  process_block(_input, _audio.data());
-  return _audio.data();
+  process_block(_input, _output);
+  return _output;
 }
 
 void
@@ -64,6 +68,14 @@ block_input&
 audio_processor::prepare_block(std::int32_t sample_count)
 {
   _input.note_count = 0;
+  for (std::int32_t p = 0; p < _topology->output_param_count; p++)
+  {
+    auto const& descriptor = _topology->output_params[p];
+    if (descriptor.type == param_type::real)
+      _output.output_params[p].real = 0.0f;
+    else
+      _output.output_params[p].discrete = descriptor.default_.discrete;
+  }
   for (std::size_t p = 0; p < _topology->params.size(); p++)
   {
     auto const& descriptor = *_topology->params[p].descriptor;

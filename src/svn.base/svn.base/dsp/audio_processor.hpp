@@ -3,6 +3,7 @@
 
 #include <svn.base/dsp/note_event.hpp>
 #include <svn.base/dsp/block_input.hpp>
+#include <svn.base/dsp/block_output.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
 #include <svn.base/support/param_value.hpp>
 
@@ -15,6 +16,7 @@ class audio_processor
 {
 private:
   block_input _input;
+  block_output _output;
   std::vector<note_event> _notes;
   std::vector<audio_sample> _audio;
 
@@ -37,11 +39,11 @@ private:
 protected:
   virtual void
   process_block(
-    block_input const& input, audio_sample* audio) = 0;
+    block_input const& input, block_output& output) = 0;
 
 public:
   float sample_rate() const;
-  struct audio_sample const* process_block();
+  block_output const& process_block();
   struct runtime_topology const* topology() const;
 
   // Caller writes either discrete or normalized (0..1) values to automation.

@@ -50,8 +50,8 @@ private:
 protected:
   void
   process_block(
-    struct base::block_input const& input,
-    struct base::audio_sample* audio) override;
+    base::block_input const& input,
+    base::block_output& output) override;
 
 public:
   seven_synth(

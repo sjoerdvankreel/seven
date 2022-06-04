@@ -113,11 +113,11 @@ processor::process(ProcessData& data)
 
   process_notes(input, data);
   process_automation(input, data);
-  audio_sample const* audio = _processor->process_block();
+  block_output const& output = _processor->process_block();
   for (std::int32_t s = 0; s < data.numSamples; s++)
   {
-    data.outputs[0].channelBuffers32[0][s] = audio[s].left;
-    data.outputs[0].channelBuffers32[1][s] = audio[s].right;
+    data.outputs[0].channelBuffers32[0][s] = output.audio[s].left;
+    data.outputs[0].channelBuffers32[1][s] = output.audio[s].right;
   }
   process_input_parameters(data);
   return kResultOk;

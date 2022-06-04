@@ -90,7 +90,7 @@ seven_synth::setup_voice(
 
 void
 seven_synth::process_block(
-  block_input const& input, audio_sample* audio)
+  block_input const& input, block_output& output)
 {
   voice_input vinput;
   vinput.bpm = input.bpm;
@@ -142,7 +142,7 @@ seven_synth::process_block(
       clear_audio(_voice_audio.data(), vinput.sample_count);
       std::int32_t processed = _voices[v].process_block(vinput,
         _voice_audio_scratch.data(), _voice_audio.data(), release_sample);
-      base::add_audio(audio + voice_start, _voice_audio.data(), processed);
+      base::add_audio(output.audio + voice_start, _voice_audio.data(), processed);
       if(processed < vinput.sample_count) return_voice(v);
     }
 }
