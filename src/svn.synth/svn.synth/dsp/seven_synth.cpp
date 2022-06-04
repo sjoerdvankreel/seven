@@ -15,13 +15,12 @@ audio_processor(topology, sample_rate, max_sample_count, state),
 _automation_scratch(topology, max_sample_count),
 _audio_scratch(static_cast<std::size_t>(max_sample_count)),
 _voices(),
-_voices_started()
+_voice_states()
 {
   assert(state != nullptr);
   assert(sample_rate > 0.0f);
   assert(topology != nullptr);
   assert(max_sample_count > 0);
-  _voices_started.fill(-1L);
 }
 
 void

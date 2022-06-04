@@ -2,6 +2,7 @@
 #define SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
 
 #include <svn.synth/dsp/synth_voice.hpp>
+#include <svn.synth/dsp/voice_state.hpp>
 #include <svn.synth/static/topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
 #include <svn.base/dsp/automation_buffer.hpp>
@@ -32,7 +33,7 @@ private:
   // it is considered taken untill the end of the buffer.
   // Oldest voice is recycled first.
   std::array<synth_voice, synth_polyphony> _voices;
-  std::array<std::int64_t, synth_polyphony> _voices_started;
+  std::array<voice_state, synth_polyphony> _voice_states;
 
 protected:
   void
