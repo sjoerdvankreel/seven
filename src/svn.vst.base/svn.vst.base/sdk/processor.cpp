@@ -47,8 +47,8 @@ processor::initialize(FUnknown* context)
 {
   tresult result = AudioEffect::initialize(context);
   if (result != kResultTrue) return kResultFalse;
-  addEventInput(STR16("Event In"), _topology->polyphony);
   addAudioOutput(STR16("Stereo Out"), SpeakerArr::kStereo);
+  addEventInput(STR16("Event In"), _topology->max_note_events);
   return kResultTrue;
 }
 
@@ -176,26 +176,31 @@ processor::process_notes(block_input& input, ProcessData const& data)
   Event event;
   if (data.inputEvents == nullptr) return;
   int32 count = data.inputEvents->getEventCount();
+  std::int32_t capacity = _processor->topology().max_note_events;
   for (std::int32_t i = 0; i < count; i++)
     if (data.inputEvents->getEvent(i, event) == kResultOk)
       if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
-        if (input.note_count[event.sampleOffset] < _processor->topology().polyphony)
+        if(input.note_count == capacity) break;
+        else
         {
-          auto& note = input.notes[event.sampleOffset][input.note_count[event.sampleOffset]];
+          auto& note = input.notes[input.note_count++];
           switch (event.type)
           {
           case Event::kNoteOnEvent:
             note.midi = event.noteOn.pitch;
+            note.velocity = event.noteOn.velocity;
+            note.sample_index = event.sampleOffset;
             note.correlation = event.noteOn.noteId == -1 ? event.noteOn.pitch : event.noteOn.noteId;
             break;
           case Event::kNoteOffEvent:
             note.midi = note_off;
+            note.sample_index = event.sampleOffset;
             note.correlation = event.noteOff.noteId == -1 ? event.noteOff.pitch : event.noteOff.noteId;
             break;
           default:
+            assert(false);
             break;
           }
-          input.note_count[event.sampleOffset]++;
         }
 }
 

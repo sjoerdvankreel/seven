@@ -18,8 +18,6 @@ private:
   std::vector<note_event> _notes;
   std::vector<audio_sample> _audio;
   automation_buffer _automation_buffer;
-  std::vector<note_event*> _sample_notes;
-  std::vector<std::int32_t> _sample_note_counts;
 
   float const _sample_rate;
   union param_value* const _state;

@@ -15,10 +15,9 @@ struct block_input
   // Points to the first runtime parameter for the runtime part (e.g. to filter 2 frequency for a filter component).
   void* const* automation; 
   
-  // Midi note events, sample * polyphony
-  // and midi note event count per sample.
-  struct note_event** notes;
-  std::int32_t* note_count;
+  // Midi note events.
+  std::int32_t note_count;
+  struct note_event* notes;
 };
 
 } // namespace svn::base

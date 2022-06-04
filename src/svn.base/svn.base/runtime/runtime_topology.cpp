@@ -20,11 +20,11 @@ runtime_topology::init_defaults(param_value* state) const
 
 std::unique_ptr<runtime_topology>
 runtime_topology::create(
-  part_descriptor const* static_parts, std::int32_t count, std::int32_t polyphony)
+  part_descriptor const* static_parts, std::int32_t count, std::int32_t max_note_events)
 {
-  assert(polyphony >= 0);
+  assert(max_note_events >= 0);
   auto result = std::make_unique<runtime_topology>();
-  result->polyphony = polyphony;
+  result->max_note_events = max_note_events;
 
   std::int32_t param_index = 0;
   for (std::int32_t t = 0; t < count; t++)
