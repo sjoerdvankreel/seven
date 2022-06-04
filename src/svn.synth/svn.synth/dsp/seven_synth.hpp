@@ -5,7 +5,6 @@
 #include <svn.synth/dsp/voice_state.hpp>
 #include <svn.synth/static/topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
-#include <svn.base/dsp/automation_buffer.hpp>
 
 #include <array>
 #include <cstdint>
@@ -23,11 +22,7 @@ class seven_synth:
 public base::audio_processor
 {
 private:
-  // Same as synth automation when voice is active,
-  // filled with automation state at moment of release otherwise.
-  automation_buffer _automation_scratch;
   std::vector<audio_sample> _audio_scratch;
-
   // Voice management. 
   // If a voice is activated within the current buffer,
   // it is considered taken from the beginning of the buffer.

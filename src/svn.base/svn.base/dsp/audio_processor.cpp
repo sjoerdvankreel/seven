@@ -13,10 +13,12 @@ audio_processor(
 _input(),
 _notes(static_cast<std::size_t>(topology->max_note_events)),
 _audio(static_cast<std::size_t>(max_sample_count)),
-_automation_buffer(topology, max_sample_count),
 _sample_rate(sample_rate),
 _state(state),
-_topology(topology)
+_topology(topology),
+_automation_buffer(topology->params.size()),
+_automation_real(topology->real_count* max_sample_count),
+_automation_discrete(topology->discrete_count* max_sample_count)
 {
   assert(state != nullptr);
   assert(sample_rate > 0.0f);
@@ -26,6 +28,15 @@ _topology(topology)
   _input.note_count = 0;
   _input.automation = _automation_buffer.data();
   _input.notes = topology->max_note_events == 0? nullptr: _notes.data();
+
+  std::int32_t real_p = 0;
+  std::int32_t discrete_p = 0;
+  for (std::size_t p = 0; p < topology->params.size(); p++)
+    switch (topology->params[p].descriptor->type)
+    {
+    case param_type::real: _automation_buffer[p] = _automation_real.data() + real_p++ * max_sample_count; break;
+    default: _automation_buffer[p] = _automation_discrete.data() + discrete_p++ * max_sample_count; break;
+    }
 }
 
 audio_sample const*

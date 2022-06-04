@@ -15,7 +15,6 @@ seven_synth(
   base::runtime_topology const* topology, float sample_rate,
   std::int32_t max_sample_count, base::param_value* state):
 audio_processor(topology, sample_rate, max_sample_count, state),
-_automation_scratch(topology, max_sample_count),
 _audio_scratch(static_cast<std::size_t>(max_sample_count)),
 _voices(),
 _voice_states()

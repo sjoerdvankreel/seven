@@ -4,7 +4,6 @@
 #include <svn.base/dsp/note_event.hpp>
 #include <svn.base/dsp/block_input.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
-#include <svn.base/dsp/automation_buffer.hpp>
 
 #include <vector>
 #include <cstdint>
@@ -17,11 +16,18 @@ private:
   block_input _input;
   std::vector<note_event> _notes;
   std::vector<audio_sample> _audio;
-  automation_buffer _automation_buffer;
 
   float const _sample_rate;
   union param_value* const _state;
   struct runtime_topology const* const _topology;
+
+  // Float* for real, std::int32_t* for discrete. 
+  // Of size total runtime parameter count in topology.
+  std::vector<void*> _automation_buffer;
+  // Contiguous float array of size total real parameters in topology * max_sample_count.
+  std::vector<float> _automation_real;
+  // Contiguous std::int32_t array of size total discrete parameters in topology * max_sample_count.
+  std::vector<std::int32_t> _automation_discrete;
 
   void state_check();
   void transform_automation();
