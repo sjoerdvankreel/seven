@@ -123,7 +123,7 @@ seven_synth::process_block(
         _automation_fixed[v], input.automation,
         static_cast<std::int32_t>(topology()->params.size()),
         static_cast<std::int32_t>(topology()->params.size()),
-        0, vinput.sample_count, voice_start, vinput.sample_count);
+        0, input.sample_count, voice_start, vinput.sample_count);
 
       std::int32_t voice_release = _voice_states[v].release_position_buffer;
       // Already released in previous buffer, fix from the beginning.
