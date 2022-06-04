@@ -27,6 +27,7 @@ void
 seven_synth::process_block(
   block_input const& input, audio_sample* audio)
 {
+  // Set up (de)activation state.
   
 }
 
