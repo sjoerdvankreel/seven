@@ -33,8 +33,9 @@ protected:
     block_input const& input, audio_sample* audio) = 0;
 
 public:
+  float sample_rate() const;
   struct audio_sample const* process_block();
-  struct runtime_topology const& topology() const;
+  struct runtime_topology const* topology() const;
 
   // Caller writes either discrete or normalized (0..1) values to automation.
   // Process block call overwrites real valued automation with actual range.
@@ -46,9 +47,13 @@ public:
     std::int32_t max_sample_count, param_value* state);
 };
 
-inline runtime_topology const& 
+inline float
+audio_processor::sample_rate() const
+{ return _sample_rate; }
+
+inline runtime_topology const*
 audio_processor::topology() const
-{ return *_topology; }
+{ return _topology; }
 
 } // namespace svn::base
 #endif // SVN_BASE_DSP_AUDIO_PROCESSOR_HPP

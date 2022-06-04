@@ -15,8 +15,6 @@ namespace svn::synth {
 class synth_voice
 {
 private:
-  // Scratch space.
-  struct audio_sample* _audio_scratch;
   struct base::runtime_topology const* _topology;
   std::array<voice_oscillator, oscillator_count> _oscillators;
 
@@ -30,13 +28,13 @@ public:
   std::int32_t
   process_block(
     base::block_input const& input,
+    struct base::audio_sample* audio_scratch,
     struct base::audio_sample* audio,
     std::int32_t release_sample);
 
   synth_voice() = default;
   synth_voice(
     struct base::runtime_topology const* topology,
-    struct base::audio_sample* audio_scratch,
     float sample_rate, float frequency, float velocity);
 };
 

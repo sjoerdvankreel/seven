@@ -9,6 +9,10 @@ struct voice_state
 {
   // True if processing any audio during current buffer.
   bool in_use = false;
+  // True when done producing audio.
+  bool finished = false;
+  // Find voice from event.
+  std::int32_t correlation = -1;
   // Start position in stream, used for recycling oldest voice when running out.
   std::int64_t start_position_stream = -1;
   // Start position in current buffer, 0 if started in previous buffer.

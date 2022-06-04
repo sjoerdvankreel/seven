@@ -11,14 +11,11 @@ namespace svn::synth {
 synth_voice::
 synth_voice(
   base::runtime_topology const* topology,
-  base::audio_sample* audio_scratch,
   float sample_rate, float frequency, float velocity):
 _topology(topology),
-_audio_scratch(audio_scratch),
 _oscillators()
 { 
-  assert(topology != nullptr);
-  assert(audio_scratch != nullptr);
+  assert(topology != nullptr);  
   assert(frequency > 0.0f);
   assert(sample_rate > frequency);
   assert(0.0f <= velocity && velocity <= 1.0f);
@@ -28,11 +25,13 @@ _oscillators()
 std::int32_t
 synth_voice::process_block(
   base::block_input const& input,
-  struct base::audio_sample* audio,
+  base::audio_sample* audio_scratch,
+  base::audio_sample* audio,
   std::int32_t release_sample)
 {
   assert(audio != nullptr);
   assert(release_sample >= -1);
+  assert(audio_scratch != nullptr);
   assert(release_sample < input.sample_count);
 
   std::int32_t result = 0;
@@ -41,11 +40,11 @@ synth_voice::process_block(
 
   for (std::int32_t i = 0; i < oscillator_count; i++)
   {
-    clear_audio(_audio_scratch, input.sample_count);
+    clear_audio(audio_scratch, input.sample_count);
     std::int32_t offset = _topology->bounds[part_type::oscillator][i];
     part_input.automation = input.automation + offset;
-    part_samples = _oscillators[i].process_block(part_input, _audio_scratch, release_sample);
-    add_audio(audio, _audio_scratch, input.sample_count);
+    part_samples = _oscillators[i].process_block(part_input, audio_scratch, release_sample);
+    add_audio(audio, audio_scratch, input.sample_count);
     result = std::max(result, part_samples);
   }
   return result;

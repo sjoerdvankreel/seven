@@ -31,14 +31,18 @@ private:
   // it is considered taken from the beginning of the buffer.
   // Similarly, if a voice is finished within the current buffer,
   // it is considered taken untill the end of the buffer.
-  // Oldest voice is recycled first.
   std::array<synth_voice, synth_polyphony> _voices;
   std::array<voice_state, synth_polyphony> _voice_states;
+
+  // Oldest voice is recycled first.
+  void setup_voice(
+    struct note_event const& note, 
+    std::int64_t stream_position);
 
 protected:
   void
   process_block(
-    base::block_input const& input,
+    struct base::block_input const& input,
     struct base::audio_sample* audio) override;
 
 public:

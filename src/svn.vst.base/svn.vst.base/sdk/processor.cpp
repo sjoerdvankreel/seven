@@ -176,7 +176,7 @@ processor::process_notes(block_input& input, ProcessData const& data)
   Event event;
   if (data.inputEvents == nullptr) return;
   int32 count = data.inputEvents->getEventCount();
-  std::int32_t capacity = _processor->topology().max_note_events;
+  std::int32_t capacity = _processor->topology()->max_note_events;
   for (std::int32_t i = 0; i < count; i++)
     if (data.inputEvents->getEvent(i, event) == kResultOk)
       if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
