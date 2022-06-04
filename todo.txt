@@ -1,2 +1,3 @@
 handle bpm+default bpm
 handle nans and denormals
+output params
