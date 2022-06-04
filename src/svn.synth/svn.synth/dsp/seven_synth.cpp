@@ -54,18 +54,21 @@ seven_synth::setup_voice_release(
     }
 }
 
-void
+bool
 seven_synth::setup_voice(
   note_event const& note, 
   std::int32_t sample_count,
   std::int64_t stream_position)
 {
+  bool exhausted = true;
   std::int32_t slot = -1;
   std::int64_t slot_position = -1;
+
   for(std::int32_t v = 0; v < synth_polyphony; v++)
     if (!_voice_states[v].in_use)
     {
       slot = v;
+      exhausted = false;
       break;
     } else
     {
@@ -86,6 +89,7 @@ seven_synth::setup_voice(
   _voice_states[slot].start_position_buffer = note.sample_index;
   _voice_states[slot].start_position_stream = stream_position + note.sample_index;
   _voices[slot] = synth_voice(topology(), sample_rate(), note.velocity, note.midi);
+  return exhausted;
 }
 
 void
@@ -105,11 +109,18 @@ seven_synth::process_block(
     }
 
   // Set up new activation and release state.
+  bool exhausted = false;
   for(std::int32_t n = 0; n < input.note_count; n++)
     if(input.notes[n].note_on)
-      setup_voice(input.notes[n], input.sample_count, input.stream_position);
+      exhausted |= setup_voice(input.notes[n], input.sample_count, input.stream_position);
     else
       setup_voice_release(input.notes[n], input.sample_count);
+  
+  // For output information.
+  std::int32_t voice_count = 0;
+  for(std::int32_t v = 0; v < synth_polyphony; v++)
+    if(_voice_states[v].in_use)
+      ++voice_count;
 
   // Process voices that are active anywhere in this buffer.
   for(std::int32_t v = 0; v < synth_polyphony; v++)
@@ -145,6 +156,12 @@ seven_synth::process_block(
       base::add_audio(output.audio + voice_start, _voice_audio.data(), processed);
       if(processed < vinput.sample_count) return_voice(v);
     }
+
+    // Clip and set output info.
+    bool clip = clip_audio(output.audio, input.sample_count);
+    output.output_params[output_param::clip].discrete = clip? 1: 0;
+    output.output_params[output_param::voices].discrete = voice_count;
+    output.output_params[output_param::exhausted].discrete = exhausted? 1: 0;
 }
 
 } // namespace svn::synth

@@ -41,7 +41,8 @@ private:
   // Oldest voice is recycled first.
   void return_voice(
     std::int32_t voice);
-  void setup_voice(
+  // True if exhausted.
+  bool setup_voice(
     struct note_event const& note, 
     std::int32_t sample_count, std::int64_t stream_position);
   void setup_voice_release(

@@ -24,6 +24,7 @@ param_descriptor const
 output_params[output_param::count] =
 {
   { { L"Clip", L"Clip" }, false },
+  { { L"Exhausted", L"Exhausted" }, false },
   { { L"Voices", L"Voice count" }, L"", 0, 0, synth_polyphony }
 };
 

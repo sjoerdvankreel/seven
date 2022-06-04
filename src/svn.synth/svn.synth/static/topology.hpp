@@ -15,12 +15,12 @@ extern base::part_descriptor const part_descriptors[];
 extern base::param_descriptor const filter_params[];
 extern base::param_descriptor const oscillator_params[];
 
-struct output_param_t { enum value { clip, voices, count }; };
 struct part_type_t { enum value { oscillator, filter, count }; };
 struct oscillator_type_t { enum value { blep, blamp, dsf, count }; };
 struct filter_type_t { enum value { ladder, state_variable, count }; };
 struct filter_param_t { enum value { on, type, frequency, resonance, count }; };
 struct oscillator_param_t { enum value { on, type, level, detune, detune2, panning, pw, decay, count }; };
+struct output_param_t { enum value { clip, exhausted, voices, count }; };
 
 typedef part_type_t::value part_type;
 typedef filter_type_t::value filter_type;

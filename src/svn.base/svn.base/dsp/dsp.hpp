@@ -10,6 +10,7 @@
 #include <cmath>
 #include <cassert>
 #include <cstdint>
+#include <algorithm>
 
 namespace svn::base {
 
@@ -61,6 +62,24 @@ note_to_frequency(float note)
 {
   assert(note > 0.0f);
   return 440.0f * std::pow(2.0f, (note - 69.0f) / 12.0f);
+}
+
+inline bool
+clip_audio(
+  audio_sample* audio,
+  std::int32_t sample_count)
+{
+  bool result = false;
+  for (std::int32_t s = 0; s < sample_count; s++)
+  {
+    result |= audio[s].left < -1.0f;
+    result |= audio[s].left > 1.0f;
+    result |= audio[s].right < -1.0f;
+    result |= audio[s].right > 1.0f;
+    audio[s].left = std::clamp(audio[s].left, -1.0f, 1.0f);
+    audio[s].right = std::clamp(audio[s].right, -1.0f, 1.0f);
+  }
+  return result;
 }
 
 } // namespace svn::base
