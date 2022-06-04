@@ -11,12 +11,15 @@ using namespace svn::base;
 namespace svn::synth {
 
 voice_oscillator::
-voice_oscillator(float sample_rate, float frequency):
+voice_oscillator(float sample_rate, 
+  float frequency, float velocity):
+_velocity(velocity),
 _frequency(frequency), 
 _sample_rate(sample_rate)
 { 
   assert(frequency > 0.0f);
   assert(sample_rate > frequency);
+  assert(0.0f <= velocity && velocity <= 1.0f);
 }
 
 std::int32_t
@@ -46,7 +49,7 @@ voice_oscillator::process_block(
       _released++;
     }
 
-    float sample = decay_level * level[s] * std::sin(2.0f * std::numbers::pi * _phase);
+    float sample = _velocity * decay_level * level[s] * std::sin(2.0f * std::numbers::pi * _phase);
     audio[s].left = (1.0f - panning[s]) * sample;
     audio[s].right = panning[s] * sample;
     _phase += _frequency / _sample_rate;

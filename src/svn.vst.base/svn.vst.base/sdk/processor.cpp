@@ -96,9 +96,13 @@ tresult PLUGIN_API
 processor::process(ProcessData& data)
 {
   block_input& input = _processor->prepare_block(data.numSamples);
+  
   input.bpm = 0.0f;
+  input.stream_position = -1L;
   input.sample_count = data.numSamples;  
 
+  if(data.processContext != nullptr)
+    input.stream_position = data.processContext->projectTimeSamples;
   if(data.processContext != nullptr && data.processContext->kTempoValid) 
     input.bpm = static_cast<float>(data.processContext->tempo);
   if (data.numSamples == 0 || data.numOutputs == 0) 

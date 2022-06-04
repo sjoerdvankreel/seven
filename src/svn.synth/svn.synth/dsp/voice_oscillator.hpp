@@ -11,14 +11,15 @@ namespace svn::synth {
 class voice_oscillator
 {
   float _phase = 0.0f;
+  float _velocity = 0.0f;
   float _frequency = 0.0f;
   float _sample_rate = 0.0f;
   std::int32_t _released = -1;
 
 public:
   voice_oscillator() = default;
-  voice_oscillator(
-    float sample_rate, float frequency);
+  voice_oscillator(float sample_rate, 
+    float frequency, float velocity);
 
   std::int32_t process_block(
     base::block_input const& input, 

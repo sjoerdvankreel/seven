@@ -12,14 +12,17 @@ synth_voice::
 synth_voice(
   base::runtime_topology const* topology,
   base::audio_sample* audio_scratch,
-  float sample_rate, float frequency):
+  float sample_rate, float frequency, float velocity):
 _topology(topology),
 _audio_scratch(audio_scratch),
 _oscillators()
 { 
   assert(topology != nullptr);
   assert(audio_scratch != nullptr);
-  _oscillators.fill(voice_oscillator(sample_rate, frequency));
+  assert(frequency > 0.0f);
+  assert(sample_rate > frequency);
+  assert(0.0f <= velocity && velocity <= 1.0f);
+  _oscillators.fill(voice_oscillator(sample_rate, frequency, velocity));
 }
 
 std::int32_t

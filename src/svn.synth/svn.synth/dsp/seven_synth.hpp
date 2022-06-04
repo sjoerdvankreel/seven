@@ -24,7 +24,15 @@ private:
   // filled with automation state at moment of deactivation otherwise.
   automation_buffer _automation_scratch;
   std::vector<audio_sample> _audio_scratch;
+
+  // Voice management. 
+  // If a voice is activated within the current buffer,
+  // it is considered taken from the beginning of the buffer.
+  // Similarly, if a voice is finished within the current buffer,
+  // it is considered taken untill the end of the buffer.
+  // Oldest voice is recycled first.
   std::array<synth_voice, synth_polyphony> _voices;
+  std::array<std::int64_t, synth_polyphony> _voices_started;
 
 protected:
   void
