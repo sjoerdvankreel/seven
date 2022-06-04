@@ -12,10 +12,10 @@ class automation_view
   void* const* _automation;
   std::int32_t _total_param_count;
   std::int32_t _part_param_count;
+  std::int32_t _part_param_offset;
   std::int32_t _sample_count;
   std::int32_t _sample_offset;
   std::int32_t _sample_fixed_at;
-  std::int32_t _part_param_offset;
 
 public:
   automation_view(
@@ -27,8 +27,15 @@ public:
     std::int32_t sample_offset,
     std::int32_t sample_fixed_at);
 
-  template <typename T>
-  T get(std::int32_t param, std::int32_t sample) const;
+  automation_view rearrange_samples(
+    std::int32_t sample_offset,
+    std::int32_t sample_fixed_at) const;
+  automation_view rearrange_params(
+    std::int32_t part_param_count,
+    std::int32_t part_param_offset) const;
+
+  template <typename T> T
+  get(std::int32_t param, std::int32_t sample) const;
 };
 
 inline automation_view::
@@ -59,6 +66,26 @@ _sample_fixed_at(sample_fixed_at)
   assert(sample_offset < sample_count);
   assert(sample_fixed_at <= sample_count);
   assert(sample_fixed_at >= sample_offset);
+}
+
+inline automation_view 
+automation_view::rearrange_samples(
+  std::int32_t sample_offset,
+  std::int32_t sample_fixed_at) const
+{ 
+  return automation_view(_automation, 
+   _total_param_count, _part_param_count, _part_param_offset, 
+   _sample_count, sample_offset, sample_fixed_at); 
+}
+
+inline automation_view
+automation_view::rearrange_params(
+  std::int32_t part_param_count,
+  std::int32_t part_param_offset) const
+{
+  return automation_view(_automation,
+    _total_param_count, part_param_count, part_param_offset,
+    _sample_count, _sample_offset, _sample_fixed_at);
 }
 
 template <typename T>

@@ -43,7 +43,7 @@ synth_voice::process_block(
   {
     clear_audio(audio_scratch, input.sample_count);
     std::int32_t offset = _topology->bounds[part_type::oscillator][i];
-    part_input.automation = input.automation + offset;
+    part_input.automation = input.automation.rearrange_params(oscillator_param::count, offset);
     part_samples = _oscillators[i].process_block(part_input, audio_scratch, release_sample);
     add_audio(audio, audio_scratch, input.sample_count);
     result = std::max(result, part_samples);
