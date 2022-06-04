@@ -49,7 +49,6 @@ seven_synth::setup_voice_release(
       !_voice_states[v].released_previous_buffer &&
       _voice_states[v].midi == note.midi)
     {
-      assert(!_voice_states[v].release_this_buffer);
       _voice_states[v].release_this_buffer = true;
       _voice_states[v].release_position_buffer = note.sample_index;
     }
