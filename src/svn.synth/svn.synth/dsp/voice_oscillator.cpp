@@ -14,13 +14,13 @@ namespace svn::synth {
 
 voice_oscillator::
 voice_oscillator(float sample_rate, 
-  float frequency, float velocity):
+  float velocity, std::int32_t midi_note):
 _velocity(velocity),
-_frequency(frequency), 
-_sample_rate(sample_rate)
-{ 
-  assert(frequency > 0.0f);
-  assert(sample_rate > frequency);
+_sample_rate(sample_rate),
+_frequency(base::note_to_frequency(static_cast<float>(midi_note)))
+{
+  assert(sample_rate > _frequency);
+  assert(0 <= midi_note && midi_note < 128);
   assert(0.0f <= velocity && velocity <= 1.0f);
 }
 

@@ -12,15 +12,14 @@ namespace svn::synth {
 synth_voice::
 synth_voice(
   base::runtime_topology const* topology,
-  float sample_rate, float frequency, float velocity):
+  float sample_rate, float velocity, std::int32_t midi_note):
 _topology(topology),
 _oscillators()
 { 
   assert(topology != nullptr);  
-  assert(frequency > 0.0f);
-  assert(sample_rate > frequency);
+  assert(0 <= midi_note && midi_note < 128);
   assert(0.0f <= velocity && velocity <= 1.0f);
-  _oscillators.fill(voice_oscillator(sample_rate, frequency, velocity));
+  _oscillators.fill(voice_oscillator(sample_rate, velocity, midi_note));
 }
 
 std::int32_t

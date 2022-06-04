@@ -36,7 +36,7 @@ public:
   synth_voice() = default;
   synth_voice(
     struct base::runtime_topology const* topology,
-    float sample_rate, float frequency, float velocity);
+    float sample_rate, float velocity, std::int32_t midi_note);
 };
 
 } // namespace svn::synth

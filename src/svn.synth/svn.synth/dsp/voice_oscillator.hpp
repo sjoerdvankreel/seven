@@ -17,14 +17,14 @@ class voice_oscillator
   std::int32_t _released = -1;
 
 public:
-  voice_oscillator() = default;
-  voice_oscillator(float sample_rate, 
-    float frequency, float velocity);
-
   std::int32_t process_block(
-    struct voice_input const& input, 
+    struct voice_input const& input,
     base::audio_sample* audio,
     std::int32_t release_sample);
+
+  voice_oscillator() = default;
+  voice_oscillator(float sample_rate, 
+    float velocity, std::int32_t midi_note);
 };
 
 } // namespace svn::synth

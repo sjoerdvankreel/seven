@@ -7,6 +7,7 @@
 #include <svn.base/runtime/runtime_param.hpp>
 #include <svn.base/static/param_descriptor.hpp>
 
+#include <cmath>
 #include <cassert>
 #include <cstdint>
 
@@ -52,6 +53,14 @@ add_audio(
   assert(sample_count >= 0);
   for (std::int32_t s = 0; s < sample_count; s++)
     x[s] += y[s];
+}
+
+// Note including cents.
+inline float
+note_to_frequency(float note)
+{
+  assert(note > 0.0f);
+  return 440.0f * std::pow(2.0f, (note - 69.0f) / 12.0f);
 }
 
 } // namespace svn::base
