@@ -16,7 +16,7 @@ struct voice_state
   // Start position in stream, used for recycling oldest voice when running out.
   std::int64_t start_position_stream = -1;
   // Start position in current buffer, 0 if started in previous buffer.
-  std::int32_t start_position_buffer = 0;
+  std::int32_t start_position_buffer = -1;
   // Used to stop tracking automation after release.
   std::int32_t release_position_buffer = -1;
 };

@@ -72,12 +72,33 @@ void
 seven_synth::process_block(
   block_input const& input, audio_sample* audio)
 {
+  base::block_input voice_input;
+  voice_input.note_count = 0;
+  voice_input.notes = nullptr;
+  voice_input.bpm = input.bpm;
+
   // Set up activation and release state.
   for(std::int32_t n = 0; n < input.note_count; n++)
     if(input.notes[n].note_on)
       setup_voice(input.notes[n], input.stream_position);
     else
       setup_voice_release(input.notes[n]);
+
+  // Process voices that are active anywhere in this buffer.
+  for(std::int32_t v = 0; v < synth_polyphony; v++)
+    if (_voice_states[v].in_use)
+    {
+      std::int32_t voice_start = _voice_states[v].start_position_buffer;
+      std::int32_t voice_release = _voice_states[v].release_position_buffer;
+      assert(voice_release == -1 || voice_release >= voice_start);
+      voice_input.sample_count = input.sample_count - voice_start;
+      voice_input.stream_position = input.stream_position + voice_start;
+      //voice_input.automation
+      //if (_voice_states[v].release_position_buffer != -1)
+      //{
+
+      //}
+    }
 }
 
 } // namespace svn::synth
