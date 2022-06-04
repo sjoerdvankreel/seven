@@ -125,21 +125,24 @@ seven_synth::process_block(
         static_cast<std::int32_t>(topology()->params.size()),
         0, input.sample_count, voice_start, vinput.sample_count);
 
+      std::int32_t release_sample = -1;
       std::int32_t voice_release = _voice_states[v].release_position_buffer;
       // Already released in previous buffer, fix from the beginning.
       if (_voice_states[v].released_previous_buffer)
         vinput.automation = vinput.automation.rearrange_samples(0, 0);
       // Releasing this buffer, do the bookkeeping.
       else if(_voice_states[v].release_this_buffer)
+      {
+        release_sample = voice_release - voice_start;
+        for (std::size_t p = 0; p < topology()->params.size(); p++)
+          _automation_fixed[v][p] = input.automation[p][voice_release];
         vinput.automation = vinput.automation.rearrange_samples(voice_start, voice_release - voice_start);
-      // else nothing to do, we ride along with the active automation values.     
+      }
+      // Else nothing to do, we ride along with the active automation values.     
 
       clear_audio(_voice_audio.data(), vinput.sample_count);
-      if(_voice_states[v].release_this_buffer)
-        for(std::size_t p = 0; p < topology()->params.size(); p++)
-          _automation_fixed[v][p] = input.automation[p][voice_release];
-      std::int32_t processed = _voices[v].process_block(vinput, 
-        _voice_audio_scratch.data(), _voice_audio.data(), voice_release - voice_start);
+      std::int32_t processed = _voices[v].process_block(vinput,
+        _voice_audio_scratch.data(), _voice_audio.data(), release_sample);
       base::add_audio(audio + voice_start, _voice_audio.data(), processed);
       if(processed < vinput.sample_count) return_voice(v);
     }
