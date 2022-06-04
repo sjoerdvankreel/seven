@@ -1,3 +1,4 @@
+#include <svn.base/dsp/dsp.hpp>
 #include <svn.base/dsp/block_input.hpp>
 #include <svn.synth/static/topology.hpp>
 #include <svn.synth/dsp/voice_oscillator.hpp>
@@ -49,9 +50,10 @@ voice_oscillator::process_block(
       _released++;
     }
 
-    float sample = _velocity * decay_level * level[s] * std::sin(2.0f * std::numbers::pi * _phase);
-    audio[s].left = (1.0f - panning[s]) * sample;
-    audio[s].right = panning[s] * sample;
+    float sample = std::sin(2.0f * std::numbers::pi * _phase);
+    float scaled = base::sanity(_velocity * decay_level * level[s] * sample);
+    audio[s].left = (1.0f - panning[s]) * scaled;
+    audio[s].right = panning[s] * scaled;
     _phase += _frequency / _sample_rate;
     _phase -= std::floor(_phase);
   }

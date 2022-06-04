@@ -12,6 +12,24 @@
 
 namespace svn::base {
 
+inline float
+sanity(float val)
+{
+  assert(!std::isnan(val));
+  assert(!std::isinf(val));
+  assert(std::fpclassify(val) != FP_SUBNORMAL);
+  return val;
+}
+
+inline float 
+sanity_bipolar(float val)
+{
+  sanity(val);
+  assert(val <= 1.0f);
+  assert(val >= -1.0f);
+  return val;
+}
+
 inline void
 clear_audio(
   audio_sample* audio, 
