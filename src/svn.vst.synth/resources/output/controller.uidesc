@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vstgui-ui-description version="1">
 	<bitmaps>
-		<bitmap name="knob_green" path="knob_green.png"/>
-		<bitmap name="knob_orange" path="knob_orange.png"/>
-		<bitmap name="background_image" path="background_image.png"/>
+		<bitmap name="green" path="green.png"/>
+		<bitmap name="orange" path="orange.png"/>
+		<bitmap name="background" path="background.png"/>
 	</bitmaps>
 	<colors>
 		<color name="white" rgba="#FFFFFFFF"/>
@@ -15,16 +15,22 @@
 		<color name="orange_50" rgba="#FF800080"/>
 	</colors>
 	<control-tags>
-		<control-tag name="unit1_level" tag="0"/>
-		<control-tag name="unit1_detune" tag="1"/>
-		<control-tag name="unit1_panning" tag="2"/>
-		<control-tag name="unit1_pulse_width" tag="3"/>
-		<control-tag name="unit2_level" tag="4"/>
-		<control-tag name="unit2_detune" tag="5"/>
-		<control-tag name="unit2_panning" tag="6"/>
-		<control-tag name="unit2_pulse_width" tag="7"/>
+		<control-tag name="voice_amp_amp" tag="0"/>
+		<control-tag name="voice_amp_dcy" tag="1"/>
+		<control-tag name="voice_osc_1_on" tag="2"/>
+		<control-tag name="voice_osc_1_type" tag="3"/>
+		<control-tag name="voice_osc_1_pan" tag="4"/>
+		<control-tag name="voice_osc_1_oct" tag="5"/>
+		<control-tag name="voice_osc_1_note" tag="6"/>
+		<control-tag name="voice_osc_1_detune" tag="7"/>
+		<control-tag name="voice_osc_2_on" tag="8"/>
+		<control-tag name="voice_osc_2_type" tag="9"/>
+		<control-tag name="voice_osc_2_pan" tag="10"/>
+		<control-tag name="voice_osc_2_oct" tag="11"/>
+		<control-tag name="voice_osc_2_note" tag="12"/>
+		<control-tag name="voice_osc_2_detune" tag="13"/>
 	</control-tags>
-	<template bitmap="background_image" class="CViewContainer" name="view" size="800, 600">
+	<template bitmap="background" class="CViewContainer" name="view" size="800, 600">
 		<view class="CViewContainer" origin="5, 5" size="105, 75" background-color="orange" background-color-draw-style="stroked">
 			<view class="CViewContainer" origin="0, 0" size="105, 75" background-color="black_50">
 				<view class="CViewContainer" origin="0, 0" size="105, 20" background-color="orange_50">
