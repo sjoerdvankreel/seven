@@ -1,5 +1,5 @@
-#ifndef SVN_BASE_STATIC_ITEM_NAME_HPP
-#define SVN_BASE_STATIC_ITEM_NAME_HPP
+#ifndef SVN_BASE_SUPPORT_ITEM_NAME_HPP
+#define SVN_BASE_SUPPORT_ITEM_NAME_HPP
 
 namespace svn::base {
 
@@ -11,4 +11,4 @@ struct item_name
 };
 
 } // namespace svn::base
-#endif // SVN_BASE_STATIC_ITEM_NAME_HPP
+#endif // SVN_BASE_SUPPORT_ITEM_NAME_HPP

@@ -1,4 +1,4 @@
-#include <svn.base/static/item_name.hpp>
+#include <svn.base/support/item_name.hpp>
 #include <cassert>
 
 namespace svn::base {

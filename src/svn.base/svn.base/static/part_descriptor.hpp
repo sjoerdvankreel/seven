@@ -1,7 +1,7 @@
 #ifndef SVN_BASE_STATIC_PART_DESCRIPTOR_HPP
 #define SVN_BASE_STATIC_PART_DESCRIPTOR_HPP
 
-#include <svn.base/static/item_name.hpp>
+#include <svn.base/support/item_name.hpp>
 #include <cstdint>
 
 namespace svn::base {
