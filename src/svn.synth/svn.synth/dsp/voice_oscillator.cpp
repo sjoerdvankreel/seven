@@ -34,7 +34,7 @@ voice_oscillator::process_block(
     float cent = input.automation.get(voice_osc_param::detune, s).real;
     std::int32_t note = input.automation.get(voice_osc_param::note, s).discrete;
     std::int32_t octave = input.automation.get(voice_osc_param::oct, s).discrete;
-    float frequency = note_to_frequency(12 * octave + note + cent + _midi_note - 60);
+    float frequency = note_to_frequency(12 * (octave + 1) + note + cent + _midi_note - 60);
     float sample = std::sin(2.0f * std::numbers::pi * _phase);
     audio[s].left = (1.0f - panning) * sample;
     audio[s].right = panning * sample;

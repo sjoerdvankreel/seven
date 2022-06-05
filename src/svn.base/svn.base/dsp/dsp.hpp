@@ -60,7 +60,7 @@ add_audio(
 inline float
 note_to_frequency(float note)
 {
-  assert(note > 0.0f);
+  assert(note >= 0.0f);
   return 440.0f * std::pow(2.0f, (note - 69.0f) / 12.0f);
 }
 
