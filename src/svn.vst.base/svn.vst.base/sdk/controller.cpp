@@ -9,6 +9,7 @@
 #include <cstring>
 #include <cstdint>
 
+using namespace VSTGUI;
 using namespace svn::base;
 using namespace Steinberg;
 using namespace Steinberg::Vst;                  
@@ -19,6 +20,14 @@ controller::
 controller(svn::base::runtime_topology const* topology):
 _topology(topology)
 { assert(topology != nullptr); }
+
+
+IPlugView* PLUGIN_API 
+controller::createView(char const* name)
+{
+  if(ConstString(name) != ViewType::kEditor) return nullptr;
+  return new VST3Editor(this, "view", "controller.uidesc");
+}
 
 tresult PLUGIN_API 
 controller::setComponentState(IBStream* state)

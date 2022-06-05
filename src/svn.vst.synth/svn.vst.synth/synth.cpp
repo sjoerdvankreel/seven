@@ -27,7 +27,7 @@ using namespace svn::vst::synth;
 
 Steinberg::FUID 
 init_get_controller_id()
-{ return synth::controller_id; }
+{ return synth::controller_id; } 
 
 std::unique_ptr<runtime_topology>
 init_create_topology()
