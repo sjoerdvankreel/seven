@@ -19,7 +19,7 @@ static Steinberg::FUID const controller_id(0x57068B2B, 0x63374143, 0x85FA79D9, 0
 #endif // NDEBUG
 } // namespace svn::vst::synth
 
-namespace svn::vst::base {
+namespace svn::vst::base { 
 
 using namespace svn::base;
 using namespace svn::synth;
