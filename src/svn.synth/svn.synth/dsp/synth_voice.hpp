@@ -17,7 +17,7 @@ class synth_voice
 private:
   std::vector<audio_sample> _audio_scratch;
   struct base::runtime_topology const* _topology;
-  std::array<voice_oscillator, oscillator_count> _oscillators;
+  std::array<voice_oscillator, voice_osc_count> _oscillators;
 
 public:
   // With input and audio offset to the start of the voice within the current 
