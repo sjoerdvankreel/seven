@@ -29,6 +29,8 @@ private:
   std::vector<base::param_value*> _automation_fixed;
   // Contiguous array of size total voice count * total param count.
   std::vector<base::param_value> _automation_fixed_buffer;
+  // Last automation values of previous buffer, in case we need them on sample 0 the next round.
+  std::vector<base::param_value> _last_automation_previous_block;
 
   // Voice management. 
   // If a voice is activated within the current buffer,

@@ -21,6 +21,7 @@ _voice_audio(static_cast<std::size_t>(max_sample_count)),
 _voice_audio_scratch(static_cast<std::size_t>(max_sample_count)),
 _automation_fixed(static_cast<std::size_t>(synth_polyphony)),
 _automation_fixed_buffer(static_cast<std::size_t>(synth_polyphony * topology->params.size())),
+_last_automation_previous_block(static_cast<std::size_t>(topology->params.size())),
 _voices(),
 _voice_states()
 {
@@ -28,8 +29,11 @@ _voice_states()
   assert(sample_rate > 0.0f);
   assert(topology != nullptr);
   assert(max_sample_count > 0);
+
   for(std::int32_t v = 0; v < synth_polyphony; v++)
     _automation_fixed[v] = _automation_fixed_buffer.data() + v * topology->params.size();
+  // Use defaults on the first round.
+  topology->init_defaults(_last_automation_previous_block.data());
 }
 
 void
@@ -137,17 +141,30 @@ seven_synth::process_block(
 
       std::int32_t release_sample = -1;
       std::int32_t voice_release = _voice_states[v].release_position_buffer;
+      
       // Already released in previous buffer, fix from the beginning.
       if (_voice_states[v].released_previous_buffer)
         vinput.automation = vinput.automation.rearrange_samples(0, 0);
+      
       // Releasing this buffer, do the bookkeeping.
       else if(_voice_states[v].release_this_buffer)
       {
-        release_sample = voice_release - voice_start;
+        // Fix voice to automation values at T-1 if released at time T.
+        // This fixes the case where a new note play in the current channel
+        // together with an automation value, in case we want to apply
+        // the automation change only to the new note.
         for (std::size_t p = 0; p < topology()->params.size(); p++)
-          _automation_fixed[v][p] = input.automation[p][voice_release];
+          if(voice_release == 0)
+            _automation_fixed[v][p] = _last_automation_previous_block[p];
+          else 
+            _automation_fixed[v][p] = input.automation[p][voice_release - 1];
+
+        release_sample = voice_release - voice_start;
+        assert(release_sample >= 0);
         vinput.automation = vinput.automation.rearrange_samples(voice_start, release_sample);
+        _voice_states[v].released_previous_buffer = true;
       }
+
       // Else nothing to do, we ride along with the active automation values.     
 
       clear_audio(_voice_audio.data(), vinput.sample_count);
@@ -162,6 +179,12 @@ seven_synth::process_block(
     output.output_params[output_param::clip].discrete = clip? 1: 0;
     output.output_params[output_param::voices].discrete = voice_count;
     output.output_params[output_param::exhausted].discrete = exhausted? 1: 0;
+
+    // Remember last automation values in case a note is released on the 
+    // next round at sample index 0. Because if a voice is released at
+    // time T then we fix it to the automation values at time T-1.
+    for (std::size_t p = 0; p < topology()->params.size(); p++)
+      _last_automation_previous_block[p] = input.automation[p][input.sample_count - 1];
 }
 
 } // namespace svn::synth

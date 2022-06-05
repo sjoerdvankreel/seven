@@ -84,7 +84,7 @@ automation_view::rearrange_samples(
 { 
   return automation_view(_fixed, _automation, 
    _total_param_count, _part_param_count, _part_param_offset, 
-   _sample_count, sample_offset, _sample_fixed_at);
+   _sample_count, sample_offset, sample_fixed_at);
 }
 
 inline automation_view
