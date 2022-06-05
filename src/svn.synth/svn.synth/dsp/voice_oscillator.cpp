@@ -28,6 +28,8 @@ voice_oscillator::process_block(
   assert(audio != nullptr);
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
+    audio[s] = 0.0f;
+    if(input.automation.get(voice_osc_param::on, s).discrete == 0) continue;
     float panning = input.automation.get(voice_osc_param::pan, s).real;
     float cent = input.automation.get(voice_osc_param::detune, s).real;
     std::int32_t note = input.automation.get(voice_osc_param::note, s).discrete;
