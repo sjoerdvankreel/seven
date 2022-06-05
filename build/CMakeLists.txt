@@ -26,26 +26,26 @@ find_library(VSTGUI_SUPPORT_LIB_Release vstgui_support PATHS "${VST_SDK_375_BUIL
 find_library(VSTGUI_UIDESCRIPTION_LIB_Release vstgui_uidescription PATHS "${VST_SDK_375_BUILD_DIR}/lib/Release")
 
 # Svn base library.
-set(SVN_BASE_SRC_DIR "src/svn.base")
+set(SVN_BASE_SRC_DIR "../src/svn.base")
 file(GLOB_RECURSE SVN_BASE_SRC "${SVN_BASE_SRC_DIR}/*.*")
 add_library(seven.base STATIC ${SVN_BASE_SRC})
-source_group(TREE "../${SVN_BASE_SRC_DIR}" FILES ${SVN_BASE_SRC})
+source_group(TREE "${SVN_BASE_SRC_DIR}" FILES ${SVN_BASE_SRC})
 target_include_directories(seven.base PRIVATE ${SVN_BASE_SRC_DIR})
 
 # Svn synth library.
-set(SVN_SYNTH_SRC_DIR "src/svn.synth")
+set(SVN_SYNTH_SRC_DIR "../src/svn.synth")
 file(GLOB_RECURSE SVN_SYNTH_SRC "${SVN_SYNTH_SRC_DIR}/*.*")
 add_library(seven.synth STATIC ${SVN_SYNTH_SRC})
-source_group(TREE "../${SVN_SYNTH_SRC_DIR}" FILES ${SVN_SYNTH_SRC})
+source_group(TREE "${SVN_SYNTH_SRC_DIR}" FILES ${SVN_SYNTH_SRC})
 target_include_directories(seven.synth PRIVATE ${SVN_BASE_SRC_DIR})
 target_include_directories(seven.synth PRIVATE ${SVN_SYNTH_SRC_DIR})
 target_link_libraries(seven.synth seven.base)
 
 # Svn vst base library.
-set(SVN_VST_BASE_SRC_DIR "src/svn.vst.base")
+set(SVN_VST_BASE_SRC_DIR "../src/svn.vst.base")
 file(GLOB_RECURSE SVN_VST_BASE_SRC "${SVN_VST_BASE_SRC_DIR}/*.*")
 add_library(seven.vst.base STATIC ${SVN_VST_BASE_SRC})
-source_group(TREE "../${SVN_VST_BASE_SRC_DIR}" FILES ${SVN_VST_BASE_SRC})
+source_group(TREE "${SVN_VST_BASE_SRC_DIR}" FILES ${SVN_VST_BASE_SRC})
 target_include_directories(seven.vst.base PRIVATE ${SVN_BASE_SRC_DIR})
 target_include_directories(seven.vst.base PRIVATE ${SVN_VST_BASE_SRC_DIR})
 target_include_directories(seven.vst.base PRIVATE ${VST_SDK_375_SRC_DIR})
@@ -60,10 +60,10 @@ target_link_libraries(seven.vst.base debug "${VSTGUI_SUPPORT_LIB_Debug}" optimiz
 target_link_libraries(seven.vst.base debug "${VSTGUI_UIDESCRIPTION_LIB_Debug}" optimized "${VSTGUI_UIDESCRIPTION_LIB_Release}")
 
 # Svn vst synth.
-set(SVN_VST_SYNTH_SRC_DIR "src/svn.vst.synth")
+set(SVN_VST_SYNTH_SRC_DIR "../src/svn.vst.synth")
 file(GLOB_RECURSE SVN_VST_SYNTH_SRC "${SVN_VST_SYNTH_SRC_DIR}/*.*")
 add_library(seven.vst.synth SHARED ${SVN_VST_SYNTH_SRC})
-source_group(TREE "../${SVN_VST_SYNTH_SRC_DIR}" FILES ${SVN_VST_SYNTH_SRC})
+source_group(TREE "${SVN_VST_SYNTH_SRC_DIR}" FILES ${SVN_VST_SYNTH_SRC})
 target_include_directories(seven.vst.synth PRIVATE ${SVN_BASE_SRC_DIR})
 target_include_directories(seven.vst.synth PRIVATE ${SVN_SYNTH_SRC_DIR})
 target_include_directories(seven.vst.synth PRIVATE ${SVN_VST_BASE_SRC_DIR})
