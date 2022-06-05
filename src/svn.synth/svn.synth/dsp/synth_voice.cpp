@@ -13,10 +13,10 @@ synth_voice::
 synth_voice(
   base::runtime_topology const* topology,
   float sample_rate, float velocity, std::int32_t midi_note):
-_amp(),
+_oscillators(),
 _topology(topology),
-_oscillators()
-{ 
+_amp(sample_rate, velocity)
+{
   assert(topology != nullptr);  
   assert(0 <= midi_note && midi_note < 128);
   assert(0.0f <= velocity && velocity <= 1.0f);
