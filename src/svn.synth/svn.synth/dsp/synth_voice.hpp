@@ -1,8 +1,9 @@
 #ifndef SVN_SYNTH_DSP_SYNTH_VOICE_HPP
 #define SVN_SYNTH_DSP_SYNTH_VOICE_HPP
 
-#include <svn.synth/static/topology.hpp>
+#include <svn.synth/dsp/voice_amp.hpp>
 #include <svn.synth/dsp/voice_oscillator.hpp>
+#include <svn.synth/static/topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
 
 #include <array>
@@ -15,7 +16,7 @@ namespace svn::synth {
 class synth_voice
 {
 private:
-  std::vector<audio_sample> _audio_scratch;
+  voice_amp _amp;
   struct base::runtime_topology const* _topology;
   std::array<voice_oscillator, voice_osc_count> _oscillators;
 

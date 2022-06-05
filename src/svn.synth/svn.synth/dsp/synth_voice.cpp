@@ -13,13 +13,14 @@ synth_voice::
 synth_voice(
   base::runtime_topology const* topology,
   float sample_rate, float velocity, std::int32_t midi_note):
+_amp(),
 _topology(topology),
 _oscillators()
 { 
   assert(topology != nullptr);  
   assert(0 <= midi_note && midi_note < 128);
   assert(0.0f <= velocity && velocity <= 1.0f);
-  _oscillators.fill(voice_oscillator(sample_rate, velocity, midi_note));
+  _oscillators.fill(voice_oscillator(sample_rate, midi_note));
 }
 
 std::int32_t
@@ -34,20 +35,16 @@ synth_voice::process_block(
   assert(audio_scratch != nullptr);
   assert(release_sample < input.sample_count);
 
-  std::int32_t result = 0;
-  std::int32_t part_samples = 0;
   voice_input part_input = input;
-
   for (std::int32_t i = 0; i < voice_osc_count; i++)
   {
     clear_audio(audio_scratch, input.sample_count);
     std::int32_t offset = _topology->bounds[part_type::voice_osc][i];
     part_input.automation = input.automation.rearrange_params(voice_osc_param::count, offset);
-    part_samples = _oscillators[i].process_block(part_input, audio_scratch, release_sample);
+    _oscillators[i].process_block(part_input, audio_scratch);
     add_audio(audio, audio_scratch, input.sample_count);
-    result = std::max(result, part_samples);
   }
-  return result;
+  return _amp.process_block(input, audio, release_sample);
 }
 
 } // namespace svn::synth
