@@ -31,12 +31,10 @@ param_default_to_vst_normalized(param_descriptor const& param)
 static int32
 param_flags(param_type type, bool output)
 {
-  int32 flags = output? ParameterInfo::kIsReadOnly: ParameterInfo::kCanAutomate;
-  switch (type)
-  {
-  case param_type::list: return flags | ParameterInfo::kIsList;
-  default: return flags;
-  }
+  int32 result = ParameterInfo::kCanAutomate;
+  if(output) result |= ParameterInfo::kIsReadOnly;
+  if(type == param_type::list) result |= ParameterInfo::kIsList;
+  return result;
 }
 
 // For output params.
