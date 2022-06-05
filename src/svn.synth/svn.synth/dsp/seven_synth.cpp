@@ -146,7 +146,7 @@ seven_synth::process_block(
         release_sample = voice_release - voice_start;
         for (std::size_t p = 0; p < topology()->params.size(); p++)
           _automation_fixed[v][p] = input.automation[p][voice_release];
-        vinput.automation = vinput.automation.rearrange_samples(voice_start, voice_release - voice_start);
+        vinput.automation = vinput.automation.rearrange_samples(voice_start, release_sample);
       }
       // Else nothing to do, we ride along with the active automation values.     
 
