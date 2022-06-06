@@ -6,6 +6,7 @@
 #include <vstgui/uidescription/rapidjson/include/rapidjson/prettywriter.h>
 #include <vstgui/uidescription/rapidjson/include/rapidjson/ostreamwrapper.h>
 
+#define NOMINMAX 1
 #include <Windows.h>
 
 #include <cstdint>
@@ -14,19 +15,21 @@
 #include <sstream>
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 using namespace svn::base;
 using namespace rapidjson;
 
 // Used for dimension calculations.
-// Parts are layed out top-to-bottom, then left-to-right, and are wrapped based on the max ui height.
-// Parameters are layed out in a grid, in declaration order, based on the control column count in the grid.
+// Parts are layed out top-to-bottom, then left-to-right, in topology.ui_order,
+// and are wrapped based on the max ui height. Parameters are layed out in a grid, 
+// in declaration order, based on the control column count in the part descriptor.
 
 struct param_ui_descriptor
 {
   std::int32_t row;
   std::int32_t column;
-  std::int32_t runtime_param_index; // Or 0 based for output params.
+  std::int32_t runtime_param_index;
 };
 
 struct part_ui_descriptor
@@ -36,9 +39,10 @@ struct part_ui_descriptor
   std::int32_t width;
   std::int32_t height;
   std::int32_t rows;
+  std::int32_t column;
   std::int32_t columns;
   std::int32_t color_index; // Cycles through the color wheel.
-  std::int32_t runtime_part_index; // Or ui_order_output_params.
+  std::int32_t runtime_part_index;
   std::vector<param_ui_descriptor> params;
 };
 
@@ -83,6 +87,8 @@ static rgb const color_wheel[color_count] =
 
 typedef bool (*svn_init_exit_dll_t)(void);
 typedef runtime_topology const* (*svn_get_topology_t)(void);
+static void print_ui_descriptor(
+  runtime_topology const& topology, ui_descriptor const& descriptor);
 static Document build_ui_description(runtime_topology const& toplogy);
 static ui_descriptor build_ui_descriptor(runtime_topology const& topology);
 
@@ -119,8 +125,10 @@ main(int argc, char** argv)
     return 1;
   }
 
+  ui_descriptor descriptor = build_ui_descriptor(*topology);
   std::cout << "Parts: " << topology->parts.size() << ".\n";
   std::cout << "Parameters: " << topology->params.size() << ".\n";
+  print_ui_descriptor(*topology, descriptor);
   
   try
   {
@@ -153,6 +161,35 @@ main(int argc, char** argv)
 
 /* -------- topology to descriptor -------- */
 
+static void
+print_ui_descriptor(
+  runtime_topology const& topology,
+  ui_descriptor const& descriptor)
+{
+  std::cout << "UI descriptor:\n";
+  std::cout << "\tHeight: " << descriptor.height << "\n";
+  std::cout << "\tColumn widths: ";
+  for(std::size_t c = 0; c < descriptor.column_widths.size(); c++)
+    std::cout << descriptor.column_widths[c] << " ";
+  std::cout << "\n";
+  for (std::size_t rp = 0; rp < descriptor.parts.size(); rp++)
+  {
+    std::int32_t rt_index = descriptor.parts[rp].runtime_part_index;
+    std::cout << "\tPart " << (rp + 1) << ":\n";
+    std::wcout << L"\t\tName: " << topology.parts[rt_index].runtime_name << L"\n";
+    std::cout << "\t\tColumn: " << descriptor.parts[rp].column << "\n";
+    std::cout << "\t\tParams: " << descriptor.parts[rp].params.size() << "\n";
+    std::cout << "\t\tColumns: " << descriptor.parts[rp].columns << "\n";
+    std::cout << "\t\tRows: " << descriptor.parts[rp].rows << "\n";
+    std::cout << "\t\tWidth: " << descriptor.parts[rp].width << "\n";
+    std::cout << "\t\tHeight: " << descriptor.parts[rp].height << "\n";
+    std::cout << "\t\tLeft: " << descriptor.parts[rp].left << "\n";
+    std::cout << "\t\tTop: " << descriptor.parts[rp].top << "\n";
+    std::cout << "\t\tColor index: " << descriptor.parts[rp].color_index << "\n";
+  }
+  std::cout << "\n";
+}   
+
 static param_ui_descriptor
 build_param_ui_descriptor(
   std::int32_t row, 
@@ -170,21 +207,21 @@ static part_ui_descriptor
 build_part_ui_descriptor(
   runtime_topology const& topology,
   std::int32_t runtime_part_index,
-  std::int32_t left, std::int32_t top)
+  std::int32_t unordered_type_index,
+  std::int32_t column, std::int32_t left, std::int32_t top)
 {
   part_ui_descriptor result;
   auto const& part = topology.parts[runtime_part_index];
-  std::int32_t param_count = topology.output_param_count;
-  //if(runtime_part_index != ui_order_output_params)
-  //  param_count = part.descriptor->param_count;
+  std::int32_t param_count = part.descriptor->param_count;
 
   result.top = top;
   result.left = left;
+  result.column = column;
   result.runtime_part_index = runtime_part_index;
   result.columns = part.descriptor->ui_control_columns;
   result.rows = param_count / result.columns;
   if(param_count % result.columns != 0) ++result.rows;
-  result.color_index = part.descriptor->type % color_count;
+  result.color_index = unordered_type_index % color_count;
   result.height = (result.rows + 1) * item_height;
   result.width = (result.columns) * (control_width + label_width);
   
@@ -202,20 +239,46 @@ build_part_ui_descriptor(
 static ui_descriptor
 build_ui_descriptor(runtime_topology const& topology)
 {
-  std::set<std::int32_t> unique_part_types;
-  for(std::size_t p = 0; p < topology.parts.size(); p++)
-    unique_part_types.insert(topology.parts[p].descriptor->type);
-  std::size_t part_type_count = unique_part_types.size();
-  if(topology.output_param_count != 0) part_type_count++;
-
   ui_descriptor result;
-  for(std::size_t i = 0; i < part_type_count; i++)
-  {
-    std::int32_t type_index = topology.ui_order[i];
+  std::int32_t top = 0;
+  std::int32_t left = 0;
+  std::int32_t current_column = 0;
+  bool pushed_column_width = false;
+  std::int32_t max_column_height = 0;
+  std::int32_t current_column_width = 0;
 
-    //result.parts.push_back(build_part_ui_descriptor(topology, runtime_part_index, left, top));
+  for(std::int32_t p = 0; p < topology.static_part_count; p++)
+  {
+    std::int32_t ui_index = topology.ui_order[p];
+    auto const& static_part = topology.static_parts[ui_index];
+    for (std::int32_t c = 0; c < static_part.part_count; c++)
+    {
+      pushed_column_width = false;
+      std::int32_t runtime_part_index = topology.part_bounds[ui_index][c];
+      part_ui_descriptor descriptor(build_part_ui_descriptor(
+        topology, runtime_part_index, p, current_column, left, top));
+      if(descriptor.height > topology.max_ui_height)
+        throw std::runtime_error("Part height exceeds max ui height.");
+      current_column_width = std::max(current_column_width, descriptor.width);
+      top += descriptor.height;
+      if (top >= topology.max_ui_height)
+      {
+        top = 0;
+        current_column++;
+        left += current_column_width;
+        descriptor.column++;
+        descriptor.top = top;
+        descriptor.left = left;
+        pushed_column_width = true;
+        result.column_widths.push_back(current_column_width);
+      }
+      result.parts.push_back(descriptor);
+      max_column_height = std::max(max_column_height, descriptor.top + descriptor.height);
+    }
   }
 
+  if(!pushed_column_width) result.column_widths.push_back(current_column_width);
+  result.height = max_column_height;
   return result;
 }
 

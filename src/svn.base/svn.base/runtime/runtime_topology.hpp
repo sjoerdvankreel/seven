@@ -13,10 +13,13 @@ namespace svn::base {
 
 struct runtime_topology
 {
+  struct part_descriptor const* static_parts; // Static description of audio processor.
+  std::int32_t static_part_count; // Part count in static description.
   std::int32_t max_note_events = 0; // Not the same as polyphony.
   std::vector<runtime_part> parts; // Runtime part descriptor array, e.g. osc 1, osc 2, filter 1, filter 2.
   std::vector<runtime_param> params; // Runtime parameter descriptor array, e.g. osc 1 wave, osc 1 amp, osc 2 wave, etc.
-  std::vector<std::vector<std::int32_t>> bounds; // Runtime parameter bounds, e.g. bounds[part_type::osc][1] points to osc 2 wave.
+  std::vector<std::vector<std::int32_t>> part_bounds; // Runtime part bounds, e.g. bounds[part_type::osc][1] indexes osc 2 part.
+  std::vector<std::vector<std::int32_t>> param_bounds; // Runtime parameter bounds, e.g. bounds[part_type::osc][1] indexes osc 2 wave param.
   std::int32_t max_ui_height; // For ui generator. 
   std::int32_t const* ui_order; // For ui generator. Part types mixed with ui_order_output_params. Ui generation goes top-down first, then left-right.
   std::int32_t input_param_count = 0; // Runtime input params.

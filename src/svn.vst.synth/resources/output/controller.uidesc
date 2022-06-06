@@ -86,7 +86,10 @@
             "osc_2_panning": "10",
             "osc_2_octave": "11",
             "osc_2_note": "12",
-            "osc_2_detune": "13"
+            "osc_2_detune": "13",
+            "out_clip": "14",
+            "out_exhausted": "15",
+            "out_voice_count": "16"
         },
         "templates": {
             "view": {

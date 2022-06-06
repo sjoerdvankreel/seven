@@ -24,33 +24,41 @@ runtime_topology::create(
   std::int32_t max_note_events, std::int32_t max_ui_height, std::int32_t const* ui_order)
 {
   bool seen_output = false;
+  assert(part_count > 0);
   assert(max_note_events >= 0);
+  assert(static_parts != nullptr);
   assert(ui_order == nullptr && max_ui_height == 0 || ui_order != nullptr && max_ui_height > 0);
 
   auto result = std::make_unique<runtime_topology>();
   result->ui_order = ui_order;
   result->input_param_count = 0;
   result->output_param_count = 0;
+  result->static_parts = static_parts;
+  result->static_part_count = part_count;
   result->max_ui_height = max_ui_height;
   result->max_note_events = max_note_events;
 
+  std::int32_t part_index = 0;
   std::int32_t param_index = 0;
   for (std::int32_t t = 0; t < part_count; t++)
   {
     seen_output |= static_parts[t].output;
     assert(!seen_output || static_parts[t].output);
     std::int32_t type_index = 0;
-    result->bounds.push_back(std::vector<std::int32_t>());
+    result->part_bounds.push_back(std::vector<std::int32_t>());
+    result->param_bounds.push_back(std::vector<std::int32_t>());
     std::wstring type_name(static_parts[t].static_name.short_);
     for (std::int32_t i = 0; i < static_parts[t].part_count; i++)
     {
-      result->bounds[t].push_back(param_index);
+      result->part_bounds[t].push_back(part_index);
+      result->param_bounds[t].push_back(param_index);
       std::wstring runtime_name = type_name;
-      param_index += static_parts[t].param_count;
       if(static_parts[t].output) result->output_param_count += static_parts[t].param_count;
       else result->input_param_count += static_parts[t].param_count;
       if (static_parts[t].part_count > 1) runtime_name += std::wstring(L" ") + std::to_wstring(i + 1);
       result->parts.push_back(runtime_part(type_index++, runtime_name, param_index, &static_parts[t]));
+      part_index++;
+      param_index += static_parts[t].param_count;
     }
   }
 
@@ -67,7 +75,8 @@ runtime_topology::create(
 
   assert(result->parts.size() > 0);
   assert(result->params.size() > 0);
-  assert(result->bounds.size() > 0);
+  assert(result->part_bounds.size() > 0);
+  assert(result->param_bounds.size() > 0);
   assert(result->params.size() == result->input_param_count + result->output_param_count);
   return result;
 }

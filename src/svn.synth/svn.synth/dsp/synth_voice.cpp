@@ -39,7 +39,7 @@ synth_voice::process_block(
   for (std::int32_t i = 0; i < voice_osc_count; i++)
   {
     clear_audio(audio_scratch, input.sample_count);
-    std::int32_t offset = _topology->bounds[part_type::voice_osc][i];
+    std::int32_t offset = _topology->param_bounds[part_type::voice_osc][i];
     part_input.automation = input.automation.rearrange_params(voice_osc_param::count, offset);
     _oscillators[i].process_block(part_input, audio_scratch);
     add_audio(audio, audio_scratch, input.sample_count);
