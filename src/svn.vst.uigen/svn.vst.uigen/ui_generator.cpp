@@ -139,6 +139,18 @@ narrow_assume_ascii(std::wstring const& wide)
   return result;
 }
 
+static std::string
+get_control_tag(std::wstring const& runtime_param_name)
+{
+  std::string result = narrow_assume_ascii(runtime_param_name);
+  for (std::size_t c = 0; c < result.length(); c++)
+  {
+    if(std::isspace(result[c])) result[c] = '_';
+    else result[c] = static_cast<char>(std::tolower(result[c]));
+  }
+  return result;
+}
+
 static Value
 build_ui_bitmaps(Document::AllocatorType& allocator)
 {
@@ -207,11 +219,25 @@ build_ui_control_tags(
   Value result(kObjectType);
   for (std::size_t p = 0; p < topology.params.size(); p++)
   {
-    std::string name = narrow_assume_ascii(topology.params[p].runtime_name);
-    Value key(name.c_str(), allocator);
+    std::string tag = get_control_tag(topology.params[p].runtime_name);
+    Value key(tag.c_str(), allocator);
     Value value(std::to_string(p).c_str(), allocator);
     result.AddMember(key, value, allocator);
   }
+  return result;
+}
+
+static Value
+build_ui_view_template(
+  Document::AllocatorType& allocator, runtime_topology const& topology)
+{
+  Value result(kObjectType);
+  Value view(kObjectType);
+  view.AddMember("size", "800, 600", allocator);
+  view.AddMember("class", "CViewContainer", allocator);
+  Value background(print_rgb_hex(black, true, 0xFF).c_str(), allocator);
+  view.AddMember("background-color", background, allocator);
+  result.AddMember("view", view, allocator);
   return result;
 }
 
@@ -226,6 +252,7 @@ build_ui_description(runtime_topology const& topology)
   description.AddMember("bitmaps", build_ui_bitmaps(allocator), allocator);
   description.AddMember("colors", build_ui_colors(allocator), allocator);
   description.AddMember("control-tags", build_ui_control_tags(allocator, topology), allocator);
+  description.AddMember("templates", build_ui_view_template(allocator, topology), allocator);
   result.AddMember("vstgui-ui-description", description, allocator);
   return result;
 }

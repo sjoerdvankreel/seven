@@ -73,20 +73,27 @@
             "FF008080": "#FF008080"
         },
         "control-tags": {
-            "Amp Level": "0",
-            "Amp Decay": "1",
-            "Osc 1 Enabled": "2",
-            "Osc 1 Type": "3",
-            "Osc 1 Panning": "4",
-            "Osc 1 Octave": "5",
-            "Osc 1 Note": "6",
-            "Osc 1 Detune": "7",
-            "Osc 2 Enabled": "8",
-            "Osc 2 Type": "9",
-            "Osc 2 Panning": "10",
-            "Osc 2 Octave": "11",
-            "Osc 2 Note": "12",
-            "Osc 2 Detune": "13"
+            "amp_level": "0",
+            "amp_decay": "1",
+            "osc_1_enabled": "2",
+            "osc_1_type": "3",
+            "osc_1_panning": "4",
+            "osc_1_octave": "5",
+            "osc_1_note": "6",
+            "osc_1_detune": "7",
+            "osc_2_enabled": "8",
+            "osc_2_type": "9",
+            "osc_2_panning": "10",
+            "osc_2_octave": "11",
+            "osc_2_note": "12",
+            "osc_2_detune": "13"
+        },
+        "templates": {
+            "view": {
+                "size": "800, 600",
+                "class": "CViewContainer",
+                "background-color": "000000FF"
+            }
         }
     }
 }
