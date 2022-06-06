@@ -175,8 +175,19 @@ build_ui_colors(Document::AllocatorType& allocator)
   return result;
 }
 
+static Value
+build_ui_control_tags(Document::AllocatorType& allocator, runtime_topology const& topology)
+{
+  Value result(kObjectType);
+  for (std::size_t p = 0; p < topology.params.size(); p++)
+  {
+    //Value key(topology.params[p].runtime_name, allocator);
+  }
+  return result;
+}
+
 static Document
-build_ui_description(runtime_topology const& toplogy)
+build_ui_description(runtime_topology const& topology)
 {
   Document result;
   result.SetObject();
@@ -185,6 +196,7 @@ build_ui_description(runtime_topology const& toplogy)
   description.AddMember("version", 1, allocator);
   description.AddMember("bitmaps", build_ui_bitmaps(allocator), allocator);
   description.AddMember("colors", build_ui_colors(allocator), allocator);
+  description.AddMember("control-tags", build_ui_control_tags(allocator, topology), allocator);
   result.AddMember("vstgui-ui-description", description, allocator);
   return result;
 }
