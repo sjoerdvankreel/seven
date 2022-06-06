@@ -214,7 +214,6 @@ build_ui_descriptor(runtime_topology const& topology)
   std::int32_t top = 0;
   std::int32_t left = 0;
   std::int32_t current_column = 0;
-  bool pushed_column_width = false;
   std::int32_t max_column_height = 0;
   std::int32_t current_column_width = 0;
 
@@ -224,7 +223,6 @@ build_ui_descriptor(runtime_topology const& topology)
     auto const& static_part = topology.static_parts[ui_index];
     for (std::int32_t c = 0; c < static_part.part_count; c++)
     {
-      pushed_column_width = false;
       std::int32_t runtime_part_index = topology.part_bounds[ui_index][c];
       part_ui_descriptor descriptor(build_part_ui_descriptor(
         topology, runtime_part_index, p, current_column, left, top));
@@ -243,8 +241,6 @@ build_ui_descriptor(runtime_topology const& topology)
         top = 0;
         current_column++;
         left += current_column_width;
-        pushed_column_width = true;
-        result.column_widths.push_back(current_column_width);
         current_column_width = 0;
       }
       result.parts.push_back(descriptor);
@@ -252,12 +248,17 @@ build_ui_descriptor(runtime_topology const& topology)
     }
   }
 
-  if(!pushed_column_width) 
-    result.column_widths.push_back(current_column_width);
-  result.width = 0;
-  for(std::size_t i = 0; i < result.column_widths.size(); i++)
-    result.width += result.column_widths[i];
   result.height = max_column_height;
+  std::int32_t previous_column = -1;
+  result.width = 0;
+  for(std::size_t i = 0; i < result.parts.size(); i++)
+    if (result.parts[i].column != previous_column)
+    {
+      result.width += result.parts[i].width;
+      result.column_widths.push_back(result.parts[i].width);
+      previous_column = result.parts[i].column;
+    }
+
   return result;
 }
 
