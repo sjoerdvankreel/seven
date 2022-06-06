@@ -10,6 +10,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <stdexcept>
 
 using namespace svn::base;
 using namespace rapidjson;
@@ -90,8 +91,9 @@ main(int argc, char** argv)
     os.flush();
     os.close();
   }
-  catch(...)
+  catch(std::exception const& e)
   {
+    std::cout << e.what() << "\n.";
     std::cout << "Failed to write " << argv[2] << ".\n";
     reinterpret_cast<svn_init_exit_dll_t>(exit_dll)();
     return 1;
@@ -117,6 +119,24 @@ print_rgb_hex(rgb color, bool print_alpha, std::uint8_t alpha)
   oss << ((alpha >> 4) & 0xF);
   oss << (alpha & 0xF);
   return oss.str();
+}
+
+static std::string 
+narrow_assume_ascii(std::wstring const& wide)
+{
+  std::string result;
+  for (std::size_t c = 0; c < wide.length(); c++)
+  {
+    if (wide[c] > 127)
+    {
+      std::string error("Unexpected character: ");
+      error += std::to_string(static_cast<int>(wide[c]));
+      error += ".";
+      throw std::runtime_error(error);
+    }
+    result += static_cast<char>(wide[c]);
+  }
+  return result;
 }
 
 static Value
@@ -176,12 +196,16 @@ build_ui_colors(Document::AllocatorType& allocator)
 }
 
 static Value
-build_ui_control_tags(Document::AllocatorType& allocator, runtime_topology const& topology)
+build_ui_control_tags(
+  Document::AllocatorType& allocator, runtime_topology const& topology)
 {
   Value result(kObjectType);
   for (std::size_t p = 0; p < topology.params.size(); p++)
   {
-    //Value key(topology.params[p].runtime_name, allocator);
+    std::string name = narrow_assume_ascii(topology.params[p].runtime_name);
+    Value key(name.c_str(), allocator);
+    Value value(std::to_string(p).c_str(), allocator);
+    result.AddMember(key, value, allocator);
   }
   return result;
 }

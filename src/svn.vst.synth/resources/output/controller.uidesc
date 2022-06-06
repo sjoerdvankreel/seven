@@ -69,6 +69,21 @@
             "FF0080FF": "#FF0080FF",
             "FF008080": "#FF008080"
         },
-        "control-tags": {}
+        "control-tags": {
+            "Amp Level": "0",
+            "Amp Decay": "1",
+            "Osc 1 Enabled": "2",
+            "Osc 1 Type": "3",
+            "Osc 1 Panning": "4",
+            "Osc 1 Octave": "5",
+            "Osc 1 Note": "6",
+            "Osc 1 Detune": "7",
+            "Osc 2 Enabled": "8",
+            "Osc 2 Type": "9",
+            "Osc 2 Panning": "10",
+            "Osc 2 Octave": "11",
+            "Osc 2 Note": "12",
+            "Osc 2 Detune": "13"
+        }
     }
 }
