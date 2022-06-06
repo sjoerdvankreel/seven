@@ -75,9 +75,9 @@ main(int argc, char** argv)
   std::cout << "Input parameters: " << topology->params.size() << ".\n";
   std::cout << "Output parameters: " << topology->output_param_count << ".\n";
   
-  Document ui_description(build_ui_description(*topology));
   try
   {
+    Document ui_description(build_ui_description(*topology));
     std::ofstream os(argv[2]);
     OStreamWrapper wrapper(os);
     PrettyWriter<OStreamWrapper> writer(wrapper);
@@ -93,7 +93,7 @@ main(int argc, char** argv)
   }
   catch(std::exception const& e)
   {
-    std::cout << e.what() << "\n.";
+    std::cout << e.what() << "\n";
     std::cout << "Failed to write " << argv[2] << ".\n";
     reinterpret_cast<svn_init_exit_dll_t>(exit_dll)();
     return 1;
