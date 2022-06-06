@@ -1,5 +1,73 @@
 {
     "vstgui-ui-description": {
-        "version": 1
+        "version": 1,
+        "bitmaps": {
+            "FF0000": {
+                "path": "FF0000.png"
+            },
+            "FF8000": {
+                "path": "FF8000.png"
+            },
+            "FFFF00": {
+                "path": "FFFF00.png"
+            },
+            "80FF00": {
+                "path": "80FF00.png"
+            },
+            "00FF00": {
+                "path": "00FF00.png"
+            },
+            "00FF80": {
+                "path": "00FF80.png"
+            },
+            "00FFFF": {
+                "path": "00FFFF.png"
+            },
+            "0080FF": {
+                "path": "0080FF.png"
+            },
+            "0000FF": {
+                "path": "0000FF.png"
+            },
+            "8000FF": {
+                "path": "8000FF.png"
+            },
+            "FF00FF": {
+                "path": "FF00FF.png"
+            },
+            "FF0080": {
+                "path": "FF0080.png"
+            }
+        },
+        "colors": {
+            "FFFFFFFF": "#FFFFFFFF",
+            "FFFFFF80": "#FFFFFF80",
+            "000000FF": "#000000FF",
+            "00000080": "#00000080",
+            "FF0000FF": "#FF0000FF",
+            "FF000080": "#FF000080",
+            "FF8000FF": "#FF8000FF",
+            "FF800080": "#FF800080",
+            "FFFF00FF": "#FFFF00FF",
+            "FFFF0080": "#FFFF0080",
+            "80FF00FF": "#80FF00FF",
+            "80FF0080": "#80FF0080",
+            "00FF00FF": "#00FF00FF",
+            "00FF0080": "#00FF0080",
+            "00FF80FF": "#00FF80FF",
+            "00FF8080": "#00FF8080",
+            "00FFFFFF": "#00FFFFFF",
+            "00FFFF80": "#00FFFF80",
+            "0080FFFF": "#0080FFFF",
+            "0080FF80": "#0080FF80",
+            "0000FFFF": "#0000FFFF",
+            "0000FF80": "#0000FF80",
+            "8000FFFF": "#8000FFFF",
+            "8000FF80": "#8000FF80",
+            "FF00FFFF": "#FF00FFFF",
+            "FF00FF80": "#FF00FF80",
+            "FF0080FF": "#FF0080FF",
+            "FF008080": "#FF008080"
+        }
     }
 }
