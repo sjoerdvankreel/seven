@@ -22,13 +22,16 @@ std::unique_ptr<runtime_topology>
 runtime_topology::create(
   part_descriptor const* static_parts, std::int32_t part_count, 
   param_descriptor const* output_params, std::int32_t output_param_count,
-  std::int32_t max_note_events)
+  std::int32_t max_note_events, std::int32_t ui_height, std::int32_t const* ui_order)
 {
   assert(max_note_events >= 0);
   assert(output_param_count >= 0);
   assert(output_params == nullptr || output_param_count > 0);
+  assert(ui_order == nullptr && ui_height == 0 || ui_order != nullptr && ui_height > 0);
 
   auto result = std::make_unique<runtime_topology>();
+  result->ui_order = ui_order;
+  result->ui_height = ui_height;
   result->max_note_events = max_note_events;
   result->output_params = output_params;
   result->output_param_count = output_param_count;

@@ -1,10 +1,19 @@
 #include <svn.synth/static/topology.hpp>
 #include <svn.base/support/item_name.hpp>
 #include <svn.base/support/note_name.hpp>
+#include <svn.base/runtime/runtime_topology.hpp>
 
 using namespace svn::base;
 
 namespace svn::synth {
+
+std::int32_t const 
+synth_ui_order[part_type::count + 1] = 
+{
+  part_type::voice_amp,
+  ui_order_output_params,
+  part_type::voice_osc
+};
 
 static item_name const
 voice_osc_types[voice_osc_type::count] =

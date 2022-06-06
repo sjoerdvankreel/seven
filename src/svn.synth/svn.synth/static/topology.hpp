@@ -8,7 +8,9 @@ namespace svn::synth {
 
 inline std::int32_t constexpr voice_osc_count = 2;
 inline std::int32_t constexpr synth_polyphony = 32;
+inline std::int32_t constexpr synth_ui_height = 600;
 
+extern std::int32_t const synth_ui_order[];
 extern base::param_descriptor const output_params[];
 extern base::part_descriptor const part_descriptors[];
 extern base::param_descriptor const voice_osc_params[];
