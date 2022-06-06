@@ -240,12 +240,16 @@ static Value
 build_ui_view_template(
   Document::AllocatorType& allocator, runtime_topology const& topology)
 {
-  Value result(kObjectType);
-  Value view(kObjectType);
-  view.AddMember("size", "800, 600", allocator);
-  view.AddMember("class", "CViewContainer", allocator);
+  Value attrs(kObjectType);
+  attrs.AddMember("size", "500, 100", allocator);
+  attrs.AddMember("minSize", "500, 100", allocator);
+  attrs.AddMember("maxSize", "500, 100", allocator);
+  attrs.AddMember("class", "CViewContainer", allocator);
   Value background(print_rgb_hex(black, true, 0xFF).c_str(), allocator);
-  view.AddMember("background-color", background, allocator);
+  attrs.AddMember("background-color", "color_0080FFFF", allocator);
+  Value view(kObjectType);
+  view.AddMember("attributes", attrs, allocator);
+  Value result(kObjectType);
   result.AddMember("view", view, allocator);
   return result;
 }

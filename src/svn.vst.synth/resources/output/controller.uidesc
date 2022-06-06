@@ -90,9 +90,13 @@
         },
         "templates": {
             "view": {
-                "size": "800, 600",
-                "class": "CViewContainer",
-                "background-color": "000000FF"
+                "attributes": {
+                    "size": "500, 100",
+                    "minSize": "500, 100",
+                    "maxSize": "500, 100",
+                    "class": "CViewContainer",
+                    "background-color": "color_0080FFFF"
+                }
             }
         }
     }
