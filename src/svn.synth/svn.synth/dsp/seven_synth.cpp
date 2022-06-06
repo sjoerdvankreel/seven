@@ -20,8 +20,8 @@ audio_processor(topology, sample_rate, max_sample_count, state),
 _voice_audio(static_cast<std::size_t>(max_sample_count)),
 _voice_audio_scratch(static_cast<std::size_t>(max_sample_count)),
 _automation_fixed(static_cast<std::size_t>(synth_polyphony)),
-_automation_fixed_buffer(static_cast<std::size_t>(synth_polyphony * topology->params.size())),
-_last_automation_previous_block(static_cast<std::size_t>(topology->params.size())),
+_automation_fixed_buffer(static_cast<std::size_t>(synth_polyphony * topology->input_param_count)),
+_last_automation_previous_block(static_cast<std::size_t>(topology->input_param_count)),
 _voices(),
 _voice_states()
 {
@@ -31,7 +31,7 @@ _voice_states()
   assert(max_sample_count > 0);
 
   for(std::int32_t v = 0; v < synth_polyphony; v++)
-    _automation_fixed[v] = _automation_fixed_buffer.data() + v * topology->params.size();
+    _automation_fixed[v] = _automation_fixed_buffer.data() + v * topology->input_param_count;
   // Use defaults on the first round.
   topology->init_defaults(_last_automation_previous_block.data());
 }
@@ -135,8 +135,8 @@ seven_synth::process_block(
       vinput.stream_position = input.stream_position + voice_start;
       vinput.automation = base::automation_view(
         _automation_fixed[v], input.automation,
-        static_cast<std::int32_t>(topology()->params.size()),
-        static_cast<std::int32_t>(topology()->params.size()),
+        topology()->input_param_count,
+        topology()->input_param_count,
         0, input.sample_count, voice_start, vinput.sample_count);
 
       std::int32_t release_sample = -1;
@@ -153,7 +153,7 @@ seven_synth::process_block(
         // This fixes the case where a new note play in the current channel
         // together with an automation value, in case we want to apply
         // the automation change only to the new note.
-        for (std::size_t p = 0; p < topology()->params.size(); p++)
+        for (std::int32_t p = 0; p < topology()->input_param_count; p++)
           if(voice_release == 0)
             _automation_fixed[v][p] = _last_automation_previous_block[p];
           else 
@@ -176,14 +176,14 @@ seven_synth::process_block(
 
     // Clip and set output info.
     bool clip = clip_audio(output.audio, input.sample_count);
-    output.output_params[output_param::clip].discrete = clip? 1: 0;
-    output.output_params[output_param::voices].discrete = voice_count;
-    output.output_params[output_param::exhausted].discrete = exhausted? 1: 0;
+    output.output_params[glob_output_param::clip].discrete = clip? 1: 0;
+    output.output_params[glob_output_param::voices].discrete = voice_count;
+    output.output_params[glob_output_param::exhausted].discrete = exhausted? 1: 0;
 
     // Remember last automation values in case a note is released on the 
     // next round at sample index 0. Because if a voice is released at
     // time T then we fix it to the automation values at time T-1.
-    for (std::size_t p = 0; p < topology()->params.size(); p++)
+    for (std::int32_t p = 0; p < topology()->input_param_count; p++)
       _last_automation_previous_block[p] = input.automation[p][input.sample_count - 1];
 }
 

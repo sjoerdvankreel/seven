@@ -21,17 +21,9 @@ private:
 
 public:
 
-  // Creates an input parameter.
   parameter(
     std::int32_t index, 
     svn::base::runtime_param const* param);
-
-  // Creates an output parameter.
-  // Index starts counting from input parameter count.
-  parameter(
-    std::int32_t index,
-    svn::base::param_descriptor const* descriptor);
-
   static std::int32_t vst_normalized_to_discrete(
     svn::base::param_descriptor const& param, double val);
   static double discrete_to_vst_normalized(

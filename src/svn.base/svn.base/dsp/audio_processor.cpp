@@ -17,8 +17,8 @@ _audio(static_cast<std::size_t>(max_sample_count)),
 _sample_rate(sample_rate),
 _state(state),
 _topology(topology),
-_automation(topology->params.size()),
-_automation_buffer(topology->params.size() * max_sample_count),
+_automation(static_cast<std::size_t>(topology->input_param_count)),
+_automation_buffer(static_cast<std::size_t>(topology->input_param_count) * max_sample_count),
 _output_param_buffer(static_cast<std::size_t>(topology->output_param_count))
 {
   assert(state != nullptr);
@@ -35,7 +35,7 @@ _output_param_buffer(static_cast<std::size_t>(topology->output_param_count))
   
   std::int32_t real_p = 0;
   std::int32_t discrete_p = 0;
-  for (std::size_t p = 0; p < topology->params.size(); p++)
+  for (std::int32_t p = 0; p < topology->input_param_count; p++)
     _automation[p] = _automation_buffer.data() + p * max_sample_count;
 }
 
@@ -53,7 +53,7 @@ audio_processor::process_block()
 void
 audio_processor::state_check()
 {
-  for (std::size_t p = 0; p < _topology->params.size(); p++)
+  for (std::int32_t p = 0; p < _topology->input_param_count; p++)
   {
     auto const& descriptor = *_topology->params[p].descriptor;
     if (descriptor.type == param_type::real)
@@ -70,13 +70,13 @@ audio_processor::prepare_block(std::int32_t sample_count)
   _input.note_count = 0;
   for (std::int32_t p = 0; p < _topology->output_param_count; p++)
   {
-    auto const& descriptor = _topology->output_params[p];
+    auto const& descriptor = *_topology->params[_topology->input_param_count + p].descriptor;
     if (descriptor.type == param_type::real)
       _output.output_params[p].real = 0.0f;
     else
       _output.output_params[p].discrete = descriptor.default_.discrete;
   }
-  for (std::size_t p = 0; p < _topology->params.size(); p++)
+  for (std::int32_t p = 0; p < _topology->input_param_count; p++)
   {
     auto const& descriptor = *_topology->params[p].descriptor;
     if (descriptor.type == param_type::real)
@@ -92,7 +92,7 @@ audio_processor::prepare_block(std::int32_t sample_count)
 void
 audio_processor::automation_check(std::int32_t sample_count)
 {
-  for (std::size_t p = 0; p < _topology->params.size(); p++)
+  for (std::int32_t p = 0; p < _topology->input_param_count; p++)
   {
     auto const& descriptor = *_topology->params[p].descriptor;
     for (std::int32_t s = 0; s < sample_count; s++)
@@ -107,7 +107,7 @@ audio_processor::automation_check(std::int32_t sample_count)
 void
 audio_processor::transform_automation()
 {
-  for (std::size_t p = 0; p < _topology->params.size(); p++)
+  for (std::int32_t p = 0; p < _topology->input_param_count; p++)
   {
     auto const& descriptor = *_topology->params[p].descriptor;
     if (descriptor.type == param_type::real)

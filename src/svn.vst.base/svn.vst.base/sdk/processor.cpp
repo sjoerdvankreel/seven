@@ -24,14 +24,14 @@ processor::
 processor(
   Steinberg::FUID controller_id,
   runtime_topology const* topology):
-_state(static_cast<std::size_t>(topology->params.size())),
-_accurateParameters(static_cast<std::size_t>(topology->params.size())),
+_state(static_cast<std::size_t>(topology->input_param_count)),
+_accurateParameters(static_cast<std::size_t>(topology->input_param_count)),
 _topology(topology),
 _processor()
 {
 	setControllerClass(controller_id);
   topology->init_defaults(_state.data());
-  for(std::size_t i = 0; i < topology->params.size(); i++)
+  for(std::int32_t i = 0; i < topology->input_param_count; i++)
     _accurateParameters[i].setParamID(static_cast<std::int32_t>(i));
 }
 
@@ -216,13 +216,13 @@ processor::process_output_parameters(
   int32 index;
   double normalized;
   if (!data.outputParameterChanges) return;
-  std::int32_t input_count = static_cast<std::int32_t>(_processor->topology()->params.size());
-
+  
+  std::int32_t input_count = _processor->topology()->input_param_count;
   for (std::int32_t p = 0; p < _processor->topology()->output_param_count; p++)
   {
     IParamValueQueue* queue = data.outputParameterChanges->addParameterData(input_count + p, index);
     if (queue == nullptr) continue;
-    auto const& descriptor = _processor->topology()->output_params[p];
+    auto const& descriptor = *_processor->topology()->params[input_count + p].descriptor;
     param_value value = output.output_params[p];
     if(descriptor.type == param_type::real)
       normalized = descriptor.dsp.from_range(value.real);

@@ -33,14 +33,14 @@ tresult PLUGIN_API
 controller::setComponentState(IBStream* state)
 {
   param_value value;
-  std::vector<param_value> values(_topology->params.size(), value);
+  std::vector<param_value> values(_topology->input_param_count, value);
   
   if (state == nullptr) return kResultFalse;
   IBStreamer streamer(state, kLittleEndian);
   vst_io_stream stream(&streamer);
   if(!stream.load(*_topology, values.data())) return kResultFalse;
 
-  for(std::size_t p = 0; p < _topology->params.size(); p++)
+  for(std::int32_t p = 0; p < _topology->input_param_count; p++)
     if(_topology->params[p].descriptor->type == param_type::real)
       setParamNormalized(p, values[p].real);
     else
@@ -54,13 +54,10 @@ controller::initialize(FUnknown* context)
 {
   tresult result = EditControllerEx1::initialize(context);
   if (result != kResultTrue) return result;
-  std::int32_t input_count = static_cast<std::int32_t>(_topology->params.size());
   for (std::size_t p = 0; p < _topology->parts.size(); p++)
     addUnit(new Unit(_topology->parts[p].runtime_name.c_str(), p + 1, kRootUnitId));
   for (std::size_t p = 0; p < _topology->params.size(); p++)
-    parameters.addParameter(new parameter(static_cast<std::int32_t>(p), &_topology->params[p]));
-  for(std::int32_t p = 0; p < _topology->output_param_count; p++)
-    parameters.addParameter(new parameter(static_cast<std::int32_t>(input_count + p), &_topology->output_params[p]));
+    parameters.addParameter(new parameter(p, &_topology->params[p]));
   return kResultTrue;
 }
 

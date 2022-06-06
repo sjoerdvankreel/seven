@@ -120,8 +120,7 @@ main(int argc, char** argv)
   }
 
   std::cout << "Parts: " << topology->parts.size() << ".\n";
-  std::cout << "Input parameters: " << topology->params.size() << ".\n";
-  std::cout << "Output parameters: " << topology->output_param_count << ".\n";
+  std::cout << "Parameters: " << topology->params.size() << ".\n";
   
   try
   {
@@ -176,8 +175,8 @@ build_part_ui_descriptor(
   part_ui_descriptor result;
   auto const& part = topology.parts[runtime_part_index];
   std::int32_t param_count = topology.output_param_count;
-  if(runtime_part_index != ui_order_output_params)
-    param_count = part.descriptor->param_count;
+  //if(runtime_part_index != ui_order_output_params)
+  //  param_count = part.descriptor->param_count;
 
   result.top = top;
   result.left = left;
@@ -214,7 +213,7 @@ build_ui_descriptor(runtime_topology const& topology)
   {
     std::int32_t type_index = topology.ui_order[i];
 
-    result.parts.push_back(build_part_ui_descriptor(topology, runtime_part_index, left, top));
+    //result.parts.push_back(build_part_ui_descriptor(topology, runtime_part_index, left, top));
   }
 
   return result;

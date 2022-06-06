@@ -8,6 +8,7 @@ namespace svn::base {
 
 struct part_descriptor
 {
+  bool output; // Part contains output parameters.
   std::int32_t const type; // Type id, e.g. Osc, Filter.
   item_name const static_name; // Static name, e.g. "Osc", "Filter".
   std::int32_t const part_count; // Part count of this type, e.g. 2 filters.
@@ -16,7 +17,7 @@ struct part_descriptor
   std::int32_t const ui_control_columns; // For ui generator. Number of parameters stacked left-to-right.
 
   part_descriptor(
-    std::int32_t type,
+    std::int32_t type, bool output,
     item_name const& static_name, std::int32_t part_count,
     param_descriptor const* params, std::int32_t param_count,
     std::int32_t ui_control_columns);

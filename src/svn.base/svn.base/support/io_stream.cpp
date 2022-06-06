@@ -22,9 +22,9 @@ io_stream::save(runtime_topology const& topology, param_value const* state)
 
   if(!write_int32(magic)) return false;
   if(!write_int32(version)) return false;
-  if(!write_int32(static_cast<std::int32_t>(topology.params.size()))) return false;
+  if(!write_int32(topology.input_param_count)) return false;
 
-  for (std::size_t p = 0; p < topology.params.size(); p++)
+  for (std::int32_t p = 0; p < topology.input_param_count; p++)
   {
     auto const& part = *topology.params[p].part;
     auto const& param = *topology.params[p].descriptor;
@@ -99,7 +99,7 @@ io_stream::load(runtime_topology const& topology, param_value* state)
       break;
     }
 
-    for (std::size_t rp = 0; rp < topology.params.size(); rp++)
+    for (std::int32_t rp = 0; rp < topology.input_param_count; rp++)
     {
       auto const& part = topology.params[rp].part;
       auto const& param = topology.params[rp].descriptor;

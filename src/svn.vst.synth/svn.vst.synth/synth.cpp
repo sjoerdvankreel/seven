@@ -33,8 +33,7 @@ std::unique_ptr<runtime_topology>
 init_create_topology()
 { 
   return runtime_topology::create(
-    part_descriptors, part_type::count, 
-    output_params, output_param::count,
+    part_descriptors, part_type::count,
     synth_polyphony, synth_max_ui_height, synth_ui_order);
 }
  
