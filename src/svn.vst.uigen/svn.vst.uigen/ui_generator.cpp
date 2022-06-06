@@ -8,13 +8,31 @@
 #include <Windows.h>
 #include <fstream>
 #include <iostream>
+#include <cstdint>
 
 using namespace svn::base;
 using namespace rapidjson;
 
+struct rgba { std::uint8_t r, g, b, a; };
 typedef bool (*svn_init_exit_dll_t)(void);
 typedef runtime_topology const*(*svn_get_topology_t)(void);
 static Document build_ui_description(runtime_topology const& toplogy);
+
+static rgba const color_wheel[12] =
+{
+  { 0xFF, 0x00, 0x00, 0xFF },
+  { 0xFF, 0x80, 0x00, 0xFF },
+  { 0xFF, 0xFF, 0x00, 0xFF },
+  { 0x80, 0xFF, 0x00, 0xFF },
+  { 0x00, 0xFF, 0x00, 0xFF },
+  { 0x00, 0xFF, 0x80, 0xFF },
+  { 0x00, 0xFF, 0xFF, 0xFF },
+  { 0x00, 0x80, 0xFF, 0xFF },
+  { 0x00, 0x00, 0xFF, 0xFF },
+  { 0x80, 0x00, 0xFF, 0xFF },
+  { 0xFF, 0x00, 0xFF, 0xFF },
+  { 0xFF, 0x00, 0x80, 0xFF }
+};
 
 // Builds vst3 .uidesc file based on topology.
 // We use the rapidjson distribution included with the vst3 sdk.
@@ -85,7 +103,8 @@ build_ui_description(runtime_topology const& toplogy)
   Document result;
   result.SetObject();
   Document::AllocatorType& allocator = result.GetAllocator();
-  result.AddMember("version", 1, allocator);
-  result.AddMember("testId", 2, allocator);
+  Value description(kObjectType);
+  description.AddMember("version", 1, allocator);
+  result.AddMember("vstgui-ui-description", description, allocator);
   return result;
 }
