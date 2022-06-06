@@ -124,14 +124,13 @@ main(int argc, char** argv)
     reinterpret_cast<svn_init_exit_dll_t>(exit_dll)();
     return 1;
   }
-
-  ui_descriptor descriptor = build_ui_descriptor(*topology);
-  std::cout << "Parts: " << topology->parts.size() << ".\n";
-  std::cout << "Parameters: " << topology->params.size() << ".\n";
-  print_ui_descriptor(*topology, descriptor);
   
   try
   {
+    ui_descriptor descriptor = build_ui_descriptor(*topology);
+    std::cout << "Parts: " << topology->parts.size() << ".\n";
+    std::cout << "Parameters: " << topology->params.size() << ".\n";
+    print_ui_descriptor(*topology, descriptor);
     Document ui_description(build_ui_description(*topology));
     std::ofstream os(argv[2]);
     OStreamWrapper wrapper(os);
