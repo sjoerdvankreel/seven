@@ -22,11 +22,9 @@ std::unique_ptr<runtime_topology>
 runtime_topology::create(
   part_descriptor const* static_parts, std::int32_t part_count, 
   param_descriptor const* output_params, std::int32_t output_param_count,
-  std::int32_t max_note_events, std::int32_t output_ui_row, std::int32_t output_ui_column)
+  std::int32_t max_note_events)
 {
   assert(max_note_events >= 0);
-  assert(output_ui_row >= 0);
-  assert(output_ui_column >= 0);
   assert(output_param_count >= 0);
   assert(output_params == nullptr || output_param_count > 0);
 

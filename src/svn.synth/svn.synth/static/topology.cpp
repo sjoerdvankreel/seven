@@ -24,8 +24,8 @@ output_params[output_param::count] =
 part_descriptor const
 part_descriptors[part_type::count] =
 {
-  { part_type::voice_amp, { L"Amp", L"Voice level" }, 1, voice_amp_params, voice_amp_param::count, 0, 0 },
-  { part_type::voice_osc, { L"Osc", L"Voice oscillator" }, voice_osc_count, voice_osc_params, voice_osc_param::count, 0, 1 }
+  { part_type::voice_amp, { L"Amp", L"Voice level" }, 1, voice_amp_params, voice_amp_param::count },
+  { part_type::voice_osc, { L"Osc", L"Voice oscillator" }, voice_osc_count, voice_osc_params, voice_osc_param::count }
 };
 
 param_descriptor const

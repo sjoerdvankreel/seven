@@ -35,8 +35,7 @@ init_create_topology()
   return runtime_topology::create(
     part_descriptors, part_type::count, 
     output_params, output_param::count,
-    synth_polyphony,
-    synth_output_ui_row, synth_output_ui_column);
+    synth_polyphony); 
 }
  
 std::unique_ptr<svn::base::audio_processor>
