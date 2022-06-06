@@ -248,17 +248,18 @@ build_ui_descriptor(runtime_topology const& topology)
     }
   }
 
-  result.height = max_column_height;
-  std::int32_t previous_column = -1;
   result.width = 0;
-  for(std::size_t i = 0; i < result.parts.size(); i++)
-    if (result.parts[i].column != previous_column)
-    {
-      result.width += result.parts[i].width;
-      result.column_widths.push_back(result.parts[i].width);
-      previous_column = result.parts[i].column;
-    }
-
+  result.height = max_column_height;
+  std::int32_t column_count = 0;
+  for(std::size_t p = 0; p < result.parts.size(); p++)
+    column_count = std::max(column_count, result.parts[p].column + 1);
+  result.column_widths.resize(column_count);
+  for(std::int32_t c = 0; c < column_count; c++)
+    for(std::size_t p = 0; p < result.parts.size(); p++)
+      if(result.parts[p].column == c)
+        result.column_widths[c] = std::max(result.column_widths[c], result.parts[p].width);
+  for(std::int32_t c = 0; c < column_count; c++)
+    result.width += result.column_widths[c];
   return result;
 }
 
