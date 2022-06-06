@@ -160,35 +160,6 @@ main(int argc, char** argv)
 
 /* -------- topology to descriptor -------- */
 
-static void
-print_ui_descriptor(
-  runtime_topology const& topology,
-  ui_descriptor const& descriptor)
-{
-  std::cout << "UI descriptor:\n";
-  std::cout << "\tHeight: " << descriptor.height << "\n";
-  std::cout << "\tColumn widths: ";
-  for(std::size_t c = 0; c < descriptor.column_widths.size(); c++)
-    std::cout << descriptor.column_widths[c] << " ";
-  std::cout << "\n";
-  for (std::size_t rp = 0; rp < descriptor.parts.size(); rp++)
-  {
-    std::int32_t rt_index = descriptor.parts[rp].runtime_part_index;
-    std::cout << "\tPart " << (rp + 1) << ":\n";
-    std::wcout << L"\t\tName: " << topology.parts[rt_index].runtime_name << L"\n";
-    std::cout << "\t\tColumn: " << descriptor.parts[rp].column << "\n";
-    std::cout << "\t\tParams: " << descriptor.parts[rp].params.size() << "\n";
-    std::cout << "\t\tColumns: " << descriptor.parts[rp].columns << "\n";
-    std::cout << "\t\tRows: " << descriptor.parts[rp].rows << "\n";
-    std::cout << "\t\tWidth: " << descriptor.parts[rp].width << "\n";
-    std::cout << "\t\tHeight: " << descriptor.parts[rp].height << "\n";
-    std::cout << "\t\tLeft: " << descriptor.parts[rp].left << "\n";
-    std::cout << "\t\tTop: " << descriptor.parts[rp].top << "\n";
-    std::cout << "\t\tColor index: " << descriptor.parts[rp].color_index << "\n";
-  }
-  std::cout << "\n";
-}   
-
 static param_ui_descriptor
 build_param_ui_descriptor(
   std::int32_t row, 
@@ -282,6 +253,35 @@ build_ui_descriptor(runtime_topology const& topology)
   if(!pushed_column_width) result.column_widths.push_back(current_column_width);
   result.height = max_column_height;
   return result;
+}
+
+static void
+print_ui_descriptor(
+  runtime_topology const& topology,
+  ui_descriptor const& descriptor)
+{
+  std::cout << "UI descriptor:\n";
+  std::cout << "\tHeight: " << descriptor.height << "\n";
+  std::cout << "\tColumn widths: ";
+  for (std::size_t c = 0; c < descriptor.column_widths.size(); c++)
+    std::cout << descriptor.column_widths[c] << " ";
+  std::cout << "\n";
+  for (std::size_t rp = 0; rp < descriptor.parts.size(); rp++)
+  {
+    std::int32_t rt_index = descriptor.parts[rp].runtime_part_index;
+    std::cout << "\tPart " << (rp + 1) << ":\n";
+    std::wcout << L"\t\tName: " << topology.parts[rt_index].runtime_name << L"\n";
+    std::cout << "\t\tColumn: " << descriptor.parts[rp].column << "\n";
+    std::cout << "\t\tParams: " << descriptor.parts[rp].params.size() << "\n";
+    std::cout << "\t\tColumns: " << descriptor.parts[rp].columns << "\n";
+    std::cout << "\t\tRows: " << descriptor.parts[rp].rows << "\n";
+    std::cout << "\t\tWidth: " << descriptor.parts[rp].width << "\n";
+    std::cout << "\t\tHeight: " << descriptor.parts[rp].height << "\n";
+    std::cout << "\t\tLeft: " << descriptor.parts[rp].left << "\n";
+    std::cout << "\t\tTop: " << descriptor.parts[rp].top << "\n";
+    std::cout << "\t\tColor index: " << descriptor.parts[rp].color_index << "\n";
+  }
+  std::cout << "\n";
 }
 
 /* -------- descriptor to json -------- */
