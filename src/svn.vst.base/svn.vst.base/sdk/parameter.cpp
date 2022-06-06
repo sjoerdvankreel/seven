@@ -48,7 +48,7 @@ Parameter(
   0, 
   descriptor->static_name.short_),
   _descriptor(descriptor)
-{  
+{    
   assert(index >= 0);
   assert(descriptor != nullptr);
 }

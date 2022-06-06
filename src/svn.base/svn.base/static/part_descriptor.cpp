@@ -10,7 +10,7 @@ part_descriptor(
   param_descriptor const* params, std::int32_t param_count) :
 type(type), static_name(static_name), part_count(part_count),
 param_count(param_count), params(params)
-{
+{ 
   assert(part_count > 0);
   assert(param_count > 0);
   assert(params != nullptr);

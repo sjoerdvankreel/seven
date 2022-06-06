@@ -104,6 +104,14 @@ main(int argc, char** argv)
   return 0;
 }
 
+static std::string 
+get_color_name(std::string rgb)
+{ return "color_" + rgb; }
+
+static std::string 
+get_bitmap_name(std::string rgb)
+{ return "bitmap_" + rgb; }
+
 static std::string
 print_rgb_hex(rgb color, bool print_alpha, std::uint8_t alpha)
 {
@@ -156,14 +164,15 @@ build_ui_bitmaps(Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   
-  Value background(kObjectType);
-  background.AddMember("path", "background.png", allocator);
-  result.AddMember("background", background, allocator);
+  Value background_value(kObjectType);
+  background_value.AddMember("path", "background.png", allocator);
+  Value background_key(get_bitmap_name("background").c_str(), allocator);
+  result.AddMember(background_key, background_value, allocator);
 
   for (std::size_t c = 0; c < color_count; c++)
   {
     std::string name = print_rgb_hex(color_wheel[c], false, 0x0);
-    Value key(name.c_str(), allocator);
+    Value key(get_bitmap_name(name).c_str(), allocator);
     Value value(kObjectType);
     Value path((name + ".png").c_str(), allocator);
     value.AddMember("path", path, allocator);
@@ -178,35 +187,35 @@ build_ui_colors(Document::AllocatorType& allocator)
   Value result(kObjectType);
 
   std::string white_opaque = print_rgb_hex(white, true, 0xFF);
-  Value white_opaque_key(white_opaque.c_str(), allocator);
   Value white_opaque_value(("#" + white_opaque).c_str(), allocator);
+  Value white_opaque_key(get_color_name(white_opaque).c_str(), allocator);
   result.AddMember(white_opaque_key, white_opaque_value, allocator);
 
   std::string white_50 = print_rgb_hex(white, true, 0x80);
-  Value white_50_key(white_50.c_str(), allocator);
   Value white_50_value(("#" + white_50).c_str(), allocator);
+  Value white_50_key(get_color_name(white_50).c_str(), allocator);
   result.AddMember(white_50_key, white_50_value, allocator);
 
   std::string black_opaque = print_rgb_hex(black, true, 0xFF);
-  Value black_opaque_key(black_opaque.c_str(), allocator);
   Value black_opaque_value(("#" + black_opaque).c_str(), allocator);
+  Value black_opaque_key(get_color_name(black_opaque).c_str(), allocator);
   result.AddMember(black_opaque_key, black_opaque_value, allocator);
 
   std::string black_50 = print_rgb_hex(black, true, 0x80);
-  Value black_50_key(black_50.c_str(), allocator);
   Value black_50_value(("#" + black_50).c_str(), allocator);
+  Value black_50_key(get_color_name(black_50).c_str(), allocator);
   result.AddMember(black_50_key, black_50_value, allocator);
 
   for(std::size_t c = 0; c < color_count; c++)
   {
     std::string name_opaque = print_rgb_hex(color_wheel[c], true, 0xFF);
-    Value key_opaque(name_opaque.c_str(), allocator);
     Value value_opaque(("#" + name_opaque).c_str(), allocator);
+    Value key_opaque(get_color_name(name_opaque).c_str(), allocator);
     result.AddMember(key_opaque, value_opaque, allocator);
 
     std::string name_50 = print_rgb_hex(color_wheel[c], true, 0x80);
-    Value key_50(name_50.c_str(), allocator);
     Value value_50(("#" + name_50).c_str(), allocator);
+    Value key_50(get_color_name(name_50).c_str(), allocator);
     result.AddMember(key_50, value_50, allocator);
   }
   return result;
@@ -248,7 +257,7 @@ build_ui_description(runtime_topology const& topology)
   result.SetObject();
   Document::AllocatorType& allocator = result.GetAllocator();
   Value description(kObjectType);
-  description.AddMember("version", 1, allocator);
+  description.AddMember("version", "1", allocator);
   description.AddMember("bitmaps", build_ui_bitmaps(allocator), allocator);
   description.AddMember("colors", build_ui_colors(allocator), allocator);
   description.AddMember("control-tags", build_ui_control_tags(allocator, topology), allocator);
