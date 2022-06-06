@@ -27,6 +27,12 @@ DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 
 extern "C" {
 
+// Ui generator support.
+SMTG_EXPORT_SYMBOL
+svn::base::runtime_topology const*
+svn_get_topology()
+{ return _topology.get(); }
+
 SMTG_EXPORT_SYMBOL 
 bool ExitDll()
 {

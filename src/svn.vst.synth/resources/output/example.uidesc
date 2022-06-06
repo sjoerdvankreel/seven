@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vstgui-ui-description version="1">
+	<bitmaps>
+		<bitmap name="green" path="green.png"/>
+		<bitmap name="orange" path="orange.png"/>
+		<bitmap name="background" path="background.png"/>
+	</bitmaps>
+	<colors>
+		<color name="white" rgba="#FFFFFFFF"/>
+		<color name="black" rgba="#000000FF"/>
+		<color name="black_50" rgba="#00000080"/>
+		<color name="green" rgba="#00FF80FF"/>
+		<color name="green_50" rgba="#00FF8080"/>
+		<color name="orange" rgba="#FF8000FF"/>
+		<color name="orange_50" rgba="#FF800080"/>
+	</colors>
+	<control-tags>
+		<control-tag name="voice_amp_amp" tag="0"/>
+		<control-tag name="voice_amp_dcy" tag="1"/>
+		<control-tag name="voice_osc_1_on" tag="2"/>
+		<control-tag name="voice_osc_1_type" tag="3"/>
+		<control-tag name="voice_osc_1_pan" tag="4"/>
+		<control-tag name="voice_osc_1_oct" tag="5"/>
+		<control-tag name="voice_osc_1_note" tag="6"/>
+		<control-tag name="voice_osc_1_dtn" tag="7"/>
+		<control-tag name="voice_osc_2_on" tag="8"/>
+		<control-tag name="voice_osc_2_type" tag="9"/>
+		<control-tag name="voice_osc_2_pan" tag="10"/>
+		<control-tag name="voice_osc_2_oct" tag="11"/>
+		<control-tag name="voice_osc_2_note" tag="12"/>
+		<control-tag name="voice_osc_2_dtn" tag="13"/>
+	</control-tags>
+	<template bitmap="background" class="CViewContainer" name="view" size="800, 600">
+		<view class="CViewContainer" origin="5, 5" size="105, 50" background-color="orange" background-color-draw-style="stroked">
+			<view class="CViewContainer" origin="0, 0" size="105, 50" background-color="black_50">
+				<view class="CViewContainer" origin="0, 0" size="105, 20" background-color="orange_50">
+					<view class="CTextLabel" origin="0, 0" size="105, 20" text-alignment="left" font="~ NormalFontSmall" font-color="white" title=" Amp" transparent="true" />
+				</view>
+				<view class="CViewContainer" origin="5, 25" size="100, 25" transparent="true">
+					<view class="CAnimKnob" origin="0, 0" size="20, 20" control-tag="voice_amp_amp" bitmap="orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="25, 0" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="orange" title="Amp" transparent="true" />
+					<view class="CAnimKnob" origin="50, 0" size="20, 20" control-tag="voice_amp_dcy" bitmap="orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="75, 0" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="orange" title="Dcy" transparent="true" />
+				</view>
+			</view>
+		</view>
+		<view class="CViewContainer" origin="5, 60" size="105, 100" background-color="green" background-color-draw-style="stroked">
+			<view class="CViewContainer" origin="0, 0" size="105, 100" background-color="black_50">
+				<view class="CViewContainer" origin="0, 0" size="105, 20" background-color="green_50">
+					<view class="CTextLabel" origin="0, 0" size="105, 20" text-alignment="left" font="~ NormalFontSmall" font-color="white" title=" Osc 1" transparent="true" />
+				</view>
+				<view class="CViewContainer" origin="5, 25" size="100, 75" transparent="true">
+					<view class="CAnimKnob" origin="0, 0" size="20, 20" control-tag="voice_osc_1_on" bitmap="green" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="25, 0" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="On" transparent="true" />
+					<view class="CAnimKnob" origin="50, 0" size="20, 20" control-tag="voice_osc_1_type" bitmap="green" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="75, 0" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="Type" transparent="true" />
+					<view class="CAnimKnob" origin="0, 25" size="20, 20" control-tag="voice_osc_1_pan" bitmap="green" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="25, 25" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="Pan" transparent="true" />
+					<view class="CAnimKnob" origin="50, 25" size="20, 20" control-tag="voice_osc_1_oct" bitmap="green" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="75, 25" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="Oct" transparent="true" />
+					<view class="CAnimKnob" origin="0, 50" size="20, 20" control-tag="voice_osc_1_note" bitmap="green" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="25, 50" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="Note" transparent="true" />
+					<view class="CAnimKnob" origin="50, 50" size="20, 20" control-tag="voice_osc_1_dtn" bitmap="green" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="75, 50" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="Dtn" transparent="true" />
+				</view>
+			</view>
+		</view>
+		<view class="CViewContainer" origin="5, 165" size="105, 100" background-color="green" background-color-draw-style="stroked">
+			<view class="CViewContainer" origin="0, 0" size="105, 100" background-color="black_50">
+				<view class="CViewContainer" origin="0, 0" size="105, 20" background-color="green_50">
+					<view class="CTextLabel" origin="0, 0" size="105, 20" text-alignment="left" font="~ NormalFontSmall" font-color="white" title=" Osc 1" transparent="true" />
+				</view>
+				<view class="CViewContainer" origin="5, 25" size="100, 75" transparent="true">
+					<view class="CAnimKnob" origin="0, 0" size="20, 20" control-tag="voice_osc_2_on" bitmap="green" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="25, 0" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="On" transparent="true" />
+					<view class="CAnimKnob" origin="50, 0" size="20, 20" control-tag="voice_osc_2_type" bitmap="green" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="75, 0" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="Type" transparent="true" />
+					<view class="CAnimKnob" origin="0, 25" size="20, 20" control-tag="voice_osc_2_pan" bitmap="green" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="25, 25" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="Pan" transparent="true" />
+					<view class="CAnimKnob" origin="50, 25" size="20, 20" control-tag="voice_osc_2_oct" bitmap="green" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="75, 25" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="Oct" transparent="true" />
+					<view class="CAnimKnob" origin="0, 50" size="20, 20" control-tag="voice_osc_2_note" bitmap="green" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="25, 50" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="Note" transparent="true" />
+					<view class="CAnimKnob" origin="50, 50" size="20, 20" control-tag="voice_osc_2_dtn" bitmap="green" angle-start="20" angle-range="320" height-of-one-image="20"/>
+					<view class="CTextLabel" origin="75, 50" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="green" title="Dtn" transparent="true" />
+				</view>
+			</view>
+		</view>
+	</template>
+</vstgui-ui-description>

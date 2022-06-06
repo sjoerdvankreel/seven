@@ -81,3 +81,10 @@ add_custom_target(copy-resources-synth-debug ALL DEPENDS seven.vst.synth COMMAND
 add_custom_target(copy-resources-synth-base-release ALL DEPENDS seven.vst.synth COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/src/svn.vst.base/resources/output ${CMAKE_BINARY_DIR}/Release/seven.vst.synth.vst3/Contents/Resources)
 add_custom_target(copy-resources-synth-base-debug ALL DEPENDS seven.vst.synth COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/src/svn.vst.base/resources/output ${CMAKE_BINARY_DIR}/Debug/seven.vst.synth.debug.vst3/Contents/Resources)
 
+# Svn vst uigenerator.
+set(SVN_VST_UIGEN_SRC_DIR "src/svn.vst.uigen")
+file(GLOB_RECURSE SVN_VST_UIGEN_SRC "${SVN_VST_UIGEN_SRC_DIR}/*.*")
+add_executable(seven.vst.uigen ${SVN_VST_UIGEN_SRC})
+source_group(TREE "../${SVN_VST_UIGEN_SRC_DIR}" FILES ${SVN_VST_UIGEN_SRC})
+target_include_directories(seven.vst.uigen PRIVATE ${SVN_BASE_SRC_DIR})
+target_link_libraries(seven.vst.uigen seven.base)
