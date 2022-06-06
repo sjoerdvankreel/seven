@@ -143,6 +143,11 @@ static Value
 build_ui_bitmaps(Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
+  
+  Value background(kObjectType);
+  background.AddMember("path", "background.png", allocator);
+  result.AddMember("background", background, allocator);
+
   for (std::size_t c = 0; c < color_count; c++)
   {
     std::string name = print_rgb_hex(color_wheel[c], false, 0x0);

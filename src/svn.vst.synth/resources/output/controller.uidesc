@@ -2,6 +2,9 @@
     "vstgui-ui-description": {
         "version": 1,
         "bitmaps": {
+            "background": {
+                "path": "background.png"
+            },
             "FF0000": {
                 "path": "FF0000.png"
             },
