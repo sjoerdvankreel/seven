@@ -24,7 +24,8 @@ struct param_ui_descriptor
 {
   std::int32_t row;
   std::int32_t column;
-  std::int32_t param_index;
+  runtime_param const* runtime_param; // Or null for output params.
+  param_descriptor const* static_param;
 };
 
 struct part_ui_descriptor
@@ -35,7 +36,7 @@ struct part_ui_descriptor
   std::int32_t height;
   std::int32_t rows;
   std::int32_t columns;
-  std::int32_t part_index; // Or ui_order_output_params.
+  std::int32_t runtime_part_index; // Or ui_order_output_params.
   std::vector<param_ui_descriptor> params;
 };
 
@@ -43,6 +44,7 @@ struct ui_descriptor
 {
   std::int32_t height;
   std::vector<part_ui_descriptor> parts;
+  std::vector<std::int32_t> column_widths;
 };
 
 static std::int32_t const margin = 5;
@@ -80,6 +82,9 @@ static rgb const color_wheel[color_count] =
 typedef bool (*svn_init_exit_dll_t)(void);
 typedef runtime_topology const* (*svn_get_topology_t)(void);
 static Document build_ui_description(runtime_topology const& toplogy);
+static ui_descriptor build_ui_descriptor(runtime_topology const& topology);
+
+/* -------- driver -------- */
 
 // Builds vst3 .uidesc file based on topology.
 // We use the rapidjson distribution included with the vst3 sdk.
@@ -144,6 +149,40 @@ main(int argc, char** argv)
   reinterpret_cast<svn_init_exit_dll_t>(exit_dll)();
   return 0;
 }
+
+/* -------- topology to descriptor -------- */
+
+static param_ui_descriptor
+build_param_ui_descriptor(
+  std::int32_t row, 
+  std::int32_t column, 
+  std::int32_t runtime_param_index)
+{
+  param_ui_descriptor result;
+  result.row = row;
+  result.column = column;
+  //result.runtime_param_index = runtime_param_index;
+  return result;
+}
+
+static part_ui_descriptor
+build_part_ui_descriptor(
+  runtime_topology const& topology,
+  std::int32_t runtime_part_index)
+{
+  part_ui_descriptor result;
+ // topology.parts[runtime_part_index].
+   return result;
+}
+
+static ui_descriptor
+build_ui_descriptor(runtime_topology const& topology)
+{
+  ui_descriptor result;
+  return result;
+}
+
+/* -------- descriptor to json -------- */
 
 static std::string 
 get_color_name(std::string rgb)

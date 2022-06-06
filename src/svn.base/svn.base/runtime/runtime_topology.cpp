@@ -48,7 +48,7 @@ runtime_topology::create(
       std::wstring runtime_name = type_name;
       param_index += static_parts[t].param_count;
       if (static_parts[t].part_count > 1) runtime_name += std::wstring(L" ") + std::to_wstring(i + 1);
-      result->parts.push_back(runtime_part(type_index++, runtime_name, &static_parts[t]));
+      result->parts.push_back(runtime_part(type_index++, runtime_name, param_index, &static_parts[t]));
     }
   }
 
