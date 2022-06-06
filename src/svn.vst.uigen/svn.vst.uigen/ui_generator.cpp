@@ -1,14 +1,23 @@
 #include <svn.base/runtime/runtime_topology.hpp>
+
+#include <vstgui/uidescription/rapidjson/include/rapidjson/document.h>
+#include <vstgui/uidescription/rapidjson/include/rapidjson/rapidjson.h>
+#include <vstgui/uidescription/rapidjson/include/rapidjson/prettywriter.h>
+#include <vstgui/uidescription/rapidjson/include/rapidjson/ostreamwrapper.h>
+
 #include <Windows.h>
 #include <fstream>
 #include <iostream>
 
 using namespace svn::base;
+using namespace rapidjson;
 
 typedef bool (*svn_init_exit_dll_t)(void);
 typedef runtime_topology const*(*svn_get_topology_t)(void);
+static Document build_ui_description(runtime_topology const& toplogy);
 
 // Builds vst3 .uidesc file based on topology.
+// We use the rapidjson distribution included with the vst3 sdk.
 int 
 main(int argc, char** argv)
 {
@@ -41,19 +50,22 @@ main(int argc, char** argv)
   std::cout << "Parts: " << topology->parts.size() << ".\n";
   std::cout << "Input parameters: " << topology->params.size() << ".\n";
   std::cout << "Output parameters: " << topology->output_param_count << ".\n";
-
+  
+  Document ui_description(build_ui_description(*topology));
   try
   {
-    std::ofstream output(argv[2]);
-    output << "ui description";
-    if (output.bad())
+    std::ofstream os(argv[2]);
+    OStreamWrapper wrapper(os);
+    PrettyWriter<OStreamWrapper> writer(wrapper);
+    ui_description.Accept(writer);
+    if (os.bad())
     {
       std::cout << "Failed to write " << argv[2] << ".\n";
       reinterpret_cast<svn_init_exit_dll_t>(exit_dll)();
       return 1;
     }
-    output.flush();
-    output.close();
+    os.flush();
+    os.close();
   }
   catch(...)
   {
@@ -65,4 +77,15 @@ main(int argc, char** argv)
   std::cout << "Ui description written to " << argv[2] << ".\n";
   reinterpret_cast<svn_init_exit_dll_t>(exit_dll)();
   return 0;
+}
+
+static Document
+build_ui_description(runtime_topology const& toplogy)
+{
+  Document result;
+  result.SetObject();
+  Document::AllocatorType& allocator = result.GetAllocator();
+  result.AddMember("version", 1, allocator);
+  result.AddMember("testId", 2, allocator);
+  return result;
 }

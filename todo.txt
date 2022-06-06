@@ -1,3 +1,4 @@
 handle bpm+default bpm
 handle nans and denormals
 output params
+DVSTGUI_LIVE_EDITING=0 DVSTGUI_ENABLE_XML_PARSER=0
