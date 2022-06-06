@@ -16,6 +16,35 @@
 using namespace svn::base;
 using namespace rapidjson;
 
+// Used for dimension calculations.
+// Parts are layed out top-to-bottom, then left-to-right, and are wrapped based on the max ui height.
+// Parameters are layed out in a grid, in declaration order, based on the control column count in the grid.
+
+struct param_ui_descriptor
+{
+  std::int32_t row;
+  std::int32_t column;
+  std::int32_t param_index;
+};
+
+struct part_ui_descriptor
+{
+  std::int32_t top;
+  std::int32_t left;
+  std::int32_t width;
+  std::int32_t height;
+  std::int32_t rows;
+  std::int32_t columns;
+  std::int32_t part_index; // Or ui_order_output_params.
+  std::vector<param_ui_descriptor> params;
+};
+
+struct ui_descriptor
+{
+  std::int32_t height;
+  std::vector<part_ui_descriptor> parts;
+};
+
 static std::int32_t const margin = 5;
 static std::int32_t const item_height = 20;
 static std::int32_t const label_width = 40;
