@@ -260,14 +260,17 @@ build_ui_descriptor(runtime_topology const& topology)
         throw std::runtime_error("Part height exceeds max ui height.");
       current_column_width = std::max(current_column_width, descriptor.width);
       top += descriptor.height;
-      if (top > topology.max_ui_height)
+      if (top >= topology.max_ui_height)
       {
+        if (top > topology.max_ui_height)
+        {
+          descriptor.column++;
+          descriptor.top = 0;
+          descriptor.left = descriptor.left + current_column_width;
+        }
         top = 0;
         current_column++;
         left += current_column_width;
-        descriptor.column++;
-        descriptor.top = top;
-        descriptor.left = left;
         pushed_column_width = true;
         result.column_widths.push_back(current_column_width);
       }
