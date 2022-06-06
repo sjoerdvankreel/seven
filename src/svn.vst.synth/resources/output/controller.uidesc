@@ -43,10 +43,10 @@
             }
         },
         "colors": {
-            "color_FFFFFFFF": "#FFFFFFFF",
-            "color_FFFFFF80": "#FFFFFF80",
-            "color_000000FF": "#000000FF",
-            "color_00000080": "#00000080",
+            "color_whiteFF": "#FFFFFFFF",
+            "color_white80": "#FFFFFF80",
+            "color_blackFF": "#000000FF",
+            "color_black80": "#00000080",
             "color_FF0000FF": "#FF0000FF",
             "color_FF000080": "#FF000080",
             "color_FF8000FF": "#FF8000FF",
@@ -87,17 +87,6 @@
             "osc_2_octave": "11",
             "osc_2_note": "12",
             "osc_2_detune": "13"
-        },
-        "templates": {
-            "view": {
-                "attributes": {
-                    "size": "500, 100",
-                    "minSize": "500, 100",
-                    "maxSize": "500, 100",
-                    "class": "CViewContainer",
-                    "background-color": "color_0080FFFF"
-                }
-            }
         }
     }
 }

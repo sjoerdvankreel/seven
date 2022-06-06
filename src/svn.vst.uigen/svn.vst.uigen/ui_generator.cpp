@@ -1,3 +1,4 @@
+#include <svn.base/static/part_descriptor.hpp>
 #include <svn.base/runtime/runtime_topology.hpp>
 
 #include <vstgui/uidescription/rapidjson/include/rapidjson/document.h>
@@ -15,14 +16,21 @@
 using namespace svn::base;
 using namespace rapidjson;
 
+static std::int32_t const margin = 5;
+static std::int32_t const item_height = 20;
+static std::int32_t const label_width = 40;
+static std::int32_t const control_width = 20;
+
+static char const* color_name_whiteFF = "whiteFF";
+static char const* color_name_white80 = "white80";
+static char const* color_name_blackFF = "blackFF";
+static char const* color_name_black80 = "black80";
+static char const* color_value_whiteFF = "#FFFFFFFF";
+static char const* color_value_white80 = "#FFFFFF80";
+static char const* color_value_blackFF = "#000000FF";
+static char const* color_value_black80 = "#00000080";
+
 struct rgb { std::uint8_t r, g, b; };
-typedef bool (*svn_init_exit_dll_t)(void);
-typedef runtime_topology const*(*svn_get_topology_t)(void);
-static Document build_ui_description(runtime_topology const& toplogy);
-
-static rgb white = { 0xFF, 0xFF, 0xFF };
-static rgb black = { 0x00, 0x00, 0x00 };
-
 static std::size_t const color_count = 12;
 static rgb const color_wheel[color_count] =
 {
@@ -39,6 +47,10 @@ static rgb const color_wheel[color_count] =
   { 0xFF, 0x00, 0xFF },
   { 0xFF, 0x00, 0x80 }
 };
+
+typedef bool (*svn_init_exit_dll_t)(void);
+typedef runtime_topology const* (*svn_get_topology_t)(void);
+static Document build_ui_description(runtime_topology const& toplogy);
 
 // Builds vst3 .uidesc file based on topology.
 // We use the rapidjson distribution included with the vst3 sdk.
@@ -112,6 +124,24 @@ static std::string
 get_bitmap_name(std::string rgb)
 { return "bitmap_" + rgb; }
 
+static Value&
+add_member(Value& container, std::string const& key, 
+  Value const& value, Document::AllocatorType& allocator)
+{
+  Value key_copy(key.c_str(), allocator);
+  Value value_copy(value, allocator);
+  return container.AddMember(key_copy, value_copy, allocator);
+}
+
+static Value&
+add_member(Value& container, std::string const& key, 
+  std::string const& value, Document::AllocatorType& allocator)
+{
+  Value key_copy(key.c_str(), allocator);
+  Value value_copy(value.c_str(), allocator);
+  return container.AddMember(key_copy, value_copy, allocator);
+}
+
 static std::string
 print_rgb_hex(rgb color, bool print_alpha, std::uint8_t alpha)
 {
@@ -162,21 +192,17 @@ get_control_tag(std::wstring const& runtime_param_name)
 static Value
 build_ui_bitmaps(Document::AllocatorType& allocator)
 {
-  Value result(kObjectType);
-  
+  Value result(kObjectType);  
   Value background_value(kObjectType);
   background_value.AddMember("path", "background.png", allocator);
-  Value background_key(get_bitmap_name("background").c_str(), allocator);
-  result.AddMember(background_key, background_value, allocator);
-
+  add_member(result, get_bitmap_name("background"), background_value, allocator);
   for (std::size_t c = 0; c < color_count; c++)
   {
     std::string name = print_rgb_hex(color_wheel[c], false, 0x0);
-    Value key(get_bitmap_name(name).c_str(), allocator);
     Value value(kObjectType);
     Value path((name + ".png").c_str(), allocator);
     value.AddMember("path", path, allocator);
-    result.AddMember(key, value, allocator);
+    add_member(result, get_bitmap_name(name), value, allocator);
   }
   return result;
 }
@@ -185,60 +211,96 @@ static Value
 build_ui_colors(Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-
-  std::string white_opaque = print_rgb_hex(white, true, 0xFF);
-  Value white_opaque_value(("#" + white_opaque).c_str(), allocator);
-  Value white_opaque_key(get_color_name(white_opaque).c_str(), allocator);
-  result.AddMember(white_opaque_key, white_opaque_value, allocator);
-
-  std::string white_50 = print_rgb_hex(white, true, 0x80);
-  Value white_50_value(("#" + white_50).c_str(), allocator);
-  Value white_50_key(get_color_name(white_50).c_str(), allocator);
-  result.AddMember(white_50_key, white_50_value, allocator);
-
-  std::string black_opaque = print_rgb_hex(black, true, 0xFF);
-  Value black_opaque_value(("#" + black_opaque).c_str(), allocator);
-  Value black_opaque_key(get_color_name(black_opaque).c_str(), allocator);
-  result.AddMember(black_opaque_key, black_opaque_value, allocator);
-
-  std::string black_50 = print_rgb_hex(black, true, 0x80);
-  Value black_50_value(("#" + black_50).c_str(), allocator);
-  Value black_50_key(get_color_name(black_50).c_str(), allocator);
-  result.AddMember(black_50_key, black_50_value, allocator);
-
+  add_member(result, get_color_name(color_name_whiteFF), color_value_whiteFF, allocator);
+  add_member(result, get_color_name(color_name_white80), color_value_white80, allocator);
+  add_member(result, get_color_name(color_name_blackFF), color_value_blackFF, allocator);
+  add_member(result, get_color_name(color_name_black80), color_value_black80, allocator);
   for(std::size_t c = 0; c < color_count; c++)
   {
     std::string name_opaque = print_rgb_hex(color_wheel[c], true, 0xFF);
-    Value value_opaque(("#" + name_opaque).c_str(), allocator);
-    Value key_opaque(get_color_name(name_opaque).c_str(), allocator);
-    result.AddMember(key_opaque, value_opaque, allocator);
-
+    add_member(result, get_color_name(name_opaque), "#" + name_opaque, allocator);
     std::string name_50 = print_rgb_hex(color_wheel[c], true, 0x80);
-    Value value_50(("#" + name_50).c_str(), allocator);
-    Value key_50(get_color_name(name_50).c_str(), allocator);
-    result.AddMember(key_50, value_50, allocator);
+    add_member(result, get_color_name(name_50), ("#" + name_50), allocator);
   }
   return result;
 }
 
 static Value
 build_ui_control_tags(
-  Document::AllocatorType& allocator, runtime_topology const& topology)
+  runtime_topology const& topology, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   for (std::size_t p = 0; p < topology.params.size(); p++)
   {
     std::string tag = get_control_tag(topology.params[p].runtime_name);
-    Value key(tag.c_str(), allocator);
-    Value value(std::to_string(p).c_str(), allocator);
-    result.AddMember(key, value, allocator);
+    add_member(result, get_control_tag(topology.params[p].runtime_name), std::to_string(p), allocator);
   }
+  return result;
+}
+
+/*
+<view class="CViewContainer" origin="5, 5" size="105, 50" background-color="orange" background-color-draw-style="stroked">
+      <view class="CViewContainer" origin="0, 0" size="105, 50" background-color="black_50">
+        <view class="CViewContainer" origin="0, 0" size="105, 20" background-color="orange_50">
+          <view class="CTextLabel" origin="0, 0" size="105, 20" text-alignment="left" font="~ NormalFontSmall" font-color="white" title=" Amp" transparent="true" />
+        </view>
+        <view class="CViewContainer" origin="5, 25" size="100, 25" transparent="true">
+          <view class="CAnimKnob" origin="0, 0" size="20, 20" control-tag="voice_amp_amp" bitmap="orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+          <view class="CTextLabel" origin="25, 0" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="orange" title="Amp" transparent="true" />
+          <view class="CAnimKnob" origin="50, 0" size="20, 20" control-tag="voice_amp_dcy" bitmap="orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
+          <view class="CTextLabel" origin="75, 0" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="orange" title="Dcy" transparent="true" />
+        </view>
+      </view>
+    </view>
+*/
+
+/*
+static Value 
+build_ui_part_view(
+  Document::AllocatorType& allocator, runtime_part const& part)
+{
+  Value header_label_attrs(kObjectType);
+  header_label_attrs.AddMember("origin", "0, 0", allocator);
+  header_label_attrs.AddMember("size", "105, 20", allocator);
+  header_label_attrs.AddMember("font-color", "white", allocator);
+  header_label_attrs.AddMember("transparent", "true", allocator);
+  header_label_attrs.AddMember("text-alignment", "left", allocator);
+  header_label_attrs.AddMember("font", "~ NormalFontSmall", allocator);
+
+  Value header_attrs(kObjectType);
+  header_attrs.AddMember("origin", "0, 0", allocator);
+  header_attrs.AddMember("size", "105, 20", allocator);
+  header_attrs.AddMember("background-color", "color_FF000080", allocator);
+  
+
+
+  Value inner_attrs(kObjectType);
+
+  Value inner(kObjectType);
+
+  Value outer_attrs(kObjectType);
+  outer_attrs.AddMember("origin", "5, 5", allocator);
+  outer_attrs.AddMember("size", "105, 50", allocator);
+  outer_attrs.AddMember("background-color", "color_80FF0080", allocator);
+  outer_attrs.AddMember("background-color-draw-style", "stroked", allocator);
+  Value outer(kObjectType);
+  outer.AddMember("attributes", outer_attrs, allocator);
+  return outer_attrs;
+}
+
+static Value
+build_ui_part_views(
+  Document::AllocatorType& allocator, runtime_topology const& topology)
+{
+  Value result(kObjectType);
+  for(std::size_t i = 0; i < 1; i++)
+    result.AddMember("CViewContainer", build_ui_part_view(allocator, topology.parts[i]), allocator);
   return result;
 }
 
 static Value
 build_ui_view_template(
-  Document::AllocatorType& allocator, runtime_topology const& topology)
+  runtime_topology const& topology, Document::AllocatorType& allocator)
 {
   Value attrs(kObjectType);
   attrs.AddMember("size", "500, 100", allocator);
@@ -251,8 +313,11 @@ build_ui_view_template(
   view.AddMember("attributes", attrs, allocator);
   Value result(kObjectType);
   result.AddMember("view", view, allocator);
+  result.AddMember("children", build_ui_part_views(allocator, topology), allocator);
   return result;
 }
+
+*/
 
 static Document
 build_ui_description(runtime_topology const& topology)
@@ -264,8 +329,8 @@ build_ui_description(runtime_topology const& topology)
   description.AddMember("version", "1", allocator);
   description.AddMember("bitmaps", build_ui_bitmaps(allocator), allocator);
   description.AddMember("colors", build_ui_colors(allocator), allocator);
-  description.AddMember("control-tags", build_ui_control_tags(allocator, topology), allocator);
-  description.AddMember("templates", build_ui_view_template(allocator, topology), allocator);
+  description.AddMember("control-tags", build_ui_control_tags(topology, allocator), allocator);
+  //description.AddMember("templates", build_ui_view_template(topology, allocator), allocator);
   result.AddMember("vstgui-ui-description", description, allocator);
   return result;
 }
