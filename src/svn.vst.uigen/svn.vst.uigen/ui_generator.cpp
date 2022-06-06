@@ -298,6 +298,8 @@ build_ui_part_views(
   return result;
 }
 
+*/
+
 static Value
 build_ui_view_template(
   runtime_topology const& topology, Document::AllocatorType& allocator)
@@ -307,17 +309,15 @@ build_ui_view_template(
   attrs.AddMember("minSize", "500, 100", allocator);
   attrs.AddMember("maxSize", "500, 100", allocator);
   attrs.AddMember("class", "CViewContainer", allocator);
-  Value background(print_rgb_hex(black, true, 0xFF).c_str(), allocator);
-  attrs.AddMember("background-color", "color_0080FFFF", allocator);
+  //Value background(print_rgb_hex(black, true, 0xFF).c_str(), allocator);
+  attrs.AddMember("background-color", "color_whiteFF", allocator);
   Value view(kObjectType);
   view.AddMember("attributes", attrs, allocator);
   Value result(kObjectType);
   result.AddMember("view", view, allocator);
-  result.AddMember("children", build_ui_part_views(allocator, topology), allocator);
+  //result.AddMember("children", build_ui_part_views(allocator, topology), allocator);
   return result;
 }
-
-*/
 
 static Document
 build_ui_description(runtime_topology const& topology)
@@ -330,7 +330,7 @@ build_ui_description(runtime_topology const& topology)
   description.AddMember("bitmaps", build_ui_bitmaps(allocator), allocator);
   description.AddMember("colors", build_ui_colors(allocator), allocator);
   description.AddMember("control-tags", build_ui_control_tags(topology, allocator), allocator);
-  //description.AddMember("templates", build_ui_view_template(topology, allocator), allocator);
+  description.AddMember("templates", build_ui_view_template(topology, allocator), allocator);
   result.AddMember("vstgui-ui-description", description, allocator);
   return result;
 }

@@ -20,7 +20,7 @@ static Steinberg::FUID const controller_id(0x57068B2B, 0x63374143, 0x85FA79D9, 0
 } // namespace svn::vst::synth
 
 namespace svn::vst::base { 
-
+ 
 using namespace svn::base;
 using namespace svn::synth;
 using namespace svn::vst::synth;
@@ -37,7 +37,7 @@ init_create_topology()
     output_params, output_param::count,
     synth_polyphony); 
 }
-
+ 
 std::unique_ptr<svn::base::audio_processor>
 init_create_audio_processor(
   runtime_topology const* topology, float sample_rate, 
