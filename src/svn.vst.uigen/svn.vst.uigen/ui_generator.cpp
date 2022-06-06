@@ -48,6 +48,7 @@ struct part_ui_descriptor
 
 struct ui_descriptor
 {
+  std::int32_t width;
   std::int32_t height;
   std::vector<part_ui_descriptor> parts;
   std::vector<std::int32_t> column_widths;
@@ -244,13 +245,18 @@ build_ui_descriptor(runtime_topology const& topology)
         left += current_column_width;
         pushed_column_width = true;
         result.column_widths.push_back(current_column_width);
+        current_column_width = 0;
       }
       result.parts.push_back(descriptor);
       max_column_height = std::max(max_column_height, descriptor.top + descriptor.height);
     }
   }
 
-  if(!pushed_column_width) result.column_widths.push_back(current_column_width);
+  if(!pushed_column_width) 
+    result.column_widths.push_back(current_column_width);
+  result.width = 0;
+  for(std::size_t i = 0; i < result.column_widths.size(); i++)
+    result.width += result.column_widths[i];
   result.height = max_column_height;
   return result;
 }
@@ -261,6 +267,7 @@ print_ui_descriptor(
   ui_descriptor const& descriptor)
 {
   std::cout << "UI descriptor:\n";
+  std::cout << "\tWidth: " << descriptor.width << "\n";
   std::cout << "\tHeight: " << descriptor.height << "\n";
   std::cout << "\tColumn widths: ";
   for (std::size_t c = 0; c < descriptor.column_widths.size(); c++)
