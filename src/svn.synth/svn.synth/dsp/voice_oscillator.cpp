@@ -12,11 +12,11 @@ using namespace svn::base;
 namespace svn::synth {
 
 static inline float 
-osc_sine(float phase)
-{
+osc_sine(float phase)  
+{  
   assert(0.0f <= phase && phase < 1.0f);
   return std::sin(2.0f * std::numbers::pi * phase);
-}
+}      
 
 static inline float
 osc_blep(float sample_rate, float frequency, float phase)
