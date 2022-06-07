@@ -521,8 +521,9 @@ build_ui_param_checkbox(
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
   Value result(build_ui_param_control_base(topology, part, param, 3, control_width, allocator));
+  add_attribute(result, "frame-width", "0", allocator);
   add_attribute(result, "draw-crossbox", "true", allocator);
-  add_attribute(result, "round-rect-radius", "3", allocator);
+  add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "boxfill-color", get_color_name(part.color_index, 0x80), allocator);
   add_attribute(result, "boxframe-color", get_color_name(part.color_index, 0xFF), allocator);
   add_attribute(result, "checkmark-color", get_color_name(part.color_index, 0xFF), allocator);
@@ -538,8 +539,13 @@ build_ui_param_menu(
   Value result(build_ui_param_control_base(topology, part, param, 0, control_width + label_width, allocator));
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
+  add_attribute(result, "text-alignment", "left", allocator);
+  add_attribute(result, "style-no-frame", "true", allocator);
+  add_attribute(result, "style-round-rect", "true", allocator);
   add_attribute(result, "menu-popup-style", "true", allocator);
   add_attribute(result, "menu-check-style", "false", allocator);
+  add_attribute(result, "text-inset", size_to_string(margin, 0), allocator);
+  add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "max-value", std::to_string(descriptor.max.discrete), allocator);
   add_attribute(result, "font-color", get_color_name(part.color_index, 0xFF), allocator);
   add_attribute(result, "back-color", get_color_name(part.color_index, 0x80), allocator);
