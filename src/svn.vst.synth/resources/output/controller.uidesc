@@ -193,7 +193,7 @@
                                             "COptionMenu": {
                                                 "attributes": {
                                                     "class": "COptionMenu",
-                                                    "size": "77, 20",
+                                                    "size": "49, 20",
                                                     "control-tag": "osc_1_type",
                                                     "origin": "83, 3",
                                                     "tooltip": "Osc 1 Type",
@@ -460,7 +460,7 @@
                                             "COptionMenu": {
                                                 "attributes": {
                                                     "class": "COptionMenu",
-                                                    "size": "77, 20",
+                                                    "size": "49, 20",
                                                     "control-tag": "osc_2_type",
                                                     "origin": "83, 3",
                                                     "tooltip": "Osc 2 Type",

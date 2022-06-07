@@ -24,7 +24,7 @@ runtime_topology::create(part_descriptor const* static_parts,
   std::int32_t max_ui_height, std::int32_t const* ui_order,
   std::int32_t ui_color_cycle_step, std::int32_t ui_color_start_index)
 {
-  bool seen_output = false;
+  bool seen_output = false;   
   assert(part_count > 0);
   assert(max_note_events >= 0);
   assert(static_parts != nullptr);

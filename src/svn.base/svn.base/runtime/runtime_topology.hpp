@@ -26,7 +26,7 @@ struct runtime_topology
   std::int32_t const* ui_order; // For ui generator. Part types mixed with ui_order_output_params. Ui generation goes top-down first, then left-right.
   std::int32_t ui_color_cycle_step = 1; // For ui generator, cycles through color wheel.
   std::int32_t ui_color_start_index = 0; // For ui generator, cycles through color wheel.
-
+   
   // Params contains interior pointers into parts.
   runtime_topology() = default;
   runtime_topology(runtime_topology const&) = delete;

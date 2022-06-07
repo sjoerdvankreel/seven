@@ -28,7 +28,7 @@ glob_output_params[glob_output_param::count] =
   { { L"Clip", L"Clip" }, false },
   { { L"Drain", L"Voices exhausted" }, false },
   { { L"Voices", L"Voice count" }, L"", 0, 0, synth_polyphony }
-}; 
+};  
 
 param_descriptor const
 voice_osc_params[voice_osc_param::count] =

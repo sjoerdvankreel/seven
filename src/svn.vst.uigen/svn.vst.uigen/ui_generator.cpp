@@ -540,7 +540,8 @@ build_ui_param_menu(
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  Value result(build_ui_param_control_base(topology, part, param, 0, control_width + label_width + edit_width + margin, allocator));
+  std::int32_t width = control_width + label_width + margin;
+  Value result(build_ui_param_control_base(topology, part, param, 0, width, allocator));
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
