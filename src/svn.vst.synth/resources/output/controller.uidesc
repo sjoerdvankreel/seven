@@ -173,7 +173,7 @@
                                                     "frame-width": "1",
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
-                                                    "boxfill-color": "color_FF000080",
+                                                    "boxfill-color": "color_FF000040",
                                                     "boxframe-color": "color_FF0000FF",
                                                     "checkmark-color": "color_FF0000FF"
                                                 }
@@ -208,8 +208,7 @@
                                                     "round-rect-radius": "3",
                                                     "max-value": "1",
                                                     "font-color": "color_FF0000FF",
-                                                    "back-color": "color_FF000080",
-                                                    "frame-color": "color_FF0000FF",
+                                                    "back-color": "color_FF000040",
                                                     "shadow-color": "color_FF000080"
                                                 }
                                             },
@@ -377,7 +376,7 @@
                                                     "frame-width": "1",
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
-                                                    "boxfill-color": "color_FF000080",
+                                                    "boxfill-color": "color_FF000040",
                                                     "boxframe-color": "color_FF0000FF",
                                                     "checkmark-color": "color_FF0000FF"
                                                 }
@@ -412,8 +411,7 @@
                                                     "round-rect-radius": "3",
                                                     "max-value": "1",
                                                     "font-color": "color_FF0000FF",
-                                                    "back-color": "color_FF000080",
-                                                    "frame-color": "color_FF0000FF",
+                                                    "back-color": "color_FF000040",
                                                     "shadow-color": "color_FF000080"
                                                 }
                                             },
@@ -685,7 +683,7 @@
                                                     "frame-width": "1",
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
-                                                    "boxfill-color": "color_FFFF0080",
+                                                    "boxfill-color": "color_FFFF0040",
                                                     "boxframe-color": "color_FFFF00FF",
                                                     "checkmark-color": "color_FFFF00FF"
                                                 }
@@ -712,7 +710,7 @@
                                                     "frame-width": "1",
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
-                                                    "boxfill-color": "color_FFFF0080",
+                                                    "boxfill-color": "color_FFFF0040",
                                                     "boxframe-color": "color_FFFF00FF",
                                                     "checkmark-color": "color_FFFF00FF"
                                                 }

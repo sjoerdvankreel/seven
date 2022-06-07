@@ -13,8 +13,8 @@ synth_ui_order[part_type::count] =
   part_type::voice_osc,
   part_type::voice_amp,
   part_type::glob_output
-};  
-
+};   
+  
 static item_name const
 voice_osc_types[voice_osc_type::count] =
 {

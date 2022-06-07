@@ -523,7 +523,7 @@ build_ui_param_checkbox(
   add_attribute(result, "frame-width", "1", allocator);
   add_attribute(result, "draw-crossbox", "true", allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
-  add_attribute(result, "boxfill-color", get_color_name(color_wheel[part.color_index], color_alpha::half), allocator);
+  add_attribute(result, "boxfill-color", get_color_name(color_wheel[part.color_index], color_alpha::quarter), allocator);
   add_attribute(result, "boxframe-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
   add_attribute(result, "checkmark-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
   return result;
@@ -547,8 +547,7 @@ build_ui_param_menu(
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "max-value", std::to_string(descriptor.max.discrete), allocator);
   add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
-  add_attribute(result, "back-color", get_color_name(color_wheel[part.color_index], color_alpha::half), allocator);
-  add_attribute(result, "frame-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
+  add_attribute(result, "back-color", get_color_name(color_wheel[part.color_index], color_alpha::quarter), allocator);
   add_attribute(result, "shadow-color", get_color_name(color_wheel[part.color_index], color_alpha::half), allocator);
   return result;
 }
