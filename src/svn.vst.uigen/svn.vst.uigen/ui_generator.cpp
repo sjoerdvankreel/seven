@@ -88,10 +88,12 @@ static rgb const color_wheel[color_count] =
 
 typedef bool (*svn_init_exit_dll_t)(void);
 typedef runtime_topology const* (*svn_get_topology_t)(void);
+static ui_descriptor build_ui_descriptor(
+  runtime_topology const& topology);
 static void print_ui_descriptor(
   runtime_topology const& topology, ui_descriptor const& descriptor);
-static Document build_ui_description(runtime_topology const& toplogy);
-static ui_descriptor build_ui_descriptor(runtime_topology const& topology);
+static Document build_ui_description(
+  runtime_topology const& topology, ui_descriptor const& descriptor);
 
 /* -------- driver -------- */
 
@@ -132,7 +134,7 @@ main(int argc, char** argv)
     std::cout << "Parts: " << topology->parts.size() << ".\n";
     std::cout << "Parameters: " << topology->params.size() << ".\n";
     print_ui_descriptor(*topology, descriptor);
-    Document ui_description(build_ui_description(*topology));
+    Document ui_description(build_ui_description(*topology, descriptor));
     std::ofstream os(argv[2]);
     OStreamWrapper wrapper(os);
     PrettyWriter<OStreamWrapper> writer(wrapper);
@@ -302,6 +304,16 @@ get_color_name(std::string rgb)
 static std::string 
 get_bitmap_name(std::string rgb)
 { return "bitmap_" + rgb; }
+
+static std::string
+size_to_string(std::int32_t w, std::int32_t h)
+{
+  std::string result;
+  result += std::to_string(w);
+  result += ", ";
+  result += std::to_string(h);
+  return result;
+}
 
 static Value&
 add_member(Value& container, std::string const& key, 
@@ -480,18 +492,26 @@ build_ui_part_views(
 */
 
 static Value
-build_ui_view_template(
-  runtime_topology const& topology, Document::AllocatorType& allocator)
+build_ui_template_attrs(
+  ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {
-  Value attrs(kObjectType);
-  attrs.AddMember("size", "500, 100", allocator);
-  attrs.AddMember("minSize", "500, 100", allocator);
-  attrs.AddMember("maxSize", "500, 100", allocator);
-  attrs.AddMember("class", "CViewContainer", allocator);
-  //Value background(print_rgb_hex(black, true, 0xFF).c_str(), allocator);
-  attrs.AddMember("background-color", "color_whiteFF", allocator);
+  Value result(kObjectType);
+  std::string size = size_to_string(descriptor.width, descriptor.height);
+  add_member(result, "size", size, allocator);
+  add_member(result, "minSize", size, allocator);
+  add_member(result, "maxSize", size, allocator);
+  result.AddMember("class", "CViewContainer", allocator);
+  add_member(result, "background-color", color_value_blackFF, allocator);
+  return result;
+}
+
+static Value
+build_ui_template(
+  runtime_topology const& topology, 
+  ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{  
   Value view(kObjectType);
-  view.AddMember("attributes", attrs, allocator);
+  view.AddMember("attributes", build_ui_template_attrs(descriptor, allocator), allocator);
   Value result(kObjectType);
   result.AddMember("view", view, allocator);
   //result.AddMember("children", build_ui_part_views(allocator, topology), allocator);
@@ -499,7 +519,8 @@ build_ui_view_template(
 }
 
 static Document
-build_ui_description(runtime_topology const& topology)
+build_ui_description(
+  runtime_topology const& topology, ui_descriptor const& descriptor)
 {
   Document result;
   result.SetObject();
@@ -509,7 +530,7 @@ build_ui_description(runtime_topology const& topology)
   description.AddMember("bitmaps", build_ui_bitmaps(allocator), allocator);
   description.AddMember("colors", build_ui_colors(allocator), allocator);
   description.AddMember("control-tags", build_ui_control_tags(topology, allocator), allocator);
-  description.AddMember("templates", build_ui_view_template(topology, allocator), allocator);
+  description.AddMember("templates", build_ui_template(topology, descriptor, allocator), allocator);
   result.AddMember("vstgui-ui-description", description, allocator);
   return result;
 }

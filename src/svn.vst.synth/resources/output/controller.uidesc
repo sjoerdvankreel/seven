@@ -94,11 +94,11 @@
         "templates": {
             "view": {
                 "attributes": {
-                    "size": "500, 100",
-                    "minSize": "500, 100",
-                    "maxSize": "500, 100",
+                    "size": "180, 220",
+                    "minSize": "180, 220",
+                    "maxSize": "180, 220",
                     "class": "CViewContainer",
-                    "background-color": "color_whiteFF"
+                    "background-color": "#000000FF"
                 }
             }
         }
