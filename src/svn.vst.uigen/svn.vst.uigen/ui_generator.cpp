@@ -325,15 +325,10 @@ get_param_control_class(
 {
   switch (topology.params[param.runtime_param_index].descriptor->type)
   {
-  case param_type::list:
-  case param_type::real:
-  case param_type::discrete:
-    return "CAnimKnob";
-  case param_type::toggle:
-    return "CCheckBox";
-  default:
-    assert(false);
-    return "";
+  case param_type::toggle: return "CCheckBox";
+  case param_type::list: return "COptionMenu";
+  case param_type::real: case param_type::discrete: return "CAnimKnob";
+  default: assert(false); return "";
   }
 }
 
@@ -492,12 +487,12 @@ build_ui_control_tags(
 static Value
 build_ui_param_control_base(
   runtime_topology const& topology, part_ui_descriptor const& part,
-  param_ui_descriptor const& param, std::int32_t offset_x,
+  param_ui_descriptor const& param, std::int32_t offset_x, std::int32_t width,
   Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "class", get_param_control_class(topology, param), allocator);
-  add_attribute(result, "size", size_to_string(control_width - offset_x, item_height), allocator);
+  add_attribute(result, "size", size_to_string(width - offset_x, item_height), allocator);
   std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
   add_attribute(result, "control-tag", tag, allocator);
   std::int32_t top = margin + param.row * (item_height + margin);
@@ -511,7 +506,7 @@ build_ui_param_knob(
   runtime_topology const& topology, part_ui_descriptor const& part, 
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_control_base(topology, part, param, 0, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, 0, control_width, allocator));
   add_attribute(result, "angle-start", "20", allocator);
   add_attribute(result, "angle-range", "320", allocator);
   add_attribute(result, "height-of-one-image", std::to_string(item_height), allocator);
@@ -525,7 +520,7 @@ build_ui_param_checkbox(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_control_base(topology, part, param, 3, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, 3, control_width, allocator));
   add_attribute(result, "draw-crossbox", "true", allocator);
   add_attribute(result, "round-rect-radius", "3", allocator);
   add_attribute(result, "boxfill-color", get_color_name(part.color_index, 0x80), allocator);
@@ -535,22 +530,22 @@ build_ui_param_checkbox(
 }
 
 static Value
-build_ui_param_control(
+build_ui_param_menu(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
-  switch (topology.params[param.runtime_param_index].descriptor->type)
-  {
-  case param_type::real:
-  case param_type::list:
-  case param_type::discrete:
-    return build_ui_param_knob(topology, part, param, allocator);
-  case param_type::toggle:
-    return build_ui_param_checkbox(topology, part, param, allocator);
-  default:
-    assert(false);
-    return Value();
-  }
+  auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
+  Value result(build_ui_param_control_base(topology, part, param, 0, control_width + label_width, allocator));
+  add_attribute(result, "min-value", "0", allocator);
+  add_attribute(result, "default-value", "0", allocator);
+  add_attribute(result, "menu-popup-style", "true", allocator);
+  add_attribute(result, "menu-check-style", "false", allocator);
+  add_attribute(result, "max-value", std::to_string(descriptor.max.discrete), allocator);
+  add_attribute(result, "font-color", get_color_name(part.color_index, 0xFF), allocator);
+  add_attribute(result, "back-color", get_color_name(part.color_index, 0x80), allocator);
+  add_attribute(result, "frame-color", get_color_name(part.color_index, 0xFF), allocator);
+  add_attribute(result, "shadow-color", get_color_name(part.color_index, 0x80), allocator);
+  return result;
 }
 
 static Value
@@ -573,6 +568,32 @@ build_ui_param_label(
   return result;
 }
 
+static void
+add_ui_param(
+  runtime_topology const& topology, part_ui_descriptor const& part, 
+  Value& container, std::size_t index, Document::AllocatorType& allocator)
+{
+  param_ui_descriptor const& param = part.params[index];
+  std::string control_class = get_param_control_class(topology, param);
+  switch (topology.params[param.runtime_param_index].descriptor->type)
+  {
+  case param_type::real:
+  case param_type::discrete:
+    add_child(container, control_class, build_ui_param_knob(topology, part, param, allocator), allocator);
+    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, allocator), allocator);
+    break;
+  case param_type::toggle:
+    add_child(container, control_class, build_ui_param_checkbox(topology, part, param, allocator), allocator);
+    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, allocator), allocator);
+    break;
+  case param_type::list:
+    add_child(container, control_class, build_ui_param_menu(topology, part, param, allocator), allocator);
+    break;
+  default:
+    assert(false);
+  }
+}
+
 static Value
 build_ui_part_param_container(runtime_topology const& topology,
   part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
@@ -583,12 +604,7 @@ build_ui_part_param_container(runtime_topology const& topology,
   add_attribute(result, "origin", size_to_string(0, item_height), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height - item_height), allocator);
   for(std::size_t p = 0; p < descriptor.params.size(); p++)
-  {
-    param_ui_descriptor const& param = descriptor.params[p];
-    std::string control_class = get_param_control_class(topology, param);
-    add_child(result, control_class, build_ui_param_control(topology, descriptor, param, allocator), allocator);
-    add_child(result, "CTextLabel", build_ui_param_label(topology, descriptor, param, allocator), allocator);
-  }
+    add_ui_param(topology, descriptor, result, p, allocator);
   return result;
 }
 
