@@ -24,7 +24,7 @@ struct param_descriptor
   param_descriptor(
     item_name const& static_name, bool default_);
   param_descriptor(
-    item_name const& static_name,
+    item_name const& static_name, param_type type,
     item_name const* list, std::int32_t count);
   param_descriptor(
     item_name const& static_name, wchar_t const* unit,

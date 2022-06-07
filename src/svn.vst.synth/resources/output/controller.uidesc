@@ -477,26 +477,28 @@
                                                     "title": "Oct"
                                                 }
                                             },
-                                            "COptionMenu": {
+                                            "CAnimKnob": {
                                                 "attributes": {
-                                                    "class": "COptionMenu",
-                                                    "size": "60, 20",
+                                                    "class": "CAnimKnob",
+                                                    "size": "20, 20",
                                                     "control-tag": "osc_1_note",
                                                     "origin": "66, 26",
-                                                    "min-value": "0",
-                                                    "default-value": "0",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
+                                                    "bitmap": "bitmap_FFFF00"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
                                                     "text-alignment": "left",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "menu-popup-style": "true",
-                                                    "menu-check-style": "false",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "max-value": "11",
+                                                    "font": "~ NormalFontSmall",
+                                                    "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "back-color": "color_FFFF0080",
-                                                    "frame-color": "color_FFFF00FF",
-                                                    "shadow-color": "color_FFFF0080"
+                                                    "origin": "89, 26",
+                                                    "title": "Note"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -673,26 +675,28 @@
                                                     "title": "Oct"
                                                 }
                                             },
-                                            "COptionMenu": {
+                                            "CAnimKnob": {
                                                 "attributes": {
-                                                    "class": "COptionMenu",
-                                                    "size": "60, 20",
+                                                    "class": "CAnimKnob",
+                                                    "size": "20, 20",
                                                     "control-tag": "osc_2_note",
                                                     "origin": "66, 26",
-                                                    "min-value": "0",
-                                                    "default-value": "0",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
+                                                    "bitmap": "bitmap_FFFF00"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
                                                     "text-alignment": "left",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "menu-popup-style": "true",
-                                                    "menu-check-style": "false",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "max-value": "11",
+                                                    "font": "~ NormalFontSmall",
+                                                    "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "back-color": "color_FFFF0080",
-                                                    "frame-color": "color_FFFF00FF",
-                                                    "shadow-color": "color_FFFF0080"
+                                                    "origin": "89, 26",
+                                                    "title": "Note"
                                                 }
                                             },
                                             "CAnimKnob": {

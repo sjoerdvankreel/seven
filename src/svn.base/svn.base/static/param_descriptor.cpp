@@ -7,14 +7,15 @@ namespace svn::base {
 
 param_descriptor::
 param_descriptor(
-  item_name const& static_name,
+  item_name const& static_name, param_type type,
   item_name const* list, std::int32_t count):
-type(param_type::list), unit(L""), static_name(static_name), list(list),
+type(type), unit(L""), static_name(static_name), list(list),
 dsp(param_bounds::none()), display(param_bounds::none()),
 min(0), max(count - 1), default_(0)
 { 
   assert(count > 0);
   assert(list != nullptr);
+  assert(type == param_type::list || type==param_type::discrete);
 }
 
 param_descriptor::

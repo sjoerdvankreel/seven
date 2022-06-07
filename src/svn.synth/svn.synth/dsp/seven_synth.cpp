@@ -178,7 +178,7 @@ seven_synth::process_block(
     bool clip = clip_audio(output.audio, input.sample_count);
     output.output_params[glob_output_param::clip].discrete = clip? 1: 0;
     output.output_params[glob_output_param::voices].discrete = voice_count;
-    output.output_params[glob_output_param::drain].discrete = drain ? 1: 0;
+    output.output_params[glob_output_param::drain].discrete = drain ? 1: 0; 
 
     // Remember last automation values in case a note is released on the 
     // next round at sample index 0. Because if a voice is released at
