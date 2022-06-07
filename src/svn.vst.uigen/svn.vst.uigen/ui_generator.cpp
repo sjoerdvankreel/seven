@@ -489,8 +489,8 @@ build_ui_param_control(
   add_attribute(result, "height-of-one-image", std::to_string(item_height), allocator);
   std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
   add_attribute(result, "control-tag", tag, allocator);
-  std::int32_t top = param.row * item_height;
-  std::int32_t left = param.column * (control_width + label_width);
+  std::int32_t top = margin + param.row * (item_height + margin);
+  std::int32_t left = margin + param.column * (control_width + label_width + margin);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   std::string bitmap = print_rgb_hex(color_wheel[part.color_index], false, 0x00);
   add_attribute(result, "bitmap", get_bitmap_name(bitmap), allocator);
@@ -509,8 +509,8 @@ build_ui_param_label(
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "size", size_to_string(label_width, item_height), allocator);
   add_attribute(result, "font-color", get_color_name(part.color_index, 0xFF), allocator);
-  std::int32_t top = param.row * item_height;
-  std::int32_t left = param.column * (control_width + label_width) + control_width;
+  std::int32_t top = margin + param.row * (item_height + margin);
+  std::int32_t left = margin + param.column * (control_width + label_width + margin) + control_width + margin;
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   std::string title = narrow_assume_ascii(topology.params[param.runtime_param_index].descriptor->static_name.short_);
   add_attribute(result, "title", title, allocator);
@@ -547,7 +547,7 @@ build_ui_part_header_label(runtime_topology const& topology,
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "font-color", get_color_name(color_name_whiteFF), allocator);
-  add_attribute(result, "origin", size_to_string(0, 0), allocator);
+  add_attribute(result, "origin", size_to_string(margin, 0), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, item_height), allocator);
   add_attribute(result, "background-color", get_color_name(descriptor.color_index, 0x80), allocator);
   return result;
