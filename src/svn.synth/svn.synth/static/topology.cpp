@@ -45,7 +45,7 @@ param_descriptor const
 voice_amp_params[voice_amp_param::count] =
 {
   { { L"Amp", L"Level" }, L"dB", 1.0, param_bounds::linear_unit(), param_bounds::decibel() },
-  { { L"Decay", L"Decay" }, L"Sec", 0.0, param_bounds::linear_unit(), param_bounds::linear_unit() }
+  { { L"Dcy", L"Decay" }, L"Sec", 0.0, param_bounds::linear_unit(), param_bounds::linear_unit() }
 };
 
 part_descriptor const

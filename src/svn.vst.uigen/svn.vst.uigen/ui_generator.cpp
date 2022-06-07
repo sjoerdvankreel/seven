@@ -60,7 +60,7 @@ struct ui_descriptor
 
 static std::int32_t const margin = 3;
 static std::int32_t const item_height = 20;
-static std::int32_t const label_width = 40;
+static std::int32_t const label_width = 30;
 static std::int32_t const control_width = 20;
 
 struct color_alpha_t { enum value { quarter, half, opaque, count }; };

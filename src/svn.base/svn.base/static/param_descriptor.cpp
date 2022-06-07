@@ -31,7 +31,7 @@ dsp(dsp), display(display), min(0.0f), max(1.0f), default_(default_)
   assert(0.0 <= default_ && default_ <= 1.0);
   assert(0 <= dsp.slope && dsp.slope <= param_slope::count);
   assert(0 <= display.slope && display.slope <= param_slope::count);
-}
+} 
 
 param_descriptor::   
 param_descriptor(
