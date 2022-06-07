@@ -540,7 +540,7 @@ build_ui_param_menu(
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  std::int32_t width = control_width + label_width + margin;
+  std::int32_t width = control_width + label_width + edit_width + margin;
   Value result(build_ui_param_control_base(topology, part, param, 0, width, allocator));
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
@@ -612,7 +612,7 @@ add_ui_param(
   switch (topology.params[param.runtime_param_index].descriptor->type)
   {
   case param_type::real:
-  case param_type::discrete:
+  case param_type::discrete: 
   case param_type::discrete_list:
     add_child(container, control_class, build_ui_param_knob(topology, part, param, allocator), allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, allocator), allocator);
@@ -621,6 +621,7 @@ add_ui_param(
   case param_type::toggle:
     add_child(container, control_class, build_ui_param_checkbox(topology, part, param, allocator), allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, allocator), allocator);
+    add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, allocator), allocator);
     break;
   case param_type::list:
     add_child(container, control_class, build_ui_param_menu(topology, part, param, allocator), allocator);

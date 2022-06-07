@@ -190,10 +190,26 @@
                                                     "title": "On"
                                                 }
                                             },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "text-alignment": "right",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "size": "28, 20",
+                                                    "font-color": "color_00FF80FF",
+                                                    "back-color": "color_00FF8040",
+                                                    "control-tag": "osc_1_enabled",
+                                                    "origin": "52, 3"
+                                                }
+                                            },
                                             "COptionMenu": {
                                                 "attributes": {
                                                     "class": "COptionMenu",
-                                                    "size": "49, 20",
+                                                    "size": "77, 20",
                                                     "control-tag": "osc_1_type",
                                                     "origin": "83, 3",
                                                     "tooltip": "Osc 1 Type",
@@ -457,10 +473,26 @@
                                                     "title": "On"
                                                 }
                                             },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "text-alignment": "right",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "size": "28, 20",
+                                                    "font-color": "color_00FF80FF",
+                                                    "back-color": "color_00FF8040",
+                                                    "control-tag": "osc_2_enabled",
+                                                    "origin": "52, 3"
+                                                }
+                                            },
                                             "COptionMenu": {
                                                 "attributes": {
                                                     "class": "COptionMenu",
-                                                    "size": "49, 20",
+                                                    "size": "77, 20",
                                                     "control-tag": "osc_2_type",
                                                     "origin": "83, 3",
                                                     "tooltip": "Osc 2 Type",
@@ -860,6 +892,22 @@
                                                     "title": "Clip"
                                                 }
                                             },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "text-alignment": "right",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "size": "28, 20",
+                                                    "font-color": "color_8000FFFF",
+                                                    "back-color": "color_8000FF40",
+                                                    "control-tag": "out_clip",
+                                                    "origin": "52, 3"
+                                                }
+                                            },
                                             "CCheckBox": {
                                                 "attributes": {
                                                     "class": "CCheckBox",
@@ -885,6 +933,22 @@
                                                     "font-color": "color_8000FFFF",
                                                     "origin": "106, 3",
                                                     "title": "Drain"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "text-alignment": "right",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "size": "28, 20",
+                                                    "font-color": "color_8000FFFF",
+                                                    "back-color": "color_8000FF40",
+                                                    "control-tag": "out_voices_exhausted",
+                                                    "origin": "132, 3"
                                                 }
                                             },
                                             "CAnimKnob": {
