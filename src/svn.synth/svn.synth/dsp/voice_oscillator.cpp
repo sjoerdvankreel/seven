@@ -16,7 +16,7 @@ osc_sine(float phase)
 {  
   assert(0.0f <= phase && phase < 1.0f);
   return std::sin(2.0f * std::numbers::pi * phase);
-}      
+}        
 
 static inline float
 osc_blep(float sample_rate, float frequency, float phase)
@@ -37,7 +37,7 @@ osc_blep(float sample_rate, float frequency, float phase)
   }
   return saw;
 }
-
+ 
 voice_oscillator::
 voice_oscillator(
   float sample_rate, std::int32_t midi_note):

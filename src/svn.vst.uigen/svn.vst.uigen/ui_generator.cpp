@@ -11,8 +11,9 @@
 #include <Windows.h>
 #undef GetObject
 
-#include <cstdint>
 #include <set>
+#include <cassert>
+#include <cstdint>
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -318,6 +319,25 @@ get_color_name(std::int32_t wheel_index, std::uint8_t alpha)
 { return get_color_name(print_rgb_hex(color_wheel[wheel_index], true, alpha)); }
 
 static std::string
+get_param_control_class(
+  runtime_topology const& topology,
+  param_ui_descriptor const& param)
+{
+  switch (topology.params[param.runtime_param_index].descriptor->type)
+  {
+  case param_type::list:
+  case param_type::real:
+  case param_type::discrete:
+    return "CAnimKnob";
+  case param_type::toggle:
+    return "CCheckBox";
+  default:
+    assert(false);
+    return "";
+  }
+}
+
+static std::string
 size_to_string(std::int32_t w, std::int32_t h)
 {
   std::string result;
@@ -470,24 +490,67 @@ build_ui_control_tags(
 }
 
 static Value
-build_ui_param_control(
-  runtime_topology const& topology, part_ui_descriptor const& part, 
-  param_ui_descriptor const& param, Document::AllocatorType& allocator)
+build_ui_param_control_base(
+  runtime_topology const& topology, part_ui_descriptor const& part,
+  param_ui_descriptor const& param, std::int32_t offset_x,
+  Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  add_attribute(result, "class", "CAnimKnob", allocator);
-  add_attribute(result, "angle-start", "20", allocator);
-  add_attribute(result, "angle-range", "320", allocator);
-  add_attribute(result, "size", size_to_string(control_width, item_height), allocator);
-  add_attribute(result, "height-of-one-image", std::to_string(item_height), allocator);
+  add_attribute(result, "class", get_param_control_class(topology, param), allocator);
+  add_attribute(result, "size", size_to_string(control_width - offset_x, item_height), allocator);
   std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
   add_attribute(result, "control-tag", tag, allocator);
   std::int32_t top = margin + param.row * (item_height + margin);
-  std::int32_t left = margin + param.column * (control_width + label_width + margin);
+  std::int32_t left = margin + param.column * (control_width + label_width + margin) + offset_x;
   add_attribute(result, "origin", size_to_string(left, top), allocator);
+  return result;
+}
+
+static Value
+build_ui_param_knob(
+  runtime_topology const& topology, part_ui_descriptor const& part, 
+  param_ui_descriptor const& param, Document::AllocatorType& allocator)
+{
+  Value result(build_ui_param_control_base(topology, part, param, 0, allocator));
+  add_attribute(result, "angle-start", "20", allocator);
+  add_attribute(result, "angle-range", "320", allocator);
+  add_attribute(result, "height-of-one-image", std::to_string(item_height), allocator);
   std::string bitmap = print_rgb_hex(color_wheel[part.color_index], false, 0x00);
   add_attribute(result, "bitmap", get_bitmap_name(bitmap), allocator);
   return result;
+}
+
+static Value
+build_ui_param_checkbox(
+  runtime_topology const& topology, part_ui_descriptor const& part,
+  param_ui_descriptor const& param, Document::AllocatorType& allocator)
+{
+  Value result(build_ui_param_control_base(topology, part, param, 3, allocator));
+  add_attribute(result, "draw-crossbox", "true", allocator);
+  add_attribute(result, "round-rect-radius", "3", allocator);
+  add_attribute(result, "boxfill-color", get_color_name(part.color_index, 0x80), allocator);
+  add_attribute(result, "boxframe-color", get_color_name(part.color_index, 0xFF), allocator);
+  add_attribute(result, "checkmark-color", get_color_name(part.color_index, 0xFF), allocator);
+  return result;
+}
+
+static Value
+build_ui_param_control(
+  runtime_topology const& topology, part_ui_descriptor const& part,
+  param_ui_descriptor const& param, Document::AllocatorType& allocator)
+{
+  switch (topology.params[param.runtime_param_index].descriptor->type)
+  {
+  case param_type::real:
+  case param_type::list:
+  case param_type::discrete:
+    return build_ui_param_knob(topology, part, param, allocator);
+  case param_type::toggle:
+    return build_ui_param_checkbox(topology, part, param, allocator);
+  default:
+    assert(false);
+    return Value();
+  }
 }
 
 static Value
@@ -522,7 +585,8 @@ build_ui_part_param_container(runtime_topology const& topology,
   for(std::size_t p = 0; p < descriptor.params.size(); p++)
   {
     param_ui_descriptor const& param = descriptor.params[p];
-    add_child(result, "CAnimKnob", build_ui_param_control(topology, descriptor, param, allocator), allocator);
+    std::string control_class = get_param_control_class(topology, param);
+    add_child(result, control_class, build_ui_param_control(topology, descriptor, param, allocator), allocator);
     add_child(result, "CTextLabel", build_ui_param_label(topology, descriptor, param, allocator), allocator);
   }
   return result;

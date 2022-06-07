@@ -152,12 +152,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "amp_level",
                                                     "origin": "3, 3",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FF0000"
                                                 }
                                             },
@@ -176,12 +176,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "amp_decay",
                                                     "origin": "66, 3",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FF0000"
                                                 }
                                             },
@@ -251,16 +251,17 @@
                                             "size": "192, 49"
                                         },
                                         "children": {
-                                            "CAnimKnob": {
+                                            "CCheckBox": {
                                                 "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "size": "20, 20",
-                                                    "height-of-one-image": "20",
+                                                    "class": "CCheckBox",
+                                                    "size": "17, 20",
                                                     "control-tag": "out_clip",
-                                                    "origin": "3, 3",
-                                                    "bitmap": "bitmap_FF8000"
+                                                    "origin": "6, 3",
+                                                    "draw-crossbox": "true",
+                                                    "round-rect-radius": "3",
+                                                    "boxfill-color": "color_FF800080",
+                                                    "boxframe-color": "color_FF8000FF",
+                                                    "checkmark-color": "color_FF8000FF"
                                                 }
                                             },
                                             "CTextLabel": {
@@ -275,16 +276,17 @@
                                                     "title": "Clip"
                                                 }
                                             },
-                                            "CAnimKnob": {
+                                            "CCheckBox": {
                                                 "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "size": "20, 20",
-                                                    "height-of-one-image": "20",
+                                                    "class": "CCheckBox",
+                                                    "size": "17, 20",
                                                     "control-tag": "out_exhausted",
-                                                    "origin": "66, 3",
-                                                    "bitmap": "bitmap_FF8000"
+                                                    "origin": "69, 3",
+                                                    "draw-crossbox": "true",
+                                                    "round-rect-radius": "3",
+                                                    "boxfill-color": "color_FF800080",
+                                                    "boxframe-color": "color_FF8000FF",
+                                                    "checkmark-color": "color_FF8000FF"
                                                 }
                                             },
                                             "CTextLabel": {
@@ -302,12 +304,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "out_voice_count",
                                                     "origin": "3, 26",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FF8000"
                                                 }
                                             },
@@ -377,16 +379,17 @@
                                             "size": "192, 49"
                                         },
                                         "children": {
-                                            "CAnimKnob": {
+                                            "CCheckBox": {
                                                 "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "size": "20, 20",
-                                                    "height-of-one-image": "20",
+                                                    "class": "CCheckBox",
+                                                    "size": "17, 20",
                                                     "control-tag": "osc_1_enabled",
-                                                    "origin": "3, 3",
-                                                    "bitmap": "bitmap_FFFF00"
+                                                    "origin": "6, 3",
+                                                    "draw-crossbox": "true",
+                                                    "round-rect-radius": "3",
+                                                    "boxfill-color": "color_FFFF0080",
+                                                    "boxframe-color": "color_FFFF00FF",
+                                                    "checkmark-color": "color_FFFF00FF"
                                                 }
                                             },
                                             "CTextLabel": {
@@ -404,12 +407,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "osc_1_type",
                                                     "origin": "66, 3",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -428,12 +431,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "osc_1_panning",
                                                     "origin": "129, 3",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -452,12 +455,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "osc_1_octave",
                                                     "origin": "3, 26",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -476,12 +479,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "osc_1_note",
                                                     "origin": "66, 26",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -500,12 +503,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "osc_1_detune",
                                                     "origin": "129, 26",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -575,16 +578,17 @@
                                             "size": "192, 170"
                                         },
                                         "children": {
-                                            "CAnimKnob": {
+                                            "CCheckBox": {
                                                 "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "size": "20, 20",
-                                                    "height-of-one-image": "20",
+                                                    "class": "CCheckBox",
+                                                    "size": "17, 20",
                                                     "control-tag": "osc_2_enabled",
-                                                    "origin": "3, 3",
-                                                    "bitmap": "bitmap_FFFF00"
+                                                    "origin": "6, 3",
+                                                    "draw-crossbox": "true",
+                                                    "round-rect-radius": "3",
+                                                    "boxfill-color": "color_FFFF0080",
+                                                    "boxframe-color": "color_FFFF00FF",
+                                                    "checkmark-color": "color_FFFF00FF"
                                                 }
                                             },
                                             "CTextLabel": {
@@ -602,12 +606,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "osc_2_type",
                                                     "origin": "66, 3",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -626,12 +630,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "osc_2_panning",
                                                     "origin": "129, 3",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -650,12 +654,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "osc_2_octave",
                                                     "origin": "3, 26",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -674,12 +678,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "osc_2_note",
                                                     "origin": "66, 26",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -698,12 +702,12 @@
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
                                                     "size": "20, 20",
-                                                    "height-of-one-image": "20",
                                                     "control-tag": "osc_2_detune",
                                                     "origin": "129, 26",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
