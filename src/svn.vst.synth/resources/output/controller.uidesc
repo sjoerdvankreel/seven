@@ -94,9 +94,9 @@
         "templates": {
             "view": {
                 "attributes": {
-                    "size": "360, 160",
-                    "minSize": "360, 160",
-                    "maxSize": "360, 160",
+                    "size": "350, 165",
+                    "minSize": "350, 165",
+                    "maxSize": "350, 165",
                     "class": "CViewContainer",
                     "bitmap": "bitmap_background"
                 },
@@ -105,8 +105,8 @@
                         "attributes": {
                             "class": "CViewContainer",
                             "background-color-draw-style": "stroked",
-                            "origin": "0, 0",
-                            "size": "180, 40",
+                            "origin": "5, 5",
+                            "size": "135, 50",
                             "background-color": "color_FF0000FF"
                         },
                         "children": {
@@ -114,7 +114,7 @@
                                 "attributes": {
                                     "class": "CViewContainer",
                                     "origin": "0, 0",
-                                    "size": "180, 40",
+                                    "size": "135, 50",
                                     "background-color": "color_black80"
                                 },
                                 "children": {
@@ -122,7 +122,7 @@
                                         "attributes": {
                                             "class": "CViewContainer",
                                             "origin": "0, 0",
-                                            "size": "180, 20",
+                                            "size": "135, 20",
                                             "background-color": "color_FF000080"
                                         },
                                         "children": {
@@ -134,8 +134,8 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_whiteFF",
-                                                    "origin": "0, 0",
-                                                    "size": "180, 20",
+                                                    "origin": "5, 0",
+                                                    "size": "135, 20",
                                                     "background-color": "color_FF000080"
                                                 }
                                             }
@@ -146,7 +146,7 @@
                                             "transparent": "true",
                                             "class": "CViewContainer",
                                             "origin": "0, 20",
-                                            "size": "180, 20"
+                                            "size": "135, 30"
                                         },
                                         "children": {
                                             "CAnimKnob": {
@@ -157,7 +157,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "amp_level",
-                                                    "origin": "0, 0",
+                                                    "origin": "5, 5",
                                                     "bitmap": "bitmap_FF0000"
                                                 }
                                             },
@@ -169,7 +169,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FF0000FF",
-                                                    "origin": "20, 0",
+                                                    "origin": "30, 5",
                                                     "title": "Amp"
                                                 }
                                             },
@@ -181,7 +181,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "amp_decay",
-                                                    "origin": "60, 0",
+                                                    "origin": "70, 5",
                                                     "bitmap": "bitmap_FF0000"
                                                 }
                                             },
@@ -193,7 +193,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FF0000FF",
-                                                    "origin": "80, 0",
+                                                    "origin": "95, 5",
                                                     "title": "Dcy"
                                                 }
                                             }
@@ -207,8 +207,8 @@
                         "attributes": {
                             "class": "CViewContainer",
                             "background-color-draw-style": "stroked",
-                            "origin": "0, 40",
-                            "size": "180, 60",
+                            "origin": "5, 60",
+                            "size": "135, 100",
                             "background-color": "color_FF8000FF"
                         },
                         "children": {
@@ -216,7 +216,7 @@
                                 "attributes": {
                                     "class": "CViewContainer",
                                     "origin": "0, 0",
-                                    "size": "180, 60",
+                                    "size": "135, 100",
                                     "background-color": "color_black80"
                                 },
                                 "children": {
@@ -224,7 +224,7 @@
                                         "attributes": {
                                             "class": "CViewContainer",
                                             "origin": "0, 0",
-                                            "size": "180, 20",
+                                            "size": "135, 20",
                                             "background-color": "color_FF800080"
                                         },
                                         "children": {
@@ -236,8 +236,8 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_whiteFF",
-                                                    "origin": "0, 0",
-                                                    "size": "180, 20",
+                                                    "origin": "5, 0",
+                                                    "size": "135, 20",
                                                     "background-color": "color_FF800080"
                                                 }
                                             }
@@ -248,7 +248,7 @@
                                             "transparent": "true",
                                             "class": "CViewContainer",
                                             "origin": "0, 20",
-                                            "size": "180, 40"
+                                            "size": "135, 80"
                                         },
                                         "children": {
                                             "CAnimKnob": {
@@ -259,7 +259,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "out_clip",
-                                                    "origin": "0, 0",
+                                                    "origin": "5, 5",
                                                     "bitmap": "bitmap_FF8000"
                                                 }
                                             },
@@ -271,7 +271,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FF8000FF",
-                                                    "origin": "20, 0",
+                                                    "origin": "30, 5",
                                                     "title": "Clip"
                                                 }
                                             },
@@ -283,7 +283,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "out_exhausted",
-                                                    "origin": "60, 0",
+                                                    "origin": "70, 5",
                                                     "bitmap": "bitmap_FF8000"
                                                 }
                                             },
@@ -295,7 +295,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FF8000FF",
-                                                    "origin": "80, 0",
+                                                    "origin": "95, 5",
                                                     "title": "Exhausted"
                                                 }
                                             },
@@ -307,7 +307,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "out_voice_count",
-                                                    "origin": "0, 20",
+                                                    "origin": "5, 30",
                                                     "bitmap": "bitmap_FF8000"
                                                 }
                                             },
@@ -319,7 +319,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FF8000FF",
-                                                    "origin": "20, 20",
+                                                    "origin": "30, 30",
                                                     "title": "Voices"
                                                 }
                                             }
@@ -333,8 +333,8 @@
                         "attributes": {
                             "class": "CViewContainer",
                             "background-color-draw-style": "stroked",
-                            "origin": "0, 100",
-                            "size": "180, 60",
+                            "origin": "145, 5",
+                            "size": "200, 75",
                             "background-color": "color_FFFF00FF"
                         },
                         "children": {
@@ -342,7 +342,7 @@
                                 "attributes": {
                                     "class": "CViewContainer",
                                     "origin": "0, 0",
-                                    "size": "180, 60",
+                                    "size": "200, 75",
                                     "background-color": "color_black80"
                                 },
                                 "children": {
@@ -350,7 +350,7 @@
                                         "attributes": {
                                             "class": "CViewContainer",
                                             "origin": "0, 0",
-                                            "size": "180, 20",
+                                            "size": "200, 20",
                                             "background-color": "color_FFFF0080"
                                         },
                                         "children": {
@@ -362,8 +362,8 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_whiteFF",
-                                                    "origin": "0, 0",
-                                                    "size": "180, 20",
+                                                    "origin": "5, 0",
+                                                    "size": "200, 20",
                                                     "background-color": "color_FFFF0080"
                                                 }
                                             }
@@ -374,7 +374,7 @@
                                             "transparent": "true",
                                             "class": "CViewContainer",
                                             "origin": "0, 20",
-                                            "size": "180, 40"
+                                            "size": "200, 55"
                                         },
                                         "children": {
                                             "CAnimKnob": {
@@ -385,7 +385,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "osc_1_enabled",
-                                                    "origin": "0, 0",
+                                                    "origin": "5, 5",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -397,7 +397,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "20, 0",
+                                                    "origin": "30, 5",
                                                     "title": "On"
                                                 }
                                             },
@@ -409,7 +409,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "osc_1_type",
-                                                    "origin": "60, 0",
+                                                    "origin": "70, 5",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -421,7 +421,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "80, 0",
+                                                    "origin": "95, 5",
                                                     "title": "Type"
                                                 }
                                             },
@@ -433,7 +433,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "osc_1_panning",
-                                                    "origin": "120, 0",
+                                                    "origin": "135, 5",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -445,7 +445,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "140, 0",
+                                                    "origin": "160, 5",
                                                     "title": "Pan"
                                                 }
                                             },
@@ -457,7 +457,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "osc_1_octave",
-                                                    "origin": "0, 20",
+                                                    "origin": "5, 30",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -469,7 +469,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "20, 20",
+                                                    "origin": "30, 30",
                                                     "title": "Oct"
                                                 }
                                             },
@@ -481,7 +481,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "osc_1_note",
-                                                    "origin": "60, 20",
+                                                    "origin": "70, 30",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -493,7 +493,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "80, 20",
+                                                    "origin": "95, 30",
                                                     "title": "Note"
                                                 }
                                             },
@@ -505,7 +505,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "osc_1_detune",
-                                                    "origin": "120, 20",
+                                                    "origin": "135, 30",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -517,7 +517,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "140, 20",
+                                                    "origin": "160, 30",
                                                     "title": "Dtn"
                                                 }
                                             }
@@ -531,8 +531,8 @@
                         "attributes": {
                             "class": "CViewContainer",
                             "background-color-draw-style": "stroked",
-                            "origin": "180, 0",
-                            "size": "180, 160",
+                            "origin": "145, 85",
+                            "size": "200, 75",
                             "background-color": "color_FFFF00FF"
                         },
                         "children": {
@@ -540,7 +540,7 @@
                                 "attributes": {
                                     "class": "CViewContainer",
                                     "origin": "0, 0",
-                                    "size": "180, 160",
+                                    "size": "200, 75",
                                     "background-color": "color_black80"
                                 },
                                 "children": {
@@ -548,7 +548,7 @@
                                         "attributes": {
                                             "class": "CViewContainer",
                                             "origin": "0, 0",
-                                            "size": "180, 20",
+                                            "size": "200, 20",
                                             "background-color": "color_FFFF0080"
                                         },
                                         "children": {
@@ -560,8 +560,8 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_whiteFF",
-                                                    "origin": "0, 0",
-                                                    "size": "180, 20",
+                                                    "origin": "5, 0",
+                                                    "size": "200, 20",
                                                     "background-color": "color_FFFF0080"
                                                 }
                                             }
@@ -572,7 +572,7 @@
                                             "transparent": "true",
                                             "class": "CViewContainer",
                                             "origin": "0, 20",
-                                            "size": "180, 140"
+                                            "size": "200, 55"
                                         },
                                         "children": {
                                             "CAnimKnob": {
@@ -583,7 +583,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "osc_2_enabled",
-                                                    "origin": "0, 0",
+                                                    "origin": "5, 5",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -595,7 +595,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "20, 0",
+                                                    "origin": "30, 5",
                                                     "title": "On"
                                                 }
                                             },
@@ -607,7 +607,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "osc_2_type",
-                                                    "origin": "60, 0",
+                                                    "origin": "70, 5",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -619,7 +619,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "80, 0",
+                                                    "origin": "95, 5",
                                                     "title": "Type"
                                                 }
                                             },
@@ -631,7 +631,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "osc_2_panning",
-                                                    "origin": "120, 0",
+                                                    "origin": "135, 5",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -643,7 +643,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "140, 0",
+                                                    "origin": "160, 5",
                                                     "title": "Pan"
                                                 }
                                             },
@@ -655,7 +655,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "osc_2_octave",
-                                                    "origin": "0, 20",
+                                                    "origin": "5, 30",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -667,7 +667,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "20, 20",
+                                                    "origin": "30, 30",
                                                     "title": "Oct"
                                                 }
                                             },
@@ -679,7 +679,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "osc_2_note",
-                                                    "origin": "60, 20",
+                                                    "origin": "70, 30",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -691,7 +691,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "80, 20",
+                                                    "origin": "95, 30",
                                                     "title": "Note"
                                                 }
                                             },
@@ -703,7 +703,7 @@
                                                     "size": "20, 20",
                                                     "height-of-one-image": "20",
                                                     "control-tag": "osc_2_detune",
-                                                    "origin": "120, 20",
+                                                    "origin": "135, 30",
                                                     "bitmap": "bitmap_FFFF00"
                                                 }
                                             },
@@ -715,7 +715,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "140, 20",
+                                                    "origin": "160, 30",
                                                     "title": "Dtn"
                                                 }
                                             }

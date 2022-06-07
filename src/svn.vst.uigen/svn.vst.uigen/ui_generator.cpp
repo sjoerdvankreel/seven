@@ -184,18 +184,13 @@ build_param_ui_descriptor(
 
 static part_ui_descriptor
 build_part_ui_descriptor(
-  runtime_topology const& topology,
-  std::int32_t runtime_part_index,
-  std::int32_t unordered_type_index,
-  std::int32_t column, std::int32_t left, std::int32_t top)
+  runtime_topology const& topology, 
+  std::int32_t runtime_part_index, std::int32_t unordered_type_index)
 {
   part_ui_descriptor result;
   auto const& part = topology.parts[runtime_part_index];
   std::int32_t param_count = part.descriptor->param_count;
-
-  result.top = top;
-  result.left = left;
-  result.column = column;
+ 
   result.runtime_part_index = runtime_part_index;
   result.columns = part.descriptor->ui_control_columns;
   result.rows = param_count / result.columns;
@@ -218,13 +213,8 @@ build_part_ui_descriptor(
 static ui_descriptor
 build_ui_descriptor(runtime_topology const& topology)
 {
+  // Build part list.
   ui_descriptor result;
-  std::int32_t top = 0;
-  std::int32_t left = 0;
-  std::int32_t current_column = 0;
-  std::int32_t max_column_height = 0;
-  std::int32_t current_column_width = 0;
-
   for(std::int32_t p = 0; p < topology.static_part_count; p++)
   {
     std::int32_t ui_index = topology.ui_order[p];
@@ -232,50 +222,53 @@ build_ui_descriptor(runtime_topology const& topology)
     for (std::int32_t c = 0; c < static_part.part_count; c++)
     {
       std::int32_t runtime_part_index = topology.part_bounds[ui_index][c];
-      part_ui_descriptor descriptor(build_part_ui_descriptor(
-        topology, runtime_part_index, p, current_column, left, top));
-      if(descriptor.height > topology.max_ui_height)
+      part_ui_descriptor descriptor(build_part_ui_descriptor(topology, runtime_part_index, p));
+      if(descriptor.height + 2 * margin > topology.max_ui_height)
         throw std::runtime_error("Part height exceeds max ui height.");
-      current_column_width = std::max(current_column_width, descriptor.width);
-      top += descriptor.height;
-      if (top >= topology.max_ui_height)
-      {
-        if (top > topology.max_ui_height)
-        {
-          descriptor.column++;
-          descriptor.top = 0;
-          descriptor.left = descriptor.left + current_column_width;
-        }
-        top = 0;
-        current_column++;
-        left += current_column_width;
-        current_column_width = 0;
-      }
       result.parts.push_back(descriptor);
-      max_column_height = std::max(max_column_height, descriptor.top + descriptor.height);
     }
   }
 
-  // Stretch to fill columns.
-  result.width = 0;
-  result.height = max_column_height;
-  std::int32_t column_count = 0;
-  for(std::size_t p = 0; p < result.parts.size(); p++)
-    column_count = std::max(column_count, result.parts[p].column + 1);
-  result.column_widths.resize(column_count);
-  for(std::int32_t c = 0; c < column_count; c++)
-    for(std::size_t p = 0; p < result.parts.size(); p++)
-      if(result.parts[p].column == c)
-        result.column_widths[c] = std::max(result.column_widths[c], result.parts[p].width);
+  // Fix up top/left/column.
+  std::int32_t column = 0;
+  std::int32_t top = margin;
+  std::int32_t left = margin;
+  std::int32_t column_width = 0;
+  std::int32_t max_column_height = 0;
+  for (std::size_t p = 0; p < result.parts.size(); p++)
+  {
+    auto& part = result.parts[p];
+    if (top + part.height + margin > topology.max_ui_height)
+    {
+      max_column_height = std::max(top, max_column_height);
+      column++;
+      top = margin;
+      left += column_width + margin;
+      result.column_widths.push_back(column_width);
+      column_width = 0;
+    }
+
+    part.top = top;
+    part.left = left;
+    part.column = column;
+    column_width = std::max(column_width, part.width);
+    top += part.height + margin;
+  }
+  result.column_widths.push_back(column_width);
+  max_column_height = std::max(top, max_column_height);
+
+  // Fix up column width.
+  result.width = margin;
+  for(std::size_t c = 0; c < result.column_widths.size(); c++)
+    result.width += result.column_widths[c] + margin;
   for (std::size_t p = 0; p < result.parts.size(); p++)
     result.parts[p].width = result.column_widths[result.parts[p].column];
-  for(std::int32_t c = 0; c < column_count; c++)
-    result.width += result.column_widths[c];
 
-  // Stretch last block to fill row.
-  for(std::size_t p = 0; p < result.parts.size(); p++)
-    if(p == result.parts.size() - 1 || result.parts[p].column != result.parts[p + 1].column)
-      result.parts[p].height = result.height - result.parts[p].top;
+  // Fix up last block height.
+  result.height = max_column_height;
+  for (std::size_t p = 0; p < result.parts.size(); p++)
+    if (p == result.parts.size() - 1 || result.parts[p].column != result.parts[p + 1].column)
+      result.parts[p].height = result.height - result.parts[p].top - margin;
 
   return result;
 }
