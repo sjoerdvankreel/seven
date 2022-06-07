@@ -56,7 +56,7 @@ struct ui_descriptor
   std::vector<std::int32_t> column_widths;
 };
 
-static std::int32_t const margin = 5;
+static std::int32_t const margin = 3;
 static std::int32_t const item_height = 20;
 static std::int32_t const label_width = 40;
 static std::int32_t const control_width = 20;
