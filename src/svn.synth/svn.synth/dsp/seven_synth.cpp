@@ -64,7 +64,7 @@ seven_synth::setup_voice(
   std::int32_t sample_count,
   std::int64_t stream_position)
 {
-  bool exhausted = true;
+  bool drain = true;
   std::int32_t slot = -1;
   std::int64_t slot_position = -1;
 
@@ -72,7 +72,7 @@ seven_synth::setup_voice(
     if (!_voice_states[v].in_use)
     {
       slot = v;
-      exhausted = false;
+      drain = false;
       break;
     } else
     {
@@ -93,7 +93,7 @@ seven_synth::setup_voice(
   _voice_states[slot].start_position_buffer = note.sample_index;
   _voice_states[slot].start_position_stream = stream_position + note.sample_index;
   _voices[slot] = synth_voice(topology(), sample_rate(), note.velocity, note.midi);
-  return exhausted;
+  return drain;
 }
 
 void
@@ -113,10 +113,10 @@ seven_synth::process_block(
     }
 
   // Set up new activation and release state.
-  bool exhausted = false;
+  bool drain = false;
   for(std::int32_t n = 0; n < input.note_count; n++)
     if(input.notes[n].note_on)
-      exhausted |= setup_voice(input.notes[n], input.sample_count, input.stream_position);
+      drain |= setup_voice(input.notes[n], input.sample_count, input.stream_position);
     else
       setup_voice_release(input.notes[n], input.sample_count);
   
@@ -178,7 +178,7 @@ seven_synth::process_block(
     bool clip = clip_audio(output.audio, input.sample_count);
     output.output_params[glob_output_param::clip].discrete = clip? 1: 0;
     output.output_params[glob_output_param::voices].discrete = voice_count;
-    output.output_params[glob_output_param::exhausted].discrete = exhausted? 1: 0;
+    output.output_params[glob_output_param::drain].discrete = drain ? 1: 0;
 
     // Remember last automation values in case a note is released on the 
     // next round at sample index 0. Because if a voice is released at

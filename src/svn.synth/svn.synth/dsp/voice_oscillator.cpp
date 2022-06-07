@@ -10,14 +10,14 @@
 using namespace svn::base;
 
 namespace svn::synth {
-
+  
 static inline float 
 osc_sine(float phase)  
 {  
   assert(0.0f <= phase && phase < 1.0f);
   return std::sin(2.0f * std::numbers::pi * phase);
 }        
-
+    
 static inline float
 osc_blep(float sample_rate, float frequency, float phase)
 {
@@ -37,7 +37,7 @@ osc_blep(float sample_rate, float frequency, float phase)
   }
   return saw;
 }
- 
+  
 voice_oscillator::
 voice_oscillator(
   float sample_rate, std::int32_t midi_note):
@@ -59,8 +59,8 @@ voice_oscillator::process_block(
     bool on = input.automation.get(voice_osc_param::on, s).discrete != 0;
     if(!on) continue;
        
+    float cent = input.automation.get(voice_osc_param::cent, s).real;
     float panning = input.automation.get(voice_osc_param::pan, s).real;
-    float cent = input.automation.get(voice_osc_param::detune, s).real;
     std::int32_t type = input.automation.get(voice_osc_param::type, s).discrete;
     std::int32_t note = input.automation.get(voice_osc_param::note, s).discrete;
     std::int32_t octave = input.automation.get(voice_osc_param::oct, s).discrete;

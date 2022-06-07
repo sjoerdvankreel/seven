@@ -17,10 +17,10 @@ extern base::param_descriptor const voice_amp_params[];
 extern base::param_descriptor const glob_output_params[];
 
 struct part_type_t { enum value { voice_amp, voice_osc, glob_output, count }; };
-struct glob_output_param_t { enum value { clip, exhausted, voices, count }; };
+struct glob_output_param_t { enum value { clip, drain, voices, count }; };
 struct voice_amp_param_t { enum value { amp, decay, count }; };
 struct voice_osc_type_t { enum value { sine, blep, count }; };
-struct voice_osc_param_t { enum value { on, type, pan, oct, note, detune, count }; };
+struct voice_osc_param_t { enum value { on, type, pan, oct, note, cent, count }; };
 
 typedef part_type_t::value part_type;
 typedef voice_osc_type_t::value voice_osc_type;

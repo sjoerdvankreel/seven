@@ -7,10 +7,10 @@
 #include <cstdint>
 
 namespace svn::base {
-
+  
 struct param_type_t { enum value { real, list, toggle, discrete, count }; };
 typedef param_type_t::value param_type;
- 
+  
 // Describes automation input.
 struct param_descriptor
 {

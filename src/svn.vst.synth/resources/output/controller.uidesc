@@ -80,15 +80,15 @@
             "osc_1_panning": "4",
             "osc_1_octave": "5",
             "osc_1_note": "6",
-            "osc_1_detune": "7",
+            "osc_1_cent": "7",
             "osc_2_enabled": "8",
             "osc_2_type": "9",
             "osc_2_panning": "10",
             "osc_2_octave": "11",
             "osc_2_note": "12",
-            "osc_2_detune": "13",
+            "osc_2_cent": "13",
             "out_clip": "14",
-            "out_exhausted": "15",
+            "out_voices_exhausted": "15",
             "out_voice_count": "16"
         },
         "templates": {
@@ -194,7 +194,7 @@
                                                     "size": "40, 20",
                                                     "font-color": "color_FF0000FF",
                                                     "origin": "89, 3",
-                                                    "title": "Dcy"
+                                                    "title": "Decay"
                                                 }
                                             }
                                         }
@@ -257,6 +257,7 @@
                                                     "size": "17, 20",
                                                     "control-tag": "out_clip",
                                                     "origin": "6, 3",
+                                                    "frame-width": "0",
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_FF800080",
@@ -280,8 +281,9 @@
                                                 "attributes": {
                                                     "class": "CCheckBox",
                                                     "size": "17, 20",
-                                                    "control-tag": "out_exhausted",
+                                                    "control-tag": "out_voices_exhausted",
                                                     "origin": "69, 3",
+                                                    "frame-width": "0",
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_FF800080",
@@ -298,7 +300,7 @@
                                                     "size": "40, 20",
                                                     "font-color": "color_FF8000FF",
                                                     "origin": "89, 3",
-                                                    "title": "Exhausted"
+                                                    "title": "Drain"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -385,6 +387,7 @@
                                                     "size": "17, 20",
                                                     "control-tag": "osc_1_enabled",
                                                     "origin": "6, 3",
+                                                    "frame-width": "0",
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_FFFF0080",
@@ -404,28 +407,26 @@
                                                     "title": "On"
                                                 }
                                             },
-                                            "CAnimKnob": {
+                                            "COptionMenu": {
                                                 "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "size": "20, 20",
+                                                    "class": "COptionMenu",
+                                                    "size": "60, 20",
                                                     "control-tag": "osc_1_type",
                                                     "origin": "66, 3",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "height-of-one-image": "20",
-                                                    "bitmap": "bitmap_FFFF00"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "transparent": "true",
+                                                    "min-value": "0",
+                                                    "default-value": "0",
                                                     "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "size": "40, 20",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "menu-popup-style": "true",
+                                                    "menu-check-style": "false",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "max-value": "1",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "89, 3",
-                                                    "title": "Type"
+                                                    "back-color": "color_FFFF0080",
+                                                    "frame-color": "color_FFFF00FF",
+                                                    "shadow-color": "color_FFFF0080"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -476,35 +477,33 @@
                                                     "title": "Oct"
                                                 }
                                             },
-                                            "CAnimKnob": {
+                                            "COptionMenu": {
                                                 "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "size": "20, 20",
+                                                    "class": "COptionMenu",
+                                                    "size": "60, 20",
                                                     "control-tag": "osc_1_note",
                                                     "origin": "66, 26",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "height-of-one-image": "20",
-                                                    "bitmap": "bitmap_FFFF00"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "transparent": "true",
+                                                    "min-value": "0",
+                                                    "default-value": "0",
                                                     "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "size": "40, 20",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "menu-popup-style": "true",
+                                                    "menu-check-style": "false",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "max-value": "11",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "89, 26",
-                                                    "title": "Note"
+                                                    "back-color": "color_FFFF0080",
+                                                    "frame-color": "color_FFFF00FF",
+                                                    "shadow-color": "color_FFFF0080"
                                                 }
                                             },
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
-                                                    "control-tag": "osc_1_detune",
+                                                    "control-tag": "osc_1_cent",
                                                     "origin": "129, 26",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
@@ -521,7 +520,7 @@
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
                                                     "origin": "152, 26",
-                                                    "title": "Dtn"
+                                                    "title": "Cent"
                                                 }
                                             }
                                         }
@@ -584,6 +583,7 @@
                                                     "size": "17, 20",
                                                     "control-tag": "osc_2_enabled",
                                                     "origin": "6, 3",
+                                                    "frame-width": "0",
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_FFFF0080",
@@ -603,28 +603,26 @@
                                                     "title": "On"
                                                 }
                                             },
-                                            "CAnimKnob": {
+                                            "COptionMenu": {
                                                 "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "size": "20, 20",
+                                                    "class": "COptionMenu",
+                                                    "size": "60, 20",
                                                     "control-tag": "osc_2_type",
                                                     "origin": "66, 3",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "height-of-one-image": "20",
-                                                    "bitmap": "bitmap_FFFF00"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "transparent": "true",
+                                                    "min-value": "0",
+                                                    "default-value": "0",
                                                     "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "size": "40, 20",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "menu-popup-style": "true",
+                                                    "menu-check-style": "false",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "max-value": "1",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "89, 3",
-                                                    "title": "Type"
+                                                    "back-color": "color_FFFF0080",
+                                                    "frame-color": "color_FFFF00FF",
+                                                    "shadow-color": "color_FFFF0080"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -675,35 +673,33 @@
                                                     "title": "Oct"
                                                 }
                                             },
-                                            "CAnimKnob": {
+                                            "COptionMenu": {
                                                 "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "size": "20, 20",
+                                                    "class": "COptionMenu",
+                                                    "size": "60, 20",
                                                     "control-tag": "osc_2_note",
                                                     "origin": "66, 26",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "height-of-one-image": "20",
-                                                    "bitmap": "bitmap_FFFF00"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "transparent": "true",
+                                                    "min-value": "0",
+                                                    "default-value": "0",
                                                     "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "size": "40, 20",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "menu-popup-style": "true",
+                                                    "menu-check-style": "false",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "max-value": "11",
                                                     "font-color": "color_FFFF00FF",
-                                                    "origin": "89, 26",
-                                                    "title": "Note"
+                                                    "back-color": "color_FFFF0080",
+                                                    "frame-color": "color_FFFF00FF",
+                                                    "shadow-color": "color_FFFF0080"
                                                 }
                                             },
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
-                                                    "control-tag": "osc_2_detune",
+                                                    "control-tag": "osc_2_cent",
                                                     "origin": "129, 26",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
@@ -720,7 +716,7 @@
                                                     "size": "40, 20",
                                                     "font-color": "color_FFFF00FF",
                                                     "origin": "152, 26",
-                                                    "title": "Dtn"
+                                                    "title": "Cent"
                                                 }
                                             }
                                         }
