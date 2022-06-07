@@ -201,8 +201,8 @@ build_part_ui_descriptor(
   result.rows = param_count / result.columns;
   if(param_count % result.columns != 0) ++result.rows;
   result.color_index = unordered_type_index % color_count;
-  result.height = (result.rows + 1) * item_height;
-  result.width = (result.columns) * (control_width + label_width);
+  result.height = (result.rows + 1) * (item_height + margin);
+  result.width = (result.columns) * (control_width + label_width + margin) + margin;
   
   for(std::int32_t i = 0; i < part.descriptor->param_count; i++)
   {
