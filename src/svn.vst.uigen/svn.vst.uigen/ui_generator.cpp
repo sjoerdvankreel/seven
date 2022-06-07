@@ -166,7 +166,7 @@ main(int argc, char** argv)
   return 0;
 }
 
-/* -------- topology to descriptor -------- */
+/* -------- topology to ui descriptor -------- */
 
 static param_ui_descriptor
 build_param_ui_descriptor(
@@ -300,7 +300,7 @@ print_ui_descriptor(
   std::cout << "\n";
 }
 
-/* -------- descriptor to json -------- */
+/* -------- ui descriptor to json support -------- */
 
 static std::string 
 get_color_name(std::string const& rgb)
@@ -401,6 +401,8 @@ get_control_tag(std::wstring const& runtime_param_name)
   }
   return result;
 }
+
+/* -------- ui descriptor to json -------- */
 
 static Value
 build_ui_bitmaps(Document::AllocatorType& allocator)
