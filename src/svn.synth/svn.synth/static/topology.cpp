@@ -10,10 +10,10 @@ namespace svn::synth {
 std::int32_t const 
 synth_ui_order[part_type::count] = 
 {
+  part_type::voice_osc,
   part_type::voice_amp,
-  part_type::glob_output,
-  part_type::voice_osc
-};
+  part_type::glob_output
+}; 
 
 static item_name const
 voice_osc_types[voice_osc_type::count] =
@@ -38,7 +38,7 @@ voice_osc_params[voice_osc_param::count] =
   { { L"Pan", L"Panning" }, L"%", 0.5, param_bounds::linear_unit(), param_bounds::linear(-100.0, 100.0) },
   { { L"Oct", L"Octave" }, L"", 4, 0, 9 },
   { { L"Note", L"Note" }, param_type::discrete, note_names, note_name::count },
-  { { L"Cent", L"Cent" }, L"Cent", 0.5, param_bounds::linear(-0.5, 0.5), param_bounds::linear(-50.0, 50.0) }
+  { { L"Cent", L"Cent" }, L"", 0.5, param_bounds::linear(-0.5, 0.5), param_bounds::linear(-50.0, 50.0) }
 };
 
 param_descriptor const

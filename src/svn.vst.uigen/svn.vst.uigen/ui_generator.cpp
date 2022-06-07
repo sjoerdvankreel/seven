@@ -12,6 +12,7 @@
 #undef GetObject
 
 #include <set>
+#include <cwchar>
 #include <cassert>
 #include <cstdint>
 #include <fstream>
@@ -498,6 +499,11 @@ build_ui_param_control_base(
   std::int32_t top = margin + param.row * (item_height + margin);
   std::int32_t left = margin + param.column * (control_width + label_width + margin) + offset_x;
   add_attribute(result, "origin", size_to_string(left, top), allocator);
+  auto const& rt_param = topology.params[param.runtime_param_index];
+  std::string tooltip = narrow_assume_ascii(rt_param.runtime_name);
+  std::string unit = std::string(" (") + narrow_assume_ascii(rt_param.descriptor->unit) + ")";
+  if (std::wcslen(rt_param.descriptor->unit) > 0) tooltip += unit;
+  add_attribute(result, "tooltip", tooltip, allocator);
   return result;
 }
 

@@ -58,7 +58,7 @@ voice_oscillator::process_block(
     audio[s] = 0.0f;
     bool on = input.automation.get(voice_osc_param::on, s).discrete != 0;
     if(!on) continue;
-       
+        
     float cent = input.automation.get(voice_osc_param::cent, s).real;
     float panning = input.automation.get(voice_osc_param::pan, s).real;
     std::int32_t type = input.automation.get(voice_osc_param::type, s).discrete;

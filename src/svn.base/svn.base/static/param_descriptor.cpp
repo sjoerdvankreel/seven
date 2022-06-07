@@ -33,7 +33,7 @@ dsp(dsp), display(display), min(0.0f), max(1.0f), default_(default_)
   assert(0 <= display.slope && display.slope <= param_slope::count);
 }
 
-param_descriptor::
+param_descriptor::   
 param_descriptor(
   item_name const& static_name, bool default_):
 type(param_type::toggle), unit(L""), static_name(static_name), list(nullptr),
