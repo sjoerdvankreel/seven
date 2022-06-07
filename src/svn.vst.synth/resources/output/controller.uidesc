@@ -43,34 +43,48 @@
             }
         },
         "colors": {
-            "color_whiteFF": "#FFFFFFFF",
-            "color_white80": "#FFFFFF80",
-            "color_blackFF": "#000000FF",
-            "color_black80": "#00000080",
-            "color_FF0000FF": "#FF0000FF",
+            "color_FFFFFF40": "#FFFFFF40",
+            "color_00000040": "#00000040",
+            "color_FF000040": "#FF000040",
+            "color_FF800040": "#FF800040",
+            "color_FFFF0040": "#FFFF0040",
+            "color_80FF0040": "#80FF0040",
+            "color_00FF0040": "#00FF0040",
+            "color_00FF8040": "#00FF8040",
+            "color_00FFFF40": "#00FFFF40",
+            "color_0080FF40": "#0080FF40",
+            "color_0000FF40": "#0000FF40",
+            "color_8000FF40": "#8000FF40",
+            "color_FF00FF40": "#FF00FF40",
+            "color_FF008040": "#FF008040",
+            "color_FFFFFF80": "#FFFFFF80",
+            "color_00000080": "#00000080",
             "color_FF000080": "#FF000080",
-            "color_FF8000FF": "#FF8000FF",
             "color_FF800080": "#FF800080",
-            "color_FFFF00FF": "#FFFF00FF",
             "color_FFFF0080": "#FFFF0080",
-            "color_80FF00FF": "#80FF00FF",
             "color_80FF0080": "#80FF0080",
-            "color_00FF00FF": "#00FF00FF",
             "color_00FF0080": "#00FF0080",
-            "color_00FF80FF": "#00FF80FF",
             "color_00FF8080": "#00FF8080",
-            "color_00FFFFFF": "#00FFFFFF",
             "color_00FFFF80": "#00FFFF80",
-            "color_0080FFFF": "#0080FFFF",
             "color_0080FF80": "#0080FF80",
-            "color_0000FFFF": "#0000FFFF",
             "color_0000FF80": "#0000FF80",
-            "color_8000FFFF": "#8000FFFF",
             "color_8000FF80": "#8000FF80",
-            "color_FF00FFFF": "#FF00FFFF",
             "color_FF00FF80": "#FF00FF80",
-            "color_FF0080FF": "#FF0080FF",
-            "color_FF008080": "#FF008080"
+            "color_FF008080": "#FF008080",
+            "color_FFFFFFFF": "#FFFFFFFF",
+            "color_000000FF": "#000000FF",
+            "color_FF0000FF": "#FF0000FF",
+            "color_FF8000FF": "#FF8000FF",
+            "color_FFFF00FF": "#FFFF00FF",
+            "color_80FF00FF": "#80FF00FF",
+            "color_00FF00FF": "#00FF00FF",
+            "color_00FF80FF": "#00FF80FF",
+            "color_00FFFFFF": "#00FFFFFF",
+            "color_0080FFFF": "#0080FFFF",
+            "color_0000FFFF": "#0000FFFF",
+            "color_8000FFFF": "#8000FFFF",
+            "color_FF00FFFF": "#FF00FFFF",
+            "color_FF0080FF": "#FF0080FF"
         },
         "control-tags": {
             "amp_level": "0",
@@ -115,7 +129,7 @@
                                     "class": "CViewContainer",
                                     "origin": "0, 0",
                                     "size": "192, 69",
-                                    "background-color": "color_black80"
+                                    "background-color": "color_00000080"
                                 },
                                 "children": {
                                     "CViewContainer": {
@@ -133,7 +147,7 @@
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
-                                                    "font-color": "color_whiteFF",
+                                                    "font-color": "color_FFFFFFFF",
                                                     "origin": "3, 0",
                                                     "size": "192, 20",
                                                     "background-color": "color_FF000080"
@@ -156,7 +170,7 @@
                                                     "control-tag": "osc_1_enabled",
                                                     "origin": "6, 3",
                                                     "tooltip": "Osc 1 Enabled",
-                                                    "frame-width": "0",
+                                                    "frame-width": "1",
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_FF000080",
@@ -319,7 +333,7 @@
                                     "class": "CViewContainer",
                                     "origin": "0, 0",
                                     "size": "192, 69",
-                                    "background-color": "color_black80"
+                                    "background-color": "color_00000080"
                                 },
                                 "children": {
                                     "CViewContainer": {
@@ -337,7 +351,7 @@
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
-                                                    "font-color": "color_whiteFF",
+                                                    "font-color": "color_FFFFFFFF",
                                                     "origin": "3, 0",
                                                     "size": "192, 20",
                                                     "background-color": "color_FF000080"
@@ -360,7 +374,7 @@
                                                     "control-tag": "osc_2_enabled",
                                                     "origin": "6, 3",
                                                     "tooltip": "Osc 2 Enabled",
-                                                    "frame-width": "0",
+                                                    "frame-width": "1",
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_FF000080",
@@ -523,7 +537,7 @@
                                     "class": "CViewContainer",
                                     "origin": "0, 0",
                                     "size": "129, 46",
-                                    "background-color": "color_black80"
+                                    "background-color": "color_00000080"
                                 },
                                 "children": {
                                     "CViewContainer": {
@@ -541,7 +555,7 @@
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
-                                                    "font-color": "color_whiteFF",
+                                                    "font-color": "color_FFFFFFFF",
                                                     "origin": "3, 0",
                                                     "size": "129, 20",
                                                     "background-color": "color_FF800080"
@@ -627,7 +641,7 @@
                                     "class": "CViewContainer",
                                     "origin": "0, 0",
                                     "size": "129, 92",
-                                    "background-color": "color_black80"
+                                    "background-color": "color_00000080"
                                 },
                                 "children": {
                                     "CViewContainer": {
@@ -645,7 +659,7 @@
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
-                                                    "font-color": "color_whiteFF",
+                                                    "font-color": "color_FFFFFFFF",
                                                     "origin": "3, 0",
                                                     "size": "129, 20",
                                                     "background-color": "color_FFFF0080"
@@ -668,7 +682,7 @@
                                                     "control-tag": "out_clip",
                                                     "origin": "6, 3",
                                                     "tooltip": "Out Clip",
-                                                    "frame-width": "0",
+                                                    "frame-width": "1",
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_FFFF0080",
@@ -695,7 +709,7 @@
                                                     "control-tag": "out_voices_exhausted",
                                                     "origin": "69, 3",
                                                     "tooltip": "Out Voices exhausted",
-                                                    "frame-width": "0",
+                                                    "frame-width": "1",
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_FFFF0080",

@@ -63,16 +63,14 @@ static std::int32_t const item_height = 20;
 static std::int32_t const label_width = 40;
 static std::int32_t const control_width = 20;
 
-static char const* color_name_whiteFF = "whiteFF";
-static char const* color_name_white80 = "white80";
-static char const* color_name_blackFF = "blackFF";
-static char const* color_name_black80 = "black80";
-static char const* color_value_whiteFF = "#FFFFFFFF";
-static char const* color_value_white80 = "#FFFFFF80";
-static char const* color_value_blackFF = "#000000FF";
-static char const* color_value_black80 = "#00000080";
+struct color_alpha_t { enum value { quarter, half, opaque, count }; };
+typedef color_alpha_t::value color_alpha;
+static std::uint8_t const
+color_alphas[color_alpha::count] = { 0x40, 0x80, 0xFF };
 
 struct rgb { std::uint8_t r, g, b; };
+static rgb white = { 0xFF, 0xFF, 0xFF };
+static rgb black = { 0x00, 0x00, 0x00 };
 static std::size_t const color_count = 12;
 static rgb const color_wheel[color_count] =
 {
@@ -96,8 +94,7 @@ typedef runtime_topology const* (*svn_get_topology_t)(void);
 static ui_descriptor build_ui_descriptor(
   runtime_topology const& topology);
 static std::string print_rgb_hex(
-  rgb color, bool print_alpha, std::uint8_t alpha);
-
+  rgb color, bool print_alpha, std::int32_t alpha_index);
 static void print_ui_descriptor(
   runtime_topology const& topology, ui_descriptor const& descriptor);
 static Document build_ui_description(
@@ -308,16 +305,16 @@ print_ui_descriptor(
 /* -------- ui descriptor to json support -------- */
 
 static std::string 
-get_color_name(std::string const& rgb)
-{ return "color_" + rgb; }
-
-static std::string 
 get_bitmap_name(std::string const& rgb)
 { return "bitmap_" + rgb; }
 
 static std::string
-get_color_name(std::int32_t wheel_index, std::uint8_t alpha)
-{ return get_color_name(print_rgb_hex(color_wheel[wheel_index], true, alpha)); }
+get_color_value(rgb color, std::int32_t alpha_index)
+{ return "#" + print_rgb_hex(color, true, alpha_index); }
+
+static std::string
+get_color_name(rgb color, std::int32_t alpha_index)
+{ return "color_" + print_rgb_hex(color, true, alpha_index); }
 
 static std::string
 get_param_control_class(
@@ -388,7 +385,7 @@ add_attribute(
 }
 
 static std::string
-print_rgb_hex(rgb color, bool print_alpha, std::uint8_t alpha)
+print_rgb_hex(rgb color, bool print_alpha, std::int32_t alpha_index)
 {
   std::ostringstream oss;
   oss << std::hex << std::uppercase;
@@ -399,8 +396,8 @@ print_rgb_hex(rgb color, bool print_alpha, std::uint8_t alpha)
   oss << ((color.b >> 4) & 0xF);
   oss << (color.b & 0xF);
   if(!print_alpha) return oss.str();
-  oss << ((alpha >> 4) & 0xF);
-  oss << (alpha & 0xF);
+  oss << ((color_alphas[alpha_index] >> 4) & 0xF);
+  oss << (color_alphas[alpha_index] & 0xF);
   return oss.str();
 }
 
@@ -445,7 +442,7 @@ build_ui_bitmaps(Document::AllocatorType& allocator)
   add_member(result, get_bitmap_name("background"), background_value, allocator);
   for (std::size_t c = 0; c < color_count; c++)
   {
-    std::string name = print_rgb_hex(color_wheel[c], false, 0x0);
+    std::string name = print_rgb_hex(color_wheel[c], false, color_alpha::opaque);
     Value value(kObjectType);
     Value path((name + ".png").c_str(), allocator);
     value.AddMember("path", path, allocator);
@@ -458,16 +455,12 @@ static Value
 build_ui_colors(Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  add_member(result, get_color_name(color_name_whiteFF), color_value_whiteFF, allocator);
-  add_member(result, get_color_name(color_name_white80), color_value_white80, allocator);
-  add_member(result, get_color_name(color_name_blackFF), color_value_blackFF, allocator);
-  add_member(result, get_color_name(color_name_black80), color_value_black80, allocator);
-  for(std::size_t c = 0; c < color_count; c++)
+  for (std::int32_t a = 0; a < color_alpha::count; a++)
   {
-    std::string name_opaque = print_rgb_hex(color_wheel[c], true, 0xFF);
-    add_member(result, get_color_name(name_opaque), "#" + name_opaque, allocator);
-    std::string name_50 = print_rgb_hex(color_wheel[c], true, 0x80);
-    add_member(result, get_color_name(name_50), ("#" + name_50), allocator);
+    add_member(result, get_color_name(white, a), get_color_value(white, a), allocator);
+    add_member(result, get_color_name(black, a), get_color_value(black, a), allocator);
+    for (std::size_t c = 0; c < color_count; c++)
+      add_member(result, get_color_name(color_wheel[c], a), get_color_value(color_wheel[c], a), allocator);
   }
   return result;
 }
@@ -527,12 +520,12 @@ build_ui_param_checkbox(
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
   Value result(build_ui_param_control_base(topology, part, param, 3, control_width, allocator));
-  add_attribute(result, "frame-width", "0", allocator);
+  add_attribute(result, "frame-width", "1", allocator);
   add_attribute(result, "draw-crossbox", "true", allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
-  add_attribute(result, "boxfill-color", get_color_name(part.color_index, 0x80), allocator);
-  add_attribute(result, "boxframe-color", get_color_name(part.color_index, 0xFF), allocator);
-  add_attribute(result, "checkmark-color", get_color_name(part.color_index, 0xFF), allocator);
+  add_attribute(result, "boxfill-color", get_color_name(color_wheel[part.color_index], color_alpha::half), allocator);
+  add_attribute(result, "boxframe-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
+  add_attribute(result, "checkmark-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
   return result;
 }
 
@@ -553,10 +546,10 @@ build_ui_param_menu(
   add_attribute(result, "text-inset", size_to_string(margin, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "max-value", std::to_string(descriptor.max.discrete), allocator);
-  add_attribute(result, "font-color", get_color_name(part.color_index, 0xFF), allocator);
-  add_attribute(result, "back-color", get_color_name(part.color_index, 0x80), allocator);
-  add_attribute(result, "frame-color", get_color_name(part.color_index, 0xFF), allocator);
-  add_attribute(result, "shadow-color", get_color_name(part.color_index, 0x80), allocator);
+  add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
+  add_attribute(result, "back-color", get_color_name(color_wheel[part.color_index], color_alpha::half), allocator);
+  add_attribute(result, "frame-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
+  add_attribute(result, "shadow-color", get_color_name(color_wheel[part.color_index], color_alpha::half), allocator);
   return result;
 }
 
@@ -571,7 +564,7 @@ build_ui_param_label(
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "size", size_to_string(label_width, item_height), allocator);
-  add_attribute(result, "font-color", get_color_name(part.color_index, 0xFF), allocator);
+  add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
   std::int32_t top = margin + param.row * (item_height + margin);
   std::int32_t left = margin + param.column * (control_width + label_width + margin) + control_width + margin;
   add_attribute(result, "origin", size_to_string(left, top), allocator);
@@ -631,10 +624,10 @@ build_ui_part_header_label(runtime_topology const& topology,
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
-  add_attribute(result, "font-color", get_color_name(color_name_whiteFF), allocator);
+  add_attribute(result, "font-color", get_color_name(white, color_alpha::opaque), allocator);
   add_attribute(result, "origin", size_to_string(margin, 0), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, item_height), allocator);
-  add_attribute(result, "background-color", get_color_name(descriptor.color_index, 0x80), allocator);
+  add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
   return result;
 }
 
@@ -646,7 +639,7 @@ build_ui_part_header_container(runtime_topology const& topology,
   add_attribute(result, "class", "CViewContainer", allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, item_height), allocator);
-  add_attribute(result, "background-color", get_color_name(descriptor.color_index, 0x80), allocator);
+  add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
   add_child(result, "CTextLabel", build_ui_part_header_label(topology, descriptor, allocator), allocator);
   return result;
 }
@@ -659,7 +652,7 @@ build_ui_part_inner_container(runtime_topology const& topology,
   add_attribute(result, "class", "CViewContainer", allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height), allocator);
-  add_attribute(result, "background-color", get_color_name(color_name_black80), allocator);
+  add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
   add_child(result, "CViewContainer", build_ui_part_header_container(topology, descriptor, allocator), allocator);
   add_child(result, "CViewContainer", build_ui_part_param_container(topology, descriptor, allocator), allocator);
   return result;
@@ -674,7 +667,7 @@ build_ui_part_outer_container(runtime_topology const& topology,
   add_attribute(result, "background-color-draw-style", "stroked", allocator);
   add_attribute(result, "origin", size_to_string(descriptor.left, descriptor.top), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height), allocator);
-  add_attribute(result, "background-color", get_color_name(descriptor.color_index, 0xFF), allocator);
+  add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::opaque), allocator);
   add_child(result, "CViewContainer", build_ui_part_inner_container(topology, descriptor, allocator), allocator);
   return result;
 }
