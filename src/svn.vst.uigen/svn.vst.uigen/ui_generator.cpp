@@ -437,74 +437,64 @@ build_ui_control_tags(
   return result;
 }
 
-/*
-<view class="CViewContainer" origin="5, 5" size="105, 50" background-color="orange" background-color-draw-style="stroked">
-      <view class="CViewContainer" origin="0, 0" size="105, 50" background-color="black_50">
-        <view class="CViewContainer" origin="0, 0" size="105, 20" background-color="orange_50">
-          <view class="CTextLabel" origin="0, 0" size="105, 20" text-alignment="left" font="~ NormalFontSmall" font-color="white" title=" Amp" transparent="true" />
-        </view>
-        <view class="CViewContainer" origin="5, 25" size="100, 25" transparent="true">
-          <view class="CAnimKnob" origin="0, 0" size="20, 20" control-tag="voice_amp_amp" bitmap="orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
-          <view class="CTextLabel" origin="25, 0" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="orange" title="Amp" transparent="true" />
-          <view class="CAnimKnob" origin="50, 0" size="20, 20" control-tag="voice_amp_dcy" bitmap="orange" angle-start="20" angle-range="320" height-of-one-image="20"/>
-          <view class="CTextLabel" origin="75, 0" size="20, 20" text-alignment="left" font="~ NormalFontSmall" font-color="orange" title="Dcy" transparent="true" />
-        </view>
-      </view>
-    </view>
-*/
-
-/*
-static Value 
-build_ui_part_view(
-  Document::AllocatorType& allocator, runtime_part const& part)
-{
-  Value header_label_attrs(kObjectType);
-  header_label_attrs.AddMember("origin", "0, 0", allocator);
-  header_label_attrs.AddMember("size", "105, 20", allocator);
-  header_label_attrs.AddMember("font-color", "white", allocator);
-  header_label_attrs.AddMember("transparent", "true", allocator);
-  header_label_attrs.AddMember("text-alignment", "left", allocator);
-  header_label_attrs.AddMember("font", "~ NormalFontSmall", allocator);
-
-  Value header_attrs(kObjectType);
-  header_attrs.AddMember("origin", "0, 0", allocator);
-  header_attrs.AddMember("size", "105, 20", allocator);
-  header_attrs.AddMember("background-color", "color_FF000080", allocator);
-  
-
-
-  Value inner_attrs(kObjectType);
-
-  Value inner(kObjectType);
-
-  Value outer_attrs(kObjectType);
-  outer_attrs.AddMember("origin", "5, 5", allocator);
-  outer_attrs.AddMember("size", "105, 50", allocator);
-  outer_attrs.AddMember("background-color", "color_80FF0080", allocator);
-  outer_attrs.AddMember("background-color-draw-style", "stroked", allocator);
-  Value outer(kObjectType);
-  outer.AddMember("attributes", outer_attrs, allocator);
-  return outer_attrs;
-}
-
 static Value
-build_ui_part_views(
-  Document::AllocatorType& allocator, runtime_topology const& topology)
+build_ui_part_header_label_attrs(runtime_topology const& topology,
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  for(std::size_t i = 0; i < 1; i++)
-    result.AddMember("CViewContainer", build_ui_part_view(allocator, topology.parts[i]), allocator);
+  std::string title = narrow_assume_ascii(topology.parts[descriptor.runtime_part_index].runtime_name);
+  add_member(result, "title", title, allocator);
+  add_member(result, "class", "CTextLabel", allocator);
+  add_member(result, "transparent", "true", allocator);
+  add_member(result, "text-alignment", "left", allocator);
+  add_member(result, "font", "~ NormalFontSmall", allocator);
+  add_member(result, "font-color", get_color_name(color_name_whiteFF), allocator);
+  add_member(result, "origin", size_to_string(0, 0), allocator);
+  add_member(result, "size", size_to_string(descriptor.width, item_height), allocator);
+  add_member(result, "background-color", get_color_name(descriptor.color_index, 0x80), allocator);
   return result;
 }
 
-*/
+static Value
+build_ui_part_header_label(runtime_topology const& topology,
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  result.AddMember("attributes", build_ui_part_header_label_attrs(topology, descriptor, allocator), allocator);
+  return result;
+}
+
+static Value
+build_ui_part_header_container_attrs(
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  add_member(result, "class", "CViewContainer", allocator);
+  add_member(result, "origin", size_to_string(0, 0), allocator);
+  add_member(result, "size", size_to_string(descriptor.width, item_height), allocator);
+  add_member(result, "background-color", get_color_name(descriptor.color_index, 0x80), allocator);
+  return result;
+}
+
+static Value
+build_ui_part_header_container(runtime_topology const& topology,
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  result.AddMember("attributes", build_ui_part_header_container_attrs(descriptor, allocator), allocator);
+  Value children(kObjectType);
+  children.AddMember("CTextLabel", build_ui_part_header_label(topology, descriptor, allocator), allocator);
+  result.AddMember("children", children, allocator);
+  return result;
+}
 
 static Value
 build_ui_part_inner_container_attrs(
   part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  add_member(result, "origin", size_to_string(descriptor.left, descriptor.top), allocator);
+  add_member(result, "class", "CViewContainer", allocator);
+  add_member(result, "origin", size_to_string(0, 0), allocator);
   add_member(result, "size", size_to_string(descriptor.width, descriptor.height), allocator);
   add_member(result, "background-color", get_color_name(color_name_black80), allocator);
   return result;
@@ -517,7 +507,7 @@ build_ui_part_inner_container(runtime_topology const& topology,
   Value result(kObjectType);
   result.AddMember("attributes", build_ui_part_inner_container_attrs(descriptor, allocator), allocator);
   Value children(kObjectType);
-  //children.AddMember("CViewContainer", build_ui_part_header(topology, descriptor, allocator), allocator);
+  children.AddMember("CViewContainer", build_ui_part_header_container(topology, descriptor, allocator), allocator);
   result.AddMember("children", children, allocator);
   return result;
 }
@@ -527,6 +517,7 @@ build_ui_part_outer_container_attrs(
   part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
+  add_member(result, "class", "CViewContainer", allocator);
   add_member(result, "background-color-draw-style", "stroked", allocator);
   add_member(result, "origin", size_to_string(descriptor.left, descriptor.top), allocator);
   add_member(result, "size", size_to_string(descriptor.width, descriptor.height), allocator);
@@ -555,8 +546,8 @@ build_ui_template_attrs(
   add_member(result, "size", size, allocator);
   add_member(result, "minSize", size, allocator);
   add_member(result, "maxSize", size, allocator);
-  result.AddMember("class", "CViewContainer", allocator);
-  add_member(result, "background-color", color_value_blackFF, allocator);
+  add_member(result, "class", "CViewContainer", allocator);
+  add_member(result, "bitmap", get_bitmap_name("background"), allocator);
   return result;
 }
 

@@ -98,11 +98,12 @@
                     "minSize": "180, 220",
                     "maxSize": "180, 220",
                     "class": "CViewContainer",
-                    "background-color": "#000000FF"
+                    "bitmap": "bitmap_background"
                 },
                 "children": {
                     "CViewContainer": {
                         "attributes": {
+                            "class": "CViewContainer",
                             "background-color-draw-style": "stroked",
                             "origin": "0, 0",
                             "size": "120, 40",
@@ -111,16 +112,42 @@
                         "children": {
                             "CViewContainer": {
                                 "attributes": {
+                                    "class": "CViewContainer",
                                     "origin": "0, 0",
                                     "size": "120, 40",
                                     "background-color": "color_black80"
                                 },
-                                "children": {}
+                                "children": {
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "origin": "0, 0",
+                                            "size": "120, 20",
+                                            "background-color": "color_FF000080"
+                                        },
+                                        "children": {
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "title": "Amp",
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_whiteFF",
+                                                    "origin": "0, 0",
+                                                    "size": "120, 20",
+                                                    "background-color": "color_FF000080"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     },
                     "CViewContainer": {
                         "attributes": {
+                            "class": "CViewContainer",
                             "background-color-draw-style": "stroked",
                             "origin": "0, 40",
                             "size": "120, 60",
@@ -129,16 +156,42 @@
                         "children": {
                             "CViewContainer": {
                                 "attributes": {
-                                    "origin": "0, 40",
+                                    "class": "CViewContainer",
+                                    "origin": "0, 0",
                                     "size": "120, 60",
                                     "background-color": "color_black80"
                                 },
-                                "children": {}
+                                "children": {
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "origin": "0, 0",
+                                            "size": "120, 20",
+                                            "background-color": "color_FF800080"
+                                        },
+                                        "children": {
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "title": "Out",
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_whiteFF",
+                                                    "origin": "0, 0",
+                                                    "size": "120, 20",
+                                                    "background-color": "color_FF800080"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     },
                     "CViewContainer": {
                         "attributes": {
+                            "class": "CViewContainer",
                             "background-color-draw-style": "stroked",
                             "origin": "0, 100",
                             "size": "180, 60",
@@ -147,16 +200,42 @@
                         "children": {
                             "CViewContainer": {
                                 "attributes": {
-                                    "origin": "0, 100",
+                                    "class": "CViewContainer",
+                                    "origin": "0, 0",
                                     "size": "180, 60",
                                     "background-color": "color_black80"
                                 },
-                                "children": {}
+                                "children": {
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "origin": "0, 0",
+                                            "size": "180, 20",
+                                            "background-color": "color_FFFF0080"
+                                        },
+                                        "children": {
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "title": "Osc 1",
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_whiteFF",
+                                                    "origin": "0, 0",
+                                                    "size": "180, 20",
+                                                    "background-color": "color_FFFF0080"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     },
                     "CViewContainer": {
                         "attributes": {
+                            "class": "CViewContainer",
                             "background-color-draw-style": "stroked",
                             "origin": "0, 160",
                             "size": "180, 60",
@@ -165,11 +244,36 @@
                         "children": {
                             "CViewContainer": {
                                 "attributes": {
-                                    "origin": "0, 160",
+                                    "class": "CViewContainer",
+                                    "origin": "0, 0",
                                     "size": "180, 60",
                                     "background-color": "color_black80"
                                 },
-                                "children": {}
+                                "children": {
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "origin": "0, 0",
+                                            "size": "180, 20",
+                                            "background-color": "color_FFFF0080"
+                                        },
+                                        "children": {
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "title": "Osc 2",
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_whiteFF",
+                                                    "origin": "0, 0",
+                                                    "size": "180, 20",
+                                                    "background-color": "color_FFFF0080"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

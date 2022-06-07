@@ -58,7 +58,7 @@ voice_oscillator::process_block(
     audio[s] = 0.0f;
     bool on = input.automation.get(voice_osc_param::on, s).discrete != 0;
     if(!on) continue;
-     
+       
     float panning = input.automation.get(voice_osc_param::pan, s).real;
     float cent = input.automation.get(voice_osc_param::detune, s).real;
     std::int32_t type = input.automation.get(voice_osc_param::type, s).discrete;
@@ -72,7 +72,7 @@ voice_oscillator::process_block(
     case voice_osc_type::sine: sample = osc_sine(_phase); break;
     case voice_osc_type::blep: sample = osc_blep(_sample_rate, frequency, _phase); break;
     default: assert(false); break;
-    }
+    } 
 
     audio[s].left = (1.0f - panning) * sample;
     audio[s].right = panning * sample;
