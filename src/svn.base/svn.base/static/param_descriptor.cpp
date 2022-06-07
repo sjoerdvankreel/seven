@@ -15,7 +15,7 @@ min(0), max(count - 1), default_(0)
 { 
   assert(count > 0);
   assert(list != nullptr);
-  assert(type == param_type::list || type==param_type::discrete);
+  assert(type == param_type::list || type==param_type::discrete_list);
 }
 
 param_descriptor::
@@ -79,6 +79,7 @@ param_descriptor::parse(wchar_t const* buffer, param_value& val) const
     if (val.discrete > max.discrete) return false;
     return true;
   case param_type::list:
+  case param_type::discrete_list:
     for (std::int32_t i = 0; i <= max.discrete; i++)
       if (!std::wcscmp(list[i].short_, buffer))
         return val.discrete = i, true;
@@ -108,8 +109,8 @@ param_descriptor::format(param_value val, wchar_t* buffer, std::size_t size) con
   {
   case param_type::real: stream << val.real; break;
   case param_type::discrete: stream << val.discrete; break;
-  case param_type::list: stream << list[val.discrete].short_; break;
   case param_type::toggle: stream << (val.discrete == 0 ? L"Off" : L"On"); break;
+  case param_type::list: case param_type::discrete_list: stream << list[val.discrete].short_; break;
   default: assert(false); break;
   }
   std::wstring str = stream.str();

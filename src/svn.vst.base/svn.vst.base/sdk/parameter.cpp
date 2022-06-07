@@ -35,7 +35,7 @@ param_flags(param_type type, bool output)
 {
   int32 result = ParameterInfo::kCanAutomate;
   if(output) result |= ParameterInfo::kIsReadOnly;
-  if(type == param_type::list) result |= ParameterInfo::kIsList;
+  if(type == param_type::list || type == param_type::discrete_list) result |= ParameterInfo::kIsList;
   return result;
 }
 

@@ -8,7 +8,7 @@
 
 namespace svn::base {
   
-struct param_type_t { enum value { real, list, toggle, discrete, count }; };
+struct param_type_t { enum value { real, list, toggle, discrete, discrete_list, count }; };
 typedef param_type_t::value param_type;
   
 // Describes automation input.

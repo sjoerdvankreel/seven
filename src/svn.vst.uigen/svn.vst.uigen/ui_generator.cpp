@@ -327,7 +327,10 @@ get_param_control_class(
   {
   case param_type::toggle: return "CCheckBox";
   case param_type::list: return "COptionMenu";
-  case param_type::real: case param_type::discrete: return "CAnimKnob";
+  case param_type::real: 
+  case param_type::discrete: 
+  case param_type::discrete_list:
+  return "CAnimKnob";
   default: assert(false); return "";
   }
 }
@@ -609,6 +612,7 @@ add_ui_param(
   {
   case param_type::real:
   case param_type::discrete:
+  case param_type::discrete_list:
     add_child(container, control_class, build_ui_param_knob(topology, part, param, allocator), allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, allocator), allocator);
     add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, allocator), allocator);
