@@ -1,4 +1,5 @@
 #include <svn.base/static/part_descriptor.hpp>
+#include <svn.base/static/param_descriptor.hpp>
 #include <svn.base/runtime/runtime_topology.hpp>
 
 #include <vstgui/uidescription/rapidjson/include/rapidjson/document.h>
@@ -467,6 +468,65 @@ build_ui_control_tags(
 }
 
 static Value
+build_ui_param_control(
+  runtime_topology const& topology, part_ui_descriptor const& part, 
+  param_ui_descriptor const& param, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  add_attribute(result, "class", "CAnimKnob", allocator);
+  add_attribute(result, "angle-start", "20", allocator);
+  add_attribute(result, "angle-range", "320", allocator);
+  add_attribute(result, "size", size_to_string(control_width, item_height), allocator);
+  add_attribute(result, "height-of-one-image", std::to_string(item_height), allocator);
+  std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
+  add_attribute(result, "control-tag", tag, allocator);
+  std::int32_t top = param.row * item_height;
+  std::int32_t left = param.column * (control_width + label_width);
+  add_attribute(result, "origin", size_to_string(left, top), allocator);
+  std::string bitmap = print_rgb_hex(color_wheel[part.color_index], false, 0x00);
+  add_attribute(result, "bitmap", get_bitmap_name(bitmap), allocator);
+  return result;
+}
+
+static Value
+build_ui_param_label(
+  runtime_topology const& topology, part_ui_descriptor const& part,
+  param_ui_descriptor const& param, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  add_attribute(result, "class", "CTextLabel", allocator);
+  add_attribute(result, "transparent", "true", allocator);
+  add_attribute(result, "text-alignment", "left", allocator);
+  add_attribute(result, "font", "~ NormalFontSmall", allocator);
+  add_attribute(result, "size", size_to_string(label_width, item_height), allocator);
+  add_attribute(result, "font-color", get_color_name(part.color_index, 0xFF), allocator);
+  std::int32_t top = param.row * item_height;
+  std::int32_t left = param.column * (control_width + label_width) + control_width;
+  add_attribute(result, "origin", size_to_string(left, top), allocator);
+  std::string title = narrow_assume_ascii(topology.params[param.runtime_param_index].descriptor->static_name.short_);
+  add_attribute(result, "title", title, allocator);
+  return result;
+}
+
+static Value
+build_ui_part_param_container(runtime_topology const& topology,
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  add_attribute(result, "transparent", "true", allocator);
+  add_attribute(result, "class", "CViewContainer", allocator);
+  add_attribute(result, "origin", size_to_string(0, item_height), allocator);
+  add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height - item_height), allocator);
+  for(std::size_t p = 0; p < descriptor.params.size(); p++)
+  {
+    param_ui_descriptor const& param = descriptor.params[p];
+    add_child(result, "CAnimKnob", build_ui_param_control(topology, descriptor, param, allocator), allocator);
+    add_child(result, "CTextLabel", build_ui_param_label(topology, descriptor, param, allocator), allocator);
+  }
+  return result;
+}
+
+static Value
 build_ui_part_header_label(runtime_topology const& topology,
   part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {
@@ -507,6 +567,7 @@ build_ui_part_inner_container(runtime_topology const& topology,
   add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height), allocator);
   add_attribute(result, "background-color", get_color_name(color_name_black80), allocator);
   add_child(result, "CViewContainer", build_ui_part_header_container(topology, descriptor, allocator), allocator);
+  add_child(result, "CViewContainer", build_ui_part_param_container(topology, descriptor, allocator), allocator);
   return result;
 }
 
@@ -525,8 +586,7 @@ build_ui_part_outer_container(runtime_topology const& topology,
 }
 
 static Value
-build_ui_template(
-  runtime_topology const& topology, 
+build_ui_template(runtime_topology const& topology, 
   ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {  
   Value view(kObjectType);

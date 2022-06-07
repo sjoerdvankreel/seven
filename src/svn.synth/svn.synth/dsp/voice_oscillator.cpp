@@ -47,7 +47,7 @@ _midi_note(midi_note)
   assert(sample_rate > 0.0f);
   assert(0 <= midi_note && midi_note < 128);
 }
-
+  
 void
 voice_oscillator::process_block(
   voice_input const& input, audio_sample* audio)
