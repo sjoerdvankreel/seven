@@ -59,6 +59,7 @@ struct ui_descriptor
 };
 
 static std::int32_t const margin = 3;
+static std::int32_t const edit_width = 40;
 static std::int32_t const item_height = 20;
 static std::int32_t const label_width = 30;
 static std::int32_t const control_width = 20;
@@ -197,7 +198,7 @@ build_part_ui_descriptor(
   result.color_index = (topology.ui_color_start_index + 
     unordered_type_index * topology.ui_color_cycle_step) % color_count;
   result.height = (result.rows + 1) * (item_height + margin);
-  result.width = (result.columns) * (control_width + label_width + margin) + margin;
+  result.width = (result.columns) * (control_width + label_width + edit_width + 2 * margin) + margin;
   
   for(std::int32_t i = 0; i < part.descriptor->param_count; i++)
   {
@@ -491,7 +492,7 @@ build_ui_param_control_base(
   std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
   add_attribute(result, "control-tag", tag, allocator);
   std::int32_t top = margin + param.row * (item_height + margin);
-  std::int32_t left = margin + param.column * (control_width + label_width + margin) + offset_x;
+  std::int32_t left = margin + param.column * (control_width + label_width + edit_width + 2 * margin) + offset_x;
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   auto const& rt_param = topology.params[param.runtime_param_index];
   std::string tooltip = narrow_assume_ascii(rt_param.runtime_name);
@@ -536,7 +537,7 @@ build_ui_param_menu(
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  Value result(build_ui_param_control_base(topology, part, param, 0, control_width + label_width, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, 0, control_width + label_width + edit_width + margin, allocator));
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
@@ -566,10 +567,29 @@ build_ui_param_label(
   add_attribute(result, "size", size_to_string(label_width, item_height), allocator);
   add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
   std::int32_t top = margin + param.row * (item_height + margin);
-  std::int32_t left = margin + param.column * (control_width + label_width + margin) + control_width + margin;
+  std::int32_t left = margin + param.column * (control_width + label_width + edit_width + 2 * margin) + control_width + margin;
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   std::string title = narrow_assume_ascii(topology.params[param.runtime_param_index].descriptor->static_name.short_);
   add_attribute(result, "title", title, allocator);
+  return result;
+}
+
+static Value
+build_ui_param_edit(
+  runtime_topology const& topology, part_ui_descriptor const& part,
+  param_ui_descriptor const& param, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  add_attribute(result, "class", "CTextEdit", allocator);
+  add_attribute(result, "text-alignment", "left", allocator);
+  add_attribute(result, "font", "~ NormalFontSmall", allocator);
+  add_attribute(result, "size", size_to_string(edit_width, item_height), allocator);
+  add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
+  std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
+  add_attribute(result, "control-tag", tag, allocator);
+  std::int32_t top = margin + param.row * (item_height + margin);
+  std::int32_t left = margin + param.column * (control_width + label_width + edit_width + 2 * margin) + control_width + label_width + margin;
+  add_attribute(result, "origin", size_to_string(left, top), allocator);
   return result;
 }
 
@@ -586,6 +606,7 @@ add_ui_param(
   case param_type::discrete:
     add_child(container, control_class, build_ui_param_knob(topology, part, param, allocator), allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, allocator), allocator);
+    add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, allocator), allocator);
     break;
   case param_type::toggle:
     add_child(container, control_class, build_ui_param_checkbox(topology, part, param, allocator), allocator);

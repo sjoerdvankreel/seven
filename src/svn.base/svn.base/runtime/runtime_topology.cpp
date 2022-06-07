@@ -12,7 +12,7 @@ runtime_topology::init_defaults(param_value* state) const
 {
   for (std::int32_t p = 0; p < input_param_count; p++)
     switch (params[p].descriptor->type)
-    {
+    {  
     case param_type::real: state[p].real = params[p].descriptor->default_.real; break;
     default: state[p].discrete = params[p].descriptor->default_.discrete; break;
     }
@@ -77,7 +77,7 @@ runtime_topology::create(part_descriptor const* static_parts,
       result->params.push_back(runtime_param(part, runtime_name, &result->parts[part], &descriptor));
     }
   }
-
+   
   assert(result->parts.size() > 0);
   assert(result->params.size() > 0);
   assert(result->part_bounds.size() > 0);
