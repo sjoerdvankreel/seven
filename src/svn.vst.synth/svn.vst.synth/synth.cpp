@@ -33,8 +33,10 @@ std::unique_ptr<runtime_topology>
 init_create_topology()
 { 
   return runtime_topology::create(
-    part_descriptors, part_type::count,
-    synth_polyphony, synth_max_ui_height, synth_ui_order);
+    part_descriptors, 
+    part_type::count, synth_polyphony, 
+    synth_max_ui_height, synth_ui_order,
+    synth_ui_color_cycle_step, synth_ui_color_start_index);
 }
  
 std::unique_ptr<svn::base::audio_processor>

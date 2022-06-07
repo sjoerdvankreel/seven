@@ -6,7 +6,7 @@
 using namespace svn::base;
 
 namespace svn::synth {
-
+  
 std::int32_t const 
 synth_ui_order[part_type::count] = 
 {

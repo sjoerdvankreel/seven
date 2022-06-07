@@ -20,10 +20,12 @@ struct runtime_topology
   std::vector<runtime_param> params; // Runtime parameter descriptor array, e.g. osc 1 wave, osc 1 amp, osc 2 wave, etc.
   std::vector<std::vector<std::int32_t>> part_bounds; // Runtime part bounds, e.g. bounds[part_type::osc][1] indexes osc 2 part.
   std::vector<std::vector<std::int32_t>> param_bounds; // Runtime parameter bounds, e.g. bounds[part_type::osc][1] indexes osc 2 wave param.
-  std::int32_t max_ui_height; // For ui generator. 
-  std::int32_t const* ui_order; // For ui generator. Part types mixed with ui_order_output_params. Ui generation goes top-down first, then left-right.
   std::int32_t input_param_count = 0; // Runtime input params.
   std::int32_t output_param_count = 0; // Runtime output params.
+  std::int32_t max_ui_height; // For ui generator. 
+  std::int32_t const* ui_order; // For ui generator. Part types mixed with ui_order_output_params. Ui generation goes top-down first, then left-right.
+  std::int32_t ui_color_cycle_step = 1; // For ui generator, cycles through color wheel.
+  std::int32_t ui_color_start_index = 0; // For ui generator, cycles through color wheel.
 
   // Params contains interior pointers into parts.
   runtime_topology() = default;
@@ -33,8 +35,10 @@ struct runtime_topology
 
   // Output params must follow input params.
   static std::unique_ptr<runtime_topology> create(
-    struct part_descriptor const* static_parts, std::int32_t part_count,     
-    std::int32_t max_notes, std::int32_t max_ui_height, std::int32_t const* ui_order);
+    struct part_descriptor const* static_parts, 
+    std::int32_t part_count, std::int32_t max_notes, 
+    std::int32_t max_ui_height, std::int32_t const* ui_order,
+    std::int32_t ui_color_cycle_step, std::int32_t ui_color_start_index);
 };
 
 } // namespace svn::base

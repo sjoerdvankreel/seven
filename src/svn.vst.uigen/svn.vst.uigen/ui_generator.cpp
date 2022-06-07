@@ -194,7 +194,8 @@ build_part_ui_descriptor(
   result.columns = part.descriptor->ui_control_columns;
   result.rows = param_count / result.columns;
   if(param_count % result.columns != 0) ++result.rows;
-  result.color_index = unordered_type_index % color_count;
+  result.color_index = (topology.ui_color_start_index + 
+    unordered_type_index * topology.ui_color_cycle_step) % color_count;
   result.height = (result.rows + 1) * (item_height + margin);
   result.width = (result.columns) * (control_width + label_width + margin) + margin;
   
