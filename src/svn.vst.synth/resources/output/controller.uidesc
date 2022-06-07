@@ -99,6 +99,80 @@
                     "maxSize": "180, 220",
                     "class": "CViewContainer",
                     "background-color": "#000000FF"
+                },
+                "children": {
+                    "CViewContainer": {
+                        "attributes": {
+                            "background-color-draw-style": "stroked",
+                            "origin": "0, 0",
+                            "size": "120, 40",
+                            "background-color": "color_FF0000FF"
+                        },
+                        "children": {
+                            "CViewContainer": {
+                                "attributes": {
+                                    "origin": "0, 0",
+                                    "size": "120, 40",
+                                    "background-color": "color_black80"
+                                },
+                                "children": {}
+                            }
+                        }
+                    },
+                    "CViewContainer": {
+                        "attributes": {
+                            "background-color-draw-style": "stroked",
+                            "origin": "0, 40",
+                            "size": "120, 60",
+                            "background-color": "color_FF8000FF"
+                        },
+                        "children": {
+                            "CViewContainer": {
+                                "attributes": {
+                                    "origin": "0, 40",
+                                    "size": "120, 60",
+                                    "background-color": "color_black80"
+                                },
+                                "children": {}
+                            }
+                        }
+                    },
+                    "CViewContainer": {
+                        "attributes": {
+                            "background-color-draw-style": "stroked",
+                            "origin": "0, 100",
+                            "size": "180, 60",
+                            "background-color": "color_FFFF00FF"
+                        },
+                        "children": {
+                            "CViewContainer": {
+                                "attributes": {
+                                    "origin": "0, 100",
+                                    "size": "180, 60",
+                                    "background-color": "color_black80"
+                                },
+                                "children": {}
+                            }
+                        }
+                    },
+                    "CViewContainer": {
+                        "attributes": {
+                            "background-color-draw-style": "stroked",
+                            "origin": "0, 160",
+                            "size": "180, 60",
+                            "background-color": "color_FFFF00FF"
+                        },
+                        "children": {
+                            "CViewContainer": {
+                                "attributes": {
+                                    "origin": "0, 160",
+                                    "size": "180, 60",
+                                    "background-color": "color_black80"
+                                },
+                                "children": {}
+                            }
+                        }
+                    }
                 }
             }
         }

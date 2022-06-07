@@ -88,8 +88,12 @@ static rgb const color_wheel[color_count] =
 
 typedef bool (*svn_init_exit_dll_t)(void);
 typedef runtime_topology const* (*svn_get_topology_t)(void);
+
 static ui_descriptor build_ui_descriptor(
   runtime_topology const& topology);
+static std::string print_rgb_hex(
+  rgb color, bool print_alpha, std::uint8_t alpha);
+
 static void print_ui_descriptor(
   runtime_topology const& topology, ui_descriptor const& descriptor);
 static Document build_ui_description(
@@ -298,12 +302,16 @@ print_ui_descriptor(
 /* -------- descriptor to json -------- */
 
 static std::string 
-get_color_name(std::string rgb)
+get_color_name(std::string const& rgb)
 { return "color_" + rgb; }
 
 static std::string 
-get_bitmap_name(std::string rgb)
+get_bitmap_name(std::string const& rgb)
 { return "bitmap_" + rgb; }
+
+static std::string
+get_color_name(std::int32_t wheel_index, std::uint8_t alpha)
+{ return get_color_name(print_rgb_hex(color_wheel[wheel_index], true, alpha)); }
 
 static std::string
 size_to_string(std::int32_t w, std::int32_t h)
@@ -492,6 +500,53 @@ build_ui_part_views(
 */
 
 static Value
+build_ui_part_inner_container_attrs(
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  add_member(result, "origin", size_to_string(descriptor.left, descriptor.top), allocator);
+  add_member(result, "size", size_to_string(descriptor.width, descriptor.height), allocator);
+  add_member(result, "background-color", get_color_name(color_name_black80), allocator);
+  return result;
+}
+
+static Value
+build_ui_part_inner_container(runtime_topology const& topology,
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  result.AddMember("attributes", build_ui_part_inner_container_attrs(descriptor, allocator), allocator);
+  Value children(kObjectType);
+  //children.AddMember("CViewContainer", build_ui_part_header(topology, descriptor, allocator), allocator);
+  result.AddMember("children", children, allocator);
+  return result;
+}
+
+static Value
+build_ui_part_outer_container_attrs(
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  add_member(result, "background-color-draw-style", "stroked", allocator);
+  add_member(result, "origin", size_to_string(descriptor.left, descriptor.top), allocator);
+  add_member(result, "size", size_to_string(descriptor.width, descriptor.height), allocator);
+  add_member(result, "background-color", get_color_name(descriptor.color_index, 0xFF), allocator);
+  return result;
+}
+
+static Value
+build_ui_part_outer_container(runtime_topology const& topology,
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  result.AddMember("attributes", build_ui_part_outer_container_attrs(descriptor, allocator), allocator);
+  Value children(kObjectType);
+  children.AddMember("CViewContainer", build_ui_part_inner_container(topology, descriptor, allocator), allocator);
+  result.AddMember("children", children, allocator);
+  return result;
+}
+
+static Value
 build_ui_template_attrs(
   ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {
@@ -512,9 +567,12 @@ build_ui_template(
 {  
   Value view(kObjectType);
   view.AddMember("attributes", build_ui_template_attrs(descriptor, allocator), allocator);
+  Value children(kObjectType);
+  for(std::size_t p = 0; p < descriptor.parts.size(); p++)
+    children.AddMember("CViewContainer", build_ui_part_outer_container(topology, descriptor.parts[p], allocator), allocator);
+  view.AddMember("children", children, allocator);
   Value result(kObjectType);
   result.AddMember("view", view, allocator);
-  //result.AddMember("children", build_ui_part_views(allocator, topology), allocator);
   return result;
 }
 
