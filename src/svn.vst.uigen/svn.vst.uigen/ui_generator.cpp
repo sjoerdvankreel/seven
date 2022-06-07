@@ -56,12 +56,12 @@ struct ui_descriptor
   std::int32_t height;
   std::vector<part_ui_descriptor> parts;
   std::vector<std::int32_t> column_widths;
-};
+}; 
 
 static std::int32_t const margin = 3;
-static std::int32_t const edit_width = 40;
+static std::int32_t const edit_width = 28;
 static std::int32_t const item_height = 20;
-static std::int32_t const label_width = 30;
+static std::int32_t const label_width = 26;
 static std::int32_t const control_width = 20;
 
 struct color_alpha_t { enum value { quarter, half, opaque, count }; };
@@ -581,10 +581,15 @@ build_ui_param_edit(
 {
   Value result(kObjectType);
   add_attribute(result, "class", "CTextEdit", allocator);
-  add_attribute(result, "text-alignment", "left", allocator);
+  add_attribute(result, "text-alignment", "right", allocator);
+  add_attribute(result, "style-no-frame", "true", allocator);
+  add_attribute(result, "style-round-rect", "true", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
+  add_attribute(result, "text-inset", size_to_string(margin, 0), allocator);
+  add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "size", size_to_string(edit_width, item_height), allocator);
   add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
+  add_attribute(result, "back-color", get_color_name(color_wheel[part.color_index], color_alpha::quarter), allocator);
   std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
   add_attribute(result, "control-tag", tag, allocator);
   std::int32_t top = margin + param.row * (item_height + margin);
