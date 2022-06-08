@@ -217,38 +217,11 @@
                                             "background-color": "color_00FF8020"
                                         },
                                         "children": {
-                                            "CCheckBox": {
-                                                "attributes": {
-                                                    "class": "CCheckBox",
-                                                    "size": "17, 20",
-                                                    "origin": "6, 3",
-                                                    "control-tag": "osc_1_enabled",
-                                                    "tooltip": "Osc 1 Enabled",
-                                                    "frame-width": "1",
-                                                    "draw-crossbox": "true",
-                                                    "round-rect-radius": "3",
-                                                    "boxfill-color": "color_00FF8040",
-                                                    "boxframe-color": "color_00FF80FF",
-                                                    "checkmark-color": "color_00FF80FF"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "26, 20",
-                                                    "origin": "26, 3",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "font-color": "color_00FF80FF",
-                                                    "title": "On"
-                                                }
-                                            },
                                             "COptionMenu": {
                                                 "attributes": {
                                                     "class": "COptionMenu",
                                                     "size": "49, 20",
-                                                    "origin": "83, 3",
+                                                    "origin": "3, 3",
                                                     "control-tag": "osc_1_type",
                                                     "tooltip": "Osc 1 Type",
                                                     "min-value": "0",
@@ -270,7 +243,7 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "size": "28, 20",
-                                                    "origin": "135, 3",
+                                                    "origin": "55, 3",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
@@ -282,9 +255,51 @@
                                                 "attributes": {
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
-                                                    "origin": "163, 3",
+                                                    "origin": "83, 3",
                                                     "control-tag": "osc_1_panning",
                                                     "tooltip": "Osc 1 Panning (%)",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
+                                                    "bitmap": "bitmap_00FF80"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "26, 20",
+                                                    "origin": "106, 3",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_00FF80FF",
+                                                    "title": "Pan"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "origin": "132, 3",
+                                                    "control-tag": "osc_1_panning",
+                                                    "tooltip": "Osc 1 Panning (%)",
+                                                    "text-alignment": "right",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "font-color": "color_00FF80FF",
+                                                    "back-color": "color_00FF8020"
+                                                }
+                                            },
+                                            "CAnimKnob": {
+                                                "attributes": {
+                                                    "class": "CAnimKnob",
+                                                    "size": "20, 20",
+                                                    "origin": "163, 3",
+                                                    "control-tag": "osc_1_octave",
+                                                    "tooltip": "Osc 1 Octave",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "height-of-one-image": "20",
@@ -300,7 +315,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_00FF80FF",
-                                                    "title": "Pan"
+                                                    "title": "Oct"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -308,8 +323,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "28, 20",
                                                     "origin": "212, 3",
-                                                    "control-tag": "osc_1_panning",
-                                                    "tooltip": "Osc 1 Panning (%)",
+                                                    "control-tag": "osc_1_octave",
+                                                    "tooltip": "Osc 1 Octave",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
@@ -325,8 +340,8 @@
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
                                                     "origin": "3, 26",
-                                                    "control-tag": "osc_1_octave",
-                                                    "tooltip": "Osc 1 Octave",
+                                                    "control-tag": "osc_1_note",
+                                                    "tooltip": "Osc 1 Note",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "height-of-one-image": "20",
@@ -342,7 +357,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_00FF80FF",
-                                                    "title": "Oct"
+                                                    "title": "Note"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -350,8 +365,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "28, 20",
                                                     "origin": "52, 26",
-                                                    "control-tag": "osc_1_octave",
-                                                    "tooltip": "Osc 1 Octave",
+                                                    "control-tag": "osc_1_note",
+                                                    "tooltip": "Osc 1 Note",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
@@ -367,8 +382,8 @@
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
                                                     "origin": "83, 26",
-                                                    "control-tag": "osc_1_note",
-                                                    "tooltip": "Osc 1 Note",
+                                                    "control-tag": "osc_1_cent",
+                                                    "tooltip": "Osc 1 Cent",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "height-of-one-image": "20",
@@ -384,48 +399,6 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_00FF80FF",
-                                                    "title": "Note"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "28, 20",
-                                                    "origin": "132, 26",
-                                                    "control-tag": "osc_1_note",
-                                                    "tooltip": "Osc 1 Note",
-                                                    "text-alignment": "right",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8020"
-                                                }
-                                            },
-                                            "CAnimKnob": {
-                                                "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "size": "20, 20",
-                                                    "origin": "163, 26",
-                                                    "control-tag": "osc_1_cent",
-                                                    "tooltip": "Osc 1 Cent",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "height-of-one-image": "20",
-                                                    "bitmap": "bitmap_00FF80"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "26, 20",
-                                                    "origin": "186, 26",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "font-color": "color_00FF80FF",
                                                     "title": "Cent"
                                                 }
                                             },
@@ -433,7 +406,7 @@
                                                 "attributes": {
                                                     "class": "CTextEdit",
                                                     "size": "28, 20",
-                                                    "origin": "212, 26",
+                                                    "origin": "132, 26",
                                                     "control-tag": "osc_1_cent",
                                                     "tooltip": "Osc 1 Cent",
                                                     "text-alignment": "right",
@@ -508,38 +481,11 @@
                                             "background-color": "color_00FF8020"
                                         },
                                         "children": {
-                                            "CCheckBox": {
-                                                "attributes": {
-                                                    "class": "CCheckBox",
-                                                    "size": "17, 20",
-                                                    "origin": "6, 3",
-                                                    "control-tag": "osc_2_enabled",
-                                                    "tooltip": "Osc 2 Enabled",
-                                                    "frame-width": "1",
-                                                    "draw-crossbox": "true",
-                                                    "round-rect-radius": "3",
-                                                    "boxfill-color": "color_00FF8040",
-                                                    "boxframe-color": "color_00FF80FF",
-                                                    "checkmark-color": "color_00FF80FF"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "26, 20",
-                                                    "origin": "26, 3",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "font-color": "color_00FF80FF",
-                                                    "title": "On"
-                                                }
-                                            },
                                             "COptionMenu": {
                                                 "attributes": {
                                                     "class": "COptionMenu",
                                                     "size": "49, 20",
-                                                    "origin": "83, 3",
+                                                    "origin": "3, 3",
                                                     "control-tag": "osc_2_type",
                                                     "tooltip": "Osc 2 Type",
                                                     "min-value": "0",
@@ -561,7 +507,7 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "size": "28, 20",
-                                                    "origin": "135, 3",
+                                                    "origin": "55, 3",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
@@ -573,9 +519,51 @@
                                                 "attributes": {
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
-                                                    "origin": "163, 3",
+                                                    "origin": "83, 3",
                                                     "control-tag": "osc_2_panning",
                                                     "tooltip": "Osc 2 Panning (%)",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
+                                                    "bitmap": "bitmap_00FF80"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "26, 20",
+                                                    "origin": "106, 3",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_00FF80FF",
+                                                    "title": "Pan"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "origin": "132, 3",
+                                                    "control-tag": "osc_2_panning",
+                                                    "tooltip": "Osc 2 Panning (%)",
+                                                    "text-alignment": "right",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "font-color": "color_00FF80FF",
+                                                    "back-color": "color_00FF8020"
+                                                }
+                                            },
+                                            "CAnimKnob": {
+                                                "attributes": {
+                                                    "class": "CAnimKnob",
+                                                    "size": "20, 20",
+                                                    "origin": "163, 3",
+                                                    "control-tag": "osc_2_octave",
+                                                    "tooltip": "Osc 2 Octave",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "height-of-one-image": "20",
@@ -591,7 +579,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_00FF80FF",
-                                                    "title": "Pan"
+                                                    "title": "Oct"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -599,8 +587,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "28, 20",
                                                     "origin": "212, 3",
-                                                    "control-tag": "osc_2_panning",
-                                                    "tooltip": "Osc 2 Panning (%)",
+                                                    "control-tag": "osc_2_octave",
+                                                    "tooltip": "Osc 2 Octave",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
@@ -616,8 +604,8 @@
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
                                                     "origin": "3, 26",
-                                                    "control-tag": "osc_2_octave",
-                                                    "tooltip": "Osc 2 Octave",
+                                                    "control-tag": "osc_2_note",
+                                                    "tooltip": "Osc 2 Note",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "height-of-one-image": "20",
@@ -633,7 +621,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_00FF80FF",
-                                                    "title": "Oct"
+                                                    "title": "Note"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -641,8 +629,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "28, 20",
                                                     "origin": "52, 26",
-                                                    "control-tag": "osc_2_octave",
-                                                    "tooltip": "Osc 2 Octave",
+                                                    "control-tag": "osc_2_note",
+                                                    "tooltip": "Osc 2 Note",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
@@ -658,8 +646,8 @@
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
                                                     "origin": "83, 26",
-                                                    "control-tag": "osc_2_note",
-                                                    "tooltip": "Osc 2 Note",
+                                                    "control-tag": "osc_2_cent",
+                                                    "tooltip": "Osc 2 Cent",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "height-of-one-image": "20",
@@ -675,48 +663,6 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_00FF80FF",
-                                                    "title": "Note"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "28, 20",
-                                                    "origin": "132, 26",
-                                                    "control-tag": "osc_2_note",
-                                                    "tooltip": "Osc 2 Note",
-                                                    "text-alignment": "right",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8020"
-                                                }
-                                            },
-                                            "CAnimKnob": {
-                                                "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "size": "20, 20",
-                                                    "origin": "163, 26",
-                                                    "control-tag": "osc_2_cent",
-                                                    "tooltip": "Osc 2 Cent",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "height-of-one-image": "20",
-                                                    "bitmap": "bitmap_00FF80"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "26, 20",
-                                                    "origin": "186, 26",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "font-color": "color_00FF80FF",
                                                     "title": "Cent"
                                                 }
                                             },
@@ -724,7 +670,7 @@
                                                 "attributes": {
                                                     "class": "CTextEdit",
                                                     "size": "28, 20",
-                                                    "origin": "212, 26",
+                                                    "origin": "132, 26",
                                                     "control-tag": "osc_2_cent",
                                                     "tooltip": "Osc 2 Cent",
                                                     "text-alignment": "right",

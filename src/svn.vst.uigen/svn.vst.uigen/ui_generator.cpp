@@ -47,6 +47,7 @@ struct part_ui_descriptor
   std::int32_t columns;
   std::int32_t color_index; // Cycles through the color wheel.
   std::int32_t runtime_part_index;
+  param_ui_descriptor enabled_param;
   std::vector<param_ui_descriptor> params;
 };
 
@@ -192,6 +193,7 @@ build_part_ui_descriptor(
   part_ui_descriptor result;
   auto const& part = topology.parts[runtime_part_index];
   std::int32_t param_count = part.descriptor->param_count;
+  if(part.descriptor->ui_control_enabled != -1) param_count--;
 
   result.runtime_part_index = runtime_part_index;
   result.columns = part.descriptor->ui_control_columns;
@@ -202,13 +204,21 @@ build_part_ui_descriptor(
   result.height = (result.rows + 1) * (param_row_height + margin);
   result.width = result.columns * param_total_width + margin;
 
+  std::int32_t grid_index = 0;
+  result.enabled_param.row = -1;
+  result.enabled_param.column = -1;
+  result.enabled_param.runtime_param_index = -1;
   for (std::int32_t i = 0; i < part.descriptor->param_count; i++)
-  {
-    std::int32_t row = i / result.columns;
-    std::int32_t column = i % result.columns;
-    result.params.push_back(build_param_ui_descriptor(
-      row, column, part.runtime_param_start + i));
-  }
+    if (i == part.descriptor->ui_control_enabled)
+      result.enabled_param.runtime_param_index = i;
+    else
+    {
+      std::int32_t row = grid_index / result.columns;
+      std::int32_t column = grid_index % result.columns;
+      result.params.push_back(build_param_ui_descriptor(
+        row, column, part.runtime_param_start + i));
+      grid_index++;
+    }
 
   return result;
 }
