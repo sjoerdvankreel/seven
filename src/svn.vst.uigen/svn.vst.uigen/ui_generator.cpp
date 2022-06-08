@@ -712,8 +712,8 @@ build_ui_part_inner_container(runtime_topology const& topology,
   add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height), allocator);
   add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
   add_child(result, "CViewContainer", build_ui_part_header_container(topology, descriptor, allocator), allocator);
-  add_child(result, "CViewContainer", build_ui_part_param_container(topology, descriptor, allocator), allocator);
   add_child(result, "CViewContainer", build_ui_part_param_container_border(topology, descriptor, allocator), allocator);
+  add_child(result, "CViewContainer", build_ui_part_param_container(topology, descriptor, allocator), allocator);
   return result;
 }
 

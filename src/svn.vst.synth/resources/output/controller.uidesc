@@ -203,6 +203,15 @@
                                     "CViewContainer": {
                                         "attributes": {
                                             "class": "CViewContainer",
+                                            "background-color-draw-style": "stroked",
+                                            "origin": "0, 20",
+                                            "size": "243, 49",
+                                            "background-color": "color_00FF8080"
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
                                             "origin": "0, 20",
                                             "size": "243, 49",
                                             "background-color": "color_00FF8020"
@@ -438,15 +447,6 @@
                                                 }
                                             }
                                         }
-                                    },
-                                    "CViewContainer": {
-                                        "attributes": {
-                                            "class": "CViewContainer",
-                                            "background-color-draw-style": "stroked",
-                                            "origin": "0, 20",
-                                            "size": "243, 49",
-                                            "background-color": "color_00FF8080"
-                                        }
                                     }
                                 }
                             }
@@ -489,6 +489,15 @@
                                                     "background-color": "color_00FF8080"
                                                 }
                                             }
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "background-color-draw-style": "stroked",
+                                            "origin": "0, 20",
+                                            "size": "243, 49",
+                                            "background-color": "color_00FF8080"
                                         }
                                     },
                                     "CViewContainer": {
@@ -729,15 +738,6 @@
                                                 }
                                             }
                                         }
-                                    },
-                                    "CViewContainer": {
-                                        "attributes": {
-                                            "class": "CViewContainer",
-                                            "background-color-draw-style": "stroked",
-                                            "origin": "0, 20",
-                                            "size": "243, 49",
-                                            "background-color": "color_00FF8080"
-                                        }
                                     }
                                 }
                             }
@@ -780,6 +780,15 @@
                                                     "background-color": "color_0080FF80"
                                                 }
                                             }
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "background-color-draw-style": "stroked",
+                                            "origin": "0, 20",
+                                            "size": "163, 26",
+                                            "background-color": "color_0080FF80"
                                         }
                                     },
                                     "CViewContainer": {
@@ -875,15 +884,6 @@
                                                 }
                                             }
                                         }
-                                    },
-                                    "CViewContainer": {
-                                        "attributes": {
-                                            "class": "CViewContainer",
-                                            "background-color-draw-style": "stroked",
-                                            "origin": "0, 20",
-                                            "size": "163, 26",
-                                            "background-color": "color_0080FF80"
-                                        }
                                     }
                                 }
                             }
@@ -926,6 +926,15 @@
                                                     "background-color": "color_8000FF80"
                                                 }
                                             }
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "background-color-draw-style": "stroked",
+                                            "origin": "0, 20",
+                                            "size": "163, 72",
+                                            "background-color": "color_8000FF80"
                                         }
                                     },
                                     "CViewContainer": {
@@ -1032,15 +1041,6 @@
                                                     "back-color": "color_8000FF20"
                                                 }
                                             }
-                                        }
-                                    },
-                                    "CViewContainer": {
-                                        "attributes": {
-                                            "class": "CViewContainer",
-                                            "background-color-draw-style": "stroked",
-                                            "origin": "0, 20",
-                                            "size": "163, 72",
-                                            "background-color": "color_8000FF80"
                                         }
                                     }
                                 }
