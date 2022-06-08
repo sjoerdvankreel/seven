@@ -24,7 +24,7 @@ min(0), max(count - 1), default_(0), precision(0)
 }
 
 param_descriptor::
-param_descriptor(
+param_descriptor( 
   item_name const& static_name, bool ui_edit_font_small, 
   std::int32_t ui_param_group, wchar_t const* unit, 
   float default_, std::int32_t precision,

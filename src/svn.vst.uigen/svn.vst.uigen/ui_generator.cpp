@@ -629,21 +629,23 @@ static Value
 build_ui_param_background(runtime_topology const& topology, 
   part_ui_descriptor const& part, std::size_t index, Document::AllocatorType& allocator)
 {
+  std::string color;
   Value result(kObjectType);
   param_ui_descriptor const& param = part.params[index];
   param_descriptor const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  add_attribute(result, "class", "CViewContainer", allocator);
-  add_attribute(result, "background-color-draw-style", "filled", allocator);
-  add_attribute(result, "size", size_to_string(param_total_width - padding_param_group, param_row_height + margin - padding_param_group), allocator);
-  if(descriptor.ui_param_group == 0)
-    add_attribute(result, "background-color", get_color_name(black, color_alpha::sixteenth), allocator);
-  if (descriptor.ui_param_group == 1)
-    add_attribute(result, "background-color", get_color_name(white, color_alpha::eight), allocator);
-  if (descriptor.ui_param_group == 2)
-    add_attribute(result, "background-color", get_color_name(color_wheel[part.color_index], color_alpha::eight), allocator);
-  std::int32_t l = param.column * param_total_width + padding_param_group * 2;
+  std::int32_t width = param_total_width - padding_param_group;
+  std::int32_t height = param_row_height + margin - padding_param_group;
+  std::int32_t left = param.column * param_total_width + padding_param_group * 2;
   std::int32_t top = param.row * (param_row_height + margin) + 2 * padding_param_group;
-  add_attribute(result, "origin", size_to_string(l, top), allocator);
+  if (descriptor.ui_param_group == 0) color = get_color_name(black, color_alpha::sixteenth);
+  if (descriptor.ui_param_group == 1) color = get_color_name(white, color_alpha::eight);
+  if (descriptor.ui_param_group == 2) color = get_color_name(color_wheel[part.color_index], color_alpha::eight);
+
+  add_attribute(result, "class", "CViewContainer", allocator);
+  add_attribute(result, "background-color", color, allocator);
+  add_attribute(result, "origin", size_to_string(left, top), allocator);
+  add_attribute(result, "size", size_to_string(width, height), allocator);
+  add_attribute(result, "background-color-draw-style", "filled", allocator);
   return result;
 }
 
