@@ -193,17 +193,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "osc_1_enabled",
+                                                    "origin": "52, 3",
+                                                    "tooltip": "Osc 1 Enabled",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040",
-                                                    "control-tag": "osc_1_enabled",
-                                                    "origin": "52, 3"
+                                                    "back-color": "color_00FF8040"
                                                 }
                                             },
                                             "COptionMenu": {
@@ -256,17 +257,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "osc_1_panning",
+                                                    "origin": "212, 3",
+                                                    "tooltip": "Osc 1 Panning (%)",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040",
-                                                    "control-tag": "osc_1_panning",
-                                                    "origin": "212, 3"
+                                                    "back-color": "color_00FF8040"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -297,17 +299,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "osc_1_octave",
+                                                    "origin": "52, 26",
+                                                    "tooltip": "Osc 1 Octave",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040",
-                                                    "control-tag": "osc_1_octave",
-                                                    "origin": "52, 26"
+                                                    "back-color": "color_00FF8040"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -338,17 +341,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "osc_1_note",
+                                                    "origin": "132, 26",
+                                                    "tooltip": "Osc 1 Note",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040",
-                                                    "control-tag": "osc_1_note",
-                                                    "origin": "132, 26"
+                                                    "back-color": "color_00FF8040"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -379,17 +383,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "osc_1_cent",
+                                                    "origin": "212, 26",
+                                                    "tooltip": "Osc 1 Cent",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040",
-                                                    "control-tag": "osc_1_cent",
-                                                    "origin": "212, 26"
+                                                    "back-color": "color_00FF8040"
                                                 }
                                             }
                                         }
@@ -476,17 +481,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "osc_2_enabled",
+                                                    "origin": "52, 3",
+                                                    "tooltip": "Osc 2 Enabled",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040",
-                                                    "control-tag": "osc_2_enabled",
-                                                    "origin": "52, 3"
+                                                    "back-color": "color_00FF8040"
                                                 }
                                             },
                                             "COptionMenu": {
@@ -539,17 +545,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "osc_2_panning",
+                                                    "origin": "212, 3",
+                                                    "tooltip": "Osc 2 Panning (%)",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040",
-                                                    "control-tag": "osc_2_panning",
-                                                    "origin": "212, 3"
+                                                    "back-color": "color_00FF8040"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -580,17 +587,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "osc_2_octave",
+                                                    "origin": "52, 26",
+                                                    "tooltip": "Osc 2 Octave",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040",
-                                                    "control-tag": "osc_2_octave",
-                                                    "origin": "52, 26"
+                                                    "back-color": "color_00FF8040"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -621,17 +629,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "osc_2_note",
+                                                    "origin": "132, 26",
+                                                    "tooltip": "Osc 2 Note",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040",
-                                                    "control-tag": "osc_2_note",
-                                                    "origin": "132, 26"
+                                                    "back-color": "color_00FF8040"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -662,17 +671,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "osc_2_cent",
+                                                    "origin": "212, 26",
+                                                    "tooltip": "Osc 2 Cent",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040",
-                                                    "control-tag": "osc_2_cent",
-                                                    "origin": "212, 26"
+                                                    "back-color": "color_00FF8040"
                                                 }
                                             }
                                         }
@@ -757,17 +767,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "amp_level",
+                                                    "origin": "52, 3",
+                                                    "tooltip": "Amp Level (dB)",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_0080FFFF",
-                                                    "back-color": "color_0080FF40",
-                                                    "control-tag": "amp_level",
-                                                    "origin": "52, 3"
+                                                    "back-color": "color_0080FF40"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -798,17 +809,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "amp_decay",
+                                                    "origin": "132, 3",
+                                                    "tooltip": "Amp Decay (Sec)",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_0080FFFF",
-                                                    "back-color": "color_0080FF40",
-                                                    "control-tag": "amp_decay",
-                                                    "origin": "132, 3"
+                                                    "back-color": "color_0080FF40"
                                                 }
                                             }
                                         }
@@ -895,17 +907,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "out_clip",
+                                                    "origin": "52, 3",
+                                                    "tooltip": "Out Clip",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_8000FFFF",
-                                                    "back-color": "color_8000FF40",
-                                                    "control-tag": "out_clip",
-                                                    "origin": "52, 3"
+                                                    "back-color": "color_8000FF40"
                                                 }
                                             },
                                             "CCheckBox": {
@@ -938,17 +951,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "out_voices_exhausted",
+                                                    "origin": "132, 3",
+                                                    "tooltip": "Out Voices exhausted",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_8000FFFF",
-                                                    "back-color": "color_8000FF40",
-                                                    "control-tag": "out_voices_exhausted",
-                                                    "origin": "132, 3"
+                                                    "back-color": "color_8000FF40"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -979,17 +993,18 @@
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "control-tag": "out_voice_count",
+                                                    "origin": "52, 26",
+                                                    "tooltip": "Out Voice count",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "size": "28, 20",
                                                     "font-color": "color_8000FFFF",
-                                                    "back-color": "color_8000FF40",
-                                                    "control-tag": "out_voice_count",
-                                                    "origin": "52, 26"
+                                                    "back-color": "color_8000FF40"
                                                 }
                                             }
                                         }

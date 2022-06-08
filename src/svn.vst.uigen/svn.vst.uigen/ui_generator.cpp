@@ -488,11 +488,11 @@ build_ui_control_tags(
 static Value
 build_ui_param_control_base(
   runtime_topology const& topology, part_ui_descriptor const& part,
-  param_ui_descriptor const& param, std::int32_t left, std::int32_t width,
-  Document::AllocatorType& allocator)
+  param_ui_descriptor const& param, std::string const& control_class, 
+  std::int32_t left, std::int32_t width, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  add_attribute(result, "class", get_param_control_class(topology, param), allocator);
+  add_attribute(result, "class", control_class, allocator);
   add_attribute(result, "size", size_to_string(width, param_row_height), allocator);
   std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
   add_attribute(result, "control-tag", tag, allocator);
@@ -512,7 +512,8 @@ build_ui_param_knob(
   runtime_topology const& topology, part_ui_descriptor const& part, 
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_control_base(topology, part, param, 0, param_col1_width, allocator));
+  std::string class_name = get_param_control_class(topology, param);
+  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_col1_width, allocator));
   add_attribute(result, "angle-start", "20", allocator);
   add_attribute(result, "angle-range", "320", allocator);
   add_attribute(result, "height-of-one-image", std::to_string(param_row_height), allocator);
@@ -526,7 +527,8 @@ build_ui_param_checkbox(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_control_base(topology, part, param, margin, param_col1_width - margin, allocator));
+  std::string class_name = get_param_control_class(topology, param);
+  Value result(build_ui_param_control_base(topology, part, param, class_name, margin, param_col1_width - margin, allocator));
   add_attribute(result, "frame-width", "1", allocator);
   add_attribute(result, "draw-crossbox", "true", allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
@@ -541,8 +543,9 @@ build_ui_param_menu(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
+  std::string class_name = get_param_control_class(topology, param);
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  Value result(build_ui_param_control_base(topology, part, param, 0, param_total_width - margin, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_total_width - margin, allocator));
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
@@ -584,22 +587,16 @@ build_ui_param_edit(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
-  Value result(kObjectType);
-  add_attribute(result, "class", "CTextEdit", allocator);
+  std::int32_t left = param_col1_width + margin + param_col2_width;
+  Value result(build_ui_param_control_base(topology, part, param, "CTextEdit", left, param_col3_width, allocator));
   add_attribute(result, "text-alignment", "right", allocator);
   add_attribute(result, "style-no-frame", "true", allocator);
   add_attribute(result, "style-round-rect", "true", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "text-inset", size_to_string(margin, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
-  add_attribute(result, "size", size_to_string(param_col3_width, param_row_height), allocator);
   add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
   add_attribute(result, "back-color", get_color_name(color_wheel[part.color_index], color_alpha::quarter), allocator);
-  std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
-  add_attribute(result, "control-tag", tag, allocator);
-  std::int32_t top = margin + param.row * (param_row_height + margin);
-  std::int32_t left = margin + param.column * param_total_width + param_col1_width + param_col2_width + margin;
-  add_attribute(result, "origin", size_to_string(left, top), allocator);
   return result;
 }
 
