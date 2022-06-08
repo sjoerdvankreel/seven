@@ -225,7 +225,7 @@
                                             "COptionMenu": {
                                                 "attributes": {
                                                     "class": "COptionMenu",
-                                                    "size": "77, 20",
+                                                    "size": "49, 20",
                                                     "origin": "83, 3",
                                                     "tooltip": "Osc 1 Type",
                                                     "control-tag": "osc_1_type",
@@ -242,6 +242,19 @@
                                                     "font-color": "color_00FF80FF",
                                                     "back-color": "color_00FF8040",
                                                     "shadow-color": "color_00FF8080"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "28, 20",
+                                                    "origin": "135, 3",
+                                                    "tooltip": "Osc 1 Type",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_00FF80FF",
+                                                    "title": "Type"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -518,7 +531,7 @@
                                             "COptionMenu": {
                                                 "attributes": {
                                                     "class": "COptionMenu",
-                                                    "size": "77, 20",
+                                                    "size": "49, 20",
                                                     "origin": "83, 3",
                                                     "tooltip": "Osc 2 Type",
                                                     "control-tag": "osc_2_type",
@@ -535,6 +548,19 @@
                                                     "font-color": "color_00FF80FF",
                                                     "back-color": "color_00FF8040",
                                                     "shadow-color": "color_00FF8080"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "28, 20",
+                                                    "origin": "135, 3",
+                                                    "tooltip": "Osc 2 Type",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_00FF80FF",
+                                                    "title": "Type"
                                                 }
                                             },
                                             "CAnimKnob": {

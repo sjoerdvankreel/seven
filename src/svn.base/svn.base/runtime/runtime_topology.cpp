@@ -9,7 +9,7 @@ namespace svn::base {
 
 void 
 runtime_topology::init_defaults(param_value* state) const
-{  
+{   
   for (std::int32_t p = 0; p < input_param_count; p++)
     switch (params[p].descriptor->type)
     {      
@@ -43,7 +43,7 @@ runtime_topology::create(part_descriptor const* static_parts,
   result->ui_color_cycle_step = ui_color_cycle_step;
   result->ui_color_start_index = ui_color_start_index;
 
-  std::int32_t part_index = 0;
+  std::int32_t part_index = 0; 
   std::int32_t param_index = 0;
   for (std::int32_t t = 0; t < part_count; t++)
   {

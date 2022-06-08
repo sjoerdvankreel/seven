@@ -56,14 +56,14 @@ struct ui_descriptor
   std::int32_t height;
   std::vector<part_ui_descriptor> parts;
   std::vector<std::int32_t> column_widths;
-}; 
+};
 
 static std::int32_t const margin = 3;
 static std::int32_t const param_row_height = 20;
 static std::int32_t const param_col1_width = 20;
 static std::int32_t const param_col2_width = 26;
 static std::int32_t const param_col3_width = 28;
-static std::int32_t const param_total_width = 
+static std::int32_t const param_total_width =
 param_col1_width + margin + param_col2_width + margin + param_col3_width;
 
 struct color_alpha_t { enum value { eight, quarter, half, opaque, count }; };
@@ -107,7 +107,7 @@ static Document build_ui_description(
 
 // Builds vst3 .uidesc file based on topology.
 // We use the rapidjson distribution included with the vst3 sdk.
-int 
+int
 main(int argc, char** argv)
 {
   HMODULE library;
@@ -116,17 +116,17 @@ main(int argc, char** argv)
   FARPROC get_topology;
   runtime_topology const* topology;
 
-  if (argc != 3) 
+  if (argc != 3)
     return std::cout << "Usage: ui_generator <full\\path\\to\\plugin.vst3> (dll) <full\\path\\to\\file.uidesc> (json)\n", 1;
-  if ((library = LoadLibraryA(argv[1])) == nullptr) 
+  if ((library = LoadLibraryA(argv[1])) == nullptr)
     return std::cout << "Library " << argv[1] << " not found.\n", 1;
-  if((init_dll = GetProcAddress(library, "InitDll")) == nullptr)
+  if ((init_dll = GetProcAddress(library, "InitDll")) == nullptr)
     return std::cout << argv[1] << " does not export InitDll.\n", 1;
   if ((exit_dll = GetProcAddress(library, "ExitDll")) == nullptr)
     return std::cout << argv[1] << " does not export ExitDll.\n", 1;
   if ((get_topology = GetProcAddress(library, "svn_get_topology")) == nullptr)
     return std::cout << argv[1] << " does not export svn_get_topology.\n", 1;
-  if(!reinterpret_cast<svn_init_exit_dll_t>(init_dll)())
+  if (!reinterpret_cast<svn_init_exit_dll_t>(init_dll)())
     return std::cout << "InitDll returned false.\n", 1;
 
   if ((topology = reinterpret_cast<svn_get_topology_t>(get_topology)()) == nullptr)
@@ -135,7 +135,7 @@ main(int argc, char** argv)
     reinterpret_cast<svn_init_exit_dll_t>(exit_dll)();
     return 1;
   }
-  
+
   try
   {
     ui_descriptor descriptor = build_ui_descriptor(*topology);
@@ -156,7 +156,7 @@ main(int argc, char** argv)
     os.flush();
     os.close();
   }
-  catch(std::exception const& e)
+  catch (std::exception const& e)
   {
     std::cout << e.what() << "\n";
     std::cout << "Failed to write " << argv[2] << ".\n";
@@ -173,8 +173,8 @@ main(int argc, char** argv)
 
 static param_ui_descriptor
 build_param_ui_descriptor(
-  std::int32_t row, 
-  std::int32_t column, 
+  std::int32_t row,
+  std::int32_t column,
   std::int32_t runtime_param_index)
 {
   param_ui_descriptor result;
@@ -186,23 +186,23 @@ build_param_ui_descriptor(
 
 static part_ui_descriptor
 build_part_ui_descriptor(
-  runtime_topology const& topology, 
+  runtime_topology const& topology,
   std::int32_t runtime_part_index, std::int32_t unordered_type_index)
 {
   part_ui_descriptor result;
   auto const& part = topology.parts[runtime_part_index];
   std::int32_t param_count = part.descriptor->param_count;
- 
+
   result.runtime_part_index = runtime_part_index;
   result.columns = part.descriptor->ui_control_columns;
   result.rows = param_count / result.columns;
-  if(param_count % result.columns != 0) ++result.rows;
-  result.color_index = (topology.ui_color_start_index + 
+  if (param_count % result.columns != 0) ++result.rows;
+  result.color_index = (topology.ui_color_start_index +
     unordered_type_index * topology.ui_color_cycle_step) % color_count;
   result.height = (result.rows + 1) * (param_row_height + margin);
   result.width = result.columns * param_total_width + margin;
-  
-  for(std::int32_t i = 0; i < part.descriptor->param_count; i++)
+
+  for (std::int32_t i = 0; i < part.descriptor->param_count; i++)
   {
     std::int32_t row = i / result.columns;
     std::int32_t column = i % result.columns;
@@ -218,7 +218,7 @@ build_ui_descriptor(runtime_topology const& topology)
 {
   // Build part list.
   ui_descriptor result;
-  for(std::int32_t p = 0; p < topology.static_part_count; p++)
+  for (std::int32_t p = 0; p < topology.static_part_count; p++)
   {
     std::int32_t ui_index = topology.ui_order[p];
     auto const& static_part = topology.static_parts[ui_index];
@@ -226,7 +226,7 @@ build_ui_descriptor(runtime_topology const& topology)
     {
       std::int32_t runtime_part_index = topology.part_bounds[ui_index][c];
       part_ui_descriptor descriptor(build_part_ui_descriptor(topology, runtime_part_index, p));
-      if(descriptor.height + 2 * margin > topology.max_ui_height)
+      if (descriptor.height + 2 * margin > topology.max_ui_height)
         throw std::runtime_error("Part height exceeds max ui height.");
       result.parts.push_back(descriptor);
     }
@@ -262,7 +262,7 @@ build_ui_descriptor(runtime_topology const& topology)
 
   // Fix up column width.
   result.width = margin;
-  for(std::size_t c = 0; c < result.column_widths.size(); c++)
+  for (std::size_t c = 0; c < result.column_widths.size(); c++)
     result.width += result.column_widths[c] + margin;
   for (std::size_t p = 0; p < result.parts.size(); p++)
     result.parts[p].width = result.column_widths[result.parts[p].column];
@@ -308,17 +308,23 @@ print_ui_descriptor(
 
 /* -------- ui descriptor to json support -------- */
 
-static std::string 
+static std::string
 get_bitmap_name(std::string const& rgb)
-{ return "bitmap_" + rgb; }
+{
+  return "bitmap_" + rgb;
+}
 
 static std::string
 get_color_value(rgb color, std::int32_t alpha_index)
-{ return "#" + print_rgb_hex(color, true, alpha_index); }
+{
+  return "#" + print_rgb_hex(color, true, alpha_index);
+}
 
 static std::string
 get_color_name(rgb color, std::int32_t alpha_index)
-{ return "color_" + print_rgb_hex(color, true, alpha_index); }
+{
+  return "color_" + print_rgb_hex(color, true, alpha_index);
+}
 
 static std::string
 get_param_control_class(
@@ -329,10 +335,10 @@ get_param_control_class(
   {
   case param_type::toggle: return "CCheckBox";
   case param_type::list: return "COptionMenu";
-  case param_type::real: 
-  case param_type::discrete: 
+  case param_type::real:
+  case param_type::discrete:
   case param_type::discrete_list:
-  return "CAnimKnob";
+    return "CAnimKnob";
   default: assert(false); return "";
   }
 }
@@ -348,7 +354,7 @@ size_to_string(std::int32_t w, std::int32_t h)
 }
 
 static Value&
-add_member(Value& container, std::string const& key, 
+add_member(Value& container, std::string const& key,
   Value const& value, Document::AllocatorType& allocator)
 {
   Value key_copy(key.c_str(), allocator);
@@ -357,7 +363,7 @@ add_member(Value& container, std::string const& key,
 }
 
 static Value&
-add_member(Value& container, std::string const& key, 
+add_member(Value& container, std::string const& key,
   std::string const& value, Document::AllocatorType& allocator)
 {
   Value key_copy(key.c_str(), allocator);
@@ -380,7 +386,7 @@ add_child(
 
 static void
 add_attribute(
-  Value& container, std::string const& key, 
+  Value& container, std::string const& key,
   std::string const& value, Document::AllocatorType& allocator)
 {
   if (!container.HasMember("attributes"))
@@ -402,13 +408,13 @@ print_rgb_hex(rgb color, bool print_alpha, std::int32_t alpha_index)
   oss << (color.g & 0xF);
   oss << ((color.b >> 4) & 0xF);
   oss << (color.b & 0xF);
-  if(!print_alpha) return oss.str();
+  if (!print_alpha) return oss.str();
   oss << ((color_alphas[alpha_index] >> 4) & 0xF);
   oss << (color_alphas[alpha_index] & 0xF);
   return oss.str();
 }
 
-static std::string 
+static std::string
 narrow_assume_ascii(std::wstring const& wide)
 {
   std::string result;
@@ -432,7 +438,7 @@ get_control_tag(std::wstring const& runtime_param_name)
   std::string result = narrow_assume_ascii(runtime_param_name);
   for (std::size_t c = 0; c < result.length(); c++)
   {
-    if(std::isspace(result[c])) result[c] = '_';
+    if (std::isspace(result[c])) result[c] = '_';
     else result[c] = static_cast<char>(std::tolower(result[c]));
   }
   return result;
@@ -443,7 +449,7 @@ get_control_tag(std::wstring const& runtime_param_name)
 static Value
 build_ui_bitmaps(Document::AllocatorType& allocator)
 {
-  Value result(kObjectType);  
+  Value result(kObjectType);
   Value background_value(kObjectType);
   background_value.AddMember("path", "background.png", allocator);
   add_member(result, get_bitmap_name("background"), background_value, allocator);
@@ -508,7 +514,7 @@ build_ui_param_item_base(
 static Value
 build_ui_param_control_base(
   runtime_topology const& topology, part_ui_descriptor const& part,
-  param_ui_descriptor const& param, std::string const& control_class, 
+  param_ui_descriptor const& param, std::string const& control_class,
   std::int32_t left, std::int32_t width, Document::AllocatorType& allocator)
 {
   Value result(build_ui_param_item_base(topology, part, param, control_class, left, width, allocator));
@@ -519,7 +525,7 @@ build_ui_param_control_base(
 
 static Value
 build_ui_param_knob(
-  runtime_topology const& topology, part_ui_descriptor const& part, 
+  runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);
@@ -555,7 +561,7 @@ build_ui_param_menu(
 {
   std::string class_name = get_param_control_class(topology, param);
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_total_width - margin, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_col1_width + margin + param_col2_width, allocator));
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
@@ -575,9 +581,10 @@ build_ui_param_menu(
 static Value
 build_ui_param_label(
   runtime_topology const& topology, part_ui_descriptor const& part,
-  param_ui_descriptor const& param, Document::AllocatorType& allocator)
+  param_ui_descriptor const& param, std::int32_t left, std::int32_t width,
+  Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_item_base(topology, part, param, "CTextLabel", param_col1_width + margin, param_col2_width, allocator));
+  Value result(build_ui_param_item_base(topology, part, param, "CTextLabel", left, width, allocator));
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
@@ -607,27 +614,30 @@ build_ui_param_edit(
 
 static void
 add_ui_param(
-  runtime_topology const& topology, part_ui_descriptor const& part, 
+  runtime_topology const& topology, part_ui_descriptor const& part,
   Value& container, std::size_t index, Document::AllocatorType& allocator)
 {
+  std::int32_t left_col2 = param_col1_width + margin;
+  std::int32_t left_col3 = left_col2 + param_col2_width + margin;
   param_ui_descriptor const& param = part.params[index];
   std::string control_class = get_param_control_class(topology, param);
   switch (topology.params[param.runtime_param_index].descriptor->type)
   {
   case param_type::real:
-  case param_type::discrete: 
+  case param_type::discrete:
   case param_type::discrete_list:
     add_child(container, control_class, build_ui_param_knob(topology, part, param, allocator), allocator);
-    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, allocator), allocator);
+    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col2, param_col2_width, allocator), allocator);
     add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, allocator), allocator);
     break;
   case param_type::toggle:
     add_child(container, control_class, build_ui_param_checkbox(topology, part, param, allocator), allocator);
-    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, allocator), allocator);
+    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col2, param_col2_width, allocator), allocator);
     add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, allocator), allocator);
     break;
   case param_type::list:
     add_child(container, control_class, build_ui_param_menu(topology, part, param, allocator), allocator);
+    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col3, param_col3_width, allocator), allocator);
     break;
   default:
     assert(false);
@@ -643,7 +653,7 @@ build_ui_part_param_container(runtime_topology const& topology,
   add_attribute(result, "class", "CViewContainer", allocator);
   add_attribute(result, "origin", size_to_string(0, param_row_height), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height - param_row_height), allocator);
-  for(std::size_t p = 0; p < descriptor.params.size(); p++)
+  for (std::size_t p = 0; p < descriptor.params.size(); p++)
     add_ui_param(topology, descriptor, result, p, allocator);
   return result;
 }
@@ -708,9 +718,9 @@ build_ui_part_outer_container(runtime_topology const& topology,
 }
 
 static Value
-build_ui_template(runtime_topology const& topology, 
+build_ui_template(runtime_topology const& topology,
   ui_descriptor const& descriptor, Document::AllocatorType& allocator)
-{  
+{
   Value view(kObjectType);
   std::string size = size_to_string(descriptor.width, descriptor.height);
   add_attribute(view, "size", size, allocator);
