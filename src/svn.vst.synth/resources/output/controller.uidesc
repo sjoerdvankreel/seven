@@ -164,7 +164,6 @@
                     "CViewContainer": {
                         "attributes": {
                             "class": "CViewContainer",
-                            "background-color-draw-style": "stroked",
                             "origin": "3, 3",
                             "size": "243, 69",
                             "bitmap": "bitmap_background6"
@@ -188,13 +187,13 @@
                                         "children": {
                                             "CTextLabel": {
                                                 "attributes": {
-                                                    "title": "Osc 1",
+                                                    "title": " Osc 1",
                                                     "class": "CTextLabel",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_FFFFFFFF",
-                                                    "origin": "3, 0",
+                                                    "origin": "0, 0",
                                                     "size": "243, 20",
                                                     "background-color": "color_00FF8080"
                                                 }
@@ -439,6 +438,15 @@
                                                 }
                                             }
                                         }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "background-color-draw-style": "stroked",
+                                            "origin": "0, 20",
+                                            "size": "243, 49",
+                                            "background-color": "color_00FF8080"
+                                        }
                                     }
                                 }
                             }
@@ -447,7 +455,6 @@
                     "CViewContainer": {
                         "attributes": {
                             "class": "CViewContainer",
-                            "background-color-draw-style": "stroked",
                             "origin": "3, 75",
                             "size": "243, 69",
                             "bitmap": "bitmap_background6"
@@ -471,13 +478,13 @@
                                         "children": {
                                             "CTextLabel": {
                                                 "attributes": {
-                                                    "title": "Osc 2",
+                                                    "title": " Osc 2",
                                                     "class": "CTextLabel",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_FFFFFFFF",
-                                                    "origin": "3, 0",
+                                                    "origin": "0, 0",
                                                     "size": "243, 20",
                                                     "background-color": "color_00FF8080"
                                                 }
@@ -722,6 +729,15 @@
                                                 }
                                             }
                                         }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "background-color-draw-style": "stroked",
+                                            "origin": "0, 20",
+                                            "size": "243, 49",
+                                            "background-color": "color_00FF8080"
+                                        }
                                     }
                                 }
                             }
@@ -730,7 +746,6 @@
                     "CViewContainer": {
                         "attributes": {
                             "class": "CViewContainer",
-                            "background-color-draw-style": "stroked",
                             "origin": "249, 3",
                             "size": "163, 46",
                             "bitmap": "bitmap_background8"
@@ -754,13 +769,13 @@
                                         "children": {
                                             "CTextLabel": {
                                                 "attributes": {
-                                                    "title": "Amp",
+                                                    "title": " Amp",
                                                     "class": "CTextLabel",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_FFFFFFFF",
-                                                    "origin": "3, 0",
+                                                    "origin": "0, 0",
                                                     "size": "163, 20",
                                                     "background-color": "color_0080FF80"
                                                 }
@@ -860,6 +875,15 @@
                                                 }
                                             }
                                         }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "background-color-draw-style": "stroked",
+                                            "origin": "0, 20",
+                                            "size": "163, 26",
+                                            "background-color": "color_0080FF80"
+                                        }
                                     }
                                 }
                             }
@@ -868,7 +892,6 @@
                     "CViewContainer": {
                         "attributes": {
                             "class": "CViewContainer",
-                            "background-color-draw-style": "stroked",
                             "origin": "249, 52",
                             "size": "163, 92",
                             "bitmap": "bitmap_background10"
@@ -892,13 +915,13 @@
                                         "children": {
                                             "CTextLabel": {
                                                 "attributes": {
-                                                    "title": "Out",
+                                                    "title": " Out",
                                                     "class": "CTextLabel",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_FFFFFFFF",
-                                                    "origin": "3, 0",
+                                                    "origin": "0, 0",
                                                     "size": "163, 20",
                                                     "background-color": "color_8000FF80"
                                                 }
@@ -1009,6 +1032,15 @@
                                                     "back-color": "color_8000FF20"
                                                 }
                                             }
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "background-color-draw-style": "stroked",
+                                            "origin": "0, 20",
+                                            "size": "163, 72",
+                                            "background-color": "color_8000FF80"
                                         }
                                     }
                                 }

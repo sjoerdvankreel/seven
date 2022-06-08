@@ -659,18 +659,31 @@ build_ui_part_param_container(runtime_topology const& topology,
 }
 
 static Value
+build_ui_part_param_container_border(runtime_topology const& topology,
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  add_attribute(result, "class", "CViewContainer", allocator);
+  add_attribute(result, "background-color-draw-style", "stroked", allocator);
+  add_attribute(result, "origin", size_to_string(0, param_row_height), allocator);
+  add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height - param_row_height), allocator);
+  add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
+  return result;
+}
+
+static Value
 build_ui_part_header_label(runtime_topology const& topology,
   part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  std::string title = narrow_assume_ascii(topology.parts[descriptor.runtime_part_index].runtime_name);
+  std::string title = " " + narrow_assume_ascii(topology.parts[descriptor.runtime_part_index].runtime_name);
   add_attribute(result, "title", title, allocator);
   add_attribute(result, "class", "CTextLabel", allocator);
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "font-color", get_color_name(white, color_alpha::opaque), allocator);
-  add_attribute(result, "origin", size_to_string(margin, 0), allocator);
+  add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, param_row_height), allocator);
   add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
   return result;
@@ -700,6 +713,7 @@ build_ui_part_inner_container(runtime_topology const& topology,
   add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
   add_child(result, "CViewContainer", build_ui_part_header_container(topology, descriptor, allocator), allocator);
   add_child(result, "CViewContainer", build_ui_part_param_container(topology, descriptor, allocator), allocator);
+  add_child(result, "CViewContainer", build_ui_part_param_container_border(topology, descriptor, allocator), allocator);
   return result;
 }
 
@@ -709,7 +723,6 @@ build_ui_part_outer_container(runtime_topology const& topology,
 {
   Value result(kObjectType);
   add_attribute(result, "class", "CViewContainer", allocator);
-  add_attribute(result, "background-color-draw-style", "stroked", allocator);
   add_attribute(result, "origin", size_to_string(descriptor.left, descriptor.top), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height), allocator);
   add_attribute(result, "bitmap", get_bitmap_name(std::string("background") + std::to_string(descriptor.color_index + 1)), allocator);
