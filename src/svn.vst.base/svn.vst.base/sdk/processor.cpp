@@ -25,14 +25,14 @@ processor(
   Steinberg::FUID controller_id,
   runtime_topology const* topology):
 _state(static_cast<std::size_t>(topology->input_param_count)),
-_accurateParameters(static_cast<std::size_t>(topology->input_param_count)),
+_accurate_parameters(static_cast<std::size_t>(topology->input_param_count)),
 _topology(topology),
 _processor()
 {
 	setControllerClass(controller_id);
   topology->init_defaults(_state.data());
   for(std::int32_t i = 0; i < topology->input_param_count; i++)
-    _accurateParameters[i].setParamID(static_cast<std::int32_t>(i));
+    _accurate_parameters[i].setParamID(static_cast<std::int32_t>(i));
 }
 
 tresult PLUGIN_API
@@ -193,19 +193,19 @@ processor::process_automation(block_input& input, ProcessData const& data)
       auto id = queue->getParameterId();
       auto const& param = *_topology->params[id].descriptor;
       if (param.type == param_type::real)
-        _accurateParameters[id].setValue(_state[id].real);
+        _accurate_parameters[id].setValue(_state[id].real);
       else
-        _accurateParameters[id].setValue(
+        _accurate_parameters[id].setValue(
           parameter::discrete_to_vst_normalized(param, _state[id].discrete));
 
-      _accurateParameters[id].beginChanges(queue);
+      _accurate_parameters[id].beginChanges(queue);
       for (std::int32_t s = 0; s < data.numSamples; s++)
         if (param.type == param_type::real)
-          input.automation[id][s].real = _accurateParameters[id].advance(1);
+          input.automation[id][s].real = _accurate_parameters[id].advance(1);
         else
           input.automation[id][s].discrete 
-            = parameter::vst_normalized_to_discrete(param, _accurateParameters[id].advance(1));
-      _accurateParameters[id].endChanges();
+            = parameter::vst_normalized_to_discrete(param, _accurate_parameters[id].advance(1));
+      _accurate_parameters[id].endChanges();
     }
 }
 

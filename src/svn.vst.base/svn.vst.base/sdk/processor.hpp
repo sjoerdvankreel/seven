@@ -31,7 +31,8 @@ private:
 
 private:
   std::vector<svn::base::param_value> _state;
-  std::vector<Parameter> _accurateParameters;
+  std::vector<Parameter> _accurate_parameters;
+  std::vector<param_value> _output_param_cache;
   svn::base::runtime_topology const* const _topology;
   std::unique_ptr<svn::base::audio_processor> _processor;
 
