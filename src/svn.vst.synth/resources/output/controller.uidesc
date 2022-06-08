@@ -1315,11 +1315,23 @@
                                                     "size": "81, 24"
                                                 }
                                             },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "38, 20",
+                                                    "origin": "3, 3",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_80FF00FF",
+                                                    "title": "Clip"
+                                                }
+                                            },
                                             "CCheckBox": {
                                                 "attributes": {
                                                     "class": "CCheckBox",
-                                                    "size": "20, 20",
-                                                    "origin": "6, 3",
+                                                    "size": "38, 20",
+                                                    "origin": "44, 3",
                                                     "control-tag": "out_clip",
                                                     "tooltip": "Out Clip",
                                                     "title": "",
@@ -1329,18 +1341,6 @@
                                                     "boxfill-color": "color_80FF0040",
                                                     "boxframe-color": "color_80FF00FF",
                                                     "checkmark-color": "color_80FF00FF"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "26, 20",
-                                                    "origin": "26, 3",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "font-color": "color_80FF00FF",
-                                                    "title": "Clip"
                                                 }
                                             },
                                             "CViewContainer": {
@@ -1361,11 +1361,23 @@
                                                     "size": "81, 24"
                                                 }
                                             },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "38, 20",
+                                                    "origin": "3, 26",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_80FF00FF",
+                                                    "title": "Drain"
+                                                }
+                                            },
                                             "CCheckBox": {
                                                 "attributes": {
                                                     "class": "CCheckBox",
-                                                    "size": "20, 20",
-                                                    "origin": "6, 26",
+                                                    "size": "38, 20",
+                                                    "origin": "44, 26",
                                                     "control-tag": "out_voices_exhausted",
                                                     "tooltip": "Out Voices exhausted",
                                                     "title": "",
@@ -1375,18 +1387,6 @@
                                                     "boxfill-color": "color_80FF0040",
                                                     "boxframe-color": "color_80FF00FF",
                                                     "checkmark-color": "color_80FF00FF"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "26, 20",
-                                                    "origin": "26, 26",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "font-color": "color_80FF00FF",
-                                                    "title": "Drain"
                                                 }
                                             },
                                             "CViewContainer": {
@@ -1407,11 +1407,23 @@
                                                     "size": "81, 24"
                                                 }
                                             },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "38, 20",
+                                                    "origin": "3, 49",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_80FF00FF",
+                                                    "title": "Voices"
+                                                }
+                                            },
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
-                                                    "size": "49, 20",
-                                                    "origin": "3, 49",
+                                                    "size": "35, 20",
+                                                    "origin": "44, 49",
                                                     "control-tag": "out_voice_count",
                                                     "tooltip": "Out Voice count",
                                                     "text-alignment": "right",
@@ -1423,18 +1435,6 @@
                                                     "back-color": "color_00000020",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_80FF00FF"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "28, 20",
-                                                    "origin": "55, 49",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "font-color": "color_80FF00FF",
-                                                    "title": "Voices"
                                                 }
                                             }
                                         }

@@ -67,6 +67,7 @@ static std::int32_t const param_col2_width = 26;
 static std::int32_t const param_col3_width = 28;
 static std::int32_t const param_total_width =
 param_col1_width + margin + param_col2_width + margin + param_col3_width;
+static std::int32_t const param_output_col_width = (param_total_width - margin) / 2;
 
 struct color_alpha_t { enum value { eight, quarter, half, opaque, count }; };
 typedef color_alpha_t::value color_alpha;
@@ -659,7 +660,7 @@ build_ui_param_background(std::int32_t row, std::int32_t column,
 }
 
 static void
-add_ui_param(
+add_ui_input_param(
   runtime_topology const& topology, part_ui_descriptor const& part,
   Value& container, std::size_t index, Document::AllocatorType& allocator)
 {
@@ -696,6 +697,30 @@ add_ui_param(
   }
 }
 
+static void
+add_ui_output_param(
+  runtime_topology const& topology, part_ui_descriptor const& part,
+  Value& container, std::size_t index, Document::AllocatorType& allocator)
+{
+  param_ui_descriptor const& param = part.params[index];
+  std::string control_class = get_param_control_class(topology, param);
+  add_child(container, "CTextLabel", build_ui_param_label(
+    topology, part, param, 0, param_output_col_width, allocator), allocator);
+  switch (topology.params[param.runtime_param_index].descriptor->type)
+  {
+  case param_type::toggle:
+    add_child(container, control_class, build_ui_param_checkbox(topology, part, param, color_wheel[part.color_index],
+      param_output_col_width + margin, param_output_col_width, margin, allocator), allocator);
+    break;
+  case param_type::discrete_text:
+    add_child(container, control_class, build_ui_param_edit(topology, part, param, 
+      param_output_col_width + margin, param_output_col_width - margin, allocator), allocator);
+    break;
+  default:
+    assert(false);
+  }
+}
+
 static Value
 build_ui_part_param_container(runtime_topology const& topology,
   part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
@@ -708,13 +733,17 @@ build_ui_part_param_container(runtime_topology const& topology,
   for (std::size_t p = 0; p < descriptor.params.size(); p++)
   {
     auto const& param = descriptor.params[p];
+    auto const& part = topology.parts[descriptor.runtime_part_index];
     auto const& param_descriptor = *topology.params[param.runtime_param_index].descriptor;
     add_child(result, "CViewContainer", build_ui_param_background(
       param.row, param.column, param_descriptor.ui_param_group, descriptor.color_index, allocator), allocator);
     if(param_descriptor.ui_param_group != 0)
       add_child(result, "CViewContainer", build_ui_param_background(
         param.row, param.column, 0, descriptor.color_index, allocator), allocator);
-    add_ui_param(topology, descriptor, result, p, allocator);
+    if(part.descriptor->output)
+      add_ui_output_param(topology, descriptor, result, p, allocator);
+    else
+      add_ui_input_param(topology, descriptor, result, p, allocator);
   }
   for (std::int32_t p = descriptor.params.size(); p < descriptor.rows * descriptor.columns; p++)
   {

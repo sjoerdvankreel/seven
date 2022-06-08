@@ -7,7 +7,7 @@
 namespace svn::base {
 
 param_descriptor::
-param_descriptor(     
+param_descriptor(        
   item_name const& static_name, bool ui_edit_font_small, 
   std::int32_t ui_param_group, param_type type, 
   item_name const* list, std::int32_t count):
