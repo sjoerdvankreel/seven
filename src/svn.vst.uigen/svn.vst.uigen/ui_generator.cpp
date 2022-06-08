@@ -705,6 +705,9 @@ build_ui_part_param_container(runtime_topology const& topology,
     auto const& param_descriptor = *topology.params[param.runtime_param_index].descriptor;
     add_child(result, "CViewContainer", build_ui_param_background(
       param.row, param.column, param_descriptor.ui_param_group, descriptor.color_index, allocator), allocator);
+    if(param_descriptor.ui_param_group != 0)
+      add_child(result, "CViewContainer", build_ui_param_background(
+        param.row, param.column, 0, descriptor.color_index, allocator), allocator);
     add_ui_param(topology, descriptor, result, p, allocator);
   }
   for (std::int32_t p = descriptor.params.size(); p < descriptor.rows * descriptor.columns; p++)
