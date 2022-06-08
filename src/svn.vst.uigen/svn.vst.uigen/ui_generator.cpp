@@ -205,12 +205,12 @@ build_part_ui_descriptor(
   result.width = result.columns * param_total_width + margin;
 
   std::int32_t grid_index = 0;
-  result.enabled_param.row = -1;
-  result.enabled_param.column = -1;
+  result.enabled_param.row = 0;
   result.enabled_param.runtime_param_index = -1;
+  result.enabled_param.column = result.columns - 1;
   for (std::int32_t i = 0; i < part.descriptor->param_count; i++)
     if (i == part.descriptor->ui_control_enabled)
-      result.enabled_param.runtime_param_index = i;
+      result.enabled_param.runtime_param_index = part.runtime_param_start + i;
     else
     {
       std::int32_t row = grid_index / result.columns;
@@ -312,6 +312,7 @@ print_ui_descriptor(
     std::cout << "\t\tLeft: " << descriptor.parts[rp].left << "\n";
     std::cout << "\t\tTop: " << descriptor.parts[rp].top << "\n";
     std::cout << "\t\tColor index: " << descriptor.parts[rp].color_index << "\n";
+    std::cout << "\t\tEnabled index: " << descriptor.parts[rp].enabled_param.runtime_param_index << "\n";
   }
   std::cout << "\n";
 }
@@ -320,21 +321,13 @@ print_ui_descriptor(
 
 static std::string
 get_bitmap_name(std::string const& rgb)
-{
-  return "bitmap_" + rgb;
-}
-
+{ return "bitmap_" + rgb; }
 static std::string
 get_color_value(rgb color, std::int32_t alpha_index)
-{
-  return "#" + print_rgb_hex(color, true, alpha_index);
-}
-
+{ return "#" + print_rgb_hex(color, true, alpha_index); }
 static std::string
 get_color_name(rgb color, std::int32_t alpha_index)
-{
-  return "color_" + print_rgb_hex(color, true, alpha_index);
-}
+{ return "color_" + print_rgb_hex(color, true, alpha_index); }
 
 static std::string
 get_param_control_class(
@@ -506,12 +499,13 @@ static Value
 build_ui_param_item_base(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, std::string const& control_class,
-  std::int32_t left, std::int32_t width, Document::AllocatorType& allocator)
+  std::int32_t left, std::int32_t width, std::int32_t top_margin, 
+  Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "class", control_class, allocator);
   add_attribute(result, "size", size_to_string(width, param_row_height), allocator);
-  std::int32_t top = margin + param.row * (param_row_height + margin);
+  std::int32_t top = top_margin + param.row * (param_row_height + margin);
   std::int32_t l = margin + param.column * param_total_width + left;
   add_attribute(result, "origin", size_to_string(l, top), allocator);
   return result;
@@ -521,9 +515,10 @@ static Value
 build_ui_param_control_base(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, std::string const& control_class,
-  std::int32_t left, std::int32_t width, Document::AllocatorType& allocator)
+  std::int32_t left, std::int32_t width, std::int32_t top_margin,
+  Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_item_base(topology, part, param, control_class, left, width, allocator));
+  Value result(build_ui_param_item_base(topology, part, param, control_class, left, width, top_margin, allocator));
   std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
   add_attribute(result, "control-tag", tag, allocator);
   auto const& rt_param = topology.params[param.runtime_param_index];
@@ -535,12 +530,30 @@ build_ui_param_control_base(
 }
 
 static Value
+build_ui_param_checkbox_base(
+  runtime_topology const& topology, part_ui_descriptor const& part,
+  param_ui_descriptor const& param, std::int32_t left, 
+  std::int32_t width, std::int32_t top_margin, Document::AllocatorType& allocator)
+{
+  std::string class_name = get_param_control_class(topology, param);
+  Value result(build_ui_param_control_base(topology, part, param, class_name, left, width, top_margin, allocator));
+  add_attribute(result, "title", "", allocator);
+  add_attribute(result, "frame-width", "1", allocator);
+  add_attribute(result, "draw-crossbox", "true", allocator);
+  add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
+  add_attribute(result, "boxfill-color", get_color_name(color_wheel[part.color_index], color_alpha::quarter), allocator);
+  add_attribute(result, "boxframe-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
+  add_attribute(result, "checkmark-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
+  return result;
+}
+
+static Value
 build_ui_param_knob(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);
-  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_col1_width, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_col1_width, margin, allocator));
   add_attribute(result, "angle-start", "20", allocator);
   add_attribute(result, "angle-range", "320", allocator);
   add_attribute(result, "height-of-one-image", std::to_string(param_row_height), allocator);
@@ -554,15 +567,7 @@ build_ui_param_checkbox(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
-  std::string class_name = get_param_control_class(topology, param);
-  Value result(build_ui_param_control_base(topology, part, param, class_name, margin, param_col1_width - margin, allocator));
-  add_attribute(result, "frame-width", "1", allocator);
-  add_attribute(result, "draw-crossbox", "true", allocator);
-  add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
-  add_attribute(result, "boxfill-color", get_color_name(color_wheel[part.color_index], color_alpha::quarter), allocator);
-  add_attribute(result, "boxframe-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
-  add_attribute(result, "checkmark-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
-  return result;
+  return build_ui_param_checkbox_base(topology, part, param, margin, param_col1_width, margin, allocator);
 }
 
 static Value
@@ -572,7 +577,7 @@ build_ui_param_menu(
 {
   std::string class_name = get_param_control_class(topology, param);
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_col1_width + margin + param_col2_width, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_col1_width + margin + param_col2_width, margin, allocator));
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
@@ -595,7 +600,7 @@ build_ui_param_label(
   param_ui_descriptor const& param, std::int32_t left, std::int32_t width,
   Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_item_base(topology, part, param, "CTextLabel", left, width, allocator));
+  Value result(build_ui_param_item_base(topology, part, param, "CTextLabel", left, width, margin, allocator));
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
@@ -611,7 +616,7 @@ build_ui_param_edit(
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
   std::int32_t left = param_col1_width + margin + param_col2_width;
-  Value result(build_ui_param_control_base(topology, part, param, "CTextEdit", left, param_col3_width, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, "CTextEdit", left, param_col3_width, margin, allocator));
   add_attribute(result, "text-alignment", "right", allocator);
   add_attribute(result, "style-no-frame", "true", allocator);
   add_attribute(result, "style-round-rect", "true", allocator);
@@ -682,6 +687,13 @@ build_ui_part_param_container_border(runtime_topology const& topology,
 }
 
 static Value
+build_ui_part_header_enabled(runtime_topology const& topology,
+  part_ui_descriptor const& part, param_ui_descriptor const& param, Document::AllocatorType& allocator)
+{
+  return build_ui_param_checkbox_base(topology, part, param, param_total_width - param_col1_width + margin, param_col1_width, 0, allocator);
+}
+
+static Value
 build_ui_part_header_label(runtime_topology const& topology,
   part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {
@@ -709,6 +721,8 @@ build_ui_part_header_container(runtime_topology const& topology,
   add_attribute(result, "size", size_to_string(descriptor.width, param_row_height), allocator);
   add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
   add_child(result, "CTextLabel", build_ui_part_header_label(topology, descriptor, allocator), allocator);
+  if(descriptor.enabled_param.runtime_param_index != -1)
+    add_child(result, "CCheckBox", build_ui_part_header_enabled(topology, descriptor, descriptor.enabled_param, allocator), allocator);
   return result;
 }
 

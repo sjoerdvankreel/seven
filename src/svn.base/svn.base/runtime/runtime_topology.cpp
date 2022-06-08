@@ -49,12 +49,12 @@ runtime_topology::create(part_descriptor const* static_parts,
   {             
     seen_output |= static_parts[t].output;
     assert(!seen_output || static_parts[t].output);
-    std::int32_t type_index = 0;
+    std::int32_t type_index = 0;   
     result->part_bounds.push_back(std::vector<std::int32_t>());
     result->param_bounds.push_back(std::vector<std::int32_t>());
     std::wstring type_name(static_parts[t].static_name.short_);
     for (std::int32_t i = 0; i < static_parts[t].part_count; i++)
-    {
+    {  
       result->part_bounds[t].push_back(part_index);
       result->param_bounds[t].push_back(param_index);
       std::wstring runtime_name = type_name;

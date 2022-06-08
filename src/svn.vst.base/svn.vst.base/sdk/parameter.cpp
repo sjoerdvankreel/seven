@@ -37,7 +37,7 @@ param_flags(param_type type, bool output)
   if(output) result |= ParameterInfo::kIsReadOnly;
   if(type == param_type::list || type == param_type::discrete_list) result |= ParameterInfo::kIsList;
   return result;
-}
+}  
 
 parameter::
 parameter(std::int32_t index, svn::base::runtime_param const* param) :
