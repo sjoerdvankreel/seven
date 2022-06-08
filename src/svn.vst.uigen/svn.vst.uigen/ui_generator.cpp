@@ -25,9 +25,9 @@ using namespace svn::base;
 using namespace rapidjson;
 
 // Used for dimension calculations.
-// Parts are layed out top-to-bottom, then left-to-right, in topology.ui_order,
-// and are wrapped based on the max ui height. Parameters are layed out in a grid, 
-// in declaration order, based on the control column count in the part descriptor.
+// Parts are layed out top-to-bottom, then left-to-right, and are 
+// wrapped based on the max ui height. Parameters are layed out in 
+// a grid, based on the control column count in the part descriptor.
 
 struct param_ui_descriptor
 {
@@ -231,11 +231,10 @@ build_ui_descriptor(runtime_topology const& topology)
   ui_descriptor result;
   for (std::int32_t p = 0; p < topology.static_part_count; p++)
   {
-    std::int32_t ui_index = topology.ui_order[p];
-    auto const& static_part = topology.static_parts[ui_index];
+    auto const& static_part = topology.static_parts[p];
     for (std::int32_t c = 0; c < static_part.part_count; c++)
     {
-      std::int32_t runtime_part_index = topology.part_bounds[ui_index][c];
+      std::int32_t runtime_part_index = topology.part_bounds[p][c];
       part_ui_descriptor descriptor(build_part_ui_descriptor(topology, runtime_part_index, p));
       if (descriptor.height + 2 * margin > topology.max_ui_height)
         throw std::runtime_error("Part height exceeds max ui height.");

@@ -19,18 +19,17 @@ runtime_topology::init_defaults(param_value* state) const
 }    
   
 std::unique_ptr<runtime_topology>
-runtime_topology::create(part_descriptor const* static_parts, 
-  std::int32_t part_count, std::int32_t max_note_events, 
-  std::int32_t max_ui_height, std::int32_t const* ui_order)
+runtime_topology::create(
+  part_descriptor const* static_parts, std::int32_t part_count, 
+  std::int32_t max_note_events, std::int32_t max_ui_height)
 {
   bool seen_output = false;   
   assert(part_count > 0);
+  assert(max_ui_height >= 0);
   assert(max_note_events >= 0);
   assert(static_parts != nullptr);
-  assert(ui_order == nullptr && max_ui_height == 0 || ui_order != nullptr && max_ui_height > 0);
 
   auto result = std::make_unique<runtime_topology>();
-  result->ui_order = ui_order;
   result->input_param_count = 0;
   result->output_param_count = 0;
   result->static_parts = static_parts;

@@ -7,20 +7,12 @@ using namespace svn::base;
 
 namespace svn::synth {
   
-std::int32_t const 
-synth_ui_order[part_type::count] = 
-{
-  part_type::voice_osc,
-  part_type::voice_amp,
-  part_type::glob_output
-};    
-  
 static item_name const
 voice_osc_types[voice_osc_type::count] =
 {
   { L"Sine", L"Sine wave" },
   { L"Blep", L"Bandlimited step" }
-};
+}; 
 
 param_descriptor const 
 glob_output_params[glob_output_param::count] =
@@ -52,8 +44,8 @@ voice_amp_params[voice_amp_param::count] =
 part_descriptor const 
 part_descriptors[part_type::count] =
 {
-  { part_type::voice_amp, false, { L"Amp", L"Voice level" }, 1, voice_amp_params, voice_amp_param::count, 2, -1 },
   { part_type::voice_osc, false, { L"Osc", L"Voice oscillator" }, voice_osc_count, voice_osc_params, voice_osc_param::count, 3, 0 },
+  { part_type::voice_amp, false, { L"Amp", L"Voice level" }, 1, voice_amp_params, voice_amp_param::count, 2, -1 },
   { part_type::glob_output, true, { L"Out", L"Output" }, 1, glob_output_params, glob_output_param::count, 1, -1 }
 };
 

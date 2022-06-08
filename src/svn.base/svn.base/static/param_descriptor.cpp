@@ -116,12 +116,12 @@ param_descriptor::parse(wchar_t const* buffer, param_value& val) const
     if (!std::wcscmp(L"On", buffer)) val.discrete = 1;
     else if (!std::wcscmp(L"Off", buffer)) val.discrete = 0;
     else return false;
-    return true;
+    return true; 
   default:
     assert(false);
     return false;
   }
-}
+} 
 
 std::size_t 
 param_descriptor::format(param_value val, wchar_t* buffer, std::size_t size) const

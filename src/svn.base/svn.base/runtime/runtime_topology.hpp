@@ -21,10 +21,8 @@ struct runtime_topology
   std::vector<std::vector<std::int32_t>> part_bounds; // Runtime part bounds, e.g. bounds[part_type::osc][1] indexes osc 2 part.
   std::vector<std::vector<std::int32_t>> param_bounds; // Runtime parameter bounds, e.g. bounds[part_type::osc][1] indexes osc 2 wave param.
   std::int32_t input_param_count = 0; // Runtime input params.
-  std::int32_t output_param_count = 0; // Runtime output params.
-  
+  std::int32_t output_param_count = 0; // Runtime output params.  
   std::int32_t max_ui_height; // For ui generator. 
-  std::int32_t const* ui_order; // For ui generator. Part types mixed with ui_order_output_params. Ui generation goes top-down first, then left-right.
    
   // Params contains interior pointers into parts.
   runtime_topology() = default;
@@ -35,8 +33,7 @@ struct runtime_topology
   // Output params must follow input params.
   static std::unique_ptr<runtime_topology> create(
     struct part_descriptor const* static_parts, 
-    std::int32_t part_count, std::int32_t max_notes, 
-    std::int32_t max_ui_height, std::int32_t const* ui_order);
+    std::int32_t part_count, std::int32_t max_notes, std::int32_t max_ui_height);
 };
 
 } // namespace svn::base
