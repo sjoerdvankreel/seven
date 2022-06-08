@@ -633,7 +633,6 @@ add_ui_param(
   case param_type::toggle:
     add_child(container, control_class, build_ui_param_checkbox(topology, part, param, allocator), allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col2, param_col2_width, allocator), allocator);
-    add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, allocator), allocator);
     break;
   case param_type::list:
     add_child(container, control_class, build_ui_param_menu(topology, part, param, allocator), allocator);

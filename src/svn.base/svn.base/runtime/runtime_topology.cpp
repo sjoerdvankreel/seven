@@ -46,7 +46,7 @@ runtime_topology::create(part_descriptor const* static_parts,
   std::int32_t part_index = 0; 
   std::int32_t param_index = 0;
   for (std::int32_t t = 0; t < part_count; t++)
-  {
+  {   
     seen_output |= static_parts[t].output;
     assert(!seen_output || static_parts[t].output);
     std::int32_t type_index = 0;
