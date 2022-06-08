@@ -626,20 +626,18 @@ build_ui_param_edit(
 }
 
 static Value
-build_ui_param_background(runtime_topology const& topology, 
-  part_ui_descriptor const& part, std::size_t index, Document::AllocatorType& allocator)
+build_ui_param_background(std::int32_t row, std::int32_t column, 
+  std::int32_t group_index, std::int32_t color_index, Document::AllocatorType& allocator)
 {
   std::string color;
   Value result(kObjectType);
   std::string style = "filled";
-  param_ui_descriptor const& param = part.params[index];
-  param_descriptor const& descriptor = *topology.params[param.runtime_param_index].descriptor;
   std::int32_t width = param_total_width - padding_param_group;
   std::int32_t height = param_row_height + margin - padding_param_group;
-  std::int32_t left = param.column * param_total_width + padding_param_group * 2;
-  std::int32_t top = param.row * (param_row_height + margin) + 2 * padding_param_group;
+  std::int32_t left = column * param_total_width + padding_param_group * 2;
+  std::int32_t top = row * (param_row_height + margin) + 2 * padding_param_group;
 
-  if (descriptor.ui_param_group == 0)
+  if (group_index == 0)
   { 
     style = "stroked";
     top -= padding_param_group;
@@ -648,8 +646,8 @@ build_ui_param_background(runtime_topology const& topology,
     height += padding_param_group * 2;
     color = get_color_name(black, color_alpha::quarter);
   }
-  if (descriptor.ui_param_group == 1) color = get_color_name(white, color_alpha::eight);
-  if (descriptor.ui_param_group == 2) color = get_color_name(color_wheel[part.color_index], color_alpha::eight);
+  if (group_index == 1) color = get_color_name(white, color_alpha::eight);
+  if (group_index == 2) color = get_color_name(color_wheel[color_index], color_alpha::eight);
 
   add_attribute(result, "class", "CViewContainer", allocator);
   add_attribute(result, "background-color", color, allocator);
@@ -703,8 +701,16 @@ build_ui_part_param_container(runtime_topology const& topology,
   add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::eight), allocator);
   for (std::size_t p = 0; p < descriptor.params.size(); p++)
   {
-    add_child(result, "CViewContainer", build_ui_param_background(topology, descriptor, p, allocator), allocator);
+    auto const& param = descriptor.params[p];
+    auto const& param_descriptor = *topology.params[param.runtime_param_index].descriptor;
+    add_child(result, "CViewContainer", build_ui_param_background(
+      param.row, param.column, param_descriptor.ui_param_group, descriptor.color_index, allocator), allocator);
     add_ui_param(topology, descriptor, result, p, allocator);
+  }
+  for (std::int32_t p = descriptor.params.size(); p < descriptor.rows * descriptor.columns; p++)
+  {
+    add_child(result, "CViewContainer", build_ui_param_background(
+      p / descriptor.rows, p % descriptor.columns, 0, descriptor.color_index, allocator), allocator);
   }
   return result;
 }

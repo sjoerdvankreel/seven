@@ -1242,6 +1242,15 @@
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_8000FFFF"
                                                 }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color": "color_00000040",
+                                                    "origin": "81, 24",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 24"
+                                                }
                                             }
                                         }
                                     }
