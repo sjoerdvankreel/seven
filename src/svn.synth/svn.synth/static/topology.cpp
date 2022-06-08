@@ -49,12 +49,12 @@ voice_amp_params[voice_amp_param::count] =
   { { L"Dcy", L"Decay" }, false, 1, L"Sec", 0.0, 2, param_bounds::linear_unit(), param_bounds::linear_unit() }
 };      
  
-part_descriptor const
+part_descriptor const 
 part_descriptors[part_type::count] =
 {
   { part_type::voice_amp, false, { L"Amp", L"Voice level" }, 1, voice_amp_params, voice_amp_param::count, 2, -1 },
   { part_type::voice_osc, false, { L"Osc", L"Voice oscillator" }, voice_osc_count, voice_osc_params, voice_osc_param::count, 3, 0 },
-  { part_type::glob_output, true, { L"Out", L"Output" }, 1, glob_output_params, glob_output_param::count, 2, -1 }
+  { part_type::glob_output, true, { L"Out", L"Output" }, 1, glob_output_params, glob_output_param::count, 1, -1 }
 };
 
 } // namespace svn::synth
