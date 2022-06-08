@@ -503,11 +503,6 @@ build_ui_param_item_base(
   std::int32_t top = margin + param.row * (param_row_height + margin);
   std::int32_t l = margin + param.column * param_total_width + left;
   add_attribute(result, "origin", size_to_string(l, top), allocator);
-  auto const& rt_param = topology.params[param.runtime_param_index];
-  std::string tooltip = narrow_assume_ascii(rt_param.runtime_name);
-  std::string unit = std::string(" (") + narrow_assume_ascii(rt_param.descriptor->unit) + ")";
-  if (std::wcslen(rt_param.descriptor->unit) > 0) tooltip += unit;
-  add_attribute(result, "tooltip", tooltip, allocator);
   return result;
 }
 
@@ -520,6 +515,11 @@ build_ui_param_control_base(
   Value result(build_ui_param_item_base(topology, part, param, control_class, left, width, allocator));
   std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
   add_attribute(result, "control-tag", tag, allocator);
+  auto const& rt_param = topology.params[param.runtime_param_index];
+  std::string tooltip = narrow_assume_ascii(rt_param.runtime_name);
+  std::string unit = std::string(" (") + narrow_assume_ascii(rt_param.descriptor->unit) + ")";
+  if (std::wcslen(rt_param.descriptor->unit) > 0) tooltip += unit;
+  add_attribute(result, "tooltip", tooltip, allocator);
   return result;
 }
 
