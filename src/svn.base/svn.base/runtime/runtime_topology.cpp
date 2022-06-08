@@ -21,15 +21,12 @@ runtime_topology::init_defaults(param_value* state) const
 std::unique_ptr<runtime_topology>
 runtime_topology::create(part_descriptor const* static_parts, 
   std::int32_t part_count, std::int32_t max_note_events, 
-  std::int32_t max_ui_height, std::int32_t const* ui_order,
-  std::int32_t ui_color_cycle_step, std::int32_t ui_color_start_index)
+  std::int32_t max_ui_height, std::int32_t const* ui_order)
 {
   bool seen_output = false;   
   assert(part_count > 0);
   assert(max_note_events >= 0);
   assert(static_parts != nullptr);
-  assert(ui_color_cycle_step > 0);
-  assert(ui_color_start_index >= 0);
   assert(ui_order == nullptr && max_ui_height == 0 || ui_order != nullptr && max_ui_height > 0);
 
   auto result = std::make_unique<runtime_topology>();
@@ -40,8 +37,6 @@ runtime_topology::create(part_descriptor const* static_parts,
   result->static_part_count = part_count;
   result->max_ui_height = max_ui_height;
   result->max_note_events = max_note_events;
-  result->ui_color_cycle_step = ui_color_cycle_step;
-  result->ui_color_start_index = ui_color_start_index;
 
   std::int32_t part_index = 0; 
   std::int32_t param_index = 0;
@@ -84,6 +79,6 @@ runtime_topology::create(part_descriptor const* static_parts,
   assert(result->param_bounds.size() > 0);
   assert(result->params.size() == result->input_param_count + result->output_param_count);
   return result;
-}
+} 
 
 } // namespace svn::base

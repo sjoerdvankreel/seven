@@ -25,8 +25,6 @@ struct runtime_topology
   
   std::int32_t max_ui_height; // For ui generator. 
   std::int32_t const* ui_order; // For ui generator. Part types mixed with ui_order_output_params. Ui generation goes top-down first, then left-right.
-  std::int32_t ui_color_cycle_step = 1; // For ui generator, cycles through color wheel.
-  std::int32_t ui_color_start_index = 0; // For ui generator, cycles through color wheel.
    
   // Params contains interior pointers into parts.
   runtime_topology() = default;
@@ -38,8 +36,7 @@ struct runtime_topology
   static std::unique_ptr<runtime_topology> create(
     struct part_descriptor const* static_parts, 
     std::int32_t part_count, std::int32_t max_notes, 
-    std::int32_t max_ui_height, std::int32_t const* ui_order,
-    std::int32_t ui_color_cycle_step, std::int32_t ui_color_start_index);
+    std::int32_t max_ui_height, std::int32_t const* ui_order);
 };
 
 } // namespace svn::base
