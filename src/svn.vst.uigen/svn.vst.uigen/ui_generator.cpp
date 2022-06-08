@@ -450,11 +450,12 @@ static Value
 build_ui_bitmaps(Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  Value background_value(kObjectType);
-  background_value.AddMember("path", "background.png", allocator);
-  add_member(result, get_bitmap_name("background"), background_value, allocator);
   for (std::size_t c = 0; c < color_count; c++)
   {
+    Value background_value(kObjectType);
+    std::string background_name = std::string("background") + std::to_string(c + 1);
+    add_member(background_value, "path", background_name + ".png", allocator);
+    add_member(result, get_bitmap_name(background_name), background_value, allocator);
     std::string name = print_rgb_hex(color_wheel[c], false, color_alpha::opaque);
     Value value(kObjectType);
     Value path((name + ".png").c_str(), allocator);
@@ -648,10 +649,10 @@ build_ui_part_param_container(runtime_topology const& topology,
   part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "class", "CViewContainer", allocator);
   add_attribute(result, "origin", size_to_string(0, param_row_height), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height - param_row_height), allocator);
+  add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::eight), allocator);
   for (std::size_t p = 0; p < descriptor.params.size(); p++)
     add_ui_param(topology, descriptor, result, p, allocator);
   return result;
@@ -711,7 +712,7 @@ build_ui_part_outer_container(runtime_topology const& topology,
   add_attribute(result, "background-color-draw-style", "stroked", allocator);
   add_attribute(result, "origin", size_to_string(descriptor.left, descriptor.top), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height), allocator);
-  add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::opaque), allocator);
+  add_attribute(result, "bitmap", get_bitmap_name(std::string("background") + std::to_string(descriptor.color_index + 1)), allocator);
   add_child(result, "CViewContainer", build_ui_part_inner_container(topology, descriptor, allocator), allocator);
   return result;
 }
@@ -726,7 +727,6 @@ build_ui_template(runtime_topology const& topology,
   add_attribute(view, "minSize", size, allocator);
   add_attribute(view, "maxSize", size, allocator);
   add_attribute(view, "class", "CViewContainer", allocator);
-  add_attribute(view, "bitmap", get_bitmap_name("background"), allocator);
   for (std::size_t p = 0; p < descriptor.parts.size(); p++)
     add_child(view, "CViewContainer", build_ui_part_outer_container(topology, descriptor.parts[p], allocator), allocator);
   Value result(kObjectType);

@@ -2,41 +2,74 @@
     "vstgui-ui-description": {
         "version": "1",
         "bitmaps": {
-            "bitmap_background": {
-                "path": "background.png"
+            "bitmap_background1": {
+                "path": "background1.png"
             },
             "bitmap_FF0000": {
                 "path": "FF0000.png"
             },
+            "bitmap_background2": {
+                "path": "background2.png"
+            },
             "bitmap_FF8000": {
                 "path": "FF8000.png"
+            },
+            "bitmap_background3": {
+                "path": "background3.png"
             },
             "bitmap_FFFF00": {
                 "path": "FFFF00.png"
             },
+            "bitmap_background4": {
+                "path": "background4.png"
+            },
             "bitmap_80FF00": {
                 "path": "80FF00.png"
+            },
+            "bitmap_background5": {
+                "path": "background5.png"
             },
             "bitmap_00FF00": {
                 "path": "00FF00.png"
             },
+            "bitmap_background6": {
+                "path": "background6.png"
+            },
             "bitmap_00FF80": {
                 "path": "00FF80.png"
+            },
+            "bitmap_background7": {
+                "path": "background7.png"
             },
             "bitmap_00FFFF": {
                 "path": "00FFFF.png"
             },
+            "bitmap_background8": {
+                "path": "background8.png"
+            },
             "bitmap_0080FF": {
                 "path": "0080FF.png"
+            },
+            "bitmap_background9": {
+                "path": "background9.png"
             },
             "bitmap_0000FF": {
                 "path": "0000FF.png"
             },
+            "bitmap_background10": {
+                "path": "background10.png"
+            },
             "bitmap_8000FF": {
                 "path": "8000FF.png"
             },
+            "bitmap_background11": {
+                "path": "background11.png"
+            },
             "bitmap_FF00FF": {
                 "path": "FF00FF.png"
+            },
+            "bitmap_background12": {
+                "path": "background12.png"
             },
             "bitmap_FF0080": {
                 "path": "FF0080.png"
@@ -125,8 +158,7 @@
                     "size": "415, 147",
                     "minSize": "415, 147",
                     "maxSize": "415, 147",
-                    "class": "CViewContainer",
-                    "bitmap": "bitmap_background"
+                    "class": "CViewContainer"
                 },
                 "children": {
                     "CViewContainer": {
@@ -135,7 +167,7 @@
                             "background-color-draw-style": "stroked",
                             "origin": "3, 3",
                             "size": "243, 69",
-                            "background-color": "color_00FF80FF"
+                            "bitmap": "bitmap_background6"
                         },
                         "children": {
                             "CViewContainer": {
@@ -171,10 +203,10 @@
                                     },
                                     "CViewContainer": {
                                         "attributes": {
-                                            "transparent": "true",
                                             "class": "CViewContainer",
                                             "origin": "0, 20",
-                                            "size": "243, 49"
+                                            "size": "243, 49",
+                                            "background-color": "color_00FF8020"
                                         },
                                         "children": {
                                             "CCheckBox": {
@@ -418,7 +450,7 @@
                             "background-color-draw-style": "stroked",
                             "origin": "3, 75",
                             "size": "243, 69",
-                            "background-color": "color_00FF80FF"
+                            "bitmap": "bitmap_background6"
                         },
                         "children": {
                             "CViewContainer": {
@@ -454,10 +486,10 @@
                                     },
                                     "CViewContainer": {
                                         "attributes": {
-                                            "transparent": "true",
                                             "class": "CViewContainer",
                                             "origin": "0, 20",
-                                            "size": "243, 49"
+                                            "size": "243, 49",
+                                            "background-color": "color_00FF8020"
                                         },
                                         "children": {
                                             "CCheckBox": {
@@ -701,7 +733,7 @@
                             "background-color-draw-style": "stroked",
                             "origin": "249, 3",
                             "size": "163, 46",
-                            "background-color": "color_0080FFFF"
+                            "bitmap": "bitmap_background8"
                         },
                         "children": {
                             "CViewContainer": {
@@ -737,10 +769,10 @@
                                     },
                                     "CViewContainer": {
                                         "attributes": {
-                                            "transparent": "true",
                                             "class": "CViewContainer",
                                             "origin": "0, 20",
-                                            "size": "163, 26"
+                                            "size": "163, 26",
+                                            "background-color": "color_0080FF20"
                                         },
                                         "children": {
                                             "CAnimKnob": {
@@ -839,7 +871,7 @@
                             "background-color-draw-style": "stroked",
                             "origin": "249, 52",
                             "size": "163, 92",
-                            "background-color": "color_8000FFFF"
+                            "bitmap": "bitmap_background10"
                         },
                         "children": {
                             "CViewContainer": {
@@ -875,10 +907,10 @@
                                     },
                                     "CViewContainer": {
                                         "attributes": {
-                                            "transparent": "true",
                                             "class": "CViewContainer",
                                             "origin": "0, 20",
-                                            "size": "163, 72"
+                                            "size": "163, 72",
+                                            "background-color": "color_8000FF20"
                                         },
                                         "children": {
                                             "CCheckBox": {
