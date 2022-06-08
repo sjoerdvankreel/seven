@@ -631,21 +631,31 @@ build_ui_param_background(runtime_topology const& topology,
 {
   std::string color;
   Value result(kObjectType);
+  std::string style = "filled";
   param_ui_descriptor const& param = part.params[index];
   param_descriptor const& descriptor = *topology.params[param.runtime_param_index].descriptor;
   std::int32_t width = param_total_width - padding_param_group;
   std::int32_t height = param_row_height + margin - padding_param_group;
   std::int32_t left = param.column * param_total_width + padding_param_group * 2;
   std::int32_t top = param.row * (param_row_height + margin) + 2 * padding_param_group;
-  if (descriptor.ui_param_group == 0) color = get_color_name(black, color_alpha::sixteenth);
+
+  if (descriptor.ui_param_group == 0)
+  { 
+    style = "stroked";
+    top -= padding_param_group;
+    left -= padding_param_group;
+    width += padding_param_group * 2;
+    height += padding_param_group * 2;
+    color = get_color_name(black, color_alpha::half);
+  }
   if (descriptor.ui_param_group == 1) color = get_color_name(white, color_alpha::eight);
   if (descriptor.ui_param_group == 2) color = get_color_name(color_wheel[part.color_index], color_alpha::eight);
 
   add_attribute(result, "class", "CViewContainer", allocator);
   add_attribute(result, "background-color", color, allocator);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
+  add_attribute(result, "background-color-draw-style", style, allocator);
   add_attribute(result, "size", size_to_string(width, height), allocator);
-  add_attribute(result, "background-color-draw-style", "filled", allocator);
   return result;
 }
 
