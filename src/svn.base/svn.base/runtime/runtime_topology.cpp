@@ -25,9 +25,9 @@ runtime_topology::create(
 {
   bool seen_output = false;   
   assert(part_count > 0);
-  assert(max_ui_height >= 0);
+  assert(max_ui_height >= 0); 
   assert(max_note_events >= 0);
-  assert(static_parts != nullptr);
+  assert(static_parts != nullptr); 
 
   auto result = std::make_unique<runtime_topology>();
   result->input_param_count = 0;

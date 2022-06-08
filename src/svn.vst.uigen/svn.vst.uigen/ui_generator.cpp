@@ -189,8 +189,7 @@ build_param_ui_descriptor(
 
 static part_ui_descriptor
 build_part_ui_descriptor(
-  runtime_topology const& topology,
-  std::int32_t runtime_part_index, std::int32_t unordered_type_index)
+  runtime_topology const& topology, std::int32_t runtime_part_index)
 {
   part_ui_descriptor result;
   auto const& part = topology.parts[runtime_part_index];
@@ -201,9 +200,9 @@ build_part_ui_descriptor(
   result.columns = part.descriptor->ui_control_columns;
   result.rows = param_count / result.columns;
   if (param_count % result.columns != 0) ++result.rows;
-  result.color_index = unordered_type_index % color_count;
-  result.height = (result.rows + 1) * (param_row_height + margin);
   result.width = result.columns * param_total_width + margin;
+  result.height = (result.rows + 1) * (param_row_height + margin);
+  result.color_index = part.descriptor->ui_color_index % color_count;
 
   std::int32_t grid_index = 0;
   result.enabled_param.row = 0;
@@ -235,7 +234,7 @@ build_ui_descriptor(runtime_topology const& topology)
     for (std::int32_t c = 0; c < static_part.part_count; c++)
     {
       std::int32_t runtime_part_index = topology.part_bounds[p][c];
-      part_ui_descriptor descriptor(build_part_ui_descriptor(topology, runtime_part_index, p));
+      part_ui_descriptor descriptor(build_part_ui_descriptor(topology, runtime_part_index));
       if (descriptor.height + 2 * margin > topology.max_ui_height)
         throw std::runtime_error("Part height exceeds max ui height.");
       result.parts.push_back(descriptor);
