@@ -1426,7 +1426,7 @@
                                                     "origin": "44, 49",
                                                     "control-tag": "out_voice_count",
                                                     "tooltip": "Out Voice count",
-                                                    "text-alignment": "right",
+                                                    "text-alignment": "left",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-inset": "3, 0",
