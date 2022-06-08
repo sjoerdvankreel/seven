@@ -9,7 +9,7 @@ namespace svn::base {
 
 void 
 runtime_topology::init_defaults(param_value* state) const
-{
+{  
   for (std::int32_t p = 0; p < input_param_count; p++)
     switch (params[p].descriptor->type)
     {      

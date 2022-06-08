@@ -486,16 +486,14 @@ build_ui_control_tags(
 }
 
 static Value
-build_ui_param_control_base(
+build_ui_param_item_base(
   runtime_topology const& topology, part_ui_descriptor const& part,
-  param_ui_descriptor const& param, std::string const& control_class, 
+  param_ui_descriptor const& param, std::string const& control_class,
   std::int32_t left, std::int32_t width, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "class", control_class, allocator);
   add_attribute(result, "size", size_to_string(width, param_row_height), allocator);
-  std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
-  add_attribute(result, "control-tag", tag, allocator);
   std::int32_t top = margin + param.row * (param_row_height + margin);
   std::int32_t l = margin + param.column * param_total_width + left;
   add_attribute(result, "origin", size_to_string(l, top), allocator);
@@ -504,6 +502,18 @@ build_ui_param_control_base(
   std::string unit = std::string(" (") + narrow_assume_ascii(rt_param.descriptor->unit) + ")";
   if (std::wcslen(rt_param.descriptor->unit) > 0) tooltip += unit;
   add_attribute(result, "tooltip", tooltip, allocator);
+  return result;
+}
+
+static Value
+build_ui_param_control_base(
+  runtime_topology const& topology, part_ui_descriptor const& part,
+  param_ui_descriptor const& param, std::string const& control_class, 
+  std::int32_t left, std::int32_t width, Document::AllocatorType& allocator)
+{
+  Value result(build_ui_param_item_base(topology, part, param, control_class, left, width, allocator));
+  std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
+  add_attribute(result, "control-tag", tag, allocator);
   return result;
 }
 
@@ -567,16 +577,11 @@ build_ui_param_label(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
-  Value result(kObjectType);
-  add_attribute(result, "class", "CTextLabel", allocator);
+  Value result(build_ui_param_item_base(topology, part, param, "CTextLabel", param_col1_width + margin, param_col2_width, allocator));
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
-  add_attribute(result, "size", size_to_string(param_col2_width, param_row_height), allocator);
   add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
-  std::int32_t top = margin + param.row * (param_row_height + margin);
-  std::int32_t left = margin + param.column * param_total_width + param_col1_width + margin;
-  add_attribute(result, "origin", size_to_string(left, top), allocator);
   std::string title = narrow_assume_ascii(topology.params[param.runtime_param_index].descriptor->static_name.short_);
   add_attribute(result, "title", title, allocator);
   return result;
