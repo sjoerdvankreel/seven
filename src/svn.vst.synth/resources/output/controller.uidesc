@@ -183,8 +183,26 @@
                                         "attributes": {
                                             "class": "CViewContainer",
                                             "origin": "0, 0",
-                                            "size": "243, 20",
-                                            "background-color": "color_FF800080"
+                                            "background-color-draw-style": "filled",
+                                            "size": "243, 21",
+                                            "background-color": "color_FF800040"
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "origin": "0, 0",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "243, 21",
+                                            "background-color": "color_FF8000FF"
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "origin": "1, 1",
+                                            "size": "241, 18",
+                                            "background-color": "color_00000080"
                                         },
                                         "children": {
                                             "CTextLabel": {
@@ -194,8 +212,8 @@
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
-                                                    "font-color": "color_FFFFFFFF",
-                                                    "origin": "0, 0",
+                                                    "font-color": "color_FF8000FF",
+                                                    "origin": "0, -2",
                                                     "size": "243, 20",
                                                     "background-color": "color_FF800080"
                                                 }
@@ -204,7 +222,7 @@
                                                 "attributes": {
                                                     "class": "CCheckBox",
                                                     "size": "20, 20",
-                                                    "origin": "226, 0",
+                                                    "origin": "226, -1",
                                                     "control-tag": "osc_1_enabled",
                                                     "tooltip": "Osc 1 Enabled",
                                                     "title": "",
@@ -594,8 +612,26 @@
                                         "attributes": {
                                             "class": "CViewContainer",
                                             "origin": "0, 0",
-                                            "size": "243, 20",
-                                            "background-color": "color_FF800080"
+                                            "background-color-draw-style": "filled",
+                                            "size": "243, 21",
+                                            "background-color": "color_FF800040"
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "origin": "0, 0",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "243, 21",
+                                            "background-color": "color_FF8000FF"
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "origin": "1, 1",
+                                            "size": "241, 18",
+                                            "background-color": "color_00000080"
                                         },
                                         "children": {
                                             "CTextLabel": {
@@ -605,8 +641,8 @@
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
-                                                    "font-color": "color_FFFFFFFF",
-                                                    "origin": "0, 0",
+                                                    "font-color": "color_FF8000FF",
+                                                    "origin": "0, -2",
                                                     "size": "243, 20",
                                                     "background-color": "color_FF800080"
                                                 }
@@ -615,7 +651,7 @@
                                                 "attributes": {
                                                     "class": "CCheckBox",
                                                     "size": "20, 20",
-                                                    "origin": "226, 0",
+                                                    "origin": "226, -1",
                                                     "control-tag": "osc_2_enabled",
                                                     "tooltip": "Osc 2 Enabled",
                                                     "title": "",
@@ -1005,8 +1041,26 @@
                                         "attributes": {
                                             "class": "CViewContainer",
                                             "origin": "0, 0",
-                                            "size": "163, 20",
-                                            "background-color": "color_FFFF0080"
+                                            "background-color-draw-style": "filled",
+                                            "size": "163, 21",
+                                            "background-color": "color_FFFF0040"
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "origin": "0, 0",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "163, 21",
+                                            "background-color": "color_FFFF00FF"
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "origin": "1, 1",
+                                            "size": "161, 18",
+                                            "background-color": "color_00000080"
                                         },
                                         "children": {
                                             "CTextLabel": {
@@ -1016,8 +1070,8 @@
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
-                                                    "font-color": "color_FFFFFFFF",
-                                                    "origin": "0, 0",
+                                                    "font-color": "color_FFFF00FF",
+                                                    "origin": "0, -2",
                                                     "size": "163, 20",
                                                     "background-color": "color_FFFF0080"
                                                 }
@@ -1189,8 +1243,26 @@
                                         "attributes": {
                                             "class": "CViewContainer",
                                             "origin": "0, 0",
-                                            "size": "163, 20",
-                                            "background-color": "color_80FF0080"
+                                            "background-color-draw-style": "filled",
+                                            "size": "163, 21",
+                                            "background-color": "color_80FF0040"
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "origin": "0, 0",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "163, 21",
+                                            "background-color": "color_80FF00FF"
+                                        }
+                                    },
+                                    "CViewContainer": {
+                                        "attributes": {
+                                            "class": "CViewContainer",
+                                            "origin": "1, 1",
+                                            "size": "161, 18",
+                                            "background-color": "color_00000080"
                                         },
                                         "children": {
                                             "CTextLabel": {
@@ -1200,8 +1272,8 @@
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
-                                                    "font-color": "color_FFFFFFFF",
-                                                    "origin": "0, 0",
+                                                    "font-color": "color_80FF00FF",
+                                                    "origin": "0, -2",
                                                     "size": "163, 20",
                                                     "background-color": "color_80FF0080"
                                                 }

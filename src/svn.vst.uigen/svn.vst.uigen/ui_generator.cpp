@@ -742,8 +742,8 @@ build_ui_part_header_label(runtime_topology const& topology,
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
-  add_attribute(result, "font-color", get_color_name(white, color_alpha::opaque), allocator);
-  add_attribute(result, "origin", size_to_string(0, 0), allocator);
+  add_attribute(result, "font-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::opaque), allocator);
+  add_attribute(result, "origin", size_to_string(0, -2), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, param_row_height), allocator);
   add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
   return result;
@@ -755,16 +755,42 @@ build_ui_part_header_container(runtime_topology const& topology,
 {
   Value result(kObjectType);
   add_attribute(result, "class", "CViewContainer", allocator);
-  add_attribute(result, "origin", size_to_string(0, 0), allocator);
-  add_attribute(result, "size", size_to_string(descriptor.width, param_row_height), allocator);
-  add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
+  add_attribute(result, "origin", size_to_string(1, 1), allocator);
+  add_attribute(result, "size", size_to_string(descriptor.width - 2, param_row_height - 2), allocator);
+  add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
   add_child(result, "CTextLabel", build_ui_part_header_label(topology, descriptor, allocator), allocator);
   if(descriptor.enabled_param.runtime_param_index != -1)
   {
     std::int32_t left = param_total_width - param_col1_width + margin;
-    Value enabled_box = build_ui_param_checkbox(topology, descriptor, descriptor.enabled_param, black, left, param_col1_width, 0, allocator);
+    Value enabled_box = build_ui_param_checkbox(topology, descriptor, descriptor.enabled_param, black, left, param_col1_width, -1, allocator);
     add_child(result, "CCheckBox", enabled_box, allocator);
   }
+  return result;
+}
+
+static Value
+build_ui_part_header_container_background(runtime_topology const& topology,
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  add_attribute(result, "class", "CViewContainer", allocator);
+  add_attribute(result, "origin", size_to_string(0, 0), allocator);
+  add_attribute(result, "background-color-draw-style", "filled", allocator);
+  add_attribute(result, "size", size_to_string(descriptor.width, param_row_height + 1), allocator);
+  add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::quarter), allocator);
+  return result;
+}
+
+static Value
+build_ui_part_header_container_border(runtime_topology const& topology,
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  add_attribute(result, "class", "CViewContainer", allocator);
+  add_attribute(result, "origin", size_to_string(0, 0), allocator);
+  add_attribute(result, "background-color-draw-style", "stroked", allocator);
+  add_attribute(result, "size", size_to_string(descriptor.width, param_row_height + 1), allocator);
+  add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::opaque), allocator);
   return result;
 }
 
@@ -777,6 +803,8 @@ build_ui_part_inner_container(runtime_topology const& topology,
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height), allocator);
   add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
+  add_child(result, "CViewContainer", build_ui_part_header_container_background(topology, descriptor, allocator), allocator);
+  add_child(result, "CViewContainer", build_ui_part_header_container_border(topology, descriptor, allocator), allocator);
   add_child(result, "CViewContainer", build_ui_part_header_container(topology, descriptor, allocator), allocator);
   add_child(result, "CViewContainer", build_ui_part_param_container_border(topology, descriptor, allocator), allocator);
   add_child(result, "CViewContainer", build_ui_part_param_container(topology, descriptor, allocator), allocator);
