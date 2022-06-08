@@ -76,6 +76,20 @@
             }
         },
         "colors": {
+            "color_FFFFFF10": "#FFFFFF10",
+            "color_00000010": "#00000010",
+            "color_FF000010": "#FF000010",
+            "color_FF800010": "#FF800010",
+            "color_FFFF0010": "#FFFF0010",
+            "color_80FF0010": "#80FF0010",
+            "color_00FF0010": "#00FF0010",
+            "color_00FF8010": "#00FF8010",
+            "color_00FFFF10": "#00FFFF10",
+            "color_0080FF10": "#0080FF10",
+            "color_0000FF10": "#0000FF10",
+            "color_8000FF10": "#8000FF10",
+            "color_FF00FF10": "#FF00FF10",
+            "color_FF008010": "#FF008010",
             "color_FFFFFF20": "#FFFFFF20",
             "color_00000020": "#00000020",
             "color_FF000020": "#FF000020",
@@ -137,20 +151,22 @@
             "amp_level": "0",
             "amp_decay": "1",
             "osc_1_enabled": "2",
-            "osc_1_type": "3",
-            "osc_1_panning": "4",
-            "osc_1_octave": "5",
-            "osc_1_note": "6",
-            "osc_1_cent": "7",
-            "osc_2_enabled": "8",
-            "osc_2_type": "9",
-            "osc_2_panning": "10",
-            "osc_2_octave": "11",
-            "osc_2_note": "12",
-            "osc_2_cent": "13",
-            "out_clip": "14",
-            "out_voices_exhausted": "15",
-            "out_voice_count": "16"
+            "osc_1_enabled2": "3",
+            "osc_1_type": "4",
+            "osc_1_panning": "5",
+            "osc_1_octave": "6",
+            "osc_1_note": "7",
+            "osc_1_cent": "8",
+            "osc_2_enabled": "9",
+            "osc_2_enabled2": "10",
+            "osc_2_type": "11",
+            "osc_2_panning": "12",
+            "osc_2_octave": "13",
+            "osc_2_note": "14",
+            "osc_2_cent": "15",
+            "out_clip": "16",
+            "out_voices_exhausted": "17",
+            "out_voice_count": "18"
         },
         "templates": {
             "view": {
@@ -233,11 +249,57 @@
                                             "background-color": "color_00FF8020"
                                         },
                                         "children": {
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_00000010",
+                                                    "origin": "2, 2"
+                                                }
+                                            },
+                                            "CCheckBox": {
+                                                "attributes": {
+                                                    "class": "CCheckBox",
+                                                    "size": "20, 20",
+                                                    "origin": "6, 3",
+                                                    "control-tag": "osc_1_enabled2",
+                                                    "tooltip": "Osc 1 Enabled2",
+                                                    "title": "",
+                                                    "frame-width": "1",
+                                                    "draw-crossbox": "true",
+                                                    "round-rect-radius": "3",
+                                                    "boxfill-color": "color_00FF8040",
+                                                    "boxframe-color": "color_00FF80FF",
+                                                    "checkmark-color": "color_00FF80FF"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "26, 20",
+                                                    "origin": "26, 3",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_00FF80FF",
+                                                    "title": "On2"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF20",
+                                                    "origin": "82, 2"
+                                                }
+                                            },
                                             "COptionMenu": {
                                                 "attributes": {
                                                     "class": "COptionMenu",
                                                     "size": "49, 20",
-                                                    "origin": "3, 3",
+                                                    "origin": "83, 3",
                                                     "control-tag": "osc_1_type",
                                                     "tooltip": "Osc 1 Type",
                                                     "min-value": "0",
@@ -259,7 +321,7 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "size": "28, 20",
-                                                    "origin": "55, 3",
+                                                    "origin": "135, 3",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
@@ -267,47 +329,13 @@
                                                     "title": "Type"
                                                 }
                                             },
-                                            "CAnimKnob": {
+                                            "CViewContainer": {
                                                 "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "size": "20, 20",
-                                                    "origin": "83, 3",
-                                                    "control-tag": "osc_1_panning",
-                                                    "tooltip": "Osc 1 Panning (%)",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "height-of-one-image": "20",
-                                                    "bitmap": "bitmap_00FF80"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "26, 20",
-                                                    "origin": "106, 3",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "font-color": "color_00FF80FF",
-                                                    "title": "Pan"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "28, 20",
-                                                    "origin": "132, 3",
-                                                    "control-tag": "osc_1_panning",
-                                                    "tooltip": "Osc 1 Panning (%)",
-                                                    "text-alignment": "right",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "value-precision": "0",
-                                                    "font": "~ NormalFontSmall",
-                                                    "back-color": "color_00FF8020",
-                                                    "font-color": "color_00FF80FF"
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF20",
+                                                    "origin": "162, 2"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -315,8 +343,8 @@
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
                                                     "origin": "163, 3",
-                                                    "control-tag": "osc_1_octave",
-                                                    "tooltip": "Osc 1 Octave",
+                                                    "control-tag": "osc_1_panning",
+                                                    "tooltip": "Osc 1 Panning (%)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "height-of-one-image": "20",
@@ -332,7 +360,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_00FF80FF",
-                                                    "title": "Oct"
+                                                    "title": "Pan"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -340,8 +368,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "28, 20",
                                                     "origin": "212, 3",
-                                                    "control-tag": "osc_1_octave",
-                                                    "tooltip": "Osc 1 Octave",
+                                                    "control-tag": "osc_1_panning",
+                                                    "tooltip": "Osc 1 Panning (%)",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
@@ -353,13 +381,22 @@
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_00FF8020",
+                                                    "origin": "2, 25"
+                                                }
+                                            },
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
                                                     "origin": "3, 26",
-                                                    "control-tag": "osc_1_note",
-                                                    "tooltip": "Osc 1 Note",
+                                                    "control-tag": "osc_1_octave",
+                                                    "tooltip": "Osc 1 Octave",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "height-of-one-image": "20",
@@ -375,7 +412,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_00FF80FF",
-                                                    "title": "Note"
+                                                    "title": "Oct"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -383,8 +420,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "28, 20",
                                                     "origin": "52, 26",
-                                                    "control-tag": "osc_1_note",
-                                                    "tooltip": "Osc 1 Note",
+                                                    "control-tag": "osc_1_octave",
+                                                    "tooltip": "Osc 1 Octave",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
@@ -396,13 +433,22 @@
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_00FF8020",
+                                                    "origin": "82, 25"
+                                                }
+                                            },
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
                                                     "origin": "83, 26",
-                                                    "control-tag": "osc_1_cent",
-                                                    "tooltip": "Osc 1 Cent",
+                                                    "control-tag": "osc_1_note",
+                                                    "tooltip": "Osc 1 Note",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "height-of-one-image": "20",
@@ -418,7 +464,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_00FF80FF",
-                                                    "title": "Cent"
+                                                    "title": "Note"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -426,6 +472,58 @@
                                                     "class": "CTextEdit",
                                                     "size": "28, 20",
                                                     "origin": "132, 26",
+                                                    "control-tag": "osc_1_note",
+                                                    "tooltip": "Osc 1 Note",
+                                                    "text-alignment": "right",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "value-precision": "0",
+                                                    "font": "~ NormalFontSmall",
+                                                    "back-color": "color_00FF8020",
+                                                    "font-color": "color_00FF80FF"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_00FF8020",
+                                                    "origin": "162, 25"
+                                                }
+                                            },
+                                            "CAnimKnob": {
+                                                "attributes": {
+                                                    "class": "CAnimKnob",
+                                                    "size": "20, 20",
+                                                    "origin": "163, 26",
+                                                    "control-tag": "osc_1_cent",
+                                                    "tooltip": "Osc 1 Cent",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
+                                                    "bitmap": "bitmap_00FF80"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "26, 20",
+                                                    "origin": "186, 26",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_00FF80FF",
+                                                    "title": "Cent"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "origin": "212, 26",
                                                     "control-tag": "osc_1_cent",
                                                     "tooltip": "Osc 1 Cent",
                                                     "text-alignment": "right",
@@ -517,11 +615,57 @@
                                             "background-color": "color_00FF8020"
                                         },
                                         "children": {
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_00000010",
+                                                    "origin": "2, 2"
+                                                }
+                                            },
+                                            "CCheckBox": {
+                                                "attributes": {
+                                                    "class": "CCheckBox",
+                                                    "size": "20, 20",
+                                                    "origin": "6, 3",
+                                                    "control-tag": "osc_2_enabled2",
+                                                    "tooltip": "Osc 2 Enabled2",
+                                                    "title": "",
+                                                    "frame-width": "1",
+                                                    "draw-crossbox": "true",
+                                                    "round-rect-radius": "3",
+                                                    "boxfill-color": "color_00FF8040",
+                                                    "boxframe-color": "color_00FF80FF",
+                                                    "checkmark-color": "color_00FF80FF"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "26, 20",
+                                                    "origin": "26, 3",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_00FF80FF",
+                                                    "title": "On2"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF20",
+                                                    "origin": "82, 2"
+                                                }
+                                            },
                                             "COptionMenu": {
                                                 "attributes": {
                                                     "class": "COptionMenu",
                                                     "size": "49, 20",
-                                                    "origin": "3, 3",
+                                                    "origin": "83, 3",
                                                     "control-tag": "osc_2_type",
                                                     "tooltip": "Osc 2 Type",
                                                     "min-value": "0",
@@ -543,7 +687,7 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "size": "28, 20",
-                                                    "origin": "55, 3",
+                                                    "origin": "135, 3",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
@@ -551,47 +695,13 @@
                                                     "title": "Type"
                                                 }
                                             },
-                                            "CAnimKnob": {
+                                            "CViewContainer": {
                                                 "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "size": "20, 20",
-                                                    "origin": "83, 3",
-                                                    "control-tag": "osc_2_panning",
-                                                    "tooltip": "Osc 2 Panning (%)",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "height-of-one-image": "20",
-                                                    "bitmap": "bitmap_00FF80"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "26, 20",
-                                                    "origin": "106, 3",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "font-color": "color_00FF80FF",
-                                                    "title": "Pan"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "28, 20",
-                                                    "origin": "132, 3",
-                                                    "control-tag": "osc_2_panning",
-                                                    "tooltip": "Osc 2 Panning (%)",
-                                                    "text-alignment": "right",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "value-precision": "0",
-                                                    "font": "~ NormalFontSmall",
-                                                    "back-color": "color_00FF8020",
-                                                    "font-color": "color_00FF80FF"
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF20",
+                                                    "origin": "162, 2"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -599,8 +709,8 @@
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
                                                     "origin": "163, 3",
-                                                    "control-tag": "osc_2_octave",
-                                                    "tooltip": "Osc 2 Octave",
+                                                    "control-tag": "osc_2_panning",
+                                                    "tooltip": "Osc 2 Panning (%)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "height-of-one-image": "20",
@@ -616,7 +726,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_00FF80FF",
-                                                    "title": "Oct"
+                                                    "title": "Pan"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -624,8 +734,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "28, 20",
                                                     "origin": "212, 3",
-                                                    "control-tag": "osc_2_octave",
-                                                    "tooltip": "Osc 2 Octave",
+                                                    "control-tag": "osc_2_panning",
+                                                    "tooltip": "Osc 2 Panning (%)",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
@@ -637,13 +747,22 @@
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_00FF8020",
+                                                    "origin": "2, 25"
+                                                }
+                                            },
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
                                                     "origin": "3, 26",
-                                                    "control-tag": "osc_2_note",
-                                                    "tooltip": "Osc 2 Note",
+                                                    "control-tag": "osc_2_octave",
+                                                    "tooltip": "Osc 2 Octave",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "height-of-one-image": "20",
@@ -659,7 +778,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_00FF80FF",
-                                                    "title": "Note"
+                                                    "title": "Oct"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -667,8 +786,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "28, 20",
                                                     "origin": "52, 26",
-                                                    "control-tag": "osc_2_note",
-                                                    "tooltip": "Osc 2 Note",
+                                                    "control-tag": "osc_2_octave",
+                                                    "tooltip": "Osc 2 Octave",
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
@@ -680,13 +799,22 @@
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_00FF8020",
+                                                    "origin": "82, 25"
+                                                }
+                                            },
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
                                                     "size": "20, 20",
                                                     "origin": "83, 26",
-                                                    "control-tag": "osc_2_cent",
-                                                    "tooltip": "Osc 2 Cent",
+                                                    "control-tag": "osc_2_note",
+                                                    "tooltip": "Osc 2 Note",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "height-of-one-image": "20",
@@ -702,7 +830,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_00FF80FF",
-                                                    "title": "Cent"
+                                                    "title": "Note"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -710,6 +838,58 @@
                                                     "class": "CTextEdit",
                                                     "size": "28, 20",
                                                     "origin": "132, 26",
+                                                    "control-tag": "osc_2_note",
+                                                    "tooltip": "Osc 2 Note",
+                                                    "text-alignment": "right",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "value-precision": "0",
+                                                    "font": "~ NormalFontSmall",
+                                                    "back-color": "color_00FF8020",
+                                                    "font-color": "color_00FF80FF"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_00FF8020",
+                                                    "origin": "162, 25"
+                                                }
+                                            },
+                                            "CAnimKnob": {
+                                                "attributes": {
+                                                    "class": "CAnimKnob",
+                                                    "size": "20, 20",
+                                                    "origin": "163, 26",
+                                                    "control-tag": "osc_2_cent",
+                                                    "tooltip": "Osc 2 Cent",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "height-of-one-image": "20",
+                                                    "bitmap": "bitmap_00FF80"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "26, 20",
+                                                    "origin": "186, 26",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_00FF80FF",
+                                                    "title": "Cent"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "28, 20",
+                                                    "origin": "212, 26",
                                                     "control-tag": "osc_2_cent",
                                                     "tooltip": "Osc 2 Cent",
                                                     "text-alignment": "right",
@@ -785,6 +965,15 @@
                                             "background-color": "color_0080FF20"
                                         },
                                         "children": {
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_00000010",
+                                                    "origin": "2, 2"
+                                                }
+                                            },
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
@@ -826,6 +1015,15 @@
                                                     "font": "~ NormalFontVerySmall",
                                                     "back-color": "color_0080FF20",
                                                     "font-color": "color_0080FFFF"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF20",
+                                                    "origin": "82, 2"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -933,6 +1131,15 @@
                                             "background-color": "color_8000FF20"
                                         },
                                         "children": {
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_00000010",
+                                                    "origin": "2, 2"
+                                                }
+                                            },
                                             "CCheckBox": {
                                                 "attributes": {
                                                     "class": "CCheckBox",
@@ -961,6 +1168,15 @@
                                                     "title": "Clip"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_00000010",
+                                                    "origin": "82, 2"
+                                                }
+                                            },
                                             "CCheckBox": {
                                                 "attributes": {
                                                     "class": "CCheckBox",
@@ -987,6 +1203,15 @@
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_8000FFFF",
                                                     "title": "Drain"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_00000010",
+                                                    "origin": "2, 25"
                                                 }
                                             },
                                             "CAnimKnob": {

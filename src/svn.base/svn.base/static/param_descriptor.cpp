@@ -7,7 +7,7 @@
 namespace svn::base {
 
 param_descriptor::
-param_descriptor(
+param_descriptor(     
   item_name const& static_name, bool ui_edit_font_small, 
   std::int32_t ui_param_group, param_type type, 
   item_name const* list, std::int32_t count):
@@ -19,7 +19,7 @@ min(0), max(count - 1), default_(0), precision(0)
 { 
   assert(count > 0);
   assert(list != nullptr);
-  assert(ui_param_group <= 0 && ui_param_group < 3);
+  assert(0 <= ui_param_group && ui_param_group < 3);
   assert(type == param_type::list || type==param_type::discrete_list);
 }
 
@@ -40,7 +40,7 @@ default_(default_), precision(precision)
   assert(dsp.min < dsp.max);
   assert(display.min < display.max);
   assert(0.0 <= default_ && default_ <= 1.0);
-  assert(ui_param_group <= 0 && ui_param_group < 3);
+  assert(0 <= ui_param_group && ui_param_group < 3); 
   assert(0 <= dsp.slope && dsp.slope <= param_slope::count);
   assert(0 <= display.slope && display.slope <= param_slope::count);
 } 
@@ -54,10 +54,10 @@ ui_edit_font_small(ui_edit_font_small),
 ui_param_group(ui_param_group), list(nullptr),
 dsp(param_bounds::none()), display(param_bounds::none()), 
 min(0), max(1), default_(default_? 1: 0), precision(0)
-{ assert(ui_param_group <= 0 && ui_param_group < 3); }
+{ assert(0 <= ui_param_group && ui_param_group < 3); }
 
 param_descriptor::
-param_descriptor(
+param_descriptor( 
   item_name const& static_name, bool ui_edit_font_small, 
   std::int32_t ui_param_group, wchar_t const* unit,
   std::int32_t default_, std::int32_t min, std::int32_t max):
@@ -69,7 +69,7 @@ min(min), max(max), default_(default_), precision(0)
 {
   assert(unit != nullptr);
   assert(min <= default_ && default_ <= max);
-  assert(ui_param_group <= 0 && ui_param_group < 3);
+  assert(0 <= ui_param_group && ui_param_group < 3);
 }
 
 param_value 

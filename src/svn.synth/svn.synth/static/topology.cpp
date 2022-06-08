@@ -34,7 +34,8 @@ param_descriptor const
 voice_osc_params[voice_osc_param::count] =
 {
   { { L"On", L"Enabled" }, false, 0, false },
-  { { L"Type", L"Type" }, false, 0, param_type::list, voice_osc_types, voice_osc_type::count },
+  { { L"On2", L"Enabled2" }, false, 0, false },
+  { { L"Type", L"Type" }, false, 1, param_type::list, voice_osc_types, voice_osc_type::count },
   { { L"Pan", L"Panning" }, false, 1, L"%", 0.5, 0, param_bounds::linear_unit(), param_bounds::linear(-100.0, 100.0) },
   { { L"Oct", L"Octave" }, false, 2, L"", 4, 0, 9 },
   { { L"Note", L"Note" }, false, 2, param_type::discrete_list, note_names, note_name::count },
@@ -46,8 +47,8 @@ voice_amp_params[voice_amp_param::count] =
 {
   { { L"Amp", L"Level" }, true, 0, L"dB", 1.0, 1, param_bounds::linear_unit(), param_bounds::decibel() },
   { { L"Dcy", L"Decay" }, false, 1, L"Sec", 0.0, 2, param_bounds::linear_unit(), param_bounds::linear_unit() }
-};     
-
+};      
+ 
 part_descriptor const
 part_descriptors[part_type::count] =
 {
