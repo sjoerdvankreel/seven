@@ -59,10 +59,12 @@ struct ui_descriptor
 }; 
 
 static std::int32_t const margin = 3;
-static std::int32_t const edit_width = 28;
-static std::int32_t const item_height = 20;
-static std::int32_t const label_width = 26;
-static std::int32_t const control_width = 20;
+static std::int32_t const param_row_height = 20;
+static std::int32_t const param_col1_width = 20;
+static std::int32_t const param_col2_width = 26;
+static std::int32_t const param_col3_width = 28;
+static std::int32_t const param_total_width = 
+param_col1_width + margin + param_col2_width + margin + param_col3_width;
 
 struct color_alpha_t { enum value { quarter, half, opaque, count }; };
 typedef color_alpha_t::value color_alpha;
@@ -197,8 +199,8 @@ build_part_ui_descriptor(
   if(param_count % result.columns != 0) ++result.rows;
   result.color_index = (topology.ui_color_start_index + 
     unordered_type_index * topology.ui_color_cycle_step) % color_count;
-  result.height = (result.rows + 1) * (item_height + margin);
-  result.width = (result.columns) * (control_width + label_width + edit_width + 2 * margin) + margin;
+  result.height = (result.rows + 1) * (param_row_height + margin);
+  result.width = result.columns * param_total_width + margin;
   
   for(std::int32_t i = 0; i < part.descriptor->param_count; i++)
   {
@@ -486,16 +488,16 @@ build_ui_control_tags(
 static Value
 build_ui_param_control_base(
   runtime_topology const& topology, part_ui_descriptor const& part,
-  param_ui_descriptor const& param, std::int32_t offset_x, std::int32_t width,
+  param_ui_descriptor const& param, std::int32_t pad_left, std::int32_t width,
   Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "class", get_param_control_class(topology, param), allocator);
-  add_attribute(result, "size", size_to_string(width - offset_x, item_height), allocator);
+  add_attribute(result, "size", size_to_string(width - pad_left, param_row_height), allocator);
   std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
   add_attribute(result, "control-tag", tag, allocator);
-  std::int32_t top = margin + param.row * (item_height + margin);
-  std::int32_t left = margin + param.column * (control_width + label_width + edit_width + 2 * margin) + offset_x;
+  std::int32_t top = margin + param.row * (param_row_height + margin);
+  std::int32_t left = margin + param.column * param_total_width + pad_left;
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   auto const& rt_param = topology.params[param.runtime_param_index];
   std::string tooltip = narrow_assume_ascii(rt_param.runtime_name);
@@ -510,10 +512,10 @@ build_ui_param_knob(
   runtime_topology const& topology, part_ui_descriptor const& part, 
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_control_base(topology, part, param, 0, control_width, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, 0, param_col1_width, allocator));
   add_attribute(result, "angle-start", "20", allocator);
   add_attribute(result, "angle-range", "320", allocator);
-  add_attribute(result, "height-of-one-image", std::to_string(item_height), allocator);
+  add_attribute(result, "height-of-one-image", std::to_string(param_row_height), allocator);
   std::string bitmap = print_rgb_hex(color_wheel[part.color_index], false, 0x00);
   add_attribute(result, "bitmap", get_bitmap_name(bitmap), allocator);
   return result;
@@ -524,7 +526,7 @@ build_ui_param_checkbox(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_control_base(topology, part, param, 3, control_width, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, margin, param_col1_width, allocator));
   add_attribute(result, "frame-width", "1", allocator);
   add_attribute(result, "draw-crossbox", "true", allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
@@ -540,8 +542,7 @@ build_ui_param_menu(
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  std::int32_t width = control_width + label_width + edit_width + margin;
-  Value result(build_ui_param_control_base(topology, part, param, 0, width, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, 0, param_total_width - margin, allocator));
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
@@ -568,10 +569,10 @@ build_ui_param_label(
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
-  add_attribute(result, "size", size_to_string(label_width, item_height), allocator);
+  add_attribute(result, "size", size_to_string(param_col2_width, param_row_height), allocator);
   add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
-  std::int32_t top = margin + param.row * (item_height + margin);
-  std::int32_t left = margin + param.column * (control_width + label_width + edit_width + 2 * margin) + control_width + margin;
+  std::int32_t top = margin + param.row * (param_row_height + margin);
+  std::int32_t left = margin + param.column * param_total_width + param_col1_width + margin;
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   std::string title = narrow_assume_ascii(topology.params[param.runtime_param_index].descriptor->static_name.short_);
   add_attribute(result, "title", title, allocator);
@@ -591,13 +592,13 @@ build_ui_param_edit(
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "text-inset", size_to_string(margin, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
-  add_attribute(result, "size", size_to_string(edit_width, item_height), allocator);
+  add_attribute(result, "size", size_to_string(param_col3_width, param_row_height), allocator);
   add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
   add_attribute(result, "back-color", get_color_name(color_wheel[part.color_index], color_alpha::quarter), allocator);
   std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
   add_attribute(result, "control-tag", tag, allocator);
-  std::int32_t top = margin + param.row * (item_height + margin);
-  std::int32_t left = margin + param.column * (control_width + label_width + edit_width + 2 * margin) + control_width + label_width + margin;
+  std::int32_t top = margin + param.row * (param_row_height + margin);
+  std::int32_t left = margin + param.column * param_total_width + param_col1_width + param_col2_width + margin;
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   return result;
 }
@@ -638,8 +639,8 @@ build_ui_part_param_container(runtime_topology const& topology,
   Value result(kObjectType);
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "class", "CViewContainer", allocator);
-  add_attribute(result, "origin", size_to_string(0, item_height), allocator);
-  add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height - item_height), allocator);
+  add_attribute(result, "origin", size_to_string(0, param_row_height), allocator);
+  add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height - param_row_height), allocator);
   for(std::size_t p = 0; p < descriptor.params.size(); p++)
     add_ui_param(topology, descriptor, result, p, allocator);
   return result;
@@ -658,7 +659,7 @@ build_ui_part_header_label(runtime_topology const& topology,
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "font-color", get_color_name(white, color_alpha::opaque), allocator);
   add_attribute(result, "origin", size_to_string(margin, 0), allocator);
-  add_attribute(result, "size", size_to_string(descriptor.width, item_height), allocator);
+  add_attribute(result, "size", size_to_string(descriptor.width, param_row_height), allocator);
   add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
   return result;
 }
@@ -670,7 +671,7 @@ build_ui_part_header_container(runtime_topology const& topology,
   Value result(kObjectType);
   add_attribute(result, "class", "CViewContainer", allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
-  add_attribute(result, "size", size_to_string(descriptor.width, item_height), allocator);
+  add_attribute(result, "size", size_to_string(descriptor.width, param_row_height), allocator);
   add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
   add_child(result, "CTextLabel", build_ui_part_header_label(topology, descriptor, allocator), allocator);
   return result;
