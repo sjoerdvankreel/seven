@@ -15,7 +15,7 @@ runtime_topology::init_defaults(param_value* state) const
     {      
     case param_type::real: state[p].real = params[p].descriptor->default_.real; break;
     default: state[p].discrete = params[p].descriptor->default_.discrete; break;
-    } 
+    }  
 }    
   
 std::unique_ptr<runtime_topology>
@@ -54,7 +54,7 @@ runtime_topology::create(part_descriptor const* static_parts,
     result->param_bounds.push_back(std::vector<std::int32_t>());
     std::wstring type_name(static_parts[t].static_name.short_);
     for (std::int32_t i = 0; i < static_parts[t].part_count; i++)
-    {  
+    {   
       result->part_bounds[t].push_back(part_index);
       result->param_bounds[t].push_back(param_index);
       std::wstring runtime_name = type_name;

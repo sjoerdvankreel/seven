@@ -530,9 +530,9 @@ build_ui_param_control_base(
 }
 
 static Value
-build_ui_param_checkbox_base(
+build_ui_param_checkbox(
   runtime_topology const& topology, part_ui_descriptor const& part,
-  param_ui_descriptor const& param, std::int32_t left, 
+  param_ui_descriptor const& param, rgb color, std::int32_t left, 
   std::int32_t width, std::int32_t top_margin, Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);
@@ -541,7 +541,7 @@ build_ui_param_checkbox_base(
   add_attribute(result, "frame-width", "1", allocator);
   add_attribute(result, "draw-crossbox", "true", allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
-  add_attribute(result, "boxfill-color", get_color_name(color_wheel[part.color_index], color_alpha::quarter), allocator);
+  add_attribute(result, "boxfill-color", get_color_name(color, color_alpha::quarter), allocator);
   add_attribute(result, "boxframe-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
   add_attribute(result, "checkmark-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
   return result;
@@ -560,14 +560,6 @@ build_ui_param_knob(
   std::string bitmap = print_rgb_hex(color_wheel[part.color_index], false, 0x00);
   add_attribute(result, "bitmap", get_bitmap_name(bitmap), allocator);
   return result;
-}
-
-static Value
-build_ui_param_checkbox(
-  runtime_topology const& topology, part_ui_descriptor const& part,
-  param_ui_descriptor const& param, Document::AllocatorType& allocator)
-{
-  return build_ui_param_checkbox_base(topology, part, param, margin, param_col1_width, margin, allocator);
 }
 
 static Value
@@ -633,6 +625,7 @@ add_ui_param(
   runtime_topology const& topology, part_ui_descriptor const& part,
   Value& container, std::size_t index, Document::AllocatorType& allocator)
 {
+  Value checkbox;
   std::int32_t left_col2 = param_col1_width + margin;
   std::int32_t left_col3 = left_col2 + param_col2_width + margin;
   param_ui_descriptor const& param = part.params[index];
@@ -647,7 +640,8 @@ add_ui_param(
     add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, allocator), allocator);
     break;
   case param_type::toggle:
-    add_child(container, control_class, build_ui_param_checkbox(topology, part, param, allocator), allocator);
+    checkbox = build_ui_param_checkbox(topology, part, param, color_wheel[part.color_index], margin, param_col1_width, margin, allocator);
+    add_child(container, control_class, checkbox, allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col2, param_col2_width, allocator), allocator);
     break;
   case param_type::list:
@@ -687,13 +681,6 @@ build_ui_part_param_container_border(runtime_topology const& topology,
 }
 
 static Value
-build_ui_part_header_enabled(runtime_topology const& topology,
-  part_ui_descriptor const& part, param_ui_descriptor const& param, Document::AllocatorType& allocator)
-{
-  return build_ui_param_checkbox_base(topology, part, param, param_total_width - param_col1_width + margin, param_col1_width, 0, allocator);
-}
-
-static Value
 build_ui_part_header_label(runtime_topology const& topology,
   part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {
@@ -722,7 +709,11 @@ build_ui_part_header_container(runtime_topology const& topology,
   add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
   add_child(result, "CTextLabel", build_ui_part_header_label(topology, descriptor, allocator), allocator);
   if(descriptor.enabled_param.runtime_param_index != -1)
-    add_child(result, "CCheckBox", build_ui_part_header_enabled(topology, descriptor, descriptor.enabled_param, allocator), allocator);
+  {
+    std::int32_t left = param_total_width - param_col1_width + margin;
+    Value enabled_box = build_ui_param_checkbox(topology, descriptor, descriptor.enabled_param, black, left, param_col1_width, 0, allocator);
+    add_child(result, "CCheckBox", enabled_box, allocator);
+  }
   return result;
 }
 
