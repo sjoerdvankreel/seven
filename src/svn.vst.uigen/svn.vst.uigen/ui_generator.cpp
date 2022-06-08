@@ -68,10 +68,10 @@ static std::int32_t const param_col3_width = 28;
 static std::int32_t const param_total_width =
 param_col1_width + margin + param_col2_width + margin + param_col3_width;
 
-struct color_alpha_t { enum value { sixteenth, eight, quarter, half, opaque, count }; };
+struct color_alpha_t { enum value { eight, quarter, half, opaque, count }; };
 typedef color_alpha_t::value color_alpha;
 static std::uint8_t const
-color_alphas[color_alpha::count] = { 0x10, 0x20, 0x40, 0x80, 0xFF };
+color_alphas[color_alpha::count] = { 0x20, 0x40, 0x80, 0xFF };
 
 struct rgb { std::uint8_t r, g, b; };
 static rgb white = { 0xFF, 0xFF, 0xFF };
@@ -646,7 +646,7 @@ build_ui_param_background(runtime_topology const& topology,
     left -= padding_param_group;
     width += padding_param_group * 2;
     height += padding_param_group * 2;
-    color = get_color_name(black, color_alpha::half);
+    color = get_color_name(black, color_alpha::quarter);
   }
   if (descriptor.ui_param_group == 1) color = get_color_name(white, color_alpha::eight);
   if (descriptor.ui_param_group == 2) color = get_color_name(color_wheel[part.color_index], color_alpha::eight);

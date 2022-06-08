@@ -76,20 +76,6 @@
             }
         },
         "colors": {
-            "color_FFFFFF10": "#FFFFFF10",
-            "color_00000010": "#00000010",
-            "color_FF000010": "#FF000010",
-            "color_FF800010": "#FF800010",
-            "color_FFFF0010": "#FFFF0010",
-            "color_80FF0010": "#80FF0010",
-            "color_00FF0010": "#00FF0010",
-            "color_00FF8010": "#00FF8010",
-            "color_00FFFF10": "#00FFFF10",
-            "color_0080FF10": "#0080FF10",
-            "color_0000FF10": "#0000FF10",
-            "color_8000FF10": "#8000FF10",
-            "color_FF00FF10": "#FF00FF10",
-            "color_FF008010": "#FF008010",
             "color_FFFFFF20": "#FFFFFF20",
             "color_00000020": "#00000020",
             "color_FF000020": "#FF000020",
@@ -252,7 +238,7 @@
                                             "CViewContainer": {
                                                 "attributes": {
                                                     "class": "CViewContainer",
-                                                    "background-color": "color_00000080",
+                                                    "background-color": "color_00000040",
                                                     "origin": "1, 1",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
@@ -618,7 +604,7 @@
                                             "CViewContainer": {
                                                 "attributes": {
                                                     "class": "CViewContainer",
-                                                    "background-color": "color_00000080",
+                                                    "background-color": "color_00000040",
                                                     "origin": "1, 1",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
@@ -968,7 +954,7 @@
                                             "CViewContainer": {
                                                 "attributes": {
                                                     "class": "CViewContainer",
-                                                    "background-color": "color_00000080",
+                                                    "background-color": "color_00000040",
                                                     "origin": "1, 1",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
@@ -1134,7 +1120,7 @@
                                             "CViewContainer": {
                                                 "attributes": {
                                                     "class": "CViewContainer",
-                                                    "background-color": "color_00000080",
+                                                    "background-color": "color_00000040",
                                                     "origin": "1, 1",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
@@ -1171,7 +1157,7 @@
                                             "CViewContainer": {
                                                 "attributes": {
                                                     "class": "CViewContainer",
-                                                    "background-color": "color_00000080",
+                                                    "background-color": "color_00000040",
                                                     "origin": "81, 1",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
@@ -1208,7 +1194,7 @@
                                             "CViewContainer": {
                                                 "attributes": {
                                                     "class": "CViewContainer",
-                                                    "background-color": "color_00000080",
+                                                    "background-color": "color_00000040",
                                                     "origin": "1, 24",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
