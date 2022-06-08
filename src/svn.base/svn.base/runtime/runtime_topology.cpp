@@ -15,7 +15,7 @@ runtime_topology::init_defaults(param_value* state) const
     {      
     case param_type::real: state[p].real = params[p].descriptor->default_.real; break;
     default: state[p].discrete = params[p].descriptor->default_.discrete; break;
-    }
+    } 
 }    
   
 std::unique_ptr<runtime_topology>

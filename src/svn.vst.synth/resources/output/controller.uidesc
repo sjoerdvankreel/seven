@@ -43,6 +43,20 @@
             }
         },
         "colors": {
+            "color_FFFFFF20": "#FFFFFF20",
+            "color_00000020": "#00000020",
+            "color_FF000020": "#FF000020",
+            "color_FF800020": "#FF800020",
+            "color_FFFF0020": "#FFFF0020",
+            "color_80FF0020": "#80FF0020",
+            "color_00FF0020": "#00FF0020",
+            "color_00FF8020": "#00FF8020",
+            "color_00FFFF20": "#00FFFF20",
+            "color_0080FF20": "#0080FF20",
+            "color_0000FF20": "#0000FF20",
+            "color_8000FF20": "#8000FF20",
+            "color_FF00FF20": "#FF00FF20",
+            "color_FF008020": "#FF008020",
             "color_FFFFFF40": "#FFFFFF40",
             "color_00000040": "#00000040",
             "color_FF000040": "#FF000040",
@@ -205,7 +219,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040"
+                                                    "back-color": "color_00FF8020"
                                                 }
                                             },
                                             "COptionMenu": {
@@ -270,7 +284,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040"
+                                                    "back-color": "color_00FF8020"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -313,7 +327,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040"
+                                                    "back-color": "color_00FF8020"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -356,7 +370,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040"
+                                                    "back-color": "color_00FF8020"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -399,7 +413,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040"
+                                                    "back-color": "color_00FF8020"
                                                 }
                                             }
                                         }
@@ -498,7 +512,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040"
+                                                    "back-color": "color_00FF8020"
                                                 }
                                             },
                                             "COptionMenu": {
@@ -563,7 +577,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040"
+                                                    "back-color": "color_00FF8020"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -606,7 +620,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040"
+                                                    "back-color": "color_00FF8020"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -649,7 +663,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040"
+                                                    "back-color": "color_00FF8020"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -692,7 +706,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8040"
+                                                    "back-color": "color_00FF8020"
                                                 }
                                             }
                                         }
@@ -789,7 +803,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_0080FFFF",
-                                                    "back-color": "color_0080FF40"
+                                                    "back-color": "color_0080FF20"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -832,7 +846,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_0080FFFF",
-                                                    "back-color": "color_0080FF40"
+                                                    "back-color": "color_0080FF20"
                                                 }
                                             }
                                         }
@@ -931,7 +945,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_8000FFFF",
-                                                    "back-color": "color_8000FF40"
+                                                    "back-color": "color_8000FF20"
                                                 }
                                             },
                                             "CCheckBox": {
@@ -976,7 +990,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_8000FFFF",
-                                                    "back-color": "color_8000FF40"
+                                                    "back-color": "color_8000FF20"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -1019,7 +1033,7 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_8000FFFF",
-                                                    "back-color": "color_8000FF40"
+                                                    "back-color": "color_8000FF20"
                                                 }
                                             }
                                         }

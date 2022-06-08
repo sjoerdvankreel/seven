@@ -66,10 +66,10 @@ static std::int32_t const param_col3_width = 28;
 static std::int32_t const param_total_width = 
 param_col1_width + margin + param_col2_width + margin + param_col3_width;
 
-struct color_alpha_t { enum value { quarter, half, opaque, count }; };
+struct color_alpha_t { enum value { eight, quarter, half, opaque, count }; };
 typedef color_alpha_t::value color_alpha;
 static std::uint8_t const
-color_alphas[color_alpha::count] = { 0x40, 0x80, 0xFF };
+color_alphas[color_alpha::count] = { 0x20, 0x40, 0x80, 0xFF };
 
 struct rgb { std::uint8_t r, g, b; };
 static rgb white = { 0xFF, 0xFF, 0xFF };
@@ -601,7 +601,7 @@ build_ui_param_edit(
   add_attribute(result, "text-inset", size_to_string(margin, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
-  add_attribute(result, "back-color", get_color_name(color_wheel[part.color_index], color_alpha::quarter), allocator);
+  add_attribute(result, "back-color", get_color_name(color_wheel[part.color_index], color_alpha::eight), allocator);
   return result;
 }
 
