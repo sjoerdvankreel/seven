@@ -306,7 +306,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8020"
+                                                    "back-color": "color_00FF8020",
+                                                    "value-precision": "0"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -348,7 +349,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8020"
+                                                    "back-color": "color_00FF8020",
+                                                    "value-precision": "0"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -390,7 +392,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8020"
+                                                    "back-color": "color_00FF8020",
+                                                    "value-precision": "0"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -432,7 +435,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8020"
+                                                    "back-color": "color_00FF8020",
+                                                    "value-precision": "0"
                                                 }
                                             }
                                         }
@@ -586,7 +590,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8020"
+                                                    "back-color": "color_00FF8020",
+                                                    "value-precision": "0"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -628,7 +633,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8020"
+                                                    "back-color": "color_00FF8020",
+                                                    "value-precision": "0"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -670,7 +676,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8020"
+                                                    "back-color": "color_00FF8020",
+                                                    "value-precision": "0"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -712,7 +719,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_00FF80FF",
-                                                    "back-color": "color_00FF8020"
+                                                    "back-color": "color_00FF8020",
+                                                    "value-precision": "0"
                                                 }
                                             }
                                         }
@@ -816,7 +824,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_0080FFFF",
-                                                    "back-color": "color_0080FF20"
+                                                    "back-color": "color_0080FF20",
+                                                    "value-precision": "1"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -858,7 +867,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_0080FFFF",
-                                                    "back-color": "color_0080FF20"
+                                                    "back-color": "color_0080FF20",
+                                                    "value-precision": "2"
                                                 }
                                             }
                                         }
@@ -1018,7 +1028,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "font-color": "color_8000FFFF",
-                                                    "back-color": "color_8000FF20"
+                                                    "back-color": "color_8000FF20",
+                                                    "value-precision": "0"
                                                 }
                                             }
                                         }

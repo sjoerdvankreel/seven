@@ -617,6 +617,8 @@ build_ui_param_edit(
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
   add_attribute(result, "back-color", get_color_name(color_wheel[part.color_index], color_alpha::eight), allocator);
+  auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
+  add_attribute(result, "value-precision", std::to_string(descriptor.precision), allocator);
   return result;
 }
 

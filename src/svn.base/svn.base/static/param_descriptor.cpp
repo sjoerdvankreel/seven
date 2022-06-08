@@ -1,5 +1,6 @@
 #include <svn.base/static/param_descriptor.hpp>
 #include <cassert>
+#include <iomanip>
 #include <sstream>
 #include <algorithm>
 
@@ -11,7 +12,7 @@ param_descriptor(
   item_name const* list, std::int32_t count):
 type(type), unit(L""), static_name(static_name), list(list),
 dsp(param_bounds::none()), display(param_bounds::none()),
-min(0), max(count - 1), default_(0)
+min(0), max(count - 1), default_(0), precision(0)
 { 
   assert(count > 0);
   assert(list != nullptr);
@@ -20,11 +21,14 @@ min(0), max(count - 1), default_(0)
 
 param_descriptor::
 param_descriptor(
-  item_name const& static_name, wchar_t const* unit, float default_,
+  item_name const& static_name, wchar_t const* unit, 
+  float default_, std::int32_t precision,
   param_bounds const& dsp, param_bounds const& display):
 type(param_type::real), unit(unit), static_name(static_name), list(nullptr),
-dsp(dsp), display(display), min(0.0f), max(1.0f), default_(default_)
+dsp(dsp), display(display), min(0.0f), max(1.0f), 
+default_(default_), precision(precision)
 {
+  assert(precision >= 0);
   assert(unit != nullptr);
   assert(dsp.min < dsp.max);
   assert(display.min < display.max);
@@ -38,7 +42,7 @@ param_descriptor(
   item_name const& static_name, bool default_):
 type(param_type::toggle), unit(L""), static_name(static_name), list(nullptr),
 dsp(param_bounds::none()), display(param_bounds::none()), 
-min(0), max(1), default_(default_? 1: 0) {}
+min(0), max(1), default_(default_? 1: 0), precision(0) {}
 
 param_descriptor::
 param_descriptor(
@@ -46,7 +50,7 @@ param_descriptor(
   std::int32_t default_, std::int32_t min, std::int32_t max):
 type(param_type::discrete), unit(unit), static_name(static_name), list(nullptr),
 dsp(param_bounds::none()), display(param_bounds::none()),
-min(min), max(max), default_(default_)
+min(min), max(max), default_(default_), precision(0)
 {
   assert(unit != nullptr);
   assert(min <= default_ && default_ <= max);
@@ -107,9 +111,9 @@ param_descriptor::format(param_value val, wchar_t* buffer, std::size_t size) con
   std::wstringstream stream;
   switch (type)
   {
-  case param_type::real: stream << val.real; break;
   case param_type::discrete: stream << val.discrete; break;
   case param_type::toggle: stream << (val.discrete == 0 ? L"Off" : L"On"); break;
+  case param_type::real: stream << std::setprecision(precision) << std::fixed << val.real; break;
   case param_type::list: case param_type::discrete_list: stream << list[val.discrete].short_; break;
   default: assert(false); break;
   }

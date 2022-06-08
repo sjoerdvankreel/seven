@@ -18,6 +18,7 @@ struct param_descriptor
   wchar_t const* const unit; // Parameter unit, e.g. "dB", "Hz".
   item_name const static_name; // Static name, e.g. "Frequency", "Resonance".
   item_name const* const list; // Pointer to items for a list parameter.
+  std::int32_t const precision; // Real value formatting precision.
   param_bounds const dsp, display; // Dsp and display ranges for real parameters.
   param_value const min, max, default_; // Range for discrete parameters. 0..1 for real parameters.
 
@@ -30,7 +31,8 @@ struct param_descriptor
     item_name const& static_name, wchar_t const* unit,
     std::int32_t default_, std::int32_t min, std::int32_t max);
   param_descriptor(
-    item_name const& static_name, wchar_t const* unit, float default_,
+    item_name const& static_name, wchar_t const* unit, 
+    float default_, std::int32_t precision,
     param_bounds const& dsp, param_bounds const& display);
 
   param_value to_display(param_value val) const;
