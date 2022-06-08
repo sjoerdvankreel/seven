@@ -81,7 +81,7 @@ parameter::toNormalized(ParamValue plain) const
     return _descriptor->from_display(value).real;
   default:
     value.discrete = static_cast<std::int32_t>(plain);
-    return _descriptor->from_display(value).discrete;
+    return discrete_to_vst_normalized(*_descriptor, _descriptor->from_display(value).discrete);
   }
 }
 
