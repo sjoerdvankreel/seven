@@ -362,8 +362,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "0",
+                                                    "back-color": "color_00000020",
                                                     "font": "~ NormalFontSmall",
-                                                    "back-color": "color_00FF8020",
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             },
@@ -414,8 +414,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "0",
+                                                    "back-color": "color_00000020",
                                                     "font": "~ NormalFontSmall",
-                                                    "back-color": "color_00FF8020",
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             },
@@ -466,8 +466,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "0",
+                                                    "back-color": "color_00000020",
                                                     "font": "~ NormalFontSmall",
-                                                    "back-color": "color_00FF8020",
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             },
@@ -518,8 +518,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "0",
+                                                    "back-color": "color_00000020",
                                                     "font": "~ NormalFontSmall",
-                                                    "back-color": "color_00FF8020",
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             }
@@ -728,8 +728,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "0",
+                                                    "back-color": "color_00000020",
                                                     "font": "~ NormalFontSmall",
-                                                    "back-color": "color_00FF8020",
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             },
@@ -780,8 +780,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "0",
+                                                    "back-color": "color_00000020",
                                                     "font": "~ NormalFontSmall",
-                                                    "back-color": "color_00FF8020",
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             },
@@ -832,8 +832,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "0",
+                                                    "back-color": "color_00000020",
                                                     "font": "~ NormalFontSmall",
-                                                    "back-color": "color_00FF8020",
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             },
@@ -884,8 +884,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "0",
+                                                    "back-color": "color_00000020",
                                                     "font": "~ NormalFontSmall",
-                                                    "back-color": "color_00FF8020",
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             }
@@ -998,8 +998,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "1",
+                                                    "back-color": "color_00000020",
                                                     "font": "~ NormalFontVerySmall",
-                                                    "back-color": "color_0080FF20",
                                                     "font-color": "color_0080FFFF"
                                                 }
                                             },
@@ -1050,8 +1050,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "2",
+                                                    "back-color": "color_00000020",
                                                     "font": "~ NormalFontSmall",
-                                                    "back-color": "color_0080FF20",
                                                     "font-color": "color_0080FFFF"
                                                 }
                                             }
@@ -1238,8 +1238,8 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "0",
+                                                    "back-color": "color_00000020",
                                                     "font": "~ NormalFontSmall",
-                                                    "back-color": "color_8000FF20",
                                                     "font-color": "color_8000FFFF"
                                                 }
                                             }

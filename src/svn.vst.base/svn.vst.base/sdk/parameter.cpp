@@ -53,7 +53,7 @@ parameter(std::int32_t index, svn::base::runtime_param const* param) :
   assert(index >= 0);
   assert(param != nullptr);
   setPrecision(param->descriptor->precision);
-}     
+}      
 
 ParamValue
 parameter::toPlain(ParamValue normalized) const

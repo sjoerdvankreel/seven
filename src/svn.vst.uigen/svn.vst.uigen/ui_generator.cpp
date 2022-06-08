@@ -619,8 +619,8 @@ build_ui_param_edit(
   add_attribute(result, "text-inset", size_to_string(margin, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "value-precision", std::to_string(descriptor.precision), allocator);
+  add_attribute(result, "back-color", get_color_name(black, color_alpha::eight), allocator);
   add_attribute(result, "font", descriptor.ui_edit_font_small ? very_small_font : small_font, allocator);
-  add_attribute(result, "back-color", get_color_name(color_wheel[part.color_index], color_alpha::eight), allocator);
   add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
   return result;
 }
