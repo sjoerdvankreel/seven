@@ -25,9 +25,9 @@ voice_osc_types[voice_osc_type::count] =
 param_descriptor const 
 glob_output_params[glob_output_param::count] =
 {
-  { { L"Clip", L"Clip" }, false, 0, false },
-  { { L"Drain", L"Voices exhausted" }, false, 0, false },
-  { { L"Voices", L"Voice count" }, false, 0, L"", 0, 0, synth_polyphony }
+  { { L"Clip", L"Clip" }, false, 1, false },
+  { { L"Drain", L"Voices exhausted" }, false, 1, false },
+  { { L"Voices", L"Voice count" }, false, 2, L"", 0, 0, synth_polyphony }
 };    
 
 param_descriptor const
@@ -45,7 +45,7 @@ voice_osc_params[voice_osc_param::count] =
 param_descriptor const
 voice_amp_params[voice_amp_param::count] =
 {
-  { { L"Amp", L"Level" }, true, 0, L"dB", 1.0, 1, param_bounds::linear_unit(), param_bounds::decibel() },
+  { { L"Amp", L"Level" }, true, 1, L"dB", 1.0, 1, param_bounds::linear_unit(), param_bounds::decibel() },
   { { L"Dcy", L"Decay" }, false, 1, L"Sec", 0.0, 2, param_bounds::linear_unit(), param_bounds::linear_unit() }
 };      
  

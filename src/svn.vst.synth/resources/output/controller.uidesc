@@ -954,10 +954,10 @@
                                             "CViewContainer": {
                                                 "attributes": {
                                                     "class": "CViewContainer",
-                                                    "background-color": "color_00000040",
-                                                    "origin": "1, 1",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 24"
+                                                    "background-color": "color_FFFFFF20",
+                                                    "origin": "2, 2",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -1120,10 +1120,10 @@
                                             "CViewContainer": {
                                                 "attributes": {
                                                     "class": "CViewContainer",
-                                                    "background-color": "color_00000040",
-                                                    "origin": "1, 1",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 24"
+                                                    "background-color": "color_FFFFFF20",
+                                                    "origin": "2, 2",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22"
                                                 }
                                             },
                                             "CCheckBox": {
@@ -1157,10 +1157,10 @@
                                             "CViewContainer": {
                                                 "attributes": {
                                                     "class": "CViewContainer",
-                                                    "background-color": "color_00000040",
-                                                    "origin": "81, 1",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 24"
+                                                    "background-color": "color_FFFFFF20",
+                                                    "origin": "82, 2",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22"
                                                 }
                                             },
                                             "CCheckBox": {
@@ -1194,10 +1194,10 @@
                                             "CViewContainer": {
                                                 "attributes": {
                                                     "class": "CViewContainer",
-                                                    "background-color": "color_00000040",
-                                                    "origin": "1, 24",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 24"
+                                                    "background-color": "color_8000FF20",
+                                                    "origin": "2, 25",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 22"
                                                 }
                                             },
                                             "CAnimKnob": {

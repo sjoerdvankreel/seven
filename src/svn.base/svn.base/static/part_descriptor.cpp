@@ -19,6 +19,6 @@ ui_control_columns(ui_control_columns), ui_control_enabled(ui_control_enabled)
   assert(params != nullptr);
   assert(ui_control_columns >= 0);
   assert(ui_control_enabled >= -1 && ui_control_enabled < param_count);
-}
+} 
 
 } // namespace svn::base
