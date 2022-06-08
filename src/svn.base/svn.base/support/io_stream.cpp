@@ -40,6 +40,7 @@ io_stream::save(runtime_topology const& topology, param_value const* state)
       break;
     case param_type::toggle:
     case param_type::discrete:
+    case param_type::discrete_text:
       if(!write_int32(state[p].discrete)) return false;
       break;
     case param_type::list: 
@@ -94,6 +95,7 @@ io_stream::load(runtime_topology const& topology, param_value* state)
       break;
     case param_type::toggle:
     case param_type::discrete:
+    case param_type::discrete_text:
       if(!read_int32(value.discrete)) return false;
       break;
     default:
@@ -117,6 +119,7 @@ io_stream::load(runtime_topology const& topology, param_value* state)
         break;
       case param_type::toggle:
       case param_type::discrete:
+      case param_type::discrete_text:
         state[rp].discrete = std::clamp(value.discrete, param->min.discrete, param->max.discrete);
         break;
       case param_type::list:

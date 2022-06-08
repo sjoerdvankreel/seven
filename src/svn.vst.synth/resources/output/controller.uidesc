@@ -1407,36 +1407,11 @@
                                                     "size": "81, 24"
                                                 }
                                             },
-                                            "CAnimKnob": {
-                                                "attributes": {
-                                                    "class": "CAnimKnob",
-                                                    "size": "20, 20",
-                                                    "origin": "3, 49",
-                                                    "control-tag": "out_voice_count",
-                                                    "tooltip": "Out Voice count",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "height-of-one-image": "20",
-                                                    "bitmap": "bitmap_80FF00"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "26, 20",
-                                                    "origin": "26, 49",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFontSmall",
-                                                    "font-color": "color_80FF00FF",
-                                                    "title": "Voices"
-                                                }
-                                            },
                                             "CTextEdit": {
                                                 "attributes": {
                                                     "class": "CTextEdit",
-                                                    "size": "28, 20",
-                                                    "origin": "52, 49",
+                                                    "size": "49, 20",
+                                                    "origin": "3, 49",
                                                     "control-tag": "out_voice_count",
                                                     "tooltip": "Out Voice count",
                                                     "text-alignment": "right",
@@ -1448,6 +1423,18 @@
                                                     "back-color": "color_00000020",
                                                     "font": "~ NormalFontSmall",
                                                     "font-color": "color_80FF00FF"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "28, 20",
+                                                    "origin": "55, 49",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFontSmall",
+                                                    "font-color": "color_80FF00FF",
+                                                    "title": "Voices"
                                                 }
                                             }
                                         }

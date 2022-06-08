@@ -337,8 +337,9 @@ get_param_control_class(
 {
   switch (topology.params[param.runtime_param_index].descriptor->type)
   {
-  case param_type::toggle: return "CCheckBox";
   case param_type::list: return "COptionMenu";
+  case param_type::toggle: return "CCheckBox";
+  case param_type::discrete_text: return "CTextEdit";
   case param_type::real:
   case param_type::discrete:
   case param_type::discrete_list:
@@ -606,13 +607,13 @@ build_ui_param_label(
 static Value
 build_ui_param_edit(
   runtime_topology const& topology, part_ui_descriptor const& part,
-  param_ui_descriptor const& param, Document::AllocatorType& allocator)
+  param_ui_descriptor const& param, std::int32_t left, std::int32_t width,
+  Document::AllocatorType& allocator)
 {
   std::string small_font = "~ NormalFontSmall";
   std::string very_small_font = "~ NormalFontVerySmall";
-  std::int32_t left = param_col1_width + margin + param_col2_width;
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  Value result(build_ui_param_control_base(topology, part, param, "CTextEdit", left, param_col3_width, margin, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, "CTextEdit", left, width, margin, allocator));
   add_attribute(result, "text-alignment", "right", allocator);
   add_attribute(result, "style-no-frame", "true", allocator);
   add_attribute(result, "style-round-rect", "true", allocator);
@@ -665,6 +666,7 @@ add_ui_param(
   Value checkbox;
   std::int32_t left_col2 = param_col1_width + margin;
   std::int32_t left_col3 = left_col2 + param_col2_width + margin;
+  std::int32_t col12_and_magin = param_col1_width + margin + param_col2_width;
   param_ui_descriptor const& param = part.params[index];
   std::string control_class = get_param_control_class(topology, param);
   switch (topology.params[param.runtime_param_index].descriptor->type)
@@ -674,7 +676,7 @@ add_ui_param(
   case param_type::discrete_list:
     add_child(container, control_class, build_ui_param_knob(topology, part, param, allocator), allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col2, param_col2_width, allocator), allocator);
-    add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, allocator), allocator);
+    add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, col12_and_magin, param_col3_width, allocator), allocator);
     break;
   case param_type::toggle:
     checkbox = build_ui_param_checkbox(topology, part, param, color_wheel[part.color_index], margin, param_col1_width, margin, allocator);
@@ -683,6 +685,10 @@ add_ui_param(
     break;
   case param_type::list:
     add_child(container, control_class, build_ui_param_menu(topology, part, param, allocator), allocator);
+    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col3, param_col3_width, allocator), allocator);
+    break;
+  case param_type::discrete_text:
+    add_child(container, control_class, build_ui_param_edit(topology, part, param, 0, col12_and_magin, allocator), allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col3, param_col3_width, allocator), allocator);
     break;
   default:

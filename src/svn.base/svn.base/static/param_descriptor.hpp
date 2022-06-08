@@ -8,7 +8,7 @@
 
 namespace svn::base {
   
-struct param_type_t { enum value { real, list, toggle, discrete, discrete_list, count }; };
+struct param_type_t { enum value { real, list, toggle, discrete, discrete_list, discrete_text, count }; };
 typedef param_type_t::value param_type;
   
 // Describes automation input.
@@ -34,7 +34,7 @@ struct param_descriptor
     item_name const* list, std::int32_t count);
   param_descriptor(
     item_name const& static_name, bool ui_edit_font_small, 
-    std::int32_t ui_param_group, wchar_t const* unit, 
+    std::int32_t ui_param_group, param_type type, wchar_t const* unit,
     std::int32_t default_, std::int32_t min, std::int32_t max);
   param_descriptor(
     item_name const& static_name, bool ui_edit_font_small, 

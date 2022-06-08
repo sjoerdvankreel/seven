@@ -27,7 +27,7 @@ glob_output_params[glob_output_param::count] =
 {
   { { L"Clip", L"Clip" }, false, 1, false },
   { { L"Drain", L"Voices exhausted" }, false, 1, false },
-  { { L"Voices", L"Voice count" }, false, 2, L"", 0, 0, synth_polyphony }
+  { { L"Voices", L"Voice count" }, false, 2, param_type::discrete_text, L"", 0, 0, synth_polyphony }
 };    
 
 param_descriptor const
@@ -37,7 +37,7 @@ voice_osc_params[voice_osc_param::count] =
   { { L"On2", L"Enabled2" }, false, 0, false },
   { { L"Type", L"Type" }, false, 1, param_type::list, voice_osc_types, voice_osc_type::count },
   { { L"Pan", L"Panning" }, false, 1, L"%", 0.5, 0, param_bounds::linear_unit(), param_bounds::linear(-100.0, 100.0) },
-  { { L"Oct", L"Octave" }, false, 2, L"", 4, 0, 9 },
+  { { L"Oct", L"Octave" }, false, 2, param_type::discrete, L"", 4, 0, 9 },
   { { L"Note", L"Note" }, false, 2, param_type::discrete_list, note_names, note_name::count },
   { { L"Cent", L"Cent" }, false, 2, L"", 0.5, 0, param_bounds::linear(-0.5, 0.5), param_bounds::linear(-50.0, 50.0) }
 }; 
