@@ -25,28 +25,28 @@ voice_osc_types[voice_osc_type::count] =
 param_descriptor const 
 glob_output_params[glob_output_param::count] =
 {
-  { { L"Clip", L"Clip" }, false },
-  { { L"Drain", L"Voices exhausted" }, false },
-  { { L"Voices", L"Voice count" }, L"", 0, 0, synth_polyphony }
+  { { L"Clip", L"Clip" }, false, false },
+  { { L"Drain", L"Voices exhausted" }, false, false },
+  { { L"Voices", L"Voice count" }, false, L"", 0, 0, synth_polyphony }
 };    
 
 param_descriptor const
 voice_osc_params[voice_osc_param::count] =
 {
-  { { L"On", L"Enabled" }, false },
-  { { L"Type", L"Type" }, param_type::list, voice_osc_types, voice_osc_type::count },
-  { { L"Pan", L"Panning" }, L"%", 0.5, 0, param_bounds::linear_unit(), param_bounds::linear(-100.0, 100.0) },
-  { { L"Oct", L"Octave" }, L"", 4, 0, 9 },
-  { { L"Note", L"Note" }, param_type::discrete_list, note_names, note_name::count },
-  { { L"Cent", L"Cent" }, L"", 0.5, 0, param_bounds::linear(-0.5, 0.5), param_bounds::linear(-50.0, 50.0) }
+  { { L"On", L"Enabled" }, false, false },
+  { { L"Type", L"Type" }, false, param_type::list, voice_osc_types, voice_osc_type::count },
+  { { L"Pan", L"Panning" }, false, L"%", 0.5, 0, param_bounds::linear_unit(), param_bounds::linear(-100.0, 100.0) },
+  { { L"Oct", L"Octave" }, false, L"", 4, 0, 9 },
+  { { L"Note", L"Note" }, false, param_type::discrete_list, note_names, note_name::count },
+  { { L"Cent", L"Cent" }, false,  L"", 0.5, 0, param_bounds::linear(-0.5, 0.5), param_bounds::linear(-50.0, 50.0) }
 }; 
-  
+   
 param_descriptor const
 voice_amp_params[voice_amp_param::count] =
 {
-  { { L"Amp", L"Level" }, L"dB", 1.0, 1, param_bounds::linear_unit(), param_bounds::decibel() },
-  { { L"Dcy", L"Decay" }, L"Sec", 0.0, 2, param_bounds::linear_unit(), param_bounds::linear_unit() }
-};    
+  { { L"Amp", L"Level" }, true, L"dB", 1.0, 1, param_bounds::linear_unit(), param_bounds::decibel() },
+  { { L"Dcy", L"Decay" }, false, L"Sec", 0.0, 2, param_bounds::linear_unit(), param_bounds::linear_unit() }
+};     
 
 part_descriptor const
 part_descriptors[part_type::count] =

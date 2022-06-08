@@ -302,12 +302,12 @@
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "font-color": "color_00FF80FF",
+                                                    "value-precision": "0",
+                                                    "font": "~ NormalFontSmall",
                                                     "back-color": "color_00FF8020",
-                                                    "value-precision": "0"
+                                                    "font-color": "color_00FF80FF"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -345,12 +345,12 @@
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "font-color": "color_00FF80FF",
+                                                    "value-precision": "0",
+                                                    "font": "~ NormalFontSmall",
                                                     "back-color": "color_00FF8020",
-                                                    "value-precision": "0"
+                                                    "font-color": "color_00FF80FF"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -388,12 +388,12 @@
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "font-color": "color_00FF80FF",
+                                                    "value-precision": "0",
+                                                    "font": "~ NormalFontSmall",
                                                     "back-color": "color_00FF8020",
-                                                    "value-precision": "0"
+                                                    "font-color": "color_00FF80FF"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -431,12 +431,12 @@
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "font-color": "color_00FF80FF",
+                                                    "value-precision": "0",
+                                                    "font": "~ NormalFontSmall",
                                                     "back-color": "color_00FF8020",
-                                                    "value-precision": "0"
+                                                    "font-color": "color_00FF80FF"
                                                 }
                                             }
                                         }
@@ -586,12 +586,12 @@
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "font-color": "color_00FF80FF",
+                                                    "value-precision": "0",
+                                                    "font": "~ NormalFontSmall",
                                                     "back-color": "color_00FF8020",
-                                                    "value-precision": "0"
+                                                    "font-color": "color_00FF80FF"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -629,12 +629,12 @@
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "font-color": "color_00FF80FF",
+                                                    "value-precision": "0",
+                                                    "font": "~ NormalFontSmall",
                                                     "back-color": "color_00FF8020",
-                                                    "value-precision": "0"
+                                                    "font-color": "color_00FF80FF"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -672,12 +672,12 @@
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "font-color": "color_00FF80FF",
+                                                    "value-precision": "0",
+                                                    "font": "~ NormalFontSmall",
                                                     "back-color": "color_00FF8020",
-                                                    "value-precision": "0"
+                                                    "font-color": "color_00FF80FF"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -715,12 +715,12 @@
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "font-color": "color_00FF80FF",
+                                                    "value-precision": "0",
+                                                    "font": "~ NormalFontSmall",
                                                     "back-color": "color_00FF8020",
-                                                    "value-precision": "0"
+                                                    "font-color": "color_00FF80FF"
                                                 }
                                             }
                                         }
@@ -820,12 +820,12 @@
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "font-color": "color_0080FFFF",
+                                                    "value-precision": "1",
+                                                    "font": "~ NormalFontVerySmall",
                                                     "back-color": "color_0080FF20",
-                                                    "value-precision": "1"
+                                                    "font-color": "color_0080FFFF"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -863,12 +863,12 @@
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "font-color": "color_0080FFFF",
+                                                    "value-precision": "2",
+                                                    "font": "~ NormalFontSmall",
                                                     "back-color": "color_0080FF20",
-                                                    "value-precision": "2"
+                                                    "font-color": "color_0080FFFF"
                                                 }
                                             }
                                         }
@@ -1024,12 +1024,12 @@
                                                     "text-alignment": "right",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
-                                                    "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "font-color": "color_8000FFFF",
+                                                    "value-precision": "0",
+                                                    "font": "~ NormalFontSmall",
                                                     "back-color": "color_8000FF20",
-                                                    "value-precision": "0"
+                                                    "font-color": "color_8000FFFF"
                                                 }
                                             }
                                         }

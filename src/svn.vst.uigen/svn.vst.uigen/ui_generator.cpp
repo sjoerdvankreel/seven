@@ -607,18 +607,20 @@ build_ui_param_edit(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
+  std::string small_font = "~ NormalFontSmall";
+  std::string very_small_font = "~ NormalFontVerySmall";
   std::int32_t left = param_col1_width + margin + param_col2_width;
+  auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
   Value result(build_ui_param_control_base(topology, part, param, "CTextEdit", left, param_col3_width, margin, allocator));
   add_attribute(result, "text-alignment", "right", allocator);
   add_attribute(result, "style-no-frame", "true", allocator);
   add_attribute(result, "style-round-rect", "true", allocator);
-  add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "text-inset", size_to_string(margin, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
-  add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
-  add_attribute(result, "back-color", get_color_name(color_wheel[part.color_index], color_alpha::eight), allocator);
-  auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
   add_attribute(result, "value-precision", std::to_string(descriptor.precision), allocator);
+  add_attribute(result, "font", descriptor.ui_edit_font_small ? very_small_font : small_font, allocator);
+  add_attribute(result, "back-color", get_color_name(color_wheel[part.color_index], color_alpha::eight), allocator);
+  add_attribute(result, "font-color", get_color_name(color_wheel[part.color_index], color_alpha::opaque), allocator);
   return result;
 }
 

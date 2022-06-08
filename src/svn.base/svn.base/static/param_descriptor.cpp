@@ -8,9 +8,10 @@ namespace svn::base {
 
 param_descriptor::
 param_descriptor(
-  item_name const& static_name, param_type type,
-  item_name const* list, std::int32_t count):
-type(type), unit(L""), static_name(static_name), list(list),
+  item_name const& static_name, bool ui_edit_font_small, 
+  param_type type, item_name const* list, std::int32_t count):
+type(type), unit(L""), static_name(static_name), 
+ui_edit_font_small(ui_edit_font_small), list(list),
 dsp(param_bounds::none()), display(param_bounds::none()),
 min(0), max(count - 1), default_(0), precision(0)
 { 
@@ -21,10 +22,11 @@ min(0), max(count - 1), default_(0), precision(0)
 
 param_descriptor::
 param_descriptor(
-  item_name const& static_name, wchar_t const* unit, 
-  float default_, std::int32_t precision,
+  item_name const& static_name, bool ui_edit_font_small, 
+  wchar_t const* unit, float default_, std::int32_t precision,
   param_bounds const& dsp, param_bounds const& display):
-type(param_type::real), unit(unit), static_name(static_name), list(nullptr),
+type(param_type::real), unit(unit), static_name(static_name), 
+ui_edit_font_small(ui_edit_font_small), list(nullptr),
 dsp(dsp), display(display), min(0.0f), max(1.0f), 
 default_(default_), precision(precision)
 {
@@ -39,16 +41,18 @@ default_(default_), precision(precision)
 
 param_descriptor::   
 param_descriptor(
-  item_name const& static_name, bool default_):
-type(param_type::toggle), unit(L""), static_name(static_name), list(nullptr),
+  item_name const& static_name, bool ui_edit_font_small, bool default_):
+type(param_type::toggle), unit(L""), static_name(static_name), 
+ui_edit_font_small(ui_edit_font_small), list(nullptr),
 dsp(param_bounds::none()), display(param_bounds::none()), 
 min(0), max(1), default_(default_? 1: 0), precision(0) {}
 
 param_descriptor::
 param_descriptor(
-  item_name const& static_name, wchar_t const* unit,
+  item_name const& static_name, bool ui_edit_font_small, wchar_t const* unit,
   std::int32_t default_, std::int32_t min, std::int32_t max):
-type(param_type::discrete), unit(unit), static_name(static_name), list(nullptr),
+type(param_type::discrete), unit(unit), static_name(static_name), 
+ui_edit_font_small(ui_edit_font_small), list(nullptr),
 dsp(param_bounds::none()), display(param_bounds::none()),
 min(min), max(max), default_(default_), precision(0)
 {

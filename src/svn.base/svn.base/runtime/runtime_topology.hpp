@@ -22,6 +22,7 @@ struct runtime_topology
   std::vector<std::vector<std::int32_t>> param_bounds; // Runtime parameter bounds, e.g. bounds[part_type::osc][1] indexes osc 2 wave param.
   std::int32_t input_param_count = 0; // Runtime input params.
   std::int32_t output_param_count = 0; // Runtime output params.
+  
   std::int32_t max_ui_height; // For ui generator. 
   std::int32_t const* ui_order; // For ui generator. Part types mixed with ui_order_output_params. Ui generation goes top-down first, then left-right.
   std::int32_t ui_color_cycle_step = 1; // For ui generator, cycles through color wheel.
