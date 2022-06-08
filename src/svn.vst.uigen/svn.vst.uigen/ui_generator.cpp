@@ -488,17 +488,17 @@ build_ui_control_tags(
 static Value
 build_ui_param_control_base(
   runtime_topology const& topology, part_ui_descriptor const& part,
-  param_ui_descriptor const& param, std::int32_t pad_left, std::int32_t width,
+  param_ui_descriptor const& param, std::int32_t left, std::int32_t width,
   Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "class", get_param_control_class(topology, param), allocator);
-  add_attribute(result, "size", size_to_string(width - pad_left, param_row_height), allocator);
+  add_attribute(result, "size", size_to_string(width, param_row_height), allocator);
   std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
   add_attribute(result, "control-tag", tag, allocator);
   std::int32_t top = margin + param.row * (param_row_height + margin);
-  std::int32_t left = margin + param.column * param_total_width + pad_left;
-  add_attribute(result, "origin", size_to_string(left, top), allocator);
+  std::int32_t l = margin + param.column * param_total_width + left;
+  add_attribute(result, "origin", size_to_string(l, top), allocator);
   auto const& rt_param = topology.params[param.runtime_param_index];
   std::string tooltip = narrow_assume_ascii(rt_param.runtime_name);
   std::string unit = std::string(" (") + narrow_assume_ascii(rt_param.descriptor->unit) + ")";
@@ -526,7 +526,7 @@ build_ui_param_checkbox(
   runtime_topology const& topology, part_ui_descriptor const& part,
   param_ui_descriptor const& param, Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_control_base(topology, part, param, margin, param_col1_width, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, margin, param_col1_width - margin, allocator));
   add_attribute(result, "frame-width", "1", allocator);
   add_attribute(result, "draw-crossbox", "true", allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
