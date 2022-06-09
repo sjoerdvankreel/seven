@@ -826,6 +826,19 @@ build_ui_part_header_container_border(runtime_topology const& topology,
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "back-color", get_color_name(black, color_alpha::transparent), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, param_row_height + 1), allocator);
+  add_attribute(result, "frame-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
+  return result;
+}
+
+static Value
+build_ui_part_header_param_container_separator(runtime_topology const& topology,
+  part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  add_attribute(result, "class", "CTextLabel", allocator);
+  add_attribute(result, "style-round-rect", "false", allocator);
+  add_attribute(result, "size", size_to_string(descriptor.width, 1), allocator);
+  add_attribute(result, "origin", size_to_string(0, param_row_height), allocator);
   add_attribute(result, "frame-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::opaque), allocator);
   return result;
 }
@@ -844,6 +857,7 @@ build_ui_part_inner_container(runtime_topology const& topology,
   add_child(result, "CViewContainer", build_ui_part_header_container(topology, descriptor, allocator), allocator);
   add_child(result, "CViewContainer", build_ui_part_param_container_border(topology, descriptor, allocator), allocator);
   add_child(result, "CViewContainer", build_ui_part_param_container(topology, descriptor, allocator), allocator);
+  add_child(result, "CViewContainer", build_ui_part_header_param_container_separator(topology, descriptor, allocator), allocator);
   return result;
 }
 
