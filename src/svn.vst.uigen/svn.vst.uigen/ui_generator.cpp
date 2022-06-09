@@ -69,10 +69,10 @@ static std::int32_t const param_total_width =
 param_col1_width + margin + param_col2_width + margin + param_col3_width;
 static std::int32_t const param_output_col_width = (param_total_width - margin) / 2;
 
-struct color_alpha_t { enum value { eight, quarter, half, opaque, count }; };
+struct color_alpha_t { enum value { transparent, eight, quarter, half, opaque, count }; };
 typedef color_alpha_t::value color_alpha;
 static std::uint8_t const
-color_alphas[color_alpha::count] = { 0x20, 0x40, 0x80, 0xFF };
+color_alphas[color_alpha::count] = { 0x00, 0x20, 0x40, 0x80, 0xFF };
 
 struct rgb { std::uint8_t r, g, b; };
 static rgb white = { 0xFF, 0xFF, 0xFF };
@@ -755,11 +755,13 @@ build_ui_part_param_container_border(runtime_topology const& topology,
   part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  add_attribute(result, "class", "CViewContainer", allocator);
-  add_attribute(result, "background-color-draw-style", "stroked", allocator);
+  add_attribute(result, "class", "CTextLabel", allocator);
+  add_attribute(result, "style-round-rect", "true", allocator);
+  add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "origin", size_to_string(0, param_row_height), allocator);
+  add_attribute(result, "back-color", get_color_name(black, color_alpha::transparent), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, descriptor.height - param_row_height), allocator);
-  add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
+  add_attribute(result, "frame-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::half), allocator);
   return result;
 }
 
@@ -818,11 +820,13 @@ build_ui_part_header_container_border(runtime_topology const& topology,
   part_ui_descriptor const& descriptor, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  add_attribute(result, "class", "CViewContainer", allocator);
+  add_attribute(result, "class", "CTextLabel", allocator);
+  add_attribute(result, "style-round-rect", "true", allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
-  add_attribute(result, "background-color-draw-style", "stroked", allocator);
+  add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
+  add_attribute(result, "back-color", get_color_name(black, color_alpha::transparent), allocator);
   add_attribute(result, "size", size_to_string(descriptor.width, param_row_height + 1), allocator);
-  add_attribute(result, "background-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::opaque), allocator);
+  add_attribute(result, "frame-color", get_color_name(color_wheel[descriptor.color_index], color_alpha::opaque), allocator);
   return result;
 }
 

@@ -76,6 +76,20 @@
             }
         },
         "colors": {
+            "color_FFFFFF00": "#FFFFFF00",
+            "color_00000000": "#00000000",
+            "color_FF000000": "#FF000000",
+            "color_FF800000": "#FF800000",
+            "color_FFFF0000": "#FFFF0000",
+            "color_80FF0000": "#80FF0000",
+            "color_00FF0000": "#00FF0000",
+            "color_00FF8000": "#00FF8000",
+            "color_00FFFF00": "#00FFFF00",
+            "color_0080FF00": "#0080FF00",
+            "color_0000FF00": "#0000FF00",
+            "color_8000FF00": "#8000FF00",
+            "color_FF00FF00": "#FF00FF00",
+            "color_FF008000": "#FF008000",
             "color_FFFFFF20": "#FFFFFF20",
             "color_00000020": "#00000020",
             "color_FF000020": "#FF000020",
@@ -190,11 +204,13 @@
                                     },
                                     "CViewContainer": {
                                         "attributes": {
-                                            "class": "CViewContainer",
+                                            "class": "CTextLabel",
+                                            "style-round-rect": "true",
                                             "origin": "0, 0",
-                                            "background-color-draw-style": "stroked",
+                                            "round-rect-radius": "3",
+                                            "back-color": "color_00000000",
                                             "size": "243, 21",
-                                            "background-color": "color_FF8000FF"
+                                            "frame-color": "color_FF8000FF"
                                         }
                                     },
                                     "CViewContainer": {
@@ -238,11 +254,13 @@
                                     },
                                     "CViewContainer": {
                                         "attributes": {
-                                            "class": "CViewContainer",
-                                            "background-color-draw-style": "stroked",
+                                            "class": "CTextLabel",
+                                            "style-round-rect": "true",
+                                            "round-rect-radius": "3",
                                             "origin": "0, 20",
+                                            "back-color": "color_00000000",
                                             "size": "243, 49",
-                                            "background-color": "color_FF800080"
+                                            "frame-color": "color_FF800080"
                                         }
                                     },
                                     "CViewContainer": {
@@ -619,11 +637,13 @@
                                     },
                                     "CViewContainer": {
                                         "attributes": {
-                                            "class": "CViewContainer",
+                                            "class": "CTextLabel",
+                                            "style-round-rect": "true",
                                             "origin": "0, 0",
-                                            "background-color-draw-style": "stroked",
+                                            "round-rect-radius": "3",
+                                            "back-color": "color_00000000",
                                             "size": "243, 21",
-                                            "background-color": "color_FF8000FF"
+                                            "frame-color": "color_FF8000FF"
                                         }
                                     },
                                     "CViewContainer": {
@@ -667,11 +687,13 @@
                                     },
                                     "CViewContainer": {
                                         "attributes": {
-                                            "class": "CViewContainer",
-                                            "background-color-draw-style": "stroked",
+                                            "class": "CTextLabel",
+                                            "style-round-rect": "true",
+                                            "round-rect-radius": "3",
                                             "origin": "0, 20",
+                                            "back-color": "color_00000000",
                                             "size": "243, 49",
-                                            "background-color": "color_FF800080"
+                                            "frame-color": "color_FF800080"
                                         }
                                     },
                                     "CViewContainer": {
@@ -1048,11 +1070,13 @@
                                     },
                                     "CViewContainer": {
                                         "attributes": {
-                                            "class": "CViewContainer",
+                                            "class": "CTextLabel",
+                                            "style-round-rect": "true",
                                             "origin": "0, 0",
-                                            "background-color-draw-style": "stroked",
+                                            "round-rect-radius": "3",
+                                            "back-color": "color_00000000",
                                             "size": "163, 21",
-                                            "background-color": "color_00FF80FF"
+                                            "frame-color": "color_00FF80FF"
                                         }
                                     },
                                     "CViewContainer": {
@@ -1080,11 +1104,13 @@
                                     },
                                     "CViewContainer": {
                                         "attributes": {
-                                            "class": "CViewContainer",
-                                            "background-color-draw-style": "stroked",
+                                            "class": "CTextLabel",
+                                            "style-round-rect": "true",
+                                            "round-rect-radius": "3",
                                             "origin": "0, 20",
+                                            "back-color": "color_00000000",
                                             "size": "163, 26",
-                                            "background-color": "color_00FF8080"
+                                            "frame-color": "color_00FF8080"
                                         }
                                     },
                                     "CViewContainer": {
@@ -1250,11 +1276,13 @@
                                     },
                                     "CViewContainer": {
                                         "attributes": {
-                                            "class": "CViewContainer",
+                                            "class": "CTextLabel",
+                                            "style-round-rect": "true",
                                             "origin": "0, 0",
-                                            "background-color-draw-style": "stroked",
+                                            "round-rect-radius": "3",
+                                            "back-color": "color_00000000",
                                             "size": "163, 21",
-                                            "background-color": "color_00FFFFFF"
+                                            "frame-color": "color_00FFFFFF"
                                         }
                                     },
                                     "CViewContainer": {
@@ -1282,11 +1310,13 @@
                                     },
                                     "CViewContainer": {
                                         "attributes": {
-                                            "class": "CViewContainer",
-                                            "background-color-draw-style": "stroked",
+                                            "class": "CTextLabel",
+                                            "style-round-rect": "true",
+                                            "round-rect-radius": "3",
                                             "origin": "0, 20",
+                                            "back-color": "color_00000000",
                                             "size": "163, 72",
-                                            "background-color": "color_00FFFF80"
+                                            "frame-color": "color_00FFFF80"
                                         }
                                     },
                                     "CViewContainer": {
