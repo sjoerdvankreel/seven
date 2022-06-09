@@ -15,7 +15,7 @@ struct runtime_topology
 {
   struct part_descriptor const* static_parts; // Static description of audio processor.
   std::int32_t static_part_count; // Part count in static description.
-  std::int32_t max_note_events = 0; // Not the same as polyphony.
+  std::int32_t max_note_events = 0; // Not necessarily the same as polyphony.
   std::vector<runtime_part> parts; // Runtime part descriptor array, e.g. osc 1, osc 2, filter 1, filter 2.
   std::vector<runtime_param> params; // Runtime parameter descriptor array, e.g. osc 1 wave, osc 1 amp, osc 2 wave, etc.
   std::vector<std::vector<std::int32_t>> part_bounds; // Runtime part bounds, e.g. bounds[part_type::osc][1] indexes osc 2 part.
