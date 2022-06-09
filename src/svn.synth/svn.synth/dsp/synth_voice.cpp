@@ -39,12 +39,12 @@ synth_voice::process_block(
   for (std::int32_t i = 0; i < voice_osc_count; i++)
   {
     clear_audio(audio_scratch, input.sample_count);
-    std::int32_t offset = _topology->param_bounds[part_type::voice_osc][i];
-    part_input.automation = input.automation.rearrange_params(voice_osc_param::count, offset);
+    part_input.automation = input.automation.rearrange_params(*_topology, part_type::voice_osc, i);
     _oscillators[i].process_block(part_input, audio_scratch);
     add_audio(audio, audio_scratch, input.sample_count);
   }
-  return _amp.process_block(input, audio, release_sample);
+  part_input.automation = input.automation.rearrange_params(*_topology, part_type::voice_amp, 0);
+  return _amp.process_block(part_input, audio, release_sample);
 }
 
 } // namespace svn::synth

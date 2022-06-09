@@ -2,6 +2,8 @@
 #define SVN_BASE_DSP_AUTOMATION_VIEW_HPP
 
 #include <svn.base/support/param_value.hpp>
+#include <svn.base/static/part_descriptor.hpp>
+#include <svn.base/runtime/runtime_topology.hpp>
 
 #include <cassert>
 #include <cstdint>
@@ -34,12 +36,13 @@ public:
     std::int32_t sample_offset,
     std::int32_t sample_fixed_at);
 
+  automation_view rearrange_params(
+    runtime_topology const& topology,
+    std::int32_t part_type,
+    std::int32_t part_index) const;
   automation_view rearrange_samples(
     std::int32_t sample_offset,
     std::int32_t sample_fixed_at) const;
-  automation_view rearrange_params(
-    std::int32_t part_param_count,
-    std::int32_t part_param_offset) const;
 
   param_value get(std::int32_t param, std::int32_t sample) const;
 };
@@ -89,11 +92,14 @@ automation_view::rearrange_samples(
 
 inline automation_view
 automation_view::rearrange_params(
-  std::int32_t part_param_count,
-  std::int32_t part_param_offset) const
+  runtime_topology const& topology,
+  std::int32_t part_type, 
+  std::int32_t part_index) const
 {
+  std::int32_t param_count = topology.static_parts[part_type].param_count;
+  std::int32_t param_offset = topology.param_bounds[part_type][part_index];
   return automation_view(_fixed, _automation,
-    _total_param_count, part_param_count, part_param_offset,
+    _total_param_count, param_count, param_offset,
     _sample_count, _sample_offset, _sample_fixed_at);
 }
 
