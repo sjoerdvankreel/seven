@@ -121,7 +121,7 @@ param_descriptor::parse(wchar_t const* buffer, param_value& val) const
     assert(false);
     return false;
   }
-} 
+}  
 
 std::size_t 
 param_descriptor::format(param_value val, wchar_t* buffer, std::size_t size) const

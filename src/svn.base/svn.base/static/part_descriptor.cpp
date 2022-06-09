@@ -16,7 +16,7 @@ ui_control_enabled(ui_control_enabled), ui_color_index(ui_color_index)
 {  
   assert(part_count > 0);
   assert(param_count > 0);
-  assert(params != nullptr);
+  assert(params != nullptr); 
   assert(ui_color_index >= 0);
   assert(ui_control_columns >= 0);
   assert(ui_control_enabled >= -1 && ui_control_enabled < param_count);

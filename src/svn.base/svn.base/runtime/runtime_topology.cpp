@@ -31,7 +31,7 @@ runtime_topology::create(
 
   auto result = std::make_unique<runtime_topology>();
   result->input_param_count = 0;
-  result->output_param_count = 0;
+  result->output_param_count = 0; 
   result->static_parts = static_parts;
   result->static_part_count = part_count;
   result->max_ui_height = max_ui_height;

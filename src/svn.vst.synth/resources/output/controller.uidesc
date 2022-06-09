@@ -605,15 +605,6 @@
                                                 }
                                             }
                                         }
-                                    },
-                                    "CViewContainer": {
-                                        "attributes": {
-                                            "class": "CTextLabel",
-                                            "style-round-rect": "false",
-                                            "size": "243, 1",
-                                            "origin": "0, 20",
-                                            "frame-color": "color_FF8000FF"
-                                        }
                                     }
                                 }
                             }
@@ -1047,15 +1038,6 @@
                                                 }
                                             }
                                         }
-                                    },
-                                    "CViewContainer": {
-                                        "attributes": {
-                                            "class": "CTextLabel",
-                                            "style-round-rect": "false",
-                                            "size": "243, 1",
-                                            "origin": "0, 20",
-                                            "frame-color": "color_FF8000FF"
-                                        }
                                     }
                                 }
                             }
@@ -1261,15 +1243,6 @@
                                                     "font-color": "color_00FF80FF"
                                                 }
                                             }
-                                        }
-                                    },
-                                    "CViewContainer": {
-                                        "attributes": {
-                                            "class": "CTextLabel",
-                                            "style-round-rect": "false",
-                                            "size": "163, 1",
-                                            "origin": "0, 20",
-                                            "frame-color": "color_00FF80FF"
                                         }
                                     }
                                 }
@@ -1494,15 +1467,6 @@
                                                     "font-color": "color_00FFFFFF"
                                                 }
                                             }
-                                        }
-                                    },
-                                    "CViewContainer": {
-                                        "attributes": {
-                                            "class": "CTextLabel",
-                                            "style-round-rect": "false",
-                                            "size": "163, 1",
-                                            "origin": "0, 20",
-                                            "frame-color": "color_00FFFFFF"
                                         }
                                     }
                                 }
