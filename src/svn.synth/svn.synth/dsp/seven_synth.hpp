@@ -37,14 +37,16 @@ private:
   // it is considered taken from the beginning of the buffer.
   // Similarly, if a voice is finished within the current buffer,
   // it is considered taken untill the end of the buffer.
+  bool _voices_drained = false;
   std::array<synth_voice, synth_polyphony> _voices;
   std::array<voice_state, synth_polyphony> _voice_states;
 
   // Oldest voice is recycled first.
   void return_voice(
     std::int32_t voice);
-  // True if drained (last voice used).
-  bool setup_voice(
+  // Toggles _voices_drained to indicate whether an earlier started, 
+  // not-yet-finished voice needed to be recycled.
+  void setup_voice(
     struct note_event const& note, 
     std::int32_t sample_count, std::int64_t stream_position);
   void setup_voice_release(
