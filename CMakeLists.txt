@@ -87,5 +87,6 @@ file(GLOB_RECURSE SVN_VST_UI_GENERATOR_SRC "${SVN_VST_UI_GENERATOR_SRC_DIR}/*.*"
 add_executable(seven.vst.ui_generator ${SVN_VST_UI_GENERATOR_SRC})
 source_group(TREE "../${SVN_VST_UI_GENERATOR_SRC_DIR}" FILES ${SVN_VST_UI_GENERATOR_SRC})
 target_include_directories(seven.vst.ui_generator PRIVATE ${SVN_BASE_SRC_DIR})
+target_include_directories(seven.vst.ui_generator PRIVATE ${SVN_VST_UI_GENERATOR_SRC_DIR})
 target_include_directories(seven.vst.ui_generator PRIVATE ${VST_SDK_375_SRC_DIR}/vstgui4)
 target_link_libraries(seven.vst.ui_generator seven.base)
