@@ -13,7 +13,7 @@ slope(slope), min(min), max(max), exp(exp)
 param_bounds 
 param_bounds::linear_unit()
 { return linear(0.0f, 1.0f); }
-
+ 
 param_bounds 
 param_bounds::linear(float min, float max)
 { return { param_slope::linear, min, max, 0.0f }; }

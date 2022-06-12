@@ -8,9 +8,10 @@ namespace svn::base {
 
 param_descriptor::
 param_descriptor(          
-  item_name const& static_name, bool ui_edit_font_small, 
-  std::int32_t ui_param_group, param_type type, 
-  item_name const* list, std::int32_t count):
+  item_name const& static_name, param_type type, 
+  item_name const* list, std::int32_t count,
+  bool ui_edit_font_small, std::int32_t ui_param_group,
+  std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
 type(type), unit(L""), static_name(static_name), 
 ui_edit_font_small(ui_edit_font_small), 
 ui_param_group(ui_param_group), list(list),
@@ -19,16 +20,19 @@ min(0), max(count - 1), default_(0), precision(0)
 { 
   assert(count > 0);
   assert(list != nullptr);
+  assert(ui_relevant_if_param >= -1);
   assert(0 <= ui_param_group && ui_param_group < 3);
+  assert(ui_relevant_if_param >= 0 || ui_relevant_if_value == 0);
   assert(type == param_type::list || type == param_type::discrete_list);
 }
 
 param_descriptor::
 param_descriptor(   
-  item_name const& static_name, bool ui_edit_font_small, 
-  std::int32_t ui_param_group, wchar_t const* unit, 
+  item_name const& static_name, wchar_t const* unit, 
   float default_, std::int32_t precision,
-  param_bounds const& dsp, param_bounds const& display):
+  param_bounds const& dsp, param_bounds const& display,
+  bool ui_edit_font_small, std::int32_t ui_param_group,
+  std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
 type(param_type::real), unit(unit), static_name(static_name), 
 ui_edit_font_small(ui_edit_font_small), 
 ui_param_group(ui_param_group), list(nullptr),
@@ -39,28 +43,36 @@ default_(default_), precision(precision)
   assert(unit != nullptr);
   assert(dsp.min < dsp.max);
   assert(display.min < display.max);
+  assert(ui_relevant_if_param >= -1);
   assert(0.0 <= default_ && default_ <= 1.0);
   assert(0 <= ui_param_group && ui_param_group < 3); 
   assert(0 <= dsp.slope && dsp.slope <= param_slope::count);
+  assert(ui_relevant_if_param >= 0 || ui_relevant_if_value == 0);
   assert(0 <= display.slope && display.slope <= param_slope::count);
 } 
 
 param_descriptor::   
 param_descriptor(
-  item_name const& static_name, bool ui_edit_font_small, 
-  std::int32_t ui_param_group, bool default_):
+  item_name const& static_name, bool default_,
+  bool ui_edit_font_small, std::int32_t ui_param_group,
+  std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
 type(param_type::toggle), unit(L""), static_name(static_name), 
 ui_edit_font_small(ui_edit_font_small), 
 ui_param_group(ui_param_group), list(nullptr),
 dsp(param_bounds::none()), display(param_bounds::none()), 
 min(0), max(1), default_(default_? 1: 0), precision(0)
-{ assert(0 <= ui_param_group && ui_param_group < 3); }
+{ 
+  assert(ui_relevant_if_param >= -1);
+  assert(0 <= ui_param_group && ui_param_group < 3); 
+  assert(ui_relevant_if_param >= 0 || ui_relevant_if_value == 0);
+}
 
 param_descriptor::
 param_descriptor( 
-  item_name const& static_name, bool ui_edit_font_small, 
-  std::int32_t ui_param_group, param_type type, wchar_t const* unit,
-  std::int32_t default_, std::int32_t min, std::int32_t max):
+  item_name const& static_name, param_type type, wchar_t const* unit,
+  std::int32_t default_, std::int32_t min, std::int32_t max,
+  bool ui_edit_font_small, std::int32_t ui_param_group,
+  std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
 type(type), unit(unit), static_name(static_name), 
 ui_edit_font_small(ui_edit_font_small), 
 ui_param_group(ui_param_group), list(nullptr),
@@ -68,8 +80,10 @@ dsp(param_bounds::none()), display(param_bounds::none()),
 min(min), max(max), default_(default_), precision(0)
 {
   assert(unit != nullptr);
+  assert(ui_relevant_if_param >= -1);
   assert(min <= default_ && default_ <= max);
   assert(0 <= ui_param_group && ui_param_group < 3);
+  assert(ui_relevant_if_param >= 0 || ui_relevant_if_value == 0);
   assert(type == param_type::discrete || type == param_type::discrete_text);
 }
 

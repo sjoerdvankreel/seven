@@ -25,28 +25,28 @@ voice_osc_blep_types[voice_osc_blep_type::count] =
 param_descriptor const 
 glob_output_params[glob_output_param::count] =
 {
-  { { L"Clip", L"Clip" }, false, 1, false },
-  { { L"Drain", L"Voices exhausted" }, false, 1, false },
-  { { L"Voices", L"Voice count" }, false, 2, param_type::discrete_text, L"", 0, 0, synth_polyphony }
+  { { L"Clip", L"Clip" }, false, false, 1, -1, 0 },
+  { { L"Drain", L"Voices exhausted" }, false, false, 1, -1, 0 },
+  { { L"Voices", L"Voice count" }, param_type::discrete_text, L"", 0, 0, synth_polyphony, false, 2, -1, 0 }
 };    
 
 param_descriptor const
 voice_osc_params[voice_osc_param::count] =
 {
-  { { L"On", L"Enabled" }, false, 0, false },
-  { { L"Type", L"Type" }, false, 0, param_type::list, voice_osc_types, voice_osc_type::count },
-  { { L"Blep", L"Blep type" }, false, 0, param_type::list, voice_osc_blep_types, voice_osc_blep_type::count },
-  { { L"Pan", L"Panning" }, false, 1, L"%", 0.5, 0, param_bounds::linear_unit(), param_bounds::linear(-100.0, 100.0) },
-  { { L"Oct", L"Octave" }, false, 2, param_type::discrete, L"", 4, 0, 9 },
-  { { L"Note", L"Note" }, false, 2, param_type::discrete_list, note_names, note_name::count },
-  { { L"Cent", L"Cent" }, false, 2, L"", 0.5, 0, param_bounds::linear(-0.5, 0.5), param_bounds::linear(-50.0, 50.0) }
+  { { L"On", L"Enabled" }, false, false, 0, -1, 0 },
+  { { L"Type", L"Type" }, param_type::list, voice_osc_types, voice_osc_type::count, false, 0, -1, 0 },
+  { { L"Blep", L"Blep type" }, param_type::list, voice_osc_blep_types, voice_osc_blep_type::count, false, 0, voice_osc_param::type, voice_osc_type::blep },
+  { { L"Pan", L"Panning" }, L"%", 0.5, 0, param_bounds::linear_unit(), param_bounds::linear(-100.0, 100.0), false, 1, -1, 0 },
+  { { L"Oct", L"Octave" }, param_type::discrete, L"", 4, 0, 9, false, 2, -1, 0 },
+  { { L"Note", L"Note" }, param_type::discrete_list, note_names, note_name::count, false, 2, -1, 0 },
+  { { L"Cent", L"Cent" }, L"", 0.5, 0, param_bounds::linear(-0.5, 0.5), param_bounds::linear(-50.0, 50.0), false, 2, -1, 0 }
 }; 
    
 param_descriptor const
 voice_amp_params[voice_amp_param::count] =
 {
-  { { L"Amp", L"Level" }, true, 1, L"dB", 1.0, 1, param_bounds::linear_unit(), param_bounds::decibel() },
-  { { L"Dcy", L"Decay" }, false, 1, L"Sec", 0.0, 2, param_bounds::linear_unit(), param_bounds::linear_unit() }
+  { { L"Amp", L"Level" }, L"dB", 1.0, 1, param_bounds::linear_unit(), param_bounds::decibel(), true, 1, -1, 0 },
+  { { L"Dcy", L"Decay" }, L"Sec", 0.0, 2, param_bounds::linear_unit(), param_bounds::linear_unit(), false, 1, -1, 0 }
 };      
  
 part_descriptor const 
