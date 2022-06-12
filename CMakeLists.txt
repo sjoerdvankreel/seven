@@ -81,11 +81,11 @@ add_custom_target(copy-resources-synth-debug ALL DEPENDS seven.vst.synth COMMAND
 add_custom_target(copy-resources-synth-base-release ALL DEPENDS seven.vst.synth COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/src/svn.vst.base/resources/output ${CMAKE_BINARY_DIR}/Release/seven.vst.synth.vst3/Contents/Resources)
 add_custom_target(copy-resources-synth-base-debug ALL DEPENDS seven.vst.synth COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/src/svn.vst.base/resources/output ${CMAKE_BINARY_DIR}/Debug/seven.vst.synth.debug.vst3/Contents/Resources)
 
-# Svn vst uigenerator.
-set(SVN_VST_UIGEN_SRC_DIR "src/svn.vst.uigen")
-file(GLOB_RECURSE SVN_VST_UIGEN_SRC "${SVN_VST_UIGEN_SRC_DIR}/*.*")
-add_executable(seven.vst.uigen ${SVN_VST_UIGEN_SRC})
-source_group(TREE "../${SVN_VST_UIGEN_SRC_DIR}" FILES ${SVN_VST_UIGEN_SRC})
-target_include_directories(seven.vst.uigen PRIVATE ${SVN_BASE_SRC_DIR})
-target_include_directories(seven.vst.uigen PRIVATE ${VST_SDK_375_SRC_DIR}/vstgui4)
-target_link_libraries(seven.vst.uigen seven.base)
+# Svn vst ui generator.
+set(SVN_VST_UI_GENERATOR_SRC_DIR "src/svn.vst.ui_generator")
+file(GLOB_RECURSE SVN_VST_UI_GENERATOR_SRC "${SVN_VST_UI_GENERATOR_SRC_DIR}/*.*")
+add_executable(seven.vst.ui_generator ${SVN_VST_UI_GENERATOR_SRC})
+source_group(TREE "../${SVN_VST_UI_GENERATOR_SRC_DIR}" FILES ${SVN_VST_UI_GENERATOR_SRC})
+target_include_directories(seven.vst.ui_generator PRIVATE ${SVN_BASE_SRC_DIR})
+target_include_directories(seven.vst.ui_generator PRIVATE ${VST_SDK_375_SRC_DIR}/vstgui4)
+target_link_libraries(seven.vst.ui_generator seven.base)
