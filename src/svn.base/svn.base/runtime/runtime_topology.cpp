@@ -81,7 +81,7 @@ runtime_topology::create(
     std::int32_t type = this_param.part->descriptor->type;
     std::int32_t param = this_param.descriptor->ui_relevant_if_param;
     std::int32_t that_index = result->param_bounds[type][index] + param;
-    result->ui_param_dependencies[p].push_back(that_index);
+    result->ui_param_dependencies[that_index].push_back(p);
   }
    
   assert(result->parts.size() > 0);

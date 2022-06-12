@@ -12,11 +12,13 @@ param_descriptor(
   item_name const* list, std::int32_t count,
   bool ui_edit_font_small, std::int32_t ui_param_group,
   std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
-type(type), unit(L""), static_name(static_name), 
-ui_edit_font_small(ui_edit_font_small), 
-ui_param_group(ui_param_group), list(list),
+type(type), unit(L""), list(list), static_name(static_name),
 dsp(param_bounds::none()), display(param_bounds::none()),
-min(0), max(count - 1), default_(0), precision(0)
+min(0), max(count - 1), default_(0), precision(0),
+ui_edit_font_small(ui_edit_font_small),
+ui_param_group(ui_param_group),
+ui_relevant_if_param(ui_relevant_if_param),
+ui_relevant_if_value(ui_relevant_if_value)
 { 
   assert(count > 0);
   assert(list != nullptr);
@@ -34,10 +36,12 @@ param_descriptor(
   bool ui_edit_font_small, std::int32_t ui_param_group,
   std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
 type(param_type::real), unit(unit), static_name(static_name), 
-ui_edit_font_small(ui_edit_font_small), 
-ui_param_group(ui_param_group), list(nullptr),
 dsp(dsp), display(display), min(0.0f), max(1.0f), 
-default_(default_), precision(precision)
+default_(default_), precision(precision), list(nullptr),
+ui_edit_font_small(ui_edit_font_small),
+ui_param_group(ui_param_group),
+ui_relevant_if_param(ui_relevant_if_param),
+ui_relevant_if_value(ui_relevant_if_value)
 {           
   assert(precision >= 0);
   assert(unit != nullptr);
@@ -56,11 +60,13 @@ param_descriptor(
   item_name const& static_name, bool default_,
   bool ui_edit_font_small, std::int32_t ui_param_group,
   std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
-type(param_type::toggle), unit(L""), static_name(static_name), 
-ui_edit_font_small(ui_edit_font_small), 
-ui_param_group(ui_param_group), list(nullptr),
+type(param_type::toggle), unit(L""), static_name(static_name), list(nullptr),
 dsp(param_bounds::none()), display(param_bounds::none()), 
-min(0), max(1), default_(default_? 1: 0), precision(0)
+min(0), max(1), default_(default_? 1: 0), precision(0),
+ui_edit_font_small(ui_edit_font_small),
+ui_param_group(ui_param_group),
+ui_relevant_if_param(ui_relevant_if_param),
+ui_relevant_if_value(ui_relevant_if_value)
 { 
   assert(ui_relevant_if_param >= -1);
   assert(0 <= ui_param_group && ui_param_group < 3); 
@@ -73,11 +79,13 @@ param_descriptor(
   std::int32_t default_, std::int32_t min, std::int32_t max,
   bool ui_edit_font_small, std::int32_t ui_param_group,
   std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
-type(type), unit(unit), static_name(static_name), 
-ui_edit_font_small(ui_edit_font_small), 
-ui_param_group(ui_param_group), list(nullptr),
+type(type), unit(unit), static_name(static_name), list(nullptr),
 dsp(param_bounds::none()), display(param_bounds::none()),
-min(min), max(max), default_(default_), precision(0)
+min(min), max(max), default_(default_), precision(0),
+ui_edit_font_small(ui_edit_font_small),
+ui_param_group(ui_param_group),
+ui_relevant_if_param(ui_relevant_if_param),
+ui_relevant_if_value(ui_relevant_if_value)
 {
   assert(unit != nullptr);
   assert(ui_relevant_if_param >= -1);

@@ -21,7 +21,6 @@ controller(svn::base::runtime_topology const* topology):
 _topology(topology)
 { assert(topology != nullptr); }
 
-
 IPlugView* PLUGIN_API 
 controller::createView(char const* name)
 {
@@ -29,12 +28,19 @@ controller::createView(char const* name)
   return new VST3Editor(this, "view", "controller.uidesc");
 }
 
+tresult 
+controller::endEdit(ParamID tag)
+{
+  assert(_topology->ui_param_dependencies[tag].size() == 0);
+  return EditControllerEx1::endEdit(tag);
+}
+
 tresult PLUGIN_API 
 controller::setComponentState(IBStream* state)
 {
   param_value value;
   std::vector<param_value> values(_topology->input_param_count, value);
-  
+
   if (state == nullptr) return kResultFalse;
   IBStreamer streamer(state, kLittleEndian);
   vst_io_stream stream(&streamer);

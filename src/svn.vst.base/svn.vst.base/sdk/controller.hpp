@@ -16,13 +16,15 @@ public VSTGUI::VST3EditorDelegate
   using IBStream = Steinberg::IBStream;
   using FUnknown = Steinberg::FUnknown;
   using IPlugView = Steinberg::IPlugView;
+  using ParamID = Steinberg::Vst::ParamID;
   svn::base::runtime_topology const* const _topology;
 
 public:
   controller(svn::base::runtime_topology const* topology);
+  tresult endEdit(ParamID tag) override;
   tresult PLUGIN_API initialize(FUnknown* context) override;
-  tresult PLUGIN_API setComponentState(IBStream* state) override;
   IPlugView* PLUGIN_API createView(char const* name) override;
+  tresult PLUGIN_API setComponentState(IBStream* state) override;
 };
 
 } // namespace svn::vst::base
