@@ -8,7 +8,7 @@ namespace svn::vst::ui_generator {
 
 struct rgb { std::uint8_t r, g, b; };
 inline rgb constexpr white = { 0xFF, 0xFF, 0xFF };
-inline rgb constexprblack = { 0x00, 0x00, 0x00 };
+inline rgb constexpr black = { 0x00, 0x00, 0x00 };
 inline std::size_t constexpr color_count = 12;
 extern rgb const color_values[];
 
