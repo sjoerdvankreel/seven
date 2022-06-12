@@ -1,50 +1,21 @@
-#include <svn.base/static/part_descriptor.hpp>
-#include <svn.base/static/param_descriptor.hpp>
-#include <svn.base/runtime/runtime_topology.hpp>
-
-#include <vstgui/uidescription/rapidjson/include/rapidjson/document.h>
-#include <vstgui/uidescription/rapidjson/include/rapidjson/rapidjson.h>
+#include <svn.vst.ui_generator/generator/generator.hpp>
+#include <svn.vst.ui_generator/description/controller_ui_description.hpp>
 #include <vstgui/uidescription/rapidjson/include/rapidjson/prettywriter.h>
 #include <vstgui/uidescription/rapidjson/include/rapidjson/ostreamwrapper.h>
 
 #define NOMINMAX 1
 #include <Windows.h>
 #undef GetObject
-
-#include <set>
-#include <cwchar>
-#include <cassert>
-#include <cstdint>
 #include <fstream>
-#include <sstream>
 #include <iostream>
-#include <stdexcept>
-#include <algorithm>
 
-using namespace svn::base;
 using namespace rapidjson;
-
-// Used for dimension calculations.
-// Parts are layed out top-to-bottom, then left-to-right, and are 
-// wrapped based on the max ui height. Parameters are layed out in 
-// a grid, based on the control column count in the part descriptor.
+using namespace svn::base;
+using namespace svn::vst::ui_generator;
 
 typedef bool (*svn_init_exit_dll_t)(void);
 typedef runtime_topology const* (*svn_get_topology_t)(void);
 
-static ui_descriptor build_ui_descriptor(
-  runtime_topology const& topology);
-static std::string print_rgb_hex(
-  rgb color, bool print_alpha, std::int32_t alpha_index);
-static void print_ui_descriptor(
-  runtime_topology const& topology, ui_descriptor const& descriptor);
-static Document build_ui_description(
-  runtime_topology const& topology, ui_descriptor const& descriptor);
-
-/* -------- driver -------- */
-
-// Builds vst3 .uidesc file based on topology.
-// We use the rapidjson distribution included with the vst3 sdk.
 int
 main(int argc, char** argv)
 {
@@ -76,15 +47,15 @@ main(int argc, char** argv)
 
   try
   {
-    ui_descriptor descriptor = build_ui_descriptor(*topology);
+    controller_ui_description description = controller_ui_description::create(*topology);
     std::cout << "Parts: " << topology->parts.size() << ".\n";
     std::cout << "Parameters: " << topology->params.size() << ".\n";
-    print_ui_descriptor(*topology, descriptor);
-    Document ui_description(build_ui_description(*topology, descriptor));
+    description.print(*topology, std::cout);
+    Document json(build_vstgui_json(*topology, description));
     std::ofstream os(argv[2]);
     OStreamWrapper wrapper(os);
     PrettyWriter<OStreamWrapper> writer(wrapper);
-    ui_description.Accept(writer);
+    json.Accept(writer);
     if (os.bad())
     {
       std::cout << "Failed to write " << argv[2] << ".\n";
@@ -106,6 +77,3 @@ main(int argc, char** argv)
   reinterpret_cast<svn_init_exit_dll_t>(exit_dll)();
   return 0;
 }
-
-/* -------- ui descriptor to json support -------- */
-

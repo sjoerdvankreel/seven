@@ -29,7 +29,7 @@ size_to_string(std::int32_t w, std::int32_t h)
   return result;
 }
 
-static Value&
+Value&
 add_member(Value& container, std::string const& key,
   Value const& value, Document::AllocatorType& allocator)
 {
@@ -38,7 +38,7 @@ add_member(Value& container, std::string const& key,
   return container.AddMember(key_copy, value_copy, allocator);
 }
 
-static Value&
+Value&
 add_member(Value& container, std::string const& key,
   std::string const& value, Document::AllocatorType& allocator)
 {
@@ -47,7 +47,7 @@ add_member(Value& container, std::string const& key,
   return container.AddMember(key_copy, value_copy, allocator);
 }
 
-static void
+void
 add_child(
   Value& container, std::string const& key,
   Value const& value, Document::AllocatorType& allocator)
@@ -57,7 +57,7 @@ add_child(
   add_member(container["children"], key, value, allocator);
 }
 
-static void
+void
 add_attribute(
   Value& container, std::string const& key,
   std::string const& value, Document::AllocatorType& allocator)
@@ -84,7 +84,7 @@ get_param_control_class(
   }
 }
 
-static std::string
+std::string
 get_control_tag(std::wstring const& runtime_param_name)
 {
   std::string result = narrow_assume_ascii(runtime_param_name);
@@ -96,7 +96,7 @@ get_control_tag(std::wstring const& runtime_param_name)
   return result;
 }
 
-static std::string
+std::string
 print_rgb_hex(rgb color, bool print_alpha, std::int32_t alpha_index)
 {
   std::ostringstream oss;

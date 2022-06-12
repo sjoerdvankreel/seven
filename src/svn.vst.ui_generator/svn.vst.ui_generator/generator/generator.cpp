@@ -1,5 +1,6 @@
 #include <svn.base/static/part_descriptor.hpp>
 #include <svn.base/static/param_descriptor.hpp>
+#include <svn.vst.ui_generator/support/support.hpp>
 #include <svn.vst.ui_generator/generator/support.hpp>
 #include <svn.vst.ui_generator/generator/generator.hpp>
 
@@ -452,7 +453,7 @@ build_vstgui_json(
   root.AddMember("colors", build_ui_colors(allocator), allocator);
   root.AddMember("control-tags", build_ui_control_tags(topology, allocator), allocator);
   root.AddMember("templates", build_ui_template(topology, description, allocator), allocator);
-  result.AddMember("vstgui-ui-description", description, allocator);
+  result.AddMember("vstgui-ui-description", root, allocator);
   return result;
 }
 
