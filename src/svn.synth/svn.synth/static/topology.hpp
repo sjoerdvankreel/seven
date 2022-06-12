@@ -19,12 +19,14 @@ struct part_type_t { enum value { voice_osc, voice_amp, glob_output, count }; };
 struct glob_output_param_t { enum value { clip, drain, voices, count }; };
 struct voice_amp_param_t { enum value { amp, decay, count }; };
 struct voice_osc_type_t { enum value { sine, blep, count }; };
-struct voice_osc_param_t { enum value { on, on2, type, pan, oct, note, cent, count }; };
+struct voice_osc_blep_type_t { enum value { saw, pulse, triangle, count }; };
+struct voice_osc_param_t { enum value { on, type, blep_type, pan, oct, note, cent, count }; };
 
 typedef part_type_t::value part_type;
 typedef voice_osc_type_t::value voice_osc_type;
 typedef voice_amp_param_t::value voice_amp_param;
 typedef voice_osc_param_t::value voice_osc_param;
+typedef voice_osc_blep_type_t::value voice_osc_blep_type;
 typedef glob_output_param_t::value glob_output_param;
 
 } // namespace svn::synth

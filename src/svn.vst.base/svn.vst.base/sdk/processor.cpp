@@ -226,7 +226,7 @@ processor::process_output_parameters(
   output_param_update_samples = block_end_samples;
   std::int32_t input_count = _processor->topology()->input_param_count;
   for (std::int32_t p = 0; p < _processor->topology()->output_param_count; p++)
-  {
+  { 
     IParamValueQueue* queue = data.outputParameterChanges->addParameterData(input_count + p, index);
     if (queue == nullptr) continue;
     auto const& descriptor = *_processor->topology()->params[input_count + p].descriptor;
