@@ -22,7 +22,9 @@ struct runtime_topology
   std::vector<std::vector<std::int32_t>> param_bounds; // Runtime parameter bounds, e.g. bounds[part_type::osc][1] indexes osc 2 wave param.
   std::int32_t input_param_count = 0; // Runtime input params.
   std::int32_t output_param_count = 0; // Runtime output params.  
+  
   std::int32_t max_ui_height; // For ui generator. 
+  std::vector<std::vector<std::int32_t>> ui_param_dependencies; // For ui generator.
    
   // Params contains interior pointers into parts.
   runtime_topology() = default;

@@ -71,6 +71,18 @@ runtime_topology::create(
       result->params.push_back(runtime_param(part, runtime_name, &result->parts[part], &descriptor));
     }
   }
+
+  result->ui_param_dependencies.resize(result->params.size());
+  for (std::size_t p = 0; p < result->params.size(); p++)
+  {
+    auto const& this_param = result->params[p];
+    if(this_param.descriptor->ui_relevant_if_param == -1) continue;
+    std::int32_t index = this_param.part->type_index;
+    std::int32_t type = this_param.part->descriptor->type;
+    std::int32_t param = this_param.descriptor->ui_relevant_if_param;
+    std::int32_t that_index = result->param_bounds[type][index] + param;
+    result->ui_param_dependencies[p].push_back(that_index);
+  }
    
   assert(result->parts.size() > 0);
   assert(result->params.size() > 0);
