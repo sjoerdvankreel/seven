@@ -1,4 +1,5 @@
 #include <svn.base/static/part_descriptor.hpp>
+#include <svn.vst.ui_generator/support/support.hpp>
 #include <svn.vst.ui_generator/description/ui_description.hpp>
 #include <svn.vst.ui_generator/description/controller_ui_description.hpp>
 
@@ -84,7 +85,7 @@ controller_ui_description::print(svn::base::runtime_topology const& topology, st
   {
     std::int32_t rt_index = parts[rp].runtime_part_index;
     os << "\tPart " << (rp + 1) << ":\n";
-    os << "\t\tName: " << topology.parts[rt_index].runtime_name << L"\n";
+    os << "\t\tName: " << narrow_assume_ascii(topology.parts[rt_index].runtime_name) << "\n";
     os << "\t\tColumn: " << parts[rp].column << "\n";
     os << "\t\tParams: " << parts[rp].params.size() << "\n";
     os << "\t\tColumns: " << parts[rp].columns << "\n";
