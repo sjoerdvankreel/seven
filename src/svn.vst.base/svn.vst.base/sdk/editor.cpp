@@ -48,7 +48,7 @@ editor::controllerEndEdit(ParamID tag, std::int32_t value)
     for(std::size_t c = 0; c < _controls[dependents[d]].size(); c++)
     {
       bool visible = _topology->params[dependents[d]].descriptor->ui_relevant_if_value == value;
-      _controls[dependents[d]][c]->setVisible(visible);
+      _controls[dependents[d]][c]->getParentView()->setVisible(visible);
     }
 }
 
