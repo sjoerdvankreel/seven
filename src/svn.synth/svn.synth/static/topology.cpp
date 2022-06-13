@@ -33,13 +33,13 @@ glob_output_params[glob_output_param::count] =
 param_descriptor const
 voice_osc_params[voice_osc_param::count] =
 {
-  { { L"On", L"Enabled" }, false, 0, 0, false, -1, 0 },
-  { { L"Type", L"Type" }, param_type::list, voice_osc_types, voice_osc_type::count, 1, 0, false, -1, 0 },
-  { { L"Blep", L"Blep type" }, param_type::list, voice_osc_blep_types, voice_osc_blep_type::count, 2, 0, false, voice_osc_param::type, voice_osc_type::blep },
-  { { L"Pan", L"Panning" }, L"%", 0.5, 0, param_bounds::linear_unit(), param_bounds::linear(-100.0, 100.0), 3, 1, false, -1, 0 },
-  { { L"Oct", L"Octave" }, param_type::discrete, L"", 4, 0, 9, 4, 2, false, -1, 0 },
-  { { L"Note", L"Note" }, param_type::discrete_list, note_names, note_name::count, 5, 2, false, -1, 0 },
-  { { L"Cent", L"Cent" }, L"", 0.5, 0, param_bounds::linear(-0.5, 0.5), param_bounds::linear(-50.0, 50.0), 6, 2, false, -1, 0 }
+  { { L"On", L"Enabled" }, false, -1, 0, false, -1, 0 },
+  { { L"Type", L"Type" }, param_type::list, voice_osc_types, voice_osc_type::count, 0, 0, false, -1, 0 },
+  { { L"Blep", L"Blep type" }, param_type::list, voice_osc_blep_types, voice_osc_blep_type::count, 1, 0, false, voice_osc_param::type, voice_osc_type::blep },
+  { { L"Pan", L"Panning" }, L"%", 0.5, 0, param_bounds::linear_unit(), param_bounds::linear(-100.0, 100.0), 2, 1, false, -1, 0 },
+  { { L"Oct", L"Octave" }, param_type::discrete, L"", 4, 0, 9, 3, 2, false, -1, 0 },
+  { { L"Note", L"Note" }, param_type::discrete_list, note_names, note_name::count, 4, 2, false, -1, 0 },
+  { { L"Cent", L"Cent" }, L"", 0.5, 0, param_bounds::linear(-0.5, 0.5), param_bounds::linear(-50.0, 50.0), 5, 2, false, -1, 0 }
 }; 
    
 param_descriptor const

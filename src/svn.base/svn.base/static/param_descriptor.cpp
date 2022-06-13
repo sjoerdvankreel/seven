@@ -21,7 +21,7 @@ ui_relevant_if_value(ui_relevant_if_value)
 { 
   assert(count > 0);
   assert(list != nullptr);
-  assert(ui_param_index >= 0);
+  assert(ui_param_index >= -1);
   assert(ui_relevant_if_param >= -1);
   assert(0 <= ui_param_group && ui_param_group < 3);
   assert(ui_relevant_if_param >= 0 || ui_relevant_if_value == 0);
@@ -45,7 +45,7 @@ ui_relevant_if_value(ui_relevant_if_value)
   assert(precision >= 0);
   assert(unit != nullptr);
   assert(dsp.min < dsp.max);
-  assert(ui_param_index >= 0);
+  assert(ui_param_index >= -1);
   assert(display.min < display.max);
   assert(ui_relevant_if_param >= -1);
   assert(0.0 <= default_ && default_ <= 1.0);
@@ -68,7 +68,7 @@ ui_edit_font_small(ui_edit_font_small),
 ui_relevant_if_param(ui_relevant_if_param),
 ui_relevant_if_value(ui_relevant_if_value)
 { 
-  assert(ui_param_index >= 0);
+  assert(ui_param_index >= -1);
   assert(ui_relevant_if_param >= -1);
   assert(0 <= ui_param_group && ui_param_group < 3); 
   assert(ui_relevant_if_param >= 0 || ui_relevant_if_value == 0);
@@ -89,7 +89,7 @@ ui_relevant_if_param(ui_relevant_if_param),
 ui_relevant_if_value(ui_relevant_if_value)
 {
   assert(unit != nullptr);
-  assert(ui_param_index >= 0);
+  assert(ui_param_index >= -1);
   assert(ui_relevant_if_param >= -1);
   assert(min <= default_ && default_ <= max);
   assert(0 <= ui_param_group && ui_param_group < 3);
