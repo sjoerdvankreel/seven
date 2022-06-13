@@ -60,7 +60,7 @@ controller::initialize(FUnknown* context)
     parameters.addParameter(new parameter(p, &_topology->params[p]));
   return kResultTrue;
 }
-
+ 
 tresult
 controller::endEdit(ParamID tag)
 {

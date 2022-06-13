@@ -283,6 +283,24 @@ add_ui_output_param(
 }
 
 static Value
+build_ui_part_single_param_container(
+  runtime_topology const& topology, part_ui_description const& part,
+  std::size_t index, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  auto const& param = part.params[index];
+  std::int32_t width = param_total_width - padding_param_group;
+  std::int32_t height = param_row_height + margin - padding_param_group;
+  std::int32_t left = param.column * param_total_width + padding_param_group * 2;
+  std::int32_t top = param.row * (param_row_height + margin) + 2 * padding_param_group;
+  add_attribute(result, "class", "CViewContainer", allocator);
+  add_attribute(result, "origin", size_to_string(left, top), allocator);
+  add_attribute(result, "size", size_to_string(width, height), allocator);
+  add_attribute(result, "background-color", get_color_name(white, color_alpha::half), allocator);
+  return result;
+}
+
+static Value
 build_ui_part_param_container(runtime_topology const& topology,
   part_ui_description const& description, Document::AllocatorType& allocator)
 {
@@ -301,6 +319,7 @@ build_ui_part_param_container(runtime_topology const& topology,
     if (param_descriptor.ui_param_group != 0)
       add_child(result, "CViewContainer", build_ui_param_background(
         param.row, param.column, 0, description.color_index, allocator), allocator);
+    add_child(result, "CViewContainer", build_ui_part_single_param_container(topology, description, p, allocator), allocator);
     if (part.descriptor->output)
       add_ui_output_param(topology, description, result, p, allocator);
     else

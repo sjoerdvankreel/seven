@@ -39,10 +39,10 @@ editor::onViewRemoved(CFrame* frame, CView* view)
         _controls[param].erase(_controls[param].begin() + control);
   VST3Editor::onViewRemoved(frame, view);
 }
-
+    
 void
 editor::controllerEndEdit(ParamID tag, std::int32_t value)
-{
+{ 
   auto const& dependents = _topology->ui_param_dependencies[tag];
   for(std::size_t d = 0; d < dependents.size(); d++)
     for(std::size_t c = 0; c < _controls[dependents[d]].size(); c++)

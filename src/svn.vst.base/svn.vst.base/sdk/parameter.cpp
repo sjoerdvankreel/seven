@@ -9,7 +9,7 @@ using namespace Steinberg;
 using namespace Steinberg::Vst;
 
 namespace svn::vst::base {
-
+  
 static double 
 param_step_count(param_descriptor const& param)
 {

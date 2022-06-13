@@ -280,6 +280,14 @@
                                                     "size": "81, 24"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "2, 2",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
+                                                }
+                                            },
                                             "COptionMenu": {
                                                 "attributes": {
                                                     "class": "COptionMenu",
@@ -321,6 +329,14 @@
                                                     "origin": "81, 1",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "82, 2",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
                                                 }
                                             },
                                             "COptionMenu": {
@@ -373,6 +389,14 @@
                                                     "origin": "161, 1",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "162, 2",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -436,6 +460,14 @@
                                                     "size": "81, 24"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "2, 25",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
+                                                }
+                                            },
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
@@ -497,6 +529,14 @@
                                                     "size": "81, 24"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "82, 25",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
+                                                }
+                                            },
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
@@ -556,6 +596,14 @@
                                                     "origin": "161, 24",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "162, 25",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -710,6 +758,14 @@
                                                     "size": "81, 24"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "2, 2",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
+                                                }
+                                            },
                                             "COptionMenu": {
                                                 "attributes": {
                                                     "class": "COptionMenu",
@@ -751,6 +807,14 @@
                                                     "origin": "81, 1",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "82, 2",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
                                                 }
                                             },
                                             "COptionMenu": {
@@ -803,6 +867,14 @@
                                                     "origin": "161, 1",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "162, 2",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -866,6 +938,14 @@
                                                     "size": "81, 24"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "2, 25",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
+                                                }
+                                            },
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
@@ -927,6 +1007,14 @@
                                                     "size": "81, 24"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "82, 25",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
+                                                }
+                                            },
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
@@ -986,6 +1074,14 @@
                                                     "origin": "161, 24",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "162, 25",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -1133,6 +1229,14 @@
                                                     "size": "81, 24"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "2, 2",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
+                                                }
+                                            },
                                             "CAnimKnob": {
                                                 "attributes": {
                                                     "class": "CAnimKnob",
@@ -1192,6 +1296,14 @@
                                                     "origin": "81, 1",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "82, 2",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
                                                 }
                                             },
                                             "CAnimKnob": {
@@ -1339,6 +1451,14 @@
                                                     "size": "81, 24"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "2, 2",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
+                                                }
+                                            },
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
@@ -1385,6 +1505,14 @@
                                                     "size": "81, 24"
                                                 }
                                             },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "2, 25",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
+                                                }
+                                            },
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
@@ -1429,6 +1557,14 @@
                                                     "origin": "1, 47",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
+                                                }
+                                            },
+                                            "CViewContainer": {
+                                                "attributes": {
+                                                    "class": "CViewContainer",
+                                                    "origin": "2, 48",
+                                                    "size": "79, 22",
+                                                    "background-color": "color_FFFFFF80"
                                                 }
                                             },
                                             "CTextLabel": {
