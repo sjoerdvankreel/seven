@@ -40,7 +40,7 @@ editor::onViewRemoved(CFrame* frame, CView* view)
   VST3Editor::onViewRemoved(frame, view);
 } 
     
-void           
+void            
 editor::controllerEndEdit(ParamID tag, std::int32_t value)
 { 
   auto const& dependents = _topology->ui_param_dependencies[tag];

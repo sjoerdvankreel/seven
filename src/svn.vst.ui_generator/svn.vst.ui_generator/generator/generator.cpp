@@ -241,7 +241,7 @@ add_ui_input_param(
     add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, col12_and_magin, param_col3_width, "right", allocator), allocator);
     break;
   case param_type::toggle:
-    checkbox = build_ui_param_checkbox(topology, part, param, color_values[part.color_index], margin, param_col1_width, margin, allocator);
+    checkbox = build_ui_param_checkbox(topology, part, param, color_values[part.color_index], margin, param_col1_width, 0, allocator);
     add_child(container, control_class, checkbox, allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col2, param_col2_width, allocator), allocator);
     break;
@@ -271,7 +271,7 @@ add_ui_output_param(
   {
   case param_type::toggle:
     add_child(container, control_class, build_ui_param_checkbox(topology, part, param, color_values[part.color_index],
-      param_output_col_width + margin, param_output_col_width, margin, allocator), allocator);
+      param_output_col_width + margin, param_output_col_width, 0, allocator), allocator);
     break;
   case param_type::discrete_text:
     add_child(container, control_class, build_ui_param_edit(topology, part, param,

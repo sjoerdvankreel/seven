@@ -1503,7 +1503,7 @@
                                                         "attributes": {
                                                             "class": "CCheckBox",
                                                             "size": "38, 20",
-                                                            "origin": "41, 3",
+                                                            "origin": "41, 0",
                                                             "control-tag": "out_clip",
                                                             "tooltip": "Out Clip",
                                                             "title": "",
@@ -1559,7 +1559,7 @@
                                                         "attributes": {
                                                             "class": "CCheckBox",
                                                             "size": "38, 20",
-                                                            "origin": "41, 3",
+                                                            "origin": "41, 0",
                                                             "control-tag": "out_voices_exhausted",
                                                             "tooltip": "Out Voices exhausted",
                                                             "title": "",
