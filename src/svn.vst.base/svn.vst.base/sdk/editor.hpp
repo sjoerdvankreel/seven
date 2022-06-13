@@ -14,6 +14,7 @@ public VSTGUI::VST3Editor
   using CFrame = VSTGUI::CFrame;
   using CControl = VSTGUI::CControl;
   using ParamID = Steinberg::Vst::ParamID;
+  using PlatformType = VSTGUI::PlatformType;
   using UTF8StringPtr = VSTGUI::UTF8StringPtr;
   using EditController = Steinberg::Vst::EditController;
   std::vector<std::vector<CControl*>> _controls;
@@ -23,6 +24,8 @@ public:
   void onViewAdded(CFrame* frame, CView* view) override;
   void onViewRemoved(CFrame* frame, CView* view) override;
   void controllerEndEdit(ParamID tag, std::int32_t value);
+  bool PLUGIN_API open(void* parent, const PlatformType& type) override;
+
   editor(EditController* controller, UTF8StringPtr template_name,
     UTF8StringPtr xml_file, svn::base::runtime_topology const* topology);
 };

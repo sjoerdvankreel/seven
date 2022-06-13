@@ -19,6 +19,16 @@ _controls(topology->params.size())
   assert(template_name != nullptr);
 }
 
+bool PLUGIN_API 
+editor::open(void* parent, const PlatformType& type)
+{
+  // Need to sync parameter values to force visibility of dependent parameters.
+  if(!VST3Editor::open(parent, type)) return false;
+  for(std::size_t p = 0; p < _topology->params.size(); p++)
+    controller->endEdit(static_cast<std::int32_t>(p));
+  return true;
+}
+
 void 
 editor::onViewAdded(CFrame* frame, CView* view)
 {
