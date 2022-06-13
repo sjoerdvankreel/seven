@@ -39,7 +39,7 @@ part_ui_description::create(
       std::int32_t column = grid_index % result.columns;
       result.params.push_back({ row, column, part.runtime_param_start + i });
       grid_index++;
-    }
+    } 
 
   return result;
 }

@@ -11,7 +11,8 @@ static item_name const
 voice_osc_types[voice_osc_type::count] =
 {
   { L"Sine", L"Sine wave" },
-  { L"Blep", L"Bandlimited step" }
+  { L"Blep", L"Bandlimited step" },
+  { L"Blamp", L"Bandlimited ramp" }
 }; 
 
 static item_name const
@@ -20,6 +21,13 @@ voice_osc_blep_types[voice_osc_blep_type::count] =
   { L"Saw", L"Sawtooth" },
   { L"Pulse", L"Pulse" },
   { L"Triangle", L"Triangle" }
+};
+
+static item_name const
+voice_osc_blamp_types[voice_osc_blamp_type::count] =
+{
+  { L"Saw", L"Sawtooth" },
+  { L"Pulse", L"Pulse" }
 };
 
 param_descriptor const 
@@ -36,6 +44,7 @@ voice_osc_params[voice_osc_param::count] =
   { { L"On", L"Enabled" }, false, -1, 0, false, -1, 0 },
   { { L"Type", L"Type" }, param_type::list, voice_osc_types, voice_osc_type::count, 0, 0, false, -1, 0 },
   { { L"Blep", L"Blep type" }, param_type::list, voice_osc_blep_types, voice_osc_blep_type::count, 1, 0, false, voice_osc_param::type, voice_osc_type::blep },
+  { { L"Blamp", L"Blamp type" }, param_type::list, voice_osc_blamp_types, voice_osc_blamp_type::count, 1, 0, false, voice_osc_param::type, voice_osc_type::blamp },
   { { L"Pan", L"Panning" }, L"%", 0.5, 0, param_bounds::linear_unit(), param_bounds::linear(-100.0, 100.0), 2, 1, false, -1, 0 },
   { { L"Oct", L"Octave" }, param_type::discrete, L"", 4, 0, 9, 3, 2, false, -1, 0 },
   { { L"Note", L"Note" }, param_type::discrete_list, note_names, note_name::count, 4, 2, false, -1, 0 },
