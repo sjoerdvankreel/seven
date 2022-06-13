@@ -284,11 +284,12 @@ add_ui_output_param(
 
 static Value
 build_ui_part_single_param_container(
-  runtime_topology const& topology, part_ui_description const& part,
+  runtime_topology const& topology, part_ui_description const& description,
   std::size_t index, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  auto const& param = part.params[index];
+  auto const& param = description.params[index];
+  auto const& part = topology.parts[description.runtime_part_index];
   std::int32_t width = param_total_width - padding_param_group;
   std::int32_t height = param_row_height + margin - padding_param_group;
   std::int32_t left = param.column * param_total_width + padding_param_group * 2;
@@ -296,7 +297,11 @@ build_ui_part_single_param_container(
   add_attribute(result, "class", "CViewContainer", allocator);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   add_attribute(result, "size", size_to_string(width, height), allocator);
-  add_attribute(result, "background-color", get_color_name(white, color_alpha::half), allocator);
+  add_attribute(result, "background-color", get_color_name(white, color_alpha::half), allocator); 
+  if (part.descriptor->output)
+    add_ui_output_param(topology, description, result, index, allocator);
+  else
+    add_ui_input_param(topology, description, result, index, allocator);
   return result;
 }
 
@@ -319,11 +324,7 @@ build_ui_part_param_container(runtime_topology const& topology,
     if (param_descriptor.ui_param_group != 0)
       add_child(result, "CViewContainer", build_ui_param_background(
         param.row, param.column, 0, description.color_index, allocator), allocator);
-    add_child(result, "CViewContainer", build_ui_part_single_param_container(topology, description, p, allocator), allocator);
-    if (part.descriptor->output)
-      add_ui_output_param(topology, description, result, p, allocator);
-    else
-      add_ui_input_param(topology, description, result, p, allocator);
+    add_child(result, "CViewContainer", build_ui_part_single_param_container(topology, description, p, allocator), allocator);    
   }
   for (std::int32_t p = description.params.size(); p < description.rows * description.columns; p++)
     add_child(result, "CViewContainer", build_ui_param_background(

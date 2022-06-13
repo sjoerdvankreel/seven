@@ -38,7 +38,7 @@ editor::onViewRemoved(CFrame* frame, CView* view)
       if(_controls[param][control] == view)
         _controls[param].erase(_controls[param].begin() + control);
   VST3Editor::onViewRemoved(frame, view);
-}
+} 
     
 void
 editor::controllerEndEdit(ParamID tag, std::int32_t value)
