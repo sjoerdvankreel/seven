@@ -7,21 +7,21 @@
 namespace svn::base {
 
 param_descriptor::
-param_descriptor(          
-  item_name const& static_name, param_type type, 
-  item_name const* list, std::int32_t count,
-  bool ui_edit_font_small, std::int32_t ui_param_group,
+param_descriptor(item_name const& static_name, 
+  param_type type, item_name const* list, std::int32_t count,
+  std::int32_t ui_param_index, std::int32_t ui_param_group, bool ui_edit_font_small,
   std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
 type(type), unit(L""), list(list), static_name(static_name),
 dsp(param_bounds::none()), display(param_bounds::none()),
 min(0), max(count - 1), default_(0), precision(0),
+ui_param_index(ui_param_index), ui_param_group(ui_param_group),
 ui_edit_font_small(ui_edit_font_small),
-ui_param_group(ui_param_group),
 ui_relevant_if_param(ui_relevant_if_param),
 ui_relevant_if_value(ui_relevant_if_value)
 { 
   assert(count > 0);
   assert(list != nullptr);
+  assert(ui_param_index >= 0);
   assert(ui_relevant_if_param >= -1);
   assert(0 <= ui_param_group && ui_param_group < 3);
   assert(ui_relevant_if_param >= 0 || ui_relevant_if_value == 0);
@@ -29,23 +29,23 @@ ui_relevant_if_value(ui_relevant_if_value)
 }
 
 param_descriptor::
-param_descriptor(   
-  item_name const& static_name, wchar_t const* unit, 
-  float default_, std::int32_t precision,
+param_descriptor(item_name const& static_name, 
+  wchar_t const* unit, float default_, std::int32_t precision,
   param_bounds const& dsp, param_bounds const& display,
-  bool ui_edit_font_small, std::int32_t ui_param_group,
+  std::int32_t ui_param_index, std::int32_t ui_param_group, bool ui_edit_font_small,
   std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
 type(param_type::real), unit(unit), static_name(static_name), 
 dsp(dsp), display(display), min(0.0f), max(1.0f), 
 default_(default_), precision(precision), list(nullptr),
+ui_param_index(ui_param_index), ui_param_group(ui_param_group),
 ui_edit_font_small(ui_edit_font_small),
-ui_param_group(ui_param_group),
 ui_relevant_if_param(ui_relevant_if_param),
 ui_relevant_if_value(ui_relevant_if_value)
 {           
   assert(precision >= 0);
   assert(unit != nullptr);
   assert(dsp.min < dsp.max);
+  assert(ui_param_index >= 0);
   assert(display.min < display.max);
   assert(ui_relevant_if_param >= -1);
   assert(0.0 <= default_ && default_ <= 1.0);
@@ -58,16 +58,17 @@ ui_relevant_if_value(ui_relevant_if_value)
 param_descriptor::   
 param_descriptor(
   item_name const& static_name, bool default_,
-  bool ui_edit_font_small, std::int32_t ui_param_group,
+  std::int32_t ui_param_index, std::int32_t ui_param_group, bool ui_edit_font_small,
   std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
 type(param_type::toggle), unit(L""), static_name(static_name), list(nullptr),
 dsp(param_bounds::none()), display(param_bounds::none()), 
 min(0), max(1), default_(default_? 1: 0), precision(0),
+ui_param_index(ui_param_index), ui_param_group(ui_param_group),
 ui_edit_font_small(ui_edit_font_small),
-ui_param_group(ui_param_group),
 ui_relevant_if_param(ui_relevant_if_param),
 ui_relevant_if_value(ui_relevant_if_value)
 { 
+  assert(ui_param_index >= 0);
   assert(ui_relevant_if_param >= -1);
   assert(0 <= ui_param_group && ui_param_group < 3); 
   assert(ui_relevant_if_param >= 0 || ui_relevant_if_value == 0);
@@ -77,17 +78,18 @@ param_descriptor::
 param_descriptor( 
   item_name const& static_name, param_type type, wchar_t const* unit,
   std::int32_t default_, std::int32_t min, std::int32_t max,
-  bool ui_edit_font_small, std::int32_t ui_param_group,
+  std::int32_t ui_param_index, std::int32_t ui_param_group, bool ui_edit_font_small,
   std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
 type(type), unit(unit), static_name(static_name), list(nullptr),
 dsp(param_bounds::none()), display(param_bounds::none()),
 min(min), max(max), default_(default_), precision(0),
+ui_param_index(ui_param_index), ui_param_group(ui_param_group),
 ui_edit_font_small(ui_edit_font_small),
-ui_param_group(ui_param_group),
 ui_relevant_if_param(ui_relevant_if_param),
 ui_relevant_if_value(ui_relevant_if_value)
 {
   assert(unit != nullptr);
+  assert(ui_param_index >= 0);
   assert(ui_relevant_if_param >= -1);
   assert(min <= default_ && default_ <= max);
   assert(0 <= ui_param_group && ui_param_group < 3);

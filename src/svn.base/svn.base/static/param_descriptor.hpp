@@ -23,28 +23,27 @@ struct param_descriptor
   param_value const min, max, default_; // Range for discrete parameters. 0..1 for real parameters.
 
   bool ui_edit_font_small; // For ui generator. Set to true if value gets large.
+  std::int32_t ui_param_index; // For ui generator. Index within the grid.
   std::int32_t ui_param_group; // For ui generator. Group together related params within a part.
   std::int32_t ui_relevant_if_param; // For ui generator. This parameter is visible if other param P has value V. -1 if not applicable.
   std::int32_t ui_relevant_if_value; // For ui generator. This parameter is visible if other param P has value V.
 
-  param_descriptor(
-    item_name const& static_name, bool default_,
-    bool ui_edit_font_small, std::int32_t ui_param_group,
+  param_descriptor(item_name const& static_name, bool default_, 
+    std::int32_t ui_param_index, std::int32_t ui_param_group, bool ui_edit_font_small, 
     std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value);
-  param_descriptor(
-    item_name const& static_name, param_type type, 
-    item_name const* list, std::int32_t count,
-    bool ui_edit_font_small, std::int32_t ui_param_group,
+  param_descriptor(item_name const& static_name, 
+    param_type type, item_name const* list, std::int32_t count, 
+    std::int32_t ui_param_index, std::int32_t ui_param_group, bool ui_edit_font_small,
     std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value);
-  param_descriptor(
-    item_name const& static_name, param_type type, wchar_t const* unit,
-    std::int32_t default_, std::int32_t min, std::int32_t max,
-    bool ui_edit_font_small, std::int32_t ui_param_group,
+  param_descriptor(item_name const& static_name, 
+    param_type type, wchar_t const* unit, std::int32_t default_, 
+    std::int32_t min, std::int32_t max, 
+    std::int32_t ui_param_index, std::int32_t ui_param_group, bool ui_edit_font_small,
     std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value);
-  param_descriptor(
-    item_name const& static_name, wchar_t const* unit, float default_, 
-    std::int32_t precision, param_bounds const& dsp, param_bounds const& display,
-    bool ui_edit_font_small, std::int32_t ui_param_group,
+  param_descriptor(item_name const& static_name, 
+    wchar_t const* unit, float default_, std::int32_t precision, 
+    param_bounds const& dsp, param_bounds const& display,
+    std::int32_t ui_param_index, std::int32_t ui_param_group, bool ui_edit_font_small,
     std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value);
 
   param_value to_display(param_value val) const;
