@@ -1,5 +1,6 @@
 #include <base/source/fstreamer.h>
 #include <pluginterfaces/base/ibstream.h>
+#include <svn.vst.base/sdk/editor.hpp>
 #include <svn.vst.base/sdk/parameter.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
 #include <svn.vst.base/support/vst_io_stream.hpp>
@@ -25,7 +26,7 @@ IPlugView* PLUGIN_API
 controller::createView(char const* name)
 {
   if(ConstString(name) != ViewType::kEditor) return nullptr;
-  return new VST3Editor(this, "view", "controller.uidesc");
+  return new editor(this, "view", "controller.uidesc", _topology->params.size());
 }
 
 tresult 
