@@ -69,8 +69,8 @@ build_ui_param_item_base(
   Value result(kObjectType);
   add_attribute(result, "class", control_class, allocator);
   add_attribute(result, "size", size_to_string(width, param_row_height), allocator);
-  std::int32_t top = top_margin + param.row * (param_row_height + margin);
-  std::int32_t l = margin + param.column * param_total_width + left;
+  std::int32_t top = top_margin;//top_margin;// + param.row * (param_row_height + margin);
+  std::int32_t l = left; //margin + /*param.column * param_total_width +*/ left;
   add_attribute(result, "origin", size_to_string(l, top), allocator);
   return result;
 }
@@ -117,7 +117,7 @@ build_ui_param_knob(
   param_ui_description const& param, Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);
-  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_col1_width, margin, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_col1_width, 0, allocator));
   add_attribute(result, "angle-start", "20", allocator);
   add_attribute(result, "angle-range", "320", allocator);
   add_attribute(result, "height-of-one-image", std::to_string(param_row_height), allocator);
@@ -133,7 +133,7 @@ build_ui_param_menu(
 {
   std::string class_name = get_param_control_class(topology, param);
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_col1_width + margin + param_col2_width, margin, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_col1_width + margin + param_col2_width, 0, allocator));
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
@@ -156,7 +156,7 @@ build_ui_param_label(
   param_ui_description const& param, std::int32_t left, std::int32_t width,
   Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_item_base(topology, part, param, "CTextLabel", left, width, margin, allocator));
+  Value result(build_ui_param_item_base(topology, part, param, "CTextLabel", left, width, 0, allocator));
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
@@ -175,7 +175,7 @@ build_ui_param_edit(
   std::string small_font = "~ NormalFontSmall";
   std::string very_small_font = "~ NormalFontVerySmall";
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  Value result(build_ui_param_control_base(topology, part, param, "CTextEdit", left, width, margin, allocator));
+  Value result(build_ui_param_control_base(topology, part, param, "CTextEdit", left, width, 0, allocator));
   add_attribute(result, "text-alignment", alignment, allocator);
   add_attribute(result, "style-no-frame", "true", allocator);
   add_attribute(result, "style-round-rect", "true", allocator);
@@ -290,13 +290,11 @@ build_ui_part_single_param_container(
   Value result(kObjectType);
   auto const& param = description.params[index];
   auto const& part = topology.parts[description.runtime_part_index];
-  std::int32_t width = param_total_width - padding_param_group;
-  std::int32_t height = param_row_height + margin - padding_param_group;
   std::int32_t left = param.column * param_total_width + padding_param_group * 2;
   std::int32_t top = param.row * (param_row_height + margin) + 2 * padding_param_group;
   add_attribute(result, "class", "CViewContainer", allocator);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
-  add_attribute(result, "size", size_to_string(width, height), allocator);
+  add_attribute(result, "size", size_to_string(param_total_width, param_row_height), allocator);
   add_attribute(result, "background-color", get_color_name(white, color_alpha::half), allocator); 
   if (part.descriptor->output)
     add_ui_output_param(topology, description, result, index, allocator);

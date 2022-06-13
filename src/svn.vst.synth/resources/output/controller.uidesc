@@ -238,7 +238,7 @@
                                                 "attributes": {
                                                     "class": "CCheckBox",
                                                     "size": "20, 20",
-                                                    "origin": "226, -1",
+                                                    "origin": "63, -1",
                                                     "control-tag": "osc_1_enabled",
                                                     "tooltip": "Osc 1 Enabled",
                                                     "title": "",
@@ -284,7 +284,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "2, 2",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -292,7 +292,7 @@
                                                         "attributes": {
                                                             "class": "COptionMenu",
                                                             "size": "49, 20",
-                                                            "origin": "3, 3",
+                                                            "origin": "0, 0",
                                                             "control-tag": "osc_1_type",
                                                             "tooltip": "Osc 1 Type",
                                                             "min-value": "0",
@@ -314,7 +314,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "28, 20",
-                                                            "origin": "55, 3",
+                                                            "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -337,7 +337,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "82, 2",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -345,7 +345,7 @@
                                                         "attributes": {
                                                             "class": "COptionMenu",
                                                             "size": "49, 20",
-                                                            "origin": "83, 3",
+                                                            "origin": "0, 0",
                                                             "control-tag": "osc_1_blep_type",
                                                             "tooltip": "Osc 1 Blep type",
                                                             "min-value": "0",
@@ -367,7 +367,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "28, 20",
-                                                            "origin": "135, 3",
+                                                            "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -399,7 +399,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "162, 2",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -407,7 +407,7 @@
                                                         "attributes": {
                                                             "class": "CAnimKnob",
                                                             "size": "20, 20",
-                                                            "origin": "163, 3",
+                                                            "origin": "0, 0",
                                                             "control-tag": "osc_1_panning",
                                                             "tooltip": "Osc 1 Panning (%)",
                                                             "angle-start": "20",
@@ -420,7 +420,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "26, 20",
-                                                            "origin": "186, 3",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -432,7 +432,7 @@
                                                         "attributes": {
                                                             "class": "CTextEdit",
                                                             "size": "28, 20",
-                                                            "origin": "212, 3",
+                                                            "origin": "49, 0",
                                                             "control-tag": "osc_1_panning",
                                                             "tooltip": "Osc 1 Panning (%)",
                                                             "text-alignment": "right",
@@ -470,7 +470,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "2, 25",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -478,7 +478,7 @@
                                                         "attributes": {
                                                             "class": "CAnimKnob",
                                                             "size": "20, 20",
-                                                            "origin": "3, 26",
+                                                            "origin": "0, 0",
                                                             "control-tag": "osc_1_octave",
                                                             "tooltip": "Osc 1 Octave",
                                                             "angle-start": "20",
@@ -491,7 +491,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "26, 20",
-                                                            "origin": "26, 26",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -503,7 +503,7 @@
                                                         "attributes": {
                                                             "class": "CTextEdit",
                                                             "size": "28, 20",
-                                                            "origin": "52, 26",
+                                                            "origin": "49, 0",
                                                             "control-tag": "osc_1_octave",
                                                             "tooltip": "Osc 1 Octave",
                                                             "text-alignment": "right",
@@ -541,7 +541,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "82, 25",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -549,7 +549,7 @@
                                                         "attributes": {
                                                             "class": "CAnimKnob",
                                                             "size": "20, 20",
-                                                            "origin": "83, 26",
+                                                            "origin": "0, 0",
                                                             "control-tag": "osc_1_note",
                                                             "tooltip": "Osc 1 Note",
                                                             "angle-start": "20",
@@ -562,7 +562,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "26, 20",
-                                                            "origin": "106, 26",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -574,7 +574,7 @@
                                                         "attributes": {
                                                             "class": "CTextEdit",
                                                             "size": "28, 20",
-                                                            "origin": "132, 26",
+                                                            "origin": "49, 0",
                                                             "control-tag": "osc_1_note",
                                                             "tooltip": "Osc 1 Note",
                                                             "text-alignment": "right",
@@ -612,7 +612,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "162, 25",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -620,7 +620,7 @@
                                                         "attributes": {
                                                             "class": "CAnimKnob",
                                                             "size": "20, 20",
-                                                            "origin": "163, 26",
+                                                            "origin": "0, 0",
                                                             "control-tag": "osc_1_cent",
                                                             "tooltip": "Osc 1 Cent",
                                                             "angle-start": "20",
@@ -633,7 +633,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "26, 20",
-                                                            "origin": "186, 26",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -645,7 +645,7 @@
                                                         "attributes": {
                                                             "class": "CTextEdit",
                                                             "size": "28, 20",
-                                                            "origin": "212, 26",
+                                                            "origin": "49, 0",
                                                             "control-tag": "osc_1_cent",
                                                             "tooltip": "Osc 1 Cent",
                                                             "text-alignment": "right",
@@ -728,7 +728,7 @@
                                                 "attributes": {
                                                     "class": "CCheckBox",
                                                     "size": "20, 20",
-                                                    "origin": "226, -1",
+                                                    "origin": "63, -1",
                                                     "control-tag": "osc_2_enabled",
                                                     "tooltip": "Osc 2 Enabled",
                                                     "title": "",
@@ -774,7 +774,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "2, 2",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -782,7 +782,7 @@
                                                         "attributes": {
                                                             "class": "COptionMenu",
                                                             "size": "49, 20",
-                                                            "origin": "3, 3",
+                                                            "origin": "0, 0",
                                                             "control-tag": "osc_2_type",
                                                             "tooltip": "Osc 2 Type",
                                                             "min-value": "0",
@@ -804,7 +804,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "28, 20",
-                                                            "origin": "55, 3",
+                                                            "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -827,7 +827,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "82, 2",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -835,7 +835,7 @@
                                                         "attributes": {
                                                             "class": "COptionMenu",
                                                             "size": "49, 20",
-                                                            "origin": "83, 3",
+                                                            "origin": "0, 0",
                                                             "control-tag": "osc_2_blep_type",
                                                             "tooltip": "Osc 2 Blep type",
                                                             "min-value": "0",
@@ -857,7 +857,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "28, 20",
-                                                            "origin": "135, 3",
+                                                            "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -889,7 +889,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "162, 2",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -897,7 +897,7 @@
                                                         "attributes": {
                                                             "class": "CAnimKnob",
                                                             "size": "20, 20",
-                                                            "origin": "163, 3",
+                                                            "origin": "0, 0",
                                                             "control-tag": "osc_2_panning",
                                                             "tooltip": "Osc 2 Panning (%)",
                                                             "angle-start": "20",
@@ -910,7 +910,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "26, 20",
-                                                            "origin": "186, 3",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -922,7 +922,7 @@
                                                         "attributes": {
                                                             "class": "CTextEdit",
                                                             "size": "28, 20",
-                                                            "origin": "212, 3",
+                                                            "origin": "49, 0",
                                                             "control-tag": "osc_2_panning",
                                                             "tooltip": "Osc 2 Panning (%)",
                                                             "text-alignment": "right",
@@ -960,7 +960,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "2, 25",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -968,7 +968,7 @@
                                                         "attributes": {
                                                             "class": "CAnimKnob",
                                                             "size": "20, 20",
-                                                            "origin": "3, 26",
+                                                            "origin": "0, 0",
                                                             "control-tag": "osc_2_octave",
                                                             "tooltip": "Osc 2 Octave",
                                                             "angle-start": "20",
@@ -981,7 +981,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "26, 20",
-                                                            "origin": "26, 26",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -993,7 +993,7 @@
                                                         "attributes": {
                                                             "class": "CTextEdit",
                                                             "size": "28, 20",
-                                                            "origin": "52, 26",
+                                                            "origin": "49, 0",
                                                             "control-tag": "osc_2_octave",
                                                             "tooltip": "Osc 2 Octave",
                                                             "text-alignment": "right",
@@ -1031,7 +1031,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "82, 25",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -1039,7 +1039,7 @@
                                                         "attributes": {
                                                             "class": "CAnimKnob",
                                                             "size": "20, 20",
-                                                            "origin": "83, 26",
+                                                            "origin": "0, 0",
                                                             "control-tag": "osc_2_note",
                                                             "tooltip": "Osc 2 Note",
                                                             "angle-start": "20",
@@ -1052,7 +1052,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "26, 20",
-                                                            "origin": "106, 26",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -1064,7 +1064,7 @@
                                                         "attributes": {
                                                             "class": "CTextEdit",
                                                             "size": "28, 20",
-                                                            "origin": "132, 26",
+                                                            "origin": "49, 0",
                                                             "control-tag": "osc_2_note",
                                                             "tooltip": "Osc 2 Note",
                                                             "text-alignment": "right",
@@ -1102,7 +1102,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "162, 25",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -1110,7 +1110,7 @@
                                                         "attributes": {
                                                             "class": "CAnimKnob",
                                                             "size": "20, 20",
-                                                            "origin": "163, 26",
+                                                            "origin": "0, 0",
                                                             "control-tag": "osc_2_cent",
                                                             "tooltip": "Osc 2 Cent",
                                                             "angle-start": "20",
@@ -1123,7 +1123,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "26, 20",
-                                                            "origin": "186, 26",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -1135,7 +1135,7 @@
                                                         "attributes": {
                                                             "class": "CTextEdit",
                                                             "size": "28, 20",
-                                                            "origin": "212, 26",
+                                                            "origin": "49, 0",
                                                             "control-tag": "osc_2_cent",
                                                             "tooltip": "Osc 2 Cent",
                                                             "text-alignment": "right",
@@ -1257,7 +1257,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "2, 2",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -1265,7 +1265,7 @@
                                                         "attributes": {
                                                             "class": "CAnimKnob",
                                                             "size": "20, 20",
-                                                            "origin": "3, 3",
+                                                            "origin": "0, 0",
                                                             "control-tag": "amp_level",
                                                             "tooltip": "Amp Level (dB)",
                                                             "angle-start": "20",
@@ -1278,7 +1278,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "26, 20",
-                                                            "origin": "26, 3",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -1290,7 +1290,7 @@
                                                         "attributes": {
                                                             "class": "CTextEdit",
                                                             "size": "28, 20",
-                                                            "origin": "52, 3",
+                                                            "origin": "49, 0",
                                                             "control-tag": "amp_level",
                                                             "tooltip": "Amp Level (dB)",
                                                             "text-alignment": "right",
@@ -1328,7 +1328,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "82, 2",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -1336,7 +1336,7 @@
                                                         "attributes": {
                                                             "class": "CAnimKnob",
                                                             "size": "20, 20",
-                                                            "origin": "83, 3",
+                                                            "origin": "0, 0",
                                                             "control-tag": "amp_decay",
                                                             "tooltip": "Amp Decay (Sec)",
                                                             "angle-start": "20",
@@ -1349,7 +1349,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "26, 20",
-                                                            "origin": "106, 3",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -1361,7 +1361,7 @@
                                                         "attributes": {
                                                             "class": "CTextEdit",
                                                             "size": "28, 20",
-                                                            "origin": "132, 3",
+                                                            "origin": "49, 0",
                                                             "control-tag": "amp_decay",
                                                             "tooltip": "Amp Decay (Sec)",
                                                             "text-alignment": "right",
@@ -1483,7 +1483,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "2, 2",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -1491,7 +1491,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "38, 20",
-                                                            "origin": "3, 3",
+                                                            "origin": "0, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -1503,7 +1503,7 @@
                                                         "attributes": {
                                                             "class": "CCheckBox",
                                                             "size": "38, 20",
-                                                            "origin": "44, 3",
+                                                            "origin": "41, 3",
                                                             "control-tag": "out_clip",
                                                             "tooltip": "Out Clip",
                                                             "title": "",
@@ -1539,7 +1539,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "2, 25",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -1547,7 +1547,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "38, 20",
-                                                            "origin": "3, 26",
+                                                            "origin": "0, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -1559,7 +1559,7 @@
                                                         "attributes": {
                                                             "class": "CCheckBox",
                                                             "size": "38, 20",
-                                                            "origin": "44, 26",
+                                                            "origin": "41, 3",
                                                             "control-tag": "out_voices_exhausted",
                                                             "tooltip": "Out Voices exhausted",
                                                             "title": "",
@@ -1595,7 +1595,7 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "origin": "2, 48",
-                                                    "size": "79, 22",
+                                                    "size": "80, 20",
                                                     "background-color": "color_FFFFFF80"
                                                 },
                                                 "children": {
@@ -1603,7 +1603,7 @@
                                                         "attributes": {
                                                             "class": "CTextLabel",
                                                             "size": "38, 20",
-                                                            "origin": "3, 49",
+                                                            "origin": "0, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
@@ -1615,7 +1615,7 @@
                                                         "attributes": {
                                                             "class": "CTextEdit",
                                                             "size": "35, 20",
-                                                            "origin": "44, 49",
+                                                            "origin": "41, 0",
                                                             "control-tag": "out_voice_count",
                                                             "tooltip": "Out Voice count",
                                                             "text-alignment": "left",
