@@ -61,28 +61,23 @@ build_ui_control_tags(
 
 static Value
 build_ui_param_item_base(
-  runtime_topology const& topology, part_ui_description const& part,
-  param_ui_description const& param, std::string const& control_class,
-  std::int32_t left, std::int32_t width, std::int32_t top_margin,
-  Document::AllocatorType& allocator)
+  std::string const& control_class, std::int32_t left, 
+  std::int32_t width, std::int32_t top_margin, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "class", control_class, allocator);
   add_attribute(result, "size", size_to_string(width, param_row_height), allocator);
-  std::int32_t top = top_margin;//top_margin;// + param.row * (param_row_height + margin);
-  std::int32_t l = left; //margin + /*param.column * param_total_width +*/ left;
-  add_attribute(result, "origin", size_to_string(l, top), allocator);
+  add_attribute(result, "origin", size_to_string(left, top_margin), allocator);
   return result;
 }
 
 static Value
 build_ui_param_control_base(
-  runtime_topology const& topology, part_ui_description const& part,
-  param_ui_description const& param, std::string const& control_class,
-  std::int32_t left, std::int32_t width, std::int32_t top_margin,
-  Document::AllocatorType& allocator)
+  runtime_topology const& topology, param_ui_description const& param, 
+  std::string const& control_class, std::int32_t left, std::int32_t width, 
+  std::int32_t top_margin, Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_item_base(topology, part, param, control_class, left, width, top_margin, allocator));
+  Value result(build_ui_param_item_base(control_class, left, width, top_margin, allocator));
   std::string tag = get_control_tag(topology.params[param.runtime_param_index].runtime_name);
   add_attribute(result, "control-tag", tag, allocator);
   auto const& rt_param = topology.params[param.runtime_param_index];
@@ -100,7 +95,7 @@ build_ui_param_checkbox(
   std::int32_t width, std::int32_t top_margin, Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);
-  Value result(build_ui_param_control_base(topology, part, param, class_name, left, width, top_margin, allocator));
+  Value result(build_ui_param_control_base(topology, param, class_name, left, width, top_margin, allocator));
   add_attribute(result, "title", "", allocator);
   add_attribute(result, "frame-width", "1", allocator);
   add_attribute(result, "draw-crossbox", "true", allocator);
@@ -117,7 +112,7 @@ build_ui_param_knob(
   param_ui_description const& param, Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);
-  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_col1_width, 0, allocator));
+  Value result(build_ui_param_control_base(topology, param, class_name, 0, param_col1_width, 0, allocator));
   add_attribute(result, "angle-start", "20", allocator);
   add_attribute(result, "angle-range", "320", allocator);
   add_attribute(result, "height-of-one-image", std::to_string(param_row_height), allocator);
@@ -133,7 +128,7 @@ build_ui_param_menu(
 {
   std::string class_name = get_param_control_class(topology, param);
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  Value result(build_ui_param_control_base(topology, part, param, class_name, 0, param_col1_width + margin + param_col2_width, 0, allocator));
+  Value result(build_ui_param_control_base(topology, param, class_name, 0, param_col1_width + margin + param_col2_width, 0, allocator));
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
@@ -156,7 +151,7 @@ build_ui_param_label(
   param_ui_description const& param, std::int32_t left, std::int32_t width,
   Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_item_base(topology, part, param, "CTextLabel", left, width, 0, allocator));
+  Value result(build_ui_param_item_base("CTextLabel", left, width, 0, allocator));
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
@@ -175,7 +170,7 @@ build_ui_param_edit(
   std::string small_font = "~ NormalFontSmall";
   std::string very_small_font = "~ NormalFontVerySmall";
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  Value result(build_ui_param_control_base(topology, part, param, "CTextEdit", left, width, 0, allocator));
+  Value result(build_ui_param_control_base(topology, param, "CTextEdit", left, width, 0, allocator));
   add_attribute(result, "text-alignment", alignment, allocator);
   add_attribute(result, "style-no-frame", "true", allocator);
   add_attribute(result, "style-round-rect", "true", allocator);
