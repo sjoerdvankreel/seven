@@ -39,6 +39,7 @@ inline double
 parameter::discrete_to_vst_normalized(
   svn::base::param_descriptor const& param, std::int32_t val)
 { 
+  assert(param.type != svn::base::param_type::real);
   std::int32_t min = param.min.discrete;
   std::int32_t max = param.max.discrete;
   return static_cast<double>(val - min) / (max - min); 
@@ -48,6 +49,7 @@ inline std::int32_t
 parameter::vst_normalized_to_discrete(
   svn::base::param_descriptor const& param, double val)
 { 
+  assert(param.type != svn::base::param_type::real);
   std::int32_t min = param.min.discrete;
   std::int32_t max = param.max.discrete;
   return min + std::clamp(static_cast<std::int32_t>(val * (max - min + 1)), 0, max - min);

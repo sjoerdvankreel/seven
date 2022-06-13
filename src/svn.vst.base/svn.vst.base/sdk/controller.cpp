@@ -26,14 +26,7 @@ IPlugView* PLUGIN_API
 controller::createView(char const* name)
 {
   if(ConstString(name) != ViewType::kEditor) return nullptr;
-  return new editor(this, "view", "controller.uidesc", _topology->params.size());
-}
-
-tresult 
-controller::endEdit(ParamID tag)
-{
-  assert(_topology->ui_param_dependencies[tag].size() == 0);
-  return EditControllerEx1::endEdit(tag);
+  return _editor = new editor(this, "view", "controller.uidesc", _topology);
 }
 
 tresult PLUGIN_API 
@@ -66,6 +59,18 @@ controller::initialize(FUnknown* context)
   for (std::size_t p = 0; p < _topology->params.size(); p++)
     parameters.addParameter(new parameter(p, &_topology->params[p]));
   return kResultTrue;
+}
+
+tresult
+controller::endEdit(ParamID tag)
+{
+  if (_editor == nullptr) return EditControllerEx1::endEdit(tag);
+  if (_topology->ui_param_dependencies[tag].size() == 0) return EditControllerEx1::endEdit(tag);
+  double normalized = getParamNormalized(tag);
+  auto const& descriptor = *_topology->params[tag].descriptor;
+  std::int32_t value = parameter::vst_normalized_to_discrete(descriptor, normalized);
+  _editor->controllerEndEdit(tag, value);
+  return EditControllerEx1::endEdit(tag);
 }
 
 } // namespace svn::vst::base

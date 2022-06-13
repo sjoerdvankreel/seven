@@ -1,4 +1,5 @@
 #include <svn.vst.base/sdk/editor.hpp>
+#include <svn.base/static/param_descriptor.hpp>
 #include <cassert>
 
 using namespace VSTGUI;
@@ -7,11 +8,12 @@ namespace svn::vst::base {
 
 editor::
 editor(EditController* controller, UTF8StringPtr template_name, 
-  UTF8StringPtr xml_file, std::size_t param_count):
+  UTF8StringPtr xml_file, svn::base::runtime_topology const* topology):
 VST3Editor(controller, template_name, xml_file),
-_controls(param_count)
+_topology(topology),
+_controls(topology->params.size())
 {
-  assert(param_count > 0);
+  assert(topology != nullptr);
   assert(xml_file != nullptr);
   assert(controller != nullptr);
   assert(template_name != nullptr);
@@ -36,6 +38,13 @@ editor::onViewRemoved(CFrame* frame, CView* view)
       if(_controls[param][control] == view)
         _controls[param].erase(_controls[param].begin() + control);
   VST3Editor::onViewRemoved(frame, view);
+}
+
+void
+editor::controllerEndEdit(ParamID tag, std::int32_t value)
+{
+  for(std::size_t control = 0; control < _controls[tag].size(); control++)
+      _controls[tag][control]->setVisible(_topology->params[tag].descriptor->ui_relevant_if_value == value);
 }
 
 } // namespace svn::vst::base

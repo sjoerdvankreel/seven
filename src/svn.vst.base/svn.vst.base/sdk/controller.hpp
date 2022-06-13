@@ -5,6 +5,7 @@
 #include <vstgui/plugin-bindings/vst3editor.h>
 #include <public.sdk/source/vst/vsteditcontroller.h>
 #include <svn.base/runtime/runtime_topology.hpp>
+#include <svn.vst.base/sdk/editor.hpp>
 
 namespace svn::vst::base {
 
@@ -17,6 +18,8 @@ public VSTGUI::VST3EditorDelegate
   using FUnknown = Steinberg::FUnknown;
   using IPlugView = Steinberg::IPlugView;
   using ParamID = Steinberg::Vst::ParamID;
+  
+  editor* _editor = nullptr;
   svn::base::runtime_topology const* const _topology;
 
 public:
