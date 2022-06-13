@@ -290,12 +290,12 @@ build_ui_part_single_param_container(
   Value result(kObjectType);
   auto const& param = description.params[index];
   auto const& part = topology.parts[description.runtime_part_index];
-  std::int32_t left = param.column * param_total_width + padding_param_group * 2;
-  std::int32_t top = param.row * (param_row_height + margin) + 2 * padding_param_group;
+  std::int32_t left = param.column * param_total_width + padding_param_group * 2 + padding_param_group;
+  std::int32_t top = param.row * (param_row_height + margin) + 3 * padding_param_group;
   add_attribute(result, "class", "CViewContainer", allocator);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   add_attribute(result, "size", size_to_string(param_total_width, param_row_height), allocator);
-  add_attribute(result, "background-color", get_color_name(white, color_alpha::half), allocator); 
+  add_attribute(result, "background-color", get_color_name(white, color_alpha::transparent), allocator); 
   if (part.descriptor->output)
     add_ui_output_param(topology, description, result, index, allocator);
   else
