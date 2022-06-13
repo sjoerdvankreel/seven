@@ -43,8 +43,13 @@ editor::onViewRemoved(CFrame* frame, CView* view)
 void
 editor::controllerEndEdit(ParamID tag, std::int32_t value)
 {
-  for(std::size_t control = 0; control < _controls[tag].size(); control++)
-      _controls[tag][control]->setVisible(_topology->params[tag].descriptor->ui_relevant_if_value == value);
+  auto const& dependents = _topology->ui_param_dependencies[tag];
+  for(std::size_t d = 0; d < dependents.size(); d++)
+    for(std::size_t c = 0; c < _controls[dependents[d]].size(); c++)
+    {
+      bool visible = _topology->params[dependents[d]].descriptor->ui_relevant_if_value == value;
+      _controls[dependents[d]][c]->setVisible(visible);
+    }
 }
 
 } // namespace svn::vst::base
