@@ -22,6 +22,14 @@ controller(svn::base::runtime_topology const* topology):
 _topology(topology)
 { assert(topology != nullptr); }
 
+void
+controller::sync_dependent_parameters()
+{
+  // Updates visibility of dependent parameters.
+  for (std::size_t p = 0; p < _topology->params.size(); p++)
+    endEdit(static_cast<std::int32_t>(p));
+}
+
 IPlugView* PLUGIN_API 
 controller::createView(char const* name)
 {
@@ -34,7 +42,6 @@ controller::setComponentState(IBStream* state)
 {
   param_value value;
   std::vector<param_value> values(_topology->input_param_count, value);
-
   if (state == nullptr) return kResultFalse;
   IBStreamer streamer(state, kLittleEndian);
   vst_io_stream stream(&streamer);
@@ -46,6 +53,7 @@ controller::setComponentState(IBStream* state)
     else
       setParamNormalized(p, parameter::discrete_to_vst_normalized(
         *_topology->params[p].descriptor, values[p].discrete));
+  sync_dependent_parameters();
   return kResultOk;
 }
 

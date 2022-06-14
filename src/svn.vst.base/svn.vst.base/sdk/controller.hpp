@@ -23,7 +23,9 @@ public VSTGUI::VST3EditorDelegate
   svn::base::runtime_topology const* const _topology;
 
 public:
+  void sync_dependent_parameters();
   controller(svn::base::runtime_topology const* topology);
+
   tresult endEdit(ParamID tag) override;
   tresult PLUGIN_API initialize(FUnknown* context) override;
   IPlugView* PLUGIN_API createView(char const* name) override;

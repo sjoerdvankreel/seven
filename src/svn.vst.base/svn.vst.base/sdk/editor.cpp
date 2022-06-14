@@ -1,4 +1,5 @@
 #include <svn.vst.base/sdk/editor.hpp>
+#include <svn.vst.base/sdk/controller.hpp>
 #include <svn.base/static/param_descriptor.hpp>
 #include <cassert>
 
@@ -7,7 +8,7 @@ using namespace VSTGUI;
 namespace svn::vst::base {   
 
 editor::
-editor(EditController* controller, UTF8StringPtr template_name, 
+editor(EditController* controller, UTF8StringPtr template_name,
   UTF8StringPtr xml_file, svn::base::runtime_topology const* topology):
 VST3Editor(controller, template_name, xml_file),
 _topology(topology),
@@ -18,16 +19,6 @@ _controls(topology->params.size())
   assert(controller != nullptr);
   assert(template_name != nullptr);
 }
-
-bool PLUGIN_API 
-editor::open(void* parent, const PlatformType& type)
-{
-  // Need to sync parameter values to force visibility of dependent parameters.
-  if(!VST3Editor::open(parent, type)) return false;
-  for(std::size_t p = 0; p < _topology->params.size(); p++)
-    controller->endEdit(static_cast<std::int32_t>(p));
-  return true;
-} 
 
 void 
 editor::onViewAdded(CFrame* frame, CView* view)
@@ -48,7 +39,15 @@ editor::onViewRemoved(CFrame* frame, CView* view)
       if(_controls[param][control] == view)
         _controls[param].erase(_controls[param].begin() + control);
   VST3Editor::onViewRemoved(frame, view);
-} 
+}
+
+bool PLUGIN_API
+editor::open(void* parent, const PlatformType& type)
+{
+  if (!VST3Editor::open(parent, type)) return false;
+  static_cast<svn::vst::base::controller*>(this->controller)->sync_dependent_parameters();
+  return true;
+}
     
 void               
 editor::controllerEndEdit(ParamID tag, std::int32_t value)
