@@ -53,13 +53,31 @@ editor::onViewRemoved(CFrame* frame, CView* view)
 void               
 editor::controllerEndEdit(ParamID tag, std::int32_t value)
 { 
+  // Rearrange control order to have visible parameter on top.
+  CView* visible_view = nullptr;
+  CViewContainer* parent_view = nullptr;
+  std::vector<CView*> invisible_views;
   auto const& dependents = _topology->ui_param_dependencies[tag];
   for(std::size_t d = 0; d < dependents.size(); d++)
     for(std::size_t c = 0; c < _controls[dependents[d]].size(); c++)
     {
+      CView* container = _controls[dependents[d]][c]->getParentView();
       bool visible = _topology->params[dependents[d]].descriptor->ui_relevant_if_value == value;
-      _controls[dependents[d]][c]->getParentView()->setVisible(visible);
+      container->setVisible(visible);
+      if(visible) assert(visible_view == nullptr), visible_view = container;
+      else invisible_views.push_back(container);
+      assert(parent_view == nullptr || parent_view == container->getParentView());
+      parent_view = container->getParentView()->asViewContainer();
     }
+  if (visible_view != nullptr)
+    parent_view->removeView(visible_view, false);
+  for(std::size_t i = 0; i < invisible_views.size(); i++)
+  {
+    parent_view->removeView(invisible_views[i], false);
+    parent_view->addView(invisible_views[i]);
+  }
+  if (visible_view != nullptr)
+    parent_view->addView(visible_view);
 }
 
 } // namespace svn::vst::base
