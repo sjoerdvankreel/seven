@@ -27,7 +27,7 @@ editor::open(void* parent, const PlatformType& type)
   for(std::size_t p = 0; p < _topology->params.size(); p++)
     controller->endEdit(static_cast<std::int32_t>(p));
   return true;
-}
+} 
 
 void 
 editor::onViewAdded(CFrame* frame, CView* view)

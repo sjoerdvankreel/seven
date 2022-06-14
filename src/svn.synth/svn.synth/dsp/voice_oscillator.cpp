@@ -71,7 +71,7 @@ voice_oscillator::process_block(
     {
     case voice_osc_type::sine: sample = osc_sine(_phase); break;
     case voice_osc_type::blep: sample = osc_blep(_sample_rate, frequency, _phase); break;
-    case voice_osc_type::blamp: sample = 0.0f; break;
+    case voice_osc_type::blmp: sample = 0.0f; break;
     default: assert(false); break;
     } 
      
