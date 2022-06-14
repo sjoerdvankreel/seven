@@ -15,7 +15,7 @@ _sample_rate(sample_rate)
 { 
   assert(sample_rate > 0.0f);
   assert(0.0f <= velocity && velocity <= 1.0f); 
-}
+} 
 
 std::int32_t
 voice_amp::process_block(voice_input const& input, 

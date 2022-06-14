@@ -74,7 +74,7 @@ voice_oscillator::process_block(
     case voice_osc_type::blamp: sample = 0.0f; break;
     default: assert(false); break;
     } 
-
+     
     audio[s].left = (1.0f - panning) * sample;
     audio[s].right = panning * sample;
     _phase += frequency / _sample_rate;
