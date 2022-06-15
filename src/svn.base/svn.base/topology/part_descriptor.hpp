@@ -2,6 +2,7 @@
 #define SVN_BASE_TOPOLOGY_PART_DESCRIPTOR_HPP
 
 #include <svn.base/support/support.hpp>
+#include <svn.base/topology/param_descriptor.hpp>
 #include <cstdint>
 
 namespace svn::base {
@@ -21,7 +22,7 @@ struct part_descriptor
   std::int32_t const type; // Type id, e.g. Osc, Filter.
   bool const output; // Part contains output parameters.
   std::int32_t const part_count; // Part count of this type, e.g. 2 filters.
-  struct param_descriptor const* const params; // Pointer to parameter descriptor array.
+  param_descriptor const* const params; // Pointer to parameter descriptor array.
   std::int32_t const param_count; // Parameter count for a part of this type, e.g. 2: frequency, resonance.
   part_ui_descriptor const ui; // For ui generator.
 };
