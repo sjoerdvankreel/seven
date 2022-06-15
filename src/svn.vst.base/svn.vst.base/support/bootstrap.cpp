@@ -8,6 +8,7 @@ extern bool DeinitModule();
 void* moduleHandle = nullptr;
 
 static std::int32_t _svn_module_counter = 0;
+static VSTGUI::IViewCreator const* _graph_creator;
 static svn::base::topology_info const* _topology = nullptr;
  
 extern "C" {
@@ -15,13 +16,22 @@ extern "C" {
 svn::base::topology_info const* 
 svn_vst_get_topology() { return _topology; }
 
+BOOL WINAPI
+DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
+{
+  if (reason != DLL_PROCESS_ATTACH) return TRUE;
+  moduleHandle = instance;
+  return TRUE;
+}
+
 SMTG_EXPORT_SYMBOL
 bool InitDll()
 {
   if (++_svn_module_counter != 1) return true;
   if (!InitModule()) return false;
   _topology = svn_vst_create_topology();
-  VSTGUI::UIViewFactory::registerViewCreator(svn::vst::base::graph_factory());
+  _graph_creator = new svn::vst::base::graph_factory();
+  VSTGUI::UIViewFactory::registerViewCreator(*_graph_creator);
   return true;
 }
 
@@ -32,18 +42,12 @@ bool ExitDll()
   if (_svn_module_counter > 0) return true;
   if (_svn_module_counter < 0) return false;
   if(!DeinitModule()) return false;
+  VSTGUI::UIViewFactory::unregisterViewCreator(*_graph_creator);
+  delete _graph_creator;
+  _graph_creator = nullptr;
   delete _topology;
   _topology = nullptr;
-  VSTGUI::UIViewFactory::unregisterViewCreator(svn::vst::base::graph_factory());
   return true;
-}
-
-BOOL WINAPI
-DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
-{
-  if (reason != DLL_PROCESS_ATTACH) return TRUE;
-  moduleHandle = instance;
-  return TRUE;
 }
 
 } // extern "C"
