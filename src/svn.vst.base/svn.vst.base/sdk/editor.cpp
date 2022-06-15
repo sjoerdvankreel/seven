@@ -1,6 +1,5 @@
 #include <svn.vst.base/sdk/editor.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
-#include <svn.base/topology/param_descriptor.hpp>
 #include <cassert>
 
 using namespace VSTGUI;
@@ -11,8 +10,7 @@ editor::
 editor(EditController* controller, UTF8StringPtr template_name,
   UTF8StringPtr xml_file, svn::base::topology_info const* topology):
 VST3Editor(controller, template_name, xml_file),
-_topology(topology),
-_controls(topology->params.size())
+_topology(topology), _controls(topology->params.size())
 {
   assert(topology != nullptr);
   assert(xml_file != nullptr);
@@ -41,6 +39,7 @@ editor::onViewRemoved(CFrame* frame, CView* view)
   VST3Editor::onViewRemoved(frame, view);
 }
 
+// Set initial visibility when the plugin ui is opened.
 bool PLUGIN_API
 editor::open(void* parent, const PlatformType& type)
 {
