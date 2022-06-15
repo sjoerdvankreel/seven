@@ -1,7 +1,7 @@
 #ifndef SVN_SYNTH_DSP_SYNTH_VOICE_HPP
 #define SVN_SYNTH_DSP_SYNTH_VOICE_HPP
 
-#include <svn.synth/dsp/voice_amp.hpp>
+#include <svn.synth/dsp/amplitude.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
 #include <svn.synth/topology/topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
@@ -16,7 +16,7 @@ namespace svn::synth {
 class synth_voice
 {
 private:
-  voice_amp _amp;
+  amplitude _amplitude;
   struct base::topology_info const* _topology;
   std::array<oscillator, oscillator_count> _oscillators;
 

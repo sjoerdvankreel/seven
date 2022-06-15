@@ -36,7 +36,7 @@ glob_output_params[glob_output_param::count] =
 };
 
 param_descriptor const
-voice_amp_params[voice_amp_param::count] =
+amplitude_params[amplitude_param::count] =
 {
   { { L"Amp", L"Level" }, L"dB", { 1.0, 1, real_bounds::unit(), real_bounds::decibel() }, { 0, 1, true, -1, 0 } },
   { { L"Dcy", L"Decay" }, L"Sec", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 1, 1, false, -1, 0 } }
@@ -58,8 +58,8 @@ oscillator_params[oscillator_param::count] =
 part_descriptor const 
 part_descriptors[part_type::count] =
 {
-  { { L"Osc", L"Voice oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, { 1, 3, 0 } },
-  { { L"Amp", L"Voice level" }, part_type::voice_amp, false, 1, voice_amp_params, voice_amp_param::count, { 5, 2, -1 } },
+  { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, { 1, 3, 0 } },
+  { { L"Amp", L"Amplitude" }, part_type::amplitude, false, 1, amplitude_params, amplitude_param::count, { 5, 2, -1 } },
   { { L"Out", L"Output" }, part_type::glob_output, true, 1, glob_output_params, glob_output_param::count, { 6, 1, -1 } }
 };
  

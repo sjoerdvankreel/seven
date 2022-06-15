@@ -15,7 +15,7 @@ synth_voice(
   float sample_rate, float velocity, std::int32_t midi_note):
 _oscillators(),
 _topology(topology),
-_amp(sample_rate, velocity)
+_amplitude(sample_rate, velocity)
 {
   assert(topology != nullptr);  
   assert(0 <= midi_note && midi_note < 128);
@@ -43,8 +43,8 @@ synth_voice::process_block(
     _oscillators[i].process_block(part_input, audio_scratch);
     add_audio(audio, audio_scratch, input.sample_count);
   }
-  part_input.automation = input.automation.rearrange_params(part_type::voice_amp, 0);
-  return _amp.process_block(part_input, audio, release_sample);
+  part_input.automation = input.automation.rearrange_params(part_type::amplitude, 0);
+  return _amplitude.process_block(part_input, audio, release_sample);
 }
 
 } // namespace svn::synth
