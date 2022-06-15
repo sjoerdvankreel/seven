@@ -1,8 +1,8 @@
 #ifndef SVN_VST_BASE_SDK_CONTROLLER_HPP
 #define SVN_VST_BASE_SDK_CONTROLLER_HPP
 
-#include <pluginterfaces/vst/vsttypes.h>
 #include <vstgui/plugin-bindings/vst3editor.h>
+#include <pluginterfaces/vst/vsttypes.h>
 #include <public.sdk/source/vst/vsteditcontroller.h>
 #include <svn.base/topology/topology_info.hpp>
 #include <svn.vst.base/sdk/editor.hpp>
