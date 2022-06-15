@@ -5,7 +5,7 @@ using namespace svn::base;
 namespace svn::synth {
   
 static item_name const
-voice_osc_types[voice_osc_type::count] =
+oscillator_types[oscillator_type::count] =
 {
   { L"Sine", L"Sine wave" },
   { L"Blep", L"Bandlimited step" },
@@ -13,7 +13,7 @@ voice_osc_types[voice_osc_type::count] =
 }; 
 
 static item_name const
-voice_osc_blep_types[voice_osc_blep_type::count] =
+oscillator_blep_types[oscillator_blep_type::count] =
 {
   { L"Saw", L"Sawtooth" },
   { L"Pulse", L"Pulse" },
@@ -21,7 +21,7 @@ voice_osc_blep_types[voice_osc_blep_type::count] =
 };
 
 static item_name const
-voice_osc_blmp_types[voice_osc_blmp_type::count] =
+oscillator_blmp_types[oscillator_blmp_type::count] =
 {
   { L"Saw", L"Sawtooth" },
   { L"Pulse", L"Pulse" }
@@ -43,12 +43,12 @@ voice_amp_params[voice_amp_param::count] =
 };
 
 param_descriptor const
-voice_osc_params[voice_osc_param::count] =
+oscillator_params[oscillator_param::count] =
 {
   { { L"On", L"Enabled" }, false, { - 1, 0, false, -1, 0 } },
-  { { L"Type", L"Type" }, L"", false, voice_osc_types, voice_osc_type::count, { 0, 0, false, -1, 0 } },
-  { { L"Blep", L"Blep type" }, L"", false, voice_osc_blep_types, voice_osc_blep_type::count, {1, 0, false, voice_osc_param::type, voice_osc_type::blep}},
-  { { L"Blmp", L"Blmp type" }, L"", false, voice_osc_blmp_types, voice_osc_blmp_type::count, { 1, 0, false, voice_osc_param::type, voice_osc_type::blmp } },
+  { { L"Type", L"Type" }, L"", false, oscillator_types, oscillator_type::count, { 0, 0, false, -1, 0 } },
+  { { L"Blep", L"Blep type" }, L"", false, oscillator_blep_types, oscillator_blep_type::count, {1, 0, false, oscillator_param::type, oscillator_type::blep}},
+  { { L"Blmp", L"Blmp type" }, L"", false, oscillator_blmp_types, oscillator_blmp_type::count, { 1, 0, false, oscillator_param::type, oscillator_type::blmp } },
   { { L"Pan", L"Panning" }, L"%", { 0.5, 0, real_bounds::unit(), real_bounds::linear(-100.0, 100.0) }, { 2, 1, false, -1, 0 } },
   { { L"Oct", L"Octave" }, L"", true, 0, 9, 4, { 3, 2, false, -1, 0 } },
   { { L"Note", L"Note" }, L"", true, note_names, 12, { 4, 2, false, -1, 0 } },
@@ -58,7 +58,7 @@ voice_osc_params[voice_osc_param::count] =
 part_descriptor const 
 part_descriptors[part_type::count] =
 {
-  { { L"Osc", L"Voice oscillator" }, part_type::voice_osc, false, voice_osc_count, voice_osc_params, voice_osc_param::count, { 1, 3, 0 } },
+  { { L"Osc", L"Voice oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, { 1, 3, 0 } },
   { { L"Amp", L"Voice level" }, part_type::voice_amp, false, 1, voice_amp_params, voice_amp_param::count, { 5, 2, -1 } },
   { { L"Out", L"Output" }, part_type::glob_output, true, 1, glob_output_params, glob_output_param::count, { 6, 1, -1 } }
 };

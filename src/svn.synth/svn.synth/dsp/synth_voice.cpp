@@ -36,10 +36,10 @@ synth_voice::process_block(
   assert(release_sample < input.sample_count);
 
   voice_input part_input = input;
-  for (std::int32_t i = 0; i < voice_osc_count; i++)
+  for (std::int32_t i = 0; i < oscillator_count; i++)
   {
     clear_audio(audio_scratch, input.sample_count);
-    part_input.automation = input.automation.rearrange_params(part_type::voice_osc, i);
+    part_input.automation = input.automation.rearrange_params(part_type::oscillator, i);
     _oscillators[i].process_block(part_input, audio_scratch);
     add_audio(audio, audio_scratch, input.sample_count);
   }

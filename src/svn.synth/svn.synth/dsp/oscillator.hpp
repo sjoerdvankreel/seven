@@ -6,6 +6,7 @@
 
 namespace svn::synth {
 
+// Per-voice unit generator.
 class oscillator
 {
   float _phase = 0.0f;

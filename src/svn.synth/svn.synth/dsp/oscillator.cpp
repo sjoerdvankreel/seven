@@ -37,22 +37,22 @@ oscillator::process_block(voice_input const& input, audio_sample* audio)
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
     audio[s] = 0.0f;
-    bool on = input.automation.get(voice_osc_param::on, s).discrete != 0;
+    bool on = input.automation.get(oscillator_param::on, s).discrete != 0;
     if(!on) continue;
         
-    float cent = input.automation.get(voice_osc_param::cent, s).real;
-    float panning = input.automation.get(voice_osc_param::pan, s).real;
-    std::int32_t type = input.automation.get(voice_osc_param::type, s).discrete;
-    std::int32_t note = input.automation.get(voice_osc_param::note, s).discrete;
-    std::int32_t octave = input.automation.get(voice_osc_param::oct, s).discrete;
+    float cent = input.automation.get(oscillator_param::cent, s).real;
+    float panning = input.automation.get(oscillator_param::pan, s).real;
+    std::int32_t type = input.automation.get(oscillator_param::type, s).discrete;
+    std::int32_t note = input.automation.get(oscillator_param::note, s).discrete;
+    std::int32_t octave = input.automation.get(oscillator_param::oct, s).discrete;
 
     float sample;
     float frequency = note_to_frequency(12 * (octave + 1) + note + cent + _midi_note - 60);
     switch (type)
     {
-    case voice_osc_type::blmp: sample = 0.0f; break;
-    case voice_osc_type::sine: sample = std::sin(2.0f * std::numbers::pi * _phase); break;
-    case voice_osc_type::blep: sample = oscillator_blep(_sample_rate, frequency, _phase); break;
+    case oscillator_type::blmp: sample = 0.0f; break;
+    case oscillator_type::sine: sample = std::sin(2.0f * std::numbers::pi * _phase); break;
+    case oscillator_type::blep: sample = oscillator_blep(_sample_rate, frequency, _phase); break;
     default: assert(false); break;
     } 
      

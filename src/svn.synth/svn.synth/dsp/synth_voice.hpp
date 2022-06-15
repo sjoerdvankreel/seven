@@ -18,7 +18,7 @@ class synth_voice
 private:
   voice_amp _amp;
   struct base::topology_info const* _topology;
-  std::array<oscillator, voice_osc_count> _oscillators;
+  std::array<oscillator, oscillator_count> _oscillators;
 
 public:
   // With input and audio offset to the start of the voice within the current 
