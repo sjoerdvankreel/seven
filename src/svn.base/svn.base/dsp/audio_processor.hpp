@@ -1,9 +1,7 @@
 #ifndef SVN_BASE_DSP_AUDIO_PROCESSOR_HPP
 #define SVN_BASE_DSP_AUDIO_PROCESSOR_HPP
 
-#include <svn.base/dsp/note_event.hpp>
-#include <svn.base/dsp/block_input.hpp>
-#include <svn.base/dsp/block_output.hpp>
+#include <svn.base/dsp/io_types.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
 #include <svn.base/topology/topology_info.hpp>
 

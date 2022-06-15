@@ -5,7 +5,7 @@
 #include <public.sdk/source/vst/vstaudioeffect.h>
 #include <public.sdk/source/vst/utility/sampleaccurate.h>
 
-#include <svn.base/dsp/block_input.hpp>
+#include <svn.base/dsp/io_types.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
 #include <svn.base/topology/topology_info.hpp>
 

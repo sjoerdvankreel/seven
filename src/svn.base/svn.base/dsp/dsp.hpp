@@ -1,8 +1,7 @@
 #ifndef SVN_BASE_DSP_DSP_HPP
 #define SVN_BASE_DSP_DSP_HPP
 
-#include <svn.base/dsp/block_input.hpp>
-#include <svn.base/dsp/audio_sample.hpp>
+#include <svn.base/dsp/io_types.hpp>
 #include <svn.base/topology/topology_info.hpp>
 
 #include <cmath>
