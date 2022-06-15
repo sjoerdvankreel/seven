@@ -1,5 +1,4 @@
 #include <svn.base/support/io_stream.hpp>
-#include <svn.base/topology/topology_info.hpp>
 
 #include <vector>
 #include <cassert>
