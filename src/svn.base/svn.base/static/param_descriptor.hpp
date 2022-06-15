@@ -1,7 +1,7 @@
 #ifndef SVN_BASE_STATIC_PARAM_DESCRIPTOR_HPP
 #define SVN_BASE_STATIC_PARAM_DESCRIPTOR_HPP
 
-#include <svn.base/static/param_bounds.hpp>
+#include <svn.base/static/real_bounds.hpp>
 #include <svn.base/support/item_name.hpp>
 #include <svn.base/support/param_value.hpp>
 #include <cstdint>
@@ -17,8 +17,8 @@ struct real_descriptor
 {
   float const default_; // Normalized default.
   std::int32_t const precision; // Value formatting precision.
-  param_bounds const dsp; // Dsp range.
-  param_bounds const display; // Display range.
+  real_bounds const dsp; // Dsp range.
+  real_bounds const display; // Display range.
 };
 
 // Discrete valued specific data.

@@ -566,7 +566,7 @@
                                                             "style-round-rect": "true",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "0",
+                                                            "value-precision": "9",
                                                             "back-color": "color_00000020",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FF8000FF"
@@ -637,7 +637,7 @@
                                                             "style-round-rect": "true",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "0",
+                                                            "value-precision": "11",
                                                             "back-color": "color_00000020",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FF8000FF"
@@ -1109,7 +1109,7 @@
                                                             "style-round-rect": "true",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "0",
+                                                            "value-precision": "9",
                                                             "back-color": "color_00000020",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FF8000FF"
@@ -1180,7 +1180,7 @@
                                                             "style-round-rect": "true",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "0",
+                                                            "value-precision": "11",
                                                             "back-color": "color_00000020",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FF8000FF"
@@ -1731,7 +1731,7 @@
                                                             "style-round-rect": "true",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "0",
+                                                            "value-precision": "32",
                                                             "back-color": "color_00000020",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_00FFFFFF"

@@ -45,17 +45,17 @@ voice_osc_params[voice_osc_param::count] =
   { { L"Type", L"Type" }, L"", false, voice_osc_types, voice_osc_type::count, { 0, 0, false, -1, 0 } },
   { { L"Blep", L"Blep type" }, L"", false, voice_osc_blep_types, voice_osc_blep_type::count, {1, 0, false, voice_osc_param::type, voice_osc_type::blep}},
   { { L"Blmp", L"Blmp type" }, L"", false, voice_osc_blmp_types, voice_osc_blmp_type::count, { 1, 0, false, voice_osc_param::type, voice_osc_type::blmp } },
-  { { L"Pan", L"Panning" }, L"%", { 0.5, 0, param_bounds::linear_unit(), param_bounds::linear(-100.0, 100.0) }, { 2, 1, false, -1, 0 } },
+  { { L"Pan", L"Panning" }, L"%", { 0.5, 0, real_bounds::unit(), real_bounds::linear(-100.0, 100.0) }, { 2, 1, false, -1, 0 } },
   { { L"Oct", L"Octave" }, L"", true, 0, 9, 4, { 3, 2, false, -1, 0 } },
   { { L"Note", L"Note" }, L"", true, note_names, note_name::count, { 4, 2, false, -1, 0 } },
-  { { L"Cent", L"Cent" }, L"", { 0.5, 0, param_bounds::linear(-0.5, 0.5), param_bounds::linear(-50.0, 50.0) }, { 5, 2, false, -1, 0 } }
+  { { L"Cent", L"Cent" }, L"", { 0.5, 0, real_bounds::linear(-0.5, 0.5), real_bounds::linear(-50.0, 50.0) }, { 5, 2, false, -1, 0 } }
 }; 
    
 param_descriptor const
 voice_amp_params[voice_amp_param::count] =
 {
-  { { L"Amp", L"Level" }, L"dB", { 1.0, 1, param_bounds::linear_unit(), param_bounds::decibel() }, { 0, 1, true, -1, 0 } },
-  { { L"Dcy", L"Decay" }, L"Sec", { 0.0, 2, param_bounds::linear_unit(), param_bounds::linear_unit() }, { 1, 1, false, -1, 0 } }
+  { { L"Amp", L"Level" }, L"dB", { 1.0, 1, real_bounds::unit(), real_bounds::decibel() }, { 0, 1, true, -1, 0 } },
+  { { L"Dcy", L"Decay" }, L"Sec", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 1, 1, false, -1, 0 } }
 };      
  
 part_descriptor const 
