@@ -14,6 +14,7 @@ struct part_ui_descriptor
   std::int32_t const enabled_param; // Index into params which identifies the part on/off switch, or -1 if always on.
 };
 
+// Static part info.
 struct part_descriptor
 {
   item_name const static_name; // Static name, e.g. "Osc", "Filter".

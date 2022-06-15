@@ -29,7 +29,7 @@ Steinberg::FUID
 init_get_controller_id()
 { return synth::controller_id; } 
 
-std::unique_ptr<topology_info>
+topology_info
 init_create_topology()
 { 
   return topology_info::create(

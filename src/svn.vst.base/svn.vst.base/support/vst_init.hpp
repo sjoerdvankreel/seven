@@ -17,8 +17,7 @@ controller_factory(void* context);
 
 extern Steinberg::FUID 
 init_get_controller_id();
-extern std::unique_ptr<svn::base::topology_info>
-init_create_topology();
+extern svn::base::topology_info init_create_topology();
 extern std::unique_ptr<svn::base::audio_processor>
 init_create_audio_processor(
   svn::base::topology_info const* topology, float sample_rate,

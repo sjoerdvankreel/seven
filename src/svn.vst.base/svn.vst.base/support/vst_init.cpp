@@ -15,7 +15,7 @@ extern bool DeinitModule();
 void* moduleHandle = nullptr;
 
 static std::int32_t svn_module_counter = 0;
-static std::unique_ptr<topology_info> _topology;
+static topology_info _topology;
   
 BOOL WINAPI
 DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
@@ -31,7 +31,7 @@ extern "C" {
 SMTG_EXPORT_SYMBOL
 svn::base::topology_info const*
 svn_get_topology()
-{ return _topology.get(); }
+{ return &_topology; }
 
 SMTG_EXPORT_SYMBOL 
 bool ExitDll()
@@ -40,7 +40,7 @@ bool ExitDll()
   if (svn_module_counter > 0) return true;
   if (svn_module_counter < 0) return false;
   if(!DeinitModule()) return false;
-  _topology.reset();
+  _topology = topology_info();
   return true;
 }
 
@@ -49,7 +49,7 @@ bool InitDll()
 {
   if (++svn_module_counter != 1) return true;
   if (!InitModule()) return false;
-  _topology = std::move(init_create_topology());
+  _topology = init_create_topology();
   return true;
 }
 
@@ -60,14 +60,14 @@ namespace svn::vst::base {
 Steinberg::FUnknown*
 controller_factory(void* context)
 {
-  auto result = new controller(_topology.get());
+  auto result = new controller(&_topology);
   return static_cast<Steinberg::Vst::IEditController*>(result);
 }
 
 Steinberg::FUnknown*
 processor_factory(void* context)
 { 
-  auto result = new processor(init_get_controller_id(), _topology.get());
+  auto result = new processor(init_get_controller_id(), &_topology);
   return static_cast<Steinberg::Vst::IAudioProcessor*>(result); 
 }
 

@@ -10,6 +10,7 @@ namespace svn::base {
 struct real_slope_t { enum value { linear, logarithmic, decibel, count }; };
 typedef real_slope_t::value real_slope;
 
+// Dsp/display bounds for real valued params.
 struct real_bounds
 {
   float const min; // Minimum transformed value for real parameters.
