@@ -1,8 +1,7 @@
 #ifndef SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
 #define SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
 
-#include <svn.synth/dsp/synth_voice.hpp>
-#include <svn.synth/dsp/voice_state.hpp>
+#include <svn.synth/dsp/voice.hpp>
 #include <svn.synth/topology/topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
 
@@ -38,7 +37,7 @@ private:
   // Similarly, if a voice is finished within the current buffer,
   // it is considered taken untill the end of the buffer.
   bool _voices_drained = false;
-  std::array<synth_voice, synth_polyphony> _voices;
+  std::array<voice, synth_polyphony> _voices;
   std::array<voice_state, synth_polyphony> _voice_states;
 
   // Oldest voice is recycled first.

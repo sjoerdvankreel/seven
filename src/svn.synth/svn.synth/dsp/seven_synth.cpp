@@ -92,7 +92,7 @@ seven_synth::setup_voice(
   _voice_states[slot].release_position_buffer = -1;
   _voice_states[slot].start_position_buffer = note.sample_index;
   _voice_states[slot].start_position_stream = stream_position + note.sample_index;
-  _voices[slot] = synth_voice(topology(), sample_rate(), note.velocity, note.midi);
+  _voices[slot] = voice(topology(), sample_rate(), note.velocity, note.midi);
 }
 
 void
