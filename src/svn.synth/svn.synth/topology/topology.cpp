@@ -27,6 +27,9 @@ oscillator_blmp_types[oscillator_blmp_type::count] =
   { L"Pulse", L"Pulse" }
 };
 
+static graph_descriptor const
+oscillator_graph = { 2, 1, graph_placement::right };
+
 param_descriptor const 
 output_params[output_param::count] =
 {
@@ -58,9 +61,9 @@ oscillator_params[oscillator_param::count] =
 part_descriptor const 
 part_descriptors[part_type::count] =
 {
-  { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, { 1, 3, 0 } },
-  { { L"Amp", L"Amplitude" }, part_type::amplitude, false, 1, amplitude_params, amplitude_param::count, { 5, 2, -1 } },
-  { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, { 6, 1, -1 } }
+  { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, { 1, 3, 0, &oscillator_graph } },
+  { { L"Amp", L"Amplitude" }, part_type::amplitude, false, 1, amplitude_params, amplitude_param::count, { 5, 2, -1, nullptr } },
+  { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, { 6, 1, -1, nullptr } }
 };
  
 } // namespace svn::synth
