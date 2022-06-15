@@ -138,7 +138,7 @@ build_ui_param_menu(
   add_attribute(result, "menu-check-style", "false", allocator);
   add_attribute(result, "text-inset", size_to_string(margin, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
-  add_attribute(result, "max-value", std::to_string(descriptor.max.discrete), allocator);
+  add_attribute(result, "max-value", std::to_string(descriptor.discrete.max), allocator);
   add_attribute(result, "font-color", get_color_name(color_values[part.color_index], color_alpha::opaque), allocator);
   add_attribute(result, "back-color", get_color_name(color_values[part.color_index], color_alpha::quarter), allocator);
   add_attribute(result, "shadow-color", get_color_name(color_values[part.color_index], color_alpha::half), allocator);
@@ -176,9 +176,9 @@ build_ui_param_edit(
   add_attribute(result, "style-round-rect", "true", allocator);
   add_attribute(result, "text-inset", size_to_string(margin, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
-  add_attribute(result, "value-precision", std::to_string(descriptor.precision), allocator);
+  add_attribute(result, "value-precision", std::to_string(descriptor.real.precision), allocator);
   add_attribute(result, "back-color", get_color_name(black, color_alpha::eight), allocator);
-  add_attribute(result, "font", descriptor.ui_edit_font_small ? very_small_font : small_font, allocator);
+  add_attribute(result, "font", descriptor.ui.edit_font_small ? very_small_font : small_font, allocator);
   add_attribute(result, "font-color", get_color_name(color_values[part.color_index], color_alpha::opaque), allocator);
   return result;
 }
@@ -229,8 +229,8 @@ add_ui_input_param(
   switch (topology.params[param.runtime_param_index].descriptor->type)
   {
   case param_type::real:
-  case param_type::discrete:
-  case param_type::discrete_list:
+  case param_type::knob:
+  case param_type::knob_list:
     add_child(container, control_class, build_ui_param_knob(topology, part, param, allocator), allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col2, param_col2_width, allocator), allocator);
     add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, col12_and_magin, param_col3_width, "right", allocator), allocator);
@@ -244,7 +244,7 @@ add_ui_input_param(
     add_child(container, control_class, build_ui_param_menu(topology, part, param, allocator), allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col3, param_col3_width, allocator), allocator);
     break;
-  case param_type::discrete_text:
+  case param_type::text:
     add_child(container, control_class, build_ui_param_edit(topology, part, param, 0, col12_and_magin, "right", allocator), allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col3, param_col3_width, allocator), allocator);
     break;
@@ -268,7 +268,7 @@ add_ui_output_param(
     add_child(container, control_class, build_ui_param_checkbox(topology, part, param, color_values[part.color_index],
       param_output_col_width + margin, param_output_col_width, 0, allocator), allocator);
     break;
-  case param_type::discrete_text:
+  case param_type::text:
     add_child(container, control_class, build_ui_param_edit(topology, part, param,
       param_output_col_width + margin, param_output_col_width - margin, "left", allocator), allocator);
     break;
@@ -313,8 +313,8 @@ build_ui_part_param_container(runtime_topology const& topology,
     auto const& part = topology.parts[description.runtime_part_index];
     auto const& param_descriptor = *topology.params[param.runtime_param_index].descriptor;
     add_child(result, "CViewContainer", build_ui_param_background(
-      param.row, param.column, param_descriptor.ui_param_group, description.color_index, allocator), allocator);
-    if (param_descriptor.ui_param_group != 0)
+      param.row, param.column, param_descriptor.ui.param_group, description.color_index, allocator), allocator);
+    if (param_descriptor.ui.param_group != 0)
       add_child(result, "CViewContainer", build_ui_param_background(
         param.row, param.column, 0, description.color_index, allocator), allocator);
     add_child(result, "CViewContainer", build_ui_part_single_param_container(topology, description, p, allocator), allocator);    

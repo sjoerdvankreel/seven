@@ -13,8 +13,8 @@ runtime_topology::init_defaults(param_value* state) const
   for (std::int32_t p = 0; p < input_param_count; p++)
     switch (params[p].descriptor->type)
     {      
-    case param_type::real: state[p].real = params[p].descriptor->default_.real; break;
-    default: state[p].discrete = params[p].descriptor->default_.discrete; break;
+    case param_type::real: state[p].real = params[p].descriptor->real.default_; break;
+    default: state[p].discrete = params[p].descriptor->discrete.default_; break;
     }   
 }    
   
@@ -77,10 +77,10 @@ runtime_topology::create(
   for (std::size_t p = 0; p < result->params.size(); p++)
   {
     auto const& this_param = result->params[p];
-    if(this_param.descriptor->ui_relevant_if_param == -1) continue;
+    if(this_param.descriptor->ui.relevant_if_param == -1) continue;
     std::int32_t index = this_param.part->type_index;
     std::int32_t type = this_param.part->descriptor->type;
-    std::int32_t param = this_param.descriptor->ui_relevant_if_param;
+    std::int32_t param = this_param.descriptor->ui.relevant_if_param;
     std::int32_t that_index = result->param_bounds[type][index] + param;
     result->ui_param_dependencies[that_index].push_back(p);
   }

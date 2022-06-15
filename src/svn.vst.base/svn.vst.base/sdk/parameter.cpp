@@ -16,7 +16,7 @@ param_step_count(param_descriptor const& param)
   switch (param.type)
   {
   case param_type::real: return 0.0;
-  default: return param.max.discrete - param.min.discrete;
+  default: return param.discrete.max - param.discrete.min;
   }
 }
 
@@ -25,8 +25,8 @@ param_default_to_vst_normalized(param_descriptor const& param)
 {
   switch (param.type)
   {
-  case param_type::real: return param.default_.real;
-  default: return parameter::discrete_to_vst_normalized(param, param.default_.discrete);
+  case param_type::real: return param.real.default_;
+  default: return parameter::discrete_to_vst_normalized(param, param.discrete.default_);
   }
 }
 
@@ -35,7 +35,7 @@ param_flags(param_type type, bool output)
 {
   int32 result = ParameterInfo::kCanAutomate;
   if(output) result |= ParameterInfo::kIsReadOnly;
-  if(type == param_type::list || type == param_type::discrete_list) result |= ParameterInfo::kIsList;
+  if(type == param_type::list || type == param_type::knob_list) result |= ParameterInfo::kIsList;
   return result;
 }  
 
@@ -52,7 +52,7 @@ parameter(std::int32_t index, svn::base::runtime_param const* param) :
 {    
   assert(index >= 0);
   assert(param != nullptr);
-  setPrecision(param->descriptor->precision);
+  setPrecision(param->descriptor->real.precision);
 }        
     
 ParamValue

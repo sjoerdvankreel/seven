@@ -6,109 +6,18 @@
 
 namespace svn::base {
 
-param_descriptor::
-param_descriptor(item_name const& static_name, 
-  param_type type, item_name const* list, std::int32_t count,
-  std::int32_t ui_param_index, std::int32_t ui_param_group, bool ui_edit_font_small,
-  std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
-type(type), unit(L""), list(list), static_name(static_name),
-dsp(param_bounds::none()), display(param_bounds::none()),
-min(0), max(count - 1), default_(0), precision(0),
-ui_param_index(ui_param_index), ui_param_group(ui_param_group),
-ui_edit_font_small(ui_edit_font_small),
-ui_relevant_if_param(ui_relevant_if_param),
-ui_relevant_if_value(ui_relevant_if_value)
-{ 
-  assert(count > 0);
-  assert(list != nullptr);
-  assert(ui_param_index >= -1);
-  assert(ui_relevant_if_param >= -1);
-  assert(0 <= ui_param_group && ui_param_group < 3);
-  assert(ui_relevant_if_param >= 0 || ui_relevant_if_value == 0);
-  assert(type == param_type::list || type == param_type::discrete_list);
-}
-
-param_descriptor::
-param_descriptor(item_name const& static_name, 
-  wchar_t const* unit, float default_, std::int32_t precision,
-  param_bounds const& dsp, param_bounds const& display,
-  std::int32_t ui_param_index, std::int32_t ui_param_group, bool ui_edit_font_small,
-  std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
-type(param_type::real), unit(unit), static_name(static_name), 
-dsp(dsp), display(display), min(0.0f), max(1.0f), 
-default_(default_), precision(precision), list(nullptr),
-ui_param_index(ui_param_index), ui_param_group(ui_param_group),
-ui_edit_font_small(ui_edit_font_small),
-ui_relevant_if_param(ui_relevant_if_param),
-ui_relevant_if_value(ui_relevant_if_value)
-{           
-  assert(precision >= 0);
-  assert(unit != nullptr);
-  assert(dsp.min < dsp.max);
-  assert(ui_param_index >= -1);
-  assert(display.min < display.max);
-  assert(ui_relevant_if_param >= -1);
-  assert(0.0 <= default_ && default_ <= 1.0);
-  assert(0 <= ui_param_group && ui_param_group < 3); 
-  assert(0 <= dsp.slope && dsp.slope <= param_slope::count);
-  assert(ui_relevant_if_param >= 0 || ui_relevant_if_value == 0);
-  assert(0 <= display.slope && display.slope <= param_slope::count);
-} 
-
-param_descriptor::   
-param_descriptor(
-  item_name const& static_name, bool default_,
-  std::int32_t ui_param_index, std::int32_t ui_param_group, bool ui_edit_font_small,
-  std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
-type(param_type::toggle), unit(L""), static_name(static_name), list(nullptr),
-dsp(param_bounds::none()), display(param_bounds::none()), 
-min(0), max(1), default_(default_? 1: 0), precision(0),
-ui_param_index(ui_param_index), ui_param_group(ui_param_group),
-ui_edit_font_small(ui_edit_font_small),
-ui_relevant_if_param(ui_relevant_if_param),
-ui_relevant_if_value(ui_relevant_if_value)
-{ 
-  assert(ui_param_index >= -1);
-  assert(ui_relevant_if_param >= -1);
-  assert(0 <= ui_param_group && ui_param_group < 3); 
-  assert(ui_relevant_if_param >= 0 || ui_relevant_if_value == 0);
-}
-
-param_descriptor::
-param_descriptor( 
-  item_name const& static_name, param_type type, wchar_t const* unit,
-  std::int32_t default_, std::int32_t min, std::int32_t max,
-  std::int32_t ui_param_index, std::int32_t ui_param_group, bool ui_edit_font_small,
-  std::int32_t ui_relevant_if_param, std::int32_t ui_relevant_if_value):
-type(type), unit(unit), static_name(static_name), list(nullptr),
-dsp(param_bounds::none()), display(param_bounds::none()),
-min(min), max(max), default_(default_), precision(0),
-ui_param_index(ui_param_index), ui_param_group(ui_param_group),
-ui_edit_font_small(ui_edit_font_small),
-ui_relevant_if_param(ui_relevant_if_param),
-ui_relevant_if_value(ui_relevant_if_value)
-{
-  assert(unit != nullptr);
-  assert(ui_param_index >= -1);
-  assert(ui_relevant_if_param >= -1);
-  assert(min <= default_ && default_ <= max);
-  assert(0 <= ui_param_group && ui_param_group < 3);
-  assert(ui_relevant_if_param >= 0 || ui_relevant_if_value == 0);
-  assert(type == param_type::discrete || type == param_type::discrete_text);
-}
-
 param_value 
 param_descriptor::to_display(param_value val) const
 {
   if(type != param_type::real) return param_value(val.discrete);
-  return param_value(display.to_range(val.real));
+  return param_value(real.display.to_range(val.real));
 }
 
 param_value 
 param_descriptor::from_display(param_value val) const
 {
   if (type != param_type::real) return param_value(val.discrete);
-  return param_value(display.from_range(val.real));
+  return param_value(real.display.from_range(val.real));
 }
 
 bool 
@@ -118,23 +27,23 @@ param_descriptor::parse(wchar_t const* buffer, param_value& val) const
   float inf = std::numeric_limits<float>::infinity();
   switch (type)
   {
-  case param_type::discrete:
-  case param_type::discrete_text:
+  case param_type::knob:
+  case param_type::text:
     str >> val.discrete;
-    if (val.discrete < min.discrete) return false;
-    if (val.discrete > max.discrete) return false;
+    if (val.discrete < discrete.min) return false;
+    if (val.discrete > discrete.max) return false;
     return true;
   case param_type::list:
-  case param_type::discrete_list:
-    for (std::int32_t i = 0; i <= max.discrete; i++)
-      if (!std::wcscmp(list[i].short_, buffer))
+  case param_type::knob_list:
+    for (std::int32_t i = 0; i <= discrete.max; i++)
+      if (!std::wcscmp(discrete.items[i].short_, buffer))
         return val.discrete = i, true;
     return false;
   case param_type::real:
     str >> val.real;
     if (!std::wcscmp(L"-inf", buffer)) val.real = -inf;
-    if (val.real < display.min) return false;
-    if (val.real > display.max) return false;
+    if (val.real < real.display.min) return false;
+    if (val.real > real.display.max) return false;
     return true;
   case param_type::toggle:
     if (!std::wcscmp(L"On", buffer)) val.discrete = 1;
@@ -154,9 +63,9 @@ param_descriptor::format(param_value val, wchar_t* buffer, std::size_t size) con
   switch (type)
   { 
   case param_type::toggle: stream << (val.discrete == 0 ? L"Off" : L"On"); break;
-  case param_type::discrete: case param_type::discrete_text: stream << val.discrete; break;
-  case param_type::real: stream << std::setprecision(precision) << std::fixed << val.real; break;
-  case param_type::list: case param_type::discrete_list: stream << list[val.discrete].short_; break;
+  case param_type::knob: case param_type::text: stream << val.discrete; break;
+  case param_type::real: stream << std::setprecision(real.precision) << std::fixed << val.real; break;
+  case param_type::list: case param_type::knob_list: stream << discrete.items[val.discrete].short_; break;
   default: assert(false); break;
   }
   std::wstring str = stream.str();

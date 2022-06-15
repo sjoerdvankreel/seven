@@ -232,7 +232,7 @@ processor::process_output_parameters(
     auto const& descriptor = *_processor->topology()->params[input_count + p].descriptor;
     param_value value = output.output_params[p];
     if(descriptor.type == param_type::real)
-      normalized = descriptor.dsp.from_range(value.real);
+      normalized = descriptor.real.dsp.from_range(value.real);
     else
       normalized = parameter::discrete_to_vst_normalized(descriptor, value.discrete);
     queue->addPoint(0, normalized, index);

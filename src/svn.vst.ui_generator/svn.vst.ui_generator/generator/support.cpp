@@ -74,12 +74,12 @@ get_param_control_class(
 {
   switch (topology.params[param.runtime_param_index].descriptor->type)
   {
+  case param_type::text: return "CTextEdit";
   case param_type::list: return "COptionMenu";
   case param_type::toggle: return "CCheckBox";
-  case param_type::discrete_text: return "CTextEdit";
   case param_type::real:
-  case param_type::discrete:
-  case param_type::discrete_list: return "CAnimKnob";
+  case param_type::knob:
+  case param_type::knob_list: return "CAnimKnob";
   default: assert(false); return "";
   }
 }

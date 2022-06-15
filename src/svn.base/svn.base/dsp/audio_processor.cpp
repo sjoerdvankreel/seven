@@ -59,8 +59,7 @@ audio_processor::state_check()
     if (descriptor.type == param_type::real)
       assert(0.0 <= _state[p].real && _state[p].real <= 1.0);
     else
-      assert(descriptor.min.discrete <= _state[p].discrete &&
-        _state[p].discrete <= descriptor.max.discrete);
+      assert(descriptor.discrete.min <= _state[p].discrete && _state[p].discrete <= descriptor.discrete.max);
   }
 }
 
@@ -74,7 +73,7 @@ audio_processor::prepare_block(std::int32_t sample_count)
     if (descriptor.type == param_type::real)
       _output.output_params[p].real = 0.0f;
     else
-      _output.output_params[p].discrete = descriptor.default_.discrete;
+      _output.output_params[p].discrete = descriptor.discrete.default_;
   }
   for (std::int32_t p = 0; p < _topology->input_param_count; p++)
   {
@@ -99,8 +98,10 @@ audio_processor::automation_check(std::int32_t sample_count)
       if(descriptor.type == param_type::real)
         assert(0.0f <= _input.automation[p][s].real && _input.automation[p][s].real <= 1.0f);
       else
-        assert(descriptor.min.discrete <= _input.automation[p][s].discrete &&
-          _input.automation[p][s].discrete <= descriptor.max.discrete);
+      {
+        std::int32_t val = _input.automation[p][s].discrete;
+        assert(descriptor.discrete.min <= val && val <= descriptor.discrete.max);
+      }
   }
 }
 
@@ -112,7 +113,7 @@ audio_processor::transform_automation()
     auto const& descriptor = *_topology->params[p].descriptor;
     if (descriptor.type == param_type::real)
       for (std::int32_t s = 0; s < _input.sample_count; s++)
-        _input.automation[p][s].real = descriptor.dsp.to_range(_input.automation[p][s].real);
+        _input.automation[p][s].real = descriptor.real.dsp.to_range(_input.automation[p][s].real);
   }
 }
 

@@ -61,7 +61,7 @@ editor::controllerEndEdit(ParamID tag, std::int32_t value)
     for(std::size_t c = 0; c < _controls[dependents[d]].size(); c++)
     {
       CView* container = _controls[dependents[d]][c]->getParentView();
-      bool visible = _topology->params[dependents[d]].descriptor->ui_relevant_if_value == value;
+      bool visible = _topology->params[dependents[d]].descriptor->ui.relevant_if_value == value;
       container->setVisible(visible);
       if(visible) assert(visible_view == nullptr), visible_view = container;
       else invisible_views.push_back(container);

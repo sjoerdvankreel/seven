@@ -15,7 +15,7 @@ part_ui_description::create(
   auto const& part = topology.parts[runtime_part_index];
   std::int32_t cell_count = 0;
   for(std::int32_t i = 0; i < part.descriptor->param_count; i++)
-    cell_count = std::max(cell_count, part.descriptor->params[i].ui_param_index + 1);
+    cell_count = std::max(cell_count, part.descriptor->params[i].ui.param_index + 1);
   if (part.descriptor->ui.enabled_param!= -1) cell_count--;
 
   result.runtime_part_index = runtime_part_index;
@@ -34,7 +34,7 @@ part_ui_description::create(
       result.enabled_param.runtime_param_index = part.runtime_param_start + i;
     else
     {
-      std::int32_t grid_index = part.descriptor->params[i].ui_param_index;
+      std::int32_t grid_index = part.descriptor->params[i].ui.param_index;
       std::int32_t row = grid_index / result.columns;
       std::int32_t column = grid_index % result.columns;
       result.params.push_back({ row, column, part.runtime_param_start + i });

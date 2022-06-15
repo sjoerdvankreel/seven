@@ -38,13 +38,13 @@ io_stream::save(runtime_topology const& topology, param_value const* state)
     case param_type::real: 
       if(!write_float(state[p].real)) return false;
       break;
+    case param_type::knob:
+    case param_type::text:
     case param_type::toggle:
-    case param_type::discrete:
-    case param_type::discrete_text:
       if(!write_int32(state[p].discrete)) return false;
       break;
     case param_type::list: 
-    case param_type::discrete_list:
+    case param_type::knob_list:
       chars = param.format(state[p], nullptr, 0);
       str.reserve(chars);
       param.format(state[p], str.data(), chars);
@@ -90,12 +90,12 @@ io_stream::load(runtime_topology const& topology, param_value* state)
       if(!read_float(value.real)) return false;
       break;
     case param_type::list:
-    case param_type::discrete_list:
+    case param_type::knob_list:
       if (!read_wstring(str_value)) return false;
       break;
+    case param_type::text:
+    case param_type::knob:
     case param_type::toggle:
-    case param_type::discrete:
-    case param_type::discrete_text:
       if(!read_int32(value.discrete)) return false;
       break;
     default:
@@ -117,13 +117,13 @@ io_stream::load(runtime_topology const& topology, param_value* state)
       case param_type::real:  
         state[rp].real = std::clamp(value.real, 0.0f, 1.0f);
         break;
+      case param_type::text:
+      case param_type::knob:
       case param_type::toggle:
-      case param_type::discrete:
-      case param_type::discrete_text:
-        state[rp].discrete = std::clamp(value.discrete, param->min.discrete, param->max.discrete);
+        state[rp].discrete = std::clamp(value.discrete, param->discrete.min, param->discrete.max);
         break;
       case param_type::list:
-      case param_type::discrete_list:
+      case param_type::knob_list:
         if(param->parse(str_value.data(), value)) state[rp] = value;
         break;
       default:
