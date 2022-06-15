@@ -52,7 +52,7 @@ struct topology_info
 
   // Output params must follow input params.
   void init_defaults(param_value* state) const;
-  static topology_info create(part_descriptor const* static_parts,
+  static topology_info const* create(part_descriptor const* static_parts,
     std::int32_t part_count, std::int32_t max_notes, std::int32_t max_ui_height);
 };
 

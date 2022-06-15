@@ -83,8 +83,8 @@ processor::setupProcessing(ProcessSetup& setup)
 {
   float sample_rate = static_cast<float>(setup.sampleRate);
   std::int32_t max_sample_count = setup.maxSamplesPerBlock;
-  _processor.reset(init_create_audio_processor(
-    _topology, sample_rate, max_sample_count, _state.data()).release());
+  _processor.reset(svn_vst_create_audio_processor(
+    _topology, sample_rate, max_sample_count, _state.data()));
   return AudioEffect::setupProcessing(setup);
 }
 
