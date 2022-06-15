@@ -1,7 +1,7 @@
 #include <svn.base/dsp/dsp.hpp>
 #include <svn.base/dsp/block_input.hpp>
 #include <svn.base/dsp/automation_view.hpp>
-#include <svn.base/topology/runtime_topology.hpp>
+#include <svn.base/topology/topology_info.hpp>
 #include <svn.synth/dsp/seven_synth.hpp>
 #include <svn.synth/dsp/voice_input.hpp>
 
@@ -14,7 +14,7 @@ namespace svn::synth {
 
 seven_synth::
 seven_synth(
-  base::runtime_topology const* topology, float sample_rate,
+  base::topology_info const* topology, float sample_rate,
   std::int32_t max_sample_count, base::param_value* state):
 audio_processor(topology, sample_rate, max_sample_count, state),
 _voice_audio(static_cast<std::size_t>(max_sample_count)),

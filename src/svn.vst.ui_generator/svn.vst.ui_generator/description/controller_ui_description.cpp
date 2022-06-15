@@ -10,7 +10,7 @@ namespace svn::vst::ui_generator {
 
 controller_ui_description
 controller_ui_description::create(
-  svn::base::runtime_topology const& topology)
+  svn::base::topology_info const& topology)
 {
   // Build part list.
   controller_ui_description result;
@@ -21,7 +21,7 @@ controller_ui_description::create(
     {
       std::int32_t runtime_part_index = topology.part_bounds[p][c];
       part_ui_description description(part_ui_description::create(topology, runtime_part_index));
-      if (description.height + 2 * margin > topology.max_ui_height)
+      if (description.height + 2 * margin > topology.ui.max_height)
         throw std::runtime_error("Part height exceeds max ui height.");
       result.parts.push_back(description);
     }
@@ -36,7 +36,7 @@ controller_ui_description::create(
   for (std::size_t p = 0; p < result.parts.size(); p++)
   {
     auto& part = result.parts[p];
-    if (top + part.height + margin > topology.max_ui_height)
+    if (top + part.height + margin > topology.ui.max_height)
     {
       max_column_height = std::max(top, max_column_height);
       column++;
@@ -72,7 +72,7 @@ controller_ui_description::create(
 }
 
 void 
-controller_ui_description::print(svn::base::runtime_topology const& topology, std::ostream& os)
+controller_ui_description::print(svn::base::topology_info const& topology, std::ostream& os)
 {
   os << "UI descriptor:\n";
   os << "\tWidth: " << width << "\n";

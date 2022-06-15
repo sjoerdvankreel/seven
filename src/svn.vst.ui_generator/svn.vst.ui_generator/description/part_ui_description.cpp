@@ -8,7 +8,7 @@ namespace svn::vst::ui_generator {
 
 part_ui_description 
 part_ui_description::create(
-  svn::base::runtime_topology const& topology,
+  svn::base::topology_info const& topology,
   std::int32_t runtime_part_index)
 {
   part_ui_description result;

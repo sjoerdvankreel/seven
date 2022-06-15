@@ -1,8 +1,5 @@
 #include <svn.base/support/io_stream.hpp>
-#include <svn.base/support/param_value.hpp>
-#include <svn.base/topology/part_descriptor.hpp>
-#include <svn.base/topology/param_descriptor.hpp>
-#include <svn.base/topology/runtime_topology.hpp>
+#include <svn.base/topology/topology_info.hpp>
 
 #include <vector>
 #include <cassert>
@@ -14,7 +11,7 @@ static std::int32_t const version = 1;
 static std::int32_t const magic = 192235685;
 
 bool
-io_stream::save(runtime_topology const& topology, param_value const* state)
+io_stream::save(topology_info const& topology, param_value const* state)
 {
   std::size_t chars;
   std::vector<wchar_t> str;
@@ -26,8 +23,8 @@ io_stream::save(runtime_topology const& topology, param_value const* state)
 
   for (std::int32_t p = 0; p < topology.input_param_count; p++)
   {
-    auto const& part = *topology.params[p].part;
     auto const& param = *topology.params[p].descriptor;
+    auto const& part = topology.parts[topology.params[p].part_index];
     if(!write_wstring(part.descriptor->static_name.short_)) return false;
     if(!write_int32(part.type_index)) return false;
     if(!write_wstring(param.static_name.short_)) return false;
@@ -59,7 +56,7 @@ io_stream::save(runtime_topology const& topology, param_value const* state)
 }
 
 bool
-io_stream::load(runtime_topology const& topology, param_value* state)
+io_stream::load(topology_info const& topology, param_value* state)
 {
   std::int32_t type;
   param_value value;
@@ -105,10 +102,10 @@ io_stream::load(runtime_topology const& topology, param_value* state)
 
     for (std::int32_t rp = 0; rp < topology.input_param_count; rp++)
     {
-      auto const& part = topology.params[rp].part;
       auto const& param = topology.params[rp].descriptor;
-      if(part_name != part->descriptor->static_name.short_) continue;
-      if(type_index != part->type_index) continue;
+      auto const& part = topology.parts[topology.params[rp].part_index];
+      if(part_name != part.descriptor->static_name.short_) continue;
+      if(type_index != part.type_index) continue;
       if(param_name != param->static_name.short_) continue;
       if(type != param->type) continue;
 

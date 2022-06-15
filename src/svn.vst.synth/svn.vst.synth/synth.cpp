@@ -29,17 +29,17 @@ Steinberg::FUID
 init_get_controller_id()
 { return synth::controller_id; } 
 
-std::unique_ptr<runtime_topology>
+std::unique_ptr<topology_info>
 init_create_topology()
 { 
-  return runtime_topology::create(
+  return topology_info::create(
     part_descriptors, part_type::count, 
     synth_polyphony, synth_max_ui_height);
 }
  
 std::unique_ptr<svn::base::audio_processor>
 init_create_audio_processor(
-  runtime_topology const* topology, float sample_rate, 
+  topology_info const* topology, float sample_rate,
   std::int32_t max_sample_count, param_value* state)
 { return std::make_unique<seven_synth>(topology, sample_rate, max_sample_count, state); }
 

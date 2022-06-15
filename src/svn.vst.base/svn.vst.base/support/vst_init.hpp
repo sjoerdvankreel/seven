@@ -3,8 +3,7 @@
 
 #include <pluginterfaces/base/funknown.h>
 #include <svn.base/dsp/audio_processor.hpp>
-#include <svn.base/support/param_value.hpp>
-#include <svn.base/topology/runtime_topology.hpp>
+#include <svn.base/topology/topology_info.hpp>
 
 #include <memory>
 #include <cstdint>
@@ -18,11 +17,11 @@ controller_factory(void* context);
 
 extern Steinberg::FUID 
 init_get_controller_id();
-extern std::unique_ptr<svn::base::runtime_topology>
+extern std::unique_ptr<svn::base::topology_info>
 init_create_topology();
 extern std::unique_ptr<svn::base::audio_processor>
 init_create_audio_processor(
-  svn::base::runtime_topology const* topology, float sample_rate, 
+  svn::base::topology_info const* topology, float sample_rate,
   std::int32_t max_sample_count, svn::base::param_value* state);
 
 } // namespace svn::vst::base

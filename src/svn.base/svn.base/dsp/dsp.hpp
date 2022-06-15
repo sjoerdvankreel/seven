@@ -4,8 +4,7 @@
 #include <svn.base/dsp/block_input.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
 #include <svn.base/support/param_value.hpp>
-#include <svn.base/topology/runtime_topology.hpp>
-#include <svn.base/topology/param_descriptor.hpp>
+#include <svn.base/topology/topology_info.hpp>
 
 #include <cmath>
 #include <cassert>

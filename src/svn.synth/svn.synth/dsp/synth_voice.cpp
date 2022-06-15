@@ -1,6 +1,6 @@
 #include <svn.base/dsp/dsp.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
-#include <svn.base/topology/runtime_topology.hpp>
+#include <svn.base/topology/topology_info.hpp>
 #include <svn.synth/dsp/synth_voice.hpp>
 #include <svn.synth/dsp/voice_input.hpp>
 
@@ -11,7 +11,7 @@ namespace svn::synth {
 
 synth_voice::
 synth_voice(
-  base::runtime_topology const* topology,
+  base::topology_info const* topology,
   float sample_rate, float velocity, std::int32_t midi_note):
 _oscillators(),
 _topology(topology),

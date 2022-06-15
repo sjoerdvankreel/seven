@@ -5,7 +5,7 @@
 #include <svn.base/dsp/block_input.hpp>
 #include <svn.base/dsp/block_output.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
-#include <svn.base/support/param_value.hpp>
+#include <svn.base/topology/topology_info.hpp>
 
 #include <vector>
 #include <cstdint>
@@ -21,8 +21,8 @@ private:
   std::vector<audio_sample> _audio;
 
   float const _sample_rate;
-  union param_value* const _state;
-  struct runtime_topology const* const _topology;
+  param_value* const _state;
+  topology_info const* const _topology;
 
   // Of size total runtime parameter count in topology.
   // Pointers into _automation_buffer.
@@ -44,7 +44,7 @@ protected:
 public:
   float sample_rate() const;
   block_output const& process_block();
-  struct runtime_topology const* topology() const;
+  topology_info const* topology() const;
 
   // Caller writes either discrete or normalized (0..1) values to automation.
   // Process block call overwrites real valued automation with actual range.
@@ -52,7 +52,7 @@ public:
 
   virtual ~audio_processor() = default;
   audio_processor(
-    struct runtime_topology const* topology, float sample_rate, 
+    topology_info const* topology, float sample_rate,
     std::int32_t max_sample_count, param_value* state);
 };
 
@@ -60,7 +60,7 @@ inline float
 audio_processor::sample_rate() const
 { return _sample_rate; }
 
-inline runtime_topology const*
+inline topology_info const*
 audio_processor::topology() const
 { return _topology; }
 

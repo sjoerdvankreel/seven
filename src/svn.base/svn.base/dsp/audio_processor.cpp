@@ -1,14 +1,13 @@
 #include <svn.base/dsp/dsp.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
-#include <svn.base/topology/param_descriptor.hpp>
-#include <svn.base/topology/runtime_topology.hpp>
+#include <svn.base/topology/topology_info.hpp>
 #include <cassert>
 
 namespace svn::base {
 
 audio_processor::
 audio_processor(
-  runtime_topology const* topology, float sample_rate, 
+  topology_info const* topology, float sample_rate,
   std::int32_t max_sample_count, base::param_value* state):
 _input(),
 _output(),

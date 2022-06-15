@@ -4,7 +4,7 @@
 #include <pluginterfaces/vst/vsttypes.h>
 #include <vstgui/plugin-bindings/vst3editor.h>
 #include <public.sdk/source/vst/vsteditcontroller.h>
-#include <svn.base/topology/runtime_topology.hpp>
+#include <svn.base/topology/topology_info.hpp>
 #include <svn.vst.base/sdk/editor.hpp>
 
 namespace svn::vst::base {
@@ -20,11 +20,11 @@ public VSTGUI::VST3EditorDelegate
   using ParamID = Steinberg::Vst::ParamID;
   
   editor* _editor = nullptr;
-  svn::base::runtime_topology const* const _topology;
+  svn::base::topology_info const* const _topology;
 
 public:
   void sync_dependent_parameters();
-  controller(svn::base::runtime_topology const* topology);
+  controller(svn::base::topology_info const* topology);
 
   tresult endEdit(ParamID tag) override;
   tresult PLUGIN_API initialize(FUnknown* context) override;

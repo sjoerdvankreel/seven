@@ -14,7 +14,7 @@ using namespace svn::base;
 using namespace svn::vst::ui_generator;
 
 typedef bool (*svn_init_exit_dll_t)(void);
-typedef runtime_topology const* (*svn_get_topology_t)(void);
+typedef topology_info const* (*svn_get_topology_t)(void);
 
 int
 main(int argc, char** argv)
@@ -23,7 +23,7 @@ main(int argc, char** argv)
   FARPROC init_dll;
   FARPROC exit_dll;
   FARPROC get_topology;
-  runtime_topology const* topology;
+  topology_info const* topology;
 
   if (argc != 3)
     return std::cout << "Usage: ui_generator <full\\path\\to\\plugin.vst3> (dll) <full\\path\\to\\file.uidesc> (json)\n", 1;

@@ -1,7 +1,5 @@
 #include <svn.vst.base/sdk/parameter.hpp>
-#include <svn.base/support/param_value.hpp>
-#include <svn.base/topology/runtime_topology.hpp>
-#include <svn.base/topology/part_descriptor.hpp>
+#include <svn.base/topology/topology_info.hpp>
 #include <cassert>
 
 using namespace svn::base;
@@ -40,12 +38,12 @@ param_flags(param_type type, bool output)
 }  
 
 parameter::
-parameter(std::int32_t index, svn::base::runtime_param const* param) :
+parameter(std::int32_t index, svn::base::part_info const* part, svn::base::param_info const* param) :
   Parameter(
     param->runtime_name.c_str(), index, param->descriptor->unit,
     param_default_to_vst_normalized(*param->descriptor),
     param_step_count(*param->descriptor),
-    param_flags(param->descriptor->type, param->part->descriptor->output),
+    param_flags(param->descriptor->type, part->descriptor->output),
     param->part_index + 1,
     param->descriptor->static_name.short_),
   _descriptor(param->descriptor)

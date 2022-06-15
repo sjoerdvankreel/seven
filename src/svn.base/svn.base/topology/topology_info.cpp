@@ -1,11 +1,10 @@
-#include <svn.base/support/param_value.hpp>
-#include <svn.base/topology/runtime_topology.hpp>
+#include <svn.base/topology/topology_info.hpp>
 #include <cassert>
 
 namespace svn::base {
 
 void 
-runtime_topology::init_defaults(param_value* state) const
+topology_info::init_defaults(param_value* state) const
 {   
   for (std::int32_t p = 0; p < input_param_count; p++)
     switch (params[p].descriptor->type)
@@ -15,11 +14,9 @@ runtime_topology::init_defaults(param_value* state) const
     }   
 }    
   
-std::unique_ptr<runtime_topology>
-runtime_topology::create(
-  part_descriptor const* static_parts, 
-  std::int32_t part_count, std::int32_t max_note_events, 
-  std::int32_t max_ui_height)
+std::unique_ptr<topology_info>
+topology_info::create(part_descriptor const* static_parts,
+  std::int32_t part_count, std::int32_t max_note_events, std::int32_t max_ui_height)
 {
   bool seen_output = false;   
   assert(part_count > 0);
@@ -27,13 +24,13 @@ runtime_topology::create(
   assert(max_note_events >= 0);
   assert(static_parts != nullptr);     
 
-  auto result = std::make_unique<runtime_topology>();
+  auto result = std::make_unique<topology_info>();
   result->input_param_count = 0;
   result->output_param_count = 0; 
   result->static_parts = static_parts;
   result->static_part_count = part_count;
-  result->max_ui_height = max_ui_height;
   result->max_note_events = max_note_events;
+  result->ui.max_height = max_ui_height;
 
   std::int32_t part_index = 0; 
   std::int32_t param_index = 0;
@@ -53,7 +50,7 @@ runtime_topology::create(
       if(static_parts[t].output) result->output_param_count += static_parts[t].param_count;
       else result->input_param_count += static_parts[t].param_count;
       if (static_parts[t].part_count > 1) runtime_name += std::wstring(L" ") + std::to_wstring(i + 1);
-      result->parts.push_back(runtime_part(type_index++, runtime_name, param_index, &static_parts[t]));
+      result->parts.push_back(part_info(type_index++, runtime_name, param_index, &static_parts[t]));
       part_index++;
       param_index += static_parts[t].param_count;
     }
@@ -62,24 +59,24 @@ runtime_topology::create(
   for (std::size_t part = 0; part < result->parts.size(); part++)
   {
     std::wstring part_name = result->parts[part].runtime_name;
-    for (std::int32_t param = 0; param < result->parts[part].descriptor->param_count; param++)
+    for (std::int32_t p = 0; p < result->parts[part].descriptor->param_count; p++)
     {
-      auto const& descriptor = result->parts[part].descriptor->params[param];
+      auto const& descriptor = result->parts[part].descriptor->params[p];
       std::wstring runtime_name = part_name + L" " + descriptor.static_name.detail;
-      result->params.push_back(runtime_param(part, runtime_name, &result->parts[part], &descriptor));
+      result->params.push_back(param_info(part, runtime_name, &descriptor));
     }
   }
 
-  result->ui_param_dependencies.resize(result->params.size());
+  result->ui.param_dependencies.resize(result->params.size());
   for (std::size_t p = 0; p < result->params.size(); p++)
   {
     auto const& this_param = result->params[p];
     if(this_param.descriptor->ui.relevant_if_param == -1) continue;
-    std::int32_t index = this_param.part->type_index;
-    std::int32_t type = this_param.part->descriptor->type;
+    std::int32_t index = result->parts[this_param.part_index].type_index;
+    std::int32_t type = result->parts[this_param.part_index].descriptor->type;
     std::int32_t param = this_param.descriptor->ui.relevant_if_param;
     std::int32_t that_index = result->param_bounds[type][index] + param;
-    result->ui_param_dependencies[that_index].push_back(p);
+    result->ui.param_dependencies[that_index].push_back(p);
   }
    
   assert(result->parts.size() > 0);

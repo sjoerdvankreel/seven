@@ -17,7 +17,7 @@ class synth_voice
 {
 private:
   voice_amp _amp;
-  struct base::runtime_topology const* _topology;
+  struct base::topology_info const* _topology;
   std::array<voice_oscillator, voice_osc_count> _oscillators;
 
 public:
@@ -36,7 +36,7 @@ public:
 
   synth_voice() = default;
   synth_voice(
-    struct base::runtime_topology const* topology,
+    struct base::topology_info const* topology,
     float sample_rate, float velocity, std::int32_t midi_note);
 };
 

@@ -2,8 +2,7 @@
 #define SVN_VST_BASE_SDK_PARAMETER_HPP
 
 #include <public.sdk/source/vst/vstparameters.h>
-#include <svn.base/topology/runtime_topology.hpp>
-#include <svn.base/topology/param_descriptor.hpp>
+#include <svn.base/topology/topology_info.hpp>
 
 #include <cstdint>
 #include <algorithm>
@@ -23,7 +22,8 @@ public:
 
   parameter(
     std::int32_t index, 
-    svn::base::runtime_param const* param);
+    svn::base::part_info const* part,
+    svn::base::param_info const* param);
   static std::int32_t vst_normalized_to_discrete(
     svn::base::param_descriptor const& param, double val);
   static double discrete_to_vst_normalized(

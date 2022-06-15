@@ -1,7 +1,7 @@
 #ifndef SVN_VST_UI_GENERATOR_GENERATOR_SUPPORT_HPP
 #define SVN_VST_UI_GENERATOR_GENERATOR_SUPPORT_HPP
 
-#include <svn.base/topology/runtime_topology.hpp>
+#include <svn.base/topology/topology_info.hpp>
 #include <svn.vst.ui_generator/description/ui_description.hpp>
 #include <svn.vst.ui_generator/description/param_ui_description.hpp>
 
@@ -19,7 +19,7 @@ std::string get_control_tag(std::wstring const& runtime_param_name);
 std::string print_rgb_hex(rgb color, bool print_alpha, std::int32_t alpha_index);
 
 std::string get_param_control_class(
-  svn::base::runtime_topology const& topology, 
+  svn::base::topology_info const& topology,
   param_ui_description const& param);
 
 rapidjson::Value& add_member(

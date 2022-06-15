@@ -18,7 +18,7 @@ using namespace Steinberg::Vst;
 namespace svn::vst::base {   
 
 controller::
-controller(svn::base::runtime_topology const* topology):
+controller(svn::base::topology_info const* topology):
 _topology(topology)
 { assert(topology != nullptr); }
 
@@ -65,7 +65,10 @@ controller::initialize(FUnknown* context)
   for (std::size_t p = 0; p < _topology->parts.size(); p++)
     addUnit(new Unit(_topology->parts[p].runtime_name.c_str(), p + 1, kRootUnitId));
   for (std::size_t p = 0; p < _topology->params.size(); p++)
-    parameters.addParameter(new parameter(p, &_topology->params[p]));
+  {
+    part_info const* part = &_topology->parts[_topology->params[p].part_index];
+    parameters.addParameter(new parameter(p, part, &_topology->params[p]));
+  }
   return kResultTrue;
 }
  
@@ -73,7 +76,7 @@ tresult
 controller::endEdit(ParamID tag)
 {
   if (_editor == nullptr) return EditControllerEx1::endEdit(tag);
-  if (_topology->ui_param_dependencies[tag].size() == 0) return EditControllerEx1::endEdit(tag);
+  if (_topology->ui.param_dependencies[tag].size() == 0) return EditControllerEx1::endEdit(tag);
   double normalized = getParamNormalized(tag);
   auto const& descriptor = *_topology->params[tag].descriptor;
   std::int32_t value = parameter::vst_normalized_to_discrete(descriptor, normalized);

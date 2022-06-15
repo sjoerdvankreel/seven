@@ -1,9 +1,7 @@
 #ifndef SVN_BASE_DSP_AUTOMATION_VIEW_HPP
 #define SVN_BASE_DSP_AUTOMATION_VIEW_HPP
 
-#include <svn.base/support/param_value.hpp>
-#include <svn.base/topology/part_descriptor.hpp>
-#include <svn.base/topology/runtime_topology.hpp>
+#include <svn.base/topology/topology_info.hpp>
 
 #include <cassert>
 #include <cstdint>
@@ -37,7 +35,7 @@ public:
     std::int32_t sample_fixed_at);
 
   automation_view rearrange_params(
-    runtime_topology const& topology,
+    topology_info const& topology,
     std::int32_t part_type,
     std::int32_t part_index) const;
   automation_view rearrange_samples(
@@ -92,7 +90,7 @@ automation_view::rearrange_samples(
 
 inline automation_view
 automation_view::rearrange_params(
-  runtime_topology const& topology,
+  topology_info const& topology,
   std::int32_t part_type, 
   std::int32_t part_index) const
 {

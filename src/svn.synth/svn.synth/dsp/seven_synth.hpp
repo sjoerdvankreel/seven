@@ -60,7 +60,7 @@ protected:
 
 public:
   seven_synth(
-    struct base::runtime_topology const* topology, float sample_rate,
+    struct base::topology_info const* topology, float sample_rate,
     std::int32_t max_sample_count, base::param_value* state);
 };
 

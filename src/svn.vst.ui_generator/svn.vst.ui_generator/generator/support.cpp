@@ -69,7 +69,7 @@ add_attribute(
 
 std::string
 get_param_control_class(
-  runtime_topology const& topology,
+  topology_info const& topology,
   param_ui_description const& param)
 {
   switch (topology.params[param.runtime_param_index].descriptor->type)

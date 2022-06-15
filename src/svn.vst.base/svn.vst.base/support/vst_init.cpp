@@ -15,7 +15,7 @@ extern bool DeinitModule();
 void* moduleHandle = nullptr;
 
 static std::int32_t svn_module_counter = 0;
-static std::unique_ptr<runtime_topology> _topology;
+static std::unique_ptr<topology_info> _topology;
   
 BOOL WINAPI
 DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
@@ -29,7 +29,7 @@ extern "C" {
 
 // Ui generator support.
 SMTG_EXPORT_SYMBOL
-svn::base::runtime_topology const*
+svn::base::topology_info const*
 svn_get_topology()
 { return _topology.get(); }
 

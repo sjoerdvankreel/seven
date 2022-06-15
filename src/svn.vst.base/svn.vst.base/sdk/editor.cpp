@@ -9,7 +9,7 @@ namespace svn::vst::base {
 
 editor::
 editor(EditController* controller, UTF8StringPtr template_name,
-  UTF8StringPtr xml_file, svn::base::runtime_topology const* topology):
+  UTF8StringPtr xml_file, svn::base::topology_info const* topology):
 VST3Editor(controller, template_name, xml_file),
 _topology(topology),
 _controls(topology->params.size())
@@ -56,7 +56,7 @@ editor::controllerEndEdit(ParamID tag, std::int32_t value)
   CView* visible_view = nullptr;
   CViewContainer* parent_view = nullptr;
   std::vector<CView*> invisible_views;
-  auto const& dependents = _topology->ui_param_dependencies[tag];
+  auto const& dependents = _topology->ui.param_dependencies[tag];
   for(std::size_t d = 0; d < dependents.size(); d++)
     for(std::size_t c = 0; c < _controls[dependents[d]].size(); c++)
     {

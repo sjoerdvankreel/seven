@@ -48,7 +48,7 @@ build_ui_colors(Document::AllocatorType& allocator)
 
 static Value
 build_ui_control_tags(
-  runtime_topology const& topology, Document::AllocatorType& allocator)
+  topology_info const& topology, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   for (std::size_t p = 0; p < topology.params.size(); p++)
@@ -73,7 +73,7 @@ build_ui_param_item_base(
 
 static Value
 build_ui_param_control_base(
-  runtime_topology const& topology, param_ui_description const& param, 
+  topology_info const& topology, param_ui_description const& param,
   std::string const& control_class, std::int32_t left, std::int32_t width, 
   std::int32_t top_margin, Document::AllocatorType& allocator)
 {
@@ -90,7 +90,7 @@ build_ui_param_control_base(
 
 static Value
 build_ui_param_checkbox(
-  runtime_topology const& topology, part_ui_description const& part,
+  topology_info const& topology, part_ui_description const& part,
   param_ui_description const& param, rgb color, std::int32_t left,
   std::int32_t width, std::int32_t top_margin, Document::AllocatorType& allocator)
 {
@@ -108,7 +108,7 @@ build_ui_param_checkbox(
 
 static Value
 build_ui_param_knob(
-  runtime_topology const& topology, part_ui_description const& part,
+  topology_info const& topology, part_ui_description const& part,
   param_ui_description const& param, Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);
@@ -123,7 +123,7 @@ build_ui_param_knob(
 
 static Value
 build_ui_param_menu(
-  runtime_topology const& topology, part_ui_description const& part,
+  topology_info const& topology, part_ui_description const& part,
   param_ui_description const& param, Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);
@@ -147,7 +147,7 @@ build_ui_param_menu(
 
 static Value
 build_ui_param_label(
-  runtime_topology const& topology, part_ui_description const& part,
+  topology_info const& topology, part_ui_description const& part,
   param_ui_description const& param, std::int32_t left, std::int32_t width,
   Document::AllocatorType& allocator)
 {
@@ -163,7 +163,7 @@ build_ui_param_label(
 
 static Value
 build_ui_param_edit(
-  runtime_topology const& topology, part_ui_description const& part,
+  topology_info const& topology, part_ui_description const& part,
   param_ui_description const& param, std::int32_t left, std::int32_t width,
   std::string const& alignment, Document::AllocatorType& allocator)
 {
@@ -217,7 +217,7 @@ build_ui_param_background(std::int32_t row, std::int32_t column,
 
 static void
 add_ui_input_param(
-  runtime_topology const& topology, part_ui_description const& part,
+  topology_info const& topology, part_ui_description const& part,
   Value& container, std::size_t index, Document::AllocatorType& allocator)
 {
   Value checkbox;
@@ -255,7 +255,7 @@ add_ui_input_param(
 
 static void
 add_ui_output_param(
-  runtime_topology const& topology, part_ui_description const& part,
+  topology_info const& topology, part_ui_description const& part,
   Value& container, std::size_t index, Document::AllocatorType& allocator)
 {
   param_ui_description const& param = part.params[index];
@@ -279,7 +279,7 @@ add_ui_output_param(
 
 static Value
 build_ui_part_single_param_container(
-  runtime_topology const& topology, part_ui_description const& description,
+  topology_info const& topology, part_ui_description const& description,
   std::size_t index, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
@@ -299,7 +299,7 @@ build_ui_part_single_param_container(
 }
 
 static Value
-build_ui_part_param_container(runtime_topology const& topology,
+build_ui_part_param_container(topology_info const& topology,
   part_ui_description const& description, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
@@ -326,7 +326,7 @@ build_ui_part_param_container(runtime_topology const& topology,
 }
 
 static Value
-build_ui_part_param_container_border(runtime_topology const& topology,
+build_ui_part_param_container_border(topology_info const& topology,
   part_ui_description const& description, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
@@ -341,7 +341,7 @@ build_ui_part_param_container_border(runtime_topology const& topology,
 }
 
 static Value
-build_ui_part_header_label(runtime_topology const& topology,
+build_ui_part_header_label(topology_info const& topology,
   part_ui_description const& description, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
@@ -359,7 +359,7 @@ build_ui_part_header_label(runtime_topology const& topology,
 }
 
 static Value
-build_ui_part_header_container(runtime_topology const& topology,
+build_ui_part_header_container(topology_info const& topology,
   part_ui_description const& description, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
@@ -378,7 +378,7 @@ build_ui_part_header_container(runtime_topology const& topology,
 }
 
 static Value
-build_ui_part_header_container_background(runtime_topology const& topology,
+build_ui_part_header_container_background(topology_info const& topology,
   part_ui_description const& description, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
@@ -391,7 +391,7 @@ build_ui_part_header_container_background(runtime_topology const& topology,
 }
 
 static Value
-build_ui_part_header_container_border(runtime_topology const& topology,
+build_ui_part_header_container_border(topology_info const& topology,
   part_ui_description const& description, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
@@ -406,7 +406,7 @@ build_ui_part_header_container_border(runtime_topology const& topology,
 }
 
 static Value
-build_ui_part_inner_container(runtime_topology const& topology,
+build_ui_part_inner_container(topology_info const& topology,
   part_ui_description const& description, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
@@ -423,7 +423,7 @@ build_ui_part_inner_container(runtime_topology const& topology,
 }
 
 static Value
-build_ui_part_outer_container(runtime_topology const& topology,
+build_ui_part_outer_container(topology_info const& topology,
   part_ui_description const& description, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
@@ -436,7 +436,7 @@ build_ui_part_outer_container(runtime_topology const& topology,
 }
 
 static Value
-build_ui_template(runtime_topology const& topology,
+build_ui_template(topology_info const& topology,
   controller_ui_description const& descriptor, Document::AllocatorType& allocator)
 {
   Value view(kObjectType);
@@ -454,7 +454,7 @@ build_ui_template(runtime_topology const& topology,
 
 Document
 build_vstgui_json(
-  runtime_topology const& topology,
+  topology_info const& topology,
   controller_ui_description const& description)
 {
   Document result;

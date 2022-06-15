@@ -1,7 +1,7 @@
 #ifndef SVN_VST_UI_GENERATOR_DESCRIPTION_PART_UI_DESCRIPTION
 #define SVN_VST_UI_GENERATOR_DESCRIPTION_PART_UI_DESCRIPTION
 
-#include <svn.base/topology/runtime_topology.hpp>
+#include <svn.base/topology/topology_info.hpp>
 #include <svn.vst.ui_generator/description/param_ui_description.hpp>
 
 #include <vector>
@@ -24,7 +24,7 @@ struct part_ui_description
   std::vector<param_ui_description> params;
 
   static part_ui_description create(
-    svn::base::runtime_topology const& topology, 
+    svn::base::topology_info const& topology,
     std::int32_t runtime_part_index);
 };
 

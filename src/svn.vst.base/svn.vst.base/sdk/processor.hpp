@@ -6,9 +6,8 @@
 #include <public.sdk/source/vst/utility/sampleaccurate.h>
 
 #include <svn.base/dsp/block_input.hpp>
-#include <svn.base/topology/runtime_topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
-#include <svn.base/support/param_value.hpp>
+#include <svn.base/topology/topology_info.hpp>
 
 #include <memory>
 #include <vector>
@@ -33,13 +32,13 @@ private:
   std::vector<svn::base::param_value> _state;
   std::vector<Parameter> _accurate_parameters;
   std::int64_t output_param_update_samples = 0;
-  svn::base::runtime_topology const* const _topology;
+  svn::base::topology_info const* const _topology;
   std::unique_ptr<svn::base::audio_processor> _processor;
 
 public:
   processor(
     Steinberg::FUID controller_id,
-    svn::base::runtime_topology const* topology);
+    svn::base::topology_info const* topology);
 
 	tresult PLUGIN_API setState(IBStream* state) override;
 	tresult PLUGIN_API getState(IBStream* state) override;

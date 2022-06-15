@@ -8,8 +8,7 @@
 #include <svn.vst.base/sdk/parameter.hpp>
 #include <svn.vst.base/support/vst_init.hpp>
 #include <svn.vst.base/support/vst_io_stream.hpp>
-#include <svn.base/topology/param_descriptor.hpp>
-#include <svn.base/topology/runtime_topology.hpp>
+#include <svn.base/topology/topology_info.hpp>
 
 #include <cassert>
 #include <cstdint>
@@ -25,7 +24,7 @@ std::int32_t const output_param_update_msec = 200;
 processor::
 processor(
   Steinberg::FUID controller_id,
-  runtime_topology const* topology):
+  topology_info const* topology):
 _state(static_cast<std::size_t>(topology->input_param_count)),
 _accurate_parameters(static_cast<std::size_t>(topology->input_param_count)),
 _topology(topology),

@@ -1,7 +1,7 @@
 #ifndef SVN_VST_BASE_SDK_EDITOR_HPP
 #define SVN_VST_BASE_SDK_EDITOR_HPP
 
-#include <svn.base/topology/runtime_topology.hpp>
+#include <svn.base/topology/topology_info.hpp>
 #include <vstgui/plugin-bindings/vst3editor.h>
 #include <vector>
 
@@ -18,7 +18,7 @@ public VSTGUI::VST3Editor
   using UTF8StringPtr = VSTGUI::UTF8StringPtr;
   using EditController = Steinberg::Vst::EditController;
   std::vector<std::vector<CControl*>> _controls;
-  svn::base::runtime_topology const* const _topology;
+  svn::base::topology_info const* const _topology;
 
 public:
   void onViewAdded(CFrame* frame, CView* view) override;
@@ -27,7 +27,7 @@ public:
   bool PLUGIN_API open(void* parent, const PlatformType& type) override;
 
   editor(EditController* controller, UTF8StringPtr template_name,
-    UTF8StringPtr xml_file, svn::base::runtime_topology const* topology);
+    UTF8StringPtr xml_file, svn::base::topology_info const* topology);
 };
 
 } // namespace svn::vst::base
