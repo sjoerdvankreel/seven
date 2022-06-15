@@ -33,8 +33,8 @@ main(int argc, char** argv)
     return std::cout << argv[1] << " does not export InitDll.\n", 1;
   if ((exit_dll = GetProcAddress(library, "ExitDll")) == nullptr)
     return std::cout << argv[1] << " does not export ExitDll.\n", 1;
-  if ((get_topology = GetProcAddress(library, "svn_get_topology")) == nullptr)
-    return std::cout << argv[1] << " does not export svn_get_topology.\n", 1;
+  if ((get_topology = GetProcAddress(library, "svn_vst_get_topology")) == nullptr)
+    return std::cout << argv[1] << " does not export svn_vst_get_topology.\n", 1;
   if (!reinterpret_cast<svn_init_exit_dll_t>(init_dll)())
     return std::cout << "InitDll returned false.\n", 1;
 

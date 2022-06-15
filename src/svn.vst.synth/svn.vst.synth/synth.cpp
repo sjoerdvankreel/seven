@@ -37,14 +37,14 @@ Steinberg::FUID const svn_vst_controller_id(0x57068B2B, 0x63374143, 0x85FA79D9, 
 
 } // extern "C"
 
-// Bindings to vst3 sdk.
+// Bindings to vst3 sdk. 
 BEGIN_FACTORY_DEF(SVN_VST_SYNTH_COMPANY_NAME, SVN_VST_SYNTH_COMPANY_WEB, SVN_VST_SYNTH_COMPANY_MAIL)
   DEF_CLASS2(INLINE_UID_FROM_FUID(svn_vst_processor_id), 
     PClassInfo::kManyInstances, kVstAudioEffectClass, SVN_VST_SYNTH_NAME, 
     Steinberg::Vst::kDistributable, SVN_VST_SYNTH_CATEGORY, SVN_VST_SYNTH_VERSION, 
-    kVstVersionString, svn::vst::base::processor_factory)
+    kVstVersionString, svn_vst_processor_factory)
   DEF_CLASS2(INLINE_UID_FROM_FUID(svn_vst_controller_id), 
     PClassInfo::kManyInstances, kVstComponentControllerClass, 
     SVN_VST_SYNTH_CONTROLLER_NAME, 0, "", SVN_VST_SYNTH_VERSION,
-    kVstVersionString, svn::vst::base::controller_factory)
+    kVstVersionString, svn_vst_controller_factory)
 END_FACTORY
