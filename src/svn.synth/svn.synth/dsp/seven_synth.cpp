@@ -134,10 +134,9 @@ seven_synth::process_block(
       vinput.sample_count = input.sample_count - voice_start;
       vinput.stream_position = input.stream_position + voice_start;
       vinput.automation = base::automation_view(
-        _automation_fixed[v], input.automation,
-        topology()->input_param_count,
-        topology()->input_param_count,
-        0, input.sample_count, voice_start, vinput.sample_count);
+        topology(), _automation_fixed[v], input.automation,
+        topology()->input_param_count, topology()->input_param_count, 0, 
+        input.sample_count, voice_start, vinput.sample_count);
 
       std::int32_t release_sample = -1;
       std::int32_t voice_release = _voice_states[v].release_position_buffer;
