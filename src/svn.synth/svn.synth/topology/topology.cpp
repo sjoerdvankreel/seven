@@ -28,7 +28,7 @@ oscillator_blmp_types[oscillator_blmp_type::count] =
 };
 
 param_descriptor const 
-glob_output_params[glob_output_param::count] =
+output_params[output_param::count] =
 {
   { { L"Clip", L"Clip" }, false, { 0, 1, false, -1, 0 } },
   { { L"Drain", L"Voices exhausted" }, false, { 1, 1, false, -1, 0 } },
@@ -60,7 +60,7 @@ part_descriptors[part_type::count] =
 {
   { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, { 1, 3, 0 } },
   { { L"Amp", L"Amplitude" }, part_type::amplitude, false, 1, amplitude_params, amplitude_param::count, { 5, 2, -1 } },
-  { { L"Out", L"Output" }, part_type::glob_output, true, 1, glob_output_params, glob_output_param::count, { 6, 1, -1 } }
+  { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, { 6, 1, -1 } }
 };
  
 } // namespace svn::synth
