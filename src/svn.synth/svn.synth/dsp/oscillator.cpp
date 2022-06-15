@@ -1,7 +1,6 @@
 #include <svn.base/dsp/support.hpp>
 #include <svn.synth/topology/topology.hpp>
-#include <svn.synth/dsp/voice_input.hpp>
-#include <svn.synth/dsp/voice_oscillator.hpp>
+#include <svn.synth/dsp/oscillator.hpp>
 
 #include <cmath>
 #include <cassert>
@@ -10,16 +9,9 @@
 using namespace svn::base;
 
 namespace svn::synth {
-  
-static inline float 
-osc_sine(float phase)  
-{  
-  assert(0.0f <= phase && phase < 1.0f);
-  return std::sin(2.0f * std::numbers::pi * phase);
-}        
     
 static inline float
-osc_blep(float sample_rate, float frequency, float phase)
+oscillator_blep(float sample_rate, float frequency, float phase)
 {
   float saw = 2.0f * phase - 1.0f;
   float increment = frequency / sample_rate;
@@ -38,19 +30,8 @@ osc_blep(float sample_rate, float frequency, float phase)
   return saw;
 }
   
-voice_oscillator::
-voice_oscillator(
-  float sample_rate, std::int32_t midi_note):
-_sample_rate(sample_rate),
-_midi_note(midi_note)
-{
-  assert(sample_rate > 0.0f);
-  assert(0 <= midi_note && midi_note < 128);
-}
-  
 void
-voice_oscillator::process_block(
-  voice_input const& input, audio_sample* audio)
+oscillator::process_block(voice_input const& input, audio_sample* audio)
 {
   assert(audio != nullptr);
   for (std::int32_t s = 0; s < input.sample_count; s++)
@@ -69,9 +50,9 @@ voice_oscillator::process_block(
     float frequency = note_to_frequency(12 * (octave + 1) + note + cent + _midi_note - 60);
     switch (type)
     {
-    case voice_osc_type::sine: sample = osc_sine(_phase); break;
-    case voice_osc_type::blep: sample = osc_blep(_sample_rate, frequency, _phase); break;
     case voice_osc_type::blmp: sample = 0.0f; break;
+    case voice_osc_type::sine: sample = std::sin(2.0f * std::numbers::pi * _phase); break;
+    case voice_osc_type::blep: sample = oscillator_blep(_sample_rate, frequency, _phase); break;
     default: assert(false); break;
     } 
      

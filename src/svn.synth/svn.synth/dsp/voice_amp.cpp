@@ -1,5 +1,5 @@
 #include <svn.synth/dsp/voice_amp.hpp>
-#include <svn.synth/dsp/voice_input.hpp>
+#include <svn.synth/dsp/support.hpp>
 #include <svn.synth/topology/topology.hpp>
 
 #include <cassert>

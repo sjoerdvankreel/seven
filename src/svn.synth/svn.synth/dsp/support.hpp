@@ -1,11 +1,12 @@
-#ifndef SVN_SYNTH_DSP_VOICE_INPUT_HPP
-#define SVN_SYNTH_DSP_VOICE_INPUT_HPP
+#ifndef SVN_SYNTH_DSP_SUPPORT_HPP
+#define SVN_SYNTH_DSP_SUPPORT_HPP
 
 #include <svn.base/dsp/automation_view.hpp>
 #include <cstdint>
 
 namespace svn::synth {
 
+// Voice block input.
 struct voice_input
 {
   float bpm;
@@ -15,4 +16,4 @@ struct voice_input
 };
 
 } // namespace svn::base
-#endif // SVN_SYNTH_DSP_VOICE_INPUT_HPP
+#endif // SVN_SYNTH_DSP_SUPPORT_HPP

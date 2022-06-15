@@ -2,7 +2,7 @@
 #include <svn.base/dsp/audio_sample.hpp>
 #include <svn.base/topology/topology_info.hpp>
 #include <svn.synth/dsp/synth_voice.hpp>
-#include <svn.synth/dsp/voice_input.hpp>
+#include <svn.synth/dsp/support.hpp>
 
 #include <cassert>
 #include <algorithm>
@@ -20,7 +20,7 @@ _amp(sample_rate, velocity)
   assert(topology != nullptr);  
   assert(0 <= midi_note && midi_note < 128);
   assert(0.0f <= velocity && velocity <= 1.0f);
-  _oscillators.fill(voice_oscillator(sample_rate, midi_note));
+  _oscillators.fill(oscillator(sample_rate, midi_note));
 }
 
 std::int32_t

@@ -3,7 +3,7 @@
 #include <svn.base/dsp/automation_view.hpp>
 #include <svn.base/topology/topology_info.hpp>
 #include <svn.synth/dsp/seven_synth.hpp>
-#include <svn.synth/dsp/voice_input.hpp>
+#include <svn.synth/dsp/support.hpp>
 
 #include <cassert>
 #include <algorithm>
