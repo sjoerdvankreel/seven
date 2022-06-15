@@ -1,7 +1,7 @@
 #ifndef SVN_VST_UI_GENERATOR_GENERATOR_SUPPORT_HPP
 #define SVN_VST_UI_GENERATOR_GENERATOR_SUPPORT_HPP
 
-#include <svn.base/runtime/runtime_topology.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 #include <svn.vst.ui_generator/description/ui_description.hpp>
 #include <svn.vst.ui_generator/description/param_ui_description.hpp>
 

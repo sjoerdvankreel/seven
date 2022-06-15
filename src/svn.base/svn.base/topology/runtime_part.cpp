@@ -1,4 +1,4 @@
-#include <svn.base/runtime/runtime_part.hpp>
+#include <svn.base/topology/runtime_part.hpp>
 #include <cassert>
 
 namespace svn::base {

@@ -4,7 +4,7 @@
 #include <pluginterfaces/vst/vsttypes.h>
 #include <vstgui/plugin-bindings/vst3editor.h>
 #include <public.sdk/source/vst/vsteditcontroller.h>
-#include <svn.base/runtime/runtime_topology.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 #include <svn.vst.base/sdk/editor.hpp>
 
 namespace svn::vst::base {

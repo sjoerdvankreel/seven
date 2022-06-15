@@ -1,7 +1,7 @@
 #ifndef SVN_VST_BASE_SDK_EDITOR_HPP
 #define SVN_VST_BASE_SDK_EDITOR_HPP
 
-#include <svn.base/runtime/runtime_topology.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 #include <vstgui/plugin-bindings/vst3editor.h>
 #include <vector>
 

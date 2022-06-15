@@ -1,7 +1,7 @@
 #include <svn.synth/static/topology.hpp>
 #include <svn.base/support/item_name.hpp>
 #include <svn.base/support/note_name.hpp>
-#include <svn.base/runtime/runtime_topology.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 
 using namespace svn::base;
 

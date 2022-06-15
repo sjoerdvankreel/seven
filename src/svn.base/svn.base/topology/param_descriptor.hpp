@@ -1,9 +1,9 @@
-#ifndef SVN_BASE_STATIC_PARAM_DESCRIPTOR_HPP
-#define SVN_BASE_STATIC_PARAM_DESCRIPTOR_HPP
+#ifndef SVN_BASE_TOPOLOGY_PARAM_DESCRIPTOR_HPP
+#define SVN_BASE_TOPOLOGY_PARAM_DESCRIPTOR_HPP
 
-#include <svn.base/static/real_bounds.hpp>
 #include <svn.base/support/item_name.hpp>
 #include <svn.base/support/param_value.hpp>
+#include <svn.base/topology/real_bounds.hpp>
 #include <cstdint>
 
 namespace svn::base {
@@ -80,4 +80,4 @@ struct param_descriptor
 };
 
 } // namespace svn::base
-#endif // SVN_BASE_STATIC_PARAM_DESCRIPTOR_HPP
+#endif // SVN_BASE_TOPOLOGY_PARAM_DESCRIPTOR_HPP

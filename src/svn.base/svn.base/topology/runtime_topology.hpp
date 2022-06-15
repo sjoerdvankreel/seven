@@ -1,8 +1,8 @@
-#ifndef SVN_BASE_RUNTIME_RUNTIME_TOPOLOGY_HPP
-#define SVN_BASE_RUNTIME_RUNTIME_TOPOLOGY_HPP
+#ifndef SVN_BASE_TOPOLOGY_RUNTIME_TOPOLOGY_HPP
+#define SVN_BASE_TOPOLOGY_RUNTIME_TOPOLOGY_HPP
 
-#include <svn.base/runtime/runtime_part.hpp>
-#include <svn.base/runtime/runtime_param.hpp>
+#include <svn.base/topology/runtime_part.hpp>
+#include <svn.base/topology/runtime_param.hpp>
 
 #include <string>
 #include <vector>
@@ -40,4 +40,4 @@ struct runtime_topology
 };
 
 } // namespace svn::base
-#endif // SVN_BASE_RUNTIME_RUNTIME_TOPOLOGY_HPP
+#endif // SVN_BASE_TOPOLOGY_RUNTIME_TOPOLOGY_HPP

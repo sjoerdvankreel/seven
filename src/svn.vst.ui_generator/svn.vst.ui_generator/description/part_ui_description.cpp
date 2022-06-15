@@ -1,5 +1,5 @@
-#include <svn.base/static/part_descriptor.hpp>
-#include <svn.base/static/param_descriptor.hpp>
+#include <svn.base/topology/part_descriptor.hpp>
+#include <svn.base/topology/param_descriptor.hpp>
 #include <svn.vst.ui_generator/description/ui_description.hpp>
 #include <svn.vst.ui_generator/description/part_ui_description.hpp>
 #include <algorithm>

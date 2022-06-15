@@ -1,8 +1,8 @@
 #include <svn.base/support/param_value.hpp>
-#include <svn.base/static/part_descriptor.hpp>
-#include <svn.base/static/param_descriptor.hpp>
-#include <svn.base/runtime/runtime_param.hpp>
-#include <svn.base/runtime/runtime_topology.hpp>
+#include <svn.base/topology/part_descriptor.hpp>
+#include <svn.base/topology/param_descriptor.hpp>
+#include <svn.base/topology/runtime_param.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 #include <cassert>
 
 namespace svn::base {

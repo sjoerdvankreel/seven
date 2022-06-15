@@ -6,7 +6,7 @@
 #include <public.sdk/source/vst/utility/sampleaccurate.h>
 
 #include <svn.base/dsp/block_input.hpp>
-#include <svn.base/runtime/runtime_topology.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
 #include <svn.base/support/param_value.hpp>
 

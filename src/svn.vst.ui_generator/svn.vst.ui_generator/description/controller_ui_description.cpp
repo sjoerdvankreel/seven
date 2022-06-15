@@ -1,4 +1,4 @@
-#include <svn.base/static/part_descriptor.hpp>
+#include <svn.base/topology/part_descriptor.hpp>
 #include <svn.vst.ui_generator/support/support.hpp>
 #include <svn.vst.ui_generator/description/ui_description.hpp>
 #include <svn.vst.ui_generator/description/controller_ui_description.hpp>

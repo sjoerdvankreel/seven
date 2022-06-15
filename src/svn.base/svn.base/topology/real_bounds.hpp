@@ -1,5 +1,5 @@
-#ifndef SVN_BASE_STATIC_REAL_BOUNDS_HPP
-#define SVN_BASE_STATIC_REAL_BOUNDS_HPP
+#ifndef SVN_BASE_TOPOLOGY_REAL_BOUNDS_HPP
+#define SVN_BASE_TOPOLOGY_REAL_BOUNDS_HPP
 
 #include <cmath>
 #include <limits>
@@ -56,4 +56,4 @@ real_bounds::from_range(float val) const
 }
 
 } // namespace svn::base
-#endif // SVN_BASE_STATIC_REAL_BOUNDS_HPP
+#endif // SVN_BASE_TOPOLOGY_REAL_BOUNDS_HPP

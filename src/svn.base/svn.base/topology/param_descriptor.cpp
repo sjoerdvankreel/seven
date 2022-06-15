@@ -1,4 +1,5 @@
-#include <svn.base/static/param_descriptor.hpp>
+#include <svn.base/topology/param_descriptor.hpp>
+
 #include <cassert>
 #include <iomanip>
 #include <sstream>

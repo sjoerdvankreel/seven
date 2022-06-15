@@ -1,4 +1,4 @@
-#include <svn.base/runtime/runtime_param.hpp>
+#include <svn.base/topology/runtime_param.hpp>
 #include <cassert>
 
 namespace svn::base {

@@ -1,7 +1,7 @@
 #ifndef SVN_VST_UI_GENERATOR_DESCRIPTION_CONTROLLER_UI_DESCRIPTION
 #define SVN_VST_UI_GENERATOR_DESCRIPTION_CONTROLLER_UI_DESCRIPTION
 
-#include <svn.base/runtime/runtime_topology.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 #include <svn.vst.ui_generator/description/part_ui_description.hpp>
 
 #include <vector>

@@ -8,8 +8,8 @@
 #include <svn.vst.base/sdk/parameter.hpp>
 #include <svn.vst.base/support/vst_init.hpp>
 #include <svn.vst.base/support/vst_io_stream.hpp>
-#include <svn.base/static/param_descriptor.hpp>
-#include <svn.base/runtime/runtime_topology.hpp>
+#include <svn.base/topology/param_descriptor.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 
 #include <cassert>
 #include <cstdint>

@@ -4,7 +4,7 @@
 #include <pluginterfaces/base/funknown.h>
 #include <svn.base/dsp/audio_processor.hpp>
 #include <svn.base/support/param_value.hpp>
-#include <svn.base/runtime/runtime_topology.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 
 #include <memory>
 #include <cstdint>

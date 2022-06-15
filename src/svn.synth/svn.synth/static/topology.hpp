@@ -1,8 +1,8 @@
 #ifndef SVN_SYNTH_STATIC_TOPOLOGY_HPP
 #define SVN_SYNTH_STATIC_TOPOLOGY_HPP
 
-#include <svn.base/static/part_descriptor.hpp>
-#include <svn.base/static/param_descriptor.hpp>
+#include <svn.base/topology/part_descriptor.hpp>
+#include <svn.base/topology/param_descriptor.hpp>
 
 namespace svn::synth {
 

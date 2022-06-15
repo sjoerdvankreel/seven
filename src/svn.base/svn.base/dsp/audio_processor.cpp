@@ -1,7 +1,7 @@
 #include <svn.base/dsp/dsp.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
-#include <svn.base/static/param_descriptor.hpp>
-#include <svn.base/runtime/runtime_topology.hpp>
+#include <svn.base/topology/param_descriptor.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 #include <cassert>
 
 namespace svn::base {

@@ -1,5 +1,5 @@
-#ifndef SVN_BASE_STATIC_PART_DESCRIPTOR_HPP
-#define SVN_BASE_STATIC_PART_DESCRIPTOR_HPP
+#ifndef SVN_BASE_TOPOLOGY_PART_DESCRIPTOR_HPP
+#define SVN_BASE_TOPOLOGY_PART_DESCRIPTOR_HPP
 
 #include <svn.base/support/item_name.hpp>
 #include <cstdint>
@@ -26,4 +26,4 @@ struct part_descriptor
 };
 
 } // namespace svn::base
-#endif // SVN_BASE_STATIC_PART_DESCRIPTOR_HPP
+#endif // SVN_BASE_TOPOLOGY_PART_DESCRIPTOR_HPP

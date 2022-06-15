@@ -1,7 +1,7 @@
 #include <svn.base/dsp/dsp.hpp>
 #include <svn.base/dsp/block_input.hpp>
 #include <svn.base/dsp/automation_view.hpp>
-#include <svn.base/runtime/runtime_topology.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 #include <svn.synth/dsp/seven_synth.hpp>
 #include <svn.synth/dsp/voice_input.hpp>
 

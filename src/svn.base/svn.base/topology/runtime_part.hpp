@@ -1,5 +1,5 @@
-#ifndef SVN_BASE_RUNTIME_RUNTIME_PART_HPP
-#define SVN_BASE_RUNTIME_RUNTIME_PART_HPP
+#ifndef SVN_BASE_TOPOLOGY_RUNTIME_PART_HPP
+#define SVN_BASE_TOPOLOGY_RUNTIME_PART_HPP
 
 #include <string>
 #include <cstdint>
@@ -21,4 +21,4 @@ struct runtime_part
 }; 
 
 } // namespace svn::base
-#endif // SVN_BASE_RUNTIME_RUNTIME_PART_HPP
+#endif // SVN_BASE_TOPOLOGY_RUNTIME_PART_HPP

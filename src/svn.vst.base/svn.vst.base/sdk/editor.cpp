@@ -1,6 +1,6 @@
 #include <svn.vst.base/sdk/editor.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
-#include <svn.base/static/param_descriptor.hpp>
+#include <svn.base/topology/param_descriptor.hpp>
 #include <cassert>
 
 using namespace VSTGUI;
