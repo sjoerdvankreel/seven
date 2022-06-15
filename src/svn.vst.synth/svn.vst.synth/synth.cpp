@@ -1,7 +1,7 @@
 #include <svn.vst.synth/synth.hpp>
 #include <svn.synth/dsp/synthesizer.hpp>
 #include <svn.synth/topology/topology.hpp>
-#include <svn.vst.base/support/vst_init.hpp>
+#include <svn.vst.base/support/bootstrap.hpp>
 
 #include <pluginterfaces/base/funknown.h>
 #include <pluginterfaces/vst/ivstcomponent.h>

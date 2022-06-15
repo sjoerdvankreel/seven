@@ -1,5 +1,5 @@
-#ifndef SVN_VST_BASE_SUPPORT_VST_INIT_HPP
-#define SVN_VST_BASE_SUPPORT_VST_INIT_HPP
+#ifndef SVN_VST_BASE_SUPPORT_BOOTSTRAP_HPP
+#define SVN_VST_BASE_SUPPORT_BOOTSTRAP_HPP
 
 #include <pluginterfaces/base/funknown.h>
 #include <svn.base/dsp/audio_processor.hpp>
@@ -24,4 +24,4 @@ init_create_audio_processor(
   std::int32_t max_sample_count, svn::base::param_value* state);
 
 } // namespace svn::vst::base
-#endif // SVN_VST_BASE_SUPPORT_VST_INIT_HPP
+#endif // SVN_VST_BASE_SUPPORT_BOOTSTRAP_HPP

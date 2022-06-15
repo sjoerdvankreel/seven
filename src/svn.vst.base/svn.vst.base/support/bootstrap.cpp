@@ -2,7 +2,7 @@
 #include <public.sdk/source/main/pluginfactory.h>
 #include <svn.vst.base/sdk/processor.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
-#include <svn.vst.base/support/vst_init.hpp>
+#include <svn.vst.base/support/bootstrap.hpp>
 
 #include <cstdint>
 #include <windows.h>
