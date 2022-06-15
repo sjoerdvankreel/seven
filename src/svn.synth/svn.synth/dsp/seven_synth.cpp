@@ -1,4 +1,4 @@
-#include <svn.base/dsp/dsp.hpp>
+#include <svn.base/dsp/support.hpp>
 #include <svn.base/dsp/io_types.hpp>
 #include <svn.base/dsp/automation_view.hpp>
 #include <svn.base/topology/topology_info.hpp>

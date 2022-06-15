@@ -1,4 +1,4 @@
-#include <svn.base/dsp/dsp.hpp>
+#include <svn.base/dsp/support.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
 #include <svn.base/topology/topology_info.hpp>
 #include <svn.synth/dsp/synth_voice.hpp>

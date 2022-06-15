@@ -1,5 +1,5 @@
-#ifndef SVN_BASE_DSP_DSP_HPP
-#define SVN_BASE_DSP_DSP_HPP
+#ifndef SVN_BASE_DSP_SUPPORT_HPP
+#define SVN_BASE_DSP_SUPPORT_HPP
 
 #include <svn.base/dsp/io_types.hpp>
 #include <svn.base/topology/topology_info.hpp>
@@ -10,6 +10,11 @@
 #include <algorithm>
 
 namespace svn::base {
+
+// Note including cents.
+inline float
+note_to_frequency(float note)
+{ return 440.0f * std::pow(2.0f, (note - 69.0f) / 12.0f); }
 
 inline float
 sanity(float val)
@@ -30,9 +35,7 @@ sanity_bipolar(float val)
 }
 
 inline void
-clear_audio(
-  audio_sample* audio, 
-  std::int32_t sample_count)
+clear_audio(audio_sample* audio, std::int32_t sample_count)
 {
   assert(audio != nullptr);
   assert(sample_count >= 0);
@@ -40,28 +43,8 @@ clear_audio(
     audio[s].left = audio[s].right = 0.0f;
 }
 
-inline void
-add_audio(
-  audio_sample* x, 
-  audio_sample* y, 
-  std::int32_t sample_count)
-{
-  assert(x != nullptr);
-  assert(y != nullptr);
-  assert(sample_count >= 0);
-  for (std::int32_t s = 0; s < sample_count; s++)
-    x[s] += y[s];
-}
-
-// Note including cents.
-inline float
-note_to_frequency(float note)
-{ return 440.0f * std::pow(2.0f, (note - 69.0f) / 12.0f); }
-
 inline bool
-clip_audio(
-  audio_sample* audio,
-  std::int32_t sample_count)
+clip_audio(audio_sample* audio, std::int32_t sample_count)
 {
   bool result = false;
   for (std::int32_t s = 0; s < sample_count; s++)
@@ -76,5 +59,15 @@ clip_audio(
   return result;
 }
 
+inline void
+add_audio(audio_sample* x, audio_sample* y, std::int32_t sample_count)
+{
+  assert(x != nullptr);
+  assert(y != nullptr);
+  assert(sample_count >= 0);
+  for (std::int32_t s = 0; s < sample_count; s++)
+    x[s] += y[s];
+}
+
 } // namespace svn::base
-#endif // SVN_BASE_DSP_DSP_HPP
+#endif // SVN_BASE_DSP_SUPPORT_HPP

@@ -1,4 +1,4 @@
-#include <svn.base/dsp/dsp.hpp>
+#include <svn.base/dsp/support.hpp>
 #include <svn.synth/static/topology.hpp>
 #include <svn.synth/dsp/voice_input.hpp>
 #include <svn.synth/dsp/voice_oscillator.hpp>
