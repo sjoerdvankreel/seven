@@ -1,24 +1,6 @@
-#include <svn.vst.base/support/vst_io_stream.hpp>
-#include <cassert>
+#include <svn.vst.base/support/io_stream.hpp>
 
 namespace svn::vst::base {
-
-vst_io_stream::
-vst_io_stream(Steinberg::IBStreamer* streamer) :
-_streamer(streamer)
-{ assert (streamer != nullptr); }
-
-bool
-vst_io_stream::read_float(float& val)
-{ return _streamer->readFloat(val); }
-
-bool
-vst_io_stream::write_float(float val)
-{ return _streamer->writeFloat(val); }
-
-bool
-vst_io_stream::write_int32(std::int32_t val)
-{ return _streamer->writeInt32(val); }
 
 bool 
 vst_io_stream::read_int32(std::int32_t& val)
@@ -33,8 +15,7 @@ bool
 vst_io_stream::read_wstring(std::wstring& val)
 {
   wchar_t chr;
-  Steinberg::int32 size;
-  
+  Steinberg::int32 size;  
   val.clear();
   if(!_streamer->readInt32(size)) return false;
   for (std::int32_t i = 0; i < size; i++)

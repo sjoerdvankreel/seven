@@ -7,7 +7,7 @@
 #include <svn.vst.base/sdk/processor.hpp>
 #include <svn.vst.base/sdk/parameter.hpp>
 #include <svn.vst.base/support/vst_init.hpp>
-#include <svn.vst.base/support/vst_io_stream.hpp>
+#include <svn.vst.base/support/io_stream.hpp>
 #include <svn.base/topology/topology_info.hpp>
 
 #include <cassert>

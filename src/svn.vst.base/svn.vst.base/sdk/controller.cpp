@@ -3,7 +3,7 @@
 #include <svn.vst.base/sdk/editor.hpp>
 #include <svn.vst.base/sdk/parameter.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
-#include <svn.vst.base/support/vst_io_stream.hpp>
+#include <svn.vst.base/support/io_stream.hpp>
 
 #include <vector>
 #include <cassert>
