@@ -1,5 +1,4 @@
 #include <svn.vst.base/sdk/parameter.hpp>
-#include <svn.base/topology/topology_info.hpp>
 #include <cassert>
 
 using namespace svn::base;
@@ -38,43 +37,20 @@ param_flags(param_type type, bool output)
 }  
 
 parameter::
-parameter(std::int32_t index, svn::base::part_info const* part, svn::base::param_info const* param) :
+parameter(std::int32_t index, 
+  svn::base::part_info const* part, 
+  svn::base::param_info const* param) :
   Parameter(
     param->runtime_name.c_str(), index, param->descriptor->unit,
     param_default_to_vst_normalized(*param->descriptor),
     param_step_count(*param->descriptor),
     param_flags(param->descriptor->type, part->descriptor->output),
-    param->part_index + 1,
-    param->descriptor->static_name.short_),
+    param->part_index + 1, param->descriptor->static_name.short_),
   _descriptor(param->descriptor)
 {    
   assert(index >= 0);
   assert(param != nullptr);
   setPrecision(param->descriptor->real.precision);
-}   
-
-ParamValue
-parameter::toPlain(ParamValue normalized) const
-{
-  switch (_descriptor->type)
-  {
-  case param_type::real: 
-    return _descriptor->real.display.to_range(normalized);
-  default:
-    return vst_normalized_to_discrete(*_descriptor, normalized);
-  }
-}
-
-ParamValue 
-parameter::toNormalized(ParamValue plain) const
-{
-  switch (_descriptor->type)
-  {
-  case param_type::real:
-    return _descriptor->real.display.from_range(plain);
-  default:
-    return discrete_to_vst_normalized(*_descriptor, static_cast<std::int32_t>(plain));
-  }
 }
 
 void
@@ -100,6 +76,26 @@ parameter::fromString(TChar const* string, ParamValue& normalized) const
   default: normalized = discrete_to_vst_normalized(*_descriptor, value.discrete); break;
   }
   return true;
+}
+
+ParamValue
+parameter::toPlain(ParamValue normalized) const
+{
+  switch (_descriptor->type)
+  {
+  case param_type::real: return _descriptor->real.display.to_range(normalized);
+  default: return vst_normalized_to_discrete(*_descriptor, normalized);
+  }
+}
+
+ParamValue
+parameter::toNormalized(ParamValue plain) const
+{
+  switch (_descriptor->type)
+  {
+  case param_type::real: return _descriptor->real.display.from_range(plain);
+  default: return discrete_to_vst_normalized(*_descriptor, static_cast<std::int32_t>(plain));
+  }
 }
 
 } // namespace svn::vst::base
