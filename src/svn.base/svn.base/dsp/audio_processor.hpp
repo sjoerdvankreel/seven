@@ -30,37 +30,27 @@ private:
   // Output parameter values of size total output parameters in topology.
   std::vector<param_value> _output_param_buffer;
 
+private:
   void state_check();
   void transform_automation();
   void automation_check(std::int32_t sample_count);
 
-protected:
-  virtual void
-  process_block(
-    block_input const& input, block_output& output) = 0;
-
 public:
-  float sample_rate() const;
-  block_output const& process_block();
-  topology_info const* topology() const;
-
-  // Caller writes either discrete or normalized (0..1) values to automation.
-  // Process block call overwrites real valued automation with actual range.
-  block_input& prepare_block(std::int32_t sample_count);
-
   virtual ~audio_processor() = default;
   audio_processor(
-    topology_info const* topology, float sample_rate,
+    topology_info const* topology, float sample_rate, 
     std::int32_t max_sample_count, param_value* state);
+
+  float sample_rate() const { return _sample_rate; }
+  topology_info const* topology() const { return _topology; }
+  // Process block call overwrites real valued automation with actual range.
+  block_output const& process_block();
+  // Caller writes either discrete or normalized (0..1) values to automation.
+  block_input& prepare_block(std::int32_t sample_count);
+
+protected:
+  virtual void process_block(block_input const& input, block_output& output) = 0;
 };
-
-inline float
-audio_processor::sample_rate() const
-{ return _sample_rate; }
-
-inline topology_info const*
-audio_processor::topology() const
-{ return _topology; }
 
 } // namespace svn::base
 #endif // SVN_BASE_DSP_AUDIO_PROCESSOR_HPP

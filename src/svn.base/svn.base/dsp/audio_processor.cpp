@@ -1,6 +1,5 @@
 #include <svn.base/dsp/support.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
-#include <svn.base/topology/topology_info.hpp>
 #include <cassert>
 
 namespace svn::base {
@@ -9,16 +8,13 @@ audio_processor::
 audio_processor(
   topology_info const* topology, float sample_rate,
   std::int32_t max_sample_count, base::param_value* state):
-_input(),
-_output(),
-_notes(static_cast<std::size_t>(topology->max_note_events)),
+_input(), _output(), _state(state),
+ _topology(topology), _sample_rate(sample_rate),
 _audio(static_cast<std::size_t>(max_sample_count)),
-_sample_rate(sample_rate),
-_state(state),
-_topology(topology),
+_notes(static_cast<std::size_t>(topology->max_note_events)),
 _automation(static_cast<std::size_t>(topology->input_param_count)),
-_automation_buffer(static_cast<std::size_t>(topology->input_param_count) * max_sample_count),
-_output_param_buffer(static_cast<std::size_t>(topology->output_param_count))
+_output_param_buffer(static_cast<std::size_t>(topology->output_param_count)),
+_automation_buffer(static_cast<std::size_t>(topology->input_param_count) * max_sample_count)
 {
   assert(state != nullptr);
   assert(sample_rate > 0.0f);
@@ -27,7 +23,6 @@ _output_param_buffer(static_cast<std::size_t>(topology->output_param_count))
 
   _output.audio = _audio.data();
   _output.output_params = _output_param_buffer.data();
-
   _input.note_count = 0;
   _input.automation = _automation.data();
   _input.notes = topology->max_note_events == 0? nullptr: _notes.data();
@@ -58,7 +53,10 @@ audio_processor::state_check()
     if (descriptor.type == param_type::real)
       assert(0.0 <= _state[p].real && _state[p].real <= 1.0);
     else
-      assert(descriptor.discrete.min <= _state[p].discrete && _state[p].discrete <= descriptor.discrete.max);
+    {
+      std::int32_t val = _state[p].discrete;
+      assert(descriptor.discrete.min <= val && val <= descriptor.discrete.max);
+    }
   }
 }
 
