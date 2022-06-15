@@ -1,6 +1,6 @@
 #include <svn.vst.base/sdk/parameter.hpp>
 #include <svn.base/support/param_value.hpp>
-#include <svn.base/topology/runtime_part.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 #include <svn.base/topology/part_descriptor.hpp>
 #include <cassert>
 

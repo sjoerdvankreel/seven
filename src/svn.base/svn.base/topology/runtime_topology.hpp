@@ -1,8 +1,8 @@
 #ifndef SVN_BASE_TOPOLOGY_RUNTIME_TOPOLOGY_HPP
 #define SVN_BASE_TOPOLOGY_RUNTIME_TOPOLOGY_HPP
 
-#include <svn.base/topology/runtime_part.hpp>
-#include <svn.base/topology/runtime_param.hpp>
+#include <svn.base/topology/part_descriptor.hpp>
+#include <svn.base/topology/param_descriptor.hpp>
 
 #include <string>
 #include <vector>
@@ -10,6 +10,22 @@
 #include <cstdint>
 
 namespace svn::base {
+
+struct runtime_part
+{
+  std::int32_t const type_index; // Part index within this type, e.g. 0/1 in case of 2 filters.
+  std::wstring const runtime_name; // Runtime name, e.g. "Filter 1", "Filter 2". Equals static name when part count is 1.
+  std::int32_t const runtime_param_start; // Index into topology.
+  part_descriptor const* const descriptor; // Pointer to static part information.
+};
+
+struct runtime_param
+{
+  std::int32_t const part_index; // Index into runtime_part array, e.g. 0/1/2/3 when 2 oscillators + 2 filters.
+  std::wstring const runtime_name; // Runtime parameter name, e.g. "Filter 2 frequency".
+  runtime_part const* const part; // Pointer to runtime part, e.g. filter 1 descriptor.
+  param_descriptor const* const descriptor; // Pointer to static parameter information.
+};
 
 struct runtime_topology
 {

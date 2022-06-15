@@ -2,7 +2,7 @@
 #define SVN_VST_BASE_SDK_PARAMETER_HPP
 
 #include <public.sdk/source/vst/vstparameters.h>
-#include <svn.base/topology/runtime_param.hpp>
+#include <svn.base/topology/runtime_topology.hpp>
 #include <svn.base/topology/param_descriptor.hpp>
 
 #include <cstdint>
