@@ -67,7 +67,7 @@ controller_factory(void* context)
 Steinberg::FUnknown*
 processor_factory(void* context)
 { 
-  auto result = new processor(init_get_controller_id(), &_topology);
+  auto result = new processor(&_topology, init_get_controller_id());
   return static_cast<Steinberg::Vst::IAudioProcessor*>(result); 
 }
 
