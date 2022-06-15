@@ -6,20 +6,6 @@
 
 namespace svn::base {
 
-param_value 
-param_descriptor::to_display(param_value val) const
-{
-  if(type != param_type::real) return param_value(val.discrete);
-  return param_value(real.display.to_range(val.real));
-}
-
-param_value 
-param_descriptor::from_display(param_value val) const
-{
-  if (type != param_type::real) return param_value(val.discrete);
-  return param_value(real.display.from_range(val.real));
-}
-
 bool 
 param_descriptor::parse(wchar_t const* buffer, param_value& val) const
 {

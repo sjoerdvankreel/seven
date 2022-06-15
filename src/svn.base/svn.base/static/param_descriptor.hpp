@@ -53,8 +53,6 @@ struct param_descriptor
     discrete_descriptor const discrete; // Discrete valued specific data.
   };
 
-  param_value to_display(param_value val) const;
-  param_value from_display(param_value val) const;
   bool parse(wchar_t const* buffer, param_value& val) const;
   std::size_t format(param_value val, wchar_t* buffer, std::size_t size) const;
 

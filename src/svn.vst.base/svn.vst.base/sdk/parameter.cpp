@@ -53,35 +53,29 @@ parameter(std::int32_t index, svn::base::runtime_param const* param) :
   assert(index >= 0);
   assert(param != nullptr);
   setPrecision(param->descriptor->real.precision);
-}        
-    
+}   
+
 ParamValue
 parameter::toPlain(ParamValue normalized) const
 {
-  param_value value;
   switch (_descriptor->type)
   {
   case param_type::real: 
-    value.real = normalized;
-    return _descriptor->to_display(value).real;
+    return _descriptor->real.display.to_range(normalized);
   default:
-    value.discrete = vst_normalized_to_discrete(*_descriptor, normalized);
-    return _descriptor->to_display(value).discrete;
+    return vst_normalized_to_discrete(*_descriptor, normalized);
   }
 }
 
 ParamValue 
 parameter::toNormalized(ParamValue plain) const
 {
-  param_value value;
   switch (_descriptor->type)
   {
   case param_type::real:
-    value.real = plain;
-    return _descriptor->from_display(value).real;
+    return _descriptor->real.display.from_range(plain);
   default:
-    value.discrete = static_cast<std::int32_t>(plain);
-    return discrete_to_vst_normalized(*_descriptor, _descriptor->from_display(value).discrete);
+    return discrete_to_vst_normalized(*_descriptor, static_cast<std::int32_t>(plain));
   }
 }
 
