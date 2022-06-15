@@ -16,21 +16,21 @@ part_ui_description::create(
   std::int32_t cell_count = 0;
   for(std::int32_t i = 0; i < part.descriptor->param_count; i++)
     cell_count = std::max(cell_count, part.descriptor->params[i].ui_param_index + 1);
-  if (part.descriptor->ui_control_enabled != -1) cell_count--;
+  if (part.descriptor->ui.enabled_param!= -1) cell_count--;
 
   result.runtime_part_index = runtime_part_index;
-  result.columns = part.descriptor->ui_control_columns;
+  result.columns = part.descriptor->ui.param_columns;
   result.rows = cell_count / result.columns;
   if (cell_count % result.columns != 0) ++result.rows;
   result.width = result.columns * param_total_width + margin;
   result.height = (result.rows + 1) * (param_row_height + margin);
-  result.color_index = part.descriptor->ui_color_index % color_count;
+  result.color_index = part.descriptor->ui.color_index % color_count;
 
   result.enabled_param.row = 0;
   result.enabled_param.runtime_param_index = -1;
   result.enabled_param.column = result.columns - 1;
   for (std::int32_t i = 0; i < part.descriptor->param_count; i++)
-    if (i == part.descriptor->ui_control_enabled)
+    if (i == part.descriptor->ui.enabled_param)
       result.enabled_param.runtime_param_index = part.runtime_param_start + i;
     else
     {

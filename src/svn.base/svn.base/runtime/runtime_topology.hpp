@@ -35,7 +35,8 @@ struct runtime_topology
   // Output params must follow input params.
   static std::unique_ptr<runtime_topology> create(
     struct part_descriptor const* static_parts, 
-    std::int32_t part_count, std::int32_t max_notes, std::int32_t max_ui_height);
+    std::int32_t part_count, std::int32_t max_notes, 
+    std::int32_t max_ui_height);
 };
 
 } // namespace svn::base

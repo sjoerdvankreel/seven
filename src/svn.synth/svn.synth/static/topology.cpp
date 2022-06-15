@@ -61,9 +61,9 @@ voice_amp_params[voice_amp_param::count] =
 part_descriptor const 
 part_descriptors[part_type::count] =
 {
-  { part_type::voice_osc, false, { L"Osc", L"Voice oscillator" }, voice_osc_count, voice_osc_params, voice_osc_param::count, 3, 0, 1 },
-  { part_type::voice_amp, false, { L"Amp", L"Voice level" }, 1, voice_amp_params, voice_amp_param::count, 2, -1, 5 },
-  { part_type::glob_output, true, { L"Out", L"Output" }, 1, glob_output_params, glob_output_param::count, 1, -1, 6 }
+  { { L"Osc", L"Voice oscillator" }, part_type::voice_osc, false, voice_osc_count, voice_osc_params, voice_osc_param::count, { 1, 3, 0 } },
+  { { L"Amp", L"Voice level" }, part_type::voice_amp, false, 1, voice_amp_params, voice_amp_param::count, { 5, 2, -1 } },
+  { { L"Out", L"Output" }, part_type::glob_output, true, 1, glob_output_params, glob_output_param::count, { 6, 1, -1 } }
 };
  
 } // namespace svn::synth

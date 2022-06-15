@@ -20,8 +20,9 @@ runtime_topology::init_defaults(param_value* state) const
   
 std::unique_ptr<runtime_topology>
 runtime_topology::create(
-  part_descriptor const* static_parts, std::int32_t part_count, 
-  std::int32_t max_note_events, std::int32_t max_ui_height)
+  part_descriptor const* static_parts, 
+  std::int32_t part_count, std::int32_t max_note_events, 
+  std::int32_t max_ui_height)
 {
   bool seen_output = false;   
   assert(part_count > 0);
