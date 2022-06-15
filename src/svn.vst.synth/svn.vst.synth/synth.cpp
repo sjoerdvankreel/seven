@@ -1,5 +1,5 @@
 #include <svn.vst.synth/synth.hpp>
-#include <svn.synth/dsp/seven_synth.hpp>
+#include <svn.synth/dsp/synthesizer.hpp>
 #include <svn.synth/topology/topology.hpp>
 #include <svn.vst.base/support/vst_init.hpp>
 
@@ -41,7 +41,7 @@ std::unique_ptr<svn::base::audio_processor>
 init_create_audio_processor(
   topology_info const* topology, float sample_rate,
   std::int32_t max_sample_count, param_value* state)
-{ return std::make_unique<seven_synth>(topology, sample_rate, max_sample_count, state); }
+{ return std::make_unique<synthesizer>(topology, sample_rate, max_sample_count, state); }
 
 } // namespace svn::vst::base
 

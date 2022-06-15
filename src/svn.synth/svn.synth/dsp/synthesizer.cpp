@@ -1,9 +1,5 @@
 #include <svn.base/dsp/support.hpp>
-#include <svn.base/dsp/io_types.hpp>
-#include <svn.base/dsp/automation_view.hpp>
-#include <svn.base/topology/topology_info.hpp>
-#include <svn.synth/dsp/seven_synth.hpp>
-#include <svn.synth/dsp/support.hpp>
+#include <svn.synth/dsp/synthesizer.hpp>
 
 #include <cassert>
 #include <algorithm>
@@ -12,8 +8,8 @@ using namespace svn::base;
 
 namespace svn::synth {
 
-seven_synth::
-seven_synth(
+synthesizer::
+synthesizer(
   base::topology_info const* topology, float sample_rate,
   std::int32_t max_sample_count, base::param_value* state):
 audio_processor(topology, sample_rate, max_sample_count, state),
@@ -22,8 +18,7 @@ _voice_audio_scratch(static_cast<std::size_t>(max_sample_count)),
 _automation_fixed(static_cast<std::size_t>(synth_polyphony)),
 _automation_fixed_buffer(static_cast<std::size_t>(synth_polyphony * topology->input_param_count)),
 _last_automation_previous_block(static_cast<std::size_t>(topology->input_param_count)),
-_voices(),
-_voice_states()
+_voices(), _voice_states()
 {
   assert(state != nullptr);
   assert(sample_rate > 0.0f);
@@ -37,21 +32,20 @@ _voice_states()
 }
 
 void
-seven_synth::return_voice(std::int32_t index)
+synthesizer::return_voice(std::int32_t index)
 {
   assert(_voice_states[index].in_use);
   _voice_states[index] = voice_state();
 }
 
 void
-seven_synth::setup_voice_release(
-  note_event const& note, 
-  std::int32_t sample_count)
+synthesizer::setup_voice_release(
+  note_event const& note, std::int32_t sample_count)
 {
   for (std::int32_t v = 0; v < synth_polyphony; v++)
-    if (_voice_states[v].in_use &&
-      !_voice_states[v].released_previous_buffer &&
-      _voice_states[v].midi == note.midi)
+    if (_voice_states[v].in_use && 
+      _voice_states[v].midi == note.midi &&
+      !_voice_states[v].released_previous_buffer)
     {
       _voice_states[v].release_this_buffer = true;
       _voice_states[v].release_position_buffer = note.sample_index;
@@ -59,10 +53,8 @@ seven_synth::setup_voice_release(
 }
 
 void
-seven_synth::setup_voice(
-  note_event const& note, 
-  std::int32_t sample_count,
-  std::int64_t stream_position)
+synthesizer::setup_voice(
+  note_event const& note, std::int32_t sample_count, std::int64_t stream_position)
 {
   _voices_drained = true;
   std::int32_t slot = -1;
@@ -71,11 +63,13 @@ seven_synth::setup_voice(
   for(std::int32_t v = 0; v < synth_polyphony; v++)
     if (!_voice_states[v].in_use)
     {
+      // Found a free slot, no need to recycle.
       slot = v;
       _voices_drained = false;
       break;
     } else
     {
+      // Keep track of oldest (stream-time start position) voice.
       std::int64_t this_position = _voice_states[v].start_position_stream;
       if (slot == -1 || this_position < slot_position)
       {
@@ -96,8 +90,7 @@ seven_synth::setup_voice(
 }
 
 void
-seven_synth::process_block(
-  block_input const& input, block_output& output)
+synthesizer::process_block(block_input const& input, block_output& output)
 {
   voice_input vinput;
   vinput.bpm = input.bpm;
@@ -163,10 +156,9 @@ seven_synth::process_block(
         vinput.automation = vinput.automation.rearrange_samples(voice_start, release_sample);
         _voice_states[v].released_previous_buffer = true;
       }
-
       // Else nothing to do, we ride along with the active automation values.     
 
-      clear_audio(_voice_audio.data(), vinput.sample_count);
+      base::clear_audio(_voice_audio.data(), vinput.sample_count);
       std::int32_t processed = _voices[v].process_block(vinput,
         _voice_audio_scratch.data(), _voice_audio.data(), release_sample);
       base::add_audio(output.audio + voice_start, _voice_audio.data(), processed);
@@ -174,7 +166,7 @@ seven_synth::process_block(
     }
 
     // Clip and set output info.
-    bool clip = clip_audio(output.audio, input.sample_count);
+    bool clip = base::clip_audio(output.audio, input.sample_count);
     output.output_params[glob_output_param::clip].discrete = clip? 1: 0;
     output.output_params[glob_output_param::voices].discrete = voice_count;
     output.output_params[glob_output_param::drain].discrete = _voices_drained ? 1: 0;

@@ -1,5 +1,5 @@
-#ifndef SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
-#define SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
+#ifndef SVN_SYNTH_DSP_SYNTHESIZER_HPP
+#define SVN_SYNTH_DSP_SYNTHESIZER_HPP
 
 #include <svn.synth/dsp/voice.hpp>
 #include <svn.synth/topology/topology.hpp>
@@ -17,7 +17,7 @@ namespace svn::synth {
 // VST3 noteId, but this currently seems unsupported by my host of choice (renoise).
 // Unfortunately this also means a note off event for a specific midi note means
 // releasing all voices playing that note.
-class seven_synth:
+class synthesizer:
 public base::audio_processor
 {
 private:
@@ -40,28 +40,22 @@ private:
   std::array<voice, synth_polyphony> _voices;
   std::array<voice_state, synth_polyphony> _voice_states;
 
-  // Oldest voice is recycled first.
-  void return_voice(
-    std::int32_t voice);
-  // Toggles _voices_drained to indicate whether an earlier started, 
-  // not-yet-finished voice needed to be recycled.
-  void setup_voice(
-    struct note_event const& note, 
-    std::int32_t sample_count, std::int64_t stream_position);
-  void setup_voice_release(
-    struct note_event const& note, std::int32_t sample_count);
+public:
+  synthesizer(
+    base::topology_info const* topology, float sample_rate,
+    std::int32_t max_sample_count, base::param_value* state);
 
 protected:
-  void
-  process_block(
-    base::block_input const& input,
-    base::block_output& output) override;
+  void process_block(base::block_input const& input, base::block_output& output) override;
 
-public:
-  seven_synth(
-    struct base::topology_info const* topology, float sample_rate,
-    std::int32_t max_sample_count, base::param_value* state);
+private:
+  // Oldest voice is recycled first.
+  // Toggle _voices_drained to indicate whether an earlier 
+  // started, not-yet-finished voice needed to be recycled.
+  void return_voice(std::int32_t voice);
+  void setup_voice_release(note_event const& note, std::int32_t sample_count);
+  void setup_voice(note_event const& note, std::int32_t sample_count, std::int64_t stream_position);
 };
 
 } // namespace svn::synth
-#endif // SVN_SYNTH_DSP_SEVEN_SYNTH_HPP
+#endif // SVN_SYNTH_DSP_SYNTHESIZER_HPP
