@@ -19,16 +19,15 @@ using namespace Steinberg::Vst;
 
 namespace svn::vst::base {
 
-std::int32_t const output_param_update_msec = 200;
+// Don't update output too often.
+std::int32_t const 
+output_param_update_msec = 200;
 
 processor::
-processor(
-  Steinberg::FUID controller_id,
-  topology_info const* topology):
+processor(topology_info const* topology, FUID controller_id):
+_topology(topology), _processor(),
 _state(static_cast<std::size_t>(topology->input_param_count)),
-_accurate_parameters(static_cast<std::size_t>(topology->input_param_count)),
-_topology(topology),
-_processor()
+_accurate_parameters(static_cast<std::size_t>(topology->input_param_count))
 {
 	setControllerClass(controller_id);
   topology->init_defaults(_state.data());
@@ -36,6 +35,7 @@ _processor()
     _accurate_parameters[i].setParamID(static_cast<std::int32_t>(i));
 }
 
+// No 64-bit support.
 tresult PLUGIN_API
 processor::canProcessSampleSize(int32 symbolic_size)
 { 
@@ -43,6 +43,7 @@ processor::canProcessSampleSize(int32 symbolic_size)
   return kResultFalse;
 }
 
+// 1 stereo audio output, 1 event input.
 tresult PLUGIN_API
 processor::initialize(FUnknown* context)
 {
@@ -53,6 +54,7 @@ processor::initialize(FUnknown* context)
   return kResultTrue;
 }
 
+// Save parameter values to stream.
 tresult PLUGIN_API
 processor::getState(IBStream* state)
 {
@@ -63,10 +65,10 @@ processor::getState(IBStream* state)
   return kResultOk;
 }
 
+// Load parameter values from stream.
 tresult PLUGIN_API 
 processor::setState(IBStream* state)
 {
-  float value;
   if (state == nullptr) return kResultFalse;
   IBStreamer streamer(state, kLittleEndian);
   vst_io_stream stream(&streamer);
@@ -74,6 +76,8 @@ processor::setState(IBStream* state)
   return kResultOk;
 }
 
+// This gives us the working (max) block size and sample rate.
+// Set up our audio_processor.
 tresult PLUGIN_API
 processor::setupProcessing(ProcessSetup& setup)
 {
@@ -84,6 +88,7 @@ processor::setupProcessing(ProcessSetup& setup)
   return AudioEffect::setupProcessing(setup);
 }
 
+// 1 stereo audio output, 0 audio inputs.
 tresult PLUGIN_API 
 processor::setBusArrangements(
   SpeakerArrangement* inputs, int32 input_count,
@@ -93,38 +98,46 @@ processor::setBusArrangements(
   return AudioEffect::setBusArrangements(inputs, input_count, outputs, output_count);
 }
 
+// Where the magic happens.
 tresult PLUGIN_API
 processor::process(ProcessData& data)
 {
-  block_input& input = _processor->prepare_block(data.numSamples);
-  
+  // Setup current block input.
+  block_input& input = _processor->prepare_block(data.numSamples);  
   input.bpm = 0.0f;
   input.stream_position = -1L;
   input.sample_count = data.numSamples;  
-
   if(data.processContext != nullptr)
     input.stream_position = data.processContext->projectTimeSamples;
   if(data.processContext != nullptr && data.processContext->kTempoValid) 
     input.bpm = static_cast<float>(data.processContext->tempo);
+
+  // Not running, just update state.
   if (data.numSamples == 0 || data.numOutputs == 0) 
   {
     process_input_parameters(data);
     return kResultOk;
   }
 
+  // Setup events.
   process_notes(input, data);
   process_automation(input, data);
+
+  // Process current block.
   block_output const& output = _processor->process_block();
   for (std::int32_t s = 0; s < data.numSamples; s++)
   {
     data.outputs[0].channelBuffers32[0][s] = output.audio[s].left;
     data.outputs[0].channelBuffers32[1][s] = output.audio[s].right;
   }
+
+  // Sync both in and output param values.
   process_input_parameters(data);
   process_output_parameters(output, data);
   return kResultOk;
 }
 
+// Translate from vst3 note events.
 void
 processor::process_notes(block_input& input, ProcessData const& data)
 {
@@ -160,6 +173,8 @@ processor::process_notes(block_input& input, ProcessData const& data)
         }
 }
 
+// Translate from vst3 automation events using the last queued values.
+// We use this to make sure values are synced even if no audio is running.
 void
 processor::process_input_parameters(ProcessData const& data)
 {
@@ -182,6 +197,7 @@ processor::process_input_parameters(ProcessData const& data)
     }
 }
 
+// Translate from vst3 automation events.
 void
 processor::process_automation(block_input& input, ProcessData const& data)
 {
@@ -210,6 +226,7 @@ processor::process_automation(block_input& input, ProcessData const& data)
     }
 }
 
+// Translate to vst3 automation events.
 void
 processor::process_output_parameters(
   svn::base::block_output const& output, ProcessData& data)

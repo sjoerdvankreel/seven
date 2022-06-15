@@ -14,10 +14,12 @@
 
 namespace svn::vst::base {
 
+// Vst3 processor wrapping svn::base::audio_processor.
 class processor : 
 public Steinberg::Vst::AudioEffect
 {
 private:
+  using FUID = Steinberg::FUID;
   using TBool = Steinberg::TBool;
   using int32 = Steinberg::int32;
   using tresult = Steinberg::tresult;
@@ -29,16 +31,20 @@ private:
   using SpeakerArrangement = Steinberg::Vst::SpeakerArrangement;
 
 private:
+  // State of all parameters. 
+  // This fully defines the audio_processor and thus the plugin state.
   std::vector<svn::base::param_value> _state;
+  // For sample accurate.
   std::vector<Parameter> _accurate_parameters;
+  // Don't update output too often.
   std::int64_t output_param_update_samples = 0;
+  // Need topology for parameter dsp bounds etc.
   svn::base::topology_info const* const _topology;
+  // Where it happens. We just translate automation and audio values from/to vst3 format.
   std::unique_ptr<svn::base::audio_processor> _processor;
 
 public:
-  processor(
-    Steinberg::FUID controller_id,
-    svn::base::topology_info const* topology);
+  processor(svn::base::topology_info const* topology, FUID controller_id);
 
 	tresult PLUGIN_API setState(IBStream* state) override;
 	tresult PLUGIN_API getState(IBStream* state) override;
@@ -46,11 +52,11 @@ public:
   tresult PLUGIN_API initialize(FUnknown* context) override;
   tresult PLUGIN_API setupProcessing(ProcessSetup& setup) override;
   tresult PLUGIN_API canProcessSampleSize(int32 symbolic_size) override;
-  tresult PLUGIN_API setBusArrangements(
-    SpeakerArrangement* inputs, int32 input_count,
-    SpeakerArrangement* outputs, int32 output_count) override;
+  tresult PLUGIN_API setBusArrangements(SpeakerArrangement* inputs, 
+    int32 input_count, SpeakerArrangement* outputs, int32 output_count) override;
 
 private:
+  // Translating from/to vst3.
   void process_input_parameters(ProcessData const& data);
   void process_notes(svn::base::block_input& input, ProcessData const& data);
   void process_automation(svn::base::block_input& input, ProcessData const& data);
