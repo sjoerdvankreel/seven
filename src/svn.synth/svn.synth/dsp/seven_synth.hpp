@@ -3,7 +3,7 @@
 
 #include <svn.synth/dsp/synth_voice.hpp>
 #include <svn.synth/dsp/voice_state.hpp>
-#include <svn.synth/static/topology.hpp>
+#include <svn.synth/topology/topology.hpp>
 #include <svn.base/dsp/audio_processor.hpp>
 
 #include <array>

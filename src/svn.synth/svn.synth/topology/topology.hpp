@@ -1,8 +1,7 @@
-#ifndef SVN_SYNTH_STATIC_TOPOLOGY_HPP
-#define SVN_SYNTH_STATIC_TOPOLOGY_HPP
+#ifndef SVN_SYNTH_TOPOLOGY_TOPOLOGY_HPP
+#define SVN_SYNTH_TOPOLOGY_TOPOLOGY_HPP
 
-#include <svn.base/topology/part_descriptor.hpp>
-#include <svn.base/topology/param_descriptor.hpp>
+#include <svn.base/topology/topology_info.hpp>
 
 namespace svn::synth {
 
@@ -32,4 +31,4 @@ typedef voice_osc_blmp_type_t::value voice_osc_blmp_type;
 typedef glob_output_param_t::value glob_output_param;
 
 } // namespace svn::synth
-#endif // SVN_SYNTH_STATIC_TOPOLOGY_HPP
+#endif // SVN_SYNTH_TOPOLOGY_TOPOLOGY_HPP

@@ -1,6 +1,6 @@
 #include <svn.vst.synth/synth.hpp>
 #include <svn.synth/dsp/seven_synth.hpp>
-#include <svn.synth/static/topology.hpp>
+#include <svn.synth/topology/topology.hpp>
 #include <svn.vst.base/support/vst_init.hpp>
 
 #include <pluginterfaces/base/funknown.h>
