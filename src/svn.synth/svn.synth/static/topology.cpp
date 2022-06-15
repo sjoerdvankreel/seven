@@ -1,6 +1,5 @@
 #include <svn.synth/static/topology.hpp>
-#include <svn.base/support/item_name.hpp>
-#include <svn.base/support/note_name.hpp>
+#include <svn.base/support/support.hpp>
 #include <svn.base/topology/topology_info.hpp>
 
 using namespace svn::base;
@@ -47,7 +46,7 @@ voice_osc_params[voice_osc_param::count] =
   { { L"Blmp", L"Blmp type" }, L"", false, voice_osc_blmp_types, voice_osc_blmp_type::count, { 1, 0, false, voice_osc_param::type, voice_osc_type::blmp } },
   { { L"Pan", L"Panning" }, L"%", { 0.5, 0, real_bounds::unit(), real_bounds::linear(-100.0, 100.0) }, { 2, 1, false, -1, 0 } },
   { { L"Oct", L"Octave" }, L"", true, 0, 9, 4, { 3, 2, false, -1, 0 } },
-  { { L"Note", L"Note" }, L"", true, note_names, note_name::count, { 4, 2, false, -1, 0 } },
+  { { L"Note", L"Note" }, L"", true, note_names, 12, { 4, 2, false, -1, 0 } },
   { { L"Cent", L"Cent" }, L"", { 0.5, 0, real_bounds::linear(-0.5, 0.5), real_bounds::linear(-50.0, 50.0) }, { 5, 2, false, -1, 0 } }
 }; 
    

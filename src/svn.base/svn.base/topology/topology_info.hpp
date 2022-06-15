@@ -1,7 +1,7 @@
 #ifndef SVN_BASE_TOPOLOGY_TOPOLOGY_INFO_HPP
 #define SVN_BASE_TOPOLOGY_TOPOLOGY_INFO_HPP
 
-#include <svn.base/support/param_value.hpp>
+#include <svn.base/support/support.hpp>
 #include <svn.base/topology/part_descriptor.hpp>
 #include <svn.base/topology/param_descriptor.hpp>
 

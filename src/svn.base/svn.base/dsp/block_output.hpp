@@ -1,8 +1,8 @@
 #ifndef SVN_BASE_DSP_BLOCK_OUTPUT_HPP
 #define SVN_BASE_DSP_BLOCK_OUTPUT_HPP
 
+#include <svn.base/support/support.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
-#include <svn.base/support/param_value.hpp>
 #include <cstdint>
 
 namespace svn::base {
