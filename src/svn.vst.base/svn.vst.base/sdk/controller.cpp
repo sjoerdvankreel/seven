@@ -17,11 +17,6 @@ using namespace Steinberg::Vst;
 
 namespace svn::vst::base {   
 
-controller::
-controller(svn::base::topology_info const* topology):
-_topology(topology)
-{ assert(topology != nullptr); }
-
 void
 controller::sync_dependent_parameters()
 {
@@ -41,18 +36,25 @@ tresult PLUGIN_API
 controller::setComponentState(IBStream* state)
 {
   param_value value;
-  std::vector<param_value> values(_topology->input_param_count, value);
   if (state == nullptr) return kResultFalse;
+
+  // Load state into temporary buffer.
   IBStreamer streamer(state, kLittleEndian);
   vst_io_stream stream(&streamer);
+  std::vector<param_value> values(_topology->input_param_count, value);
   if(!stream.load(*_topology, values.data())) return kResultFalse;
 
+  // SetParamNormalized() each value.
   for(std::int32_t p = 0; p < _topology->input_param_count; p++)
     if(_topology->params[p].descriptor->type == param_type::real)
       setParamNormalized(p, values[p].real);
     else
-      setParamNormalized(p, parameter::discrete_to_vst_normalized(
-        *_topology->params[p].descriptor, values[p].discrete));
+    {
+      auto const& descriptor = *_topology->params[p].descriptor;
+      setParamNormalized(p, parameter::discrete_to_vst_normalized(descriptor, values[p].discrete));
+    }
+
+  // Set initial ui visibility state.
   sync_dependent_parameters();
   return kResultOk;
 }
@@ -62,8 +64,11 @@ controller::initialize(FUnknown* context)
 {
   tresult result = EditControllerEx1::initialize(context);
   if (result != kResultTrue) return result;
+
+  // Add parts as units.
   for (std::size_t p = 0; p < _topology->parts.size(); p++)
     addUnit(new Unit(_topology->parts[p].runtime_name.c_str(), p + 1, kRootUnitId));
+  // Add all runtime parameters.
   for (std::size_t p = 0; p < _topology->params.size(); p++)
   {
     part_info const* part = &_topology->parts[_topology->params[p].part_index];
@@ -77,6 +82,8 @@ controller::endEdit(ParamID tag)
 {
   if (_editor == nullptr) return EditControllerEx1::endEdit(tag);
   if (_topology->ui.param_dependencies[tag].size() == 0) return EditControllerEx1::endEdit(tag);
+
+  // Update visibility of dependent parameters.
   double normalized = getParamNormalized(tag);
   auto const& descriptor = *_topology->params[tag].descriptor;
   std::int32_t value = parameter::vst_normalized_to_discrete(descriptor, normalized);

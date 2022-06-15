@@ -9,6 +9,7 @@
 
 namespace svn::vst::base {
 
+// Vst edit controller dynamically generated from topology_info.
 class controller: 
 public Steinberg::Vst::EditControllerEx1, 
 public VSTGUI::VST3EditorDelegate
@@ -23,13 +24,14 @@ public VSTGUI::VST3EditorDelegate
   svn::base::topology_info const* const _topology;
 
 public:
-  void sync_dependent_parameters();
-  controller(svn::base::topology_info const* topology);
-
   tresult endEdit(ParamID tag) override;
   tresult PLUGIN_API initialize(FUnknown* context) override;
   IPlugView* PLUGIN_API createView(char const* name) override;
   tresult PLUGIN_API setComponentState(IBStream* state) override;
+
+  // Update the editor ui if dependent params change.
+  void sync_dependent_parameters();
+  controller(svn::base::topology_info const* topology) : _topology(topology) {}
 };
 
 } // namespace svn::vst::base
