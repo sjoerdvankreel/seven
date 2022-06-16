@@ -67,7 +67,7 @@ part_descriptors[part_type::count] =
 {
   { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, &oscillator_graph, { 1, 4, 0 } },
   { { L"Amp", L"Amplitude" }, part_type::amplitude, false, 1, amplitude_params, amplitude_param::count, nullptr, { 5, 2, -1 } },
-  { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, nullptr, { 6, 1, -1 } }
+  { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, nullptr, { 6, 3, -1 } }
 };
  
 } // namespace svn::synth
