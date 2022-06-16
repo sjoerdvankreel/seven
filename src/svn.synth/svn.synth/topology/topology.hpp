@@ -20,7 +20,7 @@ struct amplitude_param_t { enum value { amp, decay, count }; };
 struct oscillator_type_t { enum value { sine, blep, blmp, count }; };
 struct oscillator_blep_type_t { enum value { saw, pulse, triangle, count }; };
 struct oscillator_blmp_type_t { enum value { saw, pulse, count }; };
-struct oscillator_param_t { enum value { on, type, blep_type, blmp_type, pan, oct, note, cent, fake1, fake2, fake3, fake4, fake5, fake6, count }; };
+struct oscillator_param_t { enum value { on, type, blep_type, blmp_type, pan, oct, note, cent, fake1, fake2, fake3, fake4, count }; };
 
 typedef part_type_t::value part_type;
 typedef output_param_t::value output_param;

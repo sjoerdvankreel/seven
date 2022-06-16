@@ -59,9 +59,7 @@ oscillator_params[oscillator_param::count] =
   { { L"Fake1", L"Fake1" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 6, 1, false, -1, 0 } },
   { { L"Fake2", L"Fake2" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 7, 1, false, -1, 0 } },
   { { L"Fake3", L"Fake3" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 8, 1, false, -1, 0 } },
-  { { L"Fake4", L"Fake4" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 9, 1, false, -1, 0 } },
-  { { L"Fake5", L"Fake5" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 10, 1, false, -1, 0 } },
-  { { L"Fake6", L"Fake6" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 11, 1, false, -1, 0 } }
+  { { L"Fake4", L"Fake4" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 9, 1, false, -1, 0 } }
 };   
   
 part_descriptor const 

@@ -160,27 +160,23 @@
             "osc_1_fake2": "9",
             "osc_1_fake3": "10",
             "osc_1_fake4": "11",
-            "osc_1_fake5": "12",
-            "osc_1_fake6": "13",
-            "osc_2_enabled": "14",
-            "osc_2_type": "15",
-            "osc_2_blep_type": "16",
-            "osc_2_blmp_type": "17",
-            "osc_2_panning": "18",
-            "osc_2_octave": "19",
-            "osc_2_note": "20",
-            "osc_2_cent": "21",
-            "osc_2_fake1": "22",
-            "osc_2_fake2": "23",
-            "osc_2_fake3": "24",
-            "osc_2_fake4": "25",
-            "osc_2_fake5": "26",
-            "osc_2_fake6": "27",
-            "amp_level": "28",
-            "amp_decay": "29",
-            "out_clip": "30",
-            "out_voices_exhausted": "31",
-            "out_voice_count": "32"
+            "osc_2_enabled": "12",
+            "osc_2_type": "13",
+            "osc_2_blep_type": "14",
+            "osc_2_blmp_type": "15",
+            "osc_2_panning": "16",
+            "osc_2_octave": "17",
+            "osc_2_note": "18",
+            "osc_2_cent": "19",
+            "osc_2_fake1": "20",
+            "osc_2_fake2": "21",
+            "osc_2_fake3": "22",
+            "osc_2_fake4": "23",
+            "amp_level": "24",
+            "amp_decay": "25",
+            "out_clip": "26",
+            "out_voices_exhausted": "27",
+            "out_voice_count": "28"
         },
         "templates": {
             "view": {
@@ -1015,143 +1011,10 @@
                                             "CViewContainer": {
                                                 "attributes": {
                                                     "class": "CViewContainer",
-                                                    "background-color": "color_FFFFFF20",
-                                                    "origin": "162, 71",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 22"
-                                                }
-                                            },
-                                            "CViewContainer": {
-                                                "attributes": {
-                                                    "class": "CViewContainer",
-                                                    "background-color": "color_00000040",
-                                                    "origin": "161, 70",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 24"
-                                                }
-                                            },
-                                            "CViewContainer": {
-                                                "attributes": {
-                                                    "class": "CViewContainer",
-                                                    "origin": "163, 72",
-                                                    "size": "80, 20",
-                                                    "background-color": "color_FFFFFF00"
-                                                },
-                                                "children": {
-                                                    "CAnimKnob": {
-                                                        "attributes": {
-                                                            "class": "CAnimKnob",
-                                                            "size": "20, 20",
-                                                            "origin": "0, 0",
-                                                            "control-tag": "osc_1_fake5",
-                                                            "tooltip": "Osc 1 Fake5",
-                                                            "angle-start": "20",
-                                                            "angle-range": "320",
-                                                            "height-of-one-image": "20",
-                                                            "bitmap": "bitmap_FF8000"
-                                                        }
-                                                    },
-                                                    "CTextLabel": {
-                                                        "attributes": {
-                                                            "class": "CTextLabel",
-                                                            "size": "26, 20",
-                                                            "origin": "23, 0",
-                                                            "transparent": "true",
-                                                            "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FF8000FF",
-                                                            "title": "Fake5"
-                                                        }
-                                                    },
-                                                    "CTextEdit": {
-                                                        "attributes": {
-                                                            "class": "CTextEdit",
-                                                            "size": "28, 20",
-                                                            "origin": "49, 0",
-                                                            "control-tag": "osc_1_fake5",
-                                                            "tooltip": "Osc 1 Fake5",
-                                                            "text-alignment": "right",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "value-precision": "2",
-                                                            "back-color": "color_00000020",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FF8000FF"
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "CViewContainer": {
-                                                "attributes": {
-                                                    "class": "CViewContainer",
-                                                    "background-color": "color_FFFFFF20",
-                                                    "origin": "242, 71",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 22"
-                                                }
-                                            },
-                                            "CViewContainer": {
-                                                "attributes": {
-                                                    "class": "CViewContainer",
                                                     "background-color": "color_00000040",
                                                     "origin": "241, 70",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
-                                                }
-                                            },
-                                            "CViewContainer": {
-                                                "attributes": {
-                                                    "class": "CViewContainer",
-                                                    "origin": "243, 72",
-                                                    "size": "80, 20",
-                                                    "background-color": "color_FFFFFF00"
-                                                },
-                                                "children": {
-                                                    "CAnimKnob": {
-                                                        "attributes": {
-                                                            "class": "CAnimKnob",
-                                                            "size": "20, 20",
-                                                            "origin": "0, 0",
-                                                            "control-tag": "osc_1_fake6",
-                                                            "tooltip": "Osc 1 Fake6",
-                                                            "angle-start": "20",
-                                                            "angle-range": "320",
-                                                            "height-of-one-image": "20",
-                                                            "bitmap": "bitmap_FF8000"
-                                                        }
-                                                    },
-                                                    "CTextLabel": {
-                                                        "attributes": {
-                                                            "class": "CTextLabel",
-                                                            "size": "26, 20",
-                                                            "origin": "23, 0",
-                                                            "transparent": "true",
-                                                            "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FF8000FF",
-                                                            "title": "Fake6"
-                                                        }
-                                                    },
-                                                    "CTextEdit": {
-                                                        "attributes": {
-                                                            "class": "CTextEdit",
-                                                            "size": "28, 20",
-                                                            "origin": "49, 0",
-                                                            "control-tag": "osc_1_fake6",
-                                                            "tooltip": "Osc 1 Fake6",
-                                                            "text-alignment": "right",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "value-precision": "2",
-                                                            "back-color": "color_00000020",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FF8000FF"
-                                                        }
-                                                    }
                                                 }
                                             }
                                         }
@@ -1984,143 +1847,10 @@
                                             "CViewContainer": {
                                                 "attributes": {
                                                     "class": "CViewContainer",
-                                                    "background-color": "color_FFFFFF20",
-                                                    "origin": "162, 71",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 22"
-                                                }
-                                            },
-                                            "CViewContainer": {
-                                                "attributes": {
-                                                    "class": "CViewContainer",
-                                                    "background-color": "color_00000040",
-                                                    "origin": "161, 70",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 24"
-                                                }
-                                            },
-                                            "CViewContainer": {
-                                                "attributes": {
-                                                    "class": "CViewContainer",
-                                                    "origin": "163, 72",
-                                                    "size": "80, 20",
-                                                    "background-color": "color_FFFFFF00"
-                                                },
-                                                "children": {
-                                                    "CAnimKnob": {
-                                                        "attributes": {
-                                                            "class": "CAnimKnob",
-                                                            "size": "20, 20",
-                                                            "origin": "0, 0",
-                                                            "control-tag": "osc_2_fake5",
-                                                            "tooltip": "Osc 2 Fake5",
-                                                            "angle-start": "20",
-                                                            "angle-range": "320",
-                                                            "height-of-one-image": "20",
-                                                            "bitmap": "bitmap_FF8000"
-                                                        }
-                                                    },
-                                                    "CTextLabel": {
-                                                        "attributes": {
-                                                            "class": "CTextLabel",
-                                                            "size": "26, 20",
-                                                            "origin": "23, 0",
-                                                            "transparent": "true",
-                                                            "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FF8000FF",
-                                                            "title": "Fake5"
-                                                        }
-                                                    },
-                                                    "CTextEdit": {
-                                                        "attributes": {
-                                                            "class": "CTextEdit",
-                                                            "size": "28, 20",
-                                                            "origin": "49, 0",
-                                                            "control-tag": "osc_2_fake5",
-                                                            "tooltip": "Osc 2 Fake5",
-                                                            "text-alignment": "right",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "value-precision": "2",
-                                                            "back-color": "color_00000020",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FF8000FF"
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "CViewContainer": {
-                                                "attributes": {
-                                                    "class": "CViewContainer",
-                                                    "background-color": "color_FFFFFF20",
-                                                    "origin": "242, 71",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 22"
-                                                }
-                                            },
-                                            "CViewContainer": {
-                                                "attributes": {
-                                                    "class": "CViewContainer",
                                                     "background-color": "color_00000040",
                                                     "origin": "241, 70",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
-                                                }
-                                            },
-                                            "CViewContainer": {
-                                                "attributes": {
-                                                    "class": "CViewContainer",
-                                                    "origin": "243, 72",
-                                                    "size": "80, 20",
-                                                    "background-color": "color_FFFFFF00"
-                                                },
-                                                "children": {
-                                                    "CAnimKnob": {
-                                                        "attributes": {
-                                                            "class": "CAnimKnob",
-                                                            "size": "20, 20",
-                                                            "origin": "0, 0",
-                                                            "control-tag": "osc_2_fake6",
-                                                            "tooltip": "Osc 2 Fake6",
-                                                            "angle-start": "20",
-                                                            "angle-range": "320",
-                                                            "height-of-one-image": "20",
-                                                            "bitmap": "bitmap_FF8000"
-                                                        }
-                                                    },
-                                                    "CTextLabel": {
-                                                        "attributes": {
-                                                            "class": "CTextLabel",
-                                                            "size": "26, 20",
-                                                            "origin": "23, 0",
-                                                            "transparent": "true",
-                                                            "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FF8000FF",
-                                                            "title": "Fake6"
-                                                        }
-                                                    },
-                                                    "CTextEdit": {
-                                                        "attributes": {
-                                                            "class": "CTextEdit",
-                                                            "size": "28, 20",
-                                                            "origin": "49, 0",
-                                                            "control-tag": "osc_2_fake6",
-                                                            "tooltip": "Osc 2 Fake6",
-                                                            "text-alignment": "right",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "value-precision": "2",
-                                                            "back-color": "color_00000020",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FF8000FF"
-                                                        }
-                                                    }
                                                 }
                                             }
                                         }
