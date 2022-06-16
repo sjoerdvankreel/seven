@@ -16,7 +16,7 @@ _topology(topology), _controls(topology->params.size())
   assert(xml_file != nullptr);
   assert(controller != nullptr);
   assert(template_name != nullptr);
-}     
+}      
 
 void 
 editor::onViewAdded(CFrame* frame, CView* view)

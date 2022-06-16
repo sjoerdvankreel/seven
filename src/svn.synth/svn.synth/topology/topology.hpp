@@ -7,7 +7,7 @@ namespace svn::synth {
 
 inline std::int32_t constexpr oscillator_count = 2;
 inline std::int32_t constexpr synth_polyphony = 32;  
-inline std::int32_t constexpr synth_max_ui_height = 160; 
+inline std::int32_t constexpr synth_max_ui_height = 400; 
 
 extern base::part_descriptor const part_descriptors[];
 extern base::param_descriptor const output_params[];
