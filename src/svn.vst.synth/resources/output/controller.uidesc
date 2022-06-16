@@ -248,7 +248,7 @@
                                                 "attributes": {
                                                     "class": "CCheckBox",
                                                     "size": "28, 20",
-                                                    "origin": "309, -1",
+                                                    "origin": "306, -1",
                                                     "control-tag": "osc_1_enabled",
                                                     "tooltip": "Osc 1 Enabled",
                                                     "title": "",
@@ -1093,7 +1093,7 @@
                                                 "attributes": {
                                                     "class": "CCheckBox",
                                                     "size": "28, 20",
-                                                    "origin": "309, -1",
+                                                    "origin": "306, -1",
                                                     "control-tag": "osc_2_enabled",
                                                     "tooltip": "Osc 2 Enabled",
                                                     "title": "",

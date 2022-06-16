@@ -15,7 +15,7 @@
 
 using namespace svn::base;
 using namespace Steinberg;
-using namespace Steinberg::Vst;
+using namespace Steinberg::Vst; 
 
 namespace svn::vst::base {
 

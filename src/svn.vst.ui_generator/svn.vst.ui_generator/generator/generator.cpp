@@ -370,7 +370,7 @@ build_ui_part_header_container(topology_info const& topology,
   add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, allocator), allocator);
   if (description.enabled_param.runtime_param_index != -1)
   {
-    std::int32_t left = description.columns * (param_total_width + margin) - param_col1_width - margin;
+    std::int32_t left = description.columns * (param_total_width + margin) - param_col1_width - margin * 2;
     Value enabled_box = build_ui_param_checkbox(topology, description, description.enabled_param, black, left, param_col3_width, -1, allocator);
     add_child(result, "CCheckBox", enabled_box, allocator);
   }
