@@ -13,7 +13,7 @@ vst_io_stream::read_int32(std::int32_t& val)
 
 bool
 vst_io_stream::read_wstring(std::wstring& val)
-{
+{  
   wchar_t chr;
   Steinberg::int32 size;  
   val.clear();

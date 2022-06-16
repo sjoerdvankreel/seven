@@ -28,7 +28,7 @@ oscillator_blmp_types[oscillator_blmp_type::count] =
 };
 
 static graph_descriptor const
-oscillator_graph = { 2, 1, graph_placement::right };
+oscillator_graph = { 1, 1, 2, 2 };
 
 param_descriptor const 
 output_params[output_param::count] =
@@ -48,22 +48,28 @@ amplitude_params[amplitude_param::count] =
 param_descriptor const
 oscillator_params[oscillator_param::count] =
 {
-  { { L"On", L"Enabled" }, false, { - 1, 0, false, -1, 0 } },
+  { { L"On", L"Enabled" }, false, { -1, 0, false, -1, 0 } },
   { { L"Type", L"Type" }, L"", false, oscillator_types, oscillator_type::count, { 0, 0, false, -1, 0 } },
   { { L"Blep", L"Blep type" }, L"", false, oscillator_blep_types, oscillator_blep_type::count, {1, 0, false, oscillator_param::type, oscillator_type::blep}},
   { { L"Blmp", L"Blmp type" }, L"", false, oscillator_blmp_types, oscillator_blmp_type::count, { 1, 0, false, oscillator_param::type, oscillator_type::blmp } },
   { { L"Pan", L"Panning" }, L"%", { 0.5, 0, real_bounds::unit(), real_bounds::linear(-100.0, 100.0) }, { 2, 1, false, -1, 0 } },
   { { L"Oct", L"Octave" }, L"", true, 0, 9, 4, { 3, 2, false, -1, 0 } },
   { { L"Note", L"Note" }, L"", true, note_names, 12, { 4, 2, false, -1, 0 } },
-  { { L"Cent", L"Cent" }, L"", { 0.5, 0, real_bounds::linear(-0.5, 0.5), real_bounds::linear(-50.0, 50.0) }, { 5, 2, false, -1, 0 } }
-};  
- 
+  { { L"Cent", L"Cent" }, L"", { 0.5, 0, real_bounds::linear(-0.5, 0.5), real_bounds::linear(-50.0, 50.0) }, { 5, 2, false, -1, 0 } },
+  { { L"Fake1", L"Fake1" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 6, 1, false, -1, 0 } },
+  { { L"Fake2", L"Fake2" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 7, 1, false, -1, 0 } },
+  { { L"Fake3", L"Fake3" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 8, 1, false, -1, 0 } },
+  { { L"Fake4", L"Fake4" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 9, 1, false, -1, 0 } },
+  { { L"Fake5", L"Fake5" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 10, 1, false, -1, 0 } },
+  { { L"Fake6", L"Fake6" }, L"", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 11, 1, false, -1, 0 } }
+};   
+  
 part_descriptor const 
 part_descriptors[part_type::count] =
 {
-  { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, { 1, 3, 0, &oscillator_graph } },
-  { { L"Amp", L"Amplitude" }, part_type::amplitude, false, 1, amplitude_params, amplitude_param::count, { 5, 2, -1, nullptr } },
-  { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, { 6, 1, -1, nullptr } }
+  { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, &oscillator_graph, { 1, 4, 0 } },
+  { { L"Amp", L"Amplitude" }, part_type::amplitude, false, 1, amplitude_params, amplitude_param::count, nullptr, { 5, 2, -1 } },
+  { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, nullptr, { 6, 1, -1 } }
 };
  
 } // namespace svn::synth

@@ -1,5 +1,5 @@
 #include <svn.vst.ui_generator/generator/generator.hpp>
-#include <svn.vst.ui_generator/description/controller_ui_description.hpp>
+#include <svn.vst.ui_generator/description/ui_description.hpp>
 #include <vstgui/uidescription/rapidjson/include/rapidjson/prettywriter.h>
 #include <vstgui/uidescription/rapidjson/include/rapidjson/ostreamwrapper.h>
 

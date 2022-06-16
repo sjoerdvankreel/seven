@@ -1,30 +1,54 @@
-#ifndef SVN_VST_UI_GENERATOR_DESCRIPTION_UI_DESCRIPTION
-#define SVN_VST_UI_GENERATOR_DESCRIPTION_UI_DESCRIPTION
+#ifndef SVN_VST_UI_GENERATOR_DESCRIPTION_UI_DESCRIPTION_HPP
+#define SVN_VST_UI_GENERATOR_DESCRIPTION_UI_DESCRIPTION_HPP
 
+#include <svn.base/topology/topology_info.hpp>
+
+#include <vector>
 #include <cstdint>
-#include <cstdlib>
+#include <ostream>
 
 namespace svn::vst::ui_generator {
 
-struct rgb { std::uint8_t r, g, b; };
-inline rgb constexpr white = { 0xFF, 0xFF, 0xFF };
-inline rgb constexpr black = { 0x00, 0x00, 0x00 };
-inline std::size_t constexpr color_count = 12;
-extern rgb const color_values[];
+// Grid index for single parameter.
+struct param_ui_description
+{
+  std::int32_t row;
+  std::int32_t column;
+  std::int32_t runtime_param_index;
+};
 
-struct color_alpha_t { enum value { transparent, eight, quarter, half, opaque, count }; };
-typedef color_alpha_t::value color_alpha;
-extern std::uint8_t const color_alphas[];
+// Complete part with graph and params.
+struct part_ui_description
+{
+  std::int32_t top;
+  std::int32_t left;
+  std::int32_t width;
+  std::int32_t height;
+  std::int32_t rows;
+  std::int32_t column;
+  std::int32_t columns;
+  std::int32_t color_index;
+  std::int32_t runtime_part_index;
+  param_ui_description enabled_param;
+  base::graph_descriptor const* graph;
+  std::vector<param_ui_description> params;
 
-inline std::int32_t constexpr param_row_height = 20;
-inline std::int32_t constexpr param_col1_width = 20;
-inline std::int32_t constexpr param_col2_width = 26;
-inline std::int32_t constexpr param_col3_width = 28;
+  static part_ui_description 
+  create(svn::base::topology_info const& topology, std::int32_t runtime_part_index);
+};
 
-inline std::int32_t constexpr margin = 3;
-inline std::int32_t constexpr padding_param_group = 1;
-inline std::int32_t constexpr param_total_width = param_col1_width + margin + param_col2_width + margin + param_col3_width;
-inline std::int32_t constexpr param_output_col_width = (param_total_width - margin) / 2;
+// Complete controller editor ui.
+struct controller_ui_description
+{
+  std::int32_t width;
+  std::int32_t height;
+  std::vector<part_ui_description> parts;
+  std::vector<std::int32_t> column_widths;
+
+  static controller_ui_description
+  create(svn::base::topology_info const& topology);
+  void print(svn::base::topology_info const& topology, std::ostream& os);
+};
 
 } // namespace svn::vst::ui_generator
-#endif // SVN_VST_UI_GENERATOR_DESCRIPTION_UI_DESCRIPTION
+#endif // SVN_VST_UI_GENERATOR_DESCRIPTION_UI_DESCRIPTION_HPP

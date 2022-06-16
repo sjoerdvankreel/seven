@@ -2,8 +2,8 @@
 #define SVN_VST_UI_GENERATOR_GENERATOR_SUPPORT_HPP
 
 #include <svn.base/topology/topology_info.hpp>
+#include <svn.vst.ui_generator/description/support.hpp>
 #include <svn.vst.ui_generator/description/ui_description.hpp>
-#include <svn.vst.ui_generator/description/param_ui_description.hpp>
 
 #include <vstgui/uidescription/rapidjson/include/rapidjson/document.h>
 #include <vstgui/uidescription/rapidjson/include/rapidjson/rapidjson.h>

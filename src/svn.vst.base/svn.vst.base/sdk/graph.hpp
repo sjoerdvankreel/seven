@@ -4,7 +4,6 @@
 #include <vstgui/vstgui.h>
 #include <vstgui/vstgui_uidescription.h>
 #include <vstgui/uidescription/detail/uiviewcreatorattributes.h>
-#include <svn.base/topology/graph_descriptor.hpp>
 
 namespace svn::vst::base {
 

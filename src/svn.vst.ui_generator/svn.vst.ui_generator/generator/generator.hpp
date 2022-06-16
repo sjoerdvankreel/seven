@@ -2,7 +2,7 @@
 #define SVN_VST_UI_GENERATOR_GENERATOR_GENERATOR_HPP
 
 #include <svn.base/topology/topology_info.hpp>
-#include <svn.vst.ui_generator/description/controller_ui_description.hpp>
+#include <svn.vst.ui_generator/description/ui_description.hpp>
 #include <vstgui/uidescription/rapidjson/include/rapidjson/document.h>
 
 namespace svn::vst::ui_generator {
