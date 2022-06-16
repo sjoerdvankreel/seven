@@ -63,8 +63,6 @@ part_ui_description::create(
   }
 
   // Build param positions around the (optional) graph.
-  int x;
-  std::cin >> x;
   std::int32_t grid_index = 0;
   for(auto ui_index = layout.begin(); ui_index != layout.end(); ui_index++)
   {
@@ -155,21 +153,37 @@ controller_ui_description::print(svn::base::topology_info const& topology, std::
   for (std::size_t c = 0; c < column_widths.size(); c++)
     os << column_widths[c] << " ";
   os << "\n";
-  for (std::size_t rp = 0; rp < parts.size(); rp++)
+  for (std::size_t part = 0; part < parts.size(); part++)
   {
-    std::int32_t rt_index = parts[rp].runtime_part_index;
-    os << "\tPart " << (rp + 1) << ":\n";
+    std::int32_t rt_index = parts[part].runtime_part_index;
+    os << "\tPart " << part << ":\n";
     os << "\t\tName: " << narrow_assume_ascii(topology.parts[rt_index].runtime_name) << "\n";
-    os << "\t\tColumn: " << parts[rp].column << "\n";
-    os << "\t\tParams: " << parts[rp].params.size() << "\n";
-    os << "\t\tColumns: " << parts[rp].columns << "\n";
-    os << "\t\tRows: " << parts[rp].rows << "\n";
-    os << "\t\tWidth: " << parts[rp].width << "\n";
-    os << "\t\tHeight: " << parts[rp].height << "\n";
-    os << "\t\tLeft: " << parts[rp].left << "\n";
-    os << "\t\tTop: " << parts[rp].top << "\n";
-    os << "\t\tColor index: " << parts[rp].color_index << "\n";
-    os << "\t\tEnabled index: " << parts[rp].enabled_param.runtime_param_index << "\n";
+    os << "\t\tColumn: " << parts[part].column << "\n";
+    os << "\t\tParams: " << parts[part].params.size() << "\n";
+    os << "\t\tColumns: " << parts[part].columns << "\n";
+    os << "\t\tRows: " << parts[part].rows << "\n";
+    os << "\t\tWidth: " << parts[part].width << "\n";
+    os << "\t\tHeight: " << parts[part].height << "\n";
+    os << "\t\tLeft: " << parts[part].left << "\n";
+    os << "\t\tTop: " << parts[part].top << "\n";
+    os << "\t\tColor index: " << parts[part].color_index << "\n";
+    os << "\t\tEnabled index: " << parts[part].enabled_param.runtime_param_index << "\n";
+    if(parts[part].graph != nullptr)
+    {
+      os << "\t\tGraph position: ";
+      os << "top: " << parts[part].graph->row << ", ";
+      os << "left: " << parts[part].graph->column << ", ";
+      os << "height: " << parts[part].graph->row_span << ", ";
+      os << "width: " << parts[part].graph->column_span << "\n";
+    }
+    os << "\t\tParam cells:\n";
+    for (std::size_t param = 0; param < parts[part].params.size(); param++)
+    {
+      auto const& param_ui = parts[part].params[param];
+      auto const& descriptor = *topology.params[param_ui.runtime_param_index].descriptor;
+      auto name = narrow_assume_ascii(descriptor.static_name.short_);
+      std::cout << "\t\t\t" << name << " (" << param_ui.row << ", " << param_ui.column << ")\n";
+    }
   }
   os << "\n";
 }
