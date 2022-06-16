@@ -319,9 +319,7 @@ build_ui_part_param_container(topology_info const& topology,
         param.row, param.column, 0, description.color_index, allocator), allocator);
     add_child(result, "CViewContainer", build_ui_part_single_param_container(topology, description, p, allocator), allocator);    
   }
-  std::int32_t cell_count = description.params.size();
-  if(description.graph != nullptr) cell_count += description.graph->row_span * description.graph->column_span;
-  for (std::int32_t p = cell_count; p < description.rows * description.columns; p++)
+  for (std::int32_t p = description.cell_count; p < description.rows * description.columns; p++)
     add_child(result, "CViewContainer", build_ui_param_background(
       p / description.rows, p % description.columns, 0, description.color_index, allocator), allocator);
   return result;

@@ -24,11 +24,12 @@ struct part_ui_description
   std::int32_t left;
   std::int32_t width;
   std::int32_t height;
-  std::int32_t rows;
-  std::int32_t column;
-  std::int32_t columns;
-  std::int32_t color_index;
-  std::int32_t runtime_part_index;
+  std::int32_t rows; // Grid rows.
+  std::int32_t column; // Own column.
+  std::int32_t columns; // Grid columns.
+  std::int32_t cell_count; // Param unique ui indices plus graph size.
+  std::int32_t color_index; // Index into color wheel.
+  std::int32_t runtime_part_index; // Parameter runtime index.
   param_ui_description enabled_param;
   base::graph_descriptor const* graph;
   std::vector<param_ui_description> params;
