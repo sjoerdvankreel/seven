@@ -1012,15 +1012,6 @@
                                                 "attributes": {
                                                     "class": "CViewContainer",
                                                     "background-color": "color_00000040",
-                                                    "origin": "81, 70",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 24"
-                                                }
-                                            },
-                                            "CViewContainer": {
-                                                "attributes": {
-                                                    "class": "CViewContainer",
-                                                    "background-color": "color_00000040",
                                                     "origin": "161, 70",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 24"
@@ -1860,15 +1851,6 @@
                                                             "font-color": "color_FF8000FF"
                                                         }
                                                     }
-                                                }
-                                            },
-                                            "CViewContainer": {
-                                                "attributes": {
-                                                    "class": "CViewContainer",
-                                                    "background-color": "color_00000040",
-                                                    "origin": "81, 70",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 24"
                                                 }
                                             },
                                             "CViewContainer": {

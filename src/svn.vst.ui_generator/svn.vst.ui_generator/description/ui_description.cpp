@@ -32,7 +32,6 @@ part_ui_description::create(
   result.graph = part.descriptor->graph;
   for(std::int32_t i = 0; i < part.descriptor->param_count; i++)
     result.cell_count = std::max(result.cell_count, part.descriptor->params[i].ui.param_index + 1);
-  if (part.descriptor->ui.enabled_param != -1) result.cell_count--;
 
   if(result.graph != nullptr) result.cell_count += result.graph->row_span * result.graph->column_span;
   result.runtime_part_index = runtime_part_index;
@@ -166,6 +165,7 @@ controller_ui_description::print(svn::base::topology_info const& topology, std::
     os << "\t\tHeight: " << parts[part].height << "\n";
     os << "\t\tLeft: " << parts[part].left << "\n";
     os << "\t\tTop: " << parts[part].top << "\n";
+    os << "\t\Cell count: " << parts[part].cell_count << "\n";
     os << "\t\tColor index: " << parts[part].color_index << "\n";
     os << "\t\tEnabled index: " << parts[part].enabled_param.runtime_param_index << "\n";
     if(parts[part].graph != nullptr)
