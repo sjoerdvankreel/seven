@@ -97,13 +97,10 @@ controller::endEdit(ParamID tag)
 {
   update_state(tag);
   if (_editor == nullptr) return EditControllerEx1::endEdit(tag);
-  if (_topology->ui.param_dependencies[tag].size() == 0) return EditControllerEx1::endEdit(tag);
 
-  // Update visibility of dependent parameters.
+  // Update visibility of dependent parameters and rerender graphs.
   double normalized = getParamNormalized(tag);
-  auto const& descriptor = *_topology->params[tag].descriptor;
-  std::int32_t value = parameter::vst_normalized_to_discrete(descriptor, normalized);
-  _editor->controllerEndEdit(tag, value);
+  _editor->controllerEndEdit(tag, normalized);
   return EditControllerEx1::endEdit(tag);
 }
 

@@ -35,8 +35,8 @@ public:
   void onViewAdded(CFrame* frame, CView* view) override;
   void onViewRemoved(CFrame* frame, CView* view) override;
 
-  // Update visibility of dependent views.
-  void controllerEndEdit(ParamID tag, std::int32_t value);
+  // Update visibility of dependent views and rerender graphs.
+  void controllerEndEdit(ParamID tag, double normalized);
   bool PLUGIN_API open(void* parent, const PlatformType& type) override;
 
   editor(EditController* controller, UTF8StringPtr template_name,

@@ -1,4 +1,5 @@
 #include <svn.vst.base/sdk/editor.hpp>
+#include <svn.vst.base/sdk/parameter.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
 
 #include <cassert>
@@ -65,7 +66,7 @@ editor::open(void* parent, const PlatformType& type)
 }
     
 void               
-editor::controllerEndEdit(ParamID tag, std::int32_t value)
+editor::controllerEndEdit(ParamID tag, double normalized)
 { 
   // Rearrange control order to have visible parameter on top.
   CView* visible_view = nullptr;
@@ -75,6 +76,8 @@ editor::controllerEndEdit(ParamID tag, std::int32_t value)
   for(std::size_t d = 0; d < dependents.size(); d++)
     for(std::size_t c = 0; c < _controls[dependents[d]].size(); c++)
     {
+      auto const& descriptor = *_topology->params[tag].descriptor;
+      std::int32_t value = parameter::vst_normalized_to_discrete(descriptor, normalized);
       CView* container = _controls[dependents[d]][c]->getParentView();
       bool visible = _topology->params[dependents[d]].descriptor->ui.relevant_if_value == value;
       container->setVisible(visible);
