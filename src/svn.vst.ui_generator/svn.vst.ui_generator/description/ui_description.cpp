@@ -27,17 +27,17 @@ part_ui_description::create(
   std::int32_t runtime_part_index)
 {
   part_ui_description result;
-  result.cell_count = 0;
+  result.occupied_cell_count = 0;
   auto const& part = topology.parts[runtime_part_index];
   result.graph = part.descriptor->graph;
   for(std::int32_t i = 0; i < part.descriptor->param_count; i++)
-    result.cell_count = std::max(result.cell_count, part.descriptor->params[i].ui.param_index + 1);
+    result.occupied_cell_count = std::max(result.occupied_cell_count, part.descriptor->params[i].ui.param_index + 1);
 
-  if(result.graph != nullptr) result.cell_count += result.graph->row_span * result.graph->column_span;
+  if(result.graph != nullptr) result.occupied_cell_count += result.graph->row_span * result.graph->column_span;
   result.runtime_part_index = runtime_part_index;
   result.columns = part.descriptor->ui.param_columns;
-  result.rows = result.cell_count / result.columns;
-  if (result.cell_count % result.columns != 0) ++result.rows;
+  result.rows = result.occupied_cell_count / result.columns;
+  if (result.occupied_cell_count % result.columns != 0) ++result.rows;
   result.width = result.columns * param_total_width + margin;
   result.height = (result.rows + 1) * (param_row_height + margin);
   result.color_index = part.descriptor->ui.color_index % color_count;
@@ -74,6 +74,17 @@ part_ui_description::create(
       result.params.push_back({ row, column, part.runtime_param_start + *param_index });
     }
     grid_index++;
+  }
+
+  // Add filler cells.
+  for (; grid_index < result.rows * result.columns; grid_index++)
+  {
+    while (param_inside_graph(result, grid_index))
+      grid_index++;
+    if(grid_index >= result.rows * result.columns) break;
+    std::int32_t row = grid_index / result.columns;
+    std::int32_t column = grid_index % result.columns;
+    result.params.push_back({ row, column, -1 });
   }
 
   return result;
@@ -165,8 +176,8 @@ controller_ui_description::print(svn::base::topology_info const& topology, std::
     os << "\t\tHeight: " << parts[part].height << "\n";
     os << "\t\tLeft: " << parts[part].left << "\n";
     os << "\t\tTop: " << parts[part].top << "\n";
-    os << "\t\Cell count: " << parts[part].cell_count << "\n";
     os << "\t\tColor index: " << parts[part].color_index << "\n";
+    os << "\t\Occupied cell count: " << parts[part].occupied_cell_count << "\n";
     os << "\t\tEnabled index: " << parts[part].enabled_param.runtime_param_index << "\n";
     if(parts[part].graph != nullptr)
     {
@@ -180,8 +191,12 @@ controller_ui_description::print(svn::base::topology_info const& topology, std::
     for (std::size_t param = 0; param < parts[part].params.size(); param++)
     {
       auto const& param_ui = parts[part].params[param];
-      auto const& descriptor = *topology.params[param_ui.runtime_param_index].descriptor;
-      auto name = narrow_assume_ascii(descriptor.static_name.short_);
+      std::string name = "(Filler)";
+      if(param_ui.runtime_param_index != -1)
+      {
+        auto const& descriptor = *topology.params[param_ui.runtime_param_index].descriptor;
+        name = narrow_assume_ascii(descriptor.static_name.short_);
+      }
       std::cout << "\t\t\t" << name << " (" << param_ui.row << ", " << param_ui.column << ")\n";
     }
   }

@@ -184,7 +184,7 @@ build_ui_param_edit(
 }
 
 static Value
-build_ui_param_background(std::int32_t row, std::int32_t column,
+build_ui_param_background_or_border(std::int32_t row, std::int32_t column,
   std::int32_t group_index, std::int32_t color_index, Document::AllocatorType& allocator)
 {
   std::string color;
@@ -310,18 +310,22 @@ build_ui_part_param_container(topology_info const& topology,
   for (std::size_t p = 0; p < description.params.size(); p++)
   {
     auto const& param = description.params[p];
+    if(param.runtime_param_index == -1)
+    {
+      // Empty cell filler.
+      add_child(result, "CViewContainer", build_ui_param_background_or_border(
+        param.row, param.column, 0, description.color_index, allocator), allocator);
+      continue;
+    }
     auto const& part = topology.parts[description.runtime_part_index];
     auto const& param_descriptor = *topology.params[param.runtime_param_index].descriptor;
-    add_child(result, "CViewContainer", build_ui_param_background(
+    add_child(result, "CViewContainer", build_ui_param_background_or_border(
       param.row, param.column, param_descriptor.ui.param_group, description.color_index, allocator), allocator);
     if (param_descriptor.ui.param_group != 0)
-      add_child(result, "CViewContainer", build_ui_param_background(
+      add_child(result, "CViewContainer", build_ui_param_background_or_border(
         param.row, param.column, 0, description.color_index, allocator), allocator);
     add_child(result, "CViewContainer", build_ui_part_single_param_container(topology, description, p, allocator), allocator);    
   }
-  for (std::int32_t p = description.cell_count; p < description.rows * description.columns; p++)
-    add_child(result, "CViewContainer", build_ui_param_background(
-      p / description.rows, p % description.columns, 0, description.color_index, allocator), allocator);
   return result;
 }
 
