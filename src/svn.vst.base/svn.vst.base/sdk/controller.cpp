@@ -32,6 +32,18 @@ controller::createView(char const* name)
   return _editor = new editor(this, "view", "controller.uidesc", _topology);
 }
 
+// Update private copy of the state in svn::base format, for easy access by graphs.
+void
+controller::update_state(std::int32_t param)
+{
+  double normalized = getParamNormalized(param);
+  auto const& descriptor = *_topology->params[param].descriptor;
+  if (descriptor.type == param_type::real)
+    _state[param].real = normalized;
+  else
+    _state[param].discrete = parameter::vst_normalized_to_discrete(descriptor, normalized);
+}
+
 tresult PLUGIN_API 
 controller::setComponentState(IBStream* state)
 {
@@ -46,6 +58,7 @@ controller::setComponentState(IBStream* state)
 
   // SetParamNormalized() each value.
   for(std::int32_t p = 0; p < _topology->input_param_count; p++)
+  {
     if(_topology->params[p].descriptor->type == param_type::real)
       setParamNormalized(p, values[p].real);
     else
@@ -53,6 +66,8 @@ controller::setComponentState(IBStream* state)
       auto const& descriptor = *_topology->params[p].descriptor;
       setParamNormalized(p, parameter::discrete_to_vst_normalized(descriptor, values[p].discrete));
     }
+    update_state(p);
+  }
 
   // Set initial ui visibility state.
   sync_dependent_parameters();
@@ -80,6 +95,7 @@ controller::initialize(FUnknown* context)
 tresult
 controller::endEdit(ParamID tag)
 {
+  update_state(tag);
   if (_editor == nullptr) return EditControllerEx1::endEdit(tag);
   if (_topology->ui.param_dependencies[tag].size() == 0) return EditControllerEx1::endEdit(tag);
 

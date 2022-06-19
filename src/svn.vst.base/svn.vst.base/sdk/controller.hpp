@@ -7,6 +7,8 @@
 #include <svn.base/topology/topology_info.hpp>
 #include <svn.vst.base/sdk/editor.hpp>
 
+#include <vector>
+
 namespace svn::vst::base {
 
 // Vst edit controller dynamically generated from topology_info.
@@ -22,16 +24,23 @@ public VSTGUI::VST3EditorDelegate
   
   editor* _editor = nullptr;
   svn::base::topology_info const* const _topology;
+  // Separate copy of the parameter state used for graphs.
+  std::vector<svn::base::param_value> _state;
+
+private:
+  void update_state(std::int32_t param);
 
 public:
   tresult endEdit(ParamID tag) override;
   tresult PLUGIN_API initialize(FUnknown* context) override;
   IPlugView* PLUGIN_API createView(char const* name) override;
   tresult PLUGIN_API setComponentState(IBStream* state) override;
+  svn::base::param_value const* state() const { return _state.data(); }
 
   // Update the editor ui if dependent params change.
   void sync_dependent_parameters();
-  controller(svn::base::topology_info const* topology) : _topology(topology) {}
+  controller(svn::base::topology_info const* topology) : 
+  _topology(topology), _state(static_cast<std::size_t>(topology->input_param_count)) {}
 };
 
 } // namespace svn::vst::base

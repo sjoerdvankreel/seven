@@ -1,4 +1,5 @@
 #include <svn.vst.base/sdk/graph.hpp>
+#include <svn.vst.base/sdk/controller.hpp>
 #include <svn.vst.base/support/bootstrap.hpp>
 #include <svn.base/dsp/graph_processor.hpp>
 #include <vstgui/uidescription/uiviewcreator.h>
@@ -50,7 +51,9 @@ graph::draw(VSTGUI::CDrawContext* context)
   context->drawRect(CRect(CPoint(0, 0), size), CDrawStyle::kDrawStroked);
 
   context->setDrawMode(kAntiAliasing);
-  std::vector<graph_point> const& graph_data = _processor->process(inner_size.x, inner_size.y, 48000.0);
+  auto editor = static_cast<VST3Editor*>(getFrame()->getEditor());
+  auto state = static_cast<controller const*>(editor->getController())->state();
+  std::vector<graph_point> const& graph_data = _processor->process(state, inner_size.x, inner_size.y, 48000.0);
   for(std::size_t i = 0; i < graph_data.size(); i++)
     context->drawPoint(CPoint(graph_data[i].x, graph_data[i].y), _color);
 }
