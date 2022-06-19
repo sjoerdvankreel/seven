@@ -278,8 +278,8 @@
                                             "seven_graph": {
                                                 "attributes": {
                                                     "class": "seven_graph",
-                                                    "origin": "241, 25",
-                                                    "size": "81, 23",
+                                                    "origin": "241, 24",
+                                                    "size": "81, 24",
                                                     "color": "color_FF8000FF",
                                                     "part-index": "0",
                                                     "part-type": "0"
@@ -911,8 +911,8 @@
                                             "seven_graph": {
                                                 "attributes": {
                                                     "class": "seven_graph",
-                                                    "origin": "241, 25",
-                                                    "size": "81, 23",
+                                                    "origin": "241, 24",
+                                                    "size": "81, 24",
                                                     "color": "color_FF8000FF",
                                                     "part-index": "1",
                                                     "part-type": "0"

@@ -305,8 +305,8 @@ build_ui_part_graph(topology_info const& topology,
   Value result(kObjectType);
   std::int32_t left = description.graph->column * param_total_width;
   if(description.graph->column > 0) left += (description.graph->column - 1) * padding_param_group - padding_param_group;
-  std::int32_t top = description.graph->row * (param_row_height + margin + padding_param_group) + padding_param_group;
-  std::int32_t height = description.graph->row_span * (param_row_height + margin) + (description.graph->row_span - 1) * padding_param_group;
+  std::int32_t top = description.graph->row * (param_row_height + margin + padding_param_group);
+  std::int32_t height = description.graph->row_span * (param_row_height + margin + padding_param_group);
   std::int32_t width = description.graph->column_span * param_total_width + description.graph->column_span * padding_param_group;
   add_attribute(result, "class", "seven_graph", allocator);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
