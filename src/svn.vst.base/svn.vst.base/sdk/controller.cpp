@@ -32,46 +32,16 @@ controller::createView(char const* name)
   return _editor = new editor(this, "view", "controller.uidesc", _topology);
 }
 
-// Update private copy of the state in svn::base format, for easy access by graphs.
-void
-controller::update_state(std::int32_t param)
+tresult
+controller::endEdit(ParamID tag)
 {
-  double normalized = getParamNormalized(param);
-  auto const& descriptor = *_topology->params[param].descriptor;
-  if (descriptor.type == param_type::real)
-    _state[param].real = normalized;
-  else
-    _state[param].discrete = parameter::vst_normalized_to_discrete(descriptor, normalized);
-}
+  update_state(tag);
+  if (_editor == nullptr) return EditControllerEx1::endEdit(tag);
 
-tresult PLUGIN_API 
-controller::setComponentState(IBStream* state)
-{
-  param_value value;
-  if (state == nullptr) return kResultFalse;
-
-  // Load state into temporary buffer.
-  IBStreamer streamer(state, kLittleEndian);
-  vst_io_stream stream(&streamer);
-  std::vector<param_value> values(_topology->input_param_count, value);
-  if(!stream.load(*_topology, values.data())) return kResultFalse;
-
-  // SetParamNormalized() each value.
-  for(std::int32_t p = 0; p < _topology->input_param_count; p++)
-  {
-    if(_topology->params[p].descriptor->type == param_type::real)
-      setParamNormalized(p, values[p].real);
-    else
-    {
-      auto const& descriptor = *_topology->params[p].descriptor;
-      setParamNormalized(p, parameter::discrete_to_vst_normalized(descriptor, values[p].discrete));
-    }
-    update_state(p);
-  }
-
-  // Set initial ui visibility state.
-  sync_dependent_parameters();
-  return kResultOk;
+  // Update visibility of dependent parameters and rerender graphs.
+  double normalized = getParamNormalized(tag);
+  _editor->controllerEndEdit(tag, normalized);
+  return EditControllerEx1::endEdit(tag);
 }
 
 tresult PLUGIN_API
@@ -91,17 +61,47 @@ controller::initialize(FUnknown* context)
   }
   return kResultTrue;
 }
- 
-tresult
-controller::endEdit(ParamID tag)
-{
-  update_state(tag);
-  if (_editor == nullptr) return EditControllerEx1::endEdit(tag);
 
-  // Update visibility of dependent parameters and rerender graphs.
-  double normalized = getParamNormalized(tag);
-  _editor->controllerEndEdit(tag, normalized);
-  return EditControllerEx1::endEdit(tag);
+// Update private copy of the state in svn::base format, for easy access by graphs.
+void
+controller::update_state(std::int32_t param)
+{
+  double normalized = getParamNormalized(param);
+  auto const& descriptor = *_topology->params[param].descriptor;
+  if (descriptor.type == param_type::real)
+    _state[param].real = normalized;
+  else
+    _state[param].discrete = parameter::vst_normalized_to_discrete(descriptor, normalized);
+}
+
+tresult PLUGIN_API
+controller::setComponentState(IBStream* state)
+{
+  param_value value;
+  if (state == nullptr) return kResultFalse;
+
+  // Load state into temporary buffer.
+  IBStreamer streamer(state, kLittleEndian);
+  vst_io_stream stream(&streamer);
+  std::vector<param_value> values(_topology->input_param_count, value);
+  if (!stream.load(*_topology, values.data())) return kResultFalse;
+
+  // SetParamNormalized() each value.
+  for (std::int32_t p = 0; p < _topology->input_param_count; p++)
+  {
+    if (_topology->params[p].descriptor->type == param_type::real)
+      setParamNormalized(p, values[p].real);
+    else
+    {
+      auto const& descriptor = *_topology->params[p].descriptor;
+      setParamNormalized(p, parameter::discrete_to_vst_normalized(descriptor, values[p].discrete));
+    }
+    update_state(p);
+  }
+
+  // Set initial ui visibility state.
+  sync_dependent_parameters();
+  return kResultOk;
 }
 
 } // namespace svn::vst::base

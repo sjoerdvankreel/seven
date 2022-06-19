@@ -19,7 +19,16 @@ _topology(topology), _controls(topology->params.size()), _graphs()
   assert(xml_file != nullptr);
   assert(controller != nullptr);
   assert(template_name != nullptr);
-}       
+}
+
+// Set initial visibility when the plugin ui is opened.
+bool PLUGIN_API
+editor::open(void* parent, const PlatformType& type)
+{
+  if (!VST3Editor::open(parent, type)) return false;
+  static_cast<svn::vst::base::controller*>(this->controller)->sync_dependent_parameters();
+  return true;
+}
 
 void 
 editor::onViewAdded(CFrame* frame, CView* view)
@@ -54,15 +63,6 @@ editor::onViewRemoved(CFrame* frame, CView* view)
           _controls[param].erase(_controls[param].begin() + control);
 
   VST3Editor::onViewRemoved(frame, view);
-}
-
-// Set initial visibility when the plugin ui is opened.
-bool PLUGIN_API
-editor::open(void* parent, const PlatformType& type)
-{
-  if (!VST3Editor::open(parent, type)) return false;
-  static_cast<svn::vst::base::controller*>(this->controller)->sync_dependent_parameters();
-  return true;
 }
     
 void               
