@@ -30,8 +30,14 @@ oscillator_graph::needs_repaint(std::int32_t runtime_param) const
   return begin <= runtime_param && runtime_param < begin + oscillator_param::count;
 }
 
+std::int32_t 
+oscillator_graph::sample_count(float sample_rate) const
+{
+  return 0;
+}
+
 void 
-oscillator_graph::process_audio(std::vector<float>& data, float sample_rate)
+oscillator_graph::process_audio(block_input const& input, block_output& output, float sample_rate)
 {
   
 }

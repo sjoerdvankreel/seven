@@ -8,13 +8,20 @@ namespace svn::synth {
 class oscillator_graph:
 public svn::base::graph_processor
 {
+  using block_input = svn::base::block_input;
+  using block_output = svn::base::block_output;
+  using topology_info = svn::base::topology_info;
+
 public:
   virtual bool needs_repaint(std::int32_t runtime_param) const override;
+
 public:
-  oscillator_graph(svn::base::topology_info const* topology, std::int32_t part_index) :
+  oscillator_graph(topology_info const* topology, std::int32_t part_index) :
   svn::base::graph_processor(topology, part_index) {}
+
 protected:
-  virtual void process_audio(std::vector<float>& data, float sample_rate) override;
+  virtual std::int32_t sample_count(float sample_rate) const override;
+  virtual void process_audio(block_input const& input, block_output& output, float sample_rate) override;
 };
 
 } // namespace svn::synth
