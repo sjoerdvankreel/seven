@@ -28,7 +28,7 @@ oscillator_blmp_types[oscillator_blmp_type::count] =
 };
 
 static graph_descriptor const
-oscillator_graph = { 0, 3, 2, 1 };
+oscillator_graph = { 1, 3, 1, 1 };
 
 param_descriptor const 
 output_params[output_param::count] =
@@ -52,10 +52,11 @@ oscillator_params[oscillator_param::count] =
   { { L"Type", L"Type" }, L"", false, oscillator_types, oscillator_type::count, { 0, 0, false, -1, 0 } },
   { { L"Blep", L"Blep type" }, L"", false, oscillator_blep_types, oscillator_blep_type::count, {1, 0, false, oscillator_param::type, oscillator_type::blep}},
   { { L"Blmp", L"Blmp type" }, L"", false, oscillator_blmp_types, oscillator_blmp_type::count, { 1, 0, false, oscillator_param::type, oscillator_type::blmp } },
-  { { L"Pan", L"Panning" }, L"%", { 0.5, 0, real_bounds::unit(), real_bounds::linear(-100.0, 100.0) }, { 2, 1, false, -1, 0 } },
-  { { L"Oct", L"Octave" }, L"", true, 0, 9, 4, { 3, 2, false, -1, 0 } },
-  { { L"Note", L"Note" }, L"", true, note_names, 12, { 4, 2, false, -1, 0 } },
-  { { L"Cent", L"Cent" }, L"", { 0.5, 0, real_bounds::linear(-0.5, 0.5), real_bounds::linear(-50.0, 50.0) }, { 5, 2, false, -1, 0 } }
+  { { L"Amp", L"Level" }, L"dB", { 1.0, 1, real_bounds::unit(), real_bounds::decibel() }, { 2, 1, true, -1, 0 } },
+  { { L"Pan", L"Panning" }, L"%", { 0.5, 0, real_bounds::unit(), real_bounds::linear(-100.0, 100.0) }, { 3, 1, false, -1, 0 } },
+  { { L"Oct", L"Octave" }, L"", true, 0, 9, 4, { 4, 2, false, -1, 0 } },
+  { { L"Note", L"Note" }, L"", true, note_names, 12, { 5, 2, false, -1, 0 } },
+  { { L"Cent", L"Cent" }, L"", { 0.5, 0, real_bounds::linear(-0.5, 0.5), real_bounds::linear(-50.0, 50.0) }, { 6, 2, false, -1, 0 } }
 };   
       
 part_descriptor const 

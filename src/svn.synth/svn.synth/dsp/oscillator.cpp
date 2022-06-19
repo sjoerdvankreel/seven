@@ -40,6 +40,7 @@ oscillator::process_block(voice_input const& input, audio_sample* audio)
     bool on = input.automation.get(oscillator_param::on, s).discrete != 0;
     if(!on) continue;
         
+    float amp = input.automation.get(oscillator_param::amp, s).real;
     float cent = input.automation.get(oscillator_param::cent, s).real;
     float panning = input.automation.get(oscillator_param::pan, s).real;
     std::int32_t type = input.automation.get(oscillator_param::type, s).discrete;
@@ -56,8 +57,8 @@ oscillator::process_block(voice_input const& input, audio_sample* audio)
     default: assert(false); break;
     } 
      
-    audio[s].left = (1.0f - panning) * sample;
-    audio[s].right = panning * sample;
+    audio[s].left = (1.0f - panning) * sample * amp;
+    audio[s].right = panning * sample * amp;
     _phase += frequency / _sample_rate;
     _phase -= std::floor(_phase);
   }
