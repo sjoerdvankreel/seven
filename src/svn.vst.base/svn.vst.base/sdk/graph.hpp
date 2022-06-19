@@ -15,6 +15,7 @@ public VSTGUI::CView
   VSTGUI::CColor const _color;
   svn::base::graph_processor* const _processor;
 public:
+  ~graph() override { delete _processor; }
   void draw(VSTGUI::CDrawContext* context) override;
   graph(VSTGUI::CRect const& size, VSTGUI::CColor const& color, svn::base::graph_processor* processor):
   VSTGUI::CView(size), _color(color), _processor(processor) { }

@@ -27,7 +27,7 @@ graph_creator::create(VSTGUI::UIAttributes const& attrs, VSTGUI::IUIDescription 
   assert(ok);
   ok = attrs.getIntegerAttribute("part-index", part_index);
   assert(ok);
-  graph_processor* processor = create_graph_processor(svn_vst_get_topology(), part_type, part_index);
+  graph_processor* processor = svn_create_graph_processor(svn_vst_get_topology(), part_type, part_index);
   assert(processor != nullptr);
   return new graph(VSTGUI::CRect(0, 0, 0, 0), color, processor); 
 }
