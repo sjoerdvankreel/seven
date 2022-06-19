@@ -312,6 +312,9 @@ build_ui_part_graph(topology_info const& topology,
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   add_attribute(result, "size", size_to_string(width, height), allocator);
   add_attribute(result, "color", get_color_name(color_values[description.color_index], color_alpha::opaque), allocator);
+  auto const& part = topology.parts[description.runtime_part_index];
+  add_attribute(result, "part-index", std::to_string(part.type_index), allocator);
+  add_attribute(result, "part-type", std::to_string(part.descriptor->type), allocator);
   return result;
 }
 

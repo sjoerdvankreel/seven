@@ -1,21 +1,35 @@
 #include <svn.vst.base/sdk/graph.hpp>
+#include <svn.vst.base/support/bootstrap.hpp>
+#include <svn.base/dsp/graph_processor.hpp>
 #include <vstgui/uidescription/uiviewcreator.h>
 
 #include <cassert>
 #include <cstdint>
 
 using namespace VSTGUI;
+using namespace svn::base;
 
 namespace svn::vst::base { 
 
 CView* 
 graph_creator::create(VSTGUI::UIAttributes const& attrs, VSTGUI::IUIDescription const* desc) const
 { 
+  bool ok;
   CColor color;
+  std::int32_t part_type;
+  std::int32_t part_index;
+
   std::string const* color_name = attrs.getAttributeValue("color");
-  bool ok = UIViewCreator::stringToColor(color_name, color, desc);
+  assert(color_name != nullptr);
+  ok = UIViewCreator::stringToColor(color_name, color, desc);
   assert(ok);
-  return new graph(VSTGUI::CRect(0, 0, 0, 0), color); 
+  ok = attrs.getIntegerAttribute("part-type", part_type);
+  assert(ok);
+  ok = attrs.getIntegerAttribute("part-index", part_index);
+  assert(ok);
+  graph_processor* processor = create_graph_processor(svn_vst_get_topology(), part_type, part_index);
+  assert(processor != nullptr);
+  return new graph(VSTGUI::CRect(0, 0, 0, 0), color, processor); 
 }
 
 void
@@ -37,6 +51,7 @@ graph::draw(VSTGUI::CDrawContext* context)
 
   context->setFrameColor(_color);
   context->setDrawMode(kAntiAliasing);
+  std::vector<float> const& graph_data = _processor->process(inner_size.x, inner_size.y, 48000.0);
   context->drawLine(inner_pos, inner_pos + inner_size);
 }
 
