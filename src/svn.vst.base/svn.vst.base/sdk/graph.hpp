@@ -11,19 +11,21 @@ namespace svn::vst::base {
 class graph : 
 public VSTGUI::CView
 {
+  VSTGUI::CColor const _color;
 public:
-  graph(VSTGUI::CRect const& size): VSTGUI::CView(size) { }
+  void draw(VSTGUI::CDrawContext* context) override;
+  graph(VSTGUI::CRect const& size, VSTGUI::CColor const& color): 
+  VSTGUI::CView(size), _color(color) { }
 };
 
 // VSTGUI graph factory.
-class graph_factory : 
+class graph_creator :
 public VSTGUI::ViewCreatorAdapter
 {
 public:
   VSTGUI::IdStringPtr getViewName() const override { return "seven_graph"; }
   VSTGUI::IdStringPtr getBaseViewName() const override { return VSTGUI::UIViewCreator::kCView; }
-  VSTGUI::CView* create(VSTGUI::UIAttributes const&, const VSTGUI::IUIDescription*) const override
-  { return new graph(VSTGUI::CRect(0, 0, 0, 0)); }
+  VSTGUI::CView* create(VSTGUI::UIAttributes const& attrs, VSTGUI::IUIDescription const* desc) const override;
 };
 
 } // namespace Svn::Vst

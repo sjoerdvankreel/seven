@@ -30,7 +30,7 @@ bool InitDll()
   if (++_svn_module_counter != 1) return true;
   if (!InitModule()) return false;
   _topology = svn_vst_create_topology();
-  _graph_creator = new svn::vst::base::graph_factory();
+  _graph_creator = new svn::vst::base::graph_creator();
   VSTGUI::UIViewFactory::registerViewCreator(*_graph_creator);
   return true;
 }

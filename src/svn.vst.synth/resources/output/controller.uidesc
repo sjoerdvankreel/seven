@@ -273,13 +273,12 @@
                                             "background-color": "color_FF800020"
                                         },
                                         "children": {
-                                            "CViewContainer": {
+                                            "seven_graph": {
                                                 "attributes": {
-                                                    "class": "CViewContainer",
+                                                    "class": "seven_graph",
                                                     "origin": "242, 1",
                                                     "size": "80, 47",
-                                                    "background-color-draw-style": "stroked",
-                                                    "background-color": "color_FFFFFFFF"
+                                                    "color": "color_FF8000FF"
                                                 }
                                             },
                                             "CViewContainer": {
@@ -825,13 +824,12 @@
                                             "background-color": "color_FF800020"
                                         },
                                         "children": {
-                                            "CViewContainer": {
+                                            "seven_graph": {
                                                 "attributes": {
-                                                    "class": "CViewContainer",
+                                                    "class": "seven_graph",
                                                     "origin": "242, 1",
                                                     "size": "80, 47",
-                                                    "background-color-draw-style": "stroked",
-                                                    "background-color": "color_FFFFFFFF"
+                                                    "color": "color_FF8000FF"
                                                 }
                                             },
                                             "CViewContainer": {

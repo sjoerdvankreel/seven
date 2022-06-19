@@ -299,7 +299,7 @@ build_ui_part_single_param_container(
 }
 
 static Value
-build_ui_part_graph_container(topology_info const& topology,
+build_ui_part_graph(topology_info const& topology,
   part_ui_description const& description, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
@@ -308,11 +308,10 @@ build_ui_part_graph_container(topology_info const& topology,
   std::int32_t top = description.graph->row * (param_row_height + margin + padding_param_group) + padding_param_group;
   std::int32_t height = description.graph->row_span * (param_row_height + margin) + (description.graph->row_span - 1) * padding_param_group;
   std::int32_t width = description.graph->column_span * param_total_width + (description.graph->column_span - 1) * padding_param_group;
-  add_attribute(result, "class", "CViewContainer", allocator);
+  add_attribute(result, "class", "seven_graph", allocator);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   add_attribute(result, "size", size_to_string(width, height), allocator);
-  add_attribute(result, "background-color-draw-style", "stroked", allocator);
-  add_attribute(result, "background-color", get_color_name(white, color_alpha::opaque), allocator);
+  add_attribute(result, "color", get_color_name(color_values[description.color_index], color_alpha::opaque), allocator);
   return result;
 }
 
@@ -326,7 +325,7 @@ build_ui_part_param_container(topology_info const& topology,
   add_attribute(result, "size", size_to_string(description.width, description.height - param_row_height), allocator);
   add_attribute(result, "background-color", get_color_name(color_values[description.color_index], color_alpha::eight), allocator);
   if(description.graph != nullptr)
-    add_child(result, "CViewContainer", build_ui_part_graph_container(topology, description, allocator), allocator);
+    add_child(result, "seven_graph", build_ui_part_graph(topology, description, allocator), allocator);
   for (std::size_t p = 0; p < description.params.size(); p++)
   {
     auto const& param = description.params[p];
