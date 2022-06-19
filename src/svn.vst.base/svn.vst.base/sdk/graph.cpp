@@ -50,6 +50,7 @@ graph::draw(VSTGUI::CDrawContext* context)
   context->setFrameColor(border);
   context->drawRect(CRect(CPoint(1, 1), inner_size), CDrawStyle::kDrawStroked);
 
+  CDrawContext::LineList list;
   context->setFrameColor(_color);
   context->setDrawMode(kAntiAliasing);
   auto editor = static_cast<VST3Editor*>(getFrame()->getEditor());
@@ -59,8 +60,9 @@ graph::draw(VSTGUI::CDrawContext* context)
   {
     CPoint first = CPoint(graph_data[i - 1].x + 2, render_size.y - graph_data[i - 1].y + 2);
     CPoint second = CPoint(graph_data[i].x + 2, render_size.y - graph_data[i].y + 2);
-    context->drawLine(first, second);
+    list.push_back(CDrawContext::LinePair(first, second));
   }  
+  context->drawLines(list);
 }
 
 } // namespace svn::vst::base
