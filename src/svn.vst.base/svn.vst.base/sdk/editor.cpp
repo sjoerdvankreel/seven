@@ -26,7 +26,7 @@ editor::onViewAdded(CFrame* frame, CView* view)
   if(control == nullptr || control->getTag() < 0) return;
   _controls[control->getTag()].push_back(control);
 }
-
+ 
 void 
 editor::onViewRemoved(CFrame* frame, CView* view)
 {

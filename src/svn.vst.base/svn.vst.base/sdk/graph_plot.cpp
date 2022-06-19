@@ -1,4 +1,4 @@
-#include <svn.vst.base/sdk/graph.hpp>
+#include <svn.vst.base/sdk/graph_plot.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
 #include <svn.vst.base/support/bootstrap.hpp>
 #include <svn.base/dsp/graph_processor.hpp>
@@ -13,7 +13,7 @@ using namespace svn::base;
 namespace svn::vst::base { 
 
 CView* 
-graph_creator::create(VSTGUI::UIAttributes const& attrs, VSTGUI::IUIDescription const* desc) const
+graph_plot_creator::create(VSTGUI::UIAttributes const& attrs, VSTGUI::IUIDescription const* desc) const
 { 
   bool ok;
   CColor color;
@@ -30,11 +30,11 @@ graph_creator::create(VSTGUI::UIAttributes const& attrs, VSTGUI::IUIDescription 
   assert(ok);
   graph_processor* processor = svn_create_graph_processor(svn_vst_get_topology(), part_type, part_index);
   assert(processor != nullptr);
-  return new graph(VSTGUI::CRect(0, 0, 0, 0), color, processor); 
+  return new graph_plot(VSTGUI::CRect(0, 0, 0, 0), color, processor); 
 }
 
 void
-graph::draw(VSTGUI::CDrawContext* context)
+graph_plot::draw(VSTGUI::CDrawContext* context)
 {
   auto size = getViewSize().getSize();
   auto pos = getViewSize().getTopLeft();

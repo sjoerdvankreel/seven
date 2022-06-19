@@ -275,9 +275,9 @@
                                             "background-color": "color_FF800020"
                                         },
                                         "children": {
-                                            "seven_graph": {
+                                            "seven_graph_plot": {
                                                 "attributes": {
-                                                    "class": "seven_graph",
+                                                    "class": "seven_graph_plot",
                                                     "origin": "241, 24",
                                                     "size": "81, 24",
                                                     "color": "color_FF8000FF",
@@ -908,9 +908,9 @@
                                             "background-color": "color_FF800020"
                                         },
                                         "children": {
-                                            "seven_graph": {
+                                            "seven_graph_plot": {
                                                 "attributes": {
-                                                    "class": "seven_graph",
+                                                    "class": "seven_graph_plot",
                                                     "origin": "241, 24",
                                                     "size": "81, 24",
                                                     "color": "color_FF8000FF",
