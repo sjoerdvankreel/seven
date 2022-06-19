@@ -6,8 +6,6 @@
 
 using namespace VSTGUI;
 
-static std::int32_t const padding_param_group = 1;
-
 namespace svn::vst::base { 
 
 CView* 
@@ -23,10 +21,22 @@ graph_creator::create(VSTGUI::UIAttributes const& attrs, VSTGUI::IUIDescription 
 void
 graph::draw(VSTGUI::CDrawContext* context)
 {
+  CPoint inner_pos(1, 1);
+  auto size = getViewSize().getSize();
   auto pos = getViewSize().getTopLeft();
+  CPoint inner_size(size.x - 2, size.y - 2);
   CDrawContext::Transform transform(*context, CGraphicsTransform().translate(pos));
+  
+  CColor border(0, 0, 0, 192);
+  context->setFrameColor(border);
+  context->drawRect(getViewSize(), CDrawStyle::kDrawStroked);
+
+  CColor background(0, 0, 0, 128);
+  context->setFillColor(background);
+  context->drawRect(CRect(inner_pos, inner_size), CDrawStyle::kDrawFilled);
+
   context->setFrameColor(_color);
-  context->drawLine(CPoint(0, 0), CPoint(10, 10));
+  context->drawLine(inner_pos, inner_pos + inner_size);
 }
 
 } // namespace svn::vst::base
