@@ -36,6 +36,7 @@ graph::draw(VSTGUI::CDrawContext* context)
   context->drawRect(CRect(CPoint(0, 0), size), CDrawStyle::kDrawStroked);
 
   context->setFrameColor(_color);
+  context->setDrawMode(kAntiAliasing);
   context->drawLine(inner_pos, inner_pos + inner_size);
 }
 
