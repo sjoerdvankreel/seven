@@ -46,7 +46,7 @@ oscillator::process_block(voice_input const& input, audio_sample* audio)
     std::int32_t type = input.automation.get(oscillator_param::type, s).discrete;
     std::int32_t note = input.automation.get(oscillator_param::note, s).discrete;
     std::int32_t octave = input.automation.get(oscillator_param::oct, s).discrete;
-
+     
     float sample;
     float frequency = note_to_frequency(12 * (octave + 1) + note + cent + _midi_note - 60);
     switch (type)
