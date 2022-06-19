@@ -67,7 +67,12 @@ editor::open(void* parent, const PlatformType& type)
     
 void               
 editor::controllerEndEdit(ParamID tag, double normalized)
-{ 
+{
+  // Update graphs where needed.
+  for (std::size_t i = 0; i < _graphs.size(); i++)
+    if (_graphs[i]->processor()->needs_repaint(tag))
+      _graphs[i]->setDirty(true);
+
   // Rearrange control order to have visible parameter on top.
   CView* visible_view = nullptr;
   CViewContainer* parent_view = nullptr;
