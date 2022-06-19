@@ -41,7 +41,7 @@ graph_processor::process(param_value const* state,
     float x1_weight = x - static_cast<std::int32_t>(x);
     audio_sample stereo = _audio_data[x0_pos] * x0_weight + _audio_data[x1_pos] + x1_weight;
     float y = (stereo.left + stereo.right + 1.0f) * 0.5f * height;
-    _graph_data.push_back({x, y});
+    _graph_data.push_back({ static_cast<float>(i), y });
   }
   return _graph_data;
 }
