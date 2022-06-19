@@ -36,7 +36,6 @@ graph_creator::create(VSTGUI::UIAttributes const& attrs, VSTGUI::IUIDescription 
 void
 graph::draw(VSTGUI::CDrawContext* context)
 {
-  CPoint inner_pos(1, 1);
   auto size = getViewSize().getSize();
   auto pos = getViewSize().getTopLeft();
   CPoint inner_size(size.x - 2, size.y - 2);
@@ -55,7 +54,7 @@ graph::draw(VSTGUI::CDrawContext* context)
   auto state = static_cast<controller const*>(editor->getController())->state();
   std::vector<graph_point> const& graph_data = _processor->process(state, inner_size.x, inner_size.y, 48000.0);
   for(std::size_t i = 0; i < graph_data.size(); i++)
-    context->drawPoint(CPoint(graph_data[i].x, graph_data[i].y), _color);
+    context->drawPoint(CPoint(graph_data[i].x + 1, graph_data[i].y), _color);
 }
 
 } // namespace svn::vst::base
