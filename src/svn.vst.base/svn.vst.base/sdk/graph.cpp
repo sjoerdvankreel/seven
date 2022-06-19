@@ -50,19 +50,17 @@ graph::draw(VSTGUI::CDrawContext* context)
   context->setFrameColor(border);
   context->drawRect(CRect(CPoint(1, 1), inner_size), CDrawStyle::kDrawStroked);
 
-  CDrawContext::LineList list;
   context->setFrameColor(_color);
   context->setDrawMode(kAntiAliasing);
+  CGraphicsPath* path = context->createGraphicsPath();
   auto editor = static_cast<VST3Editor*>(getFrame()->getEditor());
   auto state = static_cast<controller const*>(editor->getController())->state();
   std::vector<graph_point> const& graph_data = _processor->process(state, render_size.x, render_size.y, 48000.0);
+  path->beginSubpath(CPoint(graph_data[0].x + 2, render_size.y - graph_data[0].y + 2));
   for(std::size_t i = 1; i < graph_data.size(); i++)
-  {
-    CPoint first = CPoint(graph_data[i - 1].x + 2, render_size.y - graph_data[i - 1].y + 2);
-    CPoint second = CPoint(graph_data[i].x + 2, render_size.y - graph_data[i].y + 2);
-    list.push_back(CDrawContext::LinePair(first, second));
-  }  
-  context->drawLines(list);
+    path->addLine(graph_data[i].x + 2, render_size.y - graph_data[i].y + 2);
+  context->drawGraphicsPath(path, CDrawContext::kPathStroked);
+  path->forget();
 }
 
 } // namespace svn::vst::base
