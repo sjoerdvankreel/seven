@@ -15,7 +15,7 @@ graph_processor::process(param_value const* state,
       _automation_buffer.push_back(state[p]);
   for (std::int32_t p = 0; p < topology()->input_param_count; p++)
     _automation.push_back(_automation_buffer.data() + static_cast<std::size_t>(p * samples));
-     
+      
   block_input input;
   input.bpm = 0.0f;
   input.note_count = 0;
