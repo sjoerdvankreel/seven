@@ -39,6 +39,7 @@ oscillator_graph::sample_count(param_value const* state, float sample_rate) cons
   std::int32_t note = state[begin + oscillator_param::note].discrete;
   std::int32_t octave = state[begin + oscillator_param::oct].discrete;
   float frequency = note_to_frequency(12 * (octave + 1) + note + cent);
+  // allow some room for blep/blamp to normalize
   return static_cast<std::int32_t>(std::ceil(sample_rate / frequency)) + 4.0f;
 }
 
