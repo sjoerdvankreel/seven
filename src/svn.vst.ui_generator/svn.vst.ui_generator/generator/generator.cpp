@@ -312,7 +312,7 @@ build_ui_part_graph_container(topology_info const& topology,
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   add_attribute(result, "size", size_to_string(width, height), allocator);
   add_attribute(result, "background-color-draw-style", "stroked", allocator);
-  add_attribute(result, "background-color", get_color_name(black, color_alpha::eight), allocator);
+  add_attribute(result, "background-color", get_color_name(white, color_alpha::opaque), allocator);
   return result;
 }
 

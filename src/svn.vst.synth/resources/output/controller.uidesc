@@ -279,7 +279,7 @@
                                                     "origin": "242, 1",
                                                     "size": "80, 47",
                                                     "background-color-draw-style": "stroked",
-                                                    "background-color": "color_00000020"
+                                                    "background-color": "color_FFFFFFFF"
                                                 }
                                             },
                                             "CViewContainer": {
@@ -831,7 +831,7 @@
                                                     "origin": "242, 1",
                                                     "size": "80, 47",
                                                     "background-color-draw-style": "stroked",
-                                                    "background-color": "color_00000020"
+                                                    "background-color": "color_FFFFFFFF"
                                                 }
                                             },
                                             "CViewContainer": {
