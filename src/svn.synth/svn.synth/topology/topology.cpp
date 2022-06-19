@@ -45,7 +45,7 @@ amplitude_params[amplitude_param::count] =
   { { L"Dcy", L"Decay" }, L"Sec", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 1, 1, false, -1, 0 } }
 };    
     
-param_descriptor const      
+param_descriptor const       
 oscillator_params[oscillator_param::count] =
 {
   { { L"On", L"Enabled" }, false, { -1, 0, false, -1, 0 } },

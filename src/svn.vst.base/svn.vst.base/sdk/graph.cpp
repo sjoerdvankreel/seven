@@ -27,13 +27,13 @@ graph::draw(VSTGUI::CDrawContext* context)
   CPoint inner_size(size.x - 2, size.y - 2);
   CDrawContext::Transform transform(*context, CGraphicsTransform().translate(pos));
   
-  CColor border(0, 128, 0, 192);
+  CColor background(255, 255, 255, 64);
+  context->setFillColor(background);
+  context->drawRect(CRect(CPoint(0, 0), size), CDrawStyle::kDrawFilled);
+
+  CColor border(0, 0, 0, 192);
   context->setFrameColor(border);
   context->drawRect(CRect(CPoint(0, 0), size), CDrawStyle::kDrawStroked);
-
-  CColor background(128, 0, 0, 128);
-  context->setFillColor(background);
-  context->drawRect(CRect(inner_pos, inner_size), CDrawStyle::kDrawFilled);
 
   context->setFrameColor(_color);
   context->drawLine(inner_pos, inner_pos + inner_size);
