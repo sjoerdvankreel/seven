@@ -45,7 +45,6 @@ _topology(topology), _fixed(fixed), _automation(automation),
 _total_param_count(total_param_count), _part_param_count(part_param_count), _part_param_offset(part_param_offset),
 _sample_count(sample_count), _sample_offset(sample_offset), _sample_fixed_at(sample_fixed_at)
 {
-  assert(fixed != nullptr);
   assert(topology != nullptr);
   assert(automation != nullptr);
   assert(part_param_count > 0);
@@ -58,6 +57,7 @@ _sample_count(sample_count), _sample_offset(sample_offset), _sample_fixed_at(sam
   assert(sample_offset < sample_count);
   assert(sample_fixed_at >= 0);
   assert(sample_fixed_at <= sample_count - sample_offset);
+  assert(sample_fixed_at == sample_count - sample_offset || fixed != nullptr);
 }
 
 inline param_value

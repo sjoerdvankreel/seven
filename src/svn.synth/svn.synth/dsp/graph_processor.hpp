@@ -8,6 +8,7 @@ namespace svn::synth {
 class oscillator_graph:
 public svn::base::graph_processor
 {
+  using param_value = svn::base::param_value;
   using block_input = svn::base::block_input;
   using block_output = svn::base::block_output;
   using topology_info = svn::base::topology_info;
@@ -20,7 +21,7 @@ public:
   svn::base::graph_processor(topology, part_index) {}
 
 protected:
-  virtual std::int32_t sample_count(float sample_rate) const override;
+  virtual std::int32_t sample_count(param_value const* state, float sample_rate) const override;
   virtual void process_audio(block_input const& input, block_output& output, float sample_rate) override;
 };
 

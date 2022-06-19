@@ -11,6 +11,8 @@
 
 namespace svn::base {
 
+inline std::int32_t constexpr midi_note_c4 = 60;
+
 // Note including cents.
 inline float
 note_to_frequency(float note)

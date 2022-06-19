@@ -9,7 +9,7 @@ graph_processor::process(param_value const* state,
 {
   _automation.clear();
   _automation_buffer.clear();
-  std::int32_t samples = sample_count(sample_rate);
+  std::int32_t samples = sample_count(state, sample_rate);
   for(std::int32_t p = 0; p < topology()->input_param_count; p++)
     for(std::int32_t s = 0; s < samples; s++)
       _automation_buffer.push_back(state[p]);

@@ -37,19 +37,19 @@ public:
   _output_param_buffer(static_cast<std::size_t>(topology->output_param_count)),
   _part_index(part_index), _audio_data(), _graph_data(), _topology(topology) {}
 
+public:
+  virtual bool needs_repaint(std::int32_t runtime_param) const = 0;
+  std::vector<graph_point> const&
+    process(param_value const* state, std::int32_t width, std::int32_t height, float sample_rate);
+
 protected:
   std::int32_t part_index() const { return _part_index; }
   topology_info const* topology() const { return _topology; }
   // Must know how many we render up front.
-  virtual std::int32_t sample_count(float sample_rate) const = 0;
+  virtual std::int32_t sample_count(param_value const* state, float sample_rate) const = 0;
   // Renders audio in (-1, 1).
   // Translation to ui coordinates is done by process().
   virtual void process_audio(block_input const& input, block_output& output, float sample_rate) = 0;
-
-public:
-  virtual bool needs_repaint(std::int32_t runtime_param) const = 0;
-  std::vector<graph_point> const& 
-  process(param_value const* state, std::int32_t width, std::int32_t height, float sample_rate);
 };
 
 } // namespace svn::base

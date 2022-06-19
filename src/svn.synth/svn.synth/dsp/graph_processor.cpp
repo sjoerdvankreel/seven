@@ -1,3 +1,4 @@
+#include <svn.base/dsp/support.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
 #include <svn.synth/dsp/graph_processor.hpp>
 #include <svn.synth/topology/topology.hpp>
@@ -31,15 +32,29 @@ oscillator_graph::needs_repaint(std::int32_t runtime_param) const
 }
 
 std::int32_t 
-oscillator_graph::sample_count(float sample_rate) const
+oscillator_graph::sample_count(param_value const* state, float sample_rate) const
 {
-  return 0;
+  std::int32_t begin = topology()->param_bounds[part_type::oscillator][part_index()];
+  float cent = state[begin + oscillator_param::cent].real;
+  std::int32_t note = state[begin + oscillator_param::note].discrete;
+  std::int32_t octave = state[begin + oscillator_param::oct].discrete;
+  float frequency = note_to_frequency(12 * (octave + 1) + note + cent);
+  return static_cast<std::int32_t>(sample_rate / frequency);
 }
 
 void 
 oscillator_graph::process_audio(block_input const& input, block_output& output, float sample_rate)
 {
-  
+  voice_input vinput;
+  vinput.bpm = input.bpm;
+  vinput.sample_count = input.sample_count;
+  vinput.stream_position = input.stream_position;
+  vinput.automation = automation_view(
+    topology(), nullptr, input.automation, topology()->input_param_count, 
+    topology()->input_param_count, 0, input.sample_count, 0, input.sample_count);
+  vinput.automation = vinput.automation.rearrange_params(part_type::oscillator, part_index());
+  oscillator osc(sample_rate, midi_note_c4);
+  osc.process_block(vinput, output.audio);
 }
 
 } // namespace svn::synth
