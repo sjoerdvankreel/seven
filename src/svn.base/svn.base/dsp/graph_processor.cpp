@@ -37,6 +37,7 @@ graph_processor::process(param_value const* state,
     float x = i * _audio_data.size() / static_cast<float>(width);
     std::int32_t x0_pos = static_cast<std::int32_t>(std::floor(x));
     std::int32_t x1_pos = static_cast<std::int32_t>(std::ceil(x));
+    if(x1_pos >= _audio_data.size()) x1_pos = _audio_data.size() - 1;
     float x0_weight = 1.0f - (x - x0_pos);
     float x1_weight = x - static_cast<std::int32_t>(x);
     audio_sample stereo = _audio_data[x0_pos] * x0_weight + _audio_data[x1_pos] * x1_weight;
