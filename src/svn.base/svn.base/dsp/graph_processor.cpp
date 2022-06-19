@@ -32,13 +32,13 @@ graph_processor::process(param_value const* state,
   process_audio(input, output, sample_rate);
 
   _graph_data.clear();
-  for (std::int32_t i = 0; i < width; i++)
+  for (std::int32_t i = 0; i < width - 1; i++)
   {
     float x = i * _audio_data.size() / static_cast<float>(width);
     std::int32_t x0_pos = static_cast<std::int32_t>(std::floor(x));
     std::int32_t x1_pos = static_cast<std::int32_t>(std::ceil(x));
     float x0_weight = 1.0f - (x - x0_pos);
-    float x1_weight = x1_pos - x;
+    float x1_weight = x - static_cast<std::int32_t>(x);
     audio_sample stereo = _audio_data[x0_pos] * x0_weight + _audio_data[x1_pos] + x1_weight;
     float y = (stereo.left + stereo.right + 1.0f) * 0.5f * height;
     _graph_data.push_back({x, y});
