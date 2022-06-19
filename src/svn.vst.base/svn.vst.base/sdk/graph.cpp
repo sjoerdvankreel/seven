@@ -38,7 +38,7 @@ graph::draw(VSTGUI::CDrawContext* context)
 {
   auto size = getViewSize().getSize();
   auto pos = getViewSize().getTopLeft();
-  CPoint inner_size(size.x - 2, size.y - 2);
+  CPoint render_size(size.x - 3, size.y - 5);
   CDrawContext::Transform transform(*context, CGraphicsTransform().translate(pos));
   
   CColor background(255, 255, 255, 64);
@@ -52,9 +52,9 @@ graph::draw(VSTGUI::CDrawContext* context)
   context->setDrawMode(kAntiAliasing);
   auto editor = static_cast<VST3Editor*>(getFrame()->getEditor());
   auto state = static_cast<controller const*>(editor->getController())->state();
-  std::vector<graph_point> const& graph_data = _processor->process(state, inner_size.x, inner_size.y, 48000.0);
+  std::vector<graph_point> const& graph_data = _processor->process(state, render_size.x, render_size.y, 48000.0);
   for(std::size_t i = 0; i < graph_data.size(); i++)
-    context->drawPoint(CPoint(graph_data[i].x + 1, graph_data[i].y), _color);
+    context->drawPoint(CPoint(graph_data[i].x + 2, render_size.y - graph_data[i].y + 2), _color);
 }
 
 } // namespace svn::vst::base
