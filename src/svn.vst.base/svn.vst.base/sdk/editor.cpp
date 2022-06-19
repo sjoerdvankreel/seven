@@ -11,7 +11,7 @@ editor(EditController* controller, UTF8StringPtr template_name,
   UTF8StringPtr xml_file, svn::base::topology_info const* topology):
 VST3Editor(controller, template_name, xml_file),
 _topology(topology), _controls(topology->params.size())
-{
+{ 
   assert(topology != nullptr);
   assert(xml_file != nullptr);
   assert(controller != nullptr);

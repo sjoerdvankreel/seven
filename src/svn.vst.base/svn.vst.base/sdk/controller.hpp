@@ -40,7 +40,7 @@ public:
   // Update the editor ui if dependent params change.
   void sync_dependent_parameters();
   controller(svn::base::topology_info const* topology) : 
-  _topology(topology), _state(static_cast<std::size_t>(topology->input_param_count)) {}
+  _topology(topology), _state(topology->params.size()) {}
 };
 
 } // namespace svn::vst::base

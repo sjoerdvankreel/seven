@@ -278,7 +278,9 @@
                                                     "class": "seven_graph",
                                                     "origin": "241, 1",
                                                     "size": "81, 47",
-                                                    "color": "color_FF8000FF"
+                                                    "color": "color_FF8000FF",
+                                                    "part-index": "0",
+                                                    "part-type": "0"
                                                 }
                                             },
                                             "CViewContainer": {
@@ -829,7 +831,9 @@
                                                     "class": "seven_graph",
                                                     "origin": "241, 1",
                                                     "size": "81, 47",
-                                                    "color": "color_FF8000FF"
+                                                    "color": "color_FF8000FF",
+                                                    "part-index": "1",
+                                                    "part-type": "0"
                                                 }
                                             },
                                             "CViewContainer": {
