@@ -49,10 +49,10 @@ graph::draw(VSTGUI::CDrawContext* context)
   context->setFrameColor(border);
   context->drawRect(CRect(CPoint(0, 0), size), CDrawStyle::kDrawStroked);
 
-  context->setFrameColor(_color);
   context->setDrawMode(kAntiAliasing);
-  std::vector<float> const& graph_data = _processor->process(inner_size.x, inner_size.y, 48000.0);
-  context->drawLine(inner_pos, inner_pos + inner_size);
+  std::vector<graph_point> const& graph_data = _processor->process(inner_size.x, inner_size.y, 48000.0);
+  for(std::size_t i = 0; i < graph_data.size(); i++)
+    context->drawPoint(CPoint(graph_data[i].x, graph_data[i].y), _color);
 }
 
 } // namespace svn::vst::base

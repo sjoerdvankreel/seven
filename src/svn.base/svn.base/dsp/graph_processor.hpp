@@ -11,10 +11,12 @@ extern class graph_processor*
 create_graph_processor(topology_info const* topology, 
   std::int32_t part_type, std::int32_t part_index);
 
+struct graph_point { float x, y; };
+
 class graph_processor
 {
   std::vector<float> _audio_data;
-  std::vector<float> _graph_data;
+  std::vector<graph_point> _graph_data;
   topology_info const* const _topology;
 
 public:
@@ -28,7 +30,7 @@ protected:
 
 public:
   virtual bool needs_repaint(std::int32_t param) const = 0;
-  std::vector<float> const& process(std::int32_t width, std::int32_t height, float sample_rate);
+  std::vector<graph_point> const& process(std::int32_t width, std::int32_t height, float sample_rate);
 };
 
 } // namespace svn::base
