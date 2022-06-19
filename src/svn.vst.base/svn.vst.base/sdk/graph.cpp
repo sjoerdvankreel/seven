@@ -53,8 +53,12 @@ graph::draw(VSTGUI::CDrawContext* context)
   auto editor = static_cast<VST3Editor*>(getFrame()->getEditor());
   auto state = static_cast<controller const*>(editor->getController())->state();
   std::vector<graph_point> const& graph_data = _processor->process(state, render_size.x, render_size.y, 48000.0);
-  for(std::size_t i = 0; i < graph_data.size(); i++)
-    context->drawPoint(CPoint(graph_data[i].x + 2, render_size.y - graph_data[i].y + 2), _color);
+  for(std::size_t i = 1; i < graph_data.size(); i++)
+  {
+    CPoint first = CPoint(graph_data[i - 1].x + 2, render_size.y - graph_data[i - 1].y + 2);
+    CPoint second = CPoint(graph_data[i].x + 2, render_size.y - graph_data[i].y + 2);
+    context->drawLine(first, second);
+  }  
 }
 
 } // namespace svn::vst::base
