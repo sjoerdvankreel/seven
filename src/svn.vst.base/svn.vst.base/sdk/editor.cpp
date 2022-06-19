@@ -1,6 +1,8 @@
 #include <svn.vst.base/sdk/editor.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
+
 #include <cassert>
+#include <algorithm>
 
 using namespace VSTGUI;
 
@@ -10,7 +12,7 @@ editor::
 editor(EditController* controller, UTF8StringPtr template_name,
   UTF8StringPtr xml_file, svn::base::topology_info const* topology):
 VST3Editor(controller, template_name, xml_file),
-_topology(topology), _controls(topology->params.size())
+_topology(topology), _controls(topology->params.size()), _graphs()
 { 
   assert(topology != nullptr);
   assert(xml_file != nullptr);
@@ -22,20 +24,34 @@ void
 editor::onViewAdded(CFrame* frame, CView* view)
 {
   VST3Editor::onViewAdded(frame, view);
+
   CControl* control = dynamic_cast<CControl*>(view);
-  if(control != nullptr && control->getTag() >= 0)
+  if (control != nullptr && control->getTag() >= 0)
     _controls[control->getTag()].push_back(control);
+
+  graph_plot* graph = dynamic_cast<graph_plot*>(view);
+  if(graph != nullptr)
+    _graphs.push_back(graph);
 }
  
 void 
 editor::onViewRemoved(CFrame* frame, CView* view)
 {
+  graph_plot* graph = dynamic_cast<graph_plot*>(view);
+  if (graph != nullptr)
+  {
+    auto it = std::find(_graphs.begin(), _graphs.end(), graph);
+    assert(it != _graphs.end());
+    _graphs.erase(it);
+  }
+
   CControl* control = dynamic_cast<CControl*>(view);
   if (control != nullptr && control->getTag() >= 0)
     for(std::size_t param = 0; param < _controls.size(); param++)
       for (std::size_t control = 0; control < _controls[param].size(); control++)
         if(_controls[param][control] == view)
           _controls[param].erase(_controls[param].begin() + control);
+
   VST3Editor::onViewRemoved(frame, view);
 }
 

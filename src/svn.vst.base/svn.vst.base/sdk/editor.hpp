@@ -3,6 +3,7 @@
 
 #include <svn.base/topology/topology_info.hpp>
 #include <vstgui/plugin-bindings/vst3editor.h>
+#include <svn.vst.base/sdk/graph_plot.hpp>
 #include <vector>
 
 namespace svn::vst::base {
@@ -24,11 +25,13 @@ public VSTGUI::VST3Editor
   using PlatformType = VSTGUI::PlatformType;
   using UTF8StringPtr = VSTGUI::UTF8StringPtr;
   using EditController = Steinberg::Vst::EditController;
+  
+  std::vector<graph_plot*> _graphs;
   std::vector<std::vector<CControl*>> _controls;
   svn::base::topology_info const* const _topology;
 
 public:
-  // Keeping track of controls by tag for fast access.
+  // Keeping track of graphs and controls by tag for fast access.
   void onViewAdded(CFrame* frame, CView* view) override;
   void onViewRemoved(CFrame* frame, CView* view) override;
 
