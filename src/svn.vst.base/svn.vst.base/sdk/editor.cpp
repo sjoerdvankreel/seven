@@ -1,3 +1,4 @@
+#include <svn.vst.base/sdk/parameter.hpp>
 #include <svn.vst.base/sdk/editor.hpp>
 #include <svn.vst.base/sdk/parameter.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
@@ -6,6 +7,7 @@
 #include <algorithm>
 
 using namespace VSTGUI;
+using namespace svn::base;
 
 namespace svn::vst::base {   
 
@@ -35,9 +37,20 @@ editor::onViewAdded(CFrame* frame, CView* view)
 {
   VST3Editor::onViewAdded(frame, view);
 
+  auto* controller = static_cast<svn::vst::base::controller*>(getController());
   CControl* control = dynamic_cast<CControl*>(view);
   if (control != nullptr && control->getTag() >= 0)
+  {
     _controls[control->getTag()].push_back(control);
+    auto const& descriptor = *_topology->params[control->getTag()].descriptor;
+    if (descriptor.type == param_type::real)
+      control->setValue(controller->state()[control->getTag()].real);
+    else
+    {
+      std::int32_t value = controller->state()[control->getTag()].discrete;
+      control->setValue(parameter::discrete_to_vst_normalized(descriptor, value));
+    }
+  }
 
   graph_plot* graph = dynamic_cast<graph_plot*>(view);
   if(graph != nullptr)
