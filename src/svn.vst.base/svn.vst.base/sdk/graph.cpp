@@ -38,16 +38,17 @@ graph::draw(VSTGUI::CDrawContext* context)
 {
   auto size = getViewSize().getSize();
   auto pos = getViewSize().getTopLeft();
-  CPoint render_size(size.x - 1, size.y - 5);
+  CPoint inner_size = size - CPoint(2, 2);
+  CPoint render_size(size.x - 2, size.y - 5);
   CDrawContext::Transform transform(*context, CGraphicsTransform().translate(pos));
   
-  CColor background(255, 255, 255, 64);
+  CColor background(0, 0, 0, 128);
   context->setFillColor(background);
-  context->drawRect(CRect(CPoint(0, 0), size), CDrawStyle::kDrawFilled);
+  context->drawRect(CRect(CPoint(1, 1), inner_size), CDrawStyle::kDrawFilled);
 
-  CColor border(0, 0, 0, 192);
+  CColor border(255, 255, 255, 64);
   context->setFrameColor(border);
-  context->drawRect(CRect(CPoint(0, 0), size), CDrawStyle::kDrawStroked);
+  context->drawRect(CRect(CPoint(1, 1), inner_size), CDrawStyle::kDrawStroked);
 
   context->setFrameColor(_color);
   context->setDrawMode(kAntiAliasing);
@@ -56,8 +57,8 @@ graph::draw(VSTGUI::CDrawContext* context)
   std::vector<graph_point> const& graph_data = _processor->process(state, render_size.x, render_size.y, 48000.0);
   for(std::size_t i = 1; i < graph_data.size(); i++)
   {
-    CPoint first = CPoint(graph_data[i - 1].x + 1, render_size.y - graph_data[i - 1].y + 2);
-    CPoint second = CPoint(graph_data[i].x + 1, render_size.y - graph_data[i].y + 2);
+    CPoint first = CPoint(graph_data[i - 1].x + 2, render_size.y - graph_data[i - 1].y + 2);
+    CPoint second = CPoint(graph_data[i].x + 2, render_size.y - graph_data[i].y + 2);
     context->drawLine(first, second);
   }  
 }
