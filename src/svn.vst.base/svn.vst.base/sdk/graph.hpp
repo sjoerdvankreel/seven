@@ -7,7 +7,7 @@
 
 namespace svn::vst::base {
 
-// Graph component backed by graph_descriptor.
+// Graph component backed by graph_descriptor and graph_processor.
 class graph : 
 public VSTGUI::CView
 {
