@@ -177,7 +177,7 @@ controller_ui_description::print(svn::base::topology_info const& topology, std::
     os << "\t\tLeft: " << parts[part].left << "\n";
     os << "\t\tTop: " << parts[part].top << "\n";
     os << "\t\tColor index: " << parts[part].color_index << "\n";
-    os << "\t\Occupied cell count: " << parts[part].occupied_cell_count << "\n";
+    os << "\t\tOccupied cell count: " << parts[part].occupied_cell_count << "\n";
     os << "\t\tEnabled index: " << parts[part].enabled_param.runtime_param_index << "\n";
     if(parts[part].graph != nullptr)
     {

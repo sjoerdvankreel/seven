@@ -43,9 +43,9 @@ amplitude_params[amplitude_param::count] =
 {
   { { L"Amp", L"Level" }, L"dB", { 1.0, 1, real_bounds::unit(), real_bounds::decibel() }, { 0, 1, true, -1, 0 } },
   { { L"Dcy", L"Decay" }, L"Sec", { 0.0, 2, real_bounds::unit(), real_bounds::unit() }, { 1, 1, false, -1, 0 } }
-};
-
-param_descriptor const 
+};   
+    
+param_descriptor const     
 oscillator_params[oscillator_param::count] =
 {
   { { L"On", L"Enabled" }, false, { -1, 0, false, -1, 0 } },
@@ -57,7 +57,7 @@ oscillator_params[oscillator_param::count] =
   { { L"Note", L"Note" }, L"", true, note_names, 12, { 4, 2, false, -1, 0 } },
   { { L"Cent", L"Cent" }, L"", { 0.5, 0, real_bounds::linear(-0.5, 0.5), real_bounds::linear(-50.0, 50.0) }, { 5, 2, false, -1, 0 } }
 };   
-     
+      
 part_descriptor const 
 part_descriptors[part_type::count] =
 {
