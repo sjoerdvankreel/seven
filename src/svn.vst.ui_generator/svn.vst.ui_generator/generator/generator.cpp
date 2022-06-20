@@ -8,6 +8,8 @@
 #include <vstgui/uidescription/rapidjson/include/rapidjson/prettywriter.h>
 #include <vstgui/uidescription/rapidjson/include/rapidjson/ostreamwrapper.h>
 
+#include <set>
+
 using namespace svn::base;
 using namespace rapidjson;
 
@@ -285,7 +287,7 @@ build_ui_part_single_param_container(
   Value result(kObjectType);
   auto const& param = description.params[index];
   auto const& part = topology.parts[description.runtime_part_index];
-  std::int32_t left = param.column * param_total_width + padding_param_group * 2 + padding_param_group;
+  std::int32_t left = param.column * param_total_width + 3 * padding_param_group;
   std::int32_t top = param.row * (param_row_height + margin) + 3 * padding_param_group;
   add_attribute(result, "class", "CViewContainer", allocator);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
@@ -303,11 +305,10 @@ build_ui_part_graph(topology_info const& topology,
   part_ui_description const& description, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  std::int32_t left = description.graph->column * param_total_width;
-  if(description.graph->column > 0) left += (description.graph->column - 1) * padding_param_group - padding_param_group;
-  std::int32_t top = description.graph->row * (param_row_height + margin + padding_param_group);
-  std::int32_t height = description.graph->row_span * (param_row_height + margin + padding_param_group);
-  std::int32_t width = description.graph->column_span * param_total_width + description.graph->column_span * padding_param_group;
+  std::int32_t left = description.graph->column * param_total_width + padding_param_group;
+  std::int32_t top = description.graph->row * (param_row_height + margin) + padding_param_group;
+  std::int32_t height = description.graph->row_span * (param_row_height + margin) + margin - 2 * padding_param_group;
+  std::int32_t width = description.graph->column_span * param_total_width + (description.graph->column_span - 1) * margin - 2 * padding_param_group;
   add_attribute(result, "class", "seven_graph_plot", allocator);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   add_attribute(result, "size", size_to_string(width, height), allocator);
@@ -329,6 +330,9 @@ build_ui_part_param_container(topology_info const& topology,
   add_attribute(result, "background-color", get_color_name(color_values[description.color_index], color_alpha::eight), allocator);
   if(description.graph != nullptr)
     add_child(result, "seven_graph_plot", build_ui_part_graph(topology, description, allocator), allocator);
+  
+  // Build cell decoration and filler cells.
+  std::set<std::pair<std::int32_t, std::int32_t>> cells_decorated;
   for (std::size_t p = 0; p < description.params.size(); p++)
   {
     auto const& param = description.params[p];
@@ -339,15 +343,24 @@ build_ui_part_param_container(topology_info const& topology,
         param.row, param.column, 0, description.color_index, allocator), allocator);
       continue;
     }
-    auto const& part = topology.parts[description.runtime_part_index];
+
+    // Only add background and borders the first time we encounter this cell.
     auto const& param_descriptor = *topology.params[param.runtime_param_index].descriptor;
-    add_child(result, "CViewContainer", build_ui_param_background_or_border(
-      param.row, param.column, param_descriptor.ui.param_group, description.color_index, allocator), allocator);
-    if (param_descriptor.ui.param_group != 0)
+    if(cells_decorated.find({ param.row, param.column}) == cells_decorated.end())
+    {
       add_child(result, "CViewContainer", build_ui_param_background_or_border(
-        param.row, param.column, 0, description.color_index, allocator), allocator);
-    add_child(result, "CViewContainer", build_ui_part_single_param_container(topology, description, p, allocator), allocator);    
+        param.row, param.column, param_descriptor.ui.param_group, description.color_index, allocator), allocator);
+      if (param_descriptor.ui.param_group != 0)
+        add_child(result, "CViewContainer", build_ui_param_background_or_border(
+          param.row, param.column, 0, description.color_index, allocator), allocator);
+    }
+    cells_decorated.insert({ param.row, param.column });
   }
+
+  // Build actual parameter content.
+  for (std::size_t p = 0; p < description.params.size(); p++)
+    if (description.params[p].runtime_param_index != -1)
+      add_child(result, "CViewContainer", build_ui_part_single_param_container(topology, description, p, allocator), allocator);
   return result;
 }
 
@@ -368,7 +381,7 @@ build_ui_part_param_container_border(topology_info const& topology,
 
 static Value
 build_ui_part_header_label(topology_info const& topology,
-  part_ui_description const& description, Document::AllocatorType& allocator)
+  part_ui_description const& description, std::int32_t left, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   std::string title = " " + narrow_assume_ascii(topology.parts[description.runtime_part_index].runtime_name);
@@ -378,7 +391,7 @@ build_ui_part_header_label(topology_info const& topology,
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "font-color", get_color_name(color_values[description.color_index], color_alpha::opaque), allocator);
-  add_attribute(result, "origin", size_to_string(0, -2), allocator);
+  add_attribute(result, "origin", size_to_string(left, -1), allocator);
   add_attribute(result, "size", size_to_string(description.width, param_row_height), allocator);
   add_attribute(result, "background-color", get_color_name(color_values[description.color_index], color_alpha::half), allocator);
   return result;
@@ -393,13 +406,13 @@ build_ui_part_header_container(topology_info const& topology,
   add_attribute(result, "origin", size_to_string(1, 1), allocator);
   add_attribute(result, "size", size_to_string(description.width - 2, param_row_height - 2), allocator);
   add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
-  add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, allocator), allocator);
   if (description.enabled_param.runtime_param_index != -1)
   {
-    std::int32_t left = description.columns * (param_total_width + margin) - param_col1_width - margin * 2;
-    Value enabled_box = build_ui_param_checkbox(topology, description, description.enabled_param, black, left, param_col3_width, -1, allocator);
+    Value enabled_box = build_ui_param_checkbox(topology, description, description.enabled_param, black, margin, header_checkbox_width, -1, allocator);
     add_child(result, "CCheckBox", enabled_box, allocator);
-  }
+    add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, header_checkbox_width + margin, allocator), allocator);
+  } else
+    add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, 0, allocator), allocator);
   return result;
 }
 

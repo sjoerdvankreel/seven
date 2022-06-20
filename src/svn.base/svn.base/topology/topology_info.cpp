@@ -72,12 +72,17 @@ topology_info::create(part_descriptor const* static_parts,
   for (std::size_t p = 0; p < result->params.size(); p++)
   {
     auto const& this_param = result->params[p];
-    if(this_param.descriptor->ui.relevant_if_param == -1) continue;
+    auto const& this_descriptor = *this_param.descriptor;
+    if(this_descriptor.ui.relevant_if_params.size() == 0) continue;
+    assert(this_descriptor.ui.relevant_if_params.size() == this_descriptor.ui.relevant_if_values.size());
     std::int32_t index = result->parts[this_param.part_index].type_index;
     std::int32_t type = result->parts[this_param.part_index].descriptor->type;
-    std::int32_t param = this_param.descriptor->ui.relevant_if_param;
-    std::int32_t that_index = result->param_bounds[type][index] + param;
-    result->ui.param_dependencies[that_index].push_back(p);
+    for(std::size_t i = 0; i < this_descriptor.ui.relevant_if_params.size(); i++)
+    {
+      std::int32_t that_param = this_param.descriptor->ui.relevant_if_params[i];
+      std::int32_t that_index = result->param_bounds[type][index] + that_param;
+      result->ui.param_dependencies[that_index].push_back(p);
+    }
   }
    
   assert(result->parts.size() > 0);

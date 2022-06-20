@@ -1,9 +1,12 @@
 #include <base/source/fstreamer.h>
 #include <pluginterfaces/base/ibstream.h>
+
+#include <svn.base/dsp/support.hpp>
 #include <svn.vst.base/sdk/editor.hpp>
 #include <svn.vst.base/sdk/parameter.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
 #include <svn.vst.base/support/io_stream.hpp>
+#include <svn.vst.base/support/support.hpp>
 
 #include <vector>
 #include <cassert>
@@ -18,18 +21,11 @@ using namespace Steinberg::Vst;
 namespace svn::vst::base {   
 
 void
-controller::sync_dependent_parameters()
+controller::sync_ui_parameters()
 {
-  // Updates visibility of dependent parameters.
+  // Updates visibility of dependent parameters and rendering of graphs.
   for (std::size_t p = 0; p < _topology->params.size(); p++)
     endEdit(static_cast<std::int32_t>(p));
-}
-
-IPlugView* PLUGIN_API 
-controller::createView(char const* name)
-{
-  if(ConstString(name) != ViewType::kEditor) return nullptr;
-  return _editor = new editor(this, "view", "controller.uidesc", _topology);
 }
 
 tresult
@@ -39,9 +35,51 @@ controller::endEdit(ParamID tag)
   if (_editor == nullptr) return EditControllerEx1::endEdit(tag);
 
   // Update visibility of dependent parameters and rerender graphs.
-  double normalized = getParamNormalized(tag);
-  _editor->controllerEndEdit(tag, normalized);
+  _editor->controllerEndEdit(tag);
   return EditControllerEx1::endEdit(tag);
+}
+
+// Update private copy of the state in svn::base format, for easy access by graphs.
+void
+controller::update_state(std::int32_t param)
+{
+  double normalized = getParamNormalized(param);
+  auto const& descriptor = *_topology->params[param].descriptor;
+  // This is in regular base format e.g. (0..1) or discrete.
+  _state[param] = vst_normalized_to_base(_topology, param, normalized);
+  // This is in dsp base format suitable for direct audio processing (which is what graph components do).
+  _state[param] = transform_to_dsp(_topology, param, _state[param]);
+}
+
+IPlugView* PLUGIN_API
+controller::createView(char const* name)
+{
+  if (ConstString(name) != ViewType::kEditor) return nullptr;
+  return _editor = new editor(this, "view", "controller.uidesc", _topology);
+}
+
+tresult PLUGIN_API
+controller::setComponentState(IBStream* state)
+{
+  param_value value;
+  if (state == nullptr) return kResultFalse;
+
+  // Load state into temporary buffer.
+  IBStreamer streamer(state, kLittleEndian);
+  vst_io_stream stream(&streamer);
+  std::vector<param_value> values(_topology->input_param_count, value);
+  if (!stream.load(*_topology, values.data())) return kResultFalse;
+
+  // SetParamNormalized() each value.
+  for (std::int32_t p = 0; p < _topology->input_param_count; p++)
+  {
+    setParamNormalized(p, base_to_vst_normalized(_topology, p, values[p]));
+    update_state(p);
+  }
+
+  // Set initial ui visibility state.
+  sync_ui_parameters();
+  return kResultOk;
 }
 
 tresult PLUGIN_API
@@ -60,48 +98,6 @@ controller::initialize(FUnknown* context)
     parameters.addParameter(new parameter(p, part, &_topology->params[p]));
   }
   return kResultTrue;
-}
-
-// Update private copy of the state in svn::base format, for easy access by graphs.
-void
-controller::update_state(std::int32_t param)
-{
-  double normalized = getParamNormalized(param);
-  auto const& descriptor = *_topology->params[param].descriptor;
-  if (descriptor.type == param_type::real)
-    _state[param].real = normalized;
-  else
-    _state[param].discrete = parameter::vst_normalized_to_discrete(descriptor, normalized);
-}
-
-tresult PLUGIN_API
-controller::setComponentState(IBStream* state)
-{
-  param_value value;
-  if (state == nullptr) return kResultFalse;
-
-  // Load state into temporary buffer.
-  IBStreamer streamer(state, kLittleEndian);
-  vst_io_stream stream(&streamer);
-  std::vector<param_value> values(_topology->input_param_count, value);
-  if (!stream.load(*_topology, values.data())) return kResultFalse;
-
-  // SetParamNormalized() each value.
-  for (std::int32_t p = 0; p < _topology->input_param_count; p++)
-  {
-    if (_topology->params[p].descriptor->type == param_type::real)
-      setParamNormalized(p, values[p].real);
-    else
-    {
-      auto const& descriptor = *_topology->params[p].descriptor;
-      setParamNormalized(p, parameter::discrete_to_vst_normalized(descriptor, values[p].discrete));
-    }
-    update_state(p);
-  }
-
-  // Set initial ui visibility state.
-  sync_dependent_parameters();
-  return kResultOk;
 }
 
 } // namespace svn::vst::base

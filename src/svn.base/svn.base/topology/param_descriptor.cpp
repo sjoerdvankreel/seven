@@ -17,6 +17,7 @@ param_descriptor::parse(wchar_t const* buffer, param_value& val) const
   case param_type::knob:
   case param_type::text:
     str >> val.discrete;
+    val.discrete = discrete.from_range(val.discrete);
     if (val.discrete < discrete.min) return false;
     if (val.discrete > discrete.max) return false;
     return true;
@@ -50,7 +51,7 @@ param_descriptor::format(param_value val, wchar_t* buffer, std::size_t size) con
   switch (type)
   { 
   case param_type::toggle: stream << (val.discrete == 0 ? L"Off" : L"On"); break;
-  case param_type::knob: case param_type::text: stream << val.discrete; break;
+  case param_type::knob: case param_type::text: stream << discrete.to_range(val.discrete); break;
   case param_type::real: stream << std::setprecision(real.precision) << std::fixed << val.real; break;
   case param_type::list: case param_type::knob_list: stream << discrete.items[val.discrete].short_; break;
   default: assert(false); break;

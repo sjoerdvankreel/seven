@@ -12,8 +12,8 @@ union param_value
   std::int32_t discrete;
 
   param_value() : discrete(0) {}
-  param_value(float val) : real(val) {}
-  param_value(std::int32_t val) : discrete(val) {}
+  explicit param_value(float val) : real(val) {}
+  explicit param_value(std::int32_t val) : discrete(val) {}
 };
 
 // Generic short name/detailed description.

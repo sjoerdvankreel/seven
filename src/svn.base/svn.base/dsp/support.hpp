@@ -18,30 +18,12 @@ inline float
 note_to_frequency(float note)
 { return 440.0f * std::pow(2.0f, (note - 69.0f) / 12.0f); }
 
-inline float
-sanity(float val)
-{
-  assert(!std::isnan(val));
-  assert(!std::isinf(val));
-  assert(std::fpclassify(val) != FP_SUBNORMAL);
-  return val;
-}
-
-inline float 
-sanity_bipolar(float val)
-{
-  sanity(val);
-  assert(val <= 1.0f);
-  assert(val >= -1.0f);
-  return val;
-}
-
 inline void
-clear_audio(audio_sample* audio, std::int32_t sample_count)
+clear_audio(audio_sample * audio, std::int32_t sample_count)
 {
   assert(audio != nullptr);
   assert(sample_count >= 0);
-  for(std::int32_t s = 0; s < sample_count; s++)
+  for (std::int32_t s = 0; s < sample_count; s++)
     audio[s].left = audio[s].right = 0.0f;
 }
 
@@ -69,6 +51,15 @@ add_audio(audio_sample* x, audio_sample* y, std::int32_t sample_count)
   assert(sample_count >= 0);
   for (std::int32_t s = 0; s < sample_count; s++)
     x[s] += y[s];
+}
+
+inline param_value
+transform_to_dsp(topology_info const* topology, std::int32_t param, param_value val)
+{
+  auto const& descriptor = *topology->params[param].descriptor;
+  if(descriptor.type == param_type::real)
+    return param_value(descriptor.real.dsp.to_range(val.real));
+  return param_value(descriptor.discrete.to_range(val.discrete));
 }
 
 } // namespace svn::base

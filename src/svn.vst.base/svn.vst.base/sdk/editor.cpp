@@ -2,6 +2,7 @@
 #include <svn.vst.base/sdk/editor.hpp>
 #include <svn.vst.base/sdk/parameter.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
+#include <svn.vst.base/support/support.hpp>
 
 #include <cassert>
 #include <algorithm>
@@ -28,7 +29,7 @@ bool PLUGIN_API
 editor::open(void* parent, const PlatformType& type)
 {
   if (!VST3Editor::open(parent, type)) return false;
-  static_cast<svn::vst::base::controller*>(this->controller)->sync_dependent_parameters();
+  static_cast<svn::vst::base::controller*>(this->controller)->sync_ui_parameters();
   return true;
 }
 
@@ -37,29 +38,27 @@ editor::onViewAdded(CFrame* frame, CView* view)
 {
   VST3Editor::onViewAdded(frame, view);
 
+  // Keep track of graphs.
+  graph_plot* graph = dynamic_cast<graph_plot*>(view);
+  if (graph != nullptr)
+    _graphs.push_back(graph);
+    
+  // Keep track of controls by tag.
   auto* controller = static_cast<svn::vst::base::controller*>(getController());
   CControl* control = dynamic_cast<CControl*>(view);
   if (control != nullptr && control->getTag() >= 0)
   {
+    // Control loses its value if removed and re-added.
     _controls[control->getTag()].push_back(control);
-    auto const& descriptor = *_topology->params[control->getTag()].descriptor;
-    if (descriptor.type == param_type::real)
-      control->setValue(controller->state()[control->getTag()].real);
-    else
-    {
-      std::int32_t value = controller->state()[control->getTag()].discrete;
-      control->setValue(parameter::discrete_to_vst_normalized(descriptor, value));
-    }
+    param_value val = controller->state()[control->getTag()];
+    control->setValue(base_to_vst_normalized(_topology, control->getTag(), val));
   }
-
-  graph_plot* graph = dynamic_cast<graph_plot*>(view);
-  if(graph != nullptr)
-    _graphs.push_back(graph);
 }
  
 void 
 editor::onViewRemoved(CFrame* frame, CView* view)
 {
+  // Keep track of graphs.
   graph_plot* graph = dynamic_cast<graph_plot*>(view);
   if (graph != nullptr)
   {
@@ -68,6 +67,7 @@ editor::onViewRemoved(CFrame* frame, CView* view)
     _graphs.erase(it);
   }
 
+  // Keep track of controls by tag.
   CControl* control = dynamic_cast<CControl*>(view);
   if (control != nullptr && control->getTag() >= 0)
     for(std::size_t param = 0; param < _controls.size(); param++)
@@ -79,40 +79,52 @@ editor::onViewRemoved(CFrame* frame, CView* view)
 }
     
 void               
-editor::controllerEndEdit(ParamID tag, double normalized)
+editor::controllerEndEdit(ParamID tag)
 {
-  // Update graphs where needed.
+  // Update graphs where needed.  
   for (std::size_t i = 0; i < _graphs.size(); i++)
     if (_graphs[i]->processor()->needs_repaint(tag))
       _graphs[i]->setDirty(true);
-
-  // Rearrange control order to have visible parameter on top.
-  CView* visible_view = nullptr;
-  CViewContainer* parent_view = nullptr;
-  std::vector<CView*> invisible_views;
+       
   auto const& dependents = _topology->ui.param_dependencies[tag];
   for(std::size_t d = 0; d < dependents.size(); d++)
+  {               
+    CView* visible_view = nullptr;
+    CViewContainer* parent_view = nullptr;
+
     for(std::size_t c = 0; c < _controls[dependents[d]].size(); c++)
     {
-      auto const& descriptor = *_topology->params[tag].descriptor;
-      std::int32_t value = parameter::vst_normalized_to_discrete(descriptor, normalized);
+      // Visible if all dependencies are met.
+      bool visible = true;
+      auto const& param = _topology->params[dependents[d]];
+      for (std::size_t i = 0; i < param.descriptor->ui.relevant_if_params.size(); i++)
+      {
+        auto controller = static_cast<svn::vst::base::controller*>(getController());
+        std::int32_t part_index = _topology->parts[param.part_index].type_index;
+        std::int32_t part_type = _topology->parts[param.part_index].descriptor->type;
+        std::int32_t offset = _topology->param_bounds[part_type][part_index];
+        std::int32_t that_param = param.descriptor->ui.relevant_if_params[i];
+        double normalized = controller->getParamNormalized(that_param + offset);
+        std::int32_t value = vst_normalized_to_base(_topology, that_param + offset, normalized).discrete;
+        visible &= _topology->params[dependents[d]].descriptor->ui.relevant_if_values[i] == value;
+      }
+
+      // Show/hide dependent controls.
       CView* container = _controls[dependents[d]][c]->getParentView();
-      bool visible = _topology->params[dependents[d]].descriptor->ui.relevant_if_value == value;
       container->setVisible(visible);
-      if(visible) assert(visible_view == nullptr), visible_view = container;
-      else invisible_views.push_back(container);
+      if(visible) 
+      {
+        assert(visible_view == nullptr || visible_view == container);
+        visible_view = container;
+      }
       assert(parent_view == nullptr || parent_view == container->getParentView());
       parent_view = container->getParentView()->asViewContainer();
     }
-  if (visible_view != nullptr)
-    parent_view->removeView(visible_view, false);
-  for(std::size_t i = 0; i < invisible_views.size(); i++)
-  {
-    parent_view->removeView(invisible_views[i], false);
-    parent_view->addView(invisible_views[i]);
+             
+    // Move to front for hittesting.
+    if(parent_view != nullptr && visible_view != nullptr)
+      parent_view->changeViewZOrder(visible_view, parent_view->getNbViews() - 1);
   }
-  if (visible_view != nullptr)
-    parent_view->addView(visible_view);
 }
 
 } // namespace svn::vst::base

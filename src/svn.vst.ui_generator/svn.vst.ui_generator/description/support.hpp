@@ -20,6 +20,7 @@ inline std::int32_t constexpr param_row_height = 20;
 inline std::int32_t constexpr param_col1_width = 20;
 inline std::int32_t constexpr param_col2_width = 26;
 inline std::int32_t constexpr param_col3_width = 28;
+inline std::int32_t constexpr header_checkbox_width = 14;
 
 inline std::int32_t constexpr margin = 3;
 inline std::int32_t constexpr padding_param_group = 1;

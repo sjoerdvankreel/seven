@@ -19,7 +19,7 @@ svn_create_graph_processor(
   default:
     assert(false);
     return nullptr;
-  }
+  }   
 }
 
 namespace svn::synth {
@@ -39,14 +39,13 @@ oscillator_graph::sample_count(param_value const* state, float sample_rate) cons
   std::int32_t note = state[begin + oscillator_param::note].discrete;
   std::int32_t octave = state[begin + oscillator_param::oct].discrete;
   float frequency = note_to_frequency(12 * (octave + 1) + note + cent);
-  // allow some room for blep/blamp to normalize
-  return static_cast<std::int32_t>(std::ceil(sample_rate / frequency)) + 4.0f;
+  return static_cast<std::int32_t>(std::ceil(2.0f * sample_rate / frequency));
 }
 
 void 
 oscillator_graph::process_audio(block_input const& input, block_output& output, float sample_rate)
 {
-  voice_input vinput;
+  voice_input vinput;  
   vinput.bpm = input.bpm;
   vinput.sample_count = input.sample_count;
   vinput.stream_position = input.stream_position;
@@ -57,5 +56,5 @@ oscillator_graph::process_audio(block_input const& input, block_output& output, 
   oscillator osc(sample_rate, midi_note_c4);
   osc.process_block(vinput, output.audio);
 }
-
+ 
 } // namespace svn::synth

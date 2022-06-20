@@ -38,7 +38,7 @@ public:
   svn::base::param_value const* state() const { return _state.data(); }
 
   // Update the editor ui if dependent params change.
-  void sync_dependent_parameters();
+  void sync_ui_parameters();
   controller(svn::base::topology_info const* topology) : 
   _topology(topology), _state(topology->params.size()) {}
 };

@@ -86,6 +86,14 @@ audio_processor::prepare_block(std::int32_t sample_count)
 }
 
 void
+audio_processor::transform_automation()
+{
+  for (std::int32_t p = 0; p < _topology->input_param_count; p++)
+    for (std::int32_t s = 0; s < _input.sample_count; s++)
+      _input.automation[p][s] = transform_to_dsp(_topology, p, _input.automation[p][s]);
+}
+
+void
 audio_processor::automation_check(std::int32_t sample_count)
 {
   for (std::int32_t p = 0; p < _topology->input_param_count; p++)
@@ -99,18 +107,6 @@ audio_processor::automation_check(std::int32_t sample_count)
         std::int32_t val = _input.automation[p][s].discrete;
         assert(descriptor.discrete.min <= val && val <= descriptor.discrete.max);
       }
-  }
-}
-
-void
-audio_processor::transform_automation()
-{
-  for (std::int32_t p = 0; p < _topology->input_param_count; p++)
-  {
-    auto const& descriptor = *_topology->params[p].descriptor;
-    if (descriptor.type == param_type::real)
-      for (std::int32_t s = 0; s < _input.sample_count; s++)
-        _input.automation[p][s].real = descriptor.real.dsp.to_range(_input.automation[p][s].real);
   }
 }
 

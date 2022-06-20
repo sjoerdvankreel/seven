@@ -1,4 +1,5 @@
 #include <svn.vst.base/sdk/parameter.hpp>
+#include <svn.vst.base/support/support.hpp>
 #include <cassert>
 
 using namespace svn::base;
@@ -23,7 +24,7 @@ param_default_to_vst_normalized(param_descriptor const& param)
   switch (param.type)
   {
   case param_type::real: return param.real.default_;
-  default: return parameter::discrete_to_vst_normalized(param, param.discrete.default_);
+  default: return discrete_to_vst_normalized(param, param.discrete.default_);
   }
 }
 

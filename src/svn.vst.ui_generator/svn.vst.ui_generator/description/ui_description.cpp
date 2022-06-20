@@ -38,7 +38,7 @@ part_ui_description::create(
   result.columns = part.descriptor->ui.param_columns;
   result.rows = result.occupied_cell_count / result.columns;
   if (result.occupied_cell_count % result.columns != 0) ++result.rows;
-  result.width = result.columns * param_total_width + margin;
+  result.width = result.columns * param_total_width;
   result.height = (result.rows + 1) * (param_row_height + margin);
   result.color_index = part.descriptor->ui.color_index % color_count;
 

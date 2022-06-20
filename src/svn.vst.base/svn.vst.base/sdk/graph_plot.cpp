@@ -39,7 +39,7 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
   auto size = getViewSize().getSize();
   auto pos = getViewSize().getTopLeft();
   CPoint inner_size = size - CPoint(2, 2);
-  CPoint render_size(size.x - 2, size.y - 5);
+  CPoint render_size(size.x - 3, size.y - 6);
   CDrawContext::Transform transform(*context, CGraphicsTransform().translate(pos));
   
   CColor background(0, 0, 0, 128);
@@ -56,9 +56,9 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
   auto editor = static_cast<VST3Editor*>(getFrame()->getEditor());
   auto state = static_cast<controller const*>(editor->getController())->state();
   std::vector<graph_point> const& graph_data = _processor->process(state, render_size.x, render_size.y, 48000.0);
-  path->beginSubpath(CPoint(graph_data[0].x + 2, render_size.y - graph_data[0].y + 2));
+  path->beginSubpath(CPoint(graph_data[0].x + 3, render_size.y - graph_data[0].y + 3));
   for(std::size_t i = 1; i < graph_data.size(); i++)
-    path->addLine(graph_data[i].x + 2, render_size.y - graph_data[i].y + 2);
+    path->addLine(graph_data[i].x + 3, render_size.y - graph_data[i].y + 3);
   context->drawGraphicsPath(path, CDrawContext::kPathStroked);
   path->forget();
 }

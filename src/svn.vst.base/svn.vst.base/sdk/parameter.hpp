@@ -29,30 +29,7 @@ public:
   ParamValue toNormalized(ParamValue plain) const override;
   void toString(ParamValue normalized, String128 string) const override;
   bool fromString(TChar const* string, ParamValue& normalized) const override;
-
-  static std::int32_t vst_normalized_to_discrete(svn::base::param_descriptor const& param, double val);
-  static double discrete_to_vst_normalized(svn::base::param_descriptor const& param, std::int32_t val);
 };
-
-inline double 
-parameter::discrete_to_vst_normalized(
-  svn::base::param_descriptor const& param, std::int32_t val)
-{ 
-  assert(param.type != svn::base::param_type::real);
-  std::int32_t min = param.discrete.min;
-  std::int32_t max = param.discrete.max;
-  return static_cast<double>(val - min) / (max - min); 
-}
-
-inline std::int32_t 
-parameter::vst_normalized_to_discrete(
-  svn::base::param_descriptor const& param, double val)
-{ 
-  assert(param.type != svn::base::param_type::real);
-  std::int32_t min = param.discrete.min;
-  std::int32_t max = param.discrete.max;
-  return min + std::clamp(static_cast<std::int32_t>(val * (max - min + 1)), 0, max - min);
-}
 
 } // namespace Svn::Vst
 #endif // SVN_VST_BASE_SDK_PARAMETER_HPP
