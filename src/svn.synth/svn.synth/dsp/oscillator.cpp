@@ -118,23 +118,29 @@ oscillator::generate_analog_spread(
   return result / static_cast<float>(spread);
 }
 
+// https://www.verklagekasper.de/synths/dsfsynthesis/dsfsynthesis.html
 float 
-oscillator::generate_dsf(float frequency) const
+oscillator::generate_dsf(
+  automation_view const& automation, std::int32_t sample, float frequency) const
 {
-  float falloff = 0.5f;
-  std::int32_t partials = 3;
-  float distance = frequency;
-  //((w * sin(v - u) + sin(u)) + std::pow(w, n + 1) * (w * sin(u + n * v) - sin(u + (n + 1) * v))) / (1 + w * w - 2 * w * cos(v));
-
-  float w = falloff;
+  float const scale_factor = 0.975f;
+  float const rolloff_range = 0.99f;
+  float rolloff = automation.get(oscillator_param::dsf_rolloff, sample).real;
+  float distance = frequency * automation.get(oscillator_param::dsf_distance, sample).real;
+  std::int32_t partials = automation.get(oscillator_param::dsf_partials, sample).discrete;
+  float max_partials = (_sample_rate * 0.5f - frequency) / distance;
+  partials = std::min(partials, static_cast<std::int32_t>(max_partials));
+   
   float n = partials;     
-  float position = _phase * frequency / _sample_rate;
-  float v = 2.0f * std::numbers::pi * distance * position;
-  float u = 2.0f * std::numbers::pi * frequency * position;
+  float w = (1.0f - rolloff) * rolloff_range;
+  float w_pow_np1 = std::pow(w, n + 1);
+  float u = 2.0f * std::numbers::pi * _phase;
+  float v = 2.0f * std::numbers::pi * distance * _phase / frequency;
   float a = w * std::sin(u + n * v) - std::sin(u + (n + 1) * v);
-  float x = (w * std::sin(v - u) + std::sin(u)) + std::pow(w, n + 1) * a;
-  float y = 1 + w * w - 2 * w * cos(v);
-  return x / y;
+  float x = (w * std::sin(v - u) + std::sin(u)) + w_pow_np1 * a;
+  float y = 1 + w * w - 2 * w * std::cos(v);
+  float scale = (1.0f - w_pow_np1) / (1.0f - w);
+  return sanity_bipolar(x * scale_factor / (y * scale));
 }
 
 float
@@ -144,7 +150,7 @@ oscillator::generate_wave(
   std::int32_t type = automation.get(oscillator_param::type, sample).discrete;
   switch (type)
   {
-  case oscillator_type::dsf: return generate_dsf(frequency);
+  case oscillator_type::dsf: return generate_dsf(automation, sample, frequency);
   case oscillator_type::analog: return generate_analog_spread(automation, sample, midi, frequency);
   default: assert(false); return 0.0f;
   }
@@ -170,8 +176,8 @@ oscillator::process_block(voice_input const& input, audio_sample* audio)
 
     float amp = input.automation.get(oscillator_param::amp, s).real;
     float panning = input.automation.get(oscillator_param::pan, s).real;
-    audio[s].left = (1.0f - panning) * sample * amp;
-    audio[s].right = panning * sample * amp;
+    audio[s].left = sanity_bipolar((1.0f - panning) * sample * amp);
+    audio[s].right = sanity_bipolar(panning * sample * amp);
   }
 }
 

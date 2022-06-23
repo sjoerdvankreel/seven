@@ -2,11 +2,11 @@
 #include <pluginterfaces/base/ibstream.h>
 
 #include <svn.base/dsp/support.hpp>
-#include <svn.vst.base/sdk/editor.hpp>
+#include <svn.vst.base/ui/editor.hpp>
 #include <svn.vst.base/sdk/parameter.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
-#include <svn.vst.base/support/io_stream.hpp>
 #include <svn.vst.base/support/support.hpp>
+#include <svn.vst.base/support/io_stream.hpp>
 
 #include <vector>
 #include <cassert>

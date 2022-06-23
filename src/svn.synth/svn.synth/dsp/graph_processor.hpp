@@ -2,27 +2,37 @@
 #define SVN_SYNTH_DSP_GRAPH_PROCESSOR_HPP
 
 #include <svn.base/dsp/graph_processor.hpp>
+#include <vector>
 
 namespace svn::synth {
 
-class oscillator_graph:
+class oscillator_wave_graph:
 public svn::base::graph_processor
 {
-  using param_value = svn::base::param_value;
-  using block_input = svn::base::block_input;
-  using block_output = svn::base::block_output;
-  using topology_info = svn::base::topology_info;
-
 public:
-  virtual bool needs_repaint(std::int32_t runtime_param) const override;
-
-public:
-  oscillator_graph(topology_info const* topology, std::int32_t part_index) :
+  oscillator_wave_graph(topology_info const* topology, std::int32_t part_index) :
   svn::base::graph_processor(topology, part_index) {}
 
-protected:
-  virtual std::int32_t sample_count(param_value const* state, float sample_rate) const override;
-  virtual void process_audio(block_input const& input, block_output& output, float sample_rate) override;
+  bool needs_repaint(std::int32_t runtime_param) const override;
+  std::int32_t audio_sample_count(param_value const* state, float sample_rate) const override;
+  void process_audio_core(block_input const& input, block_output& output, float sample_rate) override;
+  void audio_to_plot(std::vector<audio_sample> const& audio, std::vector<float>& plot, float sample_rate) override;
+};
+
+class oscillator_spectrum_graph:
+public svn::base::graph_processor
+{
+  std::vector<float> _mono;
+  svn::base::spectrum_analyzer _analyzer;
+
+public:
+  oscillator_spectrum_graph(topology_info const* topology, std::int32_t part_index) :
+  svn::base::graph_processor(topology, part_index), _mono(), _analyzer() {}
+
+  bool needs_repaint(std::int32_t runtime_param) const override;
+  std::int32_t audio_sample_count(param_value const* state, float sample_rate) const override;
+  void process_audio_core(block_input const& input, block_output& output, float sample_rate) override;
+  void audio_to_plot(std::vector<audio_sample> const& audio, std::vector<float>& plot, float sample_rate) override;
 };
 
 } // namespace svn::synth

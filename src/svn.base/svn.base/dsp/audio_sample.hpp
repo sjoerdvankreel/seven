@@ -8,6 +8,7 @@ struct audio_sample
   float left;
   float right;
 
+  float mono() const;
   audio_sample& operator=(float y);
 
   audio_sample& operator+=(float y);
@@ -20,6 +21,10 @@ struct audio_sample
   audio_sample& operator*=(audio_sample y);
   audio_sample& operator/=(audio_sample y);
 };
+
+inline float
+audio_sample::mono() const
+{ return left + right; }
 
 inline audio_sample&
 audio_sample::operator=(float y)

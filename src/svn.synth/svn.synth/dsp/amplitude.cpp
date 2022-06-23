@@ -1,3 +1,4 @@
+#include <svn.base/dsp/support.hpp>
 #include <svn.synth/dsp/amplitude.hpp>
 #include <svn.synth/topology/topology.hpp>
 #include <cassert>
@@ -28,7 +29,7 @@ amplitude::process_block(voice_input const& input,
       _released++;
     }
     float amp = input.automation.get(amplitude_param::amp, s).real;
-    audio[s] *= _velocity * decay_level * amp;
+    audio[s] = sanity_audio(audio[s] * _velocity * decay_level * amp);
   }
   return input.sample_count;
 }

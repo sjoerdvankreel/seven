@@ -28,7 +28,7 @@ struct real_bounds
   static inline real_bounds decibel() 
   { return { -std::numeric_limits<float>::infinity(), 0.0, 0.0, real_slope::decibel }; }
   static inline real_bounds log(float min, float max, float ref) 
-  { return { min, max, std::log((ref - min) / (max - min)) / std::log(0.5f), real_slope::linear }; }
+  { return { min, max, std::log((ref - min) / (max - min)) / std::log(0.5f), real_slope::logarithmic }; }
 };
 
 

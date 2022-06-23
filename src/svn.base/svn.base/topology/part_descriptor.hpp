@@ -10,10 +10,11 @@ namespace svn::base {
 // Optional single graph within 1 part.
 struct graph_descriptor
 {
-  std::int32_t row; // Rows in ui grid.
-  std::int32_t column; // Columns in ui grid.
-  std::int32_t row_span; // Row count in ui grid.
-  std::int32_t column_span; // Column count in ui grid.
+  std::int32_t const type; // Graph type.
+  std::int32_t const row; // Rows in ui grid.
+  std::int32_t const column; // Columns in ui grid.
+  std::int32_t const row_span; // Row count in ui grid.
+  std::int32_t const column_span; // Column count in ui grid.
 };
 
 // For ui generator.
@@ -33,7 +34,8 @@ struct part_descriptor
   std::int32_t const part_count; // Part count of this type, e.g. 2 filters.
   param_descriptor const* const params; // Pointer to parameter descriptor array.
   std::int32_t const param_count; // Parameter count for a part of this type, e.g. 2: frequency, resonance.
-  graph_descriptor const* const graph; // Optional graph info for this part.
+  graph_descriptor const* const graphs; // Optional graph infos for this part.
+  std::int32_t const graph_count; // Number of graphs for this part type.
   part_ui_descriptor const ui; // For ui generator.
 };
 

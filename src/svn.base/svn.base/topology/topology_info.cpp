@@ -13,7 +13,7 @@ topology_info::init_defaults(param_value* state) const
     case param_type::real: state[p].real = params[p].descriptor->real.default_; break;
     default: state[p].discrete = params[p].descriptor->discrete.default_; break;
     }   
-}    
+}     
   
 topology_info const*
 topology_info::create(part_descriptor const* static_parts,
@@ -73,13 +73,12 @@ topology_info::create(part_descriptor const* static_parts,
   {
     auto const& this_param = result->params[p];
     auto const& this_descriptor = *this_param.descriptor;
-    if(this_descriptor.ui.relevant_if_params.size() == 0) continue;
-    assert(this_descriptor.ui.relevant_if_params.size() == this_descriptor.ui.relevant_if_values.size());
+    if(this_descriptor.ui.relevance_count == 0) continue;
     std::int32_t index = result->parts[this_param.part_index].type_index;
     std::int32_t type = result->parts[this_param.part_index].descriptor->type;
-    for(std::size_t i = 0; i < this_descriptor.ui.relevant_if_params.size(); i++)
+    for(std::int32_t i = 0; i < this_descriptor.ui.relevance_count; i++)
     {
-      std::int32_t that_param = this_param.descriptor->ui.relevant_if_params[i];
+      std::int32_t that_param = this_param.descriptor->ui.relevance[i].if_param;
       std::int32_t that_index = result->param_bounds[type][index] + that_param;
       result->ui.param_dependencies[that_index].push_back(p);
     }

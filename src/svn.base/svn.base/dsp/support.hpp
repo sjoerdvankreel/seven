@@ -11,12 +11,58 @@
 
 namespace svn::base {
 
+inline float constexpr sanity_epsilon = 1.0e-5f;
 inline std::int32_t constexpr midi_note_c4 = 60;
 
 // Note including cents.
 inline float
 note_to_frequency(float note)
 { return 440.0f * std::pow(2.0f, (note - 69.0f) / 12.0f); }
+
+inline float
+sanity(float val)
+{
+  assert(!std::isnan(val));
+  assert(!std::isinf(val));
+  assert(std::fpclassify(val) != FP_SUBNORMAL);
+  return val;
+}
+
+inline float
+sanity_unipolar(float val)
+{
+  sanity(val);
+  assert(val <= 1.0f + sanity_epsilon);
+  assert(val >= 0.0f - sanity_epsilon);
+  return val;
+}
+
+inline float
+sanity_bipolar(float val)
+{
+  sanity(val);
+  assert(val <= 1.0f + sanity_epsilon);
+  assert(val >= -1.0f - sanity_epsilon);
+  return val;
+}
+
+inline audio_sample
+sanity_audio(audio_sample val)
+{
+  sanity_bipolar(val.left);
+  sanity_bipolar(val.right);
+  return val;
+}
+
+inline std::uint64_t
+next_pow2(std::uint64_t x)
+{
+  uint64_t result = 0;
+  if (x == 0) return 0;
+  if (x && !(x & (x - 1))) return x;
+  while (x != 0) x >>= 1, result++;
+  return 1ULL << result;
+}
 
 inline void
 clear_audio(audio_sample * audio, std::int32_t sample_count)
@@ -59,7 +105,7 @@ transform_to_dsp(topology_info const* topology, std::int32_t param, param_value 
   auto const& descriptor = *topology->params[param].descriptor;
   if(descriptor.type == param_type::real)
     return param_value(descriptor.real.dsp.to_range(val.real));
-  return param_value(descriptor.discrete.to_range(val.discrete));
+  return param_value(val.discrete);
 }
 
 } // namespace svn::base

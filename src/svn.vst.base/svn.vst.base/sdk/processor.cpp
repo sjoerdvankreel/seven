@@ -17,7 +17,7 @@
 using namespace svn::base;
 using namespace Steinberg;
 using namespace Steinberg::Vst; 
-
+  
 namespace svn::vst::base {
 
 // Don't update output too often.

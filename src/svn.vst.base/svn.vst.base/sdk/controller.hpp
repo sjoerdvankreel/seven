@@ -4,8 +4,8 @@
 #include <vstgui/plugin-bindings/vst3editor.h>
 #include <pluginterfaces/vst/vsttypes.h>
 #include <public.sdk/source/vst/vsteditcontroller.h>
+#include <svn.vst.base/ui/editor.hpp>
 #include <svn.base/topology/topology_info.hpp>
-#include <svn.vst.base/sdk/editor.hpp>
 
 #include <vector>
 

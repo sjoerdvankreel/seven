@@ -5,7 +5,6 @@
 #include <svn.base/topology/real_bounds.hpp>
 
 #include <cmath>
-#include <vector>
 #include <cstdint>
 
 namespace svn::base {
@@ -26,13 +25,17 @@ struct real_descriptor
 // Discrete valued specific data.
 struct discrete_descriptor
 {
-  bool quadratic; // Only for display and dsp. Params are transmitted as [min, max].
   std::int32_t const min;
   std::int32_t const max;
   std::int32_t const default_;
   item_name const* const items; // Pointer to items for a list parameter.
-  inline std::int32_t to_range(std::int32_t val) const { return quadratic? val * val: val; }
-  inline std::int32_t from_range(std::int32_t val) const { return quadratic ? static_cast<std::int32_t>(std::sqrt(val)) : val; }
+};
+
+// For ui generator.
+struct param_relevance
+{
+  std::int32_t const if_param;
+  std::int32_t const if_value;
 };
 
 // For ui generator.
@@ -40,9 +43,8 @@ struct param_ui_descriptor
 {
   std::int32_t const param_index; // Index within the grid.
   std::int32_t const param_group; // Group together related params within a part.
-  bool const edit_font_small; // Set to true if value gets large.
-  std::vector<std::int32_t> const relevant_if_params; // This parameter is visible if other param P[i] has value V[i].
-  std::vector<std::int32_t> const relevant_if_values; // This parameter is visible if other param P[i] has value V[i].  
+  param_relevance const* const relevance; // Relevant if all other params relevance.if_param[i] have value relevance.if_value[i].
+  std::int32_t const relevance_count;
 };
 
 // Describes automation input.
@@ -65,7 +67,7 @@ struct param_descriptor
   param_descriptor(item_name const& static_name, wchar_t const* unit, bool knob,
   item_name const* const items, std::int32_t count, param_ui_descriptor const& ui) :
   static_name(static_name), type(knob? param_type::knob_list: param_type::list), 
-  unit(unit), discrete(discrete_descriptor(false, 0, count - 1, 0, items)), ui(ui) {}
+  unit(unit), discrete(discrete_descriptor(0, count - 1, 0, items)), ui(ui) {}
    
   // Real.
   param_descriptor(item_name const& static_name, wchar_t const* unit, 
@@ -74,14 +76,14 @@ struct param_descriptor
 
   // Knob/text.
   param_descriptor(item_name const& static_name, wchar_t const* unit, bool knob, 
-  bool quadratic, std::int32_t min, std::int32_t max, std::int32_t default_, param_ui_descriptor const& ui) :
+  std::int32_t min, std::int32_t max, std::int32_t default_, param_ui_descriptor const& ui) :
   static_name(static_name), type(knob? param_type::knob: param_type::text), 
-  unit(unit), discrete(discrete_descriptor(quadratic, min, max, default_)), ui(ui) {}
+  unit(unit), discrete(discrete_descriptor(min, max, default_)), ui(ui) {}
 
   // Toggle.
   param_descriptor(item_name const& static_name, bool default_, param_ui_descriptor const& ui) :
   static_name(static_name), type(param_type::toggle),
-  unit(L""), discrete(discrete_descriptor(false, 0, 1, default_)), ui(ui) {}
+  unit(L""), discrete(discrete_descriptor(0, 1, default_)), ui(ui) {}
 };
 
 } // namespace svn::base

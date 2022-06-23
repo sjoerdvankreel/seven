@@ -14,26 +14,21 @@ using namespace svn::synth;
 
 // Bindings to vst base project.
 extern "C" {
-
+  
 topology_info const*
 svn_vst_create_topology()
 { return topology_info::create(
     part_descriptors, part_type::count,
     synth_polyphony, synth_max_ui_height); }
-
+      
 audio_processor*
 svn_vst_create_audio_processor(
   topology_info const* topology, float sample_rate, 
   std::int32_t max_sample_count, param_value* state)
 { return new synthesizer(topology, sample_rate, max_sample_count, state); }
 
-#if NDEBUG
-Steinberg::FUID const svn_vst_processor_id(0xE576A3A3, 0xB01240E0, 0x9FB6D08A, 0x3F4538AD);
-Steinberg::FUID const svn_vst_controller_id(0xF0A5357D, 0x1EA74ABC, 0x903F3616, 0x496F1000);
-#else
 Steinberg::FUID const svn_vst_processor_id(0xFBFCEDA8, 0x782047CE, 0xA12E8A8C, 0x8C3407E9);
 Steinberg::FUID const svn_vst_controller_id(0x57068B2B, 0x63374143, 0x85FA79D9, 0xAC8A38A5);
-#endif // NDEBUG
 
 } // extern "C"
 
