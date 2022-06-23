@@ -179,8 +179,8 @@
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_00000040",
-                                                    "boxframe-color": "color_000000FF",
-                                                    "checkmark-color": "color_000000FF"
+                                                    "boxframe-color": "color_FF0000FF",
+                                                    "checkmark-color": "color_FF0000FF"
                                                 }
                                             },
                                             "CTextLabel": {
@@ -1124,8 +1124,8 @@
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_00000040",
-                                                    "boxframe-color": "color_000000FF",
-                                                    "checkmark-color": "color_000000FF"
+                                                    "boxframe-color": "color_FF0000FF",
+                                                    "checkmark-color": "color_FF0000FF"
                                                 }
                                             },
                                             "CTextLabel": {
@@ -2069,8 +2069,8 @@
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_00000040",
-                                                    "boxframe-color": "color_000000FF",
-                                                    "checkmark-color": "color_000000FF"
+                                                    "boxframe-color": "color_FF0000FF",
+                                                    "checkmark-color": "color_FF0000FF"
                                                 }
                                             },
                                             "CTextLabel": {
@@ -3014,8 +3014,8 @@
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_00000040",
-                                                    "boxframe-color": "color_000000FF",
-                                                    "checkmark-color": "color_000000FF"
+                                                    "boxframe-color": "color_00FF00FF",
+                                                    "checkmark-color": "color_00FF00FF"
                                                 }
                                             },
                                             "CTextLabel": {
@@ -3878,8 +3878,8 @@
                                                     "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
                                                     "boxfill-color": "color_00000040",
-                                                    "boxframe-color": "color_000000FF",
-                                                    "checkmark-color": "color_000000FF"
+                                                    "boxframe-color": "color_00FF00FF",
+                                                    "checkmark-color": "color_00FF00FF"
                                                 }
                                             },
                                             "CTextLabel": {

@@ -91,9 +91,9 @@ build_ui_param_control_base(
 
 static Value
 build_ui_param_checkbox(
-  topology_info const& topology, param_ui_description const& param, 
-  std::int32_t left, std::int32_t width, std::int32_t top_margin, 
-  part_ui_color const& color, Document::AllocatorType& allocator)
+  topology_info const& topology, part_ui_description const& part,
+  param_ui_description const& param, part_ui_color const& color, std::int32_t left,
+  std::int32_t width, std::int32_t top_margin, Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);
   Value result(build_ui_param_control_base(topology, param, class_name, left, width, top_margin, allocator));
@@ -102,8 +102,8 @@ build_ui_param_checkbox(
   add_attribute(result, "draw-crossbox", "true", allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "boxfill-color", get_color_name(color, color_alpha::quarter), allocator);
-  add_attribute(result, "boxframe-color", get_color_name(color, color_alpha::opaque), allocator);
-  add_attribute(result, "checkmark-color", get_color_name(color, color_alpha::opaque), allocator);
+  add_attribute(result, "boxframe-color", get_color_name(part.color, color_alpha::opaque), allocator);
+  add_attribute(result, "checkmark-color", get_color_name(part.color, color_alpha::opaque), allocator);
   return result;
 }
 
@@ -234,7 +234,7 @@ add_ui_input_param(
     add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, col12_and_magin, param_col3_width, "right", allocator), allocator);
     break;
   case param_type::toggle:
-    checkbox = build_ui_param_checkbox(topology, param, margin, param_col1_width, 0, part.color, allocator);
+    checkbox = build_ui_param_checkbox(topology, part, param, part.color, margin, param_col1_width, 0, allocator);
     add_child(container, control_class, checkbox, allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col2, param_col2_width, allocator), allocator);
     break;
@@ -263,8 +263,8 @@ add_ui_output_param(
   switch (topology.params[param.runtime_param_index].descriptor->type)
   {
   case param_type::toggle:
-    add_child(container, control_class, build_ui_param_checkbox(topology, param,
-      param_output_col_width + margin, param_output_col_width, 0, part.color, allocator), allocator);
+    add_child(container, control_class, build_ui_param_checkbox(topology, part, param, part.color,
+      param_output_col_width + margin, param_output_col_width, 0, allocator), allocator);
     break;
   case param_type::text:
     add_child(container, control_class, build_ui_param_edit(topology, part, param,
@@ -408,7 +408,7 @@ build_ui_part_header_container(topology_info const& topology,
   add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
   if (description.enabled_param.runtime_param_index != -1)
   {
-    Value enabled_box = build_ui_param_checkbox(topology, description.enabled_param, margin, header_checkbox_width, -1, black, allocator);
+    Value enabled_box = build_ui_param_checkbox(topology, description, description.enabled_param, black, margin, header_checkbox_width, -1, allocator);
     add_child(result, "CCheckBox", enabled_box, allocator);
     add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, header_checkbox_width + margin, allocator), allocator);
   } else

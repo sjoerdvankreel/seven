@@ -14,7 +14,7 @@ static svn::base::topology_info const* _topology = nullptr;
 static VSTGUI::IViewCreator const* _graph_plot_creator = nullptr;
 static VSTGUI::IViewCreator const* _rotary_knob_creator = nullptr;
 static VSTGUI::IViewCreator const* _view_container_fix_creator = nullptr;
-
+ 
 extern "C" { 
 
 svn::base::topology_info const* 
