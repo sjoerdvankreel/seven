@@ -48,9 +48,9 @@ part_ui_description::create(
   result.columns = part.descriptor->ui.param_columns;
   result.rows = result.occupied_cell_count / result.columns;
   if (result.occupied_cell_count % result.columns != 0) ++result.rows;
+  result.color = part.descriptor->ui.color;
   result.width = result.columns * param_total_width;
   result.height = (result.rows + 1) * (param_row_height + margin);
-  result.color_index = part.descriptor->ui.color_index % color_count;
 
   result.enabled_param.row = 0;
   result.enabled_param.runtime_param_index = -1;
@@ -186,9 +186,13 @@ controller_ui_description::print(svn::base::topology_info const& topology, std::
     os << "\t\tHeight: " << parts[part].height << "\n";
     os << "\t\tLeft: " << parts[part].left << "\n";
     os << "\t\tTop: " << parts[part].top << "\n";
-    os << "\t\tColor index: " << parts[part].color_index << "\n";
     os << "\t\tOccupied cell count: " << parts[part].occupied_cell_count << "\n";
     os << "\t\tEnabled index: " << parts[part].enabled_param.runtime_param_index << "\n";
+    os << "\t\tColor:";
+    os << " " << static_cast<std::int32_t>(parts[part].color.r);
+    os << " " << static_cast<std::int32_t>(parts[part].color.g);
+    os << " " << static_cast<std::int32_t>(parts[part].color.b);
+    os << "\n";
     for(std::int32_t g = 0; g < parts[part].graph_count; g++)
     {
       os << "\t\tGraph " << (g + 1) << " position: ";

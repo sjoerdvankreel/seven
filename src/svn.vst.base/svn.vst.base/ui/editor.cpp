@@ -88,7 +88,7 @@ editor::controllerEndEdit(ParamID tag)
        
   auto const& dependents = _topology->ui.param_dependencies[tag];
   for(std::size_t d = 0; d < dependents.size(); d++)
-  {                 
+  {                  
     CView* visible_view = nullptr;
     CViewContainer* parent_view = nullptr;
 

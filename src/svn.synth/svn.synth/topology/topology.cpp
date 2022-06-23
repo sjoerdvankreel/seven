@@ -135,10 +135,10 @@ oscillator_params[oscillator_param::count] =
 part_descriptor const
 part_descriptors[part_type::count] =
 {
-  { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 1, 3, 0 } },
-  { { L"Filter", L"Voice filter" }, part_type::voice_filter, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 7, 3, 0 } },
-  { { L"Amp", L"Amplitude" }, part_type::amplitude, false, 1, amplitude_params, amplitude_param::count, nullptr, 0, { 5, 2, -1 } },
-  { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, nullptr, 0, { 6, 3, -1 } }
+  { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 3, 0, { 0xFF, 0x00, 0x00 } } },
+  { { L"Filter", L"Voice filter" }, part_type::voice_filter, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 3, 0, { 0x00, 0xFF, 0x00 } } },
+  { { L"Amp", L"Amplitude" }, part_type::amplitude, false, 1, amplitude_params, amplitude_param::count, nullptr, 0, { 2, -1, { 0x00, 0x00, 0xFF } } },
+  { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, nullptr, 0, { 3, -1, { 0xFF, 0xFF, 0x00 } } }
 }; 
    
 } // namespace svn::synth       

@@ -10,10 +10,10 @@ using namespace svn::base;
 namespace svn::vst::ui {
 
 std::string
-get_color_value(rgb color, std::int32_t alpha_index)
+get_color_value(part_ui_color const& color, std::int32_t alpha_index)
 { return "#" + print_rgb_hex(color, true, alpha_index); }
 std::string
-get_color_name(rgb color, std::int32_t alpha_index)
+get_color_name(part_ui_color const& color, std::int32_t alpha_index)
 { return "color_" + print_rgb_hex(color, true, alpha_index); }
 
 std::string
@@ -98,7 +98,7 @@ get_control_tag(topology_info const& topology, std::size_t p)
 }
 
 std::string
-print_rgb_hex(rgb color, bool print_alpha, std::int32_t alpha_index)
+print_rgb_hex(part_ui_color const& color, bool print_alpha, std::int32_t alpha_index)
 {
   std::ostringstream oss;
   oss << std::hex << std::uppercase;

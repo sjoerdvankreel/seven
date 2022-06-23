@@ -17,12 +17,20 @@ struct graph_descriptor
   std::int32_t const column_span; // Column count in ui grid.
 };
 
+// Can't be const because of ui generator.
+struct part_ui_color
+{
+  std::uint8_t r;
+  std::uint8_t g;
+  std::uint8_t b;
+};
+
 // For ui generator.
 struct part_ui_descriptor
 {
-  std::int32_t const color_index; // Index into color wheel.
   std::int32_t const param_columns; // Number of parameters stacked left-to-right.
   std::int32_t const enabled_param; // Index into params which identifies the part on/off switch, or -1 if always on.
+  part_ui_color const color; // Base color for ui generator.
 };
 
 // Static part info.
