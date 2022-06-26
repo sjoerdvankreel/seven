@@ -3,6 +3,7 @@
 
 #include <svn.synth/dsp/support.hpp>
 #include <svn.synth/topology/topology.hpp>
+#include <svn.base/dsp/delay_buffer.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
 
 namespace svn::synth {
