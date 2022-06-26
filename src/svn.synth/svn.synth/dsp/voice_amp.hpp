@@ -17,7 +17,7 @@ class voice_amp
 public:
   voice_amp() = default;
   voice_amp(float sample_rate, float velocity): _velocity(velocity), _sample_rate(sample_rate) {}
-  std::int32_t process_block(voice_input const& input, base::audio_sample* audio, std::int32_t release_sample);
+  std::int32_t process_block(voice_input const& input, base::audio_sample32* audio, std::int32_t release_sample);
 };
 
 } // namespace svn::synth

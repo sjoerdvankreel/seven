@@ -38,7 +38,7 @@ struct block_input
 // Audio processor result.
 struct block_output
 {
-  audio_sample* audio;
+  audio_sample32* audio;
   param_value* output_params;
 };
 

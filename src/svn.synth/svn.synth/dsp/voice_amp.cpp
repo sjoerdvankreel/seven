@@ -9,7 +9,7 @@ namespace svn::synth {
 
 std::int32_t
 voice_amp::process_block(voice_input const& input,
-  audio_sample* audio, std::int32_t release_sample)
+  audio_sample32* audio, std::int32_t release_sample)
 {
   assert(audio != nullptr);
   assert(release_sample >= -1);

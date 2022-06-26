@@ -16,7 +16,7 @@ public:
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t audio_sample_count(param_value const* state, float sample_rate) const override;
   void process_audio_core(block_input const& input, block_output& output, float sample_rate) override;
-  void audio_to_plot(std::vector<audio_sample> const& audio, std::vector<float>& plot, float sample_rate) override;
+  void audio_to_plot(std::vector<audio_sample32> const& audio, std::vector<float>& plot, float sample_rate) override;
 };
 
 class oscillator_spectrum_graph:
@@ -32,7 +32,7 @@ public:
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t audio_sample_count(param_value const* state, float sample_rate) const override;
   void process_audio_core(block_input const& input, block_output& output, float sample_rate) override;
-  void audio_to_plot(std::vector<audio_sample> const& audio, std::vector<float>& plot, float sample_rate) override;
+  void audio_to_plot(std::vector<audio_sample32> const& audio, std::vector<float>& plot, float sample_rate) override;
 };
 
 } // namespace svn::synth

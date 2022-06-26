@@ -16,7 +16,7 @@ private:
   block_input _input;
   block_output _output;
   std::vector<note_event> _notes;
-  std::vector<audio_sample> _audio;
+  std::vector<audio_sample32> _audio;
 
   float const _sample_rate;
   param_value* const _state;

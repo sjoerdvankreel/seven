@@ -22,9 +22,9 @@ struct voice_input
 // Internal audio outputs.
 struct audio_state
 {
-  std::vector<base::audio_sample> output;
-  std::array<std::vector<base::audio_sample>, oscillator_count> oscillator_output;
-  std::array<std::vector<base::audio_sample>, voice_filter_count> voice_filter_output;
+  std::vector<base::audio_sample32> output;
+  std::array<std::vector<base::audio_sample32>, oscillator_count> oscillator_output;
+  std::array<std::vector<base::audio_sample32>, voice_filter_count> voice_filter_output;
   audio_state(std::int32_t max_sample_count);
 };
 
@@ -32,7 +32,7 @@ inline audio_state::
 audio_state(std::int32_t max_sample_count): 
 oscillator_output(), voice_filter_output()
 {
-  std::vector<base::audio_sample> audio(static_cast<std::size_t>(max_sample_count));
+  std::vector<base::audio_sample32> audio(static_cast<std::size_t>(max_sample_count));
   output = audio;
   oscillator_output.fill(audio);
   voice_filter_output.fill(audio);

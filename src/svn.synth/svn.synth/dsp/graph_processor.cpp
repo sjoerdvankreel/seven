@@ -60,7 +60,7 @@ oscillator_spectrum_graph::needs_repaint(std::int32_t runtime_param) const
 
 void
 oscillator_spectrum_graph::audio_to_plot(
-  std::vector<audio_sample> const& audio, std::vector<float>& plot, float sample_rate)
+  std::vector<audio_sample32> const& audio, std::vector<float>& plot, float sample_rate)
 {
   _mono.clear();
   for(std::size_t s = 0; s < audio.size(); s++)
@@ -79,7 +79,7 @@ oscillator_wave_graph::needs_repaint(std::int32_t runtime_param) const
 
 void
 oscillator_wave_graph::audio_to_plot(
-  std::vector<audio_sample> const& audio, std::vector<float>& plot, float sample_rate)
+  std::vector<audio_sample32> const& audio, std::vector<float>& plot, float sample_rate)
 {
   for (std::size_t s = 0; s < audio.size(); s++)
     plot.push_back((audio[s].mono() + 1.0f) * 0.5f);

@@ -157,7 +157,7 @@ oscillator::generate_wave(
 }
 
 void
-oscillator::process_block(voice_input const& input, audio_sample* audio)
+oscillator::process_block(voice_input const& input, audio_sample32* audio)
 {
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {  

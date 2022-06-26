@@ -3,18 +3,19 @@
 
 namespace svn::base {
 
+template <class T>
 struct audio_sample
 {
-  float left;
-  float right;
+  T left;
+  T right;
 
-  float mono() const;
-  audio_sample& operator=(float y);
+  T mono() const;
+  audio_sample& operator=(T y);
 
-  audio_sample& operator+=(float y);
-  audio_sample& operator-=(float y);
-  audio_sample& operator*=(float y);
-  audio_sample& operator/=(float y);
+  audio_sample& operator+=(T y);
+  audio_sample& operator-=(T y);
+  audio_sample& operator*=(T y);
+  audio_sample& operator/=(T y);
 
   audio_sample& operator+=(audio_sample y);
   audio_sample& operator-=(audio_sample y);
@@ -22,77 +23,80 @@ struct audio_sample
   audio_sample& operator/=(audio_sample y);
 };
 
-inline float
-audio_sample::mono() const
+typedef audio_sample<float> audio_sample32;
+typedef audio_sample<double> audio_sample64;
+
+template <class T> inline T
+audio_sample<T>::mono() const
 { return left + right; }
 
-inline audio_sample&
-audio_sample::operator=(float y)
+template <class T> inline audio_sample<T>&
+audio_sample<T>::operator=(T y)
 { left = right = y; return *this; }
 
-inline audio_sample
-operator+(audio_sample x, float y)
+template <class T> inline audio_sample<T>
+operator+(audio_sample<T> x, T y)
 { return { x.left + y, x.right + y }; }
-inline audio_sample
-operator-(audio_sample x, float y)
+template <class T> inline audio_sample<T>
+operator-(audio_sample<T> x, T y)
 { return { x.left - y, x.right - y }; }
-inline audio_sample
-operator*(audio_sample x, float y)
+template <class T>inline audio_sample<T>
+operator*(audio_sample<T> x, T y)
 { return { x.left * y, x.right * y }; }
-inline audio_sample
-operator/(audio_sample x, float y)
+template <class T> inline audio_sample<T>
+operator/(audio_sample<T> x, T y)
 { return { x.left / y, x.right / y }; }
 
-inline audio_sample
-operator+(float x, audio_sample y)
+template <class T> inline audio_sample<T>
+operator+(T x, audio_sample<T> y)
 { return { x + y.left, x + y.right }; }
-inline audio_sample
-operator-(float x, audio_sample y)
+template <class T> inline audio_sample<T>
+operator-(T x, audio_sample<T> y)
 { return { x - y.left, x - y.right }; }
-inline audio_sample
-operator*(float x, audio_sample y)
+template <class T> inline audio_sample<T>
+operator*(T x, audio_sample<T> y)
 { return { x * y.left, x * y.right }; }
-inline audio_sample
-operator/(float x, audio_sample y)
+template <class T> inline audio_sample<T>
+operator/(T x, audio_sample<T> y)
 { return { x / y.left, x / y.right }; }
 
-inline audio_sample&
-audio_sample::operator+=(float y)
+template <class T> inline audio_sample<T>&
+audio_sample<T>::operator+=(T y)
 { left += y; right += y; return *this; }
-inline audio_sample&
-audio_sample::operator-=(float y)
+template <class T> inline audio_sample<T>&
+audio_sample<T>::operator-=(T y)
 { left -= y; right -= y; return *this; }
-inline audio_sample&
-audio_sample::operator*=(float y)
+template <class T> inline audio_sample<T>&
+audio_sample<T>::operator*=(T y)
 { left *= y; right *= y; return *this; }
-inline audio_sample&
-audio_sample::operator/=(float y)
+template <class T> inline audio_sample<T>&
+audio_sample<T>::operator/=(T y)
 { left /= y; right /= y; return *this; }
 
-inline audio_sample
-operator+(audio_sample x, audio_sample y)
+template <class T> inline audio_sample<T>
+operator+(audio_sample<T> x, audio_sample<T> y)
 { return { x.left + y.left, x.right + y.right }; }
-inline audio_sample
-operator-(audio_sample x, audio_sample y)
+template <class T> inline audio_sample<T>
+operator-(audio_sample<T> x, audio_sample<T> y)
 { return { x.left - y.left, x.right - y.right }; }
-inline audio_sample
-operator*(audio_sample x, audio_sample y)
+template <class T> inline audio_sample<T>
+operator*(audio_sample<T> x, audio_sample<T> y)
 { return { x.left * y.left, x.right * y.right }; }
-inline audio_sample
-operator/(audio_sample x, audio_sample y)
+template <class T> inline audio_sample<T>
+operator/(audio_sample<T> x, audio_sample<T> y)
 { return { x.left / y.left, x.right / y.right }; }
 
-inline audio_sample&
-audio_sample::operator+=(audio_sample y)
+template <class T> inline audio_sample<T>&
+audio_sample<T>::operator+=(audio_sample<T> y)
 { left += y.left; right += y.right; return *this; }
-inline audio_sample&
-audio_sample::operator-=(audio_sample y)
+template <class T> inline audio_sample<T>&
+audio_sample<T>::operator-=(audio_sample<T> y)
 { left -= y.left; right -= y.right; return *this; }
-inline audio_sample&
-audio_sample::operator*=(audio_sample y)
+template <class T> inline audio_sample<T>&
+audio_sample<T>::operator*=(audio_sample<T> y)
 { left *= y.left; right *= y.right; return *this; }
-inline audio_sample&
-audio_sample::operator/=(audio_sample y)
+template <class T> inline audio_sample<T>&
+audio_sample<T>::operator/=(audio_sample<T> y)
 { left /= y.left; right /= y.right; return *this; }  
 
 } // namespace svn::base

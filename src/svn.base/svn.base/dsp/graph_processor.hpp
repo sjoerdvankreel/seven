@@ -26,7 +26,7 @@ class graph_processor
   topology_info const* const _topology;
   std::vector<float> _plot_data;
   std::vector<graph_point> _graph_data;
-  std::vector<audio_sample> _audio_data;
+  std::vector<audio_sample32> _audio_data;
   std::vector<param_value*> _automation;
   std::vector<param_value> _automation_buffer;
   std::vector<param_value> _output_param_buffer;
@@ -36,8 +36,8 @@ protected:
   using param_value = svn::base::param_value;
   using block_input = svn::base::block_input;
   using block_output = svn::base::block_output;
-  using audio_sample = svn::base::audio_sample;
   using topology_info = svn::base::topology_info;
+  using audio_sample32 = svn::base::audio_sample32;
 
 protected:
   graph_processor(topology_info const* topology, std::int32_t part_index): 
@@ -47,7 +47,7 @@ protected:
 
 private:
   // Do the full audio dsp stuff without transforming to plot.
-  std::vector<audio_sample> const& process_audio(param_value const* state, float sample_rate);
+  std::vector<audio_sample32> const& process_audio(param_value const* state, float sample_rate);
 
 public:
   virtual ~graph_processor() {}
@@ -62,7 +62,7 @@ public:
   // Renders data in sample_count audio samples.
   virtual void process_audio_core(block_input const& input, block_output& output, float sample_rate) = 0;
   // Transforms audio to plot in (0, 1).
-  virtual void audio_to_plot(std::vector<audio_sample> const& audio, std::vector<float>& plot, float sample_rate) = 0;
+  virtual void audio_to_plot(std::vector<audio_sample32> const& audio, std::vector<float>& plot, float sample_rate) = 0;
 
   // This is the main entry point for the graph plot.
   std::vector<graph_point> const& plot(param_value const* state, float sample_rate, std::int32_t width, std::int32_t height);

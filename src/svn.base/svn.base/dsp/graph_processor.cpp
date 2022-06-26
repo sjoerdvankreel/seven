@@ -5,7 +5,7 @@
 namespace svn::base {
 
 // Given parameter state and sample rate, setup automation and run some dsp code.
-std::vector<audio_sample> const&
+std::vector<audio_sample32> const&
 graph_processor::process_audio(param_value const* state, float sample_rate)
 {
   _automation.clear();

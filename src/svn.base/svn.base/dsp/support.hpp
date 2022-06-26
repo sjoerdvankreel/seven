@@ -19,8 +19,8 @@ inline float
 note_to_frequency(float note)
 { return 440.0f * std::pow(2.0f, (note - 69.0f) / 12.0f); }
 
-inline float
-sanity(float val)
+template <class T> inline T
+sanity(T val)
 {
   assert(!std::isnan(val));
   assert(!std::isinf(val));
@@ -28,8 +28,8 @@ sanity(float val)
   return val;
 }
 
-inline float
-sanity_unipolar(float val)
+template <class T> inline T
+sanity_unipolar(T val)
 {
   sanity(val);
   assert(val <= 1.0f + sanity_epsilon);
@@ -37,8 +37,8 @@ sanity_unipolar(float val)
   return val;
 }
 
-inline float
-sanity_bipolar(float val)
+template <class T> inline T
+sanity_bipolar(T val)
 {
   sanity(val);
   assert(val <= 1.0f + sanity_epsilon);
@@ -46,16 +46,16 @@ sanity_bipolar(float val)
   return val;
 }
 
-inline audio_sample
-sanity_audio(audio_sample val)
+template <class T> inline audio_sample<T>
+sanity_audio(audio_sample<T> val)
 {
   sanity(val.left);
   sanity(val.right);
   return val;
 }
 
-inline audio_sample
-sanity_audio_bipolar(audio_sample val)
+template <class T> inline audio_sample<T>
+sanity_audio_bipolar(audio_sample<T> val)
 {
   sanity_bipolar(val.left);
   sanity_bipolar(val.right);
@@ -73,7 +73,7 @@ next_pow2(std::uint64_t x)
 }
 
 inline void
-clear_audio(audio_sample * audio, std::int32_t sample_count)
+clear_audio(audio_sample32* audio, std::int32_t sample_count)
 {
   assert(audio != nullptr);
   assert(sample_count >= 0);
@@ -82,7 +82,7 @@ clear_audio(audio_sample * audio, std::int32_t sample_count)
 }
 
 inline bool
-clip_audio(audio_sample* audio, std::int32_t sample_count)
+clip_audio(audio_sample32* audio, std::int32_t sample_count)
 {
   bool result = false;
   for (std::int32_t s = 0; s < sample_count; s++)
@@ -98,7 +98,7 @@ clip_audio(audio_sample* audio, std::int32_t sample_count)
 }
 
 inline void
-add_audio(audio_sample* x, audio_sample const* y, std::int32_t sample_count)
+add_audio(audio_sample32* x, audio_sample32 const* y, std::int32_t sample_count)
 {
   assert(x != nullptr);
   assert(y != nullptr);

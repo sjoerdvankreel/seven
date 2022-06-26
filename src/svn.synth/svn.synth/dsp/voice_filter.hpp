@@ -7,6 +7,14 @@
 
 namespace svn::synth {
 
+struct comb_state
+{
+};
+
+struct stvar_state
+{
+};
+
 class voice_filter
 {
 };
