@@ -35,5 +35,19 @@ public:
   void audio_to_plot(std::vector<audio_sample32> const& audio, std::vector<float>& plot, float sample_rate) override;
 };
 
+class filter_ir_graph:
+public svn::base::graph_processor
+{
+  std::vector<base::audio_sample32> _input;
+public:
+  filter_ir_graph(topology_info const* topology, std::int32_t part_index) :
+  svn::base::graph_processor(topology, part_index), _input() {}
+
+  bool needs_repaint(std::int32_t runtime_param) const override;
+  std::int32_t audio_sample_count(param_value const* state, float sample_rate) const override;
+  void process_audio_core(block_input const& input, block_output& output, float sample_rate) override;
+  void audio_to_plot(std::vector<audio_sample32> const& audio, std::vector<float>& plot, float sample_rate) override;
+};
+
 } // namespace svn::synth
 #endif // SVN_SYNTH_DSP_GRAPH_PROCESSOR_HPP

@@ -1,8 +1,11 @@
 #include <svn.base/dsp/support.hpp>
 #include <svn.base/dsp/spectrum_analyzer.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
+#include <svn.synth/dsp/voice_filter.hpp>
 #include <svn.synth/dsp/graph_processor.hpp>
 #include <svn.synth/topology/topology.hpp>
+
+#include <memory>
 #include <cassert>
 
 using namespace svn::base;
@@ -14,7 +17,7 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
   switch (part_type)
   {
   case svn::synth::part_type::voice_filter:
-    return new svn::synth::oscillator_wave_graph(topology, 0);
+    return new svn::synth::filter_ir_graph(topology, part_index);
   case svn::synth::part_type::oscillator:
     assert(0 <= part_index && part_index < svn::synth::oscillator_count);
     switch (graph_type)
@@ -34,6 +37,19 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
 }
 
 namespace svn::synth {
+
+static voice_input
+setup_graph_voice_input(block_input const& input, topology_info const* topology)
+{
+  voice_input result;
+  result.bpm = input.bpm;
+  result.sample_count = input.sample_count;
+  result.stream_position = input.stream_position;
+  result.automation = automation_view(
+    topology, nullptr, input.automation, topology->input_param_count,
+    topology->input_param_count, 0, input.sample_count, 0, input.sample_count);
+  return result;
+}
 
 std::int32_t
 oscillator_spectrum_graph::audio_sample_count(
@@ -102,16 +118,46 @@ void
 oscillator_wave_graph::process_audio_core(
   block_input const& input, block_output& output, float sample_rate)
 {
-  voice_input vinput;  
-  vinput.bpm = input.bpm;
-  vinput.sample_count = input.sample_count;
-  vinput.stream_position = input.stream_position;
-  vinput.automation = automation_view(
-    topology(), nullptr, input.automation, topology()->input_param_count, 
-    topology()->input_param_count, 0, input.sample_count, 0, input.sample_count);
+  voice_input vinput = setup_graph_voice_input(input, topology());
   vinput.automation = vinput.automation.rearrange_params(part_type::oscillator, part_index());
   oscillator osc(sample_rate, midi_note_c4);
   osc.process_block(vinput, output.audio);
+}
+
+std::int32_t
+filter_ir_graph::audio_sample_count(
+  param_value const* state, float sample_rate) const
+{
+  std::int32_t hundred_ms = std::ceil(sample_rate / 10.0f);
+  return static_cast<std::int32_t>(hundred_ms);
+}
+
+bool
+filter_ir_graph::needs_repaint(std::int32_t runtime_param) const
+{
+  std::int32_t begin = topology()->param_bounds[part_type::voice_filter][part_index()];
+  return begin <= runtime_param && runtime_param < begin + oscillator_param::count;
+}
+
+void
+filter_ir_graph::audio_to_plot(
+  std::vector<audio_sample32> const& audio, std::vector<float>& plot, float sample_rate)
+{
+  for (std::size_t s = 0; s < audio.size(); s++)
+    plot.push_back((audio[s].mono() + 1.0f) * 0.5f);
+}
+
+void 
+filter_ir_graph::process_audio_core(
+  block_input const& input, block_output& output, float sample_rate)
+{
+  _input.clear();
+  _input.resize(input.sample_count);
+  _input[0] = 1.0f;
+  voice_input vinput = setup_graph_voice_input(input, topology());
+  vinput.automation = vinput.automation.rearrange_params(part_type::voice_filter, part_index());
+  auto filter = std::make_unique<voice_filter>(sample_rate, midi_note_c4);
+  filter->process_block(vinput, _input.data(), output.audio);
 }
  
 } // namespace svn::synth
