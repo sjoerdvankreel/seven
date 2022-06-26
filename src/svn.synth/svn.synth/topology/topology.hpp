@@ -5,17 +5,17 @@
 
 namespace svn::synth {
 
-inline std::int32_t constexpr oscillator_count = 3;
-inline std::int32_t constexpr voice_filter_count = 2;
+inline std::int32_t constexpr oscillator_count = 4;
+inline std::int32_t constexpr voice_filter_count = 3;
 inline std::int32_t constexpr oscillator_max_spread = 8;
 inline std::int32_t constexpr synth_polyphony = 32;
-inline std::int32_t constexpr synth_max_ui_height = 400; 
+inline std::int32_t constexpr synth_max_ui_height = 500; 
 
 extern base::part_descriptor const part_descriptors[];
 
-struct amplitude_param_t { enum value { amp, decay, count }; };
+struct voice_amp_param_t { enum value { level, decay, count }; };
 struct output_param_t { enum value { clip, drain, voices, count }; };
-struct part_type_t { enum value { oscillator, voice_filter, amplitude, output, count }; };
+struct part_type_t { enum value { oscillator, voice_filter, voice_amp, output, count }; };
 
 struct oscillator_type_t { enum value { analog, dsf, count }; };
 struct oscillator_graph_t { enum value { wave, spectrum, count }; };
@@ -28,7 +28,7 @@ struct voice_filter_param_t { enum value { on, type, stvar_type, stvar_freq, stv
 
 typedef part_type_t::value part_type;
 typedef output_param_t::value output_param;
-typedef amplitude_param_t::value amplitude_param;
+typedef voice_amp_param_t::value voice_amp_param;
 
 typedef oscillator_type_t::value oscillator_type;
 typedef oscillator_param_t::value oscillator_param;

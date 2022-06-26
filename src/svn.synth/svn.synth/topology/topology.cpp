@@ -7,7 +7,7 @@ namespace svn::synth {
 // ---- amp ----
 
 static param_descriptor const
-amplitude_params[amplitude_param::count] =
+voice_amp_params[voice_amp_param::count] =
 { 
   { { L"Amp", L"Level" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 0, 1, nullptr, 0 } },
   { { L"Dcy", L"Decay" }, L"Sec", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 1, 1, nullptr, 0 } }
@@ -107,7 +107,7 @@ osc_anlg_pw_relevance[2] =
   { oscillator_param::type, oscillator_type::analog },
   { oscillator_param::anlg_type, oscillator_anlg_type::pulse }
 };
-         
+          
 static param_descriptor const
 oscillator_params[oscillator_param::count] =
 { 
@@ -131,11 +131,11 @@ oscillator_params[oscillator_param::count] =
 
 // ffadad-ffd6a5-fdffb6-caffbf-9bf6ff-a0c4ff-bdb2ff-ffc6ff-fffffc
 part_descriptor const 
-part_descriptors[part_type::count] = 
+part_descriptors[part_type::count] =  
 {
   { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 3, 0, L"Voice", { 0xFF, 0xAD, 0xAD }}},
   { { L"VFilter", L"Voice filter" }, part_type::voice_filter, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 3, 0, L"Voice", { 0xFF, 0xD6, 0xA5 } } },
-  { { L"Amp", L"Amplitude" }, part_type::amplitude, false, 1, amplitude_params, amplitude_param::count, nullptr, 0, { 2, -1, L"Voice", { 0xFD, 0xFF, 0xB6 } } },
+  { { L"Amp", L"Voice amp" }, part_type::voice_amp, false, 1, voice_amp_params, voice_amp_param::count, nullptr, 0, { 2, -1, L"Voice", { 0xFD, 0xFF, 0xB6 } } },
   { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, nullptr, 0, { 3, -1, L"Global", { 0xCA, 0xFF, 0xB6 } } }
 }; 
     

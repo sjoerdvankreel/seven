@@ -1,7 +1,7 @@
-#ifndef SVN_SYNTH_DSP_VOICE_HPP
-#define SVN_SYNTH_DSP_VOICE_HPP
+#ifndef SVN_SYNTH_DSP_SYNTH_VOICE_HPP
+#define SVN_SYNTH_DSP_SYNTH_VOICE_HPP
 
-#include <svn.synth/dsp/amplitude.hpp>
+#include <svn.synth/dsp/voice_amp.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
 #include <svn.synth/topology/topology.hpp>
 
@@ -29,10 +29,10 @@ struct voice_state
 };
 
 // Single voice in polyphonic synth.
-class voice
+class synth_voice
 {
 private:
-  amplitude _amplitude;
+  voice_amp _amp;
   base::topology_info const* _topology;
   std::array<oscillator, oscillator_count> _oscillators;
 
@@ -47,10 +47,10 @@ public:
   process_block(voice_input const& input, 
     audio_state& audio, std::int32_t release_sample);
 
-  voice() = default;
-  voice(base::topology_info const* topology,
+  synth_voice() = default;
+  synth_voice(base::topology_info const* topology,
     float sample_rate, float velocity, std::int32_t midi_note);
 };
 
 } // namespace svn::synth
-#endif // SVN_SYNTH_DSP_VOICE_HPP
+#endif // SVN_SYNTH_DSP_SYNTH_VOICE_HPP
