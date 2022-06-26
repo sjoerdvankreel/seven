@@ -7,6 +7,8 @@ namespace svn::synth {
 
 inline float constexpr filter_min_freq = 20.0f;
 inline float constexpr filter_max_freq = 20000.0f;
+inline float constexpr comb_filter_max_ms = 5.0f;
+inline float constexpr max_sample_rate = 384000.0f;
 
 inline std::int32_t constexpr oscillator_count = 4;
 inline std::int32_t constexpr voice_filter_count = 3;

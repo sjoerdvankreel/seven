@@ -10,7 +10,7 @@ namespace svn::synth {
 
 voice_filter::
 voice_filter(float sample_rate, std::int32_t midi_note) :
-_state_var(), _sample_rate(sample_rate)
+_state_var(), _comb(), _sample_rate(sample_rate)
 {
   float this_frequency = note_to_frequency(midi_note);
   float base_frequency = note_to_frequency(midi_note_c4);
@@ -56,6 +56,25 @@ voice_filter::process_state_variable(
   return sanity_audio(result.to32());
 }
 
+// https://www.dsprelated.com/freebooks/filters/Analysis_Digital_Comb_Filter.html
+audio_sample32
+voice_filter::process_comb(
+  automation_view const& automation, audio_sample32 const* source, std::int32_t sample)
+{
+  audio_sample32 input = source[sample];
+  float dly_min_ms = automation.get(voice_filter_param::comb_dly_min, sample).real;
+  float dly_plus_ms = automation.get(voice_filter_param::comb_dly_plus, sample).real;
+  float gain_min = automation.get(voice_filter_param::comb_gain_min, sample).real;
+  float gain_plus = automation.get(voice_filter_param::comb_gain_plus, sample).real;
+  std::int32_t dly_min_samples = static_cast<std::int32_t>(dly_min_ms * _sample_rate / 1000.0f);
+  std::int32_t dly_plus_samples = static_cast<std::int32_t>(dly_plus_ms * _sample_rate / 1000.0f);
+  audio_sample32 min = _comb.output.get(dly_min_samples) * gain_min;
+  audio_sample32 plus = _comb.input.get(dly_plus_samples) * gain_plus;
+  _comb.input.push(input);
+  _comb.output.push(input + plus + min);
+  return sanity_audio(_comb.output.get(0));
+}
+
 void 
 voice_filter::process_block(voice_input const& input, 
   audio_sample32 const* source, audio_sample32* output)
@@ -70,6 +89,7 @@ voice_filter::process_block(voice_input const& input,
     switch (type)
     {
     case voice_filter_type::comb: 
+      output[s] = process_comb(input.automation, source, s);
       break;
     case voice_filter_type::state_var: 
       output[s] = process_state_variable(input.automation, source, s); 

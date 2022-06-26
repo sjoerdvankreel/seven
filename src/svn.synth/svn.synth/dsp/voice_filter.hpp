@@ -3,12 +3,18 @@
 
 #include <svn.synth/dsp/support.hpp>
 #include <svn.synth/topology/topology.hpp>
+#include <svn.base/dsp/audio_sample.hpp>
 #include <svn.base/dsp/delay_buffer.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
 
+#include <cmath>
 #include <cassert>
 
 namespace svn::synth {
+
+// 5ms at 384kHz.
+inline std::int32_t constexpr 
+comb_filter_max_samples = 1920;
 
 struct stvar_state
 {
@@ -17,11 +23,22 @@ struct stvar_state
   base::audio_sample64 ic2eq;
 };
 
+struct comb_state
+{
+  base::delay_buffer<base::audio_sample32, comb_filter_max_samples> input;
+  base::delay_buffer<base::audio_sample32, comb_filter_max_samples> output;
+};
+
 class voice_filter
 {
   float _sample_rate;
+  comb_state _comb;
   stvar_state _state_var;
 private:
+  base::audio_sample32 process_comb(
+    svn::base::automation_view const& automation,
+    svn::base::audio_sample32 const* source,
+    std::int32_t sample);
   base::audio_sample32 process_state_variable(
     svn::base::automation_view const& automation,
     svn::base::audio_sample32 const* source,
