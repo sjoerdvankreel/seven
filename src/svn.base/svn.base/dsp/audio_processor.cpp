@@ -39,7 +39,9 @@ audio_processor::process_block()
   state_check();
   automation_check(_input.sample_count);
   transform_automation();
+  std::uint64_t state = disable_denormals();
   process_block(_input, _output);
+  restore_denormals(state);
   for(std::int32_t s = 0; s < _input.sample_count; s++)
     sanity_audio_bipolar(_output.audio[s]);
   return _output;

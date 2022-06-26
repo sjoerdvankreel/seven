@@ -33,7 +33,9 @@ graph_processor::process_audio(param_value const* state, float sample_rate)
   output.output_params = _output_param_buffer.data();
 
   // This produces the graph specific audio data.
+  std::uint64_t denormal_state = disable_denormals();
   process_audio_core(input, output, sample_rate);
+  restore_denormals(denormal_state);
   return _audio_data;
 }
 
