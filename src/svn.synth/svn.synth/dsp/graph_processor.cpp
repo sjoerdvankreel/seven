@@ -128,8 +128,10 @@ std::int32_t
 filter_ir_graph::audio_sample_count(
   param_value const* state, float sample_rate) const
 {
-  std::int32_t hundred_ms = std::ceil(sample_rate / 10.0f);
-  return static_cast<std::int32_t>(hundred_ms);
+  std::int32_t begin = topology()->param_bounds[part_type::voice_filter][part_index()];
+  std::int32_t type = state[begin + voice_filter_param::type].discrete;
+  std::int32_t length_ms = type == voice_filter_type::state_var? 5: 50;
+  return static_cast<std::int32_t>(std::ceil(length_ms * sample_rate / 1000.0f));
 }
 
 bool
@@ -144,7 +146,7 @@ filter_ir_graph::audio_to_plot(
   std::vector<audio_sample32> const& audio, std::vector<float>& plot, float sample_rate)
 {
   for (std::size_t s = 0; s < audio.size(); s++)
-    plot.push_back((audio[s].mono() + 1.0f) * 0.5f);
+    plot.push_back(std::clamp((audio[s].mono() + 1.0f) * 0.5f, 0.0f, 1.0f));
 }
 
 void 
