@@ -23,6 +23,40 @@ output_params[output_param::count] =
   { { L"Voices", L"Voice count" }, L"", false, 0, synth_polyphony, 0, { 2, 2, nullptr, 0 } }
 };
 
+// ---- audio route ----
+
+static std::wstring 
+format_audio_input(std::int32_t val)
+{
+  return L"";
+}
+
+static bool
+parse_audio_input(std::wstring const& val, std::int32_t& result)
+{
+  return false;
+}
+
+static std::wstring
+format_audio_output(std::int32_t val)
+{
+  return L"";
+}
+ 
+static bool
+parse_audio_output(std::wstring const& val, std::int32_t& result)
+{
+  return false;
+}
+
+static param_descriptor const
+audio_route_params[audio_route_param::count] =
+{
+  { { L"In", L"Input1" }, L"", false, 0, audio_inputs_count, 0, &format_audio_input, &parse_audio_input, { 0, 0, nullptr, 0 } },
+  { { L"Out", L"Output1" }, L"", false, 0, audio_outputs_count, 0, &format_audio_output, &parse_audio_output, { 1, 0, nullptr, 0 } },
+  { { L"Amt", L"Amount1" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 2, 0, nullptr, 0 } }
+};
+
 // ---- voice filter ----
 
 static graph_descriptor const
@@ -136,7 +170,8 @@ part_descriptors[part_type::count] =
   { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 3, 0, L"Voice", { 0xFF, 0xAD, 0xAD }}},
   { { L"VFilter", L"Voice filter" }, part_type::voice_filter, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 3, 0, L"Voice", { 0xFF, 0xD6, 0xA5 } } },
   { { L"Amp", L"Voice amp" }, part_type::voice_amp, false, 1, voice_amp_params, voice_amp_param::count, nullptr, 0, { 2, -1, L"Voice", { 0xFD, 0xFF, 0xB6 } } },
-  { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, nullptr, 0, { 3, -1, L"Global", { 0xCA, 0xFF, 0xB6 } } }
+  { { L"Audio", L"Audio route" }, part_type::audio_route, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 3, -1, L"Route", { 0xCA, 0xFF, 0xBF } } },
+  { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, nullptr, 0, { 3, -1, L"Global", { 0x9B, 0xF6, 0xFF } } }
 }; 
     
 } // namespace svn::synth       

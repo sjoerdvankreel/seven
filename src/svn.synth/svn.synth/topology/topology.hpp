@@ -15,25 +15,29 @@ inline std::int32_t constexpr voice_filter_count = 3;
 inline std::int32_t constexpr oscillator_max_spread = 8;
 inline std::int32_t constexpr synth_polyphony = 32;
 inline std::int32_t constexpr synth_max_ui_height = 500; 
+inline std::int32_t constexpr audio_inputs_count = oscillator_count + voice_filter_count + 1 /* off */;
+inline std::int32_t constexpr audio_outputs_count = voice_filter_count + 1 /* off */ + 1 /* amp */;
 
 extern base::part_descriptor const part_descriptors[];
 
-struct voice_amp_param_t { enum value { level, decay, count }; };
-struct output_param_t { enum value { clip, drain, voices, count }; };
-struct part_type_t { enum value { oscillator, voice_filter, voice_amp, output, count }; };
+struct voice_filter_type_t { enum value { state_var, comb, count }; };
+struct voice_filter_stvar_type_t { enum value { lpf, hpf, bpf, bsf, count }; };
+struct voice_filter_param_t { enum value { on, type, stvar_type, stvar_freq, stvar_res, stvar_kbd, comb_dly_plus, comb_gain_plus, comb_dly_min, comb_gain_min, count }; };
 
 struct oscillator_type_t { enum value { analog, dsf, count }; };
 struct oscillator_graph_t { enum value { wave, spectrum, count }; };
 struct oscillator_anlg_type_t { enum value { sin, saw, pulse, tri, count }; };
 struct oscillator_param_t { enum value { on, amp, pan, type, anlg_type, anlg_spread, anlg_detune, anlg_pw, dsf_partials, dsf_distance, dsf_rolloff, oct, note, cent, count }; };
 
-struct voice_filter_type_t { enum value { state_var, comb, count }; };
-struct voice_filter_stvar_type_t { enum value { lpf, hpf, bpf, bsf, count }; };
-struct voice_filter_param_t { enum value { on, type, stvar_type, stvar_freq, stvar_res, stvar_kbd, comb_dly_plus, comb_gain_plus, comb_dly_min, comb_gain_min, count }; };
+struct voice_amp_param_t { enum value { level, decay, count }; };
+struct output_param_t { enum value { clip, drain, voices, count }; };
+struct part_type_t { enum value { oscillator, voice_filter, voice_amp, audio_route, output, count }; };
+struct audio_route_param_t { enum value { in1, out1, amt1, count }; };
 
 typedef part_type_t::value part_type;
 typedef output_param_t::value output_param;
 typedef voice_amp_param_t::value voice_amp_param;
+typedef audio_route_param_t::value audio_route_param;
 
 typedef oscillator_type_t::value oscillator_type;
 typedef oscillator_param_t::value oscillator_param;
