@@ -1,4 +1,5 @@
 #include <svn.synth/topology/topology.hpp>
+#include <sstream>
 
 using namespace svn::base;
 
@@ -25,27 +26,63 @@ output_params[output_param::count] =
 
 // ---- audio route ----
 
+static wchar_t const* audio_input_names[] =
+{ L"Off", L"Osc", L"Flt" };
+static std::int32_t const audio_input_counts[] =
+{ 1, oscillator_count, voice_filter_count };
+static wchar_t const* audio_output_names[] =
+{ L"Off", L"Flt", L"Amp" };
+static std::int32_t const audio_output_counts[] =
+{ 1, voice_filter_count, 1 };
+
 static std::wstring 
 format_audio_input(std::int32_t val)
-{
-  return L"";
-}
+{ return generic_formatter(val, audio_input_names, audio_input_counts, 3); }
 
 static bool
 parse_audio_input(std::wstring const& val, std::int32_t& result)
 {
+  std::int32_t index = -1;
+  if(val == L"Off") return 0;
+  if (val.substr(0, 4) == L"Osc ")
+  {
+    std::wistringstream wiss(val.substr(4));
+    wiss >> index;
+    if (1 <= index && index <= oscillator_count)
+    {
+      result = index;
+      return true;
+    }
+    return false;
+  }
+  if (val.substr(0, 4) == L"Osc ")
+  {
+    std::wistringstream wiss(val.substr(4));
+    wiss >> index;
+    if (1 <= index && index <= oscillator_count)
+    {
+      result = index;
+      return true;
+    }
+    return false;
+  }
   return false;
 }
 
 static std::wstring
 format_audio_output(std::int32_t val)
 {
+  if (val == 0) return L"Off";
+  if (val <= voice_filter_count) return std::wstring(L"Flt ") + std::to_wstring(val);
+  if (val == voice_filter_count + 1) return std::wstring(L"Amp");
+  assert(false);
   return L"";
 }
  
 static bool
 parse_audio_output(std::wstring const& val, std::int32_t& result)
 {
+  assert(false);
   return false;
 }
 

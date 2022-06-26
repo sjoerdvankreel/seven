@@ -15,6 +15,17 @@ namespace svn::base {
 typedef std::wstring (*param_formatter)(std::int32_t val);
 typedef bool (*param_parser)(std::wstring const& val, std::int32_t& result);
 
+// Pass a list of names with count per name.
+std::wstring 
+generic_formatter(
+  std::int32_t val, wchar_t const** names, 
+  std::int32_t const* counts, std::int32_t count);
+bool 
+generic_parser(
+  std::wstring const& val, wchar_t const** names,
+  std::int32_t const* counts, std::int32_t count,
+  std::int32_t& result);
+
 // Discrete param types.
 struct param_type_t { enum value { real, toggle, knob, text, list, knob_list, count }; };
 typedef param_type_t::value param_type;

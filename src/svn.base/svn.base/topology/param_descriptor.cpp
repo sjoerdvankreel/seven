@@ -7,9 +7,27 @@
 
 namespace svn::base {
 
+std::wstring 
+generic_formatter(
+  std::int32_t val, wchar_t const** names,
+  std::int32_t const* counts, std::int32_t count)
+{
+
+}
+
+bool 
+generic_parser(
+  std::wstring const& val, wchar_t const** names,
+  std::int32_t const* counts, std::int32_t count,
+  std::int32_t& result)
+{
+
+}
+
 bool 
 param_descriptor::parse(wchar_t const* buffer, param_value& val) const
 {
+  std::int32_t discrete_val;
   std::wstringstream str(buffer);
   float inf = std::numeric_limits<float>::infinity();
   switch (type)
@@ -22,10 +40,16 @@ param_descriptor::parse(wchar_t const* buffer, param_value& val) const
     return true;
   case param_type::list:
   case param_type::knob_list:
-    for (std::int32_t i = 0; i <= discrete.max; i++)
-      if (!std::wcscmp(discrete.items[i].short_, buffer))
-        return val.discrete = i, true;
-    return false;
+    if(discrete.items != nullptr)
+    {
+      for (std::int32_t i = 0; i <= discrete.max; i++)
+        if (!std::wcscmp(discrete.items[i].short_, buffer))
+          return val.discrete = i, true;
+      return false;
+    }
+    if(!discrete.parser(str.str(), discrete_val)) return false;
+    val.discrete = discrete_val;
+    return true;
   case param_type::real:
     str >> val.real;
     if (!std::wcscmp(L"-inf", buffer)) val.real = -inf;
@@ -52,7 +76,10 @@ param_descriptor::format(param_value val, wchar_t* buffer, std::size_t size) con
   case param_type::knob: case param_type::text: stream << val.discrete; break;
   case param_type::toggle: stream << (val.discrete == 0 ? L"Off" : L"On"); break;
   case param_type::real: stream << std::setprecision(real.precision) << std::fixed << val.real; break;
-  case param_type::list: case param_type::knob_list: stream << discrete.items[val.discrete].short_; break;
+  case param_type::list: case param_type::knob_list: 
+    if(discrete.items != nullptr) stream << discrete.items[val.discrete].short_;
+    else stream << discrete.formatter(val.discrete);
+    break;
   default: assert(false); break;
   }
   std::wstring str = stream.str();
