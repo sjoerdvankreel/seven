@@ -38,7 +38,6 @@ audio_processor::process_block()
 {
   state_check();
   automation_check(_input.sample_count);
-  clear_audio(_audio.data(), _input.sample_count);
   transform_automation();
   process_block(_input, _output);
   for(std::int32_t s = 0; s < _input.sample_count; s++)

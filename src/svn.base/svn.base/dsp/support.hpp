@@ -90,7 +90,7 @@ clip_audio(audio_sample* audio, std::int32_t sample_count)
 }
 
 inline void
-add_audio(audio_sample* x, audio_sample* y, std::int32_t sample_count)
+add_audio(audio_sample* x, audio_sample const* y, std::int32_t sample_count)
 {
   assert(x != nullptr);
   assert(y != nullptr);

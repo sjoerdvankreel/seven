@@ -13,8 +13,7 @@ synthesizer(
   base::topology_info const* topology, float sample_rate,
   std::int32_t max_sample_count, base::param_value* state):
 audio_processor(topology, sample_rate, max_sample_count, state),
-_voice_audio(static_cast<std::size_t>(max_sample_count)),
-_voice_audio_scratch(static_cast<std::size_t>(max_sample_count)),
+_voice_audio(max_sample_count),
 _automation_fixed(static_cast<std::size_t>(synth_polyphony)),
 _automation_fixed_buffer(static_cast<std::size_t>(synth_polyphony * topology->input_param_count)),
 _last_automation_previous_block(static_cast<std::size_t>(topology->input_param_count)),
@@ -119,6 +118,7 @@ synthesizer::process_block(block_input const& input, block_output& output)
     if(_voice_states[v].in_use)
       ++voice_count;
 
+  base::clear_audio(output.audio, input.sample_count);
   // Process voices that are active anywhere in this buffer.
   for(std::int32_t v = 0; v < synth_polyphony; v++)
     if (_voice_states[v].in_use)
@@ -158,10 +158,8 @@ synthesizer::process_block(block_input const& input, block_output& output)
       }
       // Else nothing to do, we ride along with the active automation values.     
 
-      base::clear_audio(_voice_audio.data(), vinput.sample_count);
-      std::int32_t processed = _voices[v].process_block(vinput,
-        _voice_audio_scratch.data(), _voice_audio.data(), release_sample);
-      base::add_audio(output.audio + voice_start, _voice_audio.data(), processed);
+      std::int32_t processed = _voices[v].process_block(vinput, _voice_audio, release_sample);
+      base::add_audio(output.audio + voice_start, _voice_audio.output.data(), processed);
       if(processed < vinput.sample_count) return_voice(v);
     }
 

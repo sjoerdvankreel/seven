@@ -22,24 +22,21 @@ _amplitude(sample_rate, velocity)
 
 std::int32_t
 voice::process_block(
-  voice_input const& input, base::audio_sample* audio_scratch,
-  base::audio_sample* audio, std::int32_t release_sample)
+  voice_input const& input, audio_state& audio, std::int32_t release_sample)
 {
-  assert(audio != nullptr);
   assert(release_sample >= -1);
-  assert(audio_scratch != nullptr);
   assert(release_sample < input.sample_count);
 
   voice_input part_input = input;
+  base::clear_audio(audio.output.data(), input.sample_count);
   for (std::int32_t i = 0; i < oscillator_count; i++)
   {
-    base::clear_audio(audio_scratch, input.sample_count);
     part_input.automation = input.automation.rearrange_params(part_type::oscillator, i);
-    _oscillators[i].process_block(part_input, audio_scratch);
-    base::add_audio(audio, audio_scratch, input.sample_count);
+    _oscillators[i].process_block(part_input, audio.oscillator_output[i].data());
+    base::add_audio(audio.output.data(), audio.oscillator_output[i].data(), input.sample_count);
   }
   part_input.automation = input.automation.rearrange_params(part_type::amplitude, 0);
-  return _amplitude.process_block(part_input, audio, release_sample);
+  return _amplitude.process_block(part_input, audio.output.data(), release_sample);
 }
 
 } // namespace svn::synth

@@ -21,8 +21,8 @@ class synthesizer:
 public base::audio_processor
 {
 private:
-  std::vector<audio_sample> _voice_audio;
-  std::vector<audio_sample> _voice_audio_scratch;
+  // Keeping track of component's audio outputs for internal routing.
+  audio_state _voice_audio;
   // Of size total voice count.
   // Pointers into _automation_fixed_buffer.
   std::vector<base::param_value*> _automation_fixed;

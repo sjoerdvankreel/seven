@@ -44,9 +44,8 @@ public:
   // Automation should be fixed to the last active value if this voice is released,
   // this is handled globally by the synth class.
   std::int32_t
-  process_block(
-    voice_input const& input, base::audio_sample* audio_scratch,
-    base::audio_sample* audio, std::int32_t release_sample);
+  process_block(voice_input const& input, 
+    audio_state& audio, std::int32_t release_sample);
 
   voice() = default;
   voice(base::topology_info const* topology,
