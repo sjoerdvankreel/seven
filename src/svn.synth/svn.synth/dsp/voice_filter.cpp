@@ -8,6 +8,15 @@ using namespace svn::base;
 
 namespace svn::synth {
 
+voice_filter::
+voice_filter(float sample_rate, std::int32_t midi_note) :
+_state_var(), _sample_rate(sample_rate)
+{
+  float this_frequency = note_to_frequency(midi_note);
+  float base_frequency = note_to_frequency(midi_note_c4);
+  _state_var.kbd_track_base = this_frequency / base_frequency;
+}
+
 // https://cytomic.com/files/dsp/SvfLinearTrapOptimised2.pdf
 audio_sample32 
 voice_filter::process_state_variable(
@@ -17,6 +26,10 @@ voice_filter::process_state_variable(
   float kbd = automation.get(voice_filter_param::stvar_kbd, sample).real;
   float freq = automation.get(voice_filter_param::stvar_freq, sample).real;
   std::int32_t type = automation.get(voice_filter_param::stvar_type, sample).discrete;
+
+  if (kbd > 0.0f) freq = (1.0f - kbd) * freq + kbd * freq * _state_var.kbd_track_base;
+  if (kbd < 0.0f) freq = (1.0f + kbd) * freq - kbd * freq / _state_var.kbd_track_base;
+  freq = std::clamp(freq, filter_min_freq, filter_max_freq);
 
   double g = std::tan(std::numbers::pi * freq / _sample_rate);
   double k = 2.0 - 2.0 * res;
