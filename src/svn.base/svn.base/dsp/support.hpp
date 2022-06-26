@@ -49,6 +49,14 @@ sanity_bipolar(float val)
 inline audio_sample
 sanity_audio(audio_sample val)
 {
+  sanity(val.left);
+  sanity(val.right);
+  return val;
+}
+
+inline audio_sample
+sanity_audio_bipolar(audio_sample val)
+{
   sanity_bipolar(val.left);
   sanity_bipolar(val.right);
   return val;

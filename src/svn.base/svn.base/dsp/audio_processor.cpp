@@ -41,7 +41,7 @@ audio_processor::process_block()
   transform_automation();
   process_block(_input, _output);
   for(std::int32_t s = 0; s < _input.sample_count; s++)
-    sanity_audio(_output.audio[s]);
+    sanity_audio_bipolar(_output.audio[s]);
   return _output;
 }
 

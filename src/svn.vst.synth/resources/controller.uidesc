@@ -44,8 +44,8 @@
             "oscillator_0_panning": "2",
             "oscillator_0_type": "3",
             "oscillator_0_analog_type": "4",
-            "oscillator_0_analog_detune": "5",
-            "oscillator_0_analog_spread": "6",
+            "oscillator_0_analog_spread": "5",
+            "oscillator_0_analog_detune": "6",
             "oscillator_0_analog_pulse_width": "7",
             "oscillator_0_dsf_partials": "8",
             "oscillator_0_dsf_distance": "9",
@@ -58,8 +58,8 @@
             "oscillator_1_panning": "16",
             "oscillator_1_type": "17",
             "oscillator_1_analog_type": "18",
-            "oscillator_1_analog_detune": "19",
-            "oscillator_1_analog_spread": "20",
+            "oscillator_1_analog_spread": "19",
+            "oscillator_1_analog_detune": "20",
             "oscillator_1_analog_pulse_width": "21",
             "oscillator_1_dsf_partials": "22",
             "oscillator_1_dsf_distance": "23",
@@ -72,8 +72,8 @@
             "oscillator_2_panning": "30",
             "oscillator_2_type": "31",
             "oscillator_2_analog_type": "32",
-            "oscillator_2_analog_detune": "33",
-            "oscillator_2_analog_spread": "34",
+            "oscillator_2_analog_spread": "33",
+            "oscillator_2_analog_detune": "34",
             "oscillator_2_analog_pulse_width": "35",
             "oscillator_2_dsf_partials": "36",
             "oscillator_2_dsf_distance": "37",
@@ -86,8 +86,8 @@
             "oscillator_3_panning": "44",
             "oscillator_3_type": "45",
             "oscillator_3_analog_type": "46",
-            "oscillator_3_analog_detune": "47",
-            "oscillator_3_analog_spread": "48",
+            "oscillator_3_analog_spread": "47",
+            "oscillator_3_analog_detune": "48",
             "oscillator_3_analog_pulse_width": "49",
             "oscillator_3_dsf_partials": "50",
             "oscillator_3_dsf_distance": "51",
@@ -637,8 +637,8 @@
                                                             "class": "seven_rotary_knob",
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "oscillator_0_analog_detune",
-                                                            "tooltip": "Osc 1 Analog detune",
+                                                            "control-tag": "oscillator_0_analog_spread",
+                                                            "tooltip": "Osc 1 Analog spread",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFADADFF"
@@ -653,7 +653,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FFADADFF",
-                                                            "title": "Dtn"
+                                                            "title": "Sprd"
                                                         }
                                                     },
                                                     "CTextEdit": {
@@ -661,15 +661,15 @@
                                                             "class": "CTextEdit",
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
-                                                            "control-tag": "oscillator_0_analog_detune",
-                                                            "tooltip": "Osc 1 Analog detune",
+                                                            "control-tag": "oscillator_0_analog_spread",
+                                                            "tooltip": "Osc 1 Analog spread",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontVerySmall",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "1",
+                                                            "value-precision": "8",
                                                             "back-color": "color_00000020",
                                                             "font-color": "color_FFADADFF"
                                                         }
@@ -741,8 +741,8 @@
                                                             "class": "seven_rotary_knob",
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "oscillator_0_analog_spread",
-                                                            "tooltip": "Osc 1 Analog spread",
+                                                            "control-tag": "oscillator_0_analog_detune",
+                                                            "tooltip": "Osc 1 Analog detune",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFADADFF"
@@ -757,7 +757,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FFADADFF",
-                                                            "title": "Sprd"
+                                                            "title": "Dtn"
                                                         }
                                                     },
                                                     "CTextEdit": {
@@ -765,15 +765,15 @@
                                                             "class": "CTextEdit",
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
-                                                            "control-tag": "oscillator_0_analog_spread",
-                                                            "tooltip": "Osc 1 Analog spread",
+                                                            "control-tag": "oscillator_0_analog_detune",
+                                                            "tooltip": "Osc 1 Analog detune",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontVerySmall",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "8",
+                                                            "value-precision": "1",
                                                             "back-color": "color_00000020",
                                                             "font-color": "color_FFADADFF"
                                                         }
@@ -1595,8 +1595,8 @@
                                                             "class": "seven_rotary_knob",
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "oscillator_1_analog_detune",
-                                                            "tooltip": "Osc 2 Analog detune",
+                                                            "control-tag": "oscillator_1_analog_spread",
+                                                            "tooltip": "Osc 2 Analog spread",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFADADFF"
@@ -1611,7 +1611,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FFADADFF",
-                                                            "title": "Dtn"
+                                                            "title": "Sprd"
                                                         }
                                                     },
                                                     "CTextEdit": {
@@ -1619,15 +1619,15 @@
                                                             "class": "CTextEdit",
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
-                                                            "control-tag": "oscillator_1_analog_detune",
-                                                            "tooltip": "Osc 2 Analog detune",
+                                                            "control-tag": "oscillator_1_analog_spread",
+                                                            "tooltip": "Osc 2 Analog spread",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontVerySmall",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "1",
+                                                            "value-precision": "8",
                                                             "back-color": "color_00000020",
                                                             "font-color": "color_FFADADFF"
                                                         }
@@ -1699,8 +1699,8 @@
                                                             "class": "seven_rotary_knob",
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "oscillator_1_analog_spread",
-                                                            "tooltip": "Osc 2 Analog spread",
+                                                            "control-tag": "oscillator_1_analog_detune",
+                                                            "tooltip": "Osc 2 Analog detune",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFADADFF"
@@ -1715,7 +1715,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FFADADFF",
-                                                            "title": "Sprd"
+                                                            "title": "Dtn"
                                                         }
                                                     },
                                                     "CTextEdit": {
@@ -1723,15 +1723,15 @@
                                                             "class": "CTextEdit",
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
-                                                            "control-tag": "oscillator_1_analog_spread",
-                                                            "tooltip": "Osc 2 Analog spread",
+                                                            "control-tag": "oscillator_1_analog_detune",
+                                                            "tooltip": "Osc 2 Analog detune",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontVerySmall",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "8",
+                                                            "value-precision": "1",
                                                             "back-color": "color_00000020",
                                                             "font-color": "color_FFADADFF"
                                                         }
@@ -2553,8 +2553,8 @@
                                                             "class": "seven_rotary_knob",
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "oscillator_2_analog_detune",
-                                                            "tooltip": "Osc 3 Analog detune",
+                                                            "control-tag": "oscillator_2_analog_spread",
+                                                            "tooltip": "Osc 3 Analog spread",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFADADFF"
@@ -2569,7 +2569,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FFADADFF",
-                                                            "title": "Dtn"
+                                                            "title": "Sprd"
                                                         }
                                                     },
                                                     "CTextEdit": {
@@ -2577,15 +2577,15 @@
                                                             "class": "CTextEdit",
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
-                                                            "control-tag": "oscillator_2_analog_detune",
-                                                            "tooltip": "Osc 3 Analog detune",
+                                                            "control-tag": "oscillator_2_analog_spread",
+                                                            "tooltip": "Osc 3 Analog spread",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontVerySmall",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "1",
+                                                            "value-precision": "8",
                                                             "back-color": "color_00000020",
                                                             "font-color": "color_FFADADFF"
                                                         }
@@ -2657,8 +2657,8 @@
                                                             "class": "seven_rotary_knob",
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "oscillator_2_analog_spread",
-                                                            "tooltip": "Osc 3 Analog spread",
+                                                            "control-tag": "oscillator_2_analog_detune",
+                                                            "tooltip": "Osc 3 Analog detune",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFADADFF"
@@ -2673,7 +2673,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FFADADFF",
-                                                            "title": "Sprd"
+                                                            "title": "Dtn"
                                                         }
                                                     },
                                                     "CTextEdit": {
@@ -2681,15 +2681,15 @@
                                                             "class": "CTextEdit",
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
-                                                            "control-tag": "oscillator_2_analog_spread",
-                                                            "tooltip": "Osc 3 Analog spread",
+                                                            "control-tag": "oscillator_2_analog_detune",
+                                                            "tooltip": "Osc 3 Analog detune",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontVerySmall",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "8",
+                                                            "value-precision": "1",
                                                             "back-color": "color_00000020",
                                                             "font-color": "color_FFADADFF"
                                                         }
@@ -3511,8 +3511,8 @@
                                                             "class": "seven_rotary_knob",
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "oscillator_3_analog_detune",
-                                                            "tooltip": "Osc 4 Analog detune",
+                                                            "control-tag": "oscillator_3_analog_spread",
+                                                            "tooltip": "Osc 4 Analog spread",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFADADFF"
@@ -3527,7 +3527,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FFADADFF",
-                                                            "title": "Dtn"
+                                                            "title": "Sprd"
                                                         }
                                                     },
                                                     "CTextEdit": {
@@ -3535,15 +3535,15 @@
                                                             "class": "CTextEdit",
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
-                                                            "control-tag": "oscillator_3_analog_detune",
-                                                            "tooltip": "Osc 4 Analog detune",
+                                                            "control-tag": "oscillator_3_analog_spread",
+                                                            "tooltip": "Osc 4 Analog spread",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontVerySmall",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "1",
+                                                            "value-precision": "8",
                                                             "back-color": "color_00000020",
                                                             "font-color": "color_FFADADFF"
                                                         }
@@ -3615,8 +3615,8 @@
                                                             "class": "seven_rotary_knob",
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "oscillator_3_analog_spread",
-                                                            "tooltip": "Osc 4 Analog spread",
+                                                            "control-tag": "oscillator_3_analog_detune",
+                                                            "tooltip": "Osc 4 Analog detune",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFADADFF"
@@ -3631,7 +3631,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FFADADFF",
-                                                            "title": "Sprd"
+                                                            "title": "Dtn"
                                                         }
                                                     },
                                                     "CTextEdit": {
@@ -3639,15 +3639,15 @@
                                                             "class": "CTextEdit",
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
-                                                            "control-tag": "oscillator_3_analog_spread",
-                                                            "tooltip": "Osc 4 Analog spread",
+                                                            "control-tag": "oscillator_3_analog_detune",
+                                                            "tooltip": "Osc 4 Analog detune",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontVerySmall",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "value-precision": "8",
+                                                            "value-precision": "1",
                                                             "back-color": "color_00000020",
                                                             "font-color": "color_FFADADFF"
                                                         }

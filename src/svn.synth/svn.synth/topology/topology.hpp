@@ -20,7 +20,7 @@ struct part_type_t { enum value { oscillator, voice_filter, voice_amp, output, c
 struct oscillator_type_t { enum value { analog, dsf, count }; };
 struct oscillator_graph_t { enum value { wave, spectrum, count }; };
 struct oscillator_anlg_type_t { enum value { sin, saw, pulse, tri, count }; };
-struct oscillator_param_t { enum value { on, amp, pan, type, anlg_type, anlg_detune, anlg_spread, anlg_pw, dsf_partials, dsf_distance, dsf_rolloff, oct, note, cent, count }; };
+struct oscillator_param_t { enum value { on, amp, pan, type, anlg_type, anlg_spread, anlg_detune, anlg_pw, dsf_partials, dsf_distance, dsf_rolloff, oct, note, cent, count }; };
 
 struct voice_filter_type_t { enum value { state_var, comb, count }; };
 struct voice_filter_stvar_type_t { enum value { lpf, hpf, bpf, bsf, count }; };

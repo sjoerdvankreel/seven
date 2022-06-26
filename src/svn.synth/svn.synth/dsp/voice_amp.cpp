@@ -27,7 +27,7 @@ voice_amp::process_block(voice_input const& input,
       if(_released >= decay_samples) return s;
       decay_level = 1.0f - (_released / decay_samples);
       _released++;
-    }
+    } 
     float level = input.automation.get(voice_amp_param::level, s).real;
     audio[s] = sanity_audio(audio[s] * _velocity * decay_level * level);
   }
