@@ -91,27 +91,21 @@
             "voice_filter_0_comb_plus_gain": "49",
             "voice_filter_0_comb_min_delay": "50",
             "voice_filter_0_comb_min_gain": "51",
-            "voice_filter_0_unit_1_amount": "52",
-            "voice_filter_0_unit_2_amount": "53",
-            "voice_filter_0_unit_3_amount": "54",
-            "voice_filter_1_enabled": "55",
-            "voice_filter_1_type": "56",
-            "voice_filter_1_state_var_type": "57",
-            "voice_filter_1_state_var_frequency": "58",
-            "voice_filter_1_state_var_resonance": "59",
-            "voice_filter_1_state_var_keyboard_tracking": "60",
-            "voice_filter_1_comb_plus_delay": "61",
-            "voice_filter_1_comb_plus_gain": "62",
-            "voice_filter_1_comb_min_delay": "63",
-            "voice_filter_1_comb_min_gain": "64",
-            "voice_filter_1_unit_1_amount": "65",
-            "voice_filter_1_unit_2_amount": "66",
-            "voice_filter_1_unit_3_amount": "67",
-            "amplitude_0_level": "68",
-            "amplitude_0_decay": "69",
-            "output_0_clip": "70",
-            "output_0_voices_exhausted": "71",
-            "output_0_voice_count": "72"
+            "voice_filter_1_enabled": "52",
+            "voice_filter_1_type": "53",
+            "voice_filter_1_state_var_type": "54",
+            "voice_filter_1_state_var_frequency": "55",
+            "voice_filter_1_state_var_resonance": "56",
+            "voice_filter_1_state_var_keyboard_tracking": "57",
+            "voice_filter_1_comb_plus_delay": "58",
+            "voice_filter_1_comb_plus_gain": "59",
+            "voice_filter_1_comb_min_delay": "60",
+            "voice_filter_1_comb_min_gain": "61",
+            "amplitude_0_level": "62",
+            "amplitude_0_decay": "63",
+            "output_0_clip": "64",
+            "output_0_voices_exhausted": "65",
+            "output_0_voice_count": "66"
         },
         "templates": {
             "view": {
@@ -2962,7 +2956,7 @@
                             "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "246, 3",
-                            "size": "240, 88",
+                            "size": "240, 66",
                             "background-offset": "25, 0"
                         },
                         "children": {
@@ -2970,7 +2964,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 88",
+                                    "size": "240, 66",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -3040,7 +3034,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 69",
+                                            "size": "240, 47",
                                             "frame-color": "color_FFD6A580"
                                         }
                                     },
@@ -3048,7 +3042,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 69",
+                                            "size": "240, 47",
                                             "background-color": "color_FFD6A520"
                                         },
                                         "children": {
@@ -3149,60 +3143,6 @@
                                                     "background-color": "color_00000040",
                                                     "class": "view_container_fix",
                                                     "origin": "161, 23",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 23"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_FFFFFF20",
-                                                    "class": "view_container_fix",
-                                                    "origin": "2, 46",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 21"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_00000040",
-                                                    "class": "view_container_fix",
-                                                    "origin": "1, 45",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 23"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_FFFFFF20",
-                                                    "class": "view_container_fix",
-                                                    "origin": "82, 46",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 21"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_00000040",
-                                                    "class": "view_container_fix",
-                                                    "origin": "81, 45",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 23"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_FFFFFF20",
-                                                    "class": "view_container_fix",
-                                                    "origin": "162, 46",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 21"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_00000040",
-                                                    "class": "view_container_fix",
-                                                    "origin": "161, 45",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 23"
                                                 }
@@ -3658,162 +3598,6 @@
                                                         }
                                                     }
                                                 }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "class": "view_container_fix",
-                                                    "origin": "3, 47",
-                                                    "size": "80, 19",
-                                                    "background-color": "color_FFFFFF00"
-                                                },
-                                                "children": {
-                                                    "seven_rotary_knob": {
-                                                        "attributes": {
-                                                            "class": "seven_rotary_knob",
-                                                            "size": "20, 19",
-                                                            "origin": "0, 0",
-                                                            "control-tag": "voice_filter_0_unit_1_amount",
-                                                            "tooltip": "Filter 1 Unit 1 amount (dB)",
-                                                            "angle-start": "20",
-                                                            "angle-range": "320",
-                                                            "color": "color_FFD6A5FF"
-                                                        }
-                                                    },
-                                                    "CTextLabel": {
-                                                        "attributes": {
-                                                            "class": "CTextLabel",
-                                                            "size": "26, 19",
-                                                            "origin": "23, 0",
-                                                            "transparent": "true",
-                                                            "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FFD6A5FF",
-                                                            "title": "Unt1"
-                                                        }
-                                                    },
-                                                    "CTextEdit": {
-                                                        "attributes": {
-                                                            "class": "CTextEdit",
-                                                            "size": "28, 19",
-                                                            "origin": "49, 0",
-                                                            "control-tag": "voice_filter_0_unit_1_amount",
-                                                            "tooltip": "Filter 1 Unit 1 amount (dB)",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "text-alignment": "right",
-                                                            "font": "~ NormalFontVerySmall",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "value-precision": "1",
-                                                            "back-color": "color_00000020",
-                                                            "font-color": "color_FFD6A5FF"
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "class": "view_container_fix",
-                                                    "origin": "83, 47",
-                                                    "size": "80, 19",
-                                                    "background-color": "color_FFFFFF00"
-                                                },
-                                                "children": {
-                                                    "seven_rotary_knob": {
-                                                        "attributes": {
-                                                            "class": "seven_rotary_knob",
-                                                            "size": "20, 19",
-                                                            "origin": "0, 0",
-                                                            "control-tag": "voice_filter_0_unit_2_amount",
-                                                            "tooltip": "Filter 1 Unit 2 amount (dB)",
-                                                            "angle-start": "20",
-                                                            "angle-range": "320",
-                                                            "color": "color_FFD6A5FF"
-                                                        }
-                                                    },
-                                                    "CTextLabel": {
-                                                        "attributes": {
-                                                            "class": "CTextLabel",
-                                                            "size": "26, 19",
-                                                            "origin": "23, 0",
-                                                            "transparent": "true",
-                                                            "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FFD6A5FF",
-                                                            "title": "Unt2"
-                                                        }
-                                                    },
-                                                    "CTextEdit": {
-                                                        "attributes": {
-                                                            "class": "CTextEdit",
-                                                            "size": "28, 19",
-                                                            "origin": "49, 0",
-                                                            "control-tag": "voice_filter_0_unit_2_amount",
-                                                            "tooltip": "Filter 1 Unit 2 amount (dB)",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "text-alignment": "right",
-                                                            "font": "~ NormalFontVerySmall",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "value-precision": "1",
-                                                            "back-color": "color_00000020",
-                                                            "font-color": "color_FFD6A5FF"
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "class": "view_container_fix",
-                                                    "origin": "163, 47",
-                                                    "size": "80, 19",
-                                                    "background-color": "color_FFFFFF00"
-                                                },
-                                                "children": {
-                                                    "seven_rotary_knob": {
-                                                        "attributes": {
-                                                            "class": "seven_rotary_knob",
-                                                            "size": "20, 19",
-                                                            "origin": "0, 0",
-                                                            "control-tag": "voice_filter_0_unit_3_amount",
-                                                            "tooltip": "Filter 1 Unit 3 amount (dB)",
-                                                            "angle-start": "20",
-                                                            "angle-range": "320",
-                                                            "color": "color_FFD6A5FF"
-                                                        }
-                                                    },
-                                                    "CTextLabel": {
-                                                        "attributes": {
-                                                            "class": "CTextLabel",
-                                                            "size": "26, 19",
-                                                            "origin": "23, 0",
-                                                            "transparent": "true",
-                                                            "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FFD6A5FF",
-                                                            "title": "Unt3"
-                                                        }
-                                                    },
-                                                    "CTextEdit": {
-                                                        "attributes": {
-                                                            "class": "CTextEdit",
-                                                            "size": "28, 19",
-                                                            "origin": "49, 0",
-                                                            "control-tag": "voice_filter_0_unit_3_amount",
-                                                            "tooltip": "Filter 1 Unit 3 amount (dB)",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "text-alignment": "right",
-                                                            "font": "~ NormalFontVerySmall",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "value-precision": "1",
-                                                            "back-color": "color_00000020",
-                                                            "font-color": "color_FFD6A5FF"
-                                                        }
-                                                    }
-                                                }
                                             }
                                         }
                                     }
@@ -3825,8 +3609,8 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "246, 94",
-                            "size": "240, 88",
+                            "origin": "246, 72",
+                            "size": "240, 66",
                             "background-offset": "25, 25"
                         },
                         "children": {
@@ -3834,7 +3618,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 88",
+                                    "size": "240, 66",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -3904,7 +3688,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 69",
+                                            "size": "240, 47",
                                             "frame-color": "color_FFD6A580"
                                         }
                                     },
@@ -3912,7 +3696,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 69",
+                                            "size": "240, 47",
                                             "background-color": "color_FFD6A520"
                                         },
                                         "children": {
@@ -4013,60 +3797,6 @@
                                                     "background-color": "color_00000040",
                                                     "class": "view_container_fix",
                                                     "origin": "161, 23",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 23"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_FFFFFF20",
-                                                    "class": "view_container_fix",
-                                                    "origin": "2, 46",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 21"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_00000040",
-                                                    "class": "view_container_fix",
-                                                    "origin": "1, 45",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 23"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_FFFFFF20",
-                                                    "class": "view_container_fix",
-                                                    "origin": "82, 46",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 21"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_00000040",
-                                                    "class": "view_container_fix",
-                                                    "origin": "81, 45",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 23"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_FFFFFF20",
-                                                    "class": "view_container_fix",
-                                                    "origin": "162, 46",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 21"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_00000040",
-                                                    "class": "view_container_fix",
-                                                    "origin": "161, 45",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 23"
                                                 }
@@ -4522,162 +4252,6 @@
                                                         }
                                                     }
                                                 }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "class": "view_container_fix",
-                                                    "origin": "3, 47",
-                                                    "size": "80, 19",
-                                                    "background-color": "color_FFFFFF00"
-                                                },
-                                                "children": {
-                                                    "seven_rotary_knob": {
-                                                        "attributes": {
-                                                            "class": "seven_rotary_knob",
-                                                            "size": "20, 19",
-                                                            "origin": "0, 0",
-                                                            "control-tag": "voice_filter_1_unit_1_amount",
-                                                            "tooltip": "Filter 2 Unit 1 amount (dB)",
-                                                            "angle-start": "20",
-                                                            "angle-range": "320",
-                                                            "color": "color_FFD6A5FF"
-                                                        }
-                                                    },
-                                                    "CTextLabel": {
-                                                        "attributes": {
-                                                            "class": "CTextLabel",
-                                                            "size": "26, 19",
-                                                            "origin": "23, 0",
-                                                            "transparent": "true",
-                                                            "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FFD6A5FF",
-                                                            "title": "Unt1"
-                                                        }
-                                                    },
-                                                    "CTextEdit": {
-                                                        "attributes": {
-                                                            "class": "CTextEdit",
-                                                            "size": "28, 19",
-                                                            "origin": "49, 0",
-                                                            "control-tag": "voice_filter_1_unit_1_amount",
-                                                            "tooltip": "Filter 2 Unit 1 amount (dB)",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "text-alignment": "right",
-                                                            "font": "~ NormalFontVerySmall",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "value-precision": "1",
-                                                            "back-color": "color_00000020",
-                                                            "font-color": "color_FFD6A5FF"
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "class": "view_container_fix",
-                                                    "origin": "83, 47",
-                                                    "size": "80, 19",
-                                                    "background-color": "color_FFFFFF00"
-                                                },
-                                                "children": {
-                                                    "seven_rotary_knob": {
-                                                        "attributes": {
-                                                            "class": "seven_rotary_knob",
-                                                            "size": "20, 19",
-                                                            "origin": "0, 0",
-                                                            "control-tag": "voice_filter_1_unit_2_amount",
-                                                            "tooltip": "Filter 2 Unit 2 amount (dB)",
-                                                            "angle-start": "20",
-                                                            "angle-range": "320",
-                                                            "color": "color_FFD6A5FF"
-                                                        }
-                                                    },
-                                                    "CTextLabel": {
-                                                        "attributes": {
-                                                            "class": "CTextLabel",
-                                                            "size": "26, 19",
-                                                            "origin": "23, 0",
-                                                            "transparent": "true",
-                                                            "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FFD6A5FF",
-                                                            "title": "Unt2"
-                                                        }
-                                                    },
-                                                    "CTextEdit": {
-                                                        "attributes": {
-                                                            "class": "CTextEdit",
-                                                            "size": "28, 19",
-                                                            "origin": "49, 0",
-                                                            "control-tag": "voice_filter_1_unit_2_amount",
-                                                            "tooltip": "Filter 2 Unit 2 amount (dB)",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "text-alignment": "right",
-                                                            "font": "~ NormalFontVerySmall",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "value-precision": "1",
-                                                            "back-color": "color_00000020",
-                                                            "font-color": "color_FFD6A5FF"
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "class": "view_container_fix",
-                                                    "origin": "163, 47",
-                                                    "size": "80, 19",
-                                                    "background-color": "color_FFFFFF00"
-                                                },
-                                                "children": {
-                                                    "seven_rotary_knob": {
-                                                        "attributes": {
-                                                            "class": "seven_rotary_knob",
-                                                            "size": "20, 19",
-                                                            "origin": "0, 0",
-                                                            "control-tag": "voice_filter_1_unit_3_amount",
-                                                            "tooltip": "Filter 2 Unit 3 amount (dB)",
-                                                            "angle-start": "20",
-                                                            "angle-range": "320",
-                                                            "color": "color_FFD6A5FF"
-                                                        }
-                                                    },
-                                                    "CTextLabel": {
-                                                        "attributes": {
-                                                            "class": "CTextLabel",
-                                                            "size": "26, 19",
-                                                            "origin": "23, 0",
-                                                            "transparent": "true",
-                                                            "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_FFD6A5FF",
-                                                            "title": "Unt3"
-                                                        }
-                                                    },
-                                                    "CTextEdit": {
-                                                        "attributes": {
-                                                            "class": "CTextEdit",
-                                                            "size": "28, 19",
-                                                            "origin": "49, 0",
-                                                            "control-tag": "voice_filter_1_unit_3_amount",
-                                                            "tooltip": "Filter 2 Unit 3 amount (dB)",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "text-alignment": "right",
-                                                            "font": "~ NormalFontVerySmall",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "value-precision": "1",
-                                                            "back-color": "color_00000020",
-                                                            "font-color": "color_FFD6A5FF"
-                                                        }
-                                                    }
-                                                }
                                             }
                                         }
                                     }
@@ -4689,7 +4263,7 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "246, 185",
+                            "origin": "246, 141",
                             "size": "240, 44",
                             "background-offset": "25, 50"
                         },
@@ -4914,8 +4488,8 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "246, 232",
-                            "size": "240, 107",
+                            "origin": "246, 188",
+                            "size": "240, 151",
                             "background-offset": "50, 0"
                         },
                         "children": {
@@ -4923,7 +4497,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 107",
+                                    "size": "240, 151",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -4977,7 +4551,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 88",
+                                            "size": "240, 132",
                                             "frame-color": "color_CAFFB680"
                                         }
                                     },
@@ -4985,7 +4559,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 88",
+                                            "size": "240, 132",
                                             "background-color": "color_CAFFB620"
                                         },
                                         "children": {

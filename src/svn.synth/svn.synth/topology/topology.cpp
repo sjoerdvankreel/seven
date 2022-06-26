@@ -52,7 +52,7 @@ vfilter_comb_relevance[1] =
 static param_relevance const 
 vfilter_stvar_relevance[1] =
 { { voice_filter_param::type, voice_filter_type::state_var } };
- 
+  
 static param_descriptor const
 voice_filter_params[voice_filter_param::count] =
 { 
@@ -65,10 +65,7 @@ voice_filter_params[voice_filter_param::count] =
   { { L"Dly+", L"Comb plus delay" }, L"Ms", { 0.5f, 2, real_bounds::linear(0.0f, 0.005f), real_bounds::linear(0.0f, 5.0f) }, { 1, 2, vfilter_comb_relevance, 1 } },
   { { L"Gn+", L"Comb plus gain" }, L"", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-1.0f, 1.0f) }, { 2, 2, vfilter_comb_relevance, 1 } },
   { { L"Dly-", L"Comb min delay" }, L"Ms", { 0.5f, 2, real_bounds::linear(0.0f, 0.005f), real_bounds::linear(0.0f, 5.0f) }, { 3, 2, vfilter_comb_relevance, 1 } },
-  { { L"Gn-", L"Comb min gain" }, L"", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-1.0f, 1.0f) }, { 4, 2, vfilter_comb_relevance, 1 } },
-  { { L"Unt1", L"Unit 1 amount" }, L"dB", { 0.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 5, 1, nullptr, 0 } },
-  { { L"Unt2", L"Unit 2 amount" }, L"dB", { 0.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 6, 1, nullptr, 0 } },
-  { { L"Unt3", L"Unit 3 amount" }, L"dB", { 0.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 7, 1, nullptr, 0 } }
+  { { L"Gn-", L"Comb min gain" }, L"", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-1.0f, 1.0f) }, { 4, 2, vfilter_comb_relevance, 1 } }
 };
  
 // ---- oscillator ----

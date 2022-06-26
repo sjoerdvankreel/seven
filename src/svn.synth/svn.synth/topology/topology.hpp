@@ -24,7 +24,7 @@ struct oscillator_param_t { enum value { on, amp, pan, type, anlg_type, anlg_det
 
 struct voice_filter_type_t { enum value { state_var, comb, count }; };
 struct voice_filter_stvar_type_t { enum value { lpf, hpf, bpf, bsf, count }; };
-struct voice_filter_param_t { enum value { on, type, stvar_type, stvar_freq, stvar_res, stvar_kbd, comb_dly_plus, comb_gain_plus, comb_dly_min, comb_gain_min, unit1, unit2, unit3, count }; };
+struct voice_filter_param_t { enum value { on, type, stvar_type, stvar_freq, stvar_res, stvar_kbd, comb_dly_plus, comb_gain_plus, comb_dly_min, comb_gain_min, count }; };
 
 typedef part_type_t::value part_type;
 typedef output_param_t::value output_param;
