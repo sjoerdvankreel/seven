@@ -62,12 +62,12 @@ voice_filter::process_comb(
   automation_view const& automation, audio_sample32 const* source, std::int32_t sample)
 {
   audio_sample32 input = source[sample];
-  float dly_min_ms = automation.get(voice_filter_param::comb_dly_min, sample).real;
-  float dly_plus_ms = automation.get(voice_filter_param::comb_dly_plus, sample).real;
+  float dly_min_sec = automation.get(voice_filter_param::comb_dly_min, sample).real;
+  float dly_plus_sec = automation.get(voice_filter_param::comb_dly_plus, sample).real;
   float gain_min = automation.get(voice_filter_param::comb_gain_min, sample).real;
   float gain_plus = automation.get(voice_filter_param::comb_gain_plus, sample).real;
-  std::int32_t dly_min_samples = static_cast<std::int32_t>(dly_min_ms * _sample_rate / 1000.0f);
-  std::int32_t dly_plus_samples = static_cast<std::int32_t>(dly_plus_ms * _sample_rate / 1000.0f);
+  std::int32_t dly_min_samples = static_cast<std::int32_t>(dly_min_sec * _sample_rate);
+  std::int32_t dly_plus_samples = static_cast<std::int32_t>(dly_plus_sec * _sample_rate);
   audio_sample32 min = _comb.output.get(dly_min_samples) * gain_min;
   audio_sample32 plus = _comb.input.get(dly_plus_samples) * gain_plus;
   _comb.input.push(input);
