@@ -2,6 +2,7 @@
 #define SVN_SYNTH_DSP_SYNTH_VOICE_HPP
 
 #include <svn.synth/dsp/voice_amp.hpp>
+#include <svn.synth/dsp/voice_filter.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
 #include <svn.synth/topology/topology.hpp>
 
@@ -35,6 +36,7 @@ private:
   voice_amp _amp;
   base::topology_info const* _topology;
   std::array<oscillator, oscillator_count> _oscillators;
+  std::array<voice_filter, voice_filter_count> _filters;
 
 public:
   // With input and audio offset to the start of the voice within the current 

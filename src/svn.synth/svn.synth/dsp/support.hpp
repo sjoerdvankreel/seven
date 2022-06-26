@@ -23,6 +23,7 @@ struct voice_input
 struct audio_state
 {
   std::vector<base::audio_sample32> output;
+  std::vector<base::audio_sample32> scratch;
   std::array<std::vector<base::audio_sample32>, oscillator_count> oscillator_output;
   std::array<std::vector<base::audio_sample32>, voice_filter_count> voice_filter_output;
   audio_state(std::int32_t max_sample_count);
@@ -34,6 +35,7 @@ oscillator_output(), voice_filter_output()
 {
   std::vector<base::audio_sample32> audio(static_cast<std::size_t>(max_sample_count));
   output = audio;
+  scratch = audio;
   oscillator_output.fill(audio);
   voice_filter_output.fill(audio);
 }

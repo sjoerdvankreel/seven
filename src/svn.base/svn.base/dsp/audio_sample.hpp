@@ -11,6 +11,8 @@ struct audio_sample
 
   T mono() const;
   audio_sample& operator=(T y);
+  audio_sample<float> to32() const;
+  audio_sample<double> to64() const;
 
   audio_sample& operator+=(T y);
   audio_sample& operator-=(T y);
@@ -33,6 +35,14 @@ audio_sample<T>::mono() const
 template <class T> inline audio_sample<T>&
 audio_sample<T>::operator=(T y)
 { left = right = y; return *this; }
+
+template <> inline audio_sample<float>
+audio_sample<double>::to32() const
+{ return { static_cast<float>(left), static_cast<float>(right) }; }
+
+template <> inline audio_sample<double>
+audio_sample<float>::to64() const
+{ return { static_cast<double>(left), static_cast<double>(right) }; }
 
 template <class T> inline audio_sample<T>
 operator+(audio_sample<T> x, T y)
