@@ -313,6 +313,7 @@ build_ui_part_graph(topology_info const& topology,
   auto const& part = topology.parts[description.runtime_part_index];
   add_attribute(result, "graph-type", std::to_string(graph.type), allocator);
   add_attribute(result, "part-index", std::to_string(part.type_index), allocator);
+  add_attribute(result, "tooltip", narrow_assume_ascii(graph.description), allocator);
   add_attribute(result, "part-type", std::to_string(part.descriptor->type), allocator);
   return result;
 }

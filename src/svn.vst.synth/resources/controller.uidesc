@@ -256,6 +256,7 @@
                                                     "color": "color_FFADADFF",
                                                     "graph-type": "0",
                                                     "part-index": "0",
+                                                    "tooltip": "Waveform",
                                                     "part-type": "0"
                                                 }
                                             },
@@ -267,6 +268,7 @@
                                                     "color": "color_FFADADFF",
                                                     "graph-type": "1",
                                                     "part-index": "0",
+                                                    "tooltip": "Frequency spectrum",
                                                     "part-type": "0"
                                                 }
                                             },
@@ -1214,6 +1216,7 @@
                                                     "color": "color_FFADADFF",
                                                     "graph-type": "0",
                                                     "part-index": "1",
+                                                    "tooltip": "Waveform",
                                                     "part-type": "0"
                                                 }
                                             },
@@ -1225,6 +1228,7 @@
                                                     "color": "color_FFADADFF",
                                                     "graph-type": "1",
                                                     "part-index": "1",
+                                                    "tooltip": "Frequency spectrum",
                                                     "part-type": "0"
                                                 }
                                             },
@@ -2172,6 +2176,7 @@
                                                     "color": "color_FFADADFF",
                                                     "graph-type": "0",
                                                     "part-index": "2",
+                                                    "tooltip": "Waveform",
                                                     "part-type": "0"
                                                 }
                                             },
@@ -2183,6 +2188,7 @@
                                                     "color": "color_FFADADFF",
                                                     "graph-type": "1",
                                                     "part-index": "2",
+                                                    "tooltip": "Frequency spectrum",
                                                     "part-type": "0"
                                                 }
                                             },
@@ -3130,6 +3136,7 @@
                                                     "color": "color_FFADADFF",
                                                     "graph-type": "0",
                                                     "part-index": "3",
+                                                    "tooltip": "Waveform",
                                                     "part-type": "0"
                                                 }
                                             },
@@ -3141,6 +3148,7 @@
                                                     "color": "color_FFADADFF",
                                                     "graph-type": "1",
                                                     "part-index": "3",
+                                                    "tooltip": "Frequency spectrum",
                                                     "part-type": "0"
                                                 }
                                             },
@@ -4088,6 +4096,7 @@
                                                     "color": "color_FFD6A5FF",
                                                     "graph-type": "-1",
                                                     "part-index": "0",
+                                                    "tooltip": "Impulse response",
                                                     "part-type": "1"
                                                 }
                                             },
@@ -4755,6 +4764,7 @@
                                                     "color": "color_FFD6A5FF",
                                                     "graph-type": "-1",
                                                     "part-index": "1",
+                                                    "tooltip": "Impulse response",
                                                     "part-type": "1"
                                                 }
                                             },
@@ -5422,6 +5432,7 @@
                                                     "color": "color_FFD6A5FF",
                                                     "graph-type": "-1",
                                                     "part-index": "2",
+                                                    "tooltip": "Impulse response",
                                                     "part-type": "1"
                                                 }
                                             },

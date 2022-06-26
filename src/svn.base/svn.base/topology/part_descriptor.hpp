@@ -15,6 +15,7 @@ struct graph_descriptor
   std::int32_t const column; // Columns in ui grid.
   std::int32_t const row_span; // Row count in ui grid.
   std::int32_t const column_span; // Column count in ui grid.
+  wchar_t const* const description;
 };
 
 // Can't be const because of ui generator.

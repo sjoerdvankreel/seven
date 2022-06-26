@@ -21,6 +21,7 @@ graph_plot_creator::create(
   std::int32_t part_type;
   std::int32_t graph_type;
   std::int32_t part_index;
+  std::string const* tooltip;
 
   std::string const* color_name = attrs.getAttributeValue("color");
   assert(color_name != nullptr);
@@ -32,9 +33,12 @@ graph_plot_creator::create(
   assert(ok);
   ok = attrs.getIntegerAttribute("part-index", part_index);
   assert(ok);
+  tooltip = attrs.getAttributeValue("tooltip");
   graph_processor* processor = svn_create_graph_processor(svn_vst_get_topology(), part_type, graph_type, part_index);
   assert(processor != nullptr);
-  return new graph_plot(color, processor); 
+  auto result = new graph_plot(color, processor); 
+  if(tooltip != nullptr) result->setTooltipText(tooltip->data());
+  return result;
 } 
 
 void
@@ -65,6 +69,6 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
     path->addLine(graph_data[i].x + 3, render_size.y - graph_data[i].y + 3);
   context->drawGraphicsPath(path, CDrawContext::kPathStroked);
   path->forget();
-}
+} 
 
 } // namespace svn::vst::base

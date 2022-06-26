@@ -27,7 +27,7 @@ output_params[output_param::count] =
 
 static graph_descriptor const
 voice_filter_graph =
-{ -1, 0, 2, 1, 1 };
+{ -1, 0, 2, 1, 1, L"Impulse response" };
 
 static item_name const
 voice_filter_types[voice_filter_type::count] =
@@ -73,8 +73,8 @@ voice_filter_params[voice_filter_param::count] =
 static graph_descriptor const
 oscillator_graphs[oscillator_graph::count] =
 {
-  { oscillator_graph::wave, 0, 2, 1, 1 },
-  { oscillator_graph::spectrum, 1, 2, 1, 1 }
+  { oscillator_graph::wave, 0, 2, 1, 1, L"Waveform"},
+  { oscillator_graph::spectrum, 1, 2, 1, 1, L"Frequency spectrum"}
 };
 
 static item_name const
