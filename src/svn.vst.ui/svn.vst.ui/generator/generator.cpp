@@ -380,18 +380,18 @@ build_ui_part_param_container_border(topology_info const& topology,
 }
 
 static Value
-build_ui_part_header_label(topology_info const& topology,
-  part_ui_description const& description, std::int32_t left, Document::AllocatorType& allocator)
+build_ui_part_header_label(topology_info const& topology, 
+  part_ui_description const& description, std::string const& alignment, 
+  std::string const& title, std::int32_t left, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  std::string title = " " + narrow_assume_ascii(topology.parts[description.runtime_part_index].runtime_name);
   add_attribute(result, "title", title, allocator);
   add_attribute(result, "class", "CTextLabel", allocator);
   add_attribute(result, "transparent", "true", allocator);
-  add_attribute(result, "text-alignment", "left", allocator);
+  add_attribute(result, "text-alignment", alignment, allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "origin", size_to_string(left, -1), allocator);
-  add_attribute(result, "size", size_to_string(description.width, param_row_height), allocator);
+  add_attribute(result, "size", size_to_string(param_total_width, param_row_height), allocator);
   add_attribute(result, "font-color", get_color_name(description.color, color_alpha::opaque), allocator);
   add_attribute(result, "background-color", get_color_name(description.color, color_alpha::half), allocator);
   return result;
@@ -406,13 +406,19 @@ build_ui_part_header_container(topology_info const& topology,
   add_attribute(result, "origin", size_to_string(1, 1), allocator);
   add_attribute(result, "size", size_to_string(description.width - 2, param_row_height - 2), allocator);
   add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
+
+  std::string title = " " + narrow_assume_ascii(topology.parts[description.runtime_part_index].runtime_name);
   if (description.enabled_param.runtime_param_index != -1)
   {
     Value enabled_box = build_ui_param_checkbox(topology, description, description.enabled_param, black, margin, header_checkbox_width, -1, allocator);
     add_child(result, "CCheckBox", enabled_box, allocator);
-    add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, header_checkbox_width + margin, allocator), allocator);
+    add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, "left", title, header_checkbox_width + margin, allocator), allocator);
   } else
-    add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, 0, allocator), allocator);
+    add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, "left", title, 0, allocator), allocator);
+
+  std::int32_t left = description.width - param_total_width - 2 * margin;
+  std::string info = " " + narrow_assume_ascii(topology.parts[description.runtime_part_index].descriptor->ui.info);
+  add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, "right", info, left, allocator), allocator);
   return result;
 }
 

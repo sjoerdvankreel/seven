@@ -93,7 +93,7 @@ synthesizer::process_block(block_input const& input, block_output& output)
 {
   voice_input vinput;
   vinput.bpm = input.bpm;
-
+   
   // Correct voice info for leftovers from previous round.
   for(std::int32_t v = 0; v < synth_polyphony; v++)
     if (!_voice_states[v].in_use)

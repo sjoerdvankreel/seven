@@ -37,6 +37,7 @@ part_ui_description::create(
   part_ui_description result;
   result.occupied_cell_count = 0;
   auto const& part = topology.parts[runtime_part_index];
+  result.info = part.descriptor->ui.info;
   result.graphs = part.descriptor->graphs;
   result.graph_count = part.descriptor->graph_count;
   for(std::int32_t i = 0; i < part.descriptor->param_count; i++)

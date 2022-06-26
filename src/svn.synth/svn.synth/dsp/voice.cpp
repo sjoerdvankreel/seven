@@ -37,6 +37,6 @@ voice::process_block(
   }
   part_input.automation = input.automation.rearrange_params(part_type::amplitude, 0);
   return _amplitude.process_block(part_input, audio.output.data(), release_sample);
-}
-
+} 
+ 
 } // namespace svn::synth

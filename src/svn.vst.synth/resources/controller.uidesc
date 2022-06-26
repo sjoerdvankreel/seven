@@ -185,7 +185,20 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "origin": "17, -1",
-                                                    "size": "240, 19",
+                                                    "size": "80, 19",
+                                                    "font-color": "color_FFADADFF",
+                                                    "background-color": "color_FFADAD80"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "title": " Voice",
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "origin": "154, -1",
+                                                    "size": "80, 19",
                                                     "font-color": "color_FFADADFF",
                                                     "background-color": "color_FFADAD80"
                                                 }
@@ -1130,7 +1143,20 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "origin": "17, -1",
-                                                    "size": "240, 19",
+                                                    "size": "80, 19",
+                                                    "font-color": "color_FFADADFF",
+                                                    "background-color": "color_FFADAD80"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "title": " Voice",
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "origin": "154, -1",
+                                                    "size": "80, 19",
                                                     "font-color": "color_FFADADFF",
                                                     "background-color": "color_FFADAD80"
                                                 }
@@ -2075,7 +2101,20 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "origin": "17, -1",
-                                                    "size": "240, 19",
+                                                    "size": "80, 19",
+                                                    "font-color": "color_FFADADFF",
+                                                    "background-color": "color_FFADAD80"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "title": " Voice",
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "origin": "154, -1",
+                                                    "size": "80, 19",
                                                     "font-color": "color_FFADADFF",
                                                     "background-color": "color_FFADAD80"
                                                 }
@@ -3002,7 +3041,7 @@
                                                     "size": "14, 19",
                                                     "origin": "3, -1",
                                                     "control-tag": "voice_filter_0_enabled",
-                                                    "tooltip": "Filter 1 Enabled",
+                                                    "tooltip": "VFilter 1 Enabled",
                                                     "title": "",
                                                     "frame-width": "1",
                                                     "draw-crossbox": "true",
@@ -3014,13 +3053,26 @@
                                             },
                                             "CTextLabel": {
                                                 "attributes": {
-                                                    "title": " Filter 1",
+                                                    "title": " VFilter 1",
                                                     "class": "CTextLabel",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "origin": "17, -1",
-                                                    "size": "240, 19",
+                                                    "size": "80, 19",
+                                                    "font-color": "color_FFD6A5FF",
+                                                    "background-color": "color_FFD6A580"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "title": " Voice",
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "origin": "154, -1",
+                                                    "size": "80, 19",
                                                     "font-color": "color_FFD6A5FF",
                                                     "background-color": "color_FFD6A580"
                                                 }
@@ -3161,7 +3213,7 @@
                                                             "size": "49, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_0_type",
-                                                            "tooltip": "Filter 1 Type",
+                                                            "tooltip": "VFilter 1 Type",
                                                             "min-value": "0",
                                                             "default-value": "0",
                                                             "text-alignment": "left",
@@ -3205,7 +3257,7 @@
                                                             "size": "49, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_0_state_var_type",
-                                                            "tooltip": "Filter 1 State var type",
+                                                            "tooltip": "VFilter 1 State var type",
                                                             "min-value": "0",
                                                             "default-value": "0",
                                                             "text-alignment": "left",
@@ -3249,7 +3301,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_0_comb_plus_delay",
-                                                            "tooltip": "Filter 1 Comb plus delay (Ms)",
+                                                            "tooltip": "VFilter 1 Comb plus delay (Ms)",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -3273,7 +3325,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_0_comb_plus_delay",
-                                                            "tooltip": "Filter 1 Comb plus delay (Ms)",
+                                                            "tooltip": "VFilter 1 Comb plus delay (Ms)",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -3301,7 +3353,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_0_state_var_frequency",
-                                                            "tooltip": "Filter 1 State var frequency (Hz)",
+                                                            "tooltip": "VFilter 1 State var frequency (Hz)",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -3325,7 +3377,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_0_state_var_frequency",
-                                                            "tooltip": "Filter 1 State var frequency (Hz)",
+                                                            "tooltip": "VFilter 1 State var frequency (Hz)",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -3353,7 +3405,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_0_comb_plus_gain",
-                                                            "tooltip": "Filter 1 Comb plus gain",
+                                                            "tooltip": "VFilter 1 Comb plus gain",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -3377,7 +3429,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_0_comb_plus_gain",
-                                                            "tooltip": "Filter 1 Comb plus gain",
+                                                            "tooltip": "VFilter 1 Comb plus gain",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -3405,7 +3457,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_0_state_var_resonance",
-                                                            "tooltip": "Filter 1 State var resonance",
+                                                            "tooltip": "VFilter 1 State var resonance",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -3429,7 +3481,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_0_state_var_resonance",
-                                                            "tooltip": "Filter 1 State var resonance",
+                                                            "tooltip": "VFilter 1 State var resonance",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -3457,7 +3509,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_0_comb_min_delay",
-                                                            "tooltip": "Filter 1 Comb min delay (Ms)",
+                                                            "tooltip": "VFilter 1 Comb min delay (Ms)",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -3481,7 +3533,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_0_comb_min_delay",
-                                                            "tooltip": "Filter 1 Comb min delay (Ms)",
+                                                            "tooltip": "VFilter 1 Comb min delay (Ms)",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -3509,7 +3561,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_0_state_var_keyboard_tracking",
-                                                            "tooltip": "Filter 1 State var keyboard tracking",
+                                                            "tooltip": "VFilter 1 State var keyboard tracking",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -3533,7 +3585,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_0_state_var_keyboard_tracking",
-                                                            "tooltip": "Filter 1 State var keyboard tracking",
+                                                            "tooltip": "VFilter 1 State var keyboard tracking",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -3561,7 +3613,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_0_comb_min_gain",
-                                                            "tooltip": "Filter 1 Comb min gain",
+                                                            "tooltip": "VFilter 1 Comb min gain",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -3585,7 +3637,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_0_comb_min_gain",
-                                                            "tooltip": "Filter 1 Comb min gain",
+                                                            "tooltip": "VFilter 1 Comb min gain",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -3656,7 +3708,7 @@
                                                     "size": "14, 19",
                                                     "origin": "3, -1",
                                                     "control-tag": "voice_filter_1_enabled",
-                                                    "tooltip": "Filter 2 Enabled",
+                                                    "tooltip": "VFilter 2 Enabled",
                                                     "title": "",
                                                     "frame-width": "1",
                                                     "draw-crossbox": "true",
@@ -3668,13 +3720,26 @@
                                             },
                                             "CTextLabel": {
                                                 "attributes": {
-                                                    "title": " Filter 2",
+                                                    "title": " VFilter 2",
                                                     "class": "CTextLabel",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "origin": "17, -1",
-                                                    "size": "240, 19",
+                                                    "size": "80, 19",
+                                                    "font-color": "color_FFD6A5FF",
+                                                    "background-color": "color_FFD6A580"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "title": " Voice",
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "origin": "154, -1",
+                                                    "size": "80, 19",
                                                     "font-color": "color_FFD6A5FF",
                                                     "background-color": "color_FFD6A580"
                                                 }
@@ -3815,7 +3880,7 @@
                                                             "size": "49, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_1_type",
-                                                            "tooltip": "Filter 2 Type",
+                                                            "tooltip": "VFilter 2 Type",
                                                             "min-value": "0",
                                                             "default-value": "0",
                                                             "text-alignment": "left",
@@ -3859,7 +3924,7 @@
                                                             "size": "49, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_1_state_var_type",
-                                                            "tooltip": "Filter 2 State var type",
+                                                            "tooltip": "VFilter 2 State var type",
                                                             "min-value": "0",
                                                             "default-value": "0",
                                                             "text-alignment": "left",
@@ -3903,7 +3968,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_1_comb_plus_delay",
-                                                            "tooltip": "Filter 2 Comb plus delay (Ms)",
+                                                            "tooltip": "VFilter 2 Comb plus delay (Ms)",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -3927,7 +3992,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_1_comb_plus_delay",
-                                                            "tooltip": "Filter 2 Comb plus delay (Ms)",
+                                                            "tooltip": "VFilter 2 Comb plus delay (Ms)",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -3955,7 +4020,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_1_state_var_frequency",
-                                                            "tooltip": "Filter 2 State var frequency (Hz)",
+                                                            "tooltip": "VFilter 2 State var frequency (Hz)",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -3979,7 +4044,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_1_state_var_frequency",
-                                                            "tooltip": "Filter 2 State var frequency (Hz)",
+                                                            "tooltip": "VFilter 2 State var frequency (Hz)",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -4007,7 +4072,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_1_comb_plus_gain",
-                                                            "tooltip": "Filter 2 Comb plus gain",
+                                                            "tooltip": "VFilter 2 Comb plus gain",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -4031,7 +4096,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_1_comb_plus_gain",
-                                                            "tooltip": "Filter 2 Comb plus gain",
+                                                            "tooltip": "VFilter 2 Comb plus gain",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -4059,7 +4124,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_1_state_var_resonance",
-                                                            "tooltip": "Filter 2 State var resonance",
+                                                            "tooltip": "VFilter 2 State var resonance",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -4083,7 +4148,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_1_state_var_resonance",
-                                                            "tooltip": "Filter 2 State var resonance",
+                                                            "tooltip": "VFilter 2 State var resonance",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -4111,7 +4176,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_1_comb_min_delay",
-                                                            "tooltip": "Filter 2 Comb min delay (Ms)",
+                                                            "tooltip": "VFilter 2 Comb min delay (Ms)",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -4135,7 +4200,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_1_comb_min_delay",
-                                                            "tooltip": "Filter 2 Comb min delay (Ms)",
+                                                            "tooltip": "VFilter 2 Comb min delay (Ms)",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -4163,7 +4228,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_1_state_var_keyboard_tracking",
-                                                            "tooltip": "Filter 2 State var keyboard tracking",
+                                                            "tooltip": "VFilter 2 State var keyboard tracking",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -4187,7 +4252,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_1_state_var_keyboard_tracking",
-                                                            "tooltip": "Filter 2 State var keyboard tracking",
+                                                            "tooltip": "VFilter 2 State var keyboard tracking",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -4215,7 +4280,7 @@
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "voice_filter_1_comb_min_gain",
-                                                            "tooltip": "Filter 2 Comb min gain",
+                                                            "tooltip": "VFilter 2 Comb min gain",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_FFD6A5FF"
@@ -4239,7 +4304,7 @@
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
                                                             "control-tag": "voice_filter_1_comb_min_gain",
-                                                            "tooltip": "Filter 2 Comb min gain",
+                                                            "tooltip": "VFilter 2 Comb min gain",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
@@ -4312,7 +4377,20 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "origin": "0, -1",
-                                                    "size": "240, 19",
+                                                    "size": "80, 19",
+                                                    "font-color": "color_FDFFB6FF",
+                                                    "background-color": "color_FDFFB680"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "title": " Voice",
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "origin": "154, -1",
+                                                    "size": "80, 19",
                                                     "font-color": "color_FDFFB6FF",
                                                     "background-color": "color_FDFFB680"
                                                 }
@@ -4537,7 +4615,20 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFontSmall",
                                                     "origin": "0, -1",
-                                                    "size": "240, 19",
+                                                    "size": "80, 19",
+                                                    "font-color": "color_CAFFB6FF",
+                                                    "background-color": "color_CAFFB680"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "title": " Global",
+                                                    "class": "CTextLabel",
+                                                    "transparent": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "origin": "154, -1",
+                                                    "size": "80, 19",
                                                     "font-color": "color_CAFFB6FF",
                                                     "background-color": "color_CAFFB680"
                                                 }

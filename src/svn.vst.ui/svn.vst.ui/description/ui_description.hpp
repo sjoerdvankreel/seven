@@ -30,6 +30,7 @@ struct part_ui_description
   svn::base::part_ui_color color; // Index into color wheel.
   std::int32_t runtime_part_index; // Part runtime index.
   std::int32_t occupied_cell_count; // Param unique ui indices plus graphs sizes.
+  wchar_t const* info; // Extra header info.
 
   std::int32_t graph_count;
   param_ui_description enabled_param;

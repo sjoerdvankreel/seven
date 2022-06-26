@@ -15,7 +15,7 @@ amplitude::process_block(voice_input const& input,
   assert(release_sample >= -1);
   assert(release_sample < input.sample_count);
 
-  std::int32_t s;
+  std::int32_t s; 
   for (s = 0; s < input.sample_count; s++)
   {
     float decay_level = 1.0f;

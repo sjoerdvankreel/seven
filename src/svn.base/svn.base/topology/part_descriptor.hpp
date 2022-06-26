@@ -30,6 +30,7 @@ struct part_ui_descriptor
 {
   std::int32_t const param_columns; // Number of parameters stacked left-to-right.
   std::int32_t const enabled_param; // Index into params which identifies the part on/off switch, or -1 if always on.
+  wchar_t const* const info; // Extra info for part header ui.
   part_ui_color const color; // Base color for ui generator.
 };
 
