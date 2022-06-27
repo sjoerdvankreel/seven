@@ -130,7 +130,7 @@ oscillator_params[oscillator_param::count] =
 
 // ---- audio route ----
 
-static wchar_t const* audio_input_names[] =
+static wchar_t const* audio_input_names[audio_route_input::count] =
 { L"Off", L"Osc", L"Flt" };
 static std::int32_t const audio_input_counts[] =
 { 1, oscillator_count, voice_filter_count };

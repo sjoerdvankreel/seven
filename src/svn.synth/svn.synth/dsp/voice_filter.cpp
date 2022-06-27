@@ -77,7 +77,7 @@ voice_filter::process_comb(
 
 void 
 voice_filter::process_block(voice_input const& input, 
-  audio_sample32 const* source, audio_sample32* output)
+  audio_state const& state, audio_sample32* output)
 {
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
