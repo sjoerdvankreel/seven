@@ -32,7 +32,7 @@ struct oscillator_param_t { enum value { on, amp, pan, type, anlg_type, anlg_spr
 struct voice_amp_param_t { enum value { level, decay, count }; };
 struct output_param_t { enum value { clip, drain, voices, count }; };
 struct part_type_t { enum value { oscillator, voice_filter, voice_amp, audio_route, output, count }; };
-struct audio_route_param_t { enum value { in1, out1, amt1, count }; };
+struct audio_route_param_t { enum value { in1, out1, amt1, in2, out2, amt2, in3, out3, amt3, in4, out4, amt4, in5, out5, amt5, in6, out6, amt6, in7, out7, amt7, in8, out8, amt8, count }; };
 
 typedef part_type_t::value part_type;
 typedef output_param_t::value output_param;
