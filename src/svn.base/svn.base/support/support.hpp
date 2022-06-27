@@ -1,10 +1,22 @@
 #ifndef SVN_BASE_SUPPORT_SUPPORT_HPP
 #define SVN_BASE_SUPPORT_SUPPORT_HPP
 
+#include <string>
 #include <cstdint>
 #include <immintrin.h>
 
 namespace svn::base {
+
+// Pass a list of names with count per name.
+std::wstring 
+multi_list_formatter(
+  std::int32_t val, wchar_t const** names, 
+  std::int32_t const* counts, std::int32_t count);
+bool 
+multi_list_parser(
+  std::wstring const& val, wchar_t const** names,
+  std::int32_t const* counts, std::int32_t count,
+  std::int32_t& result);
 
 inline std::uint64_t
 disable_denormals()

@@ -65,7 +65,7 @@ parameter::toString(ParamValue normalized, String128 string) const
   }
   _descriptor->format(value, string, 128);
 }
-
+ 
 bool
 parameter::fromString(TChar const* string, ParamValue& normalized) const
 {

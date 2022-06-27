@@ -37,61 +37,23 @@ static std::int32_t const audio_output_counts[] =
 
 static std::wstring 
 format_audio_input(std::int32_t val)
-{ return generic_formatter(val, audio_input_names, audio_input_counts, 3); }
-
+{ return multi_list_formatter(val, audio_input_names, audio_input_counts, 3); }
+static std::wstring 
+format_audio_output(std::int32_t val)
+{ return multi_list_formatter(val, audio_output_names, audio_output_counts, 3); }
 static bool
 parse_audio_input(std::wstring const& val, std::int32_t& result)
-{
-  std::int32_t index = -1;
-  if(val == L"Off") return 0;
-  if (val.substr(0, 4) == L"Osc ")
-  {
-    std::wistringstream wiss(val.substr(4));
-    wiss >> index;
-    if (1 <= index && index <= oscillator_count)
-    {
-      result = index;
-      return true;
-    }
-    return false;
-  }
-  if (val.substr(0, 4) == L"Osc ")
-  {
-    std::wistringstream wiss(val.substr(4));
-    wiss >> index;
-    if (1 <= index && index <= oscillator_count)
-    {
-      result = index;
-      return true;
-    }
-    return false;
-  }
-  return false;
-}
-
-static std::wstring
-format_audio_output(std::int32_t val)
-{
-  if (val == 0) return L"Off";
-  if (val <= voice_filter_count) return std::wstring(L"Flt ") + std::to_wstring(val);
-  if (val == voice_filter_count + 1) return std::wstring(L"Amp");
-  assert(false);
-  return L"";
-}
- 
+{ return multi_list_parser(val, audio_input_names, audio_input_counts, 3, result); }
 static bool
 parse_audio_output(std::wstring const& val, std::int32_t& result)
-{
-  assert(false);
-  return false;
-}
+{ return multi_list_parser(val, audio_output_names, audio_output_counts, 3, result); }
 
 static param_descriptor const
 audio_route_params[audio_route_param::count] =
 {
-  { { L"In", L"Input1" }, L"", false, 0, audio_inputs_count, 0, &format_audio_input, &parse_audio_input, { 0, 0, nullptr, 0 } },
-  { { L"Out", L"Output1" }, L"", false, 0, audio_outputs_count, 0, &format_audio_output, &parse_audio_output, { 1, 0, nullptr, 0 } },
-  { { L"Amt", L"Amount1" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 2, 0, nullptr, 0 } }
+  { { L"In", L"Input 1" }, L"", false, 0, audio_inputs_count - 1, 0, &format_audio_input, &parse_audio_input, { 0, 0, nullptr, 0 } },
+  { { L"Out", L"Output 1" }, L"", false, 0, audio_outputs_count - 1, 0, &format_audio_output, &parse_audio_output, { 1, 0, nullptr, 0 } },
+  { { L"Amt", L"Amount 1" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 2, 0, nullptr, 0 } }
 };
 
 // ---- voice filter ----

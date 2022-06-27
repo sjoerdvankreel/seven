@@ -7,23 +7,6 @@
 
 namespace svn::base {
 
-std::wstring 
-generic_formatter(
-  std::int32_t val, wchar_t const** names,
-  std::int32_t const* counts, std::int32_t count)
-{
-
-}
-
-bool 
-generic_parser(
-  std::wstring const& val, wchar_t const** names,
-  std::int32_t const* counts, std::int32_t count,
-  std::int32_t& result)
-{
-
-}
-
 bool 
 param_descriptor::parse(wchar_t const* buffer, param_value& val) const
 {

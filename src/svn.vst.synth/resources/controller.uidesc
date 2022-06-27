@@ -132,9 +132,9 @@
             "voice_filter_2_comb_min_gain": "85",
             "voice_amp_0_level": "86",
             "voice_amp_0_decay": "87",
-            "audio_route_0_input1": "88",
-            "audio_route_0_output1": "89",
-            "audio_route_0_amount1": "90",
+            "audio_route_0_input_1": "88",
+            "audio_route_0_output_1": "89",
+            "audio_route_0_amount_1": "90",
             "output_0_clip": "91",
             "output_0_voices_exhausted": "92",
             "output_0_voice_count": "93"
@@ -6357,38 +6357,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "audio_route_0_input1",
-                                                            "tooltip": "Audio Input1",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "8",
-                                                            "font-color": "color_CAFFBFFF",
-                                                            "back-color": "color_CAFFBF40",
-                                                            "shadow-color": "color_CAFFBF80"
+                                                            "control-tag": "audio_route_0_input_1",
+                                                            "tooltip": "Audio Input 1",
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_CAFFBFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_CAFFBFFF",
                                                             "title": "In"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "audio_route_0_input_1",
+                                                            "tooltip": "Audio Input 1",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "7",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_CAFFBFFF"
                                                         }
                                                     }
                                                 }
@@ -6401,38 +6409,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "audio_route_0_output1",
-                                                            "tooltip": "Audio Output1",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "5",
-                                                            "font-color": "color_CAFFBFFF",
-                                                            "back-color": "color_CAFFBF40",
-                                                            "shadow-color": "color_CAFFBF80"
+                                                            "control-tag": "audio_route_0_output_1",
+                                                            "tooltip": "Audio Output 1",
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_CAFFBFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_CAFFBFFF",
                                                             "title": "Out"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "audio_route_0_output_1",
+                                                            "tooltip": "Audio Output 1",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "4",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_CAFFBFFF"
                                                         }
                                                     }
                                                 }
@@ -6450,8 +6466,8 @@
                                                             "class": "seven_rotary_knob",
                                                             "size": "20, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "audio_route_0_amount1",
-                                                            "tooltip": "Audio Amount1 (dB)",
+                                                            "control-tag": "audio_route_0_amount_1",
+                                                            "tooltip": "Audio Amount 1 (dB)",
                                                             "angle-start": "20",
                                                             "angle-range": "320",
                                                             "color": "color_CAFFBFFF"
@@ -6474,8 +6490,8 @@
                                                             "class": "CTextEdit",
                                                             "size": "28, 19",
                                                             "origin": "49, 0",
-                                                            "control-tag": "audio_route_0_amount1",
-                                                            "tooltip": "Audio Amount1 (dB)",
+                                                            "control-tag": "audio_route_0_amount_1",
+                                                            "tooltip": "Audio Amount 1 (dB)",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "right",
