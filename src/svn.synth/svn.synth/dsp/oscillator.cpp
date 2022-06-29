@@ -157,27 +157,30 @@ oscillator::generate_wave(
 }
 
 void
-oscillator::process_block(voice_input const& input, audio_sample32* audio)
+oscillator::process_block(voice_input const& input, audio_state& audio, std::int32_t index)
 {
+  audio_sample32* output = audio.oscillator[index].data();
+  automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
+
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {  
-    audio[s] = 0.0f;
-    bool on = input.automation.get(oscillator_param::on, s).discrete != 0;
+    output[s] = 0.0f;
+    bool on = automation.get(oscillator_param::on, s).discrete != 0;
     if(!on) continue;
         
-    float cent = input.automation.get(oscillator_param::cent, s).real;
-    std::int32_t note = input.automation.get(oscillator_param::note, s).discrete;
-    std::int32_t octave = input.automation.get(oscillator_param::oct, s).discrete;
+    float cent = automation.get(oscillator_param::cent, s).real;
+    std::int32_t note = automation.get(oscillator_param::note, s).discrete;
+    std::int32_t octave = automation.get(oscillator_param::oct, s).discrete;
     float midi = 12 * (octave + 1) + note + cent + _midi_note - 60;
     float frequency = note_to_frequency(midi);
-    float sample = generate_wave(input.automation, s, midi, frequency);
+    float sample = generate_wave(automation, s, midi, frequency);
     _phase += frequency / _sample_rate;
     _phase -= std::floor(_phase);
 
-    float amp = input.automation.get(oscillator_param::amp, s).real;
-    float panning = input.automation.get(oscillator_param::pan, s).real;
-    audio[s].left = sanity_bipolar((1.0f - panning) * sample * amp);
-    audio[s].right = sanity_bipolar(panning * sample * amp);
+    float amp = automation.get(oscillator_param::amp, s).real;
+    float panning = automation.get(oscillator_param::pan, s).real;
+    output[s].left = sanity_bipolar((1.0f - panning) * sample * amp);
+    output[s].right = sanity_bipolar(panning * sample * amp);
   }
 }
 

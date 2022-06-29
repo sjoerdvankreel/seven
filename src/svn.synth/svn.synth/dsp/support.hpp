@@ -1,6 +1,7 @@
 #ifndef SVN_SYNTH_DSP_SUPPORT_HPP
 #define SVN_SYNTH_DSP_SUPPORT_HPP
 
+#include <svn.base/dsp/support.hpp>
 #include <svn.base/support/support.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
 #include <svn.base/dsp/automation_view.hpp>
@@ -97,7 +98,7 @@ audio_state::mix(
     std::pair<std::int32_t, std::int32_t> input_ids(input_table_out[in]);
     result += input_buffer(input_ids.first, input_ids.second)[sample] * amt;
   }
-  return sanity_audio(result);
+  return base::sanity_audio(result);
 }
 
 } // namespace svn::base

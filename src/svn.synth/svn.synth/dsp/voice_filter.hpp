@@ -37,16 +37,14 @@ class voice_filter
 private:
   base::audio_sample32 process_comb(
     svn::base::automation_view const& automation,
-    svn::base::audio_sample32 const* source,
-    std::int32_t sample);
+    svn::base::audio_sample32 source, std::int32_t sample);
   base::audio_sample32 process_state_variable(
     svn::base::automation_view const& automation,
-    svn::base::audio_sample32 const* source,
-    std::int32_t sample);
+    svn::base::audio_sample32 source, std::int32_t sample);
 public:
   voice_filter() = default;
   voice_filter(float sample_rate, std::int32_t midi_note);
-  void process_block(voice_input const& input, audio_state const& state, base::audio_sample32* output);
+  void process_block(voice_input const& input, audio_state& state, std::int32_t index);
 };
 
 } // namespace svn::synth

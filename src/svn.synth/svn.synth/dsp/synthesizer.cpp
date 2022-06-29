@@ -85,7 +85,7 @@ synthesizer::setup_voice(
   _voice_states[slot].release_position_buffer = -1;
   _voice_states[slot].start_position_buffer = note.sample_index;
   _voice_states[slot].start_position_stream = stream_position + note.sample_index;
-  _voices[slot] = synth_voice(topology(), sample_rate(), note.velocity, note.midi);
+  new(&_voices[slot]) synth_voice(topology(), sample_rate(), note.velocity, note.midi);
 }
 
 void
@@ -159,7 +159,7 @@ synthesizer::process_block(block_input const& input, block_output& output)
       // Else nothing to do, we ride along with the active automation values.     
 
       std::int32_t processed = _voices[v].process_block(vinput, _voice_audio, release_sample);
-      base::add_audio(output.audio + voice_start, _voice_audio.output.data(), processed);
+      base::add_audio(output.audio + voice_start, _voice_audio.voice_amp.data(), processed);
       if(processed < vinput.sample_count) return_voice(v);
     }
 

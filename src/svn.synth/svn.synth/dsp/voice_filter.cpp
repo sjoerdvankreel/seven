@@ -20,7 +20,7 @@ _state_var(), _comb(), _sample_rate(sample_rate)
 // https://cytomic.com/files/dsp/SvfLinearTrapOptimised2.pdf
 audio_sample32 
 voice_filter::process_state_variable(
-  automation_view const& automation, audio_sample32 const* source, std::int32_t sample)
+  automation_view const& automation, audio_sample32 source, std::int32_t sample)
 {
   float res = automation.get(voice_filter_param::stvar_res, sample).real;
   float kbd = automation.get(voice_filter_param::stvar_kbd, sample).real;
@@ -37,7 +37,7 @@ voice_filter::process_state_variable(
   double a2 = g * a1;
   double a3 = g * a2;
 
-  auto v0 = source[sample].to64();
+  auto v0 = source.to64();
   auto v3 = v0 - _state_var.ic2eq;
   auto v1 = a1 * _state_var.ic1eq + a2 * v3;
   auto v2 = _state_var.ic2eq + a2 * _state_var.ic1eq + a3 * v3;
@@ -59,9 +59,8 @@ voice_filter::process_state_variable(
 // https://www.dsprelated.com/freebooks/filters/Analysis_Digital_Comb_Filter.html
 audio_sample32
 voice_filter::process_comb(
-  automation_view const& automation, audio_sample32 const* source, std::int32_t sample)
+  automation_view const& automation, audio_sample32 source, std::int32_t sample)
 {
-  audio_sample32 input = source[sample];
   float dly_min_sec = automation.get(voice_filter_param::comb_dly_min, sample).real;
   float dly_plus_sec = automation.get(voice_filter_param::comb_dly_plus, sample).real;
   float gain_min = automation.get(voice_filter_param::comb_gain_min, sample).real;
@@ -70,29 +69,34 @@ voice_filter::process_comb(
   std::int32_t dly_plus_samples = static_cast<std::int32_t>(dly_plus_sec * _sample_rate);
   audio_sample32 min = _comb.output.get(dly_min_samples) * gain_min;
   audio_sample32 plus = _comb.input.get(dly_plus_samples) * gain_plus;
-  _comb.input.push(input);
-  _comb.output.push(input + plus + min);
+  _comb.input.push(source);
+  _comb.output.push(source + plus + min);
   return sanity_audio(_comb.output.get(0));
 }
 
 void 
-voice_filter::process_block(voice_input const& input, 
-  audio_state const& state, audio_sample32* output)
+voice_filter::process_block(
+  voice_input const& input, audio_state& state, std::int32_t index)
 {
+  audio_sample32* output = state.voice_filter[index].data();
+  automation_view automation(input.automation.rearrange_params(part_type::voice_filter, index));
+  automation_view route_automation(input.automation.rearrange_params(part_type::audio_route, 0));
+
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
     output[s] = 0.0f;
-    bool on = input.automation.get(voice_filter_param::on, s).discrete != 0;
+    bool on = automation.get(voice_filter_param::on, s).discrete != 0;
     if (!on) continue;
 
-    std::int32_t type = input.automation.get(voice_filter_param::type, s).discrete;
+    audio_sample32 source = state.mix(route_automation, audio_route_output::filter, index, s);
+    std::int32_t type = automation.get(voice_filter_param::type, s).discrete;
     switch (type)
     {
     case voice_filter_type::comb: 
-      output[s] = process_comb(input.automation, source, s);
+      output[s] = process_comb(automation, source, s);
       break;
     case voice_filter_type::state_var: 
-      output[s] = process_state_variable(input.automation, source, s); 
+      output[s] = process_state_variable(automation, source, s); 
       break;
     default: 
       assert(false); 
