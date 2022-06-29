@@ -75,28 +75,23 @@ voice_filter::process_comb(
 }
 
 void 
-voice_filter::process_block(
-  voice_input const& input, audio_state& state, std::int32_t index)
+voice_filter::process_block(voice_input const& input, std::int32_t index,
+  base::audio_sample32 const* audio_in, base::audio_sample32* audio_out)
 {
-  audio_sample32* output = state.voice_filter[index].data();
   automation_view automation(input.automation.rearrange_params(part_type::voice_filter, index));
-  automation_view route_automation(input.automation.rearrange_params(part_type::audio_route, 0));
-
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
-    output[s] = 0.0f;
+    audio_out[s] = 0.0f;
     bool on = automation.get(voice_filter_param::on, s).discrete != 0;
     if (!on) continue;
-
-    audio_sample32 source = state.mix(route_automation, audio_route_output::filter, index, s);
     std::int32_t type = automation.get(voice_filter_param::type, s).discrete;
     switch (type)
     {
     case voice_filter_type::comb: 
-      output[s] = process_comb(automation, source, s);
+      audio_out[s] = process_comb(automation, audio_in[s], s);
       break;
     case voice_filter_type::state_var: 
-      output[s] = process_state_variable(automation, source, s); 
+      audio_out[s] = process_state_variable(automation, audio_in[s], s);
       break;
     default: 
       assert(false); 

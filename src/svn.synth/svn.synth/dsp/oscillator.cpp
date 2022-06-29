@@ -157,14 +157,13 @@ oscillator::generate_wave(
 }
 
 void
-oscillator::process_block(voice_input const& input, audio_state& audio, std::int32_t index)
+oscillator::process_block(voice_input const& input, 
+  std::int32_t index, audio_sample32* audio_out)
 {
-  audio_sample32* output = audio.oscillator[index].data();
   automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
-
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {  
-    output[s] = 0.0f;
+    audio_out[s] = 0.0f;
     bool on = automation.get(oscillator_param::on, s).discrete != 0;
     if(!on) continue;
         
@@ -179,8 +178,8 @@ oscillator::process_block(voice_input const& input, audio_state& audio, std::int
 
     float amp = automation.get(oscillator_param::amp, s).real;
     float panning = automation.get(oscillator_param::pan, s).real;
-    output[s].left = sanity_bipolar((1.0f - panning) * sample * amp);
-    output[s].right = sanity_bipolar(panning * sample * amp);
+    audio_out[s].left = sanity_bipolar((1.0f - panning) * sample * amp);
+    audio_out[s].right = sanity_bipolar(panning * sample * amp);
   }
 }
 

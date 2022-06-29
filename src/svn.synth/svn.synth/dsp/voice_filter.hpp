@@ -44,7 +44,8 @@ private:
 public:
   voice_filter() = default;
   voice_filter(float sample_rate, std::int32_t midi_note);
-  void process_block(voice_input const& input, audio_state& state, std::int32_t index);
+  void process_block(voice_input const& input, std::int32_t index, 
+    base::audio_sample32 const* audio_in, base::audio_sample32* audio_out);
 };
 
 } // namespace svn::synth

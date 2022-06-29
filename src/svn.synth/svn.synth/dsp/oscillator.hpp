@@ -33,7 +33,7 @@ private:
 public:
   oscillator() = default;
   oscillator(float sample_rate, std::int32_t midi_note);
-  void process_block(voice_input const& input, audio_state& audio, std::int32_t index);
+  void process_block(voice_input const& input, std::int32_t index, base::audio_sample32* audio_out);
 };
 
 } // namespace svn::synth

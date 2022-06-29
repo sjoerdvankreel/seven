@@ -31,15 +31,19 @@ synth_voice::process_block(
   assert(release_sample < input.sample_count);
 
   for (std::int32_t i = 0; i < oscillator_count; i++)
-    _oscillators[i].process_block(input, audio, i);
+    _oscillators[i].process_block(input, i, audio.oscillator[i].data());
 
   // Clear filter output in case user selected weird routing (i.e. filter 3 to filter 2).
   for (std::int32_t i = 0; i < voice_filter_count; i++)
     base::clear_audio(audio.voice_filter[i].data(), input.sample_count);
   for (std::int32_t i = 0; i < voice_filter_count; i++)
-    _filters[i].process_block(input, audio, i);
+  {
+    base::audio_sample32 const* audio_in = audio.mix(input, audio_route_output::filter, i);
+    _filters[i].process_block(input, i, audio_in, audio.voice_filter[i].data());
+  }
 
-  return _amp.process_block(input, audio, release_sample);
+  base::audio_sample32 const* audio_in = audio.mix(input, audio_route_output::amp, 0);
+  return _amp.process_block(input, release_sample, audio_in, audio.voice_amp.data());
 } 
  
 } // namespace svn::synth

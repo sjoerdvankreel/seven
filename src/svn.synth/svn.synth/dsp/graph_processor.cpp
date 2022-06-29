@@ -51,28 +51,18 @@ setup_graph_voice_input(block_input const& input, topology_info const* topology)
   return result;
 }
 
-std::int32_t
-oscillator_spectrum_graph::audio_sample_count(
-  param_value const* state, float sample_rate) const
-{
-  std::int32_t one_second = std::ceil(sample_rate);
-  return static_cast<std::int32_t>(one_second);
-}
-
 void 
 oscillator_spectrum_graph::process_audio_core(
   block_input const& input, block_output& output, float sample_rate)
-{
-  oscillator_wave_graph wave(topology(), part_index());
-  return wave.process_audio_core(input, output, sample_rate);
-}
+{ return _wave.process_audio_core(input, output, sample_rate); }
 
 bool 
 oscillator_spectrum_graph::needs_repaint(std::int32_t runtime_param) const
-{
-  oscillator_wave_graph wave(topology(), part_index());
-  return wave.needs_repaint(runtime_param);
-}
+{ return _wave.needs_repaint(runtime_param); }
+
+std::int32_t
+oscillator_spectrum_graph::audio_sample_count(param_value const* state, float sample_rate) const
+{ return static_cast<std::int32_t>(std::ceil(sample_rate)); }
 
 void
 oscillator_spectrum_graph::audio_to_plot(
@@ -118,12 +108,13 @@ void
 oscillator_wave_graph::process_audio_core(
   block_input const& input, block_output& output, float sample_rate)
 {
+  _audio_out.clear();
+  _audio_out.resize(input.sample_count);
   voice_input vinput = setup_graph_voice_input(input, topology());
   oscillator osc(sample_rate, midi_note_c4);
-  audio_state audio(input.sample_count);
-  osc.process_block(vinput, audio, part_index());
+  osc.process_block(vinput, part_index(), _audio_out.data());
   base::clear_audio(output.audio, input.sample_count);
-  base::add_audio(output.audio, audio.oscillator[part_index()].data(), input.sample_count);
+  base::add_audio(output.audio, _audio_out.data(), input.sample_count);
 }
 
 std::int32_t
@@ -155,15 +146,17 @@ void
 filter_ir_graph::process_audio_core(
   block_input const& input, block_output& output, float sample_rate)
 {
-  _input.clear();
-  _input.resize(input.sample_count);
-  _input[0] = 1.0f;
-  audio_state audio(input.sample_count);
+  _audio_in.clear();
+  _audio_in.resize(input.sample_count);
+  _audio_in[0] = 1.0f;
+  _audio_out.clear();
+  _audio_out.resize(input.sample_count);
+
   voice_input vinput = setup_graph_voice_input(input, topology());
   auto filter = std::make_unique<voice_filter>(sample_rate, midi_note_c4);
-  filter->process_block(vinput, audio, part_index());
+  filter->process_block(vinput, part_index(), _audio_in.data(), _audio_out.data());
   base::clear_audio(output.audio, input.sample_count);
-  base::add_audio(output.audio, audio.voice_filter[part_index()].data(), input.sample_count);
+  base::add_audio(output.audio, _audio_out.data(), input.sample_count);
 }
  
 } // namespace svn::synth
