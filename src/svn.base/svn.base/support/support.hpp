@@ -2,7 +2,9 @@
 #define SVN_BASE_SUPPORT_SUPPORT_HPP
 
 #include <string>
+#include <vector>
 #include <cstdint>
+#include <utility>
 #include <immintrin.h>
 
 namespace svn::base {
@@ -17,6 +19,14 @@ multi_list_parser(
   std::wstring const& val, wchar_t const** names,
   std::int32_t const* counts, std::int32_t count,
   std::int32_t& result);
+
+// (Part x, index y) <-> multi list index.
+std::vector<std::vector<std::int32_t>> 
+multi_list_table_init_in(
+  std::int32_t const* counts, std::int32_t count);
+std::vector<std::pair<std::int32_t, std::int32_t>>
+multi_list_table_init_out(
+  std::int32_t const* counts, std::int32_t count);
 
 inline std::uint64_t
 disable_denormals()

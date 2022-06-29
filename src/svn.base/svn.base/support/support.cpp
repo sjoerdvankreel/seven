@@ -5,6 +5,33 @@
 
 namespace svn::base {
 
+std::vector<std::vector<std::int32_t>> 
+multi_list_table_init_in(
+  std::int32_t const* counts, std::int32_t count)
+{
+  std::int32_t index = 0;
+  std::vector<std::vector<std::int32_t>> result;
+  for (std::int32_t i = 0; i < count; i++)
+  {
+    std::vector<std::int32_t> inner;
+    for(std::int32_t j = 0; j < counts[i]; j++)
+      inner.push_back(index++);
+    result.push_back(inner);
+  }
+  return result;
+}
+
+std::vector<std::pair<std::int32_t, std::int32_t>>
+multi_list_table_init_out(
+  std::int32_t const* counts, std::int32_t count)
+{
+  std::vector<std::pair<std::int32_t, std::int32_t>> result;
+  for(std::int32_t i = 0; i < count; i++)
+    for(std::int32_t j = 0; j < counts[i]; j++)
+      result.push_back(std::make_pair(i, j));
+  return result;
+}
+
 std::wstring 
 multi_list_formatter(
   std::int32_t val, wchar_t const** names,

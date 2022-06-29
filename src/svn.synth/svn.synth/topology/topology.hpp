@@ -16,8 +16,11 @@ inline std::int32_t constexpr oscillator_max_spread = 8;
 inline std::int32_t constexpr synth_polyphony = 32;
 inline std::int32_t constexpr synth_max_ui_height = 500; 
 inline std::int32_t constexpr audio_route_count = 9;
+
 inline std::int32_t constexpr audio_inputs_count = oscillator_count + voice_filter_count + 1 /* off */;
 inline std::int32_t constexpr audio_outputs_count = voice_filter_count + 1 /* off */ + 1 /* amp */;
+inline std::int32_t constexpr audio_input_counts[audio_inputs_count] = { 1, oscillator_count, voice_filter_count };
+inline std::int32_t constexpr audio_output_counts[audio_outputs_count] = { 1, voice_filter_count, 1 };
 
 extern base::part_descriptor const part_descriptors[];
 

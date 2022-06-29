@@ -132,12 +132,8 @@ oscillator_params[oscillator_param::count] =
 
 static wchar_t const* audio_input_names[audio_route_input::count] =
 { L"Off", L"Osc", L"Flt" };
-static std::int32_t const audio_input_counts[] =
-{ 1, oscillator_count, voice_filter_count };
-static wchar_t const* audio_output_names[] =
+static wchar_t const* audio_output_names[audio_route_output::count] =
 { L"Off", L"Flt", L"Amp" };
-static std::int32_t const audio_output_counts[] =
-{ 1, voice_filter_count, 1 };
 
 static std::wstring 
 format_audio_input(std::int32_t val)
