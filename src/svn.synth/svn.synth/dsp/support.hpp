@@ -90,11 +90,11 @@ audio_state::mix(
   std::int32_t input_off = input_table_in[audio_route_input::off][0];
   for (std::int32_t i = 0; i < audio_route_count; i++)
   {
-    std::int32_t out = automation.get(audio_route_param::in1 * i + 1, sample).discrete;
-    if (out != output_id) continue;
-    std::int32_t in = automation.get(audio_route_param::in1 * i, sample).discrete;
+    std::int32_t in = automation.get(i * 3, sample).discrete;
     if (in == input_off) continue;
-    float amt = automation.get(audio_route_param::in1 * i + 2, sample).real;
+    std::int32_t out = automation.get(i * 3 + 1, sample).discrete;
+    if (out != output_id) continue;
+    float amt = automation.get(i * 3 + 2, sample).real;
     std::pair<std::int32_t, std::int32_t> input_ids(input_table_out[in]);
     result += input_buffer(input_ids.first, input_ids.second)[sample] * amt;
   }
