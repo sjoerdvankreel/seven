@@ -123,7 +123,7 @@ oscillator_wave_graph::process_audio_core(
   audio_state audio(input.sample_count);
   osc.process_block(vinput, audio, part_index());
   base::clear_audio(output.audio, input.sample_count);
-  base::add_audio(output.audio, audio.voice_amp.data(), input.sample_count);
+  base::add_audio(output.audio, audio.oscillator[part_index()].data(), input.sample_count);
 }
 
 std::int32_t
