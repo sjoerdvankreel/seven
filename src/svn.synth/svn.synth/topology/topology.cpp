@@ -131,9 +131,9 @@ oscillator_params[oscillator_param::count] =
 // ---- audio route ----
 
 static wchar_t const* audio_input_names[audio_route_input::count] =
-{ L"Off", L"Osc", L"Flt" };
+{ L"Off", L"Osc", L"VFlt" };
 static wchar_t const* audio_output_names[audio_route_output::count] =
-{ L"Off", L"Flt", L"Amp" };
+{ L"Off", L"VFlt", L"Amp" };
 
 static std::wstring 
 format_audio_input(std::int32_t val)
