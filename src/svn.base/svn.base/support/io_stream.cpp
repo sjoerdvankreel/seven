@@ -1,5 +1,7 @@
 #include <svn.base/support/io_stream.hpp>
 
+#include <set>
+#include <tuple>
 #include <vector>
 #include <cassert>
 #include <algorithm>
@@ -20,10 +22,21 @@ io_stream::save(topology_info const& topology, param_value const* state)
   if(!write_int32(version)) return false;
   if(!write_int32(topology.input_param_count)) return false;
 
+  // Keep track of stuff we've seen, don't write different params under the same id.
+  std::set<std::tuple<std::wstring, std::int32_t, std::wstring>> seen;
   for (std::int32_t p = 0; p < topology.input_param_count; p++)
   {
     auto const& param = *topology.params[p].descriptor;
     auto const& part = topology.parts[topology.params[p].part_index];
+
+    // Just debugging.
+    auto this_id = std::make_tuple(
+      std::wstring(part.descriptor->static_name.short_), 
+      part.type_index, 
+      std::wstring(param.static_name.short_));
+    assert(seen.find(this_id) == seen.end());
+    seen.insert(this_id);
+
     if(!write_wstring(part.descriptor->static_name.short_)) return false;
     if(!write_int32(part.type_index)) return false;
     if(!write_wstring(param.static_name.short_)) return false;
