@@ -81,7 +81,7 @@ voice_filter::process_block(voice_input const& input, std::int32_t index,
   automation_view automation(input.automation.rearrange_params(part_type::voice_filter, index));
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
-    audio_out[s] = 0.0f;
+    audio_out[s] = audio_in[s];
     bool on = automation.get(voice_filter_param::on, s).discrete != 0;
     if (!on) continue;
     std::int32_t type = automation.get(voice_filter_param::type, s).discrete;
