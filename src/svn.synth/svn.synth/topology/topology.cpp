@@ -46,6 +46,14 @@ envelope_slopes[envelope_slope::count] =
   { L"Sqrt", L"Squared" }
 };
 
+static std::wstring
+format_env_sync(std::int32_t val)
+{ return L""; }
+
+static bool
+parse_env_sync(std::wstring const& val, std::int32_t& result)
+{ return false; }
+
 static param_descriptor const
 envelope_params[envelope_param::count] = 
 { 
@@ -53,18 +61,23 @@ envelope_params[envelope_param::count] =
   { { L"Type", L"Type" }, L"", false, envelope_types, envelope_type::count, { 0, 0, nullptr, 0 } },
   { { L"Sync", L"Tempo sync" }, false, { 1, 0, nullptr, 0 } },
   { { L"Dly", L"Delay time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 2, 0, nullptr, 0 } },
+  { { L"Dly", L"Delay sync" }, L"", false, 0, 17 * 16, 0, &format_env_sync, &parse_env_sync, { 2, 0, nullptr, 0 } },
   { { L"Hld", L"Hold time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 3, 0, nullptr, 0 } },
+  { { L"Hld", L"Hold sync" }, L"", false, 0, 17 * 16, 0, &format_env_sync, &parse_env_sync, { 3, 0, nullptr, 0 } },
   { { L"Sus", L"Sustain level" }, L"dB", { 0.5f, 1, real_bounds::unit(), real_bounds::decibel() }, { 4, 0, nullptr, 0 } },
   { { L"Att", L"Attack time" }, L"Sec", { 0.05f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 5, 0, nullptr, 0 } },
+  { { L"Att", L"Attack sync" }, L"", false, 0, 17 * 16, 0, &format_env_sync, &parse_env_sync, { 5, 0, nullptr, 0 } },
   { { L"ASlp", L"Attack slope" }, L"", false, envelope_slopes, envelope_slope::count, { 6, 0, nullptr, 0 } },
   { { L"AMid", L"Attack midpoint" }, L"", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 7, 0, nullptr, 0 } },
   { { L"Dcy", L"Decay time" }, L"Sec", { 0.1f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 8, 0, nullptr, 0 } },
+  { { L"Dcy", L"Decay sync" }, L"", false, 0, 17 * 16, 0, &format_env_sync, &parse_env_sync, { 8, 0, nullptr, 0 } },
   { { L"DSlp", L"Decay slope" }, L"", false, envelope_slopes, envelope_slope::count, { 9, 0, nullptr, 0 } },
   { { L"DMid", L"Decay midpoint" }, L"", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 10, 0, nullptr, 0 } },
   { { L"Rel", L"Release time" }, L"Sec", { 0.2f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 11, 0, nullptr, 0 } },
+  { { L"Rel", L"Release sync" }, L"", false, 0, 17 * 16, 0, &format_env_sync, &parse_env_sync, { 11, 0, nullptr, 0 } },
   { { L"RSlp", L"Release slope" }, L"", false, envelope_slopes, envelope_slope::count, { 12, 0, nullptr, 0 } },
   { { L"RMid", L"Release midpoint" }, L"", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 13, 0, nullptr, 0 } }
-};
+}; 
  
 // ---- voice filter ----
 
