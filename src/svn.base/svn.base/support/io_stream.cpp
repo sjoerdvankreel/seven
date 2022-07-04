@@ -1,7 +1,5 @@
 #include <svn.base/support/io_stream.hpp>
 
-#include <set>
-#include <tuple>
 #include <vector>
 #include <cassert>
 #include <algorithm>
@@ -22,24 +20,14 @@ io_stream::save(topology_info const& topology, param_value const* state)
   if(!write_int32(version)) return false;
   if(!write_int32(topology.input_param_count)) return false;
 
-  // Keep track of stuff we've seen, don't write different params under the same id.
-  std::set<std::tuple<std::wstring, std::int32_t, std::wstring>> seen;
   for (std::int32_t p = 0; p < topology.input_param_count; p++)
   {
     auto const& param = *topology.params[p].descriptor;
     auto const& part = topology.parts[topology.params[p].part_index];
 
-    // Just debugging.
-    auto this_id = std::make_tuple(
-      std::wstring(part.descriptor->static_name.short_), 
-      part.type_index, 
-      std::wstring(param.static_name.detail));
-    assert(seen.find(this_id) == seen.end());
-    seen.insert(this_id);
-
-    if(!write_wstring(part.descriptor->static_name.short_)) return false;
+    if(!write_string(part.descriptor->guid)) return false;
     if(!write_int32(part.type_index)) return false;
-    if(!write_wstring(param.static_name.detail)) return false;
+    if(!write_string(param.guid)) return false;
     if(!write_int32(param.type)) return false;
 
     switch (param.type)
@@ -72,10 +60,10 @@ io_stream::load(topology_info const& topology, param_value* state)
 {
   std::int32_t type;
   param_value value;
+  std::string part_guid;
+  std::string param_guid;
   std::wstring str_value;
-  std::wstring part_name;
-  std::wstring param_name;
-  
+
   std::int32_t temp;
   std::int32_t type_index;
   std::int32_t param_count;
@@ -87,9 +75,9 @@ io_stream::load(topology_info const& topology, param_value* state)
 
   for (std::int32_t sp = 0; sp < param_count; sp++)
   {
-    if(!read_wstring(part_name)) return false;
+    if(!read_string(part_guid)) return false;
     if(!read_int32(type_index)) return false;
-    if(!read_wstring(param_name)) return false;
+    if(!read_string(param_guid)) return false;
     if(!read_int32(type)) return false;
     if(type < 0 || type >= param_type::count) return false;
 
@@ -116,9 +104,9 @@ io_stream::load(topology_info const& topology, param_value* state)
     {
       auto const& param = topology.params[rp].descriptor;
       auto const& part = topology.parts[topology.params[rp].part_index];
-      if(part_name != part.descriptor->static_name.short_) continue;
+      if(part_guid != part.descriptor->guid) continue;
       if(type_index != part.type_index) continue;
-      if(param_name != param->static_name.detail) continue;
+      if(param_guid != param->guid) continue;
       if(type != param->type) continue;
 
       switch (type)
