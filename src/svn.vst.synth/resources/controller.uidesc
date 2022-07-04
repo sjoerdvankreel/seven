@@ -216,9 +216,9 @@
         "templates": {
             "view": {
                 "attributes": {
-                    "size": "975, 455",
-                    "minSize": "975, 455",
-                    "maxSize": "975, 455",
+                    "size": "732, 480",
+                    "minSize": "732, 480",
+                    "maxSize": "732, 480",
                     "class": "view_container_fix"
                 },
                 "children": {
@@ -3107,7 +3107,7 @@
                             "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "3, 342",
-                            "size": "240, 110",
+                            "size": "240, 135",
                             "background-offset": "25, 0"
                         },
                         "children": {
@@ -3115,7 +3115,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 110",
+                                    "size": "240, 135",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -3198,7 +3198,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 91",
+                                            "size": "240, 116",
                                             "frame-color": "color_FFADAD80"
                                         }
                                     },
@@ -3206,7 +3206,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 91",
+                                            "size": "240, 116",
                                             "background-color": "color_FFADAD20"
                                         },
                                         "children": {
@@ -6869,7 +6869,7 @@
                             "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "246, 408",
-                            "size": "240, 44",
+                            "size": "240, 69",
                             "background-offset": "50, 25"
                         },
                         "children": {
@@ -6877,7 +6877,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 44",
+                                    "size": "240, 69",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -6944,7 +6944,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 25",
+                                            "size": "240, 50",
                                             "frame-color": "color_FDFFB680"
                                         }
                                     },
@@ -6952,7 +6952,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 25",
+                                            "size": "240, 50",
                                             "background-color": "color_FDFFB620"
                                         },
                                         "children": {
@@ -9111,7 +9111,7 @@
                             "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "489, 210",
-                            "size": "240, 242",
+                            "size": "240, 220",
                             "background-offset": "75, 50"
                         },
                         "children": {
@@ -9119,7 +9119,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 242",
+                                    "size": "240, 220",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -9186,7 +9186,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 223",
+                                            "size": "240, 201",
                                             "frame-color": "color_CAFFBF80"
                                         }
                                     },
@@ -9194,7 +9194,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 223",
+                                            "size": "240, 201",
                                             "background-color": "color_CAFFBF20"
                                         },
                                         "children": {
@@ -10873,8 +10873,8 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "732, 3",
-                            "size": "240, 449",
+                            "origin": "489, 433",
+                            "size": "240, 44",
                             "background-offset": "100, 0"
                         },
                         "children": {
@@ -10882,7 +10882,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 449",
+                                    "size": "240, 44",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -10949,7 +10949,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 430",
+                                            "size": "240, 25",
                                             "frame-color": "color_9BF6FF80"
                                         }
                                     },
@@ -10957,7 +10957,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 430",
+                                            "size": "240, 25",
                                             "background-color": "color_9BF6FF20"
                                         },
                                         "children": {
