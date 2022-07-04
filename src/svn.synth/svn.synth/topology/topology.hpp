@@ -27,7 +27,7 @@ extern base::part_descriptor const part_descriptors[];
 
 struct envelope_type_t { enum value { dahdsr, dahdr, count }; };
 struct envelope_slope_t { enum value { lin, log, quad, sqrt, count }; };
-struct envelope_param_t { enum value { on, type, sync, delay_time, hold_time, sustain_level, attack_time, decay_time, release_time, attack_slope, decay_slope, release_slope, attack_mid, decay_mid, release_mid, count }; };
+struct envelope_param_t { enum value { on, type, sync, delay_time, hold_time, sustain_level, attack_time, attack_slope, attack_mid, decay_time, decay_slope, decay_mid, release_time, release_slope, release_mid, count }; };
 
 struct voice_filter_type_t { enum value { state_var, comb, count }; };
 struct voice_filter_stvar_type_t { enum value { lpf, hpf, bpf, bsf, count }; };
