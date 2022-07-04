@@ -16,6 +16,8 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
 {
   switch (part_type)
   {
+  case svn::synth::part_type::envelope:
+    return new svn::synth::filter_ir_graph(topology, part_index);
   case svn::synth::part_type::voice_filter:
     return new svn::synth::filter_ir_graph(topology, part_index);
   case svn::synth::part_type::oscillator:

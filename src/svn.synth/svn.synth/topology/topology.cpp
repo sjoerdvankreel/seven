@@ -25,11 +25,20 @@ output_params[output_param::count] =
 };
 
 // ---- envelope ----
- 
-//struct envelope_param_t { enum value { on, delay_time, attack_time, attack_slope, attack_mid, hold_time, decay_time, decay_slope, decay_mid, sustain_level, release_time, release_slope, release_mid, count }; };
+
+static graph_descriptor const
+envelope_graph =
+{ -1, 0, 2, 1, 1, L"Envelope" };
 
 static item_name const
-envelope_slope_types[envelope_slope::count] =
+envelope_types[envelope_type::count] =
+{
+  { L"Dahdsr", L"DAHDSR" },
+  { L"Dahdr", L"DAHDR" }
+};
+
+static item_name const
+envelope_slopes[envelope_slope::count] =
 {
   { L"Lin", L"Linear" },
   { L"Log", L"Logarithmic" },
@@ -39,20 +48,22 @@ envelope_slope_types[envelope_slope::count] =
 
 static param_descriptor const
 envelope_params[envelope_param::count] = 
-{
+{ 
   { { L"On", L"Enabled" }, false, { -1, 0, { }, { } } },
-  { { L"Dly", L"Delay time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 0, 0, nullptr, 0 } },
-  { { L"Hld", L"Hold time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 1, 0, nullptr, 0 } },
-  { { L"Sus", L"Sustain level" }, L"dB", { 0.5f, 1, real_bounds::unit(), real_bounds::decibel() }, { 2, 0, nullptr, 0 } },
-  { { L"Att", L"Attack time" }, L"Sec", { 0.05f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 3, 0, nullptr, 0 } },
-  { { L"Dcy", L"Decay time" }, L"Sec", { 0.1f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 4, 0, nullptr, 0 } },
-  { { L"Rel", L"Release time" }, L"Sec", { 0.2f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 5, 0, nullptr, 0 } },
-  { { L"ASlp", L"Attack slope" }, L"", false, envelope_slope_types, envelope_slope::count, { 6, 0, nullptr, 0 } },
-  { { L"DSlp", L"Decay slope" }, L"", false, envelope_slope_types, envelope_slope::count, { 7, 0, nullptr, 0 } },
-  { { L"RSlp", L"Release slope" }, L"", false, envelope_slope_types, envelope_slope::count, { 8, 0, nullptr, 0 } },
-  { { L"AMid", L"Attack midpoint" }, L"", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 9, 0, nullptr, 0 } },
-  { { L"DMid", L"Decay midpoint" }, L"", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 10, 0, nullptr, 0 } },
-  { { L"RMid", L"Release midpoint" }, L"", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 11, 0, nullptr, 0 } }
+  { { L"Type", L"Type" }, L"", false, envelope_types, envelope_type::count, { 0, 0, nullptr, 0 } },
+  { { L"Sync", L"Tempo sync" }, false, { 1, 0, nullptr, 0 } },
+  { { L"Dly", L"Delay time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 2, 0, nullptr, 0 } },
+  { { L"Hld", L"Hold time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 3, 0, nullptr, 0 } },
+  { { L"Sus", L"Sustain level" }, L"dB", { 0.5f, 1, real_bounds::unit(), real_bounds::decibel() }, { 4, 0, nullptr, 0 } },
+  { { L"Att", L"Attack time" }, L"Sec", { 0.05f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 5, 0, nullptr, 0 } },
+  { { L"Dcy", L"Decay time" }, L"Sec", { 0.1f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 6, 0, nullptr, 0 } },
+  { { L"Rel", L"Release time" }, L"Sec", { 0.2f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 7, 0, nullptr, 0 } },
+  { { L"ASlp", L"Attack slope" }, L"", false, envelope_slopes, envelope_slope::count, { 8, 0, nullptr, 0 } },
+  { { L"DSlp", L"Decay slope" }, L"", false, envelope_slopes, envelope_slope::count, { 9, 0, nullptr, 0 } },
+  { { L"RSlp", L"Release slope" }, L"", false, envelope_slopes, envelope_slope::count, { 10, 0, nullptr, 0 } },
+  { { L"AMid", L"Attack midpoint" }, L"", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 11, 0, nullptr, 0 } },
+  { { L"DMid", L"Decay midpoint" }, L"", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 12, 0, nullptr, 0 } },
+  { { L"RMid", L"Release midpoint" }, L"", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 13, 0, nullptr, 0 } }
 };
 
 // ---- voice filter ----
@@ -220,11 +231,11 @@ part_descriptor const
 part_descriptors[part_type::count] =  
 {
   { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 3, 0, L"Voice", { 0xFF, 0xAD, 0xAD }}},
-  { { L"Env", L"Envelope" }, part_type::envelope, false, envelope_count, envelope_params, envelope_param::count, nullptr, 0, { 3, 0, L"Voice", { 0xA0, 0xC4, 0xFF }}},
+  { { L"Env", L"Envelope" }, part_type::envelope, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 3, 0, L"Voice", { 0xA0, 0xC4, 0xFF }}},
   { { L"VFilter", L"Voice filter" }, part_type::voice_filter, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 3, 0, L"Voice", { 0xFF, 0xD6, 0xA5 } } },
   { { L"Amp", L"Voice amp" }, part_type::voice_amp, false, 1, voice_amp_params, voice_amp_param::count, nullptr, 0, { 2, -1, L"Voice", { 0xFD, 0xFF, 0xB6 } } },
   { { L"Audio", L"Audio route" }, part_type::audio_route, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 3, -1, L"Route", { 0xCA, 0xFF, 0xBF } } },
   { { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, nullptr, 0, { 3, -1, L"Global", { 0x9B, 0xF6, 0xFF } } }
 }; 
      
-} // namespace svn::synth       
+} // namespace svn::synth        
