@@ -15,7 +15,7 @@ inline std::int32_t constexpr oscillator_count = 4;
 inline std::int32_t constexpr voice_filter_count = 3;
 inline std::int32_t constexpr oscillator_max_spread = 8;
 inline std::int32_t constexpr synth_polyphony = 32;
-inline std::int32_t constexpr synth_max_ui_height = 500; 
+inline std::int32_t constexpr synth_max_ui_height = 460; 
 inline std::int32_t constexpr audio_route_count = 9;
 
 inline std::int32_t constexpr audio_inputs_count = oscillator_count + voice_filter_count + 1 /* off */;
@@ -40,7 +40,7 @@ struct oscillator_param_t { enum value { on, amp, pan, type, anlg_type, anlg_spr
 
 struct voice_amp_param_t { enum value { level, decay, count }; };
 struct output_param_t { enum value { clip, drain, voices, count }; };
-struct part_type_t { enum value { oscillator, envelope, voice_filter, voice_amp, audio_route, output, count }; };
+struct part_type_t { enum value { oscillator, envelope, voice_amp, voice_filter, audio_route, output, count }; };
 
 struct audio_route_input_t { enum value { off, osc, filter, count }; };
 struct audio_route_output_t { enum value { off, filter, amp, count }; };
