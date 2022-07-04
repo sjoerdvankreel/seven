@@ -74,12 +74,19 @@ format_env_sync(std::int32_t val)
 static bool
 parse_env_sync(std::wstring const& val, std::int32_t& result)
 {
-  std::int32_t num;
-  std::int32_t den;
+  std::int32_t num = -1;
+  std::int32_t den = -1;
   std::size_t pos = val.find(L'/');
   if(pos == std::wstring::npos) return false;
-  std::wstring num = val.substr(0, pos);
-  std::wstringstream num_str(num);
+  std::wstring num_str = val.substr(0, pos);
+  std::wstringstream num_ss(num_str);
+  num_ss >> num;
+  if(num_ss.bad() || !(0 <= num && num < 16)) return false;
+  std::wstring den_str = val.substr(0, pos);
+  std::wstringstream den_ss(den_str);
+  den_ss >> den;
+  if (den_ss.bad() || !(1 <= den && den <= 16)) return false;
+  return (den - 1) * 16 + num;
 }
 
 static param_descriptor const
