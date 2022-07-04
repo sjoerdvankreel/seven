@@ -7,7 +7,7 @@
 
 namespace svn::base {
 
-struct real_slope_t { enum value { linear, logarithmic, decibel, count }; };
+struct real_slope_t { enum value { linear, quadratic, logarithmic, decibel, count }; };
 typedef real_slope_t::value real_slope;
 
 // Dsp/display bounds for real valued params.
@@ -25,6 +25,8 @@ struct real_bounds
   { return { 0.0, 1.0, 0.0, real_slope::linear }; }
   static inline real_bounds linear(float min, float max) 
   { return { min, max, 0.0, real_slope::linear }; }
+  static inline real_bounds quadratic(float min, float max) 
+  { return { min, max, 0.0, real_slope::quadratic }; }
   static inline real_bounds decibel() 
   { return { -std::numeric_limits<float>::infinity(), 0.0, 0.0, real_slope::decibel }; }
   static inline real_bounds log(float min, float max, float ref) 
@@ -39,6 +41,7 @@ real_bounds::to_range(float val) const
   {
   case real_slope::linear: return min + (max - min) * val;
   case real_slope::decibel: return 20.0f * std::log10(val);
+  case real_slope::quadratic: return min + (max - min) * val * val;
   case real_slope::logarithmic: return std::pow(val, exp) * (max - min) + min;
   default: assert(false); return 0.0f;
   }
@@ -50,6 +53,7 @@ real_bounds::from_range(float val) const
   switch (slope)
   {
   case real_slope::linear: return (val - min) / (max - min);
+  case real_slope::quadratic: return std::sqrt((val - min) / (max - min));
   case real_slope::decibel: return std::exp(std::log(10.0f) * val / 20.0f);
   case real_slope::logarithmic: return std::pow((val - min) / (max - min), 1.0f / exp);
   default: assert(false); return 0.0f;

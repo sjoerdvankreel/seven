@@ -30,8 +30,8 @@ static param_descriptor const
 envelope_params[envelope_param::count] =
 {
   { { L"On", L"Enabled" }, false, { -1, 0, { }, { } } },
-  { { L"Dly", L"Delay time" }, L"Ms", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 0, 0, nullptr, 0 } }
-};
+  { { L"Dly", L"Delay time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 0, 0, nullptr, 0 } }
+}; 
 
 // ---- voice filter ----
 
