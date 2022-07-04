@@ -25,13 +25,18 @@ output_params[output_param::count] =
 };
 
 // ---- envelope ----
-
+ 
 static param_descriptor const
 envelope_params[envelope_param::count] =
 {
   { { L"On", L"Enabled" }, false, { -1, 0, { }, { } } },
-  { { L"Dly", L"Delay time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 0, 0, nullptr, 0 } }
-}; 
+  { { L"Dly", L"Delay time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 0, 0, nullptr, 0 } },
+  { { L"Att", L"Attack time" }, L"Sec", { 0.05f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 1, 0, nullptr, 0 } },
+  { { L"Hld", L"Hold time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 2, 0, nullptr, 0 } },
+  { { L"Dcy", L"Decay time" }, L"Sec", { 0.1f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 3, 0, nullptr, 0 } },
+  { { L"Sus", L"Sustain level" }, L"dB", { 0.5f, 1, real_bounds::unit(), real_bounds::decibel() }, { 4, 0, nullptr, 0 } },
+  { { L"Rel", L"Release time" }, L"Sec", { 0.2f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 5, 0, nullptr, 0 } }
+};
 
 // ---- voice filter ----
 

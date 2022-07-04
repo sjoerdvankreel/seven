@@ -25,7 +25,8 @@ inline std::int32_t constexpr audio_output_counts[audio_outputs_count] = { 1, vo
 
 extern base::part_descriptor const part_descriptors[];
 
-struct envelope_param_t { enum value { on, delay_ms, count }; };
+struct envelope_slope_t { enum value { lin, log, quad, sqrt, count }; };
+struct envelope_param_t { enum value { on, delay_time, attack_time, hold_time, decay_time, sustain_level, release_time, count }; };
 
 struct voice_filter_type_t { enum value { state_var, comb, count }; };
 struct voice_filter_stvar_type_t { enum value { lpf, hpf, bpf, bsf, count }; };
@@ -46,8 +47,10 @@ struct audio_route_param_t { enum value { in1, out1, amt1, in2, out2, amt2, in3,
 
 typedef part_type_t::value part_type;
 typedef output_param_t::value output_param;
-typedef envelope_param_t::value envelope_param;
 typedef voice_amp_param_t::value voice_amp_param;
+
+typedef envelope_slope_t::value envelope_slope;
+typedef envelope_param_t::value envelope_param;
 
 typedef audio_route_param_t::value audio_route_param;
 typedef audio_route_input_t::value audio_route_input;
