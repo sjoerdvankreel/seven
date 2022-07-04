@@ -58,6 +58,7 @@ struct param_ui_descriptor
 // Describes automation input.
 struct param_descriptor
 {
+  std::string const guid; // Unique param id for serialization.
   item_name const static_name; // Static name, e.g. "Frequency", "Resonance".
   param_type const type; // Parameter type.
   wchar_t const* const unit; // Parameter unit, e.g. "dB", "Hz".
@@ -72,32 +73,33 @@ struct param_descriptor
   std::size_t format(param_value val, wchar_t* buffer, std::size_t size) const;
 
   // Real.
-  param_descriptor(item_name const& static_name, wchar_t const* unit, 
-  real_descriptor const& real, param_ui_descriptor const& ui) :
-  static_name(static_name), type(param_type::real), unit(unit), real(real), ui(ui) {}
+  param_descriptor(std::string const& guid, item_name const& static_name, 
+  wchar_t const* unit, real_descriptor const& real, param_ui_descriptor const& ui) :
+  guid(guid), static_name(static_name), type(param_type::real), unit(unit), real(real), ui(ui) {}
 
   // Toggle.
-  param_descriptor(item_name const& static_name, bool default_, param_ui_descriptor const& ui) :
-  static_name(static_name), type(param_type::toggle),
+  param_descriptor(std::string const& guid, item_name const& static_name, 
+  bool default_, param_ui_descriptor const& ui) :
+  guid(guid), static_name(static_name), type(param_type::toggle),
   unit(L""), discrete(discrete_descriptor(0, 1, default_, nullptr, nullptr, nullptr)), ui(ui) {}
 
   // List/knob list with item list.
-  param_descriptor(item_name const& static_name, wchar_t const* unit, bool knob,
-  item_name const* const items, std::int32_t count, param_ui_descriptor const& ui) :
-  static_name(static_name), type(knob? param_type::knob_list: param_type::list), 
+  param_descriptor(std::string const& guid, item_name const& static_name, wchar_t const* unit, 
+  bool knob, item_name const* const items, std::int32_t count, param_ui_descriptor const& ui) :
+  guid(guid), static_name(static_name), type(knob? param_type::knob_list: param_type::list),
   unit(unit), discrete(discrete_descriptor(0, count - 1, 0, items, nullptr, nullptr)), ui(ui) {}
 
   // Knob/text.
-  param_descriptor(item_name const& static_name, wchar_t const* unit, bool knob, 
-  std::int32_t min, std::int32_t max, std::int32_t default_, param_ui_descriptor const& ui) :
-  static_name(static_name), type(knob? param_type::knob: param_type::text), 
+  param_descriptor(std::string const& guid, item_name const& static_name, wchar_t const* unit,
+  bool knob, std::int32_t min, std::int32_t max, std::int32_t default_, param_ui_descriptor const& ui) :
+  guid(guid), static_name(static_name), type(knob? param_type::knob: param_type::text),
   unit(unit), discrete(discrete_descriptor(min, max, default_, nullptr, nullptr, nullptr)), ui(ui) {}
    
   // List/knob list with formatter callbacks.
-  param_descriptor(item_name const& static_name, wchar_t const* unit, 
-  bool knob, std::int32_t min, std::int32_t max, std::int32_t default_, 
+  param_descriptor(std::string const& guid, item_name const& static_name, 
+  wchar_t const* unit, bool knob, std::int32_t min, std::int32_t max, std::int32_t default_, 
   param_formatter formatter, param_parser parser, param_ui_descriptor const& ui) :
-  static_name(static_name), type(knob? param_type::knob_list: param_type::list), 
+  guid(guid), static_name(static_name), type(knob? param_type::knob_list: param_type::list),
   unit(unit), discrete(discrete_descriptor(min, max, default_, nullptr, parser, formatter)), ui(ui) {}
 };
 

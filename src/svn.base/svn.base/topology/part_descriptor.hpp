@@ -38,6 +38,7 @@ struct part_ui_descriptor
 // Static part info.
 struct part_descriptor
 {
+  std::string const guid; // Unique part id for serialization.
   item_name const static_name; // Static name, e.g. "Osc", "Filter".
   std::int32_t const type; // Type id, e.g. Osc, Filter.
   bool const output; // Part contains output parameters.
