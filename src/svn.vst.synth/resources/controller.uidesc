@@ -4465,38 +4465,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_0_delay_sync",
                                                             "tooltip": "Env 1 Delay sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Dly"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_0_delay_sync",
+                                                            "tooltip": "Env 1 Delay sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -4561,38 +4569,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_0_hold_sync",
                                                             "tooltip": "Env 1 Hold sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Hld"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_0_hold_sync",
+                                                            "tooltip": "Env 1 Hold sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -4709,38 +4725,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_0_attack_sync",
                                                             "tooltip": "Env 1 Attack sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Att"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_0_attack_sync",
+                                                            "tooltip": "Env 1 Attack sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -4901,38 +4925,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_0_decay_sync",
                                                             "tooltip": "Env 1 Decay sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Dcy"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_0_decay_sync",
+                                                            "tooltip": "Env 1 Decay sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -5093,38 +5125,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_0_release_sync",
                                                             "tooltip": "Env 1 Release sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Rel"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_0_release_sync",
+                                                            "tooltip": "Env 1 Release sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -5619,38 +5659,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_1_delay_sync",
                                                             "tooltip": "Env 2 Delay sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Dly"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_1_delay_sync",
+                                                            "tooltip": "Env 2 Delay sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -5715,38 +5763,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_1_hold_sync",
                                                             "tooltip": "Env 2 Hold sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Hld"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_1_hold_sync",
+                                                            "tooltip": "Env 2 Hold sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -5863,38 +5919,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_1_attack_sync",
                                                             "tooltip": "Env 2 Attack sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Att"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_1_attack_sync",
+                                                            "tooltip": "Env 2 Attack sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -6055,38 +6119,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_1_decay_sync",
                                                             "tooltip": "Env 2 Decay sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Dcy"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_1_decay_sync",
+                                                            "tooltip": "Env 2 Decay sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -6247,38 +6319,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_1_release_sync",
                                                             "tooltip": "Env 2 Release sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Rel"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_1_release_sync",
+                                                            "tooltip": "Env 2 Release sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -6773,38 +6853,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_2_delay_sync",
                                                             "tooltip": "Env 3 Delay sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Dly"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_2_delay_sync",
+                                                            "tooltip": "Env 3 Delay sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -6869,38 +6957,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_2_hold_sync",
                                                             "tooltip": "Env 3 Hold sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Hld"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_2_hold_sync",
+                                                            "tooltip": "Env 3 Hold sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -7017,38 +7113,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_2_attack_sync",
                                                             "tooltip": "Env 3 Attack sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Att"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_2_attack_sync",
+                                                            "tooltip": "Env 3 Attack sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -7209,38 +7313,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_2_decay_sync",
                                                             "tooltip": "Env 3 Decay sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Dcy"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_2_decay_sync",
+                                                            "tooltip": "Env 3 Decay sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
@@ -7401,38 +7513,46 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "COptionMenu": {
+                                                    "seven_rotary_knob": {
                                                         "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
                                                             "origin": "0, 0",
                                                             "control-tag": "envelope_2_release_sync",
                                                             "tooltip": "Env 3 Release sync",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "272",
-                                                            "font-color": "color_A0C4FFFF",
-                                                            "back-color": "color_A0C4FF40",
-                                                            "shadow-color": "color_A0C4FF80"
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_A0C4FFFF"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
                                                             "title": "Rel"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "envelope_2_release_sync",
+                                                            "tooltip": "Env 3 Release sync",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "272",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_A0C4FFFF"
                                                         }
                                                     }
                                                 }
