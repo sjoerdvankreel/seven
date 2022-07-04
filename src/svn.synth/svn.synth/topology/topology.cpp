@@ -65,11 +65,11 @@ vfilter_stvar_relevance[1] =
   
 static param_descriptor const
 voice_filter_params[voice_filter_param::count] =
-{ 
+{  
   { { L"On", L"Enabled" }, false, { -1, 0, { }, { } } }, 
   { { L"Type", L"Type" }, L"", false, voice_filter_types, voice_filter_type::count, { 0, 2, nullptr, 0 } },
   { { L"Stvr", L"State var type" }, L"", false, voice_filter_stvar_types, voice_filter_stvar_type::count, { 1, 2, vfilter_stvar_relevance, 1 } },
-  { { L"Freq", L"State var frequency" }, L"Hz", { 0.5f, 0, real_bounds::log(filter_min_freq, filter_max_freq, 5000.0f), real_bounds::log(filter_min_freq, filter_max_freq, 5000.0f) }, { 2, 2, vfilter_stvar_relevance, 1 } },
+  { { L"Freq", L"State var frequency" }, L"Hz", { 0.25f, 0, real_bounds::quadratic(filter_min_freq, filter_max_freq), real_bounds::quadratic(filter_min_freq, filter_max_freq) }, { 2, 2, vfilter_stvar_relevance, 1 } },
   { { L"Res", L"State var resonance" }, L"", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 3, 2, vfilter_stvar_relevance, 1 } },
   { { L"Kbd", L"State var keyboard tracking" }, L"", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-1.0f, 1.0f) }, { 4, 2, vfilter_stvar_relevance, 1 } },
   { { L"Dly+", L"Comb plus delay" }, L"Ms", { 0.5f, 2, real_bounds::linear(0.0f, 0.005f), real_bounds::linear(0.0f, 5.0f) }, { 1, 2, vfilter_comb_relevance, 1 } },
