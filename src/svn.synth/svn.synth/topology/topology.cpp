@@ -24,6 +24,15 @@ output_params[output_param::count] =
   { { L"Voices", L"Voice count" }, L"", false, 0, synth_polyphony, 0, { 2, 2, nullptr, 0 } }
 };
 
+// ---- envelope ----
+
+static param_descriptor const
+envelope_params[envelope_param::count] =
+{
+  { { L"On", L"Enabled" }, false, { -1, 0, { }, { } } },
+  { { L"Dly", L"Delay time" }, L"Ms", { 0.0f, 2, real_bounds::unit(), real_bounds::unit() }, { 0, 0, nullptr, 0 } }
+};
+
 // ---- voice filter ----
 
 static graph_descriptor const
@@ -182,11 +191,14 @@ audio_route_params[audio_route_param::count] =
              
 // ---- global topo ----
   
-// ffadad-ffd6a5-fdffb6-caffbf-9bf6ff-a0c4ff-bdb2ff-ffc6ff-fffffc
+// ffadad-ffd6a5-fdffb6-caffbf-9bf6ff-
+// a0c4ff-
+// bdb2ff-ffc6ff-fffffc 
 part_descriptor const 
 part_descriptors[part_type::count] =  
 {
   { { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 3, 0, L"Voice", { 0xFF, 0xAD, 0xAD }}},
+  { { L"Env", L"Envelope" }, part_type::envelope, false, envelope_count, envelope_params, envelope_param::count, nullptr, 0, { 3, 0, L"Voice", { 0xA0, 0xC4, 0xFF }}},
   { { L"VFilter", L"Voice filter" }, part_type::voice_filter, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 3, 0, L"Voice", { 0xFF, 0xD6, 0xA5 } } },
   { { L"Amp", L"Voice amp" }, part_type::voice_amp, false, 1, voice_amp_params, voice_amp_param::count, nullptr, 0, { 2, -1, L"Voice", { 0xFD, 0xFF, 0xB6 } } },
   { { L"Audio", L"Audio route" }, part_type::audio_route, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 3, -1, L"Route", { 0xCA, 0xFF, 0xBF } } },

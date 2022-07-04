@@ -122,7 +122,7 @@ io_stream::load(topology_info const& topology, param_value* state)
       if(type != param->type) continue;
 
       switch (type)
-      {
+      { 
       case param_type::real:  
         state[rp].real = std::clamp(value.real, 0.0f, 1.0f);
         break;
