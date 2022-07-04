@@ -33,13 +33,13 @@ io_stream::save(topology_info const& topology, param_value const* state)
     auto this_id = std::make_tuple(
       std::wstring(part.descriptor->static_name.short_), 
       part.type_index, 
-      std::wstring(param.static_name.short_));
+      std::wstring(param.static_name.detail));
     assert(seen.find(this_id) == seen.end());
     seen.insert(this_id);
 
     if(!write_wstring(part.descriptor->static_name.short_)) return false;
     if(!write_int32(part.type_index)) return false;
-    if(!write_wstring(param.static_name.short_)) return false;
+    if(!write_wstring(param.static_name.detail)) return false;
     if(!write_int32(param.type)) return false;
 
     switch (param.type)
@@ -118,7 +118,7 @@ io_stream::load(topology_info const& topology, param_value* state)
       auto const& part = topology.parts[topology.params[rp].part_index];
       if(part_name != part.descriptor->static_name.short_) continue;
       if(type_index != part.type_index) continue;
-      if(param_name != param->static_name.short_) continue;
+      if(param_name != param->static_name.detail) continue;
       if(type != param->type) continue;
 
       switch (type)
