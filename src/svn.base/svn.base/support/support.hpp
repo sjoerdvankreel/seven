@@ -9,7 +9,8 @@
 
 namespace svn::base {
 
-// Pass a list of names with count per name.
+// Pass list of names with count per name.
+// E.g. ["Osc", "Flt"], [2, 1] -> ["Osc 1", "Osc 2"], ["Flt"].
 std::wstring 
 multi_list_formatter(
   std::int32_t val, wchar_t const** names, 
@@ -20,6 +21,12 @@ multi_list_parser(
   std::int32_t const* counts, std::int32_t count,
   std::int32_t& result);
 
+// 0/0, 1/4, 2/4, 3/4, 1/3, 2/3 etc.
+std::vector<std::pair<std::int32_t, std::int32_t>>
+generate_beat_synced_timesig(std::int32_t sig_count);
+std::vector<std::pair<std::int32_t, std::int32_t>>
+generate_beat_synced_timesig_names(std::int32_t sig_count);
+
 // (Part x, index y) <-> multi list index.
 std::vector<std::vector<std::int32_t>> 
 multi_list_table_init_in(
@@ -27,25 +34,6 @@ multi_list_table_init_in(
 std::vector<std::pair<std::int32_t, std::int32_t>>
 multi_list_table_init_out(
   std::int32_t const* counts, std::int32_t count);
-
-inline std::uint64_t
-disable_denormals()
-{
-  std::uint32_t ftz = _MM_GET_FLUSH_ZERO_MODE();
-  std::uint32_t daz = _MM_GET_DENORMALS_ZERO_MODE();
-  _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
-  _MM_SET_DENORMALS_ZERO_MODE(_MM_DENORMALS_ZERO_ON);
-  return ((static_cast<std::uint64_t>(ftz) << 32) & 0xFFFFFFFF00000000) | daz;
-}
-
-inline void
-restore_denormals(std::uint64_t state)
-{
-  std::uint32_t daz = static_cast<std::uint32_t>(state & 0x00000000FFFFFFFF);
-  std::uint32_t ftz = static_cast<std::uint32_t>((state & 0xFFFFFFFF00000000) >> 32);
-  _MM_SET_FLUSH_ZERO_MODE(ftz);
-  _MM_SET_DENORMALS_ZERO_MODE(daz);
-}
 
 // Value container for both real and discrete valued params.
 union param_value
@@ -74,6 +62,25 @@ inline item_name const note_names[12] =
   { L"F#", L"F#" }, { L"G", L"G" }, { L"G#", L"G#" },
   { L"A", L"A" }, { L"A#", L"A#" }, { L"B", L"B" }
 };
+
+inline std::uint64_t
+disable_denormals()
+{
+  std::uint32_t ftz = _MM_GET_FLUSH_ZERO_MODE();
+  std::uint32_t daz = _MM_GET_DENORMALS_ZERO_MODE();
+  _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
+  _MM_SET_DENORMALS_ZERO_MODE(_MM_DENORMALS_ZERO_ON);
+  return ((static_cast<std::uint64_t>(ftz) << 32) & 0xFFFFFFFF00000000) | daz;
+}
+
+inline void
+restore_denormals(std::uint64_t state)
+{
+  std::uint32_t daz = static_cast<std::uint32_t>(state & 0x00000000FFFFFFFF);
+  std::uint32_t ftz = static_cast<std::uint32_t>((state & 0xFFFFFFFF00000000) >> 32);
+  _MM_SET_FLUSH_ZERO_MODE(ftz);
+  _MM_SET_DENORMALS_ZERO_MODE(daz);
+}
 
 } // namespace svn::base
 #endif // SVN_BASE_SUPPORT_SUPPORT_HPP

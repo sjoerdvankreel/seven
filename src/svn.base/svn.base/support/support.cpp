@@ -32,6 +32,21 @@ multi_list_table_init_out(
   return result;
 }
 
+std::vector<std::pair<std::int32_t, std::int32_t>>
+generate_beat_synced_timesig(std::int32_t sig_count)
+{
+  std::vector<std::pair<std::int32_t, std::int32_t>> result;
+  result.push_back(std::make_pair(0, 0));
+  for(std::int32_t num = 1; num <= sig_count; num++)
+    for(std::int32_t den = 1; den <= sig_count; den++)
+      result.push_back(std::make_pair(num, den));
+  
+}
+
+std::vector<std::pair<std::int32_t, std::int32_t>>
+generate_beat_synced_timesig_names(std::int32_t sig_count);
+
+
 std::wstring 
 multi_list_formatter(
   std::int32_t val, wchar_t const** names,
