@@ -50,8 +50,9 @@ struct topology_info
   std::vector<std::vector<std::int32_t>> part_bounds; // Runtime part bounds, e.g. bounds[part_type::osc][1] indexes osc 2 part.
   std::vector<std::vector<std::int32_t>> param_bounds; // Runtime parameter bounds, e.g. bounds[part_type::osc][1] indexes osc 2 wave param.
 
-  // Output params must follow input params.
   void init_defaults(param_value* state) const;
+  void state_check(param_value const* state) const;
+  // Output params must follow input params.
   static topology_info const* create(part_descriptor const* static_parts,
     std::int32_t part_count, std::int32_t max_notes, std::int32_t max_ui_height);
 };

@@ -36,7 +36,7 @@ _automation_buffer(static_cast<std::size_t>(topology->input_param_count) * max_s
 block_output const&
 audio_processor::process_block()
 {
-  state_check();
+  _topology->state_check(_state);
   automation_check(_input.sample_count);
   transform_automation();
   std::uint64_t state = disable_denormals();
@@ -45,22 +45,6 @@ audio_processor::process_block()
   for(std::int32_t s = 0; s < _input.sample_count; s++)
     sanity_audio_bipolar(_output.audio[s]);
   return _output;
-}
-
-void
-audio_processor::state_check()
-{
-  for (std::int32_t p = 0; p < _topology->input_param_count; p++)
-  {
-    auto const& descriptor = *_topology->params[p].descriptor;
-    if (descriptor.type == param_type::real)
-      assert(0.0 <= _state[p].real && _state[p].real <= 1.0);
-    else
-    {
-      std::int32_t val = _state[p].discrete;
-      assert(descriptor.discrete.min <= val && val <= descriptor.discrete.max);
-    }
-  }
 }
 
 block_input&

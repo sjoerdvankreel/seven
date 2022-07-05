@@ -14,6 +14,22 @@ topology_info::init_defaults(param_value* state) const
     default: state[p].discrete = params[p].descriptor->discrete.default_; break;
     }   
 }     
+
+void
+topology_info::state_check(param_value const* state) const
+{
+  for (std::int32_t p = 0; p < input_param_count; p++)
+  {
+    auto const& descriptor = *params[p].descriptor;
+    if (descriptor.type == param_type::real)
+      assert(0.0 <= state[p].real && state[p].real <= 1.0);
+    else
+    {
+      std::int32_t val = state[p].discrete;
+      assert(descriptor.discrete.min <= val && val <= descriptor.discrete.max);
+    }
+  }
+}
   
 topology_info const*
 topology_info::create(part_descriptor const* static_parts,

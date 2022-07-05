@@ -14,7 +14,9 @@ io_stream::save(topology_info const& topology, param_value const* state)
 {
   std::size_t chars;
   std::vector<wchar_t> str;
+  
   assert(state != nullptr);
+  topology.state_check(state);
 
   if(!write_int32(magic)) return false;
   if(!write_int32(version)) return false;
@@ -72,6 +74,9 @@ io_stream::load(topology_info const& topology, param_value* state)
   if(!read_int32(temp) || temp != magic) return false;
   if(!read_int32(temp) || temp > version || temp <= 0) return false;
   if(!read_int32(param_count) || param_count <= 0) return false;
+
+  // Set defaults in case some params are missing or invalid.
+  topology.init_defaults(state);
 
   for (std::int32_t sp = 0; sp < param_count; sp++)
   {
@@ -131,6 +136,7 @@ io_stream::load(topology_info const& topology, param_value* state)
     }
   }
 
+  topology.state_check(state);
   return true;
 }
   

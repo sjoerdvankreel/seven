@@ -185,6 +185,8 @@ processor::process_input_parameters(ProcessData const& data)
   auto changes = data.inputParameterChanges;
   if (changes == nullptr) return;
   int32 count = changes->getParameterCount();
+
+  _topology->state_check(_state.data());
   for (int32 i = 0; i < count; i++)
     if ((queue = changes->getParameterData(i)) != nullptr)
     {
@@ -192,6 +194,7 @@ processor::process_input_parameters(ProcessData const& data)
       if (queue->getPoint(queue->getPointCount() - 1, index, value) == kResultTrue)
         _state[id] = vst_normalized_to_base(_topology, id, value);
     }
+  _topology->state_check(_state.data());
 }
 
 // Translate from vst3 automation events.

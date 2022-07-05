@@ -82,11 +82,12 @@ parse_env_sync(std::wstring const& val, std::int32_t& result)
   std::wstringstream num_ss(num_str);
   num_ss >> num;
   if(num_ss.bad() || !(0 <= num && num < 16)) return false;
-  std::wstring den_str = val.substr(0, pos);
+  std::wstring den_str = val.substr(pos + 1);
   std::wstringstream den_ss(den_str);
   den_ss >> den;
   if (den_ss.bad() || !(1 <= den && den <= 16)) return false;
-  return (den - 1) * 16 + num;
+  result = (den - 1) * 16 + num;
+  return true;
 }
 
 static param_descriptor const
