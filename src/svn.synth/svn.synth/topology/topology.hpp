@@ -5,18 +5,22 @@
 
 namespace svn::synth {
 
+extern std::int32_t const env_synced_timesig_count;
+extern float const* const env_synced_timesig_values;
+
 inline float constexpr filter_min_freq = 20.0f;
 inline float constexpr filter_max_freq = 20000.0f;
 inline float constexpr comb_filter_max_ms = 5.0f;
 inline float constexpr max_sample_rate = 384000.0f;
 
+inline std::int32_t constexpr synth_polyphony = 32;
+inline std::int32_t constexpr synth_max_ui_height = 480;
+
 inline std::int32_t constexpr envelope_count = 3;
 inline std::int32_t constexpr oscillator_count = 4;
+inline std::int32_t constexpr audio_route_count = 9;
 inline std::int32_t constexpr voice_filter_count = 3;
 inline std::int32_t constexpr oscillator_max_spread = 8;
-inline std::int32_t constexpr synth_polyphony = 32;
-inline std::int32_t constexpr synth_max_ui_height = 480; 
-inline std::int32_t constexpr audio_route_count = 9;
 
 inline std::int32_t constexpr audio_inputs_count = oscillator_count + voice_filter_count + 1 /* off */;
 inline std::int32_t constexpr audio_outputs_count = voice_filter_count + 1 /* off */ + 1 /* amp */;

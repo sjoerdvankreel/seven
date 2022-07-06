@@ -9,32 +9,6 @@
 
 namespace svn::base {
 
-// Pass list of names with count per name.
-// E.g. ["Osc", "Flt"], [2, 1] -> ["Osc 1", "Osc 2"], ["Flt"].
-std::wstring 
-multi_list_formatter(
-  std::int32_t val, wchar_t const** names, 
-  std::int32_t const* counts, std::int32_t count);
-bool 
-multi_list_parser(
-  std::wstring const& val, wchar_t const** names,
-  std::int32_t const* counts, std::int32_t count,
-  std::int32_t& result);
-
-// 0/0, 1/4, 2/4, 3/4, 1/3, 2/3 etc.
-std::vector<std::pair<std::int32_t, std::int32_t>>
-generate_beat_synced_timesig(std::int32_t sig_count);
-std::vector<std::pair<std::int32_t, std::int32_t>>
-generate_beat_synced_timesig_names(std::int32_t sig_count);
-
-// (Part x, index y) <-> multi list index.
-std::vector<std::vector<std::int32_t>> 
-multi_list_table_init_in(
-  std::int32_t const* counts, std::int32_t count);
-std::vector<std::pair<std::int32_t, std::int32_t>>
-multi_list_table_init_out(
-  std::int32_t const* counts, std::int32_t count);
-
 // Value container for both real and discrete valued params.
 union param_value
 {
@@ -81,6 +55,44 @@ restore_denormals(std::uint64_t state)
   _MM_SET_FLUSH_ZERO_MODE(ftz);
   _MM_SET_DENORMALS_ZERO_MODE(daz);
 }
+
+// Returns index of item.
+bool
+list_parser(
+  std::wstring const& val, 
+  std::vector<std::wstring> const& names,
+  std::int32_t& result);
+
+// Pass list of names with count per name.
+// E.g. ["Osc", "Flt"], [2, 1] -> ["Osc 1", "Osc 2"], ["Flt"].
+std::wstring 
+multi_list_formatter(
+  std::int32_t val, wchar_t const** names, 
+  std::int32_t const* counts, std::int32_t count);
+bool 
+multi_list_parser(
+  std::wstring const& val, wchar_t const** names,
+  std::int32_t const* counts, std::int32_t count,
+  std::int32_t& result);
+
+// (Part x, index y) <-> multi list index.
+std::vector<std::vector<std::int32_t>> 
+multi_list_table_init_in(
+  std::int32_t const* counts, std::int32_t count);
+std::vector<std::pair<std::int32_t, std::int32_t>>
+multi_list_table_init_out(
+  std::int32_t const* counts, std::int32_t count);
+
+// 0/0, 1/4, 2/4, 3/4, 1/3, 2/3 etc.
+std::vector<std::pair<std::int32_t, std::int32_t>>
+beat_synced_timesig(
+  std::int32_t sig_count);
+std::vector<float>
+beat_synced_timesig_values(
+  std::vector<std::pair<std::int32_t, std::int32_t>> const& timesig);
+std::vector<std::wstring>
+beat_synced_timesig_names(
+  std::vector<std::pair<std::int32_t, std::int32_t>> const& timesig);
 
 } // namespace svn::base
 #endif // SVN_BASE_SUPPORT_SUPPORT_HPP

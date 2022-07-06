@@ -5,6 +5,21 @@
 
 namespace svn::base {
 
+bool
+list_parser(
+  std::wstring const& val,
+  std::vector<std::wstring> const& names,
+  std::int32_t& result)
+{
+  for(std::size_t i = 0; i < names.size(); i++)
+    if (val == names[i])
+    {
+      result = static_cast<std::int32_t>(i);
+      return true;
+    }
+  return false;    
+}
+
 std::vector<std::vector<std::int32_t>> 
 multi_list_table_init_in(
   std::int32_t const* counts, std::int32_t count)
@@ -31,21 +46,6 @@ multi_list_table_init_out(
       result.push_back(std::make_pair(i, j));
   return result;
 }
-
-std::vector<std::pair<std::int32_t, std::int32_t>>
-generate_beat_synced_timesig(std::int32_t sig_count)
-{
-  std::vector<std::pair<std::int32_t, std::int32_t>> result;
-  result.push_back(std::make_pair(0, 0));
-  for(std::int32_t num = 1; num <= sig_count; num++)
-    for(std::int32_t den = 1; den <= sig_count; den++)
-      result.push_back(std::make_pair(num, den));
-  
-}
-
-std::vector<std::pair<std::int32_t, std::int32_t>>
-generate_beat_synced_timesig_names(std::int32_t sig_count);
-
 
 std::wstring 
 multi_list_formatter(
@@ -91,6 +91,56 @@ multi_list_parser(
       }
     else group_start += counts[i];
   return false;
+}
+
+std::vector<std::pair<std::int32_t, std::int32_t>>
+beat_synced_timesig(std::int32_t sig_count)
+{
+  std::vector<std::pair<std::int32_t, std::int32_t>> all;
+  all.push_back(std::make_pair(0, 0));
+  for (std::int32_t num = 1; num <= sig_count; num++)
+    for (std::int32_t den = 1; den <= sig_count; den++)
+      all.push_back(std::make_pair(num, den));
+
+  bool seen_this;
+  std::vector<double> seen;
+  double const epsilon = 1.0e-3;
+  std::vector<std::pair<std::int32_t, std::int32_t>> result;
+  for (std::size_t i = 0; i < all.size(); i++)
+  {
+    seen_this = false;
+    double val = all[i].second == 0 ? 0.0f : all[i].first / all[i].second;
+    for (std::size_t j = 0; j < seen.size(); j++)
+      if (val - epsilon <= seen[j] && seen[j] <= val + epsilon)
+      {
+        seen_this = true;
+        break;
+      }
+    if (seen_this) continue;
+    seen.push_back(val);
+    result.push_back(all[i]);
+  }
+  return result;
+}
+
+std::vector<float>
+beat_synced_timesig_values(
+  std::vector<std::pair<std::int32_t, std::int32_t>> const& timesig)
+{
+  std::vector<float> result;
+  for (std::size_t i = 0; i < timesig.size(); i++)
+    result.push_back(static_cast<float>(timesig[i].first) / timesig[i].second);
+  return result;
+}
+
+std::vector<std::wstring>
+beat_synced_timesig_names(
+  std::vector<std::pair<std::int32_t, std::int32_t>> const& timesig)
+{
+  std::vector<std::wstring> result;
+  for (std::size_t i = 0; i < timesig.size(); i++)
+    result.push_back(std::to_wstring(timesig[i].first) + L"/" + std::to_wstring(timesig[i].second));
+  return result;
 }
  
 } // namespace svn::base
