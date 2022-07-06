@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <sstream>
+#include <algorithm>
 
 namespace svn::base {
 
@@ -96,20 +97,22 @@ multi_list_parser(
 std::vector<std::pair<std::int32_t, std::int32_t>>
 beat_synced_timesig(std::int32_t sig_count)
 {
+  // Make all signatures.
   std::vector<std::pair<std::int32_t, std::int32_t>> all;
   all.push_back(std::make_pair(0, 0));
   for (std::int32_t num = 1; num <= sig_count; num++)
     for (std::int32_t den = 1; den <= sig_count; den++)
       all.push_back(std::make_pair(num, den));
 
+  // Filter out equivalents (e.g. 2/4 == 4/8).
   bool seen_this;
-  std::vector<double> seen;
-  double const epsilon = 1.0e-3;
+  std::vector<float> seen;
+  float const epsilon = 1.0e-3;
   std::vector<std::pair<std::int32_t, std::int32_t>> result;
   for (std::size_t i = 0; i < all.size(); i++)
   {
     seen_this = false;
-    double val = all[i].second == 0 ? 0.0f : all[i].first / all[i].second;
+    float val = all[i].second == 0 ? 0.0f : static_cast<float>(all[i].first) / all[i].second;
     for (std::size_t j = 0; j < seen.size(); j++)
       if (val - epsilon <= seen[j] && seen[j] <= val + epsilon)
       {
@@ -120,6 +123,14 @@ beat_synced_timesig(std::int32_t sig_count)
     seen.push_back(val);
     result.push_back(all[i]);
   }
+
+  // Sort ascending.
+  std::sort(result.begin(), result.end(), [](auto const& l, auto const& r) -> bool
+  { 
+    float lval = l.second == 0 ? 0.0f : static_cast<float>(l.first) / l.second;
+    float rval = r.second == 0 ? 0.0f : static_cast<float>(r.first) / r.second;
+    return lval < rval;
+  });
   return result;
 }
 
