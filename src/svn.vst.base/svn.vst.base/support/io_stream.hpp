@@ -17,7 +17,7 @@ private:
   Steinberg::IBStreamer* const _streamer;
 
 public:
-  vst_io_stream(Steinberg::IBStreamer* streamer): 
+  explicit vst_io_stream(Steinberg::IBStreamer* streamer):
   _streamer(streamer) {}
 
   // Base needs these.

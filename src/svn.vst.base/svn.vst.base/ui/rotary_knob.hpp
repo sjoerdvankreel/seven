@@ -17,7 +17,7 @@ public:
   CLASS_METHODS(rotary_knob, CKnobBase)
   void draw(VSTGUI::CDrawContext* context) override;
 public:
-  rotary_knob(VSTGUI::CColor const& color):
+  explicit rotary_knob(VSTGUI::CColor const& color):
   CKnobBase(VSTGUI::CRect(0, 0, 0, 0), nullptr, -1, nullptr), _color(color) {}
 };
 

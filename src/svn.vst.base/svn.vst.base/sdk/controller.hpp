@@ -39,7 +39,7 @@ public:
 
   // Update the editor ui if dependent params change.
   void sync_ui_parameters();
-  controller(svn::base::topology_info const* topology) : 
+  explicit controller(svn::base::topology_info const* topology) :
   _topology(topology), _state(topology->params.size()) {}
 };
 

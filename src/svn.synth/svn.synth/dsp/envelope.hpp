@@ -13,7 +13,7 @@ class envelope
   std::int32_t _position = 0;
 public:
   envelope() = default;
-  envelope(float sample_rate) : _sample_rate(sample_rate) {}
+  explicit envelope(float sample_rate) : _sample_rate(sample_rate) {}
 public:
   void setup_stages(base::automation_view const& automation, std::int32_t s,
     float bpm, float& delay, float& attack, float& hold, float& decay, float& release);
