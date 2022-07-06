@@ -6,6 +6,19 @@
 
 namespace svn::synth {
 
+class envelope_graph:
+public svn::base::graph_processor<float>
+{
+public:
+  envelope_graph(topology_info const* topology, std::int32_t part_index) :
+  svn::base::graph_processor<float>(topology, part_index) {}
+
+  bool needs_repaint(std::int32_t runtime_param) const override;
+  std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
+  void dsp_to_plot(std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate) override;
+  void process_dsp_core(block_input const& input, float* output, float sample_rate, float bpm) override;
+};
+
 class oscillator_wave_graph:
 public svn::base::graph_processor<base::audio_sample32>
 {

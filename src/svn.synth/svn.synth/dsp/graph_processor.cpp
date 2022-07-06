@@ -17,7 +17,7 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
   switch (part_type)
   {
   case svn::synth::part_type::envelope:
-    return new svn::synth::filter_ir_graph(topology, part_index);
+    return new svn::synth::envelope_graph(topology, part_index);
   case svn::synth::part_type::voice_filter:
     return new svn::synth::filter_ir_graph(topology, part_index);
   case svn::synth::part_type::oscillator:
@@ -51,6 +51,33 @@ setup_graph_voice_input(block_input const& input, topology_info const* topology)
     topology, nullptr, input.automation, topology->input_param_count,
     topology->input_param_count, 0, input.sample_count, 0, input.sample_count);
   return result;
+}
+
+bool 
+envelope_graph::needs_repaint(std::int32_t runtime_param) const
+{
+  std::int32_t begin = topology()->param_bounds[part_type::envelope][part_index()];
+  return begin <= runtime_param && runtime_param < begin + envelope_param::count;
+}
+
+std::int32_t 
+envelope_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
+{ 
+  return 100; 
+}
+
+void 
+envelope_graph::dsp_to_plot(std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate)
+{ 
+  plot.resize(dsp.size());
+  std::copy(dsp.begin(), dsp.end(), plot.begin()); 
+}
+
+void 
+envelope_graph::process_dsp_core(block_input const& input, float* output, float sample_rate, float bpm)
+{
+  for(std::int32_t i = 0; i < input.sample_count; i++)
+    output[i] = i / static_cast<float>(input.sample_count);
 }
 
 bool 
