@@ -12,16 +12,17 @@ namespace svn::vst::base {
 class graph_plot : 
 public VSTGUI::CView
 {
-  VSTGUI::CColor const _color;
-  svn::base::graph_processor* const _processor;
   static inline float const bpm = 120.0f;
   static inline float const sample_rate = 48000.0f;
+
+  VSTGUI::CColor const _color;
+  svn::base::graph_processor_base* const _processor;
 public:
   ~graph_plot() override { delete _processor; }
-  svn::base::graph_processor* const processor() const { return _processor; }
+  svn::base::graph_processor_base* const processor() const { return _processor; }
 public:
   void draw(VSTGUI::CDrawContext* context) override;
-  graph_plot(VSTGUI::CColor const& color, svn::base::graph_processor* processor):
+  graph_plot(VSTGUI::CColor const& color, svn::base::graph_processor_base* processor):
   VSTGUI::CView(VSTGUI::CRect(0, 0, 0, 0)), _color(color), _processor(processor) { }
 };
 

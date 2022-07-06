@@ -34,7 +34,7 @@ graph_plot_creator::create(
   ok = attrs.getIntegerAttribute("part-index", part_index);
   assert(ok);
   tooltip = attrs.getAttributeValue("tooltip");
-  graph_processor* processor = svn_create_graph_processor(svn_vst_get_topology(), part_type, graph_type, part_index);
+  graph_processor_base* processor = svn_create_graph_processor(svn_vst_get_topology(), part_type, graph_type, part_index);
   assert(processor != nullptr);
   auto result = new graph_plot(color, processor); 
   if(tooltip != nullptr) result->setTooltipText(tooltip->data());

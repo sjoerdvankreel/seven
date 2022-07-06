@@ -7,11 +7,11 @@
 #include <cstdint>
 
 namespace svn::base {
-class graph_processor;
+class graph_processor_base;
 } // namespace svn::base
 
 // Must be provided by the dsp project.
-extern svn::base::graph_processor*
+extern svn::base::graph_processor_base*
 svn_create_graph_processor(svn::base::topology_info const* topology,
   std::int32_t part_type, std::int32_t graph_type, std::int32_t part_index);
 
@@ -19,8 +19,26 @@ namespace svn::base {
 
 struct graph_point { float x, y; };
 
+// Interface class so we don't need to deal with 
+// graph specific types yet (e.g. audio vs cv data).
+class graph_processor_base
+{
+public:
+  virtual ~graph_processor_base() = 0 {}
+
+  // This is the main entry point for the graph plot.
+  virtual std::vector<graph_point> const& plot(
+    param_value const* state, float sample_rate, 
+    float bpm, std::int32_t width, std::int32_t height) = 0;
+
+  // Allow for some reuse between graphs.
+  // Repaint if that parameter changes?
+  virtual bool needs_repaint(std::int32_t runtime_param) const = 0;
+};
+
 // Renders pretty images.
-class graph_processor
+class graph_processor: 
+public graph_processor_base
 {
   std::int32_t const _part_index;
   topology_info const* const _topology;
@@ -54,18 +72,16 @@ public:
   std::int32_t part_index() const { return _part_index; }
   topology_info const* topology() const { return _topology; }
 
-  // Allow for some reuse between graphs.
-  // Repaint if that parameter changes?
-  virtual bool needs_repaint(std::int32_t runtime_param) const = 0;
+  std::vector<graph_point> const& plot(
+    param_value const* state, float sample_rate,
+    float bpm, std::int32_t width, std::int32_t height) override;
+
   // Need to know audio size up front.
   virtual std::int32_t audio_sample_count(param_value const* state, float sample_rate, float bpm) const = 0;
   // Renders data in sample_count audio samples.
   virtual void process_audio_core(block_input const& input, block_output& output, float sample_rate, float bpm) = 0;
   // Transforms audio to plot in (0, 1).
   virtual void audio_to_plot(std::vector<audio_sample32> const& audio, std::vector<float>& plot, float sample_rate) = 0;
-
-  // This is the main entry point for the graph plot.
-  std::vector<graph_point> const& plot(param_value const* state, float sample_rate, float bpm, std::int32_t width, std::int32_t height);
 };
 
 } // namespace svn::base

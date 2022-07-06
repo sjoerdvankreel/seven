@@ -10,7 +10,7 @@
 
 using namespace svn::base;
 
-svn::base::graph_processor*
+svn::base::graph_processor_base*
 svn_create_graph_processor(svn::base::topology_info const* topology,
   std::int32_t part_type, std::int32_t graph_type, std::int32_t part_index)
 {
