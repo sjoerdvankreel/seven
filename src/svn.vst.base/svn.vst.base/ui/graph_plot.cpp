@@ -44,10 +44,13 @@ graph_plot_creator::create(
 void
 graph_plot::draw(VSTGUI::CDrawContext* context)
 {
+  std::int32_t const padx = 2;
+  std::int32_t const pady = 4;
+
   auto size = getViewSize().getSize();
   auto pos = getViewSize().getTopLeft();
   CPoint inner_size = size - CPoint(2, 2);
-  CPoint render_size(size.x - 3, size.y - 6);
+  CPoint render_size(size.x - padx * 2, size.y - pady * 2);
   CDrawContext::Transform transform(*context, CGraphicsTransform().translate(pos));
   
   CColor background(0, 0, 0, 128);
@@ -64,9 +67,9 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
   auto editor = static_cast<VST3Editor*>(getFrame()->getEditor());
   auto state = static_cast<controller const*>(editor->getController())->state();
   std::vector<graph_point> const& graph_data = _processor->plot(state, sample_rate, bpm, render_size.x, render_size.y);
-  path->beginSubpath(CPoint(graph_data[0].x + 3, render_size.y - graph_data[0].y + 3));
+  path->beginSubpath(CPoint(graph_data[0].x + padx, render_size.y - graph_data[0].y + pady));
   for(std::size_t i = 1; i < graph_data.size(); i++)
-    path->addLine(graph_data[i].x + 3, render_size.y - graph_data[i].y + 3);
+    path->addLine(graph_data[i].x + padx, render_size.y - graph_data[i].y + pady);
   context->drawGraphicsPath(path, CDrawContext::kPathStroked);
   path->forget();
 } 
