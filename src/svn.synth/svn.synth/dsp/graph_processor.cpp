@@ -70,7 +70,7 @@ envelope_graph::process_dsp_core(
   envelope env(env_graph_rate);
   std::memset(output, 0, input.sample_count * sizeof(float));
   voice_input vinput = setup_graph_voice_input(input, topology());
-  env.process_block(vinput, part_index(), output);
+  env.process_block(vinput, part_index(), output, input.sample_count);
 }
 
 bool

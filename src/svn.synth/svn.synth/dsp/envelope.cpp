@@ -82,11 +82,11 @@ envelope::setup_stages(automation_view const& automation, std::int32_t s,
 }
 
 std::int32_t 
-envelope::process_block(voice_input const& input, std::int32_t index, float* cv_out)
+envelope::process_block(voice_input const& input, std::int32_t index, float* cv_out, std::int32_t release_sample)
 {
   float delay, attack, hold, decay, release;
   automation_view automation(input.automation.rearrange_params(part_type::envelope, index));
-  for (std::int32_t s = 0; s < input.sample_count; s++, _position++)
+  for (std::int32_t s = 0; s < input.sample_count; s++)
   {
     cv_out[s] = 0.0f;
     if(automation.get(envelope_param::on, s).discrete == 0) return s;
@@ -96,6 +96,8 @@ envelope::process_block(voice_input const& input, std::int32_t index, float* cv_
     cv_out[s] = sanity_unipolar(stage.second);
     if(stage.first == envelope_stage::end) return s;
     if(stage.first != envelope_stage::release) _release_level = cv_out[s];
+    if(s == release_sample) _position = static_cast<int32_t>(std::ceil(delay + attack + hold + decay));
+    else _position++;
   }
   return input.sample_count;
 }

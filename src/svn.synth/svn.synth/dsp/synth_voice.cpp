@@ -34,7 +34,7 @@ synth_voice::process_block(
   for (std::int32_t i = 0; i < envelope_count; i++)
   {
     std::memset(cv.envelope[i].data(), 0, input.sample_count * sizeof(float));
-    std::int32_t processed = _envelopes[i].process_block(input, i, cv.envelope[i].data());
+    std::int32_t processed = _envelopes[i].process_block(input, i, cv.envelope[i].data(), release_sample);
     if(i == 0) amp_env_end = processed;
   }
 
