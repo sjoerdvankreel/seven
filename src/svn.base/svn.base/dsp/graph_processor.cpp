@@ -5,20 +5,21 @@
 namespace svn::base {
 
 // Given parameter state and sample rate, setup automation and run some dsp code.
-std::vector<audio_sample32> const&
-graph_processor::process_audio(param_value const* state, float sample_rate, float bpm)
+template <class T>
+std::vector<T> const&
+graph_processor<T>::process_dsp(param_value const* state, float sample_rate, float bpm)
 {
   _automation.clear();
   _automation_buffer.clear();
-  std::int32_t samples = audio_sample_count(state, sample_rate, bpm);
+  std::int32_t samples = sample_count(state, sample_rate, bpm);
   for (std::int32_t p = 0; p < topology()->input_param_count; p++)
     for (std::int32_t s = 0; s < samples; s++)
       _automation_buffer.push_back(state[p]);
   for (std::int32_t p = 0; p < topology()->input_param_count; p++)
     _automation.push_back(_automation_buffer.data() + static_cast<std::size_t>(p * samples));
 
-  _audio_data.clear();
-  _audio_data.resize(samples);
+  _raw_data.clear();
+  _raw_data.resize(samples);
 
   block_input input;
   input.bpm = bpm;
@@ -28,24 +29,21 @@ graph_processor::process_audio(param_value const* state, float sample_rate, floa
   input.sample_count = samples;
   input.automation = _automation.data();
 
-  block_output output;
-  output.audio = _audio_data.data();
-  output.output_params = _output_param_buffer.data();
-
-  // This produces the graph specific audio data.
+  // This produces the graph specific dsp data.
   std::uint64_t denormal_state = disable_denormals();
-  process_audio_core(input, output, sample_rate, bpm);
+  process_dsp_core(input, _raw_data.data(), sample_rate, bpm);
   restore_denormals(denormal_state);
-  return _audio_data;
+  return _raw_data;
 }
 
+template <class T>
 std::vector<graph_point> const&
-graph_processor::plot(param_value const* state, 
+graph_processor<T>::plot(param_value const* state, 
   float sample_rate, float bpm, std::int32_t width, std::int32_t height)
 {
   _plot_data.clear();
-  process_audio(state, sample_rate, bpm);
-  audio_to_plot(_audio_data, _plot_data, sample_rate);
+  process_dsp(state, sample_rate, bpm);
+  dsp_to_plot(_raw_data, _plot_data, sample_rate);
 
   _graph_data.clear();
   float transform = width / static_cast<float>(_plot_data.size());
@@ -53,5 +51,8 @@ graph_processor::plot(param_value const* state,
     _graph_data.push_back({ static_cast<float>(i * transform), _plot_data[i] * height});
   return _graph_data;
 }
+
+template class graph_processor<float>; // Cv
+template class graph_processor<audio_sample32>; // Audio
 
 } // namespace svn::base

@@ -37,35 +37,33 @@ public:
 };
 
 // Renders pretty images.
+template <class T>
 class graph_processor: 
 public graph_processor_base
 {
   std::int32_t const _part_index;
   topology_info const* const _topology;
+
+  std::vector<T> _raw_data;
   std::vector<float> _plot_data;
   std::vector<graph_point> _graph_data;
-  std::vector<audio_sample32> _audio_data;
   std::vector<param_value*> _automation;
   std::vector<param_value> _automation_buffer;
-  std::vector<param_value> _output_param_buffer;
 
   // Saves some typing in derived class headers.
 protected:
   using param_value = svn::base::param_value;
   using block_input = svn::base::block_input;
-  using block_output = svn::base::block_output;
   using topology_info = svn::base::topology_info;
-  using audio_sample32 = svn::base::audio_sample32;
 
 protected:
   graph_processor(topology_info const* topology, std::int32_t part_index): 
   _automation(), _automation_buffer(), _part_index(part_index),
-  _output_param_buffer(static_cast<std::size_t>(topology->output_param_count)),
-  _plot_data(), _audio_data(), _graph_data(), _topology(topology) {}
+  _raw_data(), _plot_data(), _graph_data(), _topology(topology) {}
 
 private:
-  // Do the full audio dsp stuff without transforming to plot.
-  std::vector<audio_sample32> const& process_audio(param_value const* state, float sample_rate, float bpm);
+  // Do the full dsp stuff without transforming to plot.
+  std::vector<T> const& process_dsp(param_value const* state, float sample_rate, float bpm);
 
 public:
   virtual ~graph_processor() {}
@@ -76,12 +74,12 @@ public:
     param_value const* state, float sample_rate,
     float bpm, std::int32_t width, std::int32_t height) override;
 
-  // Need to know audio size up front.
-  virtual std::int32_t audio_sample_count(param_value const* state, float sample_rate, float bpm) const = 0;
-  // Renders data in sample_count audio samples.
-  virtual void process_audio_core(block_input const& input, block_output& output, float sample_rate, float bpm) = 0;
-  // Transforms audio to plot in (0, 1).
-  virtual void audio_to_plot(std::vector<audio_sample32> const& audio, std::vector<float>& plot, float sample_rate) = 0;
+  // Need to know size up front.
+  virtual std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const = 0;
+  // Transforms raw data to plot in (0, 1).
+  virtual void dsp_to_plot(std::vector<T> const& dsp, std::vector<float>& plot, float sample_rate) = 0;
+  // Renders data in sample_count samples.
+  virtual void process_dsp_core(block_input const& input, T* output, float sample_rate, float bpm) = 0;
 };
 
 } // namespace svn::base
