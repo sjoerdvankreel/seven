@@ -17,14 +17,14 @@ std::int32_t s, float delay, float attack, float hold, float decay, float releas
 
   float stage = 0.0f;
   if (pos < stage + delay) return 0.0f;
-  stage += delay;
-  if(pos < stage + attack) return (pos - stage) / (attack - stage);
-  stage += attack;
+  stage = std::ceil(stage + delay);
+  if(pos < stage + attack) return sanity_unipolar((pos - stage) / attack);
+  stage = std::ceil(stage + attack);
   if(pos < stage + hold) return 1.0f;
-  stage += hold;
-  if(pos < stage + decay) return (pos - stage) / (decay - stage);
-  stage += decay;
-  if(pos < stage + release) return (pos - stage) / (release - stage);
+  stage = std::ceil(stage + hold);
+  if(pos < stage + decay) return sanity_unipolar((pos - stage) / decay);
+  stage = std::ceil(stage + decay);
+  if(pos < stage + release) return sanity_unipolar((pos - stage) / release);
   return 0.0f;
 }
 
@@ -63,6 +63,7 @@ envelope::process_block(voice_input const& input, std::int32_t index, float* cv_
     bool dahdsr = automation.get(envelope_param::type, s).discrete == envelope_type::dahdsr;
     setup_stages(automation, s, input.bpm, delay, attack, hold, decay, release);
     cv_out[s] = generate_stage(automation, s, delay, attack, hold, decay, release);
+    sanity_unipolar(cv_out[s]);
   }
 }
 
