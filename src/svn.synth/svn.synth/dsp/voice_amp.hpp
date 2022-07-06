@@ -10,11 +10,10 @@ namespace svn::synth {
 // Per-voice amp section.
 class voice_amp
 {
-  float _velocity = 0.0f;
   float _sample_rate = 0.0f;
 public:
   voice_amp() = default;
-  voice_amp(float sample_rate, float velocity): _velocity(velocity), _sample_rate(sample_rate) {}
+  voice_amp(float sample_rate): _sample_rate(sample_rate) {}
   void process_block(voice_input const& input, cv_state const& cv, 
     base::audio_sample32 const* audio_in, base::audio_sample32* audio_out);
 };

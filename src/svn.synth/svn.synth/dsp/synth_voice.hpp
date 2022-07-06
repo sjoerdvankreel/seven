@@ -35,6 +35,7 @@ class synth_voice
 {
 private:
   voice_amp _amp;
+  float _velocity;
   base::topology_info const* _topology;
   std::array<envelope, envelope_count> _envelopes;
   std::array<oscillator, oscillator_count> _oscillators;
