@@ -88,15 +88,15 @@ envelope_params[envelope_param::count] =
   { "{AC5D88B7-8CDB-4401-9FB0-20EF0195ABD8}", { L"Hld", L"Hold sync" }, L"", true, 0, env_synced_timesig_count - 1, 0, format_env_timesig, parse_env_timesig, { 3, 0, envelope_sync_relevance, 1 } },
   { "{721AFEB5-A17E-4C37-BF3A-94F645234B73}", { L"Sus", L"Sustain level" }, L"dB", { 0.5f, 1, real_bounds::unit(), real_bounds::decibel() }, { 4, 0, nullptr, 0 } },
   { "{E0A45A06-3C0C-4409-BBFA-A2834F0C7BAD}", { L"Att", L"Attack time" }, L"Sec", { 0.05f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 5, 0, envelope_time_relevance, 1 } },
-  { "{E0CFCBB7-B050-4C47-B78C-2511AD2EE6B6}", { L"Att", L"Attack sync" }, L"", true, 0, env_synced_timesig_count - 1, 0, format_env_timesig, parse_env_timesig, { 5, 0, envelope_sync_relevance, 1 } },
+  { "{E0CFCBB7-B050-4C47-B78C-2511AD2EE6B6}", { L"Att", L"Attack sync" }, L"", true, 0, env_synced_timesig_count - 1, 1, format_env_timesig, parse_env_timesig, { 5, 0, envelope_sync_relevance, 1 } },
   { "{1400CEB5-25B1-42B1-ADA1-B5FDF8C6D1E5}", { L"Slp", L"Attack slope" }, L"", false, envelope_slopes, envelope_slope::count, { 6, 0, nullptr, 0 } },
   { "{5A57D560-64D2-44D5-BD78-82B7C4BEA79C}", { L"Mid", L"Attack midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { 7, 0, envelope_attack_log_relevance, 1 } },
   { "{A62B5DB0-4D41-4DA4-AE14-E25A2C983B21}", { L"Dcy", L"Decay time" }, L"Sec", { 0.1f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 8, 0, envelope_time_relevance, 1 } },
-  { "{09B32681-21EF-4C65-B5FD-9FA64ED4AF5E}", { L"Dcy", L"Decay sync" }, L"", true, 0, env_synced_timesig_count - 1, 0, format_env_timesig, parse_env_timesig, { 8, 0, envelope_sync_relevance, 1 } },
+  { "{09B32681-21EF-4C65-B5FD-9FA64ED4AF5E}", { L"Dcy", L"Decay sync" }, L"", true, 0, env_synced_timesig_count - 1, 9, format_env_timesig, parse_env_timesig, { 8, 0, envelope_sync_relevance, 1 } },
   { "{62381FB9-9060-4425-97A6-B57ECB2BECCA}", { L"Slp", L"Decay slope" }, L"", false, envelope_slopes, envelope_slope::count, { 9, 0, nullptr, 0 } },
   { "{8B5D1F67-DA80-4170-982D-909CC8A025E2}", { L"Mid", L"Decay midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { 10, 0, envelope_decay_log_relevance, 1 } },
   { "{75ACC8A6-F228-445C-9788-A367AE32EAAA}", { L"Rel", L"Release time" }, L"Sec", { 0.2f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 11, 0, envelope_time_relevance, 1 } },
-  { "{DDA55E4D-A100-40BA-A7C2-F4C284CACE08}", { L"Rel", L"Release sync" }, L"", true, 0, env_synced_timesig_count - 1, 0, format_env_timesig, parse_env_timesig, { 11, 0, envelope_sync_relevance, 1 } },
+  { "{DDA55E4D-A100-40BA-A7C2-F4C284CACE08}", { L"Rel", L"Release sync" }, L"", true, 0, env_synced_timesig_count - 1, 15, format_env_timesig, parse_env_timesig, { 11, 0, envelope_sync_relevance, 1 } },
   { "{6B978A93-54D1-4990-BD2E-BC143EA816AF}", { L"Slp", L"Release slope" }, L"", false, envelope_slopes, envelope_slope::count, { 12, 0, nullptr, 0 } },
   { "{4E2A6D8B-275C-4E1E-84BE-B21FE16E1E0F}", { L"Mid", L"Release midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { 13, 0, envelope_release_log_relevance, 1 } }
 }; 

@@ -140,7 +140,10 @@ beat_synced_timesig_values(
 {
   std::vector<float> result;
   for (std::size_t i = 0; i < timesig.size(); i++)
-    result.push_back(static_cast<float>(timesig[i].first) / timesig[i].second);
+    if(timesig[i].second == 0)
+      result.push_back(0.0f);
+    else
+      result.push_back(static_cast<float>(timesig[i].first) / timesig[i].second);
   return result;
 }
 
@@ -150,6 +153,9 @@ beat_synced_timesig_names(
 {
   std::vector<std::wstring> result;
   for (std::size_t i = 0; i < timesig.size(); i++)
+    if (timesig[i].second == 0)
+      result.push_back(L"0");
+    else
     result.push_back(std::to_wstring(timesig[i].first) + L"/" + std::to_wstring(timesig[i].second));
   return result;
 }
