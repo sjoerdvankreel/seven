@@ -1,5 +1,6 @@
 #include <svn.base/dsp/support.hpp>
 #include <svn.base/dsp/spectrum_analyzer.hpp>
+#include <svn.synth/dsp/envelope.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
 #include <svn.synth/dsp/voice_filter.hpp>
 #include <svn.synth/dsp/graph_processor.hpp>
@@ -41,7 +42,8 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
 namespace svn::synth {
 
 static voice_input
-setup_graph_voice_input(block_input const& input, topology_info const* topology)
+setup_graph_voice_input(
+  block_input const& input, topology_info const* topology)
 {
   voice_input result;
   result.bpm = input.bpm;
@@ -63,21 +65,26 @@ envelope_graph::needs_repaint(std::int32_t runtime_param) const
 std::int32_t 
 envelope_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 { 
-  return 100; 
+  envelope env(sample_rate);
+  voice_input vinput = setup_graph_voice_input(input, topology());
 }
 
 void 
-envelope_graph::dsp_to_plot(std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate)
+envelope_graph::dsp_to_plot(
+  std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate)
 { 
   plot.resize(dsp.size());
   std::copy(dsp.begin(), dsp.end(), plot.begin()); 
 }
 
 void 
-envelope_graph::process_dsp_core(block_input const& input, float* output, float sample_rate, float bpm)
+envelope_graph::process_dsp_core(
+  block_input const& input, float* output, float sample_rate, float bpm)
 {
-  for(std::int32_t i = 0; i < input.sample_count; i++)
-    output[i] = i / static_cast<float>(input.sample_count);
+  envelope env(sample_rate);
+  std::memset(output, 0, input.sample_count * sizeof(float));
+  voice_input vinput = setup_graph_voice_input(input, topology());
+  env.process_block(vinput, part_index(), output);
 }
 
 bool 
@@ -90,7 +97,8 @@ oscillator_spectrum_graph::process_dsp_core(
 { return _wave.process_dsp_core(input, output, sample_rate, bpm); }
 
 std::int32_t
-oscillator_spectrum_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
+oscillator_spectrum_graph::sample_count(
+  param_value const* state, float sample_rate, float bpm) const
 { return static_cast<std::int32_t>(std::ceil(sample_rate)); }
 
 void
@@ -137,9 +145,9 @@ void
 oscillator_wave_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
 {
+  oscillator osc(sample_rate, midi_note_c4);
   base::clear_audio(output, input.sample_count);
   voice_input vinput = setup_graph_voice_input(input, topology());
-  oscillator osc(sample_rate, midi_note_c4);
   osc.process_block(vinput, part_index(), output);
 }
 
