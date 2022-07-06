@@ -47,7 +47,7 @@ protected:
 
 private:
   // Do the full audio dsp stuff without transforming to plot.
-  std::vector<audio_sample32> const& process_audio(param_value const* state, float sample_rate);
+  std::vector<audio_sample32> const& process_audio(param_value const* state, float sample_rate, float bpm);
 
 public:
   virtual ~graph_processor() {}
@@ -58,14 +58,14 @@ public:
   // Repaint if that parameter changes?
   virtual bool needs_repaint(std::int32_t runtime_param) const = 0;
   // Need to know audio size up front.
-  virtual std::int32_t audio_sample_count(param_value const* state, float sample_rate) const = 0;
+  virtual std::int32_t audio_sample_count(param_value const* state, float sample_rate, float bpm) const = 0;
   // Renders data in sample_count audio samples.
-  virtual void process_audio_core(block_input const& input, block_output& output, float sample_rate) = 0;
+  virtual void process_audio_core(block_input const& input, block_output& output, float sample_rate, float bpm) = 0;
   // Transforms audio to plot in (0, 1).
   virtual void audio_to_plot(std::vector<audio_sample32> const& audio, std::vector<float>& plot, float sample_rate) = 0;
 
   // This is the main entry point for the graph plot.
-  std::vector<graph_point> const& plot(param_value const* state, float sample_rate, std::int32_t width, std::int32_t height);
+  std::vector<graph_point> const& plot(param_value const* state, float sample_rate, float bpm, std::int32_t width, std::int32_t height);
 };
 
 } // namespace svn::base

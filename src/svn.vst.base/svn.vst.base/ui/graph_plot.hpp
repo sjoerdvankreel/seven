@@ -14,6 +14,7 @@ public VSTGUI::CView
 {
   VSTGUI::CColor const _color;
   svn::base::graph_processor* const _processor;
+  static inline float const bpm = 120.0f;
   static inline float const sample_rate = 48000.0f;
 public:
   ~graph_plot() override { delete _processor; }

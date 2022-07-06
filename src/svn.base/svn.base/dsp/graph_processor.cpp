@@ -6,11 +6,11 @@ namespace svn::base {
 
 // Given parameter state and sample rate, setup automation and run some dsp code.
 std::vector<audio_sample32> const&
-graph_processor::process_audio(param_value const* state, float sample_rate)
+graph_processor::process_audio(param_value const* state, float sample_rate, float bpm)
 {
   _automation.clear();
   _automation_buffer.clear();
-  std::int32_t samples = audio_sample_count(state, sample_rate);
+  std::int32_t samples = audio_sample_count(state, sample_rate, bpm);
   for (std::int32_t p = 0; p < topology()->input_param_count; p++)
     for (std::int32_t s = 0; s < samples; s++)
       _automation_buffer.push_back(state[p]);
@@ -21,7 +21,7 @@ graph_processor::process_audio(param_value const* state, float sample_rate)
   _audio_data.resize(samples);
 
   block_input input;
-  input.bpm = 0.0f;
+  input.bpm = bpm;
   input.note_count = 0;
   input.notes = nullptr;
   input.stream_position = 0;
@@ -34,17 +34,17 @@ graph_processor::process_audio(param_value const* state, float sample_rate)
 
   // This produces the graph specific audio data.
   std::uint64_t denormal_state = disable_denormals();
-  process_audio_core(input, output, sample_rate);
+  process_audio_core(input, output, sample_rate, bpm);
   restore_denormals(denormal_state);
   return _audio_data;
 }
 
 std::vector<graph_point> const&
 graph_processor::plot(param_value const* state, 
-  float sample_rate, std::int32_t width, std::int32_t height)
+  float sample_rate, float bpm, std::int32_t width, std::int32_t height)
 {
   _plot_data.clear();
-  process_audio(state, sample_rate);
+  process_audio(state, sample_rate, bpm);
   audio_to_plot(_audio_data, _plot_data, sample_rate);
 
   _graph_data.clear();

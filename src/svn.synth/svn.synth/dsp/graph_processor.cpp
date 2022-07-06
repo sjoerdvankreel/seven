@@ -53,17 +53,17 @@ setup_graph_voice_input(block_input const& input, topology_info const* topology)
   return result;
 }
 
-void 
-oscillator_spectrum_graph::process_audio_core(
-  block_input const& input, block_output& output, float sample_rate)
-{ return _wave.process_audio_core(input, output, sample_rate); }
-
 bool 
 oscillator_spectrum_graph::needs_repaint(std::int32_t runtime_param) const
 { return _wave.needs_repaint(runtime_param); }
 
+void 
+oscillator_spectrum_graph::process_audio_core(
+  block_input const& input, block_output& output, float sample_rate, float bpm)
+{ return _wave.process_audio_core(input, output, sample_rate, bpm); }
+
 std::int32_t
-oscillator_spectrum_graph::audio_sample_count(param_value const* state, float sample_rate) const
+oscillator_spectrum_graph::audio_sample_count(param_value const* state, float sample_rate, float bpm) const
 { return static_cast<std::int32_t>(std::ceil(sample_rate)); }
 
 void
@@ -95,7 +95,7 @@ oscillator_wave_graph::audio_to_plot(
 
 std::int32_t 
 oscillator_wave_graph::audio_sample_count(
-  param_value const* state, float sample_rate) const
+  param_value const* state, float sample_rate, float bpm) const
 {
   std::int32_t const cycles = 2;
   std::int32_t begin = topology()->param_bounds[part_type::oscillator][part_index()];
@@ -108,7 +108,7 @@ oscillator_wave_graph::audio_sample_count(
 
 void 
 oscillator_wave_graph::process_audio_core(
-  block_input const& input, block_output& output, float sample_rate)
+  block_input const& input, block_output& output, float sample_rate, float bpm)
 {
   _audio_out.clear();
   _audio_out.resize(input.sample_count);
@@ -121,7 +121,7 @@ oscillator_wave_graph::process_audio_core(
 
 std::int32_t
 filter_ir_graph::audio_sample_count(
-  param_value const* state, float sample_rate) const
+  param_value const* state, float sample_rate, float bpm) const
 {
   std::int32_t begin = topology()->param_bounds[part_type::voice_filter][part_index()];
   std::int32_t type = state[begin + voice_filter_param::type].discrete;
@@ -146,7 +146,7 @@ filter_ir_graph::audio_to_plot(
 
 void 
 filter_ir_graph::process_audio_core(
-  block_input const& input, block_output& output, float sample_rate)
+  block_input const& input, block_output& output, float sample_rate, float bpm)
 {
   _audio_in.clear();
   _audio_in.resize(input.sample_count);

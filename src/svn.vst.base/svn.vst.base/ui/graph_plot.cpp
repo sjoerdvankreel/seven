@@ -63,7 +63,7 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
   CGraphicsPath* path = context->createGraphicsPath();
   auto editor = static_cast<VST3Editor*>(getFrame()->getEditor());
   auto state = static_cast<controller const*>(editor->getController())->state();
-  std::vector<graph_point> const& graph_data = _processor->plot(state, sample_rate, render_size.x, render_size.y);
+  std::vector<graph_point> const& graph_data = _processor->plot(state, sample_rate, bpm, render_size.x, render_size.y);
   path->beginSubpath(CPoint(graph_data[0].x + 3, render_size.y - graph_data[0].y + 3));
   for(std::size_t i = 1; i < graph_data.size(); i++)
     path->addLine(graph_data[i].x + 3, render_size.y - graph_data[i].y + 3);
