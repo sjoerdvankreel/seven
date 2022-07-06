@@ -19,7 +19,7 @@ namespace svn::base {
 
 struct graph_point { float x, y; };
 
-// Renders pretty images. Need not be audio.
+// Renders pretty images.
 class graph_processor
 {
   std::int32_t const _part_index;

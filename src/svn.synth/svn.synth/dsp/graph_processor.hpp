@@ -9,10 +9,9 @@ namespace svn::synth {
 class oscillator_wave_graph:
 public svn::base::graph_processor
 {
-  std::vector<base::audio_sample32> _audio_out;
 public:
   oscillator_wave_graph(topology_info const* topology, std::int32_t part_index) :
-  svn::base::graph_processor(topology, part_index), _audio_out() {}
+  svn::base::graph_processor(topology, part_index) {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t audio_sample_count(param_value const* state, float sample_rate, float bpm) const override;
@@ -41,10 +40,9 @@ class filter_ir_graph:
 public svn::base::graph_processor
 {
   std::vector<base::audio_sample32> _audio_in;
-  std::vector<base::audio_sample32> _audio_out;
 public:
   filter_ir_graph(topology_info const* topology, std::int32_t part_index) :
-  svn::base::graph_processor(topology, part_index), _audio_in(), _audio_out() {}
+  svn::base::graph_processor(topology, part_index), _audio_in() {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t audio_sample_count(param_value const* state, float sample_rate, float bpm) const override;

@@ -110,13 +110,10 @@ void
 oscillator_wave_graph::process_audio_core(
   block_input const& input, block_output& output, float sample_rate, float bpm)
 {
-  _audio_out.clear();
-  _audio_out.resize(input.sample_count);
+  base::clear_audio(output.audio, input.sample_count);
   voice_input vinput = setup_graph_voice_input(input, topology());
   oscillator osc(sample_rate, midi_note_c4);
-  osc.process_block(vinput, part_index(), _audio_out.data());
-  base::clear_audio(output.audio, input.sample_count);
-  base::add_audio(output.audio, _audio_out.data(), input.sample_count);
+  osc.process_block(vinput, part_index(), output.audio);
 }
 
 std::int32_t
@@ -151,14 +148,11 @@ filter_ir_graph::process_audio_core(
   _audio_in.clear();
   _audio_in.resize(input.sample_count);
   _audio_in[0] = 1.0f;
-  _audio_out.clear();
-  _audio_out.resize(input.sample_count);
 
+  base::clear_audio(output.audio, input.sample_count);
   voice_input vinput = setup_graph_voice_input(input, topology());
   auto filter = std::make_unique<voice_filter>(sample_rate, midi_note_c4);
-  filter->process_block(vinput, part_index(), _audio_in.data(), _audio_out.data());
-  base::clear_audio(output.audio, input.sample_count);
-  base::add_audio(output.audio, _audio_out.data(), input.sample_count);
+  filter->process_block(vinput, part_index(), _audio_in.data(), output.audio);
 }
  
 } // namespace svn::synth

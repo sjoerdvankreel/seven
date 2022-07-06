@@ -111,7 +111,6 @@ processor::process(ProcessData& data)
   if(data.processContext != nullptr)
     input.stream_position = data.processContext->projectTimeSamples;
 
-  assert(data.processContext == nullptr || (data.processContext->state & ProcessContext::kTempoValid) != 0);
   if(data.processContext != nullptr && (data.processContext->state & ProcessContext::kTempoValid) != 0)
     input.bpm = static_cast<float>(data.processContext->tempo);
 
