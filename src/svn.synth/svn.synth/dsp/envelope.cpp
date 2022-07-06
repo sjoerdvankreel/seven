@@ -12,10 +12,10 @@ namespace svn::synth {
 static const float inv_log_half = 1.0f / std::log(0.5f);
 
 float 
-envelope::generate_attack(
-  base::automation_view const& automation, std::int32_t s, float stage_pos)
+envelope::generate_slope(base::automation_view const& automation,
+  std::int32_t slope_param, std::int32_t mid_param, std::int32_t s, float stage_pos)
 {
-  std::int32_t slope = automation.get(envelope_param::attack_slope, s).discrete;
+  std::int32_t slope = automation.get(slope_param, s).discrete;
   switch (slope)
   {
   case envelope_slope::lin: return stage_pos;
@@ -25,7 +25,7 @@ envelope::generate_attack(
     assert(slope == envelope_slope::log);
     break;
   }
-  float mid = automation.get(envelope_param::attack_mid, s).real;
+  float mid = automation.get(mid_param, s).real;
   return sanity_unipolar(std::pow(stage_pos, std::log(mid) * inv_log_half));
 }
 
@@ -38,13 +38,19 @@ envelope::generate_stage(base::automation_view const& automation, std::int32_t s
   float stage = 0.0f;
   if (pos < stage + delay) return 0.0f;
   stage = std::ceil(stage + delay);
-  if(pos < stage + attack) return generate_attack(automation, s, (pos - stage) / attack);
+  if(pos < stage + attack) return generate_slope(
+    automation, envelope_param::attack_slope, 
+    envelope_param::attack_mid, s, (pos - stage) / attack);
   stage = std::ceil(stage + attack);
   if(pos < stage + hold) return 1.0f;
   stage = std::ceil(stage + hold);
-  if(pos < stage + decay) return sanity_unipolar(1.0f - (pos - stage) / decay * (1.0f - sustain));
+  if(pos < stage + decay) return sanity_unipolar(1.0f - generate_slope(
+    automation, envelope_param::decay_slope,
+    envelope_param::decay_mid, s, (pos - stage) / decay) * (1.0f - sustain));
   stage = std::ceil(stage + decay);
-  if(pos < stage + release) return sanity_unipolar(sustain - (pos - stage) / release * sustain);
+  if(pos < stage + release) return sanity_unipolar(sustain - generate_slope(
+    automation, envelope_param::release_slope,
+    envelope_param::release_mid, s, (pos - stage) / release) * sustain);
   return 0.0f;
 }
 

@@ -21,7 +21,8 @@ public:
 private:
   float generate_stage(base::automation_view const& automation, std::int32_t s,
     float delay, float attack, float hold, float decay, float sustain, float release);
-  float generate_attack(base::automation_view const& automation, std::int32_t s, float stage_pos);
+  float generate_slope(base::automation_view const& automation, 
+    std::int32_t slope_param, std::int32_t mid_param, std::int32_t s, float stage_pos);
 };
 
 } // namespace svn::synth
