@@ -51,12 +51,7 @@ envelope::setup_stages(automation_view const& automation, std::int32_t s,
 void 
 envelope::process_block(voice_input const& input, std::int32_t index, float* cv_out)
 {
-  float delay;
-  float attack;
-  float hold;
-  float decay;
-  float release;
-
+  float delay, attack, hold, decay, release;
   automation_view automation(input.automation.rearrange_params(part_type::envelope, index));
   for (std::int32_t s = 0; s < input.sample_count; s++, _position++)
   {
