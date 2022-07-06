@@ -63,16 +63,6 @@ envelope_graph::dsp_to_plot(
   std::copy(dsp.begin(), dsp.end(), plot.begin());
 }
 
-void
-envelope_graph::process_dsp_core(
-  block_input const& input, float* output, float sample_rate, float bpm)
-{
-  envelope env(env_graph_rate);
-  std::memset(output, 0, input.sample_count * sizeof(float));
-  voice_input vinput = setup_graph_voice_input(input, topology());
-  env.process_block(vinput, part_index(), output, input.sample_count);
-}
-
 bool
 envelope_graph::needs_repaint(std::int32_t runtime_param) const
 {
@@ -83,18 +73,37 @@ envelope_graph::needs_repaint(std::int32_t runtime_param) const
 std::int32_t 
 envelope_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 { 
+  float delay, attack, hold, decay, release;
   std::vector<param_value const*> automation(
     static_cast<std::size_t>(topology()->input_param_count));
-  for(std::int32_t i = 0; i < topology()->input_param_count; i++)
+  for (std::int32_t i = 0; i < topology()->input_param_count; i++)
     automation[i] = &state[i];
-  base::automation_view view(topology(), nullptr, automation.data(), 
-    topology()->input_param_count, topology()->input_param_count, 0, 1, 0, 1);
-
-  envelope env(env_graph_rate);
-  float delay, attack, hold, decay, release;
-  env.setup_stages(view.rearrange_params(part_type::envelope, part_index()), 
-    0, bpm, delay, attack, hold, decay, release);
+  setup_stages(automation.data(), sample_rate, bpm, delay, attack, hold, decay, release);
   return static_cast<std::int32_t>(std::ceil(delay + attack + hold + decay + release));
+}
+
+void
+envelope_graph::process_dsp_core(
+  block_input const& input, float* output, float sample_rate, float bpm)
+{
+  float delay, attack, hold, decay, release;
+  setup_stages(input.automation, sample_rate, bpm, delay, attack, hold, decay, release);
+  std::int32_t release_sample = static_cast<std::int32_t>(std::ceil(delay + attack + hold + decay));
+  envelope env(env_graph_rate);
+  std::memset(output, 0, input.sample_count * sizeof(float));
+  voice_input vinput = setup_graph_voice_input(input, topology());
+  env.process_block(vinput, part_index(), output, release_sample);
+}
+
+void
+envelope_graph::setup_stages(param_value const* const* automation, float sample_rate, 
+  float bpm, float& delay, float& attack, float& hold, float& decay, float& release) const
+{
+  envelope env(env_graph_rate);
+  base::automation_view view(topology(), nullptr, automation,
+    topology()->input_param_count, topology()->input_param_count, 0, 1, 0, 1);
+  env.setup_stages(view.rearrange_params(part_type::envelope, part_index()),
+    0, bpm, delay, attack, hold, decay, release);
 }
 
 bool 

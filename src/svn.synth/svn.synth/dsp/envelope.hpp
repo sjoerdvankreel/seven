@@ -13,6 +13,7 @@ typedef envelope_stage_t::value envelope_stage;
 // Per-voice envelope generator.
 class envelope
 {
+  bool _released = false;
   float _sample_rate = 0.0f;
   std::int32_t _position = 0;
   float _release_level = 0.0f;
