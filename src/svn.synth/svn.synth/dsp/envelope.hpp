@@ -1,16 +1,21 @@
 #ifndef SVN_SYNTH_DSP_ENVELOPE_HPP
 #define SVN_SYNTH_DSP_ENVELOPE_HPP
 
+#include <utility>
 #include <svn.synth/dsp/support.hpp>
 #include <svn.synth/topology/topology.hpp>
 
 namespace svn::synth {
+
+struct envelope_stage_t { enum value { delay, attack, hold, decay, sustain, release, end }; };
+typedef envelope_stage_t::value envelope_stage;
 
 // Per-voice envelope generator.
 class envelope
 {
   float _sample_rate = 0.0f;
   std::int32_t _position = 0;
+  float _release_level = 0.0f;
 public:
   envelope() = default;
   explicit envelope(float sample_rate) : _sample_rate(sample_rate) {}
@@ -22,8 +27,8 @@ public:
 private:
   float generate_slope(base::automation_view const& automation, 
     std::int32_t slope_param, std::int32_t mid_param, std::int32_t s, float stage_pos);
-  float generate_stage(base::automation_view const& automation, std::int32_t s,
-    float delay, float attack, float hold, float decay, float sustain, float release, bool& done);
+  std::pair<envelope_stage, float> generate_stage(base::automation_view const& automation, 
+    std::int32_t s, float delay, float attack, float hold, float decay, float sustain, float release);
 };
 
 } // namespace svn::synth
