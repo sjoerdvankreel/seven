@@ -13,7 +13,7 @@ synthesizer(
   base::topology_info const* topology, float sample_rate,
   std::int32_t max_sample_count, base::param_value* state):
 audio_processor(topology, sample_rate, max_sample_count, state),
-_voice_audio(max_sample_count),
+_cv(max_sample_count), _voice_audio(max_sample_count),
 _automation_fixed(static_cast<std::size_t>(synth_polyphony)),
 _automation_fixed_buffer(static_cast<std::size_t>(synth_polyphony * topology->input_param_count)),
 _last_automation_previous_block(static_cast<std::size_t>(topology->input_param_count)),
@@ -158,7 +158,7 @@ synthesizer::process_block(block_input const& input, block_output& output)
       }
       // Else nothing to do, we ride along with the active automation values.     
 
-      std::int32_t processed = _voices[v].process_block(vinput, _voice_audio, release_sample);
+      std::int32_t processed = _voices[v].process_block(vinput, _cv, _voice_audio, release_sample);
       base::add_audio(output.audio + voice_start, _voice_audio.voice_amp.data(), processed);
       if(processed < vinput.sample_count) return_voice(v);
     }

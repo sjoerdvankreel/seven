@@ -42,7 +42,7 @@ struct oscillator_graph_t { enum value { wave, spectrum, count }; };
 struct oscillator_anlg_type_t { enum value { sin, saw, pulse, tri, count }; };
 struct oscillator_param_t { enum value { on, amp, pan, type, anlg_type, anlg_spread, anlg_detune, anlg_pw, dsf_partials, dsf_distance, dsf_rolloff, oct, note, cent, count }; };
 
-struct voice_amp_param_t { enum value { level, decay, count }; };
+struct voice_amp_param_t { enum value { level, env1, pan, count }; };
 struct output_param_t { enum value { clip, drain, voices, count }; };
 struct part_type_t { enum value { oscillator, envelope, voice_amp, voice_filter, audio_route, output, count }; };
 

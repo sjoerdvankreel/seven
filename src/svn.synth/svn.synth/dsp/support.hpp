@@ -22,6 +22,18 @@ struct voice_input
   base::automation_view automation;
 };
 
+// Internal cv state.
+class cv_state
+{
+public:
+  cv_state(std::int32_t max_sample_count);
+  std::array<std::vector<float>, envelope_count> envelope;
+};
+
+inline cv_state::
+cv_state(std::int32_t max_sample_count): envelope()
+{ envelope.fill(std::vector<float>(static_cast<std::size_t>(max_sample_count))); }
+
 // Internal audio outputs.
 class audio_state
 {

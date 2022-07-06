@@ -7,31 +7,21 @@ using namespace svn::base;
 
 namespace svn::synth {
 
-std::int32_t
-voice_amp::process_block(voice_input const& input, std::int32_t release_sample,
+void
+voice_amp::process_block(voice_input const& input, cv_state const& cv,
   base::audio_sample32 const* audio_in, base::audio_sample32* audio_out)
 {
-  std::int32_t s;
-  assert(release_sample >= -1);
-  assert(release_sample < input.sample_count);
   automation_view automation(input.automation.rearrange_params(part_type::voice_amp, 0));
-
-  for (s = 0; s < input.sample_count; s++)
+  for (std::int32_t s = 0; s < input.sample_count; s++)
   {
-    float decay_level = 1.0f;
-    if(s == release_sample) _released = 0;
-    if (_released >= 0)
-    {
-      float decay_seconds = automation.get(voice_amp_param::decay, s).real;
-      float decay_samples = decay_seconds * _sample_rate;
-      if(_released >= decay_samples) return s;
-      decay_level = 1.0f - (_released / decay_samples);
-      _released++;
-    } 
+    float env1 = automation.get(voice_amp_param::env1, s).real;
     float level = automation.get(voice_amp_param::level, s).real;
-    audio_out[s] = sanity_audio(audio_in[s] * _velocity * decay_level * level);
+    float panning = automation.get(voice_amp_param::pan, s).real;
+    float final_amp = level * env1 * cv.envelope[0][s];
+    float left = audio_in[s].left * final_amp * (1.0f - panning);
+    float right = audio_in[s].right * final_amp * panning;
+    audio_out[s] = sanity_audio(audio_sample32({left, right}));
   }
-  return input.sample_count;
 }
 
 } // namespace svn::synth

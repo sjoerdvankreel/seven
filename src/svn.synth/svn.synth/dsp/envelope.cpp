@@ -31,8 +31,9 @@ envelope::generate_slope(base::automation_view const& automation,
 
 float 
 envelope::generate_stage(base::automation_view const& automation, std::int32_t s, 
-  float delay, float attack, float hold, float decay, float sustain, float release)
+  float delay, float attack, float hold, float decay, float sustain, float release, bool& done)
 {
+  done = false;
   float pos = static_cast<float>(_position);
 
   float stage = 0.0f;
@@ -51,6 +52,8 @@ envelope::generate_stage(base::automation_view const& automation, std::int32_t s
   if(pos < stage + release) return sanity_unipolar(sustain - generate_slope(
     automation, envelope_param::release_slope,
     envelope_param::release_mid, s, (pos - stage) / release) * sustain);
+
+  done = true;
   return 0.0f;
 }
 
@@ -74,7 +77,7 @@ envelope::setup_stages(automation_view const& automation, std::int32_t s,
   release = _sample_rate * 60.0f / bpm * env_synced_timesig_values[automation.get(envelope_param::release_sync, s).discrete];
 }
 
-void 
+std::int32_t 
 envelope::process_block(voice_input const& input, std::int32_t index, float* cv_out)
 {
   float delay, attack, hold, decay, release;
@@ -85,11 +88,14 @@ envelope::process_block(voice_input const& input, std::int32_t index, float* cv_
     bool on = automation.get(envelope_param::on, s).discrete != 0;
     if (!on) continue;
 
+    bool done;
     float sustain = automation.get(envelope_param::sustain_level, s).real;
     setup_stages(automation, s, input.bpm, delay, attack, hold, decay, release);
-    cv_out[s] = generate_stage(automation, s, delay, attack, hold, decay, sustain, release);
+    cv_out[s] = generate_stage(automation, s, delay, attack, hold, decay, sustain, release, done);
     sanity_unipolar(cv_out[s]);
+    if(done) return s;
   }
+  return input.sample_count;
 }
 
 } // namespace svn::synth

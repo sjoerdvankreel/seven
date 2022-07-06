@@ -4,15 +4,6 @@
 using namespace svn::base;
 
 namespace svn::synth {
-
-// ---- amp ----
-
-static param_descriptor const
-voice_amp_params[voice_amp_param::count] =
-{ 
-  { "{5A2DF5BA-7D6F-4053-983E-AA6DC5084373}", { L"Amp", L"Level" }, L"dB", {1.0f, 1, real_bounds::unit(), real_bounds::decibel()}, {0, 1, nullptr, 0}},
-  { "{461FFE68-7EF6-49B6-A3E9-590E2D0D99FB}", { L"Dcy", L"Decay" }, L"Sec", {0.0f, 2, real_bounds::unit(), real_bounds::unit()}, {1, 1, nullptr, 0}}
-};
   
 // ---- output ----
 
@@ -22,6 +13,16 @@ output_params[output_param::count] =
   { "{A6024C5F-CF37-48C8-BE5B-713191155AE5}", { L"Clip", L"Clip" }, false, {0, 1, nullptr, 0}},
   { "{8363D40B-6D49-4CF0-8D86-5449997034DE}", { L"Drain", L"Voices exhausted" }, false, {1, 1, nullptr, 0}},
   { "{6190497F-E08C-49DC-8C74-BAEF6D889BCB}", { L"Voices", L"Voice count" }, L"", false, 0, synth_polyphony, 0, {2, 2, nullptr, 0}}
+};
+
+// ---- amp ----
+
+static param_descriptor const
+voice_amp_params[voice_amp_param::count] =
+{ 
+  { "{5A2DF5BA-7D6F-4053-983E-AA6DC5084373}", { L"Amp", L"Level" }, L"dB", {1.0f, 1, real_bounds::unit(), real_bounds::decibel()}, {0, 0, nullptr, 0}},
+  { "{461FFE68-7EF6-49B6-A3E9-590E2D0D99FB}", { L"Env1", L"Env1 to level" }, L"", {1.0f, 2, real_bounds::unit(), real_bounds::unit()}, {1, 1, nullptr, 0}},
+  { "{86782F43-7079-47BE-9C7F-8BF6D12A0950}", { L"Pan", L"Panning" }, L"%", { 0.5f, 0, real_bounds::unit(), real_bounds::linear(-100.0f, 100.0f) }, { 2, 2, nullptr, 0 } }
 };
 
 // ---- envelope ----

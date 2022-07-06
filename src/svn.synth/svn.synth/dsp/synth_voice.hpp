@@ -1,9 +1,10 @@
 #ifndef SVN_SYNTH_DSP_SYNTH_VOICE_HPP
 #define SVN_SYNTH_DSP_SYNTH_VOICE_HPP
 
+#include <svn.synth/dsp/envelope.hpp>
 #include <svn.synth/dsp/voice_amp.hpp>
-#include <svn.synth/dsp/voice_filter.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
+#include <svn.synth/dsp/voice_filter.hpp>
 #include <svn.synth/topology/topology.hpp>
 
 #include <array>
@@ -35,10 +36,15 @@ class synth_voice
 private:
   voice_amp _amp;
   base::topology_info const* _topology;
+  std::array<envelope, envelope_count> _envelopes;
   std::array<oscillator, oscillator_count> _oscillators;
   std::array<voice_filter, voice_filter_count> _filters;
 
 public:
+  synth_voice() = default;
+  synth_voice(base::topology_info const* topology,
+    float sample_rate, float velocity, std::int32_t midi_note);
+
   // With input and audio offset to the start of the voice within the current 
   // block. Returns total number of samples rendered, which equals input 
   // sample count if the voice did not finish within the current block. Release 
@@ -47,11 +53,7 @@ public:
   // this is handled globally by the synth class.
   std::int32_t
   process_block(voice_input const& input, 
-    audio_state& audio, std::int32_t release_sample);
-
-  synth_voice() = default;
-  synth_voice(base::topology_info const* topology,
-    float sample_rate, float velocity, std::int32_t midi_note);
+    cv_state& cv, audio_state& audio, std::int32_t release_sample);
 };
 
 } // namespace svn::synth

@@ -21,6 +21,8 @@ class synthesizer:
 public base::audio_processor
 {
 private:
+  // Keeping track of component's cv outputs for internal routing.
+  cv_state _cv;
   // Keeping track of component's audio outputs for internal routing.
   audio_state _voice_audio;
   // Of size total voice count.
