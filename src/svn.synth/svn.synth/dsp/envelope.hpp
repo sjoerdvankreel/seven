@@ -14,13 +14,14 @@ class envelope
 public:
   envelope() = default;
   envelope(float sample_rate) : _sample_rate(sample_rate) {}
-private:
-  float generate_stage(base::automation_view const& automation, std::int32_t s,
-    float delay, float attack, float hold, float decay, float sustain, float release);
 public:
   void process_block(voice_input const& input, std::int32_t index, float* cv_out);
   void setup_stages(base::automation_view const& automation, std::int32_t s,
     float bpm, float& delay, float& attack, float& hold, float& decay, float& release);
+private:
+  float generate_stage(base::automation_view const& automation, std::int32_t s,
+    float delay, float attack, float hold, float decay, float sustain, float release);
+  float generate_attack(base::automation_view const& automation, std::int32_t s, float stage_pos);
 };
 
 } // namespace svn::synth

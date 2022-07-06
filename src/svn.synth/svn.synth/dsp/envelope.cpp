@@ -9,6 +9,26 @@ using namespace svn::base;
 
 namespace svn::synth {
 
+static const float inv_log_half = 1.0f / std::log(0.5f);
+
+float 
+envelope::generate_attack(
+  base::automation_view const& automation, std::int32_t s, float stage_pos)
+{
+  std::int32_t slope = automation.get(envelope_param::attack_slope, s).discrete;
+  switch (slope)
+  {
+  case envelope_slope::lin: return stage_pos;
+  case envelope_slope::sqrt: return sanity_unipolar(std::sqrt(stage_pos));
+  case envelope_slope::quad: return sanity_unipolar(stage_pos * stage_pos);
+  default:
+    assert(slope == envelope_slope::log);
+    break;
+  }
+  float mid = automation.get(envelope_param::attack_mid, s).real;
+  return sanity_unipolar(std::pow(stage_pos, std::log(mid) * inv_log_half));
+}
+
 float 
 envelope::generate_stage(base::automation_view const& automation, std::int32_t s, 
   float delay, float attack, float hold, float decay, float sustain, float release)
@@ -18,7 +38,7 @@ envelope::generate_stage(base::automation_view const& automation, std::int32_t s
   float stage = 0.0f;
   if (pos < stage + delay) return 0.0f;
   stage = std::ceil(stage + delay);
-  if(pos < stage + attack) return sanity_unipolar((pos - stage) / attack);
+  if(pos < stage + attack) return generate_attack(automation, s, (pos - stage) / attack);
   stage = std::ceil(stage + attack);
   if(pos < stage + hold) return 1.0f;
   stage = std::ceil(stage + hold);
@@ -60,7 +80,6 @@ envelope::process_block(voice_input const& input, std::int32_t index, float* cv_
     if (!on) continue;
 
     float sustain = automation.get(envelope_param::sustain_level, s).real;
-    bool dahdsr = automation.get(envelope_param::type, s).discrete == envelope_type::dahdsr;
     setup_stages(automation, s, input.bpm, delay, attack, hold, decay, release);
     cv_out[s] = generate_stage(automation, s, delay, attack, hold, decay, sustain, release);
     sanity_unipolar(cv_out[s]);
