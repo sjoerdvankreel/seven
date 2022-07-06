@@ -31,7 +31,7 @@ envelope::generate_slope(base::automation_view const& automation,
 
 std::pair<envelope_stage, float>
 envelope::generate_stage(base::automation_view const& automation, std::int32_t s, 
-  float delay, float attack, float hold, float decay, float sustain, float release)
+  bool dahdsr, float delay, float attack, float hold, float decay, float sustain, float release)
 {
   float pos = static_cast<float>(_position);
 
@@ -52,7 +52,7 @@ envelope::generate_stage(base::automation_view const& automation, std::int32_t s
     sanity_unipolar(1.0f - generate_slope(
     automation, envelope_param::decay_slope,
     envelope_param::decay_mid, s, (pos - stage) / decay) * (1.0f - sustain)));
-  if(!_released) return std::make_pair(
+  if(dahdsr && !_released) return std::make_pair(
     envelope_stage::sustain, sustain);
   stage = std::ceil(stage + decay);
   if(pos < stage + release) return std::make_pair(
@@ -95,7 +95,7 @@ envelope::process_block(voice_input const& input, std::int32_t index, float* cv_
     float sustain = automation.get(envelope_param::sustain_level, s).real;
     bool dahdsr = automation.get(envelope_param::type, s).discrete == envelope_type::dahdsr;
     setup_stages(automation, s, input.bpm, delay, attack, hold, decay, release);
-    auto stage = generate_stage(automation, s, delay, attack, hold, decay, sustain, release);
+    auto stage = generate_stage(automation, s, dahdsr, delay, attack, hold, decay, sustain, release);
     cv_out[s] = sanity_unipolar(stage.second);
     if(stage.first == envelope_stage::end) return s;
     if(stage.first != envelope_stage::release) _release_level = cv_out[s];

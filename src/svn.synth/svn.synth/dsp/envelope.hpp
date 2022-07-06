@@ -24,7 +24,7 @@ private:
   float generate_slope(base::automation_view const& automation, 
     std::int32_t slope_param, std::int32_t mid_param, std::int32_t s, float stage_pos);
   std::pair<envelope_stage, float> generate_stage(base::automation_view const& automation, 
-    std::int32_t s, float delay, float attack, float hold, float decay, float sustain, float release);
+    std::int32_t s, bool dahdsr, float delay, float attack, float hold, float decay, float sustain, float release);
 public:
   void setup_stages(base::automation_view const& automation, std::int32_t s,
     float bpm, float& delay, float& attack, float& hold, float& decay, float& release);
