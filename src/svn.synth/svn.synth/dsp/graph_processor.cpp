@@ -9,7 +9,7 @@
 #include <memory>
 #include <cassert>
 
-using namespace svn::base;
+using namespace svn::base; 
 
 svn::base::graph_processor_base*
 svn_create_graph_processor(svn::base::topology_info const* topology,
