@@ -84,9 +84,8 @@ envelope::process_block(voice_input const& input, std::int32_t index, float* cv_
   automation_view automation(input.automation.rearrange_params(part_type::envelope, index));
   for (std::int32_t s = 0; s < input.sample_count; s++, _position++)
   {
-    cv_out[s] = 1.0f;
-    bool on = automation.get(envelope_param::on, s).discrete != 0;
-    if (!on) continue;
+    cv_out[s] = 0.0f;
+    if(automation.get(envelope_param::on, s).discrete == 0) return s;
 
     bool done;
     float sustain = automation.get(envelope_param::sustain_level, s).real;
