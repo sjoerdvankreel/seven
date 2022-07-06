@@ -67,7 +67,7 @@ void
 envelope_graph::process_dsp_core(
   block_input const& input, float* output, float sample_rate, float bpm)
 {
-  envelope env(sample_rate);
+  envelope env(env_graph_rate);
   std::memset(output, 0, input.sample_count * sizeof(float));
   voice_input vinput = setup_graph_voice_input(input, topology());
   env.process_block(vinput, part_index(), output);
@@ -90,7 +90,7 @@ envelope_graph::sample_count(param_value const* state, float sample_rate, float 
   base::automation_view view(topology(), nullptr, automation.data(), 
     topology()->input_param_count, topology()->input_param_count, 0, 1, 0, 1);
 
-  envelope env(sample_rate);
+  envelope env(env_graph_rate);
   float delay, attack, hold, decay, release;
   env.setup_stages(view.rearrange_params(part_type::envelope, part_index()), 
     0, bpm, delay, attack, hold, decay, release);

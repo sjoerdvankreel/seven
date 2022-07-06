@@ -9,6 +9,7 @@ namespace svn::synth {
 class envelope_graph:
 public svn::base::graph_processor<float>
 {
+  static inline std::int32_t constexpr env_graph_rate = 100.0f;
 public:
   envelope_graph(topology_info const* topology, std::int32_t part_index) :
   svn::base::graph_processor<float>(topology, part_index) {}
