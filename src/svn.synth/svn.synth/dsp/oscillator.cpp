@@ -100,11 +100,11 @@ float
 oscillator::generate_analog_spread(
   automation_view const& automation, std::int32_t sample, float midi, float frequency)
 {
-  std::int32_t spread = automation.get(oscillator_param::anlg_spread, sample).discrete;
+  std::int32_t spread = 1; // automation.get(oscillator_param::anlg_spread, sample).discrete;
   if(spread == 1) return generate_analog(automation, sample, _phase, frequency / _sample_rate);
 
   float result = 0.0f;
-  float detune = automation.get(oscillator_param::anlg_detune, sample).real;
+  float detune = 0; //automation.get(oscillator_param::anlg_detune, sample).real;
   float midi_min = midi - detune * 0.5f;
   float midi_max = midi + detune * 0.5f;
   for (std::int32_t i = 0; i < spread; i++)
@@ -115,7 +115,7 @@ oscillator::generate_analog_spread(
     _phases[i] += this_frequency / _sample_rate;
     _phases[i] -= std::floor(_phases[i]);
   }
-  return result / static_cast<float>(spread);
+  return result / static_cast<float>(spread); 
 }
 
 // https://www.verklagekasper.de/synths/dsfsynthesis/dsfsynthesis.html

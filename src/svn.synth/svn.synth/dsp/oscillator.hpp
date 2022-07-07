@@ -15,7 +15,7 @@ class oscillator
   float _phase = 0.0f;
   float _sample_rate = 0.0f;
   std::int32_t _midi_note = -1;
-  std::array<float, oscillator_max_spread> _phases;
+  std::array<float, oscillator_max_voices> _phases;
 
   static inline float const min_pw = 0.05;
 

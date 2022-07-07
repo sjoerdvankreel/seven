@@ -153,9 +153,9 @@ voice_filter_params[voice_filter_param::count] =
 static graph_descriptor const
 oscillator_graphs[oscillator_graph::count] =
 {
-  { oscillator_graph::wave, 0, 2, 1, 1, L"Waveform"},
-  { oscillator_graph::spectrum, 1, 2, 1, 1, L"Frequency spectrum"}
-};
+  { oscillator_graph::wave, 0, 2, 2, 1, L"Waveform"},
+  { oscillator_graph::spectrum, 2, 2, 1, 1, L"Frequency spectrum"}
+}; 
 
 static item_name const
 oscillator_types[oscillator_type::count] =
@@ -166,7 +166,7 @@ oscillator_types[oscillator_type::count] =
              
 static item_name const 
 oscillator_anlg_types[oscillator_anlg_type::count] =
-{
+{ 
   { L"Sin", L"Sine" },
   { L"Saw", L"Sawtooth" },
   { L"Pulse", L"Pulse" },
@@ -187,30 +187,31 @@ osc_anlg_pw_relevance[2] =
   { oscillator_param::type, oscillator_type::analog },
   { oscillator_param::anlg_type, oscillator_anlg_type::pulse }
 };
-          
+            
 static param_descriptor const
 oscillator_params[oscillator_param::count] =
 { 
   { "{CA9274AE-9F57-4373-8C59-3786ACC1C1CD}", { L"On", L"Enabled" }, false, {-1, 0, {}, {}}},
-  { "{C5C4B00A-3D26-4342-ACE6-0AE936FFBCA3}", { L"Amp", L"Level" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 0, 0, nullptr, 0 } },
-  { "{63C96678-9823-4B96-B2C0-78014A268DB5}", { L"Pan", L"Panning" }, L"%", { 0.5f, 0, real_bounds::unit(), real_bounds::linear(-100.0f, 100.0f) }, { 1, 0, nullptr, 0 } },
+  { "{C5C4B00A-3D26-4342-ACE6-0AE936FFBCA3}", { L"Amp", L"Level" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 0, 2, nullptr, 0 } },
+  { "{63C96678-9823-4B96-B2C0-78014A268DB5}", { L"Pan", L"Panning" }, L"%", { 0.5f, 0, real_bounds::unit(), real_bounds::linear(-100.0f, 100.0f) }, { 1, 2, nullptr, 0 } },
   { "{84A7AEC8-25E9-4242-B32E-2E9E780F0E31}", { L"Type", L"Type" }, L"", false, oscillator_types, oscillator_type::count, { 2, 2, nullptr, 0 } },
   { "{EAFF1105-BA8D-4C55-8BEC-6B73AECF95E2}", { L"Anlg", L"Analog type" }, L"", false, oscillator_anlg_types, oscillator_anlg_type::count, { 3, 2, osc_anlg_relevance, 1 } },
-  { "{C5592DDC-7F5A-4AD3-B14C-F8D29FCD6046}", { L"Sprd", L"Analog spread" }, L"", true, 1, oscillator_max_spread, 1, { 4, 2, osc_anlg_relevance, 1 } },
-  { "{785F329A-D66B-48FF-88DD-7C5FEA093E26}", { L"Dtn", L"Analog detune" }, L"", { 0.0f, 1, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f)}, { 5, 2, osc_anlg_relevance, 1 } },
-  { "{35DAF80A-6EE0-4A3C-9E81-B225A466F4B2}", { L"Pw", L"Analog pulse width" }, L"%", { 1.0f, 0, real_bounds::linear(0.0f, 1.0f), real_bounds::linear(0.0f, 100.0f) }, { 6, 2, osc_anlg_pw_relevance, 2 } },
-  { "{8B45133B-38AA-4E23-9CB9-B05A4954A947}", { L"Prts", L"Dsf partials" }, L"", true, 0, 9999, 0, { 4, 2, osc_dsf_relevance, 1 } },
-  { "{083A6619-0309-48CA-8E9E-9A309EA61044}", { L"Dist", L"Dsf distance" }, L"", { (1.0f - 0.05f) / (20.0f - 0.05f), 2, real_bounds::linear(0.05f, 20.0f), real_bounds::linear(0.05f, 20.0f) }, { 5, 2, osc_dsf_relevance, 1 } },
-  { "{FFD6C9F3-B7D4-4819-A63A-40BC907F91AF}", { L"Roll", L"Dsf rolloff" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { 6, 2, osc_dsf_relevance, 1 } },
-  { "{5E3DB4DC-B459-43C4-9BBD-0FF8F2232AFA}", { L"Oct", L"Octave" }, L"", true, 0, 9, 4, { 7, 1, nullptr, 0 } },
-  { "{501C5217-5A5B-48D8-AEFE-CFE67417E8AD}", { L"Note", L"Note" }, L"", true, note_names, 12, { 8, 1, nullptr, 0 } },
-  { "{FD0A2D20-FCCD-4939-B1CC-BD2EBD998A25}", { L"Cent", L"Cent" }, L"", { 0.5f, 0, real_bounds::linear(-0.5f, 0.5f), real_bounds::linear(-50.0f, 50.0f) }, { 9, 1, nullptr, 0 } },
-};  
-
-// ---- audio route ----
-
+  { "{35DAF80A-6EE0-4A3C-9E81-B225A466F4B2}", { L"Pw", L"Analog pulse width" }, L"%", { 1.0f, 0, real_bounds::linear(0.0f, 1.0f), real_bounds::linear(0.0f, 100.0f) }, { 5, 2, osc_anlg_pw_relevance, 2 } },
+  { "{8B45133B-38AA-4E23-9CB9-B05A4954A947}", { L"Prts", L"Dsf partials" }, L"", true, 0, 9999, 0, { 3, 2, osc_dsf_relevance, 1 } },
+  { "{083A6619-0309-48CA-8E9E-9A309EA61044}", { L"Dist", L"Dsf distance" }, L"", { (1.0f - 0.05f) / (20.0f - 0.05f), 2, real_bounds::linear(0.05f, 20.0f), real_bounds::linear(0.05f, 20.0f) }, { 4, 2, osc_dsf_relevance, 1 } },
+  { "{FFD6C9F3-B7D4-4819-A63A-40BC907F91AF}", { L"Roll", L"Dsf rolloff" }, L"", { 0.5f, 4, real_bounds::unit(), real_bounds::unit() }, { 5, 2, osc_dsf_relevance, 1 } },
+  { "{5E3DB4DC-B459-43C4-9BBD-0FF8F2232AFA}", { L"Oct", L"Octave" }, L"", true, 0, 9, 4, { 6, 0, nullptr, 0 } },
+  { "{501C5217-5A5B-48D8-AEFE-CFE67417E8AD}", { L"Note", L"Note" }, L"", true, note_names, 12, { 7, 0, nullptr, 0 } },
+  { "{FD0A2D20-FCCD-4939-B1CC-BD2EBD998A25}", { L"Cent", L"Cent" }, L"", { 0.5f, 0, real_bounds::linear(-0.5f, 0.5f), real_bounds::linear(-50.0f, 50.0f) }, { 8, 0, nullptr, 0 } },
+  { "{F5B30B84-5C3E-471F-9B27-D1FB6E06D0AF}", { L"Uni", L"Unison voices" }, L"", true, 1, oscillator_max_voices, 1, { 9, 1, nullptr, 0 } },
+  { "{70C38B3D-E81C-42D9-A59A-9619DB318DFD}", { L"Dtn", L"Unison detune" }, L"", { 0.0f, 1, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f)}, { 10, 1, nullptr, 0 } },
+  { "{412B4D8D-4272-40ED-949F-479FB8407BF7}", { L"Sprd", L"Unison stereo spread" }, L"", { 0.0f, 1, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f)}, { 11, 1, nullptr, 0 } }
+};   
+ 
+// ---- audio route ---- 
+ 
 static wchar_t const* audio_input_names[audio_route_input::count] =
-{ L"Off", L"Osc", L"VFlt" };
+{ L"Off", L"Osc", L"VFlt" }; 
 static wchar_t const* audio_output_names[audio_route_output::count] =
 { L"Off", L"VFlt", L"Amp" };
 
@@ -275,4 +276,4 @@ part_descriptors[part_type::count] =
   { "{FEEBA3F5-F248-4C1B-BD8C-F3A492D084E2}", { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, nullptr, 0, { 3, -1, L"Global", { 0x9B, 0xF6, 0xFF } } }
 };    
       
-} // namespace svn::synth         
+} // namespace svn::synth          
