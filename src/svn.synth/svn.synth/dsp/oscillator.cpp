@@ -80,7 +80,7 @@ oscillator::generate_blep_pulse(
   float saw2 = generate_blep_saw(phase + pw, increment);
   return (saw1 - saw2) * 0.5f;
 }
-  
+   
 float
 oscillator::generate_analog(
   automation_view const& automation, std::int32_t sample, float phase, float increment) const
@@ -96,32 +96,10 @@ oscillator::generate_analog(
   }
 }
 
-float 
-oscillator::generate_analog_spread(
-  automation_view const& automation, std::int32_t sample, float midi, float frequency)
-{
-  std::int32_t spread = 1; // automation.get(oscillator_param::anlg_spread, sample).discrete;
-  if(spread == 1) return generate_analog(automation, sample, _phase, frequency / _sample_rate);
-   
-  float result = 0.0f;
-  float detune = 0; //automation.get(oscillator_param::anlg_detune, sample).real;
-  float midi_min = midi - detune * 0.5f;
-  float midi_max = midi + detune * 0.5f;
-  for (std::int32_t i = 0; i < spread; i++)
-  { 
-    float this_midi = midi_min + (midi_max - midi_min) * i / static_cast<float>(spread - 1);
-    float this_frequency = note_to_frequency(this_midi);
-    result += generate_analog(automation, sample, _phases[i], this_frequency / _sample_rate);
-    _phases[i] += this_frequency / _sample_rate;
-    _phases[i] -= std::floor(_phases[i]);
-  }
-  return result / static_cast<float>(spread); 
-} 
-
 // https://www.verklagekasper.de/synths/dsfsynthesis/dsfsynthesis.html
 float 
 oscillator::generate_dsf(
-  automation_view const& automation, std::int32_t sample, float frequency) const
+  automation_view const& automation, std::int32_t sample, float phase, float frequency) const
 {
   float const scale_factor = 0.975f;
   float const rolloff_range = 0.99f;
@@ -134,8 +112,8 @@ oscillator::generate_dsf(
   float n = partials;     
   float w = (1.0f - rolloff) * rolloff_range;
   float w_pow_np1 = std::pow(w, n + 1);
-  float u = 2.0f * std::numbers::pi * _phase;
-  float v = 2.0f * std::numbers::pi * distance * _phase / frequency;
+  float u = 2.0f * std::numbers::pi * phase;
+  float v = 2.0f * std::numbers::pi * distance * phase / frequency;
   float a = w * std::sin(u + n * v) - std::sin(u + (n + 1) * v);
   float x = (w * std::sin(v - u) + std::sin(u)) + w_pow_np1 * a;
   float y = 1 + w * w - 2 * w * std::cos(v);
@@ -145,15 +123,46 @@ oscillator::generate_dsf(
 
 float
 oscillator::generate_wave(
-  automation_view const& automation, std::int32_t sample, float midi, float frequency)
+  automation_view const& automation, std::int32_t sample, float phase, float frequency, float increment) const
 {
   std::int32_t type = automation.get(oscillator_param::type, sample).discrete;
   switch (type)
   {
-  case oscillator_type::dsf: return generate_dsf(automation, sample, frequency);
-  case oscillator_type::analog: return generate_analog_spread(automation, sample, midi, frequency);
+  case oscillator_type::dsf: return generate_dsf(automation, sample, phase, frequency);
+  case oscillator_type::analog: return generate_analog(automation, sample, phase, increment);
   default: assert(false); return 0.0f;
   }
+}
+
+base::audio_sample32
+oscillator::generate_unison(
+  automation_view const& automation, std::int32_t sample, float midi, float frequency)
+{
+  std::int32_t voices = automation.get(oscillator_param::uni_voices, sample).discrete;
+  if (voices == 1) 
+  { 
+    float sample = generate_wave(automation, sample, _phase, frequency, frequency / _sample_rate);
+    return { sample, sample };
+  }
+
+  base::audio_sample32 result = { 0.0f, 0.0f };
+  float detune = automation.get(oscillator_param::uni_detune, sample).real;
+  float spread = automation.get(oscillator_param::uni_spread, sample).real;
+  float pan_min = 0.5f - spread * 0.5f;
+  float pan_max = 0.5f + spread * 0.5f;
+  float midi_min = midi - detune * 0.5f;
+  float midi_max = midi + detune * 0.5f;
+  for (std::int32_t i = 0; i < voices; i++)
+  {
+    float this_pan = pan_min + (pan_max - pan_min) * i / static_cast<float>(voices - 1);
+    float this_midi = midi_min + (midi_max - midi_min) * i / static_cast<float>(voices - 1);
+    float this_frequency = note_to_frequency(this_midi);
+    float sample = generate_wave(automation, sample, _phases[i], this_frequency, this_frequency / _sample_rate);
+    result += sample * audio_sample32({ 1.0f - this_pan, this_pan });
+    _phases[i] += this_frequency / _sample_rate;
+    _phases[i] -= std::floor(_phases[i]);
+  }
+  return result / static_cast<float>(voices);
 }
 
 void
@@ -172,7 +181,7 @@ oscillator::process_block(voice_input const& input,
     std::int32_t octave = automation.get(oscillator_param::oct, s).discrete;
     float midi = 12 * (octave + 1) + note + cent + _midi_note - 60;
     float frequency = note_to_frequency(midi);
-    float sample = generate_wave(automation, s, midi, frequency);
+    audio_sample32 sample = generate_unison(automation, s, midi, frequency);
     _phase += frequency / _sample_rate;
     _phase -= std::floor(_phase);
 

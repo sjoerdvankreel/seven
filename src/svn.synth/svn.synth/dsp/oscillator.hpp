@@ -24,11 +24,11 @@ private:
   float generate_poly_blep(float phase, float increment) const;
   float generate_poly_blamp(float phase, float increment) const;
   float generate_blamp_triangle(float phase, float increment) const;
-  float generate_dsf(svn::base::automation_view const& automation, std::int32_t sample, float frequency) const;
-  float generate_wave(svn::base::automation_view const& automation, std::int32_t sample, float midi, float frequency);
-  float generate_analog_spread(svn::base::automation_view const& automation, std::int32_t sample, float midi, float frequency);
+  float generate_dsf(svn::base::automation_view const& automation, std::int32_t sample, float phase, float frequency) const;
   float generate_analog(svn::base::automation_view const& automation, std::int32_t sample, float phase, float increment) const;
   float generate_blep_pulse(svn::base::automation_view const& automation, std::int32_t sample, float phase, float increment) const;
+  float generate_wave(svn::base::automation_view const& automation, std::int32_t sample, float phase, float frequency, float increment) const;
+  base::audio_sample32 generate_unison(svn::base::automation_view const& automation, std::int32_t sample, float midi, float frequency);
 
 public:
   oscillator() = default;
