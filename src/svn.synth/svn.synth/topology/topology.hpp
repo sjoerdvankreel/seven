@@ -34,7 +34,7 @@ struct envelope_slope_t { enum value { lin, log, quad, sqrt, count }; };
 struct envelope_param_t { enum value { on, type, sync, delay_time, delay_sync, hold_time, hold_sync, sustain_level, attack_time, attack_sync, attack_slope, attack_mid, decay_time, decay_sync, decay_slope, decay_mid, release_time, release_sync, release_slope, release_mid, count }; };
 
 struct voice_filter_type_t { enum value { state_var, comb, count }; };
-struct voice_filter_stvar_type_t { enum value { lpf, hpf, bpf, bsf, count }; };
+struct voice_filter_stvar_type_t { enum value { lpf, hpf, bpf, bsf, apf, count }; };
 struct voice_filter_param_t { enum value { on, type, stvar_type, stvar_freq, stvar_res, stvar_kbd, comb_dly_plus, comb_gain_plus, comb_dly_min, comb_gain_min, count }; };
 
 struct oscillator_type_t { enum value { analog, dsf, count }; };

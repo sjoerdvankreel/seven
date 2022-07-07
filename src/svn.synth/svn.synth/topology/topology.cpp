@@ -121,7 +121,8 @@ voice_filter_stvar_types[voice_filter_stvar_type::count] =
   { L"LPF", L"Low pass" },
   { L"HPF", L"High pass" },
   { L"BPF", L"Band pass" },
-  { L"BSF", L"Band stop" }
+  { L"BSF", L"Band stop" },
+  { L"APF", L"All pass" }
 };
 
 static param_relevance const

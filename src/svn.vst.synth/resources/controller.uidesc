@@ -8561,7 +8561,7 @@
                                                             "menu-check-style": "false",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "max-value": "3",
+                                                            "max-value": "4",
                                                             "font-color": "color_FFD6A5FF",
                                                             "back-color": "color_FFD6A540",
                                                             "shadow-color": "color_FFD6A580"
@@ -9229,7 +9229,7 @@
                                                             "menu-check-style": "false",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "max-value": "3",
+                                                            "max-value": "4",
                                                             "font-color": "color_FFD6A5FF",
                                                             "back-color": "color_FFD6A540",
                                                             "shadow-color": "color_FFD6A580"
@@ -9897,7 +9897,7 @@
                                                             "menu-check-style": "false",
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "max-value": "3",
+                                                            "max-value": "4",
                                                             "font-color": "color_FFD6A5FF",
                                                             "back-color": "color_FFD6A540",
                                                             "shadow-color": "color_FFD6A580"

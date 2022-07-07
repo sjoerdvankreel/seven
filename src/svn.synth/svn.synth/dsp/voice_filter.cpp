@@ -51,8 +51,9 @@ voice_filter::process_state_variable(
   case voice_filter_stvar_type::bpf: result = v1; break;
   case voice_filter_stvar_type::bsf: result = v0 - k * v1; break;
   case voice_filter_stvar_type::hpf: result = v0 - k * v1 - v2; break;
+  case voice_filter_stvar_type::apf: result = v0 - 2.0 * k * v1; break;
   default: assert(false); break;
-  }
+  }  
   return sanity_audio(result.to32());
 }
 
