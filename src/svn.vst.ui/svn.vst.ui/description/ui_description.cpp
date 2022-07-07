@@ -107,12 +107,16 @@ controller_ui_description::create(
 {
   // Build part list.
   controller_ui_description result;
+  std::vector<std::pair<std::int32_t, std::int32_t>> part_ui_indices;
+  for(std::int32_t i = 0; i < topology.static_part_count; i++)
+    part_ui_indices.push_back(std::make_pair(i, topology.static_parts[i].ui.part_index));
+  std::sort(part_ui_indices.begin(), part_ui_indices.end(), [](auto const& l, auto const& r) -> bool { return l.second < r.second; });
   for (std::int32_t p = 0; p < topology.static_part_count; p++)
   {
-    auto const& static_part = topology.static_parts[p];
+    auto const& static_part = topology.static_parts[part_ui_indices[p].first];
     for (std::int32_t c = 0; c < static_part.part_count; c++)
     {
-      std::int32_t runtime_part_index = topology.part_bounds[p][c];
+      std::int32_t runtime_part_index = topology.part_bounds[part_ui_indices[p].first][c];
       part_ui_description description(part_ui_description::create(topology, runtime_part_index));
       if (description.height + 2 * margin > topology.ui.max_height)
         throw std::runtime_error("Part height exceeds max ui height.");
