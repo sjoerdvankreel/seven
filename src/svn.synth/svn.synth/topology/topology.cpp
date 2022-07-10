@@ -7,7 +7,7 @@ namespace svn::synth {
   
 // ---- output ----
 
-static param_descriptor const
+static param_descriptor const 
 output_params[output_param::count] =
 {
   { "{A6024C5F-CF37-48C8-BE5B-713191155AE5}", { L"Clip", L"Clip" }, false, {0, 1, nullptr, 0}},
@@ -17,7 +17,7 @@ output_params[output_param::count] =
 
 // ---- amp ----
 
-static param_descriptor const
+static param_descriptor const 
 voice_amp_params[voice_amp_param::count] =
 { 
   { "{5A2DF5BA-7D6F-4053-983E-AA6DC5084373}", { L"Amp", L"Level" }, L"dB", {1.0f, 1, real_bounds::unit(), real_bounds::decibel()}, {0, 0, nullptr, 0}},
@@ -27,26 +27,21 @@ voice_amp_params[voice_amp_param::count] =
 
 // ---- envelope ----
 
-static graph_descriptor const
-envelope_graph =
-{ -1, 0, 2, 1, 1, L"Envelope" };
+static std::vector<std::pair<std::int32_t, std::int32_t>> const env_synced_timesig = beat_synced_timesig(16);
+static std::vector<std::wstring> const env_synced_timesig_names = beat_synced_timesig_names(env_synced_timesig);
+static std::vector<float> const env_synced_timesig_values_init = beat_synced_timesig_values(env_synced_timesig);
+std::int32_t const env_synced_timesig_count = static_cast<std::int32_t>(env_synced_timesig.size());
+float const* const env_synced_timesig_values = env_synced_timesig_values_init.data();
 
-static param_relevance const
-envelope_time_relevance[1] =
-{ { envelope_param::sync, 0 } };
-static param_relevance const
-envelope_sync_relevance[1] =
-{ { envelope_param::sync, 1 } };
+static graph_descriptor const envelope_graph = { -1, 0, 2, 1, 1, L"Envelope" };
+static param_relevance const envelope_time_relevance[1] = { { envelope_param::sync, 0 } };
+static param_relevance const envelope_sync_relevance[1] = { { envelope_param::sync, 1 } };
+static param_relevance const envelope_attack_log_relevance[1] = { { envelope_param::attack_slope, envelope_slope::log } };
+static param_relevance const envelope_decay_log_relevance[1] = { { envelope_param::decay_slope, envelope_slope::log } };
+static param_relevance const envelope_release_log_relevance[1] = { { envelope_param::release_slope, envelope_slope::log } };
 
-static param_relevance const
-envelope_attack_log_relevance[1] =
-{ { envelope_param::attack_slope, envelope_slope::log } };
-static param_relevance const
-envelope_decay_log_relevance[1] =
-{ { envelope_param::decay_slope, envelope_slope::log } };
-static param_relevance const
-envelope_release_log_relevance[1] =
-{ { envelope_param::release_slope, envelope_slope::log } };
+static std::wstring format_env_timesig(std::int32_t val) { return env_synced_timesig_names[val]; }
+static bool parse_env_timesig(std::wstring const& val, std::int32_t& result) { return list_parser(val, env_synced_timesig_names, result); }
 
 static item_name const
 envelope_types[envelope_type::count] =
@@ -63,19 +58,6 @@ envelope_slopes[envelope_slope::count] =
   { L"Quad", L"Quadratic" },
   { L"Sqrt", L"Squared" }
 };
-
-static std::vector<std::pair<std::int32_t, std::int32_t>> const env_synced_timesig = beat_synced_timesig(16);
-static std::vector<std::wstring> const env_synced_timesig_names = beat_synced_timesig_names(env_synced_timesig);
-static std::vector<float> const env_synced_timesig_values_init = beat_synced_timesig_values(env_synced_timesig);
-std::int32_t const env_synced_timesig_count = static_cast<std::int32_t>(env_synced_timesig.size());
-float const* const env_synced_timesig_values = env_synced_timesig_values_init.data();
-
-static std::wstring
-format_env_timesig(std::int32_t val)
-{ return env_synced_timesig_names[val]; }
-static bool
-parse_env_timesig(std::wstring const& val, std::int32_t& result)
-{  return list_parser(val, env_synced_timesig_names, result); }
 
 static param_descriptor const
 envelope_params[envelope_param::count] = 
@@ -104,9 +86,9 @@ envelope_params[envelope_param::count] =
   
 // ---- voice filter ---- 
 
-static graph_descriptor const
-voice_filter_graph =
-{ -1, 0, 2, 1, 1, L"Impulse response" };
+static graph_descriptor const voice_filter_graph = { -1, 0, 2, 1, 1, L"Impulse response" };
+static param_relevance const vfilter_comb_relevance[1] = { { voice_filter_param::type, voice_filter_type::comb } };
+static param_relevance const vfilter_stvar_relevance[1] = { { voice_filter_param::type, voice_filter_type::state_var } };
 
 static item_name const
 voice_filter_types[voice_filter_type::count] =
@@ -124,14 +106,6 @@ voice_filter_stvar_types[voice_filter_stvar_type::count] =
   { L"BSF", L"Band stop" },
   { L"APF", L"All pass" }
 };
-
-static param_relevance const
-vfilter_comb_relevance[1] =
-{ { voice_filter_param::type, voice_filter_type::comb } };
-
-static param_relevance const 
-vfilter_stvar_relevance[1] =
-{ { voice_filter_param::type, voice_filter_type::state_var } };
   
 static param_descriptor const
 voice_filter_params[voice_filter_param::count] =
@@ -149,6 +123,15 @@ voice_filter_params[voice_filter_param::count] =
 };
  
 // ---- oscillator ----
+
+static param_relevance const osc_dsf_relevance[1] = { { oscillator_param::type, oscillator_type::dsf } };
+static param_relevance const osc_anlg_relevance[1] = { { oscillator_param::type, oscillator_type::analog } };
+
+static param_relevance const osc_anlg_pw_relevance[2] =
+{
+  { oscillator_param::type, oscillator_type::analog },
+  { oscillator_param::anlg_type, oscillator_anlg_type::pulse }
+};
 
 static graph_descriptor const
 oscillator_graphs[oscillator_graph::count] =
@@ -173,21 +156,6 @@ oscillator_anlg_types[oscillator_anlg_type::count] =
   { L"Tri", L"Triangle" }
 };
 
-static param_relevance const
-osc_dsf_relevance[1] =
-{ { oscillator_param::type, oscillator_type::dsf } };
-
-static param_relevance const
-osc_anlg_relevance[1] =
-{ { oscillator_param::type, oscillator_type::analog } };
-
-static param_relevance const
-osc_anlg_pw_relevance[2] =
-{
-  { oscillator_param::type, oscillator_type::analog },
-  { oscillator_param::anlg_type, oscillator_anlg_type::pulse }
-};
-            
 static param_descriptor const
 oscillator_params[oscillator_param::count] =
 { 
@@ -210,23 +178,15 @@ oscillator_params[oscillator_param::count] =
  
 // ---- audio route ---- 
  
-static wchar_t const* audio_input_names[audio_route_input::count] =
-{ L"Off", L"Osc", L"VFlt" }; 
-static wchar_t const* audio_output_names[audio_route_output::count] =
-{ L"Off", L"VFlt", L"Amp" };
+static wchar_t const* const audio_input_names[audio_route_input::count] = { L"Off", L"Osc", L"VFlt" }; 
+static wchar_t const* const audio_output_names[audio_route_output::count] = { L"Off", L"VFlt", L"Amp" };
+static std::vector<std::wstring> const audio_input_names_list = multi_list_names(audio_input_names, audio_input_counts, audio_route_input::count);
+static std::vector<std::wstring> const audio_output_names_list = multi_list_names(audio_output_names, audio_output_counts, audio_route_output::count);
 
-static std::wstring 
-format_audio_input(std::int32_t val)
-{ return multi_list_formatter(val, audio_input_names, audio_input_counts, audio_route_input::count); }
-static std::wstring 
-format_audio_output(std::int32_t val)
-{ return multi_list_formatter(val, audio_output_names, audio_output_counts, audio_route_output::count); }
-static bool
-parse_audio_input(std::wstring const& val, std::int32_t& result)
-{ return multi_list_parser(val, audio_input_names, audio_input_counts, audio_route_input::count, result); }
-static bool
-parse_audio_output(std::wstring const& val, std::int32_t& result)
-{ return multi_list_parser(val, audio_output_names, audio_output_counts, audio_route_output::count, result); }
+static std::wstring format_audio_input(std::int32_t val) { return audio_input_names_list[val]; }
+static std::wstring format_audio_output(std::int32_t val) { return audio_output_names_list[val]; }; 
+static bool parse_audio_input(std::wstring const& val, std::int32_t& result) { return list_parser(val, audio_input_names_list, result); }
+static bool parse_audio_output(std::wstring const& val, std::int32_t& result) { return list_parser(val, audio_output_names_list, result); }
 
 static param_descriptor const
 audio_route_params[audio_route_param::count] =
@@ -262,38 +222,21 @@ audio_route_params[audio_route_param::count] =
 
 // ---- cv route ---- 
  
-static wchar_t const* cv_input_names[cv_route_input::count] =
-{ L"Off", L"Env" }; 
-static wchar_t const* cv_output_names[cv_route_output::count] =
-{ L"Off", L"Osc", L"Flt", L"Amp" };
+static wchar_t const* cv_input_names[cv_route_input::count] = { L"Off", L"Env" }; 
+static wchar_t const* cv_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Flt", L"Amp" };
+static wchar_t const* cv_off_output_names[1] = { L"" };
+static wchar_t const* cv_vamp_output_names[cv_route_vamp_output::count] = { L"Lvl", L"Pan" };
+static wchar_t const* cv_vflt_output_names[cv_route_vflt_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
+static wchar_t const* cv_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"Pw", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
+static wchar_t const* const* cv_output_target_names[cv_route_output::count] = { cv_off_output_names, cv_osc_output_names, cv_vflt_output_names, cv_vamp_output_names };
+static std::int32_t const cv_output_target_counts[cv_route_output::count] = { 1, cv_route_osc_output::count, cv_route_vflt_output::count, cv_route_vamp_output::count };
+static std::vector<std::wstring> const cv_input_names_list = multi_list_names(cv_input_names, cv_input_counts, cv_route_input::count);
+static std::vector<std::wstring> const cv_output_names_list = zip_list_names(cv_output_names, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count);
 
-static wchar_t const* cv_off_output_names[1] =
-{ L"" };
-static wchar_t const* cv_vamp_output_names[cv_route_vamp_output::count] =
-{ L"Lvl", L"Pan" };
-static wchar_t const* cv_osc_output_names[cv_route_osc_output::count] =
-{ L"Amp", L"Pan", L"Pw", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
-static wchar_t const* cv_vflt_output_names[cv_route_vflt_output::count] =
-{ L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
-
-static wchar_t const* const* cv_output_target_names[cv_route_output::count] =
-{ cv_off_output_names, cv_osc_output_names, cv_vflt_output_names, cv_vamp_output_names };
-static std::int32_t const cv_output_target_counts[cv_route_output::count] =
-{ 1, cv_route_osc_output::count, cv_route_vflt_output::count, cv_route_vamp_output::count };
-
-static std::wstring 
-format_cv_input(std::int32_t val)
-{ return multi_list_formatter(val, cv_input_names, cv_input_counts, cv_route_input::count); }
-static bool
-parse_cv_input(std::wstring const& val, std::int32_t& result)
-{ return multi_list_parser(val, cv_input_names, cv_input_counts, cv_route_input::count, result); }
-
-static std::wstring 
-format_cv_output(std::int32_t val)
-{ return zip_list_formatter(val, cv_output_names, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count); }
-static bool
-parse_cv_output(std::wstring const& val, std::int32_t& result)
-{ return zip_list_parser(val, cv_output_names, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count, result); }
+static std::wstring format_cv_input(std::int32_t val) { return cv_input_names_list[val]; }
+static std::wstring format_cv_output(std::int32_t val) { return cv_output_names_list[val]; }
+static bool parse_cv_input(std::wstring const& val, std::int32_t& result) { return list_parser(val, cv_input_names_list, result); }
+static bool parse_cv_output(std::wstring const& val, std::int32_t& result) { return list_parser(val, cv_output_names_list, result); }
 
 static param_descriptor const
 cv_route_params[cv_route_param::count] =
@@ -308,9 +251,8 @@ cv_route_params[cv_route_param::count] =
              
 // ---- global topo ----
   
-// ffadad-ffd6a5-fdffb6-caffbf-9bf6ff-
-// a0c4ff-
-// bdb2ff-ffc6ff-fffffc 
+// ffadad-ffd6a5-fdffb6-caffbf-9bf6ff-a0c4ff-bdb2ff
+// -ffc6ff-fffffc 
 part_descriptor const 
 part_descriptors[part_type::count] =  
 {
@@ -319,6 +261,7 @@ part_descriptors[part_type::count] =
   { "{E6344937-C1F7-4F2A-83E7-EA27D48DEC4E}", { L"Amp", L"Voice amp" }, part_type::voice_amp, false, 1, voice_amp_params, voice_amp_param::count, nullptr, 0, { 2, 3, -1, L"Voice", { 0xFD, 0xFF, 0xB6 } } },
   { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"VFilter", L"Voice filter" }, part_type::voice_filter, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 4, 3, 0, L"Voice", { 0xFF, 0xD6, 0xA5 } } },
   { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 5, 3, -1, L"Route", { 0xCA, 0xFF, 0xBF } } },
+  { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, 1, cv_route_params, cv_route_param::count, nullptr, 0, { 6, 3, -1, L"Route", { 0xBD, 0xB2, 0xFF } } },
   { "{FEEBA3F5-F248-4C1B-BD8C-F3A492D084E2}", { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, nullptr, 0, { 3, 3, -1, L"Global", { 0x9B, 0xF6, 0xFF } } }
 };    
       
