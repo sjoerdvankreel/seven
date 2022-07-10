@@ -217,16 +217,16 @@ static wchar_t const* audio_output_names[audio_route_output::count] =
 
 static std::wstring 
 format_audio_input(std::int32_t val)
-{ return multi_list_formatter(val, audio_input_names, audio_input_counts, 3); }
+{ return multi_list_formatter(val, audio_input_names, audio_input_counts, audio_route_input::count); }
 static std::wstring 
 format_audio_output(std::int32_t val)
-{ return multi_list_formatter(val, audio_output_names, audio_output_counts, 3); }
+{ return multi_list_formatter(val, audio_output_names, audio_output_counts, audio_route_output::count); }
 static bool
 parse_audio_input(std::wstring const& val, std::int32_t& result)
-{ return multi_list_parser(val, audio_input_names, audio_input_counts, 3, result); }
+{ return multi_list_parser(val, audio_input_names, audio_input_counts, audio_route_input::count, result); }
 static bool
 parse_audio_output(std::wstring const& val, std::int32_t& result)
-{ return multi_list_parser(val, audio_output_names, audio_output_counts, 3, result); }
+{ return multi_list_parser(val, audio_output_names, audio_output_counts, audio_route_output::count, result); }
 
 static param_descriptor const
 audio_route_params[audio_route_param::count] =
@@ -258,6 +258,43 @@ audio_route_params[audio_route_param::count] =
   { "{EE82872C-0641-48CA-A030-5FCBA09FC0F7}", { L"In9", L"Input 9" }, L"", false, 0, audio_inputs_count - 1, 0, &format_audio_input, &parse_audio_input, { 24, 2, nullptr, 0 } },
   { "{DDD8D342-8ACA-4203-85EC-AA8EEE666A16}", { L"Out9", L"Output 9" }, L"", false, 0, audio_outputs_count - 1, 0, &format_audio_output, &parse_audio_output, { 25, 2, nullptr, 0 } },
   { "{D0CBABC4-9772-471B-AF8B-FE6BF6197CA8}", { L"Amt9", L"Amount 9" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 26, 2, nullptr, 0 } }
+};
+
+// ---- cv route ---- 
+ 
+static wchar_t const* cv_input_names[cv_route_input::count] =
+{ L"Off", L"Env" }; 
+static wchar_t const* cv_output_names[cv_route_output::count] =
+{ L"Off", L"Osc", L"Flt", L"Amp" };
+static wchar_t const* cv_vamp_output_names[cv_route_vamp_output::count] =
+{ L"Lvl", L"Pan" };
+static wchar_t const* cv_osc_output_names[cv_route_osc_output::count] =
+{ L"Amp", L"Pan", L"Pw", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
+static wchar_t const* cv_vflt_output_names[cv_route_vflt_output::count] =
+{ L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
+
+static std::wstring 
+format_cv_input(std::int32_t val)
+{ return multi_list_formatter(val, cv_input_names, cv_input_counts, cv_route_input::count); }
+static std::wstring 
+format_cv_output(std::int32_t val)
+{ return multi_list_formatter(val, audio_output_names, audio_output_counts, 3); }
+static bool
+parse_cv_input(std::wstring const& val, std::int32_t& result)
+{ return multi_list_parser(val, cv_input_names, cv_input_counts, cv_route_input::count, result); }
+static bool
+parse_cv_output(std::wstring const& val, std::int32_t& result)
+{ return multi_list_parser(val, audio_output_names, audio_output_counts, 3, result); }
+
+static param_descriptor const
+cv_route_params[cv_route_param::count] =
+{
+  { "{3B025C6A-0230-491A-A51F-7CF1C81B69C9}", { L"In1", L"Input 1" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, {0, 0, nullptr, 0} },
+  { "{5FDD8C86-8F2D-4613-BB98-BB673F502412}", { L"Out1", L"Output 1" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { 1, 0, nullptr, 0 } },
+  { "{469D130F-2E4A-4960-871D-032B6F588313}", { L"Amt1", L"Amount 1" }, L"%", { 1.0f, 0, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f) }, { 2, 0, nullptr, 0 } },
+  { "{2833E378-210B-404F-A4CB-0D6204A72CF0}", { L"In2", L"Input 2" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { 3, 0, nullptr, 0 } },
+  { "{D0B28D9E-8888-42EB-8D3C-177FB4585E42}", { L"Out2", L"Output 2" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { 4, 0, nullptr, 0 } },
+  { "{58AFE21F-7945-4919-BB67-60CE8892A8AF}", { L"Amt2", L"Amount 2" }, L"%", { 1.0f, 0, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f) }, { 5, 0, nullptr, 0 } }
 };
              
 // ---- global topo ----
