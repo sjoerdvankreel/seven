@@ -223,7 +223,7 @@ audio_route_params[audio_route_param::count] =
 // ---- cv route ---- 
  
 static wchar_t const* const cv_input_names[cv_route_input::count] = { L"Off", L"Env" }; 
-static wchar_t const* const cv_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Flt", L"Amp" };
+static wchar_t const* const cv_output_names[cv_route_output::count] = { L"Off", L"Osc", L"VFlt", L"Amp" };
 static wchar_t const* const cv_vamp_output_names[cv_route_vamp_output::count] = { L"Lvl", L"Pan" };
 static wchar_t const* const cv_vflt_output_names[cv_route_vflt_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
 static wchar_t const* const cv_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"Pw", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
