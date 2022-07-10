@@ -100,7 +100,7 @@ zip_list_formatter(
   wchar_t const* const* names1, std::int32_t const* counts1,
   wchar_t const* const* const* names2, std::int32_t const* counts2,
   std::int32_t count)
-{
+{  
   return L"";
 }
 

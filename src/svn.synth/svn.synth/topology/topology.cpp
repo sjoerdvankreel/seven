@@ -267,6 +267,8 @@ static wchar_t const* cv_input_names[cv_route_input::count] =
 static wchar_t const* cv_output_names[cv_route_output::count] =
 { L"Off", L"Osc", L"Flt", L"Amp" };
 
+static wchar_t const* cv_off_output_names[1] =
+{ L"" };
 static wchar_t const* cv_vamp_output_names[cv_route_vamp_output::count] =
 { L"Lvl", L"Pan" };
 static wchar_t const* cv_osc_output_names[cv_route_osc_output::count] =
@@ -275,9 +277,9 @@ static wchar_t const* cv_vflt_output_names[cv_route_vflt_output::count] =
 { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
 
 static wchar_t const* const* cv_output_target_names[cv_route_output::count] =
-{ nullptr, cv_osc_output_names, cv_vflt_output_names, cv_vamp_output_names };
+{ cv_off_output_names, cv_osc_output_names, cv_vflt_output_names, cv_vamp_output_names };
 static std::int32_t const cv_output_target_counts[cv_route_output::count] =
-{ 0, cv_route_osc_output::count, cv_route_vflt_output::count, cv_route_vamp_output::count };
+{ 1, cv_route_osc_output::count, cv_route_vflt_output::count, cv_route_vamp_output::count };
 
 static std::wstring 
 format_cv_input(std::int32_t val)
