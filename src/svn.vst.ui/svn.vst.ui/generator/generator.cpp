@@ -127,7 +127,9 @@ build_ui_param_menu(
 {
   std::string class_name = get_param_control_class(topology, param);
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
+  std::string font = descriptor.ui.small_font? "~ NormalFontVerySmall": "~ NormalFontSmall";
   Value result(build_ui_param_control_base(topology, param, class_name, 0, param_col1_width + margin + param_col2_width, 0, allocator));
+  add_attribute(result, "font", font, allocator);
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
