@@ -50,7 +50,7 @@ multi_list_table_init_out(
 
 std::wstring 
 multi_list_formatter(
-  std::int32_t val, wchar_t const** names,
+  std::int32_t val, wchar_t const* const* names,
   std::int32_t const* counts, std::int32_t count)
 {
   std::int32_t group_start = 0;
@@ -67,7 +67,7 @@ multi_list_formatter(
 
 bool 
 multi_list_parser(
-  std::wstring const& val, wchar_t const** names,
+  std::wstring const& val, wchar_t const* const* names,
   std::int32_t const* counts, std::int32_t count,
   std::int32_t& result)
 {
@@ -91,6 +91,26 @@ multi_list_parser(
         return true;
       }
     else group_start += counts[i];
+  return false;
+}
+
+std::wstring
+zip_list_formatter(
+  std::int32_t val,
+  wchar_t const* const* names1, std::int32_t const* counts1,
+  wchar_t const* const* const* names2, std::int32_t const* counts2,
+  std::int32_t count)
+{
+  return L"";
+}
+
+bool
+zip_list_parser(
+  std::wstring const& val,
+  wchar_t const* const* names1, std::int32_t const* counts1,
+  wchar_t const* const* const* names2, std::int32_t const* counts2,
+  std::int32_t count, std::int32_t& result)
+{
   return false;
 }
 

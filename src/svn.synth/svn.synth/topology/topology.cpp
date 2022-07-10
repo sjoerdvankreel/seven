@@ -266,6 +266,7 @@ static wchar_t const* cv_input_names[cv_route_input::count] =
 { L"Off", L"Env" }; 
 static wchar_t const* cv_output_names[cv_route_output::count] =
 { L"Off", L"Osc", L"Flt", L"Amp" };
+
 static wchar_t const* cv_vamp_output_names[cv_route_vamp_output::count] =
 { L"Lvl", L"Pan" };
 static wchar_t const* cv_osc_output_names[cv_route_osc_output::count] =
@@ -273,18 +274,24 @@ static wchar_t const* cv_osc_output_names[cv_route_osc_output::count] =
 static wchar_t const* cv_vflt_output_names[cv_route_vflt_output::count] =
 { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
 
+static wchar_t const* const* cv_output_target_names[cv_route_output::count] =
+{ nullptr, cv_osc_output_names, cv_vflt_output_names, cv_vamp_output_names };
+static std::int32_t const cv_output_target_counts[cv_route_output::count] =
+{ 0, cv_route_osc_output::count, cv_route_vflt_output::count, cv_route_vamp_output::count };
+
 static std::wstring 
 format_cv_input(std::int32_t val)
 { return multi_list_formatter(val, cv_input_names, cv_input_counts, cv_route_input::count); }
-static std::wstring 
-format_cv_output(std::int32_t val)
-{ return multi_list_formatter(val, audio_output_names, audio_output_counts, 3); }
 static bool
 parse_cv_input(std::wstring const& val, std::int32_t& result)
 { return multi_list_parser(val, cv_input_names, cv_input_counts, cv_route_input::count, result); }
+
+static std::wstring 
+format_cv_output(std::int32_t val)
+{ return zip_list_formatter(val, cv_output_names, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count); }
 static bool
 parse_cv_output(std::wstring const& val, std::int32_t& result)
-{ return multi_list_parser(val, audio_output_names, audio_output_counts, 3, result); }
+{ return zip_list_parser(val, cv_output_names, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count, result); }
 
 static param_descriptor const
 cv_route_params[cv_route_param::count] =

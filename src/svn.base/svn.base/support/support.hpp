@@ -64,16 +64,32 @@ list_parser(
   std::int32_t& result);
 
 // Pass list of names with count per name.
-// E.g. ["Osc", "Flt"], [2, 1] -> ["Osc 1", "Osc 2"], ["Flt"].
+// E.g. ["Osc", "Flt"], [2, 1] -> ["Osc 1", "Osc 2", "Flt"].
 std::wstring 
 multi_list_formatter(
-  std::int32_t val, wchar_t const** names, 
+  std::int32_t val, wchar_t const* const* names, 
   std::int32_t const* counts, std::int32_t count);
 bool 
 multi_list_parser(
-  std::wstring const& val, wchar_t const** names,
+  std::wstring const& val, wchar_t const* const* names,
   std::int32_t const* counts, std::int32_t count,
   std::int32_t& result);
+
+// Pass list of names with count per name plus second list specific to item in first.
+// E.g. ["Osc", "Flt"], [2, 1], ["Amp", "Pan"], ["Freq", "Res"] 
+// -> ["Osc 1 Amp", "Osc 1 Pan", "Osc 2 Amp", "Osc 2 Pan", "Flt Freq", "Flt Res"] 
+std::wstring
+zip_list_formatter(
+  std::int32_t val, 
+  wchar_t const* const* names1, std::int32_t const* counts1,
+  wchar_t const* const* const* names2, std::int32_t const* counts2,
+  std::int32_t count);
+bool
+zip_list_parser(
+  std::wstring const& val, 
+  wchar_t const* const* names1, std::int32_t const* counts1,
+  wchar_t const* const* const* names2, std::int32_t const* counts2,
+  std::int32_t count, std::int32_t& result);
 
 // (Part x, index y) <-> multi list index.
 std::vector<std::vector<std::int32_t>> 
