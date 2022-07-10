@@ -55,11 +55,36 @@ multi_list_names(
 {
   std::vector<std::wstring> result;
   for(std::int32_t i = 0; i < count; i++)
-    if(counts[i] == 1)
-      result.push_back(names[i]);
-    else
-      for(std::int32_t j = 0; j < counts[i]; j++)
-        result.push_back(names[i] + std::to_wstring(counts[i] + 1));
+    for(std::int32_t j = 0; j < counts[i]; j++)
+    {
+      std::wstring name = names[i];
+      if(counts[i] > 1) name += std::to_wstring(j + 1);
+      result.push_back(name);
+    }
+  return result;
+} 
+
+std::vector<std::wstring>
+zip_list_names(
+  wchar_t const* const* names1, std::int32_t const* counts1,
+  wchar_t const* const* const* names2, std::int32_t const* counts2,
+  std::int32_t count)
+{
+  std::vector<std::wstring> result;
+  for (std::int32_t i = 0; i < count; i++)
+    for (std::int32_t j = 0; j < counts1[i]; j++)
+      if (counts2[i] == 0)
+      {
+        std::wstring name = names1[i];
+        if (counts1[i] > 1) name += std::to_wstring(j + 1);
+        result.push_back(name);
+      }
+      else for(std::int32_t k = 0; k < counts2[i]; k++)
+      {
+        std::wstring name = names1[i];
+        if(counts1[i] > 1) name += std::to_wstring(j + 1);
+        result.push_back(name + L" " + names2[i][k]);
+      }
   return result;
 }
 
@@ -127,6 +152,6 @@ beat_synced_timesig_names(
     else
     result.push_back(std::to_wstring(timesig[i].first) + L"/" + std::to_wstring(timesig[i].second));
   return result;
-}
+} 
  
 } // namespace svn::base

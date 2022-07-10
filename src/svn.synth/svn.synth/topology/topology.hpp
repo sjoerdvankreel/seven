@@ -106,7 +106,7 @@ inline std::int32_t constexpr cv_route_count = 2;
 inline std::int32_t constexpr cv_inputs_count = 1 + envelope_count;
 inline std::int32_t constexpr cv_outputs_count = 1 + cv_route_vamp_output_t::count + cv_route_osc_output::count * oscillator_count + cv_route_vflt_output::count * voice_filter_count;
 inline std::int32_t constexpr cv_input_counts[cv_route_input::count] = { 1, envelope_count };
-inline std::int32_t constexpr cv_output_counts[cv_route_output::count] = { 1, voice_filter_count, 1 };
+inline std::int32_t constexpr cv_output_counts[cv_route_output::count] = { 1, oscillator_count, voice_filter_count, 1 };
 
 } // namespace svn::synth
 #endif // SVN_SYNTH_TOPOLOGY_TOPOLOGY_HPP
