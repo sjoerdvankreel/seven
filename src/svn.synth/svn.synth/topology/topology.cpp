@@ -27,11 +27,13 @@ voice_amp_params[voice_amp_param::count] =
 
 // ---- voice lfo ----
 
-static item_name const
+static item_name const 
 voice_lfo_types[voice_lfo_type::count] =
 {
-  { L"Sin", L"Sine" }
-}; 
+  { L"Sin", L"Sine" },
+  { L"Cust", L"Custom" },
+  { L"Rnd", L"Random" }
+};
 
 static param_descriptor const
 voice_lfo_params[voice_lfo_param::count] =
