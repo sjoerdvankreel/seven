@@ -4680,7 +4680,7 @@
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "26, 19",
+                                                            "size": "57, 19",
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -4956,7 +4956,7 @@
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "26, 19",
+                                                            "size": "57, 19",
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -5232,7 +5232,7 @@
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "26, 19",
+                                                            "size": "57, 19",
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -6026,7 +6026,7 @@
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "26, 19",
+                                                            "size": "57, 19",
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -7332,7 +7332,7 @@
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "26, 19",
+                                                            "size": "57, 19",
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -8638,7 +8638,7 @@
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "26, 19",
+                                                            "size": "57, 19",
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",

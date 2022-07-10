@@ -230,6 +230,14 @@ add_ui_input_param(
   std::string control_class = get_param_control_class(topology, param);
   switch (topology.params[param.runtime_param_index].descriptor->type)
   {
+  case param_type::list:
+    add_child(container, control_class, build_ui_param_menu(topology, part, param, allocator), allocator);
+    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col3, param_col3_width, allocator), allocator);
+    break;
+  case param_type::text:
+    add_child(container, control_class, build_ui_param_edit(topology, part, param, 0, col12_and_magin, "right", allocator), allocator);
+    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col3, param_col3_width, allocator), allocator);
+    break;
   case param_type::real:
   case param_type::knob:
   case param_type::knob_list:
@@ -240,16 +248,8 @@ add_ui_input_param(
   case param_type::toggle:
     checkbox = build_ui_param_checkbox(topology, part, param, part.color, margin, param_col1_width, 0, allocator);
     add_child(container, control_class, checkbox, allocator);
-    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col2, param_col2_width, allocator), allocator);
-    break;
-  case param_type::list:
-    add_child(container, control_class, build_ui_param_menu(topology, part, param, allocator), allocator);
-    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col3, param_col3_width, allocator), allocator);
-    break;
-  case param_type::text:
-    add_child(container, control_class, build_ui_param_edit(topology, part, param, 0, col12_and_magin, "right", allocator), allocator);
-    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col3, param_col3_width, allocator), allocator);
-    break;
+    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col2, param_col2_width + margin + param_col3_width, allocator), allocator);
+    break;  
   default:
     assert(false);
   }
