@@ -136,18 +136,20 @@ oscillator::generate_wave(
 
 base::audio_sample32
 oscillator::generate_unison(
-  automation_view const& automation, std::int32_t sample, float midi, float frequency)
+  automation_view const& automation, std::int32_t s, float midi, float frequency)
 {
-  std::int32_t voices = automation.get(oscillator_param::uni_voices, sample).discrete;
+  std::int32_t voices = automation.get(oscillator_param::uni_voices, s).discrete;
   if (voices == 1) 
   { 
-    float sample = generate_wave(automation, sample, _phase, frequency, frequency / _sample_rate);
-    return { sample, sample };
+    float sample = generate_wave(automation, s, _phases[0], frequency, frequency / _sample_rate);
+    _phases[0] += frequency / _sample_rate;
+    _phases[0] -= std::floor(_phases[0]);
+    return { sample * 0.5f, sample * 0.5f };
   }
 
   base::audio_sample32 result = { 0.0f, 0.0f };
-  float detune = automation.get(oscillator_param::uni_detune, sample).real;
-  float spread = automation.get(oscillator_param::uni_spread, sample).real;
+  float detune = automation.get(oscillator_param::uni_detune, s).real;
+  float spread = automation.get(oscillator_param::uni_spread, s).real;
   float pan_min = 0.5f - spread * 0.5f;
   float pan_max = 0.5f + spread * 0.5f;
   float midi_min = midi - detune * 0.5f;
@@ -157,8 +159,8 @@ oscillator::generate_unison(
     float this_pan = pan_min + (pan_max - pan_min) * i / static_cast<float>(voices - 1);
     float this_midi = midi_min + (midi_max - midi_min) * i / static_cast<float>(voices - 1);
     float this_frequency = note_to_frequency(this_midi);
-    float sample = generate_wave(automation, sample, _phases[i], this_frequency, this_frequency / _sample_rate);
-    result += sample * audio_sample32({ 1.0f - this_pan, this_pan });
+    float sample = generate_wave(automation, s, _phases[i], this_frequency, this_frequency / _sample_rate);
+    result += audio_sample32({ sample * (1.0f - this_pan), sample * this_pan });
     _phases[i] += this_frequency / _sample_rate;
     _phases[i] -= std::floor(_phases[i]);
   }
@@ -182,13 +184,10 @@ oscillator::process_block(voice_input const& input,
     float midi = 12 * (octave + 1) + note + cent + _midi_note - 60;
     float frequency = note_to_frequency(midi);
     audio_sample32 sample = generate_unison(automation, s, midi, frequency);
-    _phase += frequency / _sample_rate;
-    _phase -= std::floor(_phase);
-
     float amp = automation.get(oscillator_param::amp, s).real;
     float panning = automation.get(oscillator_param::pan, s).real;
-    audio_out[s].left = sanity_bipolar((1.0f - panning) * sample * amp);
-    audio_out[s].right = sanity_bipolar(panning * sample * amp);
+    audio_out[s].left = sanity_bipolar((1.0f - panning) * sample.left * amp);
+    audio_out[s].right = sanity_bipolar(panning * sample.right * amp);
   }
 }
 

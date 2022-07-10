@@ -12,12 +12,16 @@ namespace svn::synth {
 // Per-voice unit generator.
 class oscillator
 {
-  float _phase = 0.0f;
   float _sample_rate = 0.0f;
   std::int32_t _midi_note = -1;
   std::array<float, oscillator_max_voices> _phases;
 
   static inline float const min_pw = 0.05;
+
+public:
+  oscillator() = default;
+  oscillator(float sample_rate, std::int32_t midi_note);
+  void process_block(voice_input const& input, std::int32_t index, base::audio_sample32 * audio_out);
 
 private:
   float generate_blep_saw(float phase, float increment) const;
@@ -28,12 +32,7 @@ private:
   float generate_analog(svn::base::automation_view const& automation, std::int32_t sample, float phase, float increment) const;
   float generate_blep_pulse(svn::base::automation_view const& automation, std::int32_t sample, float phase, float increment) const;
   float generate_wave(svn::base::automation_view const& automation, std::int32_t sample, float phase, float frequency, float increment) const;
-  base::audio_sample32 generate_unison(svn::base::automation_view const& automation, std::int32_t sample, float midi, float frequency);
-
-public:
-  oscillator() = default;
-  oscillator(float sample_rate, std::int32_t midi_note);
-  void process_block(voice_input const& input, std::int32_t index, base::audio_sample32* audio_out);
+  base::audio_sample32 generate_unison(svn::base::automation_view const& automation, std::int32_t s, float midi, float frequency);
 };
 
 } // namespace svn::synth

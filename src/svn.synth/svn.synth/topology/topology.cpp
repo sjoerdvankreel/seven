@@ -205,7 +205,7 @@ oscillator_params[oscillator_param::count] =
   { "{FD0A2D20-FCCD-4939-B1CC-BD2EBD998A25}", { L"Cent", L"Cent" }, L"", { 0.5f, 0, real_bounds::linear(-0.5f, 0.5f), real_bounds::linear(-50.0f, 50.0f) }, { 8, 0, nullptr, 0 } },
   { "{F5B30B84-5C3E-471F-9B27-D1FB6E06D0AF}", { L"Uni", L"Unison voices" }, L"", true, 1, oscillator_max_voices, 1, { 9, 1, nullptr, 0 } },
   { "{70C38B3D-E81C-42D9-A59A-9619DB318DFD}", { L"Dtn", L"Unison detune" }, L"", { 0.0f, 1, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f)}, { 10, 1, nullptr, 0 } },
-  { "{412B4D8D-4272-40ED-949F-479FB8407BF7}", { L"Sprd", L"Unison stereo spread" }, L"", { 0.0f, 1, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f)}, { 11, 1, nullptr, 0 } }
+  { "{412B4D8D-4272-40ED-949F-479FB8407BF7}", { L"Sprd", L"Unison stereo spread" }, L"", { 0.0f, 0, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f) }, { 11, 1, nullptr, 0 } }
 };   
  
 // ---- audio route ---- 
