@@ -81,8 +81,10 @@ typedef audio_route_input_t::value audio_route_input;
 typedef audio_route_output_t::value audio_route_output;
 
 inline std::int32_t constexpr audio_route_count = 9;
-inline std::int32_t constexpr audio_input_counts[audio_route_input::count] = { 1, oscillator_count, voice_filter_count };
+inline std::int32_t constexpr audio_outputs_count = 1 + voice_filter_count + 1;
+inline std::int32_t constexpr audio_inputs_count = 1 + oscillator_count + voice_filter_count;
 inline std::int32_t constexpr audio_output_counts[audio_route_output::count] = { 1, voice_filter_count, 1 };
+inline std::int32_t constexpr audio_input_counts[audio_route_input::count] = { 1, oscillator_count, voice_filter_count };
 
 } // namespace svn::synth
 #endif // SVN_SYNTH_TOPOLOGY_TOPOLOGY_HPP
