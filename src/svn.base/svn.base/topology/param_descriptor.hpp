@@ -49,7 +49,8 @@ struct param_relevance
 // For ui generator.
 struct param_ui_descriptor
 {
-  bool const small_font; // For list params.
+  bool const control_font_small; // For list params.
+  bool const label_font_small; // For any labels.
   std::int32_t const param_index; // Index within the grid.
   std::int32_t const param_group; // Group together related params within a part.
   param_relevance const* const relevance; // Relevant if all other params relevance.if_param[i] have value relevance.if_value[i].

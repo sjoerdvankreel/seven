@@ -127,7 +127,7 @@ build_ui_param_menu(
 {
   std::string class_name = get_param_control_class(topology, param);
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  std::string font = descriptor.ui.small_font? "~ NormalFontVerySmall": "~ NormalFontSmall";
+  std::string font = descriptor.ui.list_font_small? "~ NormalFontVerySmall": "~ NormalFontSmall";
   Value result(build_ui_param_control_base(topology, param, class_name, 0, param_col1_width + margin + param_col2_width, 0, allocator));
   add_attribute(result, "font", font, allocator);
   add_attribute(result, "min-value", "0", allocator);
@@ -153,9 +153,11 @@ build_ui_param_label(
   Document::AllocatorType& allocator)
 {
   Value result(build_ui_param_item_base("CTextLabel", left, width, 0, allocator));
+  auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
+  std::string font = descriptor.ui.label_font_small ? "~ NormalFontVerySmall" : "~ NormalFontSmall";
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
-  add_attribute(result, "font", "~ NormalFontSmall", allocator);
+  add_attribute(result, "font", font, allocator);
   add_attribute(result, "font-color", get_color_name(part.color, color_alpha::opaque), allocator);
   std::string title = narrow_assume_ascii(topology.params[param.runtime_param_index].descriptor->static_name.short_);
   add_attribute(result, "title", title, allocator);

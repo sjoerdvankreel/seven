@@ -13582,7 +13582,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out1"
                                                         }
@@ -13724,7 +13724,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out2"
                                                         }
@@ -13866,7 +13866,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out3"
                                                         }
@@ -14008,7 +14008,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out4"
                                                         }
@@ -14150,7 +14150,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out5"
                                                         }
@@ -14292,7 +14292,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out6"
                                                         }
@@ -14434,7 +14434,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out7"
                                                         }
@@ -14576,7 +14576,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out8"
                                                         }
@@ -14718,7 +14718,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out9"
                                                         }
@@ -14860,7 +14860,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out10"
                                                         }
@@ -15002,7 +15002,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out11"
                                                         }
@@ -15144,7 +15144,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out12"
                                                         }
@@ -15286,7 +15286,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out13"
                                                         }
@@ -15428,7 +15428,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out14"
                                                         }
@@ -15570,7 +15570,7 @@
                                                             "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Out15"
                                                         }
