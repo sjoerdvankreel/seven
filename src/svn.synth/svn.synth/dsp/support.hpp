@@ -38,11 +38,11 @@ cv_state(std::int32_t max_sample_count): envelope()
 class audio_state
 {
   static inline std::vector<std::vector<std::int32_t>> const input_table_in
-  = svn::base::multi_list_table_init_in(audio_input_counts, audio_inputs_count);
+  = svn::base::multi_list_table_init_in(audio_input_counts, audio_route_input::count);
   static inline std::vector<std::vector<std::int32_t>> const output_table_in
-  = svn::base::multi_list_table_init_in(audio_output_counts, audio_outputs_count);
+  = svn::base::multi_list_table_init_in(audio_output_counts, audio_route_output::count);
   static inline std::vector<std::pair<std::int32_t, std::int32_t>> const input_table_out
-    = svn::base::multi_list_table_init_out(audio_input_counts, audio_inputs_count);
+    = svn::base::multi_list_table_init_out(audio_input_counts, audio_route_input::count);
 
   std::vector<base::audio_sample32> scratch;
   base::audio_sample32* output_buffer(std::int32_t output, std::int32_t index);

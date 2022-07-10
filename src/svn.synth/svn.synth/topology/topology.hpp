@@ -72,12 +72,6 @@ typedef oscillator_anlg_type_t::value oscillator_anlg_type;
 
 // ---- audio route ----
 
-inline std::int32_t constexpr audio_route_count = 9;
-inline std::int32_t constexpr audio_inputs_count = oscillator_count + voice_filter_count + 1 /* off */;
-inline std::int32_t constexpr audio_outputs_count = voice_filter_count + 1 /* off */ + 1 /* amp */;
-inline std::int32_t constexpr audio_input_counts[audio_inputs_count] = { 1, oscillator_count, voice_filter_count };
-inline std::int32_t constexpr audio_output_counts[audio_outputs_count] = { 1, voice_filter_count, 1 };
-
 struct audio_route_input_t { enum value { off, osc, filter, count }; };
 struct audio_route_output_t { enum value { off, filter, amp, count }; };
 struct audio_route_param_t { enum value { in1, out1, amt1, in2, out2, amt2, in3, out3, amt3, in4, out4, amt4, in5, out5, amt5, in6, out6, amt6, in7, out7, amt7, in8, out8, amt8, in9, out9, amt9, count }; };
@@ -85,6 +79,10 @@ struct audio_route_param_t { enum value { in1, out1, amt1, in2, out2, amt2, in3,
 typedef audio_route_param_t::value audio_route_param;
 typedef audio_route_input_t::value audio_route_input;
 typedef audio_route_output_t::value audio_route_output;
+
+inline std::int32_t constexpr audio_route_count = 9;
+inline std::int32_t constexpr audio_input_counts[audio_route_input::count] = { 1, oscillator_count, voice_filter_count };
+inline std::int32_t constexpr audio_output_counts[audio_route_output::count] = { 1, voice_filter_count, 1 };
 
 } // namespace svn::synth
 #endif // SVN_SYNTH_TOPOLOGY_TOPOLOGY_HPP
