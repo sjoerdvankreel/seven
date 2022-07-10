@@ -100,7 +100,7 @@ inline std::int32_t constexpr audio_input_counts[audio_route_input::count] = { 1
 
 // ---- cv route ----
 
-struct cv_route_input_t { enum value { off, envelope, count }; };
+struct cv_route_input_t { enum value { off, envelope, vlfo, count }; };
 struct cv_route_output_t { enum value { off, osc, vflt, vamp, count }; };
 struct cv_route_vamp_output_t { enum value { lvl, pan, count }; };
 struct cv_route_osc_output_t { enum value { amp, pan, anlg_pw, dsf_dist, dsf_roll, cent, uni_dtn, uni_sprd, count }; };
@@ -115,9 +115,9 @@ typedef cv_route_vamp_output_t::value cv_route_vamp_output;
 typedef cv_route_vflt_output_t::value cv_route_vflt_output;
 
 inline std::int32_t constexpr cv_route_count = 15;
-inline std::int32_t constexpr cv_inputs_count = 1 + envelope_count;
+inline std::int32_t constexpr cv_inputs_count = 1 + envelope_count + voice_lfo_count;
 inline std::int32_t constexpr cv_outputs_count = 1 + cv_route_vamp_output_t::count + cv_route_osc_output::count * oscillator_count + cv_route_vflt_output::count * voice_filter_count;
-inline std::int32_t constexpr cv_input_counts[cv_route_input::count] = { 1, envelope_count };
+inline std::int32_t constexpr cv_input_counts[cv_route_input::count] = { 1, envelope_count, voice_lfo_count };
 inline std::int32_t constexpr cv_output_counts[cv_route_output::count] = { 1, oscillator_count, voice_filter_count, 1 };
 
 } // namespace svn::synth

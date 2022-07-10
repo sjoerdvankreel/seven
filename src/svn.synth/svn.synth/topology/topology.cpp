@@ -241,7 +241,7 @@ audio_route_params[audio_route_param::count] =
 
 // ---- cv route ---- 
  
-static wchar_t const* const cv_input_names[cv_route_input::count] = { L"Off", L"Env" }; 
+static wchar_t const* const cv_input_names[cv_route_input::count] = { L"Off", L"Env", L"VLFO" };
 static wchar_t const* const cv_output_names[cv_route_output::count] = { L"Off", L"Osc", L"VFlt", L"Amp" };
 static wchar_t const* const cv_vamp_output_names[cv_route_vamp_output::count] = { L"Lvl", L"Pan" };
 static wchar_t const* const cv_vflt_output_names[cv_route_vflt_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
@@ -250,7 +250,7 @@ static wchar_t const* const* const cv_output_target_names[cv_route_output::count
 static std::int32_t const cv_output_target_counts[cv_route_output::count] = { 0, cv_route_osc_output::count, cv_route_vflt_output::count, cv_route_vamp_output::count };
 static std::vector<std::wstring> const cv_input_names_list = multi_list_names(cv_input_names, cv_input_counts, cv_route_input::count);
 static std::vector<std::wstring> const cv_output_names_list = zip_list_names(cv_output_names, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count);
-
+  
 static std::wstring format_cv_input(std::int32_t val) { return cv_input_names_list[val]; }
 static std::wstring format_cv_output(std::int32_t val) { return cv_output_names_list[val]; }
 static bool parse_cv_input(std::wstring const& val, std::int32_t& result) { return list_parser(val, cv_input_names_list, result); }
@@ -314,13 +314,13 @@ part_descriptor const
 part_descriptors[part_type::count] =   
 {
   { "{5C9D2CD3-2D4C-4205-893E-6B5DE9D62ADE}", { L"Osc", L"Oscillator" }, part_type::oscillator, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 0, 3, 0, L"Voice", {0xFF, 0xAD, 0xAD}}},
-  { "{FC4885FE-431C-477A-B5B7-84863DB8C07D}", { L"Env", L"Envelope" }, part_type::envelope, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 2, 3, 0, L"Voice", { 0xA0, 0xC4, 0xFF }}},
+  { "{FC4885FE-431C-477A-B5B7-84863DB8C07D}", { L"Env", L"Envelope" }, part_type::envelope, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 3, 3, 0, L"Voice", { 0xA0, 0xC4, 0xFF }}},
   { "{56DE75BB-BE73-4B27-B37F-77F6E408F986}", { L"VLFO", L"Voice LFO" }, part_type::voice_lfo, false, voice_lfo_count, voice_lfo_params, voice_lfo_param::count, nullptr, 0, { 1, 3, 0, L"Voice", { 0xFF, 0xC6, 0xFF }}},
   { "{E6344937-C1F7-4F2A-83E7-EA27D48DEC4E}", { L"Amp", L"Voice amp" }, part_type::voice_amp, false, 1, voice_amp_params, voice_amp_param::count, nullptr, 0, { 4, 3, -1, L"Voice", { 0xFD, 0xFF, 0xB6 } } },
-  { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"VFilter", L"Voice filter" }, part_type::voice_filter, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 3, 3, 0, L"Voice", { 0xFF, 0xD6, 0xA5 } } },
+  { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"VFilter", L"Voice filter" }, part_type::voice_filter, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 2, 3, 0, L"Voice", { 0xFF, 0xD6, 0xA5 } } },
   { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 5, 3, -1, L"Route", { 0xCA, 0xFF, 0xBF } } },
   { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, 1, cv_route_params, cv_route_param::count, nullptr, 0, { 6, 3, -1, L"Route", { 0xBD, 0xB2, 0xFF } } },
   { "{FEEBA3F5-F248-4C1B-BD8C-F3A492D084E2}", { L"Out", L"Output" }, part_type::output, true, 1, output_params, output_param::count, nullptr, 0, { 7, 3, -1, L"Global", { 0x9B, 0xF6, 0xFF } } }
 };    
        
-} // namespace svn::synth          
+} // namespace svn::synth           
