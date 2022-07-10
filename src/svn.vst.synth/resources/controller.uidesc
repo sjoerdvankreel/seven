@@ -13616,7 +13616,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt1"
                                                         }
@@ -13758,7 +13758,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt2"
                                                         }
@@ -13900,7 +13900,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt3"
                                                         }
@@ -14042,7 +14042,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt4"
                                                         }
@@ -14184,7 +14184,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt5"
                                                         }
@@ -14326,7 +14326,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt6"
                                                         }
@@ -14468,7 +14468,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt7"
                                                         }
@@ -14610,7 +14610,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt8"
                                                         }
@@ -14752,7 +14752,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt9"
                                                         }
@@ -14894,7 +14894,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt10"
                                                         }
@@ -15036,7 +15036,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt11"
                                                         }
@@ -15178,7 +15178,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt12"
                                                         }
@@ -15320,7 +15320,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt13"
                                                         }
@@ -15462,7 +15462,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt14"
                                                         }
@@ -15604,7 +15604,7 @@
                                                             "origin": "23, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
+                                                            "font": "~ NormalFontVerySmall",
                                                             "font-color": "color_BDB2FFFF",
                                                             "title": "Amt15"
                                                         }
