@@ -136,7 +136,7 @@ oscillator::generate_wave(
 
 base::audio_sample32
 oscillator::generate_unison(
-  automation_view const& automation, std::int32_t s, float midi, float frequency)
+  automation_view const& automation, std::int32_t s, float midi, float frequency, float panning)
 {
   std::int32_t voices = automation.get(oscillator_param::uni_voices, s).discrete;
   if (voices == 1) 
@@ -144,14 +144,15 @@ oscillator::generate_unison(
     float sample = generate_wave(automation, s, _phases[0], frequency, frequency / _sample_rate);
     _phases[0] += frequency / _sample_rate;
     _phases[0] -= std::floor(_phases[0]);
-    return { sample * 0.5f, sample * 0.5f };
+    return { sample * (1.0f - panning), sample * panning };
   }
 
   base::audio_sample32 result = { 0.0f, 0.0f };
   float detune = automation.get(oscillator_param::uni_detune, s).real;
   float spread = automation.get(oscillator_param::uni_spread, s).real;
-  float pan_min = 0.5f - spread * 0.5f;
-  float pan_max = 0.5f + spread * 0.5f;
+  float pan_range = panning < 0.5f? panning: 1.0f - panning;
+  float pan_min = panning - spread * pan_range;
+  float pan_max = panning + spread * pan_range;
   float midi_min = midi - detune * 0.5f;
   float midi_max = midi + detune * 0.5f;
   for (std::int32_t i = 0; i < voices; i++)
@@ -183,11 +184,11 @@ oscillator::process_block(voice_input const& input,
     std::int32_t octave = automation.get(oscillator_param::oct, s).discrete;
     float midi = 12 * (octave + 1) + note + cent + _midi_note - 60;
     float frequency = note_to_frequency(midi);
-    audio_sample32 sample = generate_unison(automation, s, midi, frequency);
     float amp = automation.get(oscillator_param::amp, s).real;
     float panning = automation.get(oscillator_param::pan, s).real;
-    audio_out[s].left = sanity_bipolar((1.0f - panning) * sample.left * amp);
-    audio_out[s].right = sanity_bipolar(panning * sample.right * amp);
+    audio_sample32 sample = generate_unison(automation, s, midi, frequency, panning);
+    audio_out[s].left = sanity_bipolar(sample.left * amp);
+    audio_out[s].right = sanity_bipolar(sample.right * amp);
   }
 }
 

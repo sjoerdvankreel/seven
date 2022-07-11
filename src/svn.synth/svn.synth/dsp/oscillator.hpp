@@ -32,7 +32,7 @@ private:
   float generate_analog(svn::base::automation_view const& automation, std::int32_t sample, float phase, float increment) const;
   float generate_blep_pulse(svn::base::automation_view const& automation, std::int32_t sample, float phase, float increment) const;
   float generate_wave(svn::base::automation_view const& automation, std::int32_t sample, float phase, float frequency, float increment) const;
-  base::audio_sample32 generate_unison(svn::base::automation_view const& automation, std::int32_t s, float midi, float frequency);
+  base::audio_sample32 generate_unison(svn::base::automation_view const& automation, std::int32_t s, float midi, float frequency, float panning);
 };
 
 } // namespace svn::synth
