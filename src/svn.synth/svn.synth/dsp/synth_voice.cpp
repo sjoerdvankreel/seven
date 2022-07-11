@@ -10,7 +10,7 @@ synth_voice::
 synth_voice(
   base::topology_info const* topology,
   float sample_rate, float velocity, std::int32_t midi_note):
-_envelopes(), _filters(), _oscillators(),
+_envelopes(), _filters(), _oscillators(), _lfos(),
 _topology(topology), _velocity(velocity), _amp(sample_rate)
 {
   assert(topology != nullptr);  
@@ -18,6 +18,7 @@ _topology(topology), _velocity(velocity), _amp(sample_rate)
   assert(0.0f <= velocity && velocity <= 1.0f);
   for(std::int32_t i = 0; i < voice_filter_count; i++)
     new(&_filters[i]) voice_filter(sample_rate, midi_note);
+  _lfos.fill(voice_lfo(sample_rate));
   _envelopes.fill(envelope(sample_rate));
   _oscillators.fill(oscillator(sample_rate, midi_note));
 }
@@ -28,6 +29,10 @@ synth_voice::process_block(
 {
   assert(release_sample >= -1);
   assert(release_sample < input.sample_count);
+
+  // Run lfo's.
+  for(std::int32_t i = 0; i < voice_lfo_count; i++)
+    _lfos[i].process_block(input, i, cv.voice_lfo[i].data());
 
   // Run envelopes.
   std::int32_t amp_env_end = input.sample_count;

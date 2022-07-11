@@ -28,11 +28,16 @@ class cv_state
 public:
   explicit cv_state(std::int32_t max_sample_count);
   std::array<std::vector<float>, envelope_count> envelope;
+  std::array<std::vector<float>, voice_lfo_count> voice_lfo;
 };
 
 inline cv_state::
 cv_state(std::int32_t max_sample_count): envelope()
-{ envelope.fill(std::vector<float>(static_cast<std::size_t>(max_sample_count))); }
+{ 
+  std::vector<float> cv(static_cast<std::size_t>(max_sample_count));
+  envelope.fill(cv);
+  voice_lfo.fill(cv);
+}
 
 // Internal audio outputs.
 class audio_state

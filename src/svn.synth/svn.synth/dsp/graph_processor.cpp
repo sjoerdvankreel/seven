@@ -1,6 +1,7 @@
 #include <svn.base/dsp/support.hpp>
 #include <svn.base/dsp/spectrum_analyzer.hpp>
 #include <svn.synth/dsp/envelope.hpp>
+#include <svn.synth/dsp/voice_lfo.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
 #include <svn.synth/dsp/voice_filter.hpp>
 #include <svn.synth/dsp/graph_processor.hpp>
@@ -19,8 +20,10 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
   {
   case svn::synth::part_type::envelope:
     return new svn::synth::envelope_graph(topology, part_index);
+  case svn::synth::part_type::voice_lfo:
+    return new svn::synth::voice_lfo_graph(topology, part_index);
   case svn::synth::part_type::voice_filter:
-    return new svn::synth::filter_ir_graph(topology, part_index);
+    return new svn::synth::voice_filter_ir_graph(topology, part_index);
   case svn::synth::part_type::oscillator:
     assert(0 <= part_index && part_index < svn::synth::oscillator_count);
     switch (graph_type)
@@ -37,7 +40,7 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
     assert(false);
     return nullptr;
   }   
-}
+} 
 
 namespace svn::synth {
 
@@ -53,6 +56,40 @@ setup_graph_voice_input(
     topology, nullptr, input.automation, topology->input_param_count,
     topology->input_param_count, 0, input.sample_count, 0, input.sample_count);
   return result;
+}
+
+void
+voice_lfo_graph::dsp_to_plot(
+  std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate)
+{
+  plot.resize(dsp.size());
+  std::copy(dsp.begin(), dsp.end(), plot.begin());
+}
+
+bool
+voice_lfo_graph::needs_repaint(std::int32_t runtime_param) const
+{
+  std::int32_t begin = topology()->param_bounds[part_type::voice_lfo][part_index()];
+  return begin <= runtime_param && runtime_param < begin + voice_lfo_param::count;
+}
+
+void
+voice_lfo_graph::process_dsp_core(
+  block_input const& input, float* output, float sample_rate, float bpm)
+{
+  voice_lfo lfo(lfo_graph_rate);
+  std::memset(output, 0, input.sample_count * sizeof(float));
+  voice_input vinput = setup_graph_voice_input(input, topology());
+  lfo.process_block(vinput, part_index(), output);
+}
+
+std::int32_t
+voice_lfo_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
+{
+  std::int32_t const cycles = 2;
+  std::int32_t begin = topology()->param_bounds[part_type::voice_lfo][part_index()];
+  float frequency = state[begin + voice_lfo_param::freq].real;
+  return static_cast<std::int32_t>(std::ceil(cycles * lfo_graph_rate / frequency));
 }
 
 void
@@ -78,7 +115,7 @@ envelope_graph::sample_count(param_value const* state, float sample_rate, float 
     static_cast<std::size_t>(topology()->input_param_count));
   for (std::int32_t i = 0; i < topology()->input_param_count; i++)
     automation[i] = &state[i];
-  setup_stages(automation.data(), sample_rate, bpm, delay, attack, hold, decay, release);
+  setup_stages(automation.data(), bpm, delay, attack, hold, decay, release);
   return static_cast<std::int32_t>(std::ceil(delay + attack + hold + decay + release));
 }
 
@@ -87,7 +124,7 @@ envelope_graph::process_dsp_core(
   block_input const& input, float* output, float sample_rate, float bpm)
 {
   float delay, attack, hold, decay, release;
-  setup_stages(input.automation, sample_rate, bpm, delay, attack, hold, decay, release);
+  setup_stages(input.automation, bpm, delay, attack, hold, decay, release);
   std::int32_t release_sample = static_cast<std::int32_t>(std::ceil(delay + attack + hold + decay));
   envelope env(env_graph_rate);
   std::memset(output, 0, input.sample_count * sizeof(float));
@@ -96,8 +133,8 @@ envelope_graph::process_dsp_core(
 }
 
 void
-envelope_graph::setup_stages(param_value const* const* automation, float sample_rate, 
-  float bpm, float& delay, float& attack, float& hold, float& decay, float& release) const
+envelope_graph::setup_stages(param_value const* const* automation, float bpm, 
+  float& delay, float& attack, float& hold, float& decay, float& release) const
 {
   envelope env(env_graph_rate);
   base::automation_view view(topology(), nullptr, automation,
@@ -171,7 +208,7 @@ oscillator_wave_graph::process_dsp_core(
 }
 
 std::int32_t
-filter_ir_graph::sample_count(
+voice_filter_ir_graph::sample_count(
   param_value const* state, float sample_rate, float bpm) const
 {
   std::int32_t begin = topology()->param_bounds[part_type::voice_filter][part_index()];
@@ -181,14 +218,14 @@ filter_ir_graph::sample_count(
 }
 
 bool
-filter_ir_graph::needs_repaint(std::int32_t runtime_param) const
+voice_filter_ir_graph::needs_repaint(std::int32_t runtime_param) const
 {
   std::int32_t begin = topology()->param_bounds[part_type::voice_filter][part_index()];
   return begin <= runtime_param && runtime_param < begin + oscillator_param::count;
 }
 
 void
-filter_ir_graph::dsp_to_plot(
+voice_filter_ir_graph::dsp_to_plot(
   std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate)
 {
   for (std::size_t s = 0; s < dsp.size(); s++)
@@ -196,7 +233,7 @@ filter_ir_graph::dsp_to_plot(
 }
 
 void 
-filter_ir_graph::process_dsp_core(
+voice_filter_ir_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
 {
   _audio_in.clear();
