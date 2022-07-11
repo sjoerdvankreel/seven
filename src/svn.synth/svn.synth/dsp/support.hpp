@@ -50,7 +50,6 @@ class audio_state
     = svn::base::multi_list_table_init_out(audio_input_counts, audio_route_input::count);
 
   std::vector<base::audio_sample32> scratch;
-  base::audio_sample32* output_buffer(std::int32_t output, std::int32_t index);
   base::audio_sample32 const* input_buffer(std::int32_t input, std::int32_t index) const;
 
 public:
@@ -72,18 +71,6 @@ oscillator(), voice_filter()
   voice_amp = audio;
   oscillator.fill(audio);
   voice_filter.fill(audio);
-}
-
-inline base::audio_sample32* 
-audio_state::output_buffer(std::int32_t output, std::int32_t index)
-{
-  switch (output)
-  {
-  case audio_route_output::off: return nullptr;
-  case audio_route_output::amp: return voice_amp.data();
-  case audio_route_output::filter: return voice_filter[index].data();
-  default: assert(false); return nullptr;
-  }
 }
 
 inline base::audio_sample32 const*
