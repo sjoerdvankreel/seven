@@ -248,7 +248,6 @@ static wchar_t const* const cv_vamp_output_names[cv_route_vamp_output::count] = 
 static wchar_t const* const cv_vflt_output_names[cv_route_vflt_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
 static wchar_t const* const cv_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"Pw", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
 static wchar_t const* const* const cv_output_target_names[cv_route_output::count] = { nullptr, cv_osc_output_names, cv_vflt_output_names, cv_vamp_output_names };
-static std::int32_t const cv_output_target_counts[cv_route_output::count] = { 0, cv_route_osc_output::count, cv_route_vflt_output::count, cv_route_vamp_output::count };
 static std::vector<std::wstring> const cv_input_names_list = multi_list_names(cv_input_names, cv_input_counts, cv_route_input::count);
 static std::vector<std::wstring> const cv_output_names_list = zip_list_names(cv_output_names, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count);
   
