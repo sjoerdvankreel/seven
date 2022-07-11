@@ -44,6 +44,18 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
 
 namespace svn::synth {
 
+static void
+setup_graph_cv_input(
+  std::vector<float>& cv_buffer, std::vector<float*>& cv, 
+  std::int32_t cv_target_count, std::int32_t max_sample_count)
+{
+  cv.clear();
+  cv_buffer.clear();
+  cv_buffer.resize(cv_target_count * max_sample_count);
+  for(std::int32_t i = 0; i < cv_target_count; i++)
+    cv.push_back(cv_buffer.data() + i * max_sample_count);
+}
+
 static voice_input
 setup_graph_voice_input(
   block_input const& input, topology_info const* topology)
@@ -201,10 +213,13 @@ void
 oscillator_wave_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
 {
+  std::vector<float*> cv;
+  std::vector<float> cv_buffer;
+  setup_graph_cv_input(cv_buffer, cv, cv_route_osc_output::count, input.sample_count);
   oscillator osc(sample_rate, midi_note_c4);
   base::clear_audio(output, input.sample_count);
   voice_input vinput = setup_graph_voice_input(input, topology());
-  osc.process_block(vinput, part_index(), output);
+  osc.process_block(vinput, part_index(), cv.data(), output);
 }
 
 std::int32_t

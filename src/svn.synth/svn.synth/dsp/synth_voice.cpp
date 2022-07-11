@@ -45,7 +45,10 @@ synth_voice::process_block(
 
   // Run generators.
   for (std::int32_t i = 0; i < oscillator_count; i++)
-    _oscillators[i].process_block(input, i, audio.oscillator[i].data());
+  {
+    float const* const* cv_in = cv.mix(input, cv_route_output::osc, i);
+    _oscillators[i].process_block(input, i, cv_in, audio.oscillator[i].data());
+  }
 
   // Clear filter output in case user selected weird routing (i.e. filter 3 to filter 2).
   for (std::int32_t i = 0; i < voice_filter_count; i++)
