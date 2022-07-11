@@ -14,7 +14,7 @@ inline std::int32_t constexpr voice_filter_count = 3;
 
 extern base::part_descriptor const part_descriptors[];
 inline std::int32_t constexpr synth_polyphony = 32;
-inline std::int32_t constexpr synth_max_ui_height = 800;
+inline std::int32_t constexpr synth_max_ui_height = 720;
 
 struct part_type_t { enum value { oscillator, envelope, voice_lfo, voice_amp, voice_filter, audio_route, cv_route, output, count }; };
 typedef part_type_t::value part_type;
@@ -47,8 +47,8 @@ typedef envelope_param_t::value envelope_param;
 inline float constexpr voice_lfo_min_freq = 0.1f;
 inline float constexpr voice_lfo_max_freq = 20.0f;
 
+struct voice_lfo_param_t { enum value { on, type, freq, count }; };
 struct voice_lfo_type_t { enum value { sine, custom, random, count }; };
-struct voice_lfo_param_t { enum value { on, type, bipolar, freq, count }; };
 
 typedef voice_lfo_type_t::value voice_lfo_type;
 typedef voice_lfo_param_t::value voice_lfo_param;

@@ -19,9 +19,8 @@ voice_lfo::process_block(voice_input const& input, std::int32_t index, float* cv
     cv_out[s] = 0.0f;
     if(automation.get(voice_lfo_param::on, s).discrete == 0) continue;
     float frequency = automation.get(voice_lfo_param::freq, s).real;
-    bool bipolar = automation.get(voice_lfo_param::bipolar, s).discrete != 0;
     float sample = sanity_bipolar(std::sin(2.0f * std::numbers::pi * _phase));
-    cv_out[s] = bipolar ? sample : (sample + 1.0f) * 0.5f;
+    cv_out[s] = (sample + 1.0f) * 0.5f;
     _phase += frequency / _sample_rate;
     _phase -= std::floor(_phase);
   }
