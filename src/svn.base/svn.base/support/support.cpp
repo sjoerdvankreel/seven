@@ -48,6 +48,30 @@ multi_list_table_init_out(
   return result;
 }
 
+
+std::vector<std::vector<std::vector<std::int32_t>>>
+zip_list_table_init_in(std::int32_t const* counts1, std::int32_t const* counts2, std::int32_t count)
+{
+  std::int32_t index = 0;
+  std::vector<std::vector<std::vector<std::int32_t>>> result;
+  for(std::int32_t i = 0; i < count; i++)
+  {
+    std::vector<std::vector<std::int32_t>> inner1;
+    for(std::int32_t j = 0; j < counts1[i]; j++)
+    {
+      std::vector<std::int32_t> inner2;
+      if(counts2[i] == 0)
+        inner2.push_back(index++);
+      else
+        for(std::int32_t k = 0; k < counts2[i]; k++)
+          inner2.push_back(index++);
+      inner1.push_back(inner2);
+    }
+    result.push_back(inner1);
+  }
+  return result;
+}
+
 std::vector<std::wstring>
 multi_list_names(
   wchar_t const* const* names,
