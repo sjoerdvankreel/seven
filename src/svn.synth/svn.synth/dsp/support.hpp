@@ -47,7 +47,7 @@ class audio_state
   static inline std::vector<std::vector<std::int32_t>> const output_table_in
   = svn::base::multi_list_table_init_in(audio_output_counts, audio_route_output::count);
   static inline std::vector<std::pair<std::int32_t, std::int32_t>> const input_table_out
-    = svn::base::multi_list_table_init_out(audio_input_counts, audio_route_input::count);
+  = svn::base::multi_list_table_init_out(audio_input_counts, audio_route_input::count);
 
   std::vector<base::audio_sample32> scratch;
   base::audio_sample32 const* input_buffer(std::int32_t input, std::int32_t index) const;
