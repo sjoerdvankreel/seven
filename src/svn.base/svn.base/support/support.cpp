@@ -48,11 +48,12 @@ multi_list_table_init_out(
   return result;
 }
 
-
 std::vector<std::vector<std::vector<std::int32_t>>>
-zip_list_table_init_in(std::int32_t const* counts1, std::int32_t const* counts2, std::int32_t count)
+zip_list_table_init_in(
+  std::int32_t const* counts1, std::int32_t const* counts2, 
+  std::int32_t count, std::int32_t offset)
 {
-  std::int32_t index = 0;
+  std::int32_t index = offset;
   std::vector<std::vector<std::vector<std::int32_t>>> result;
   for(std::int32_t i = 0; i < count; i++)
   {
@@ -69,6 +70,24 @@ zip_list_table_init_in(std::int32_t const* counts1, std::int32_t const* counts2,
     }
     result.push_back(inner1);
   }
+  return result;
+}
+
+std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>>
+zip_list_table_init_out(
+  std::int32_t const* counts1, std::int32_t const* counts2,
+  std::int32_t count, std::int32_t offset)
+{
+  std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> result;
+  for(std::int32_t i = 0; i < offset; i++)
+    result.push_back(std::make_tuple(-1, -1, -1));
+  for (std::int32_t i = 0; i < count; i++)
+    for(std::int32_t j = 0; j < counts1[i]; j++)
+      if(counts2[i] == 0)
+        result.push_back(std::make_tuple(i, j, -1));
+      else
+        for(std::int32_t k = 0; k < counts2[i]; k++)
+          result.push_back(std::make_tuple(i, j, k));
   return result;
 }
 

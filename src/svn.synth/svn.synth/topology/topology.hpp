@@ -115,6 +115,7 @@ typedef cv_route_vamp_output_t::value cv_route_vamp_output;
 typedef cv_route_vflt_output_t::value cv_route_vflt_output;
 
 inline std::int32_t constexpr cv_route_count = 15;
+inline std::int32_t constexpr cv_route_param_offset = 2; // for plot params
 inline std::int32_t constexpr cv_inputs_count = 1 + envelope_count + voice_lfo_count;
 inline std::int32_t constexpr cv_input_counts[cv_route_input::count] = { 1, envelope_count, voice_lfo_count };
 inline std::int32_t constexpr cv_output_counts[cv_route_output::count] = { 1, oscillator_count, voice_filter_count, 1 };

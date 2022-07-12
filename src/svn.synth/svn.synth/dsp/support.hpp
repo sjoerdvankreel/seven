@@ -31,7 +31,7 @@ class cv_state
   static inline std::vector<std::pair<std::int32_t, std::int32_t>> const input_table_out
   = svn::base::multi_list_table_init_out(cv_input_counts, cv_route_input::count);
   static inline std::vector<std::vector<std::vector<std::int32_t>>> const output_table_in
-  = svn::base::zip_list_table_init_in(cv_output_counts, cv_output_target_counts, cv_route_output::count);
+  = svn::base::zip_list_table_init_in(cv_output_counts, cv_output_target_counts, cv_route_output::count, cv_route_param_offset);
 
   // Of size max parameter count per part type * max sample count.
   std::vector<float*> scratch;
@@ -86,12 +86,12 @@ cv_state::mix(voice_input const& input,
       scratch[p][s] = 0.0f;
       for (std::int32_t i = 0; i < cv_route_count; i++)
       {
-        // +2 = plot parameters
-        std::int32_t in = automation.get(i * 3 + 2, s).discrete;
+        // +cv_route_param_offset = plot parameters
+        std::int32_t in = automation.get(i * 3 + cv_route_param_offset, s).discrete;
         if (in == input_off) continue;
-        std::int32_t out = automation.get(i * 3 + 2 + 1, s).discrete;
+        std::int32_t out = automation.get(i * 3 + cv_route_param_offset + 1, s).discrete;
         if (out != output_id) continue;
-        float amt = automation.get(i * 3 + 2 + 2, s).real;
+        float amt = automation.get(i * 3 + cv_route_param_offset + 2, s).real;
         std::pair<std::int32_t, std::int32_t> input_ids(input_table_out[in]);
         scratch[p][s] = base::sanity_bipolar(scratch[p][s] + input_buffer(input_ids.first, input_ids.second)[s] * amt);
       }
