@@ -158,53 +158,6 @@ envelope_graph::setup_stages(param_value const* const* automation, float bpm,
     0, bpm, delay, attack, hold, decay, release);
 }
 
-std::int32_t
-cv_route_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
-{ return static_cast<std::int32_t>(std::ceil(sample_rate)); }
-
-void
-cv_route_graph::dsp_to_plot(
-  std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate)
-{
-  plot.resize(dsp.size());
-  std::copy(dsp.begin(), dsp.end(), plot.begin());
-}
-
-bool
-cv_route_graph::needs_repaint(std::int32_t runtime_param) const
-{
-  for (std::int32_t i = 0; i < voice_lfo_count; i++)
-  {
-    std::int32_t begin = topology()->param_bounds[part_type::voice_lfo][i];
-    if(begin <= runtime_param && runtime_param < begin + voice_lfo_param::count) return true;
-  }
-  for (std::int32_t i = 0; i < envelope_count; i++)
-  {
-    std::int32_t begin = topology()->param_bounds[part_type::envelope][i];
-    if (begin <= runtime_param && runtime_param < begin + envelope_param::count) return true;
-  }
-  std::int32_t cv_begin = topology()->param_bounds[part_type::cv_route][0];
-  return cv_begin <= runtime_param && runtime_param < cv_begin + cv_route_param::count;
-}
-
-void
-cv_route_graph::process_dsp_core(
-  block_input const& input, float* output, float sample_rate, float bpm)
-{
-  cv_state state(input.sample_count);
-  voice_input vinput = setup_graph_voice_input(input, topology());
-  std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> output_table_out
-    = zip_list_table_init_out(cv_output_counts, cv_output_target_counts, cv_route_output::count, cv_route_param_offset);
-  automation_view automation = vinput.automation.rearrange_params(part_type::cv_route, 0);
-  auto param_ids = output_table_out[automation.get(cv_route_param::plot_tgt, 0).discrete];
-  std::memset(output, 0, input.sample_count * sizeof(float));
-  if(std::get<0>(param_ids) == -1) return;
-  float const* const* mix = state.mix(vinput, static_cast<cv_route_output>(std::get<0>(param_ids)), std::get<1>(param_ids));
-  std::vector<float> cv_in(static_cast<std::size_t>(input.sample_count), automation.get(cv_route_param::plot_lvl, 0).real);
-  for(std::int32_t i = 0; i < input.sample_count; i++)
-    output[i] = cv_in[i] * mix[std::get<2>(param_ids)][i];
-}
-
 bool 
 oscillator_spectrum_graph::needs_repaint(std::int32_t runtime_param) const
 { return _wave.needs_repaint(runtime_param); }
@@ -309,6 +262,58 @@ voice_filter_ir_graph::process_dsp_core(
   voice_input vinput = setup_graph_voice_input(input, topology());
   auto filter = std::make_unique<voice_filter>(sample_rate, midi_note_c4);
   filter->process_block(vinput, part_index(), _audio_in.data(), output);
+}
+
+
+
+std::int32_t
+cv_route_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
+{
+  return static_cast<std::int32_t>(std::ceil(sample_rate));
+}
+
+void
+cv_route_graph::dsp_to_plot(
+  std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate)
+{
+  plot.resize(dsp.size());
+  std::copy(dsp.begin(), dsp.end(), plot.begin());
+}
+
+bool
+cv_route_graph::needs_repaint(std::int32_t runtime_param) const
+{
+  for (std::int32_t i = 0; i < voice_lfo_count; i++)
+  {
+    std::int32_t begin = topology()->param_bounds[part_type::voice_lfo][i];
+    if (begin <= runtime_param && runtime_param < begin + voice_lfo_param::count) return true;
+  }
+  for (std::int32_t i = 0; i < envelope_count; i++)
+  {
+    std::int32_t begin = topology()->param_bounds[part_type::envelope][i];
+    if (begin <= runtime_param && runtime_param < begin + envelope_param::count) return true;
+  }
+  std::int32_t cv_begin = topology()->param_bounds[part_type::cv_route][0];
+  return cv_begin <= runtime_param && runtime_param < cv_begin + cv_route_param::count;
+}
+
+void
+cv_route_graph::process_dsp_core(
+  block_input const& input, float* output, float sample_rate, float bpm)
+{
+  cv_state state(input.sample_count);
+  voice_input vinput = setup_graph_voice_input(input, topology());
+  std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> output_table_out
+    = zip_list_table_init_out(cv_output_counts, cv_output_target_counts, cv_route_output::count);
+  automation_view automation = vinput.automation.rearrange_params(part_type::cv_route, 0);
+  std::int32_t target_id = automation.get(cv_route_param::plot_tgt, 0).discrete;
+  auto param_ids = output_table_out[target_id];
+  std::memset(output, 0, input.sample_count * sizeof(float));
+  if (std::get<0>(param_ids) == -1 || std::get<2>(param_ids) == -1) return;
+  float const* const* mix = state.mix(vinput, static_cast<cv_route_output>(std::get<0>(param_ids)), std::get<1>(param_ids));
+  std::vector<float> cv_in(static_cast<std::size_t>(input.sample_count), automation.get(cv_route_param::plot_lvl, 0).real);
+  for (std::int32_t i = 0; i < input.sample_count; i++)
+    output[i] = cv_in[i] * mix[std::get<2>(param_ids)][i];
 }
  
 } // namespace svn::synth

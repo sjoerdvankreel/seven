@@ -75,12 +75,9 @@ zip_list_table_init_in(
 
 std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>>
 zip_list_table_init_out(
-  std::int32_t const* counts1, std::int32_t const* counts2,
-  std::int32_t count, std::int32_t offset)
+  std::int32_t const* counts1, std::int32_t const* counts2, std::int32_t count)
 {
   std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> result;
-  for(std::int32_t i = 0; i < offset; i++)
-    result.push_back(std::make_tuple(-1, -1, -1));
   for (std::int32_t i = 0; i < count; i++)
     for(std::int32_t j = 0; j < counts1[i]; j++)
       if(counts2[i] == 0)

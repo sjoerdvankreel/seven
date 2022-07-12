@@ -94,8 +94,7 @@ zip_list_table_init_in(
   std::int32_t count, std::int32_t offset);
 std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>>
 zip_list_table_init_out(
-  std::int32_t const* counts1, std::int32_t const* counts2,
-  std::int32_t count, std::int32_t offset);
+  std::int32_t const* counts1, std::int32_t const* counts2, std::int32_t count);
 
 // 0/0, 1/4, 2/4, 3/4, 1/3, 2/3 etc.
 std::vector<std::pair<std::int32_t, std::int32_t>>

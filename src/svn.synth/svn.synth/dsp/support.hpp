@@ -80,13 +80,13 @@ cv_state::mix(voice_input const& input,
   base::automation_view automation = input.automation.rearrange_params(part_type::cv_route, 0);
   for(std::int32_t p = 0; p < cv_output_target_counts[route_output]; p++)
   {
-    std::int32_t output_id = output_table_in[route_output][route_index][p];
+    // cv_route_param_offset = plot parameters
+    std::int32_t output_id = output_table_in[route_output][route_index][p] - cv_route_param_offset;
     for (std::int32_t s = 0; s < input.sample_count; s++)
     {
       scratch[p][s] = 0.0f;
       for (std::int32_t i = 0; i < cv_route_count; i++)
       {
-        // +cv_route_param_offset = plot parameters
         std::int32_t in = automation.get(i * 3 + cv_route_param_offset, s).discrete;
         if (in == input_off) continue;
         std::int32_t out = automation.get(i * 3 + cv_route_param_offset + 1, s).discrete;
