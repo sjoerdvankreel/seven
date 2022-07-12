@@ -106,8 +106,9 @@ editor::controllerEndEdit(ParamID tag)
         std::int32_t that_param = param.descriptor->ui.relevance[i].if_param;
         double normalized = controller->getParamNormalized(that_param + offset);
         std::int32_t value = vst_normalized_to_base(_topology, that_param + offset, normalized).discrete;
-        visible &= _topology->params[dependents[d]].descriptor->ui.relevance[i].if_value == value;
-      }
+        auto const& if_values = _topology->params[dependents[d]].descriptor->ui.relevance[i].if_values;
+        visible &= std::find(if_values.begin(), if_values.end(), value) != if_values.end();
+      } 
 
       // Show/hide dependent controls.
       CView* container = _controls[dependents[d]][c]->getParentView();

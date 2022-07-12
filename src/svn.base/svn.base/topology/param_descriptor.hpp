@@ -43,7 +43,7 @@ struct discrete_descriptor
 struct param_relevance
 {
   std::int32_t const if_param;
-  std::int32_t const if_value;
+  std::vector<std::int32_t> const if_values; // Relevant if any of these values.
 };
 
 // For ui generator.
@@ -53,7 +53,7 @@ struct param_ui_descriptor
   bool const label_font_small; // For any labels.
   std::int32_t const param_index; // Index within the grid.
   std::int32_t const param_group; // Group together related params within a part.
-  param_relevance const* const relevance; // Relevant if all other params relevance.if_param[i] have value relevance.if_value[i].
+  param_relevance const* const relevance; // Relevant if all other params relevance.if_param[i] have any of values relevance.if_values[i].
   std::int32_t const relevance_count;
 };
 

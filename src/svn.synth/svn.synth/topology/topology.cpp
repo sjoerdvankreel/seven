@@ -54,11 +54,11 @@ std::int32_t const env_synced_timesig_count = static_cast<std::int32_t>(env_sync
 float const* const env_synced_timesig_values = env_synced_timesig_values_init.data();
 
 static graph_descriptor const envelope_graph = { -1, 0, 2, 1, 1, L"Envelope" };
-static param_relevance const envelope_time_relevance[1] = { { envelope_param::sync_polarity, 0 } };
-static param_relevance const envelope_sync_relevance[1] = { { envelope_param::sync_polarity, 2 } };
-static param_relevance const envelope_attack_log_relevance[1] = { { envelope_param::attack_slope, envelope_slope::log } };
-static param_relevance const envelope_decay_log_relevance[1] = { { envelope_param::decay_slope, envelope_slope::log } };
-static param_relevance const envelope_release_log_relevance[1] = { { envelope_param::release_slope, envelope_slope::log } };
+static param_relevance const envelope_decay_log_relevance[1] = { { envelope_param::decay_slope, { envelope_slope::log } } };
+static param_relevance const envelope_attack_log_relevance[1] = { { envelope_param::attack_slope, { envelope_slope::log } } };
+static param_relevance const envelope_release_log_relevance[1] = { { envelope_param::release_slope, { envelope_slope::log } } };
+static param_relevance const envelope_time_relevance[1] = { { envelope_param::sync_polarity, { envelope_sync_polarity::time_bipolar, envelope_sync_polarity::time_unipolar } } };
+static param_relevance const envelope_sync_relevance[1] = { { envelope_param::sync_polarity, { envelope_sync_polarity::sync_bipolar, envelope_sync_polarity::sync_unipolar } } };
 
 static std::wstring format_env_timesig(std::int32_t val) { return env_synced_timesig_names[val]; }
 static bool parse_env_timesig(std::wstring const& val, std::int32_t& result) { return list_parser(val, env_synced_timesig_names, result); }
@@ -116,8 +116,8 @@ envelope_params[envelope_param::count] =
 // ---- voice filter ---- 
 
 static graph_descriptor const voice_filter_graph = { -1, 0, 2, 1, 1, L"Impulse response" };
-static param_relevance const vfilter_comb_relevance[1] = { { voice_filter_param::type, voice_filter_type::comb } };
-static param_relevance const vfilter_stvar_relevance[1] = { { voice_filter_param::type, voice_filter_type::state_var } };
+static param_relevance const vfilter_comb_relevance[1] = { { voice_filter_param::type, { voice_filter_type::comb } } };
+static param_relevance const vfilter_stvar_relevance[1] = { { voice_filter_param::type, { voice_filter_type::state_var } } };
 
 static item_name const
 voice_filter_types[voice_filter_type::count] =
@@ -153,13 +153,13 @@ voice_filter_params[voice_filter_param::count] =
  
 // ---- oscillator ----
 
-static param_relevance const osc_dsf_relevance[1] = { { oscillator_param::type, oscillator_type::dsf } };
-static param_relevance const osc_anlg_relevance[1] = { { oscillator_param::type, oscillator_type::analog } };
+static param_relevance const osc_dsf_relevance[1] = { { oscillator_param::type, { oscillator_type::dsf } } };
+static param_relevance const osc_anlg_relevance[1] = { { oscillator_param::type, { oscillator_type::analog } } };
 
 static param_relevance const osc_anlg_pw_relevance[2] =
 {
-  { oscillator_param::type, oscillator_type::analog },
-  { oscillator_param::anlg_type, oscillator_anlg_type::pulse }
+  { oscillator_param::type, { oscillator_type::analog } },
+  { oscillator_param::anlg_type, { oscillator_anlg_type::pulse } }
 };
 
 static graph_descriptor const
