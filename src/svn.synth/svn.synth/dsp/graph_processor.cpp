@@ -264,13 +264,9 @@ voice_filter_ir_graph::process_dsp_core(
   filter->process_block(vinput, part_index(), _audio_in.data(), output);
 }
 
-
-
 std::int32_t
 cv_route_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
-{
-  return static_cast<std::int32_t>(std::ceil(sample_rate));
-}
+{ return static_cast<std::int32_t>(std::ceil(cv_route_graph_rate)); }
 
 void
 cv_route_graph::dsp_to_plot(
@@ -302,7 +298,13 @@ cv_route_graph::process_dsp_core(
   block_input const& input, float* output, float sample_rate, float bpm)
 {
   cv_state state(input.sample_count);
+  
   voice_input vinput = setup_graph_voice_input(input, topology());
+  for(std::int32_t i = 0; i < voice_lfo_count; i++)
+    voice_lfo(cv_route_graph_rate).process_block(vinput, i, state.voice_lfo[i].data());
+  for (std::int32_t i = 0; i < envelope_count; i++)
+    envelope(cv_route_graph_rate).process_block(vinput, i, state.envelope[i].data(), input.sample_count);
+
   std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> output_table_out
     = zip_list_table_init_out(cv_output_counts, cv_output_target_counts, cv_route_output::count);
   automation_view automation = vinput.automation.rearrange_params(part_type::cv_route, 0);
@@ -310,6 +312,7 @@ cv_route_graph::process_dsp_core(
   auto param_ids = output_table_out[target_id];
   std::memset(output, 0, input.sample_count * sizeof(float));
   if (std::get<0>(param_ids) == -1 || std::get<2>(param_ids) == -1) return;
+
   float const* const* mix = state.mix(vinput, static_cast<cv_route_output>(std::get<0>(param_ids)), std::get<1>(param_ids));
   std::vector<float> cv_in(static_cast<std::size_t>(input.sample_count), automation.get(cv_route_param::plot_lvl, 0).real);
   for (std::int32_t i = 0; i < input.sample_count; i++)
