@@ -84,7 +84,7 @@ cv_state::mix(voice_input const& input,
     std::int32_t output_id = output_table_in[route_output][route_index][p] - cv_route_param_offset;
     for (std::int32_t s = 0; s < input.sample_count; s++)
     {
-      scratch[p][s] = 0.0f;
+      scratch[p][s] = 1.0f;
       for (std::int32_t i = 0; i < cv_route_count; i++)
       {
         std::int32_t in = automation.get(i * 3 + cv_route_param_offset, s).discrete;
@@ -93,7 +93,7 @@ cv_state::mix(voice_input const& input,
         if (out != output_id) continue;
         float amt = automation.get(i * 3 + cv_route_param_offset + 2, s).real;
         std::pair<std::int32_t, std::int32_t> input_ids(input_table_out[in]);
-        scratch[p][s] = base::sanity_bipolar(scratch[p][s] + input_buffer(input_ids.first, input_ids.second)[s] * amt);
+        scratch[p][s] = base::sanity_bipolar(scratch[p][s] * input_buffer(input_ids.first, input_ids.second)[s] * amt);
       }
     }
   }
