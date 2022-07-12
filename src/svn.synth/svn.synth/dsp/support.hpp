@@ -86,11 +86,12 @@ cv_state::mix(voice_input const& input,
       scratch[p][s] = 0.0f;
       for (std::int32_t i = 0; i < cv_route_count; i++)
       {
-        std::int32_t in = automation.get(i * 3, s).discrete;
+        // +2 = plot parameters
+        std::int32_t in = automation.get(i * 3 + 2, s).discrete;
         if (in == input_off) continue;
-        std::int32_t out = automation.get(i * 3 + 1, s).discrete;
+        std::int32_t out = automation.get(i * 3 + 2 + 1, s).discrete;
         if (out != output_id) continue;
-        float amt = automation.get(i * 3 + 2, s).real;
+        float amt = automation.get(i * 3 + 2 + 2, s).real;
         std::pair<std::int32_t, std::int32_t> input_ids(input_table_out[in]);
         scratch[p][s] = base::sanity_bipolar(scratch[p][s] + input_buffer(input_ids.first, input_ids.second)[s] * amt);
       }

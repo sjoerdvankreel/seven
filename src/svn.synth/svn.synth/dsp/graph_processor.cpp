@@ -18,6 +18,8 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
 {
   switch (part_type)
   {
+  case svn::synth::part_type::cv_route:
+    return new svn::synth::envelope_graph(topology, part_index);
   case svn::synth::part_type::envelope:
     return new svn::synth::envelope_graph(topology, part_index);
   case svn::synth::part_type::voice_lfo:
