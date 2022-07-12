@@ -121,7 +121,7 @@
             "oscillator_3_unison_stereo_spread": "59",
             "envelope_0_enabled": "60",
             "envelope_0_type": "61",
-            "envelope_0_tempo_sync": "62",
+            "envelope_0_sync/polarity": "62",
             "envelope_0_delay_time": "63",
             "envelope_0_delay_sync": "64",
             "envelope_0_hold_time": "65",
@@ -141,7 +141,7 @@
             "envelope_0_release_log_midpoint": "79",
             "envelope_1_enabled": "80",
             "envelope_1_type": "81",
-            "envelope_1_tempo_sync": "82",
+            "envelope_1_sync/polarity": "82",
             "envelope_1_delay_time": "83",
             "envelope_1_delay_sync": "84",
             "envelope_1_hold_time": "85",
@@ -161,7 +161,7 @@
             "envelope_1_release_log_midpoint": "99",
             "envelope_2_enabled": "100",
             "envelope_2_type": "101",
-            "envelope_2_tempo_sync": "102",
+            "envelope_2_sync/polarity": "102",
             "envelope_2_delay_time": "103",
             "envelope_2_delay_sync": "104",
             "envelope_2_hold_time": "105",
@@ -7612,32 +7612,39 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "CCheckBox": {
+                                                    "COptionMenu": {
                                                         "attributes": {
-                                                            "class": "CCheckBox",
-                                                            "size": "20, 19",
-                                                            "origin": "3, 0",
-                                                            "control-tag": "envelope_0_tempo_sync",
-                                                            "tooltip": "Env 1 Tempo sync",
-                                                            "title": "",
-                                                            "frame-width": "1",
-                                                            "draw-crossbox": "true",
+                                                            "class": "COptionMenu",
+                                                            "size": "49, 19",
+                                                            "origin": "0, 0",
+                                                            "control-tag": "envelope_0_sync/polarity",
+                                                            "tooltip": "Env 1 Sync/polarity",
+                                                            "font": "~ NormalFontSmall",
+                                                            "min-value": "0",
+                                                            "default-value": "0",
+                                                            "text-alignment": "left",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "menu-popup-style": "true",
+                                                            "menu-check-style": "false",
+                                                            "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "boxfill-color": "color_A0C4FF40",
-                                                            "boxframe-color": "color_A0C4FFFF",
-                                                            "checkmark-color": "color_A0C4FFFF"
+                                                            "max-value": "3",
+                                                            "font-color": "color_A0C4FFFF",
+                                                            "back-color": "color_A0C4FF40",
+                                                            "shadow-color": "color_A0C4FF80"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "57, 19",
-                                                            "origin": "23, 0",
+                                                            "size": "28, 19",
+                                                            "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
-                                                            "title": "Sync"
+                                                            "title": "SnPl"
                                                         }
                                                     }
                                                 }
@@ -8918,32 +8925,39 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "CCheckBox": {
+                                                    "COptionMenu": {
                                                         "attributes": {
-                                                            "class": "CCheckBox",
-                                                            "size": "20, 19",
-                                                            "origin": "3, 0",
-                                                            "control-tag": "envelope_1_tempo_sync",
-                                                            "tooltip": "Env 2 Tempo sync",
-                                                            "title": "",
-                                                            "frame-width": "1",
-                                                            "draw-crossbox": "true",
+                                                            "class": "COptionMenu",
+                                                            "size": "49, 19",
+                                                            "origin": "0, 0",
+                                                            "control-tag": "envelope_1_sync/polarity",
+                                                            "tooltip": "Env 2 Sync/polarity",
+                                                            "font": "~ NormalFontSmall",
+                                                            "min-value": "0",
+                                                            "default-value": "0",
+                                                            "text-alignment": "left",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "menu-popup-style": "true",
+                                                            "menu-check-style": "false",
+                                                            "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "boxfill-color": "color_A0C4FF40",
-                                                            "boxframe-color": "color_A0C4FFFF",
-                                                            "checkmark-color": "color_A0C4FFFF"
+                                                            "max-value": "3",
+                                                            "font-color": "color_A0C4FFFF",
+                                                            "back-color": "color_A0C4FF40",
+                                                            "shadow-color": "color_A0C4FF80"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "57, 19",
-                                                            "origin": "23, 0",
+                                                            "size": "28, 19",
+                                                            "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
-                                                            "title": "Sync"
+                                                            "title": "SnPl"
                                                         }
                                                     }
                                                 }
@@ -10224,32 +10238,39 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "CCheckBox": {
+                                                    "COptionMenu": {
                                                         "attributes": {
-                                                            "class": "CCheckBox",
-                                                            "size": "20, 19",
-                                                            "origin": "3, 0",
-                                                            "control-tag": "envelope_2_tempo_sync",
-                                                            "tooltip": "Env 3 Tempo sync",
-                                                            "title": "",
-                                                            "frame-width": "1",
-                                                            "draw-crossbox": "true",
+                                                            "class": "COptionMenu",
+                                                            "size": "49, 19",
+                                                            "origin": "0, 0",
+                                                            "control-tag": "envelope_2_sync/polarity",
+                                                            "tooltip": "Env 3 Sync/polarity",
+                                                            "font": "~ NormalFontSmall",
+                                                            "min-value": "0",
+                                                            "default-value": "0",
+                                                            "text-alignment": "left",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "menu-popup-style": "true",
+                                                            "menu-check-style": "false",
+                                                            "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
-                                                            "boxfill-color": "color_A0C4FF40",
-                                                            "boxframe-color": "color_A0C4FFFF",
-                                                            "checkmark-color": "color_A0C4FFFF"
+                                                            "max-value": "3",
+                                                            "font-color": "color_A0C4FFFF",
+                                                            "back-color": "color_A0C4FF40",
+                                                            "shadow-color": "color_A0C4FF80"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "57, 19",
-                                                            "origin": "23, 0",
+                                                            "size": "28, 19",
+                                                            "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
-                                                            "title": "Sync"
+                                                            "title": "SnPl"
                                                         }
                                                     }
                                                 }

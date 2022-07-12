@@ -54,8 +54,8 @@ std::int32_t const env_synced_timesig_count = static_cast<std::int32_t>(env_sync
 float const* const env_synced_timesig_values = env_synced_timesig_values_init.data();
 
 static graph_descriptor const envelope_graph = { -1, 0, 2, 1, 1, L"Envelope" };
-static param_relevance const envelope_time_relevance[1] = { { envelope_param::sync, 0 } };
-static param_relevance const envelope_sync_relevance[1] = { { envelope_param::sync, 1 } };
+static param_relevance const envelope_time_relevance[1] = { { envelope_param::sync_polarity, 0 } };
+static param_relevance const envelope_sync_relevance[1] = { { envelope_param::sync_polarity, 2 } };
 static param_relevance const envelope_attack_log_relevance[1] = { { envelope_param::attack_slope, envelope_slope::log } };
 static param_relevance const envelope_decay_log_relevance[1] = { { envelope_param::decay_slope, envelope_slope::log } };
 static param_relevance const envelope_release_log_relevance[1] = { { envelope_param::release_slope, envelope_slope::log } };
@@ -79,12 +79,21 @@ envelope_slopes[envelope_slope::count] =
   { L"Sqrt", L"Squared" }
 };
 
+static item_name const
+envelope_sync_polarities[envelope_sync_polarity::count] =
+{
+  { L"Uni", L"Unipolar" },
+  { L"Bip", L"Bipolar" },
+  { L"UniSync", L"Unipolar synced" },
+  { L"BipSync", L"Bipolar synced" }
+}; 
+
 static param_descriptor const
-envelope_params[envelope_param::count] = 
+envelope_params[envelope_param::count] =  
 {  
   { "{FC3CE4BC-D8F0-487E-9BB6-826988B4B812}", { L"On", L"Enabled" }, false, { false, false, -1, 0, {}, {}}},
   { "{D622D344-A08E-4109-84D8-C310B81C2769}", { L"Type", L"Type" }, L"", false, envelope_types, envelope_type::count, { false, false, 0, 0, nullptr, 0}},
-  { "{F468AAD5-B183-4DCB-B6F3-88842FC647F6}", { L"Sync", L"Tempo sync" }, false, { false, false, 1, 0, nullptr, 0 } },
+  { "{F468AAD5-B183-4DCB-B6F3-88842FC647F6}", { L"SnPl", L"Sync/polarity" }, L"", false, envelope_sync_polarities, envelope_sync_polarity::count, { false, false, 1, 0, nullptr, 0} },
   { "{B1D30C73-FF09-452C-A9D5-00BB8B2CE58D}", { L"Dly", L"Delay time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 2, 2, envelope_time_relevance, 1 } },
   { "{70C49337-7141-42BC-B336-78B28F4770E3}", { L"Dly", L"Delay sync" }, L"", true, 0, env_synced_timesig_count - 1, 0, format_env_timesig, parse_env_timesig, { false, false, 2, 2, envelope_sync_relevance, 1}},
   { "{AADD118E-B9CE-464E-83C0-1FAE5A62F530}", { L"Hld", L"Hold time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 3, 2, envelope_time_relevance, 1 } },

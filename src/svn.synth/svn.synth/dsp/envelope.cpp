@@ -67,7 +67,8 @@ void
 envelope::setup_stages(automation_view const& automation, std::int32_t s,
   float bpm, float& delay, float& attack, float& hold, float& decay, float& release)
 {
-  if (automation.get(envelope_param::sync, s).discrete == 0)
+  std::int32_t sync_polarity = automation.get(envelope_param::sync_polarity, s).discrete;
+  if (sync_polarity == envelope_sync_polarity::sync_unipolar || sync_polarity == envelope_sync_polarity::sync_bipolar)
   {
     delay = automation.get(envelope_param::delay_time, s).real * _sample_rate;
     attack = automation.get(envelope_param::attack_time, s).real * _sample_rate;
@@ -93,16 +94,20 @@ envelope::process_block(voice_input const& input, std::int32_t index, float* cv_
     cv_out[s] = 0.0f;
     if(automation.get(envelope_param::on, s).discrete == 0) return s;
     float sustain = automation.get(envelope_param::sustain_level, s).real;
+    std::int32_t sync_polarity = automation.get(envelope_param::sync_polarity, s).discrete;
     bool dahdsr = automation.get(envelope_param::type, s).discrete == envelope_type::dahdsr;
     setup_stages(automation, s, input.bpm, delay, attack, hold, decay, release);
     auto stage = generate_stage(automation, s, dahdsr, delay, attack, hold, decay, sustain, release);
-    cv_out[s] = sanity_unipolar(stage.second);
+    if(sync_polarity == envelope_sync_polarity::sync_unipolar || sync_polarity == envelope_sync_polarity::time_unipolar)
+      cv_out[s] = sanity_unipolar(stage.second);
+    else
+      cv_out[s] = sanity_bipolar(stage.second * 2.0f - 1.0f);
     if(stage.first == envelope_stage::end) return s;
-    if(stage.first != envelope_stage::release) _release_level = cv_out[s];
+    if(stage.first != envelope_stage::release) _release_level = stage.second;
     if(s == release_sample) _released = true, _position = static_cast<int32_t>(std::ceil(delay + attack + hold + decay));
     else if(!dahdsr || stage.first != envelope_stage::sustain) _position++;
   }
-  return input.sample_count;
+  return input.sample_count; 
 }
 
 } // namespace svn::synth
