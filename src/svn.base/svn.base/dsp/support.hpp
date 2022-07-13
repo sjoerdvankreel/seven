@@ -14,6 +14,13 @@ namespace svn::base {
 inline float constexpr sanity_epsilon = 1.0e-5f;
 inline std::int32_t constexpr midi_note_c4 = 60;
 
+// Any cv input e.g. lfos, envelopes.
+struct cv_sample
+{
+  float value;
+  bool bipolar;
+};
+
 // Note including cents.
 inline float
 note_to_frequency(float note)
@@ -113,6 +120,21 @@ transform_to_dsp(topology_info const* topology, std::int32_t param, param_value 
   if(descriptor.type == param_type::real)
     return param_value(descriptor.real.dsp.to_range(val.real));
   return param_value(val.discrete);
+}
+
+// Apply either unipolar or bipolar modulation.
+// Source signal must be unipolar in [0, 1].
+inline float
+modulate(float val, cv_sample cv, float amount)
+{
+  assert(0.0f <= val && val <= 1.0f);
+  if (cv.bipolar)
+  {
+    float range = val <= 0.5f ? val : 1.0f - val;
+    return sanity_unipolar(val + cv.value * range * amount);
+  }
+  if (amount >= 0.0f) return sanity_unipolar(val + cv.value * (1.0f - val) * amount);
+  return sanity_unipolar(val + cv.value * val * amount);
 }
 
 } // namespace svn::base
