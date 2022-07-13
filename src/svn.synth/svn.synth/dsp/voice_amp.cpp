@@ -17,7 +17,8 @@ voice_amp::process_block(voice_input const& input, base::cv_sample const* env1_c
     float env1 = automation.get(voice_amp_param::env1, s).real;
     float level = automation.get(voice_amp_param::level, s).real;
     float panning = automation.get(voice_amp_param::pan, s).real;
-    float final_amp = level * env1 * env1_cv[s].value;
+    float env1_uni = !env1_cv[s].bipolar? env1_cv[s].value: (env1_cv[s].value + 1.0f) * 0.5f;
+    float final_amp = level * env1 * env1_uni;
     float left = audio_in[s].left * final_amp * (1.0f - panning);
     float right = audio_in[s].right * final_amp * panning;
     audio_out[s] = sanity_audio(audio_sample32({left, right}));
