@@ -250,8 +250,8 @@ audio_route_params[audio_route_param::count] =
 };
 
 // ---- cv route ---- 
- 
-static graph_descriptor const cv_route_graph = { -1, 0, 2, 1, 1, L"CV" };
+  
+static graph_descriptor const cv_route_graph = { -1, 0, 1, 1, 2, L"CV" };
 static wchar_t const* const cv_input_names[cv_route_input::count] = { L"Off", L"Env", L"VLFO" };
 static wchar_t const* const cv_output_names[cv_route_output::count] = { L"Off", L"Osc", L"VFlt", L"Amp" };
 static wchar_t const* const cv_vamp_output_names[cv_route_vamp_output::count] = { L"Lvl", L"Pan" };
@@ -260,7 +260,7 @@ static wchar_t const* const cv_osc_output_names[cv_route_osc_output::count] = { 
 static wchar_t const* const* const cv_output_target_names[cv_route_output::count] = { nullptr, cv_osc_output_names, cv_vflt_output_names, cv_vamp_output_names };
 static std::vector<std::wstring> const cv_input_names_list = multi_list_names(cv_input_names, cv_input_counts, cv_route_input::count);
 static std::vector<std::wstring> const cv_output_names_list = zip_list_names(cv_output_names, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count);
-  
+   
 static std::wstring format_cv_input(std::int32_t val) { return cv_input_names_list[val]; }
 static std::wstring format_cv_output(std::int32_t val) { return cv_output_names_list[val]; }
 static bool parse_cv_input(std::wstring const& val, std::int32_t& result) { return list_parser(val, cv_input_names_list, result); }
@@ -268,57 +268,58 @@ static bool parse_cv_output(std::wstring const& val, std::int32_t& result) { ret
   
 static param_descriptor const 
 cv_route_params[cv_route_param::count] = 
-{ 
-  { "{98F5212C-89A1-458D-A464-F3B71D1695ED}", { L"Lvl", L"Plot level" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, {false, false, 0, 2, nullptr, 0 } },
-  { "{CE1DC1C7-72C5-4811-8C35-8485FFAFFABC}", { L"Plot", L"Plot target" }, L"", false, 0, cv_outputs_count - 1, 0,& format_cv_output,& parse_cv_output, { true, false, 1, 2, nullptr, 0 } },
-  { "{3B025C6A-0230-491A-A51F-7CF1C81B69C9}", { L"In1", L"Input 1" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, {false, false, 2, 0, nullptr, 0} },
-  { "{5FDD8C86-8F2D-4613-BB98-BB673F502412}", { L"Out1", L"Output 1" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 3, 0, nullptr, 0 } },
-  { "{469D130F-2E4A-4960-871D-032B6F588313}", { L"Amt1", L"Amount 1" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 4, 0, nullptr, 0 } },
-  { "{2833E378-210B-404F-A4CB-0D6204A72CF0}", { L"In2", L"Input 2" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 5, 0, nullptr, 0 } },
-  { "{D0B28D9E-8888-42EB-8D3C-177FB4585E42}", { L"Out2", L"Output 2" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 6, 0, nullptr, 0 } },
-  { "{58AFE21F-7945-4919-BB67-60CE8892A8AF}", { L"Amt2", L"Amount 2" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 7, 0, nullptr, 0 } },
-  { "{25041AB5-2A06-4305-8009-C26D56311D26}", { L"In3", L"Input 3" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 8, 0, nullptr, 0 } },
-  { "{37420523-6A9D-4125-BAAB-24A28B9E0992}", { L"Out3", L"Output 3" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 9, 0, nullptr, 0 } },
-  { "{9C1F6472-6D48-42E6-B79E-3A00F33F70F5}", { L"Amt3", L"Amount 3" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 10, 0, nullptr, 0 } },
-  { "{958C1FF6-54BA-4933-9454-125357EE854E}", { L"In4", L"Input 4" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 11, 0, nullptr, 0 } },
-  { "{13056333-4562-4D49-9A1E-7EF8FD074956}", { L"Out4", L"Output 4" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 12, 0, nullptr, 0 } },
-  { "{7A8C3621-D7B9-4D63-9856-DFE2C9396FCD}", { L"Amt4", L"Amount 4" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 13, 0, nullptr, 0 } },
-  { "{DE0CBCF0-A808-4379-A044-2F4C5CFAC9CF}", { L"In5", L"Input 5" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 14, 0, nullptr, 0 } },
-  { "{B043E6E9-2207-4AF7-8AB0-F30B8B722F2C}", { L"Out5", L"Output 5" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 15, 0, nullptr, 0 } },
-  { "{FA974BFF-3DD9-4B42-9FAD-49B9F8196D46}", { L"Amt5", L"Amount 5" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 16, 0, nullptr, 0 } },
-  { "{2E34D57F-7277-48D6-9C7E-63897D735005}", { L"In6", L"Input 6" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 17, 1, nullptr, 0 } },
-  { "{4E840E8E-ADDD-4C43-A48F-901EEFA616C8}", { L"Out6", L"Output 6" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 18, 1, nullptr, 0 } },
-  { "{645B184E-6AEF-4119-8933-4623749D6280}", { L"Amt6", L"Amount 6" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 19, 1, nullptr, 0 } },
-  { "{11B875C8-815C-48DD-B6FC-4B2F6509D1B6}", { L"In7", L"Input 7" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 20, 1, nullptr, 0 } },
-  { "{B0C99125-73D5-493C-B1A4-A145BAF71455}", { L"Out7", L"Output 7" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 21, 1, nullptr, 0 } },
-  { "{5E433D4A-6E06-46DC-82DA-6F20A6C5652C}", { L"Amt7", L"Amount 7" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 22, 1, nullptr, 0 } },
-  { "{A72F92CE-A125-42A1-A1BE-2C45D96F7420}", { L"In8", L"Input 8" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 23, 1, nullptr, 0 } },
-  { "{65C29F9C-BC32-4087-94BC-21E524ED2840}", { L"Out8", L"Output 8" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 24, 1, nullptr, 0 } },
-  { "{E5E5897C-0818-49F5-B099-7778760B91A9}", { L"Amt8", L"Amount 8" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 25, 1, nullptr, 0 } },
-  { "{68B976D6-3C1A-4D6F-B1FD-AEEF8FD95F4B}", { L"In9", L"Input 9" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 26, 1, nullptr, 0 } },
-  { "{B7E00C89-2899-4F98-9C1B-C89801D6CFB3}", { L"Out9", L"Output 9" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 27, 1, nullptr, 0 } },
-  { "{2A24302A-C793-41AC-BAEE-9BF154C63504}", { L"Amt9", L"Amount 9" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 28, 1, nullptr, 0 } },
-  { "{0991AAF8-9BB5-4BDF-885A-93231158D717}", { L"In10", L"Input 10" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 29, 1, nullptr, 0 } },
-  { "{5D776DFF-11F0-48F0-8F05-2E43589C5556}", { L"Out10", L"Output 10" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 30, 1, nullptr, 0 } },
-  { "{02DF43DA-3D49-4571-87FC-F4DF12A0ADBE}", { L"Amt10", L"Amount 10" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 31, 1, nullptr, 0 } },
-  { "{60B208B7-771B-4DFD-B9C0-97E097C340BF}", { L"In11", L"Input 11" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 32, 2, nullptr, 0 } },
-  { "{9CC8A1E9-A060-41DC-AA0E-685D9BC65CAF}", { L"Out11", L"Output 11" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 33, 2, nullptr, 0 } },
-  { "{C1F0E288-FB7F-4762-BA3F-03A2508813B5}", { L"Amt11", L"Amount 11" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 34, 2, nullptr, 0 } },
-  { "{C5F2A2F7-33D0-4B82-903D-82214B938FD2}", { L"In12", L"Input 12" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 35, 2, nullptr, 0 } },
-  { "{6C10DABE-1531-4138-AE21-92794637E535}", { L"Out12", L"Output 12" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 36, 2, nullptr, 0 } },
-  { "{213502CD-8FEF-45AB-8FDF-69350CC67F72}", { L"Amt12", L"Amount 12" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 37, 2, nullptr, 0 } },
-  { "{570C4799-B355-4EDB-AB38-32AECDE1C07C}", { L"In13", L"Input 13" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 38, 2, nullptr, 0 } },
-  { "{DE40B39E-2744-44AD-B9EB-A56ECBEB27FF}", { L"Out13", L"Output 13" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 39, 2, nullptr, 0 } },
-  { "{11DC6780-F5F5-4455-90D7-7E387C8F18E0}", { L"Amt13", L"Amount 13" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 40, 2, nullptr, 0 } },
-  { "{37EFEDDD-336C-4ACB-A3CB-499D3A2F6427}", { L"In14", L"Input 14" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 41, 2, nullptr, 0 } },
-  { "{D0069229-060E-4652-9ECE-CB1474FA791D}", { L"Out14", L"Output 14" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 42, 2, nullptr, 0 } },
-  { "{C96385B6-30B7-44BB-9987-30003367804E}", { L"Amt14", L"Amount 14" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 43, 2, nullptr, 0 } },
-  { "{4DA00E54-7133-4AC4-9B22-286A7F2CD3E7}", { L"In15", L"Input 15" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 44, 2, nullptr, 0 } },
-  { "{DF96C8A8-43D8-4515-922D-E7F7F4511AD0}", { L"Out15", L"Output 15" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 45, 2, nullptr, 0 } },
-  { "{F6DA01D0-6BFD-4F14-9776-95250FC57CA6}", { L"Amt15", L"Amount 15" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 46, 2, nullptr, 0 } }
+{  
+  { "{98F5212C-89A1-458D-A464-F3B71D1695ED}", { L"Lvl", L"Plot level" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { false, false, 0, 1, nullptr, 0 } },
+  { "{CE1DC1C7-72C5-4811-8C35-8485FFAFFABC}", { L"Plot", L"Plot target" }, L"", false, 0, cv_outputs_count - 1, 0,& format_cv_output,& parse_cv_output, { true, false, 2, 1, nullptr, 0 } },
+  { "{41FB9033-220C-4DA7-836A-22808E17167F}", { L"Time", L"Plot length" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 3, 1, nullptr, 0 } },
+  { "{3B025C6A-0230-491A-A51F-7CF1C81B69C9}", { L"In1", L"Input 1" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, {false, false, 4, 0, nullptr, 0} },
+  { "{5FDD8C86-8F2D-4613-BB98-BB673F502412}", { L"Out1", L"Output 1" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 5, 0, nullptr, 0 } },
+  { "{469D130F-2E4A-4960-871D-032B6F588313}", { L"Amt1", L"Amount 1" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 6, 0, nullptr, 0 } },
+  { "{2833E378-210B-404F-A4CB-0D6204A72CF0}", { L"In2", L"Input 2" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 7, 0, nullptr, 0 } },
+  { "{D0B28D9E-8888-42EB-8D3C-177FB4585E42}", { L"Out2", L"Output 2" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 8, 0, nullptr, 0 } },
+  { "{58AFE21F-7945-4919-BB67-60CE8892A8AF}", { L"Amt2", L"Amount 2" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 9, 0, nullptr, 0 } },
+  { "{25041AB5-2A06-4305-8009-C26D56311D26}", { L"In3", L"Input 3" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 10, 0, nullptr, 0 } },
+  { "{37420523-6A9D-4125-BAAB-24A28B9E0992}", { L"Out3", L"Output 3" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 11, 0, nullptr, 0 } },
+  { "{9C1F6472-6D48-42E6-B79E-3A00F33F70F5}", { L"Amt3", L"Amount 3" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 12, 0, nullptr, 0 } },
+  { "{958C1FF6-54BA-4933-9454-125357EE854E}", { L"In4", L"Input 4" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 13, 0, nullptr, 0 } },
+  { "{13056333-4562-4D49-9A1E-7EF8FD074956}", { L"Out4", L"Output 4" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 14, 0, nullptr, 0 } },
+  { "{7A8C3621-D7B9-4D63-9856-DFE2C9396FCD}", { L"Amt4", L"Amount 4" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 15, 0, nullptr, 0 } },
+  { "{DE0CBCF0-A808-4379-A044-2F4C5CFAC9CF}", { L"In5", L"Input 5" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 16, 0, nullptr, 0 } },
+  { "{B043E6E9-2207-4AF7-8AB0-F30B8B722F2C}", { L"Out5", L"Output 5" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 17, 0, nullptr, 0 } },
+  { "{FA974BFF-3DD9-4B42-9FAD-49B9F8196D46}", { L"Amt5", L"Amount 5" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 18, 0, nullptr, 0 } },
+  { "{2E34D57F-7277-48D6-9C7E-63897D735005}", { L"In6", L"Input 6" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 19, 1, nullptr, 0 } },
+  { "{4E840E8E-ADDD-4C43-A48F-901EEFA616C8}", { L"Out6", L"Output 6" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 20, 1, nullptr, 0 } },
+  { "{645B184E-6AEF-4119-8933-4623749D6280}", { L"Amt6", L"Amount 6" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 21, 1, nullptr, 0 } },
+  { "{11B875C8-815C-48DD-B6FC-4B2F6509D1B6}", { L"In7", L"Input 7" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 22, 1, nullptr, 0 } },
+  { "{B0C99125-73D5-493C-B1A4-A145BAF71455}", { L"Out7", L"Output 7" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 23, 1, nullptr, 0 } },
+  { "{5E433D4A-6E06-46DC-82DA-6F20A6C5652C}", { L"Amt7", L"Amount 7" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 24, 1, nullptr, 0 } },
+  { "{A72F92CE-A125-42A1-A1BE-2C45D96F7420}", { L"In8", L"Input 8" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 25, 1, nullptr, 0 } },
+  { "{65C29F9C-BC32-4087-94BC-21E524ED2840}", { L"Out8", L"Output 8" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 26, 1, nullptr, 0 } },
+  { "{E5E5897C-0818-49F5-B099-7778760B91A9}", { L"Amt8", L"Amount 8" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 27, 1, nullptr, 0 } },
+  { "{68B976D6-3C1A-4D6F-B1FD-AEEF8FD95F4B}", { L"In9", L"Input 9" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 28, 1, nullptr, 0 } },
+  { "{B7E00C89-2899-4F98-9C1B-C89801D6CFB3}", { L"Out9", L"Output 9" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 29, 1, nullptr, 0 } },
+  { "{2A24302A-C793-41AC-BAEE-9BF154C63504}", { L"Amt9", L"Amount 9" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 30, 1, nullptr, 0 } },
+  { "{0991AAF8-9BB5-4BDF-885A-93231158D717}", { L"In10", L"Input 10" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 31, 1, nullptr, 0 } },
+  { "{5D776DFF-11F0-48F0-8F05-2E43589C5556}", { L"Out10", L"Output 10" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 32, 1, nullptr, 0 } },
+  { "{02DF43DA-3D49-4571-87FC-F4DF12A0ADBE}", { L"Amt10", L"Amount 10" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 33, 1, nullptr, 0 } },
+  { "{60B208B7-771B-4DFD-B9C0-97E097C340BF}", { L"In11", L"Input 11" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 34, 2, nullptr, 0 } },
+  { "{9CC8A1E9-A060-41DC-AA0E-685D9BC65CAF}", { L"Out11", L"Output 11" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 35, 2, nullptr, 0 } },
+  { "{C1F0E288-FB7F-4762-BA3F-03A2508813B5}", { L"Amt11", L"Amount 11" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 36, 2, nullptr, 0 } },
+  { "{C5F2A2F7-33D0-4B82-903D-82214B938FD2}", { L"In12", L"Input 12" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 37, 2, nullptr, 0 } },
+  { "{6C10DABE-1531-4138-AE21-92794637E535}", { L"Out12", L"Output 12" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 38, 2, nullptr, 0 } },
+  { "{213502CD-8FEF-45AB-8FDF-69350CC67F72}", { L"Amt12", L"Amount 12" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 39, 2, nullptr, 0 } },
+  { "{570C4799-B355-4EDB-AB38-32AECDE1C07C}", { L"In13", L"Input 13" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 40, 2, nullptr, 0 } },
+  { "{DE40B39E-2744-44AD-B9EB-A56ECBEB27FF}", { L"Out13", L"Output 13" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 41, 2, nullptr, 0 } },
+  { "{11DC6780-F5F5-4455-90D7-7E387C8F18E0}", { L"Amt13", L"Amount 13" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 42, 2, nullptr, 0 } },
+  { "{37EFEDDD-336C-4ACB-A3CB-499D3A2F6427}", { L"In14", L"Input 14" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 43, 2, nullptr, 0 } },
+  { "{D0069229-060E-4652-9ECE-CB1474FA791D}", { L"Out14", L"Output 14" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 44, 2, nullptr, 0 } },
+  { "{C96385B6-30B7-44BB-9987-30003367804E}", { L"Amt14", L"Amount 14" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 45, 2, nullptr, 0 } },
+  { "{4DA00E54-7133-4AC4-9B22-286A7F2CD3E7}", { L"In15", L"Input 15" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, { false, false, 46, 2, nullptr, 0 } },
+  { "{DF96C8A8-43D8-4515-922D-E7F7F4511AD0}", { L"Out15", L"Output 15" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 47, 2, nullptr, 0 } },
+  { "{F6DA01D0-6BFD-4F14-9776-95250FC57CA6}", { L"Amt15", L"Amount 15" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 48, 2, nullptr, 0 } }
 };  
                
-// ---- global topo ----
+// ---- global topo ---- 
   
 // ffadad-ffd6a5-fdffb6-caffbf-9bf6ff-a0c4ff-bdb2ff-ffc6ff
 // -fffffc   

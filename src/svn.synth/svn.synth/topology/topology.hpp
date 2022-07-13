@@ -107,7 +107,7 @@ struct cv_route_output_t { enum value { off, osc, vflt, vamp, count }; };
 struct cv_route_vamp_output_t { enum value { lvl, pan, count }; };
 struct cv_route_osc_output_t { enum value { amp, pan, anlg_pw, dsf_dist, dsf_roll, cent, uni_dtn, uni_sprd, count }; };
 struct cv_route_vflt_output_t { enum value { stvar_freq, stvar_res, stvar_kd, comb_dly_plus, comb_gain_plus, comb_dly_min, comb_gain_min, count }; };
-struct cv_route_param_t { enum value { plot_lvl, plot_tgt, in1, out1, amt1, in2, out2, amt2, in3, out3, amt3, in4, out4, amt4, in5, out5, amt5, in6, out6, amt6, in7, out7, amt7, in8, out8, amt8, in9, out9, amt9, in10, out10, amt10, in11, out11, amt11, in12, out12, amt12, in13, out13, amt13, in14, out14, amt14, in15, out15, amt15, count }; };
+struct cv_route_param_t { enum value { plot_lvl, plot_tgt, plot_time, in1, out1, amt1, in2, out2, amt2, in3, out3, amt3, in4, out4, amt4, in5, out5, amt5, in6, out6, amt6, in7, out7, amt7, in8, out8, amt8, in9, out9, amt9, in10, out10, amt10, in11, out11, amt11, in12, out12, amt12, in13, out13, amt13, in14, out14, amt14, in15, out15, amt15, count }; };
 
 typedef cv_route_param_t::value cv_route_param;
 typedef cv_route_input_t::value cv_route_input;
@@ -117,7 +117,7 @@ typedef cv_route_vamp_output_t::value cv_route_vamp_output;
 typedef cv_route_vflt_output_t::value cv_route_vflt_output;
 
 inline std::int32_t constexpr cv_route_count = 15;
-inline std::int32_t constexpr cv_route_param_offset = 2; // for plot params
+inline std::int32_t constexpr cv_route_param_offset = 3; // for plot params
 inline std::int32_t constexpr cv_inputs_count = 1 + envelope_count + voice_lfo_count;
 inline std::int32_t constexpr cv_input_counts[cv_route_input::count] = { 1, envelope_count, voice_lfo_count };
 inline std::int32_t constexpr cv_output_counts[cv_route_output::count] = { 1, oscillator_count, voice_filter_count, 1 };
