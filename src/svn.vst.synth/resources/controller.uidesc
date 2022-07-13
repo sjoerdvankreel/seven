@@ -121,7 +121,7 @@
             "oscillator_3_unison_stereo_spread": "59",
             "envelope_0_enabled": "60",
             "envelope_0_type": "61",
-            "envelope_0_sync/polarity": "62",
+            "envelope_0_sync/polarity_kind": "62",
             "envelope_0_delay_time": "63",
             "envelope_0_delay_sync": "64",
             "envelope_0_hold_time": "65",
@@ -141,7 +141,7 @@
             "envelope_0_release_log_midpoint": "79",
             "envelope_1_enabled": "80",
             "envelope_1_type": "81",
-            "envelope_1_sync/polarity": "82",
+            "envelope_1_sync/polarity_kind": "82",
             "envelope_1_delay_time": "83",
             "envelope_1_delay_sync": "84",
             "envelope_1_hold_time": "85",
@@ -161,7 +161,7 @@
             "envelope_1_release_log_midpoint": "99",
             "envelope_2_enabled": "100",
             "envelope_2_type": "101",
-            "envelope_2_sync/polarity": "102",
+            "envelope_2_sync/polarity_kind": "102",
             "envelope_2_delay_time": "103",
             "envelope_2_delay_sync": "104",
             "envelope_2_hold_time": "105",
@@ -181,17 +181,17 @@
             "envelope_2_release_log_midpoint": "119",
             "voice_lfo_0_enabled": "120",
             "voice_lfo_0_type": "121",
-            "voice_lfo_0_sync/polarity": "122",
+            "voice_lfo_0_sync/polarity_kind": "122",
             "voice_lfo_0_frequency": "123",
             "voice_lfo_0_tempo": "124",
             "voice_lfo_1_enabled": "125",
             "voice_lfo_1_type": "126",
-            "voice_lfo_1_sync/polarity": "127",
+            "voice_lfo_1_sync/polarity_kind": "127",
             "voice_lfo_1_frequency": "128",
             "voice_lfo_1_tempo": "129",
             "voice_lfo_2_enabled": "130",
             "voice_lfo_2_type": "131",
-            "voice_lfo_2_sync/polarity": "132",
+            "voice_lfo_2_sync/polarity_kind": "132",
             "voice_lfo_2_frequency": "133",
             "voice_lfo_2_tempo": "134",
             "voice_amp_0_level": "135",
@@ -4702,8 +4702,8 @@
                                                             "class": "COptionMenu",
                                                             "size": "49, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "voice_lfo_0_sync/polarity",
-                                                            "tooltip": "VLFO 1 Sync/polarity",
+                                                            "control-tag": "voice_lfo_0_sync/polarity_kind",
+                                                            "tooltip": "VLFO 1 Sync/polarity kind",
                                                             "font": "~ NormalFontSmall",
                                                             "min-value": "0",
                                                             "default-value": "0",
@@ -4729,7 +4729,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FFC6FFFF",
-                                                            "title": "SnPl"
+                                                            "title": "Kind"
                                                         }
                                                     }
                                                 }
@@ -5067,8 +5067,8 @@
                                                             "class": "COptionMenu",
                                                             "size": "49, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "voice_lfo_1_sync/polarity",
-                                                            "tooltip": "VLFO 2 Sync/polarity",
+                                                            "control-tag": "voice_lfo_1_sync/polarity_kind",
+                                                            "tooltip": "VLFO 2 Sync/polarity kind",
                                                             "font": "~ NormalFontSmall",
                                                             "min-value": "0",
                                                             "default-value": "0",
@@ -5094,7 +5094,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FFC6FFFF",
-                                                            "title": "SnPl"
+                                                            "title": "Kind"
                                                         }
                                                     }
                                                 }
@@ -5432,8 +5432,8 @@
                                                             "class": "COptionMenu",
                                                             "size": "49, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "voice_lfo_2_sync/polarity",
-                                                            "tooltip": "VLFO 3 Sync/polarity",
+                                                            "control-tag": "voice_lfo_2_sync/polarity_kind",
+                                                            "tooltip": "VLFO 3 Sync/polarity kind",
                                                             "font": "~ NormalFontSmall",
                                                             "min-value": "0",
                                                             "default-value": "0",
@@ -5459,7 +5459,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_FFC6FFFF",
-                                                            "title": "SnPl"
+                                                            "title": "Kind"
                                                         }
                                                     }
                                                 }
@@ -7996,8 +7996,8 @@
                                                             "class": "COptionMenu",
                                                             "size": "49, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "envelope_0_sync/polarity",
-                                                            "tooltip": "Env 1 Sync/polarity",
+                                                            "control-tag": "envelope_0_sync/polarity_kind",
+                                                            "tooltip": "Env 1 Sync/polarity kind",
                                                             "font": "~ NormalFontSmall",
                                                             "min-value": "0",
                                                             "default-value": "0",
@@ -8023,7 +8023,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
-                                                            "title": "SnPl"
+                                                            "title": "Kind"
                                                         }
                                                     }
                                                 }
@@ -9309,8 +9309,8 @@
                                                             "class": "COptionMenu",
                                                             "size": "49, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "envelope_1_sync/polarity",
-                                                            "tooltip": "Env 2 Sync/polarity",
+                                                            "control-tag": "envelope_1_sync/polarity_kind",
+                                                            "tooltip": "Env 2 Sync/polarity kind",
                                                             "font": "~ NormalFontSmall",
                                                             "min-value": "0",
                                                             "default-value": "0",
@@ -9336,7 +9336,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
-                                                            "title": "SnPl"
+                                                            "title": "Kind"
                                                         }
                                                     }
                                                 }
@@ -10622,8 +10622,8 @@
                                                             "class": "COptionMenu",
                                                             "size": "49, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "envelope_2_sync/polarity",
-                                                            "tooltip": "Env 3 Sync/polarity",
+                                                            "control-tag": "envelope_2_sync/polarity_kind",
+                                                            "tooltip": "Env 3 Sync/polarity kind",
                                                             "font": "~ NormalFontSmall",
                                                             "min-value": "0",
                                                             "default-value": "0",
@@ -10649,7 +10649,7 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_A0C4FFFF",
-                                                            "title": "SnPl"
+                                                            "title": "Kind"
                                                         }
                                                     }
                                                 }
