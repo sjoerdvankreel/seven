@@ -10,14 +10,14 @@ namespace svn::synth {
 static item_name const
 cv_kinds[cv_kind::count] =
 {
-  { L"Uni", L"Unipolar" },
-  { L"Bip", L"Bipolar" },
+  { L"Unipolar", L"Unipolar" },
+  { L"Bipolar", L"Bipolar" },
   { L"UniSync", L"Unipolar synced" },
   { L"BipSync", L"Bipolar synced" }
 }; 
   
 // ---- output ----
-
+ 
 static param_descriptor const 
 output_params[output_param::count] =
 {
@@ -92,7 +92,7 @@ envelope_types[envelope_type::count] =
 {
   { L"Dahdsr", L"DAHDSR" },
   { L"Dahdr", L"DAHDR" }
-};
+}; 
  
 static item_name const
 envelope_slopes[envelope_slope::count] =

@@ -107,5 +107,5 @@ envelope::process_block(voice_input const& input, std::int32_t index, float* cv_
   }
   return input.sample_count; 
 } 
-
+ 
 } // namespace svn::synth
