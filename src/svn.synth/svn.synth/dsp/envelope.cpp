@@ -68,7 +68,7 @@ envelope::setup_stages(automation_view const& automation, std::int32_t s,
   float bpm, float& delay, float& attack, float& hold, float& decay, float& release)
 {
   std::int32_t sync_polarity = automation.get(envelope_param::sync_polarity, s).discrete;
-  if (sync_polarity == envelope_sync_polarity::sync_unipolar || sync_polarity == envelope_sync_polarity::sync_bipolar)
+  if (sync_polarity == envelope_sync_polarity::time_unipolar || sync_polarity == envelope_sync_polarity::time_bipolar)
   {
     delay = automation.get(envelope_param::delay_time, s).real * _sample_rate;
     attack = automation.get(envelope_param::attack_time, s).real * _sample_rate;
