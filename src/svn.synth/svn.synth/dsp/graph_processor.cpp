@@ -75,14 +75,6 @@ setup_graph_voice_input(
   return result;
 }
 
-void
-voice_lfo_graph::dsp_to_plot(
-  std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate)
-{
-  plot.resize(dsp.size());
-  std::copy(dsp.begin(), dsp.end(), plot.begin());
-}
-
 bool
 voice_lfo_graph::needs_repaint(std::int32_t runtime_param) const
 {
@@ -100,6 +92,18 @@ voice_lfo_graph::process_dsp_core(
   lfo.process_block(vinput, part_index(), output);
 }
 
+void
+voice_lfo_graph::dsp_to_plot(
+  param_value const* state, std::vector<float> const& dsp, 
+  std::vector<float>& plot, float sample_rate)
+{
+  plot.resize(dsp.size());
+  std::int32_t begin = topology()->param_bounds[part_type::voice_lfo][part_index()];
+  bool unipolar = cv_kind_is_unipolar(state[begin + voice_lfo_param::kind].discrete);
+  for(std::size_t i = 0; i < dsp.size(); i++)
+    plot[i] = unipolar? dsp[i]: (dsp[i] + 1.0f) * 0.5f;
+}
+
 std::int32_t
 voice_lfo_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 {
@@ -109,17 +113,9 @@ voice_lfo_graph::sample_count(param_value const* state, float sample_rate, float
   if(cv_kind_is_synced(state[begin + voice_lfo_param::kind].discrete))
   {
     float timesig = voice_lfo_timesig_values[state[begin + voice_lfo_param::freq_sync].discrete];
-    samples = timesig_to_samples(lfo_graph_rate, lfo_graph_bpm, timesig);
+    samples = timesig_to_samples(lfo_graph_rate, bpm, timesig);
   }
   return static_cast<std::int32_t>(std::ceil(cycles * samples));
-}
-
-void
-envelope_graph::dsp_to_plot(
-  std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate)
-{
-  plot.resize(dsp.size());
-  std::copy(dsp.begin(), dsp.end(), plot.begin());
 }
 
 bool
@@ -127,6 +123,18 @@ envelope_graph::needs_repaint(std::int32_t runtime_param) const
 {
   std::int32_t begin = topology()->param_bounds[part_type::envelope][part_index()];
   return begin <= runtime_param && runtime_param < begin + envelope_param::count;
+}
+
+void
+envelope_graph::dsp_to_plot(
+  param_value const* state, std::vector<float> const& dsp, 
+  std::vector<float>& plot, float sample_rate)
+{
+  plot.resize(dsp.size());
+  std::int32_t begin = topology()->param_bounds[part_type::envelope][part_index()];
+  bool unipolar = cv_kind_is_unipolar(state[begin + envelope_param::kind].discrete);
+  for (std::size_t i = 0; i < dsp.size(); i++)
+    plot[i] = unipolar ? dsp[i] : (dsp[i] + 1.0f) * 0.5f;
 }
 
 std::int32_t 
@@ -181,7 +189,8 @@ oscillator_spectrum_graph::sample_count(
 
 void
 oscillator_spectrum_graph::dsp_to_plot(
-  std::vector<audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate)
+  param_value const* state, std::vector<audio_sample32> const& dsp, 
+  std::vector<float>& plot, float sample_rate)
 {
   _mono.clear();
   for(std::size_t s = 0; s < dsp.size(); s++)
@@ -200,7 +209,8 @@ oscillator_wave_graph::needs_repaint(std::int32_t runtime_param) const
 
 void
 oscillator_wave_graph::dsp_to_plot(
-  std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate)
+  param_value const* state, std::vector<base::audio_sample32> const& dsp, 
+  std::vector<float>& plot, float sample_rate)
 {
   for (std::size_t s = 0; s < dsp.size(); s++)
     plot.push_back((dsp[s].mono() + 1.0f) * 0.5f);
@@ -251,7 +261,8 @@ voice_filter_ir_graph::needs_repaint(std::int32_t runtime_param) const
 
 void
 voice_filter_ir_graph::dsp_to_plot(
-  std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate)
+  param_value const* state, std::vector<base::audio_sample32> const& dsp, 
+  std::vector<float>& plot, float sample_rate)
 {
   for (std::size_t s = 0; s < dsp.size(); s++)
     plot.push_back(std::clamp((dsp[s].mono() + 1.0f) * 0.5f, 0.0f, 1.0f));
@@ -273,7 +284,8 @@ voice_filter_ir_graph::process_dsp_core(
 
 void
 cv_route_graph::dsp_to_plot(
-  std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate)
+  param_value const* state, std::vector<float> const& dsp, 
+  std::vector<float>& plot, float sample_rate)
 {
   plot.resize(dsp.size());
   std::copy(dsp.begin(), dsp.end(), plot.begin());

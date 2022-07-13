@@ -21,14 +21,13 @@ public:
 
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
-  void dsp_to_plot(std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate) override;
   void process_dsp_core(block_input const& input, float* output, float sample_rate, float bpm) override;
+  void dsp_to_plot(base::param_value const* state, std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate) override;
 };
 
 class voice_lfo_graph:
 public svn::base::graph_processor<float>
 {
-  static inline float constexpr lfo_graph_bpm = 120.0f;
   static inline float constexpr lfo_graph_rate = 1000.0f;
 
 public:
@@ -37,8 +36,8 @@ public:
 
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
-  void dsp_to_plot(std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate) override;
   void process_dsp_core(block_input const& input, float* output, float sample_rate, float bpm) override;
+  void dsp_to_plot(base::param_value const* state, std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate) override;
 };
 
 class cv_route_graph:
@@ -52,8 +51,8 @@ public:
 
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
-  void dsp_to_plot(std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate) override;
   void process_dsp_core(block_input const& input, float* output, float sample_rate, float bpm) override;
+  void dsp_to_plot(base::param_value const* state, std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate) override;
 };
 
 class oscillator_wave_graph:
@@ -65,8 +64,8 @@ public:
 
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
-  void dsp_to_plot(std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate) override;
   void process_dsp_core(block_input const& input, base::audio_sample32* output, float sample_rate, float bpm) override;
+  void dsp_to_plot(base::param_value const* state, std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate) override;
 };
 
 class oscillator_spectrum_graph:
@@ -84,7 +83,7 @@ public:
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
   void process_dsp_core(block_input const& input, base::audio_sample32* output, float sample_rate, float bpm) override;
-  void dsp_to_plot(std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate) override;
+  void dsp_to_plot(base::param_value const* state, std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate) override;
 };
 
 class voice_filter_ir_graph:
@@ -97,8 +96,8 @@ public:
 
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
-  void dsp_to_plot(std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate) override;
   void process_dsp_core(block_input const& input, base::audio_sample32* output, float sample_rate, float bpm) override;
+  void dsp_to_plot(base::param_value const* state, std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate) override;
 };
 
 } // namespace svn::synth

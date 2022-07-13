@@ -43,7 +43,7 @@ graph_processor<T>::plot(param_value const* state,
 {
   _plot_data.clear();
   process_dsp(state, sample_rate, bpm);
-  dsp_to_plot(_raw_data, _plot_data, sample_rate);
+  dsp_to_plot(state, _raw_data, _plot_data, sample_rate);
 
   _graph_data.clear();
   float transform = width / static_cast<float>(_plot_data.size());

@@ -76,10 +76,10 @@ public:
 
   // Need to know size up front.
   virtual std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const = 0;
-  // Transforms raw data to plot in (0, 1).
-  virtual void dsp_to_plot(std::vector<T> const& dsp, std::vector<float>& plot, float sample_rate) = 0;
   // Renders data in sample_count samples.
   virtual void process_dsp_core(block_input const& input, T* output, float sample_rate, float bpm) = 0;
+  // Transforms raw data to plot in (0, 1).
+  virtual void dsp_to_plot(param_value const* state, std::vector<T> const& dsp, std::vector<float>& plot, float sample_rate) = 0;
 };
 
 } // namespace svn::base
