@@ -122,15 +122,18 @@ typedef cv_route_osc_output_t::value cv_route_osc_output;
 typedef cv_route_vamp_output_t::value cv_route_vamp_output;
 typedef cv_route_vflt_output_t::value cv_route_vflt_output;
 
+inline std::int32_t constexpr cv_route_part_mapping[cv_route_output_t::count] = { -1, part_type::oscillator, part_type::voice_filter, part_type::voice_amp };
 inline std::int32_t constexpr cv_route_vamp_mapping[cv_route_vamp_output::count] = { voice_amp_param::level, voice_amp_param::pan };
 inline std::int32_t constexpr cv_route_osc_mapping[cv_route_osc_output::count] = { oscillator_param::amp, oscillator_param::pan, oscillator_param::anlg_pw, oscillator_param::dsf_distance, oscillator_param::dsf_rolloff, oscillator_param::cent, oscillator_param::uni_detune, oscillator_param::uni_spread };
 inline std::int32_t constexpr cv_route_vflt_mapping[cv_route_vflt_output::count] = { voice_filter_param::stvar_freq, voice_filter_param::stvar_res, voice_filter_param::stvar_kbd, voice_filter_param::comb_dly_plus, voice_filter_param::comb_gain_plus, voice_filter_param::comb_dly_min, voice_filter_param::comb_gain_min };
+inline std::int32_t const* const cv_route_param_mapping[cv_route_output_t::count] = { nullptr, cv_route_osc_mapping , cv_route_vflt_mapping, cv_route_vamp_mapping };
 
 inline std::int32_t constexpr cv_route_count = 15;
 inline std::int32_t constexpr cv_route_param_offset = 3; // for plot params
 inline std::int32_t constexpr cv_inputs_count = 1 + envelope_count + voice_lfo_count;
 inline std::int32_t constexpr cv_input_counts[cv_route_input::count] = { 1, envelope_count, voice_lfo_count };
 inline std::int32_t constexpr cv_output_counts[cv_route_output::count] = { 1, oscillator_count, voice_filter_count, 1 };
+inline std::int32_t constexpr cv_output_modulated_counts[cv_route_output::count] = { 0, oscillator_param::count, voice_filter_param::count, voice_amp_param::count };
 inline std::int32_t constexpr cv_output_target_counts[cv_route_output::count] = { 0, cv_route_osc_output::count, cv_route_vflt_output::count, cv_route_vamp_output::count };
 inline std::int32_t constexpr cv_outputs_count = 1 + cv_route_vamp_output_t::count + cv_route_osc_output::count * oscillator_count + cv_route_vflt_output::count * voice_filter_count;
 

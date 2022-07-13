@@ -173,6 +173,7 @@ oscillator::process_block(voice_input const& input,
   std::int32_t index, cv_state const& cv, audio_sample32* audio_out)
 {
   automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
+  float const* const* modulated = cv.modulate(input, automation, cv_route_osc_mapping, cv_route_output::osc, index);
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {  
     audio_out[s] = 0.0f;
@@ -185,8 +186,7 @@ oscillator::process_block(voice_input const& input,
     float midi = 12 * (octave + 1) + note + cent + _midi_note - 60;
     float frequency = note_to_frequency(midi);
     float amp = automation.get(oscillator_param::amp, s).real;
-    float panning = automation.get(oscillator_param::pan, s).real;
-    //panning *= cv_in[cv_route_osc_output::pan][s];
+    float panning = modulated[oscillator_param::pan][s];
     audio_sample32 sample = generate_unison(automation, s, midi, frequency, panning);
     audio_out[s].left = sanity_bipolar(sample.left * amp);
     audio_out[s].right = sanity_bipolar(sample.right * amp);

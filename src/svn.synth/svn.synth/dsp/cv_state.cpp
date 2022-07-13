@@ -1,6 +1,8 @@
 #include <svn.synth/dsp/cv_state.hpp>
 #include <svn.base/dsp/support.hpp>
 
+#include <algorithm>
+
 namespace svn::synth {
 
 std::vector<std::vector<std::int32_t>> const cv_state::input_table_in
@@ -17,9 +19,11 @@ cv_state(std::int32_t max_sample_count) :
   std::vector<base::cv_sample> cv(static_cast<std::size_t>(max_sample_count));
   envelope.fill(cv);
   voice_lfo.fill(cv);
-  std::int32_t max_outputs = *std::max_element(cv_output_target_counts, cv_output_target_counts + cv_route_output::count);
-  scratch_buffer.resize(static_cast<std::size_t>(max_outputs * max_sample_count));
-  for (std::int32_t p = 0; p < max_outputs; p++)
+  std::int32_t max_param_count = 0;
+  for(std::int32_t i = 0; i < cv_route_output::count; i++)
+    max_param_count = std::max(max_param_count, cv_output_modulated_counts[i]);
+  scratch_buffer.resize(static_cast<std::size_t>(max_param_count * max_sample_count));
+  for (std::int32_t p = 0; p < max_param_count; p++)
     scratch.push_back(scratch_buffer.data() + p * max_sample_count);
 }
 
@@ -47,7 +51,7 @@ cv_state::modulate(voice_input const& input, base::automation_view const& automa
     std::int32_t output_id = output_table_in[route_output][route_index][p] - cv_route_param_offset;
     for (std::int32_t s = 0; s < input.sample_count; s++)
     {
-      scratch[p][s] = automated.get(mapping[p], s).real;
+      scratch[mapping[p]][s] = automated.get(mapping[p], s).real;
       for (std::int32_t i = 0; i < cv_route_count; i++)
       {
         std::int32_t in = automation.get(i * 3 + cv_route_param_offset, s).discrete;
@@ -56,7 +60,7 @@ cv_state::modulate(voice_input const& input, base::automation_view const& automa
         if (out != output_id) continue;
         float amt = automation.get(i * 3 + cv_route_param_offset + 2, s).real;
         std::pair<std::int32_t, std::int32_t> input_ids(input_table_out[in]);
-        scratch[p][s] = base::modulate(scratch[p][s], input_buffer(input_ids.first, input_ids.second)[s], amt);
+        scratch[mapping[p]][s] = base::modulate(scratch[mapping[p]][s], input_buffer(input_ids.first, input_ids.second)[s], amt);
       }
     }
   }

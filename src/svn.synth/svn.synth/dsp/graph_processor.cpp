@@ -270,7 +270,8 @@ cv_route_graph::dsp_to_plot(
   std::vector<float>& plot, float sample_rate)
 {
   plot.resize(dsp.size());
-  std::copy(dsp.begin(), dsp.end(), plot.begin());
+  for (std::size_t i = 0; i < dsp.size(); i++)
+    plot[i] = (dsp[i] + 1.0f) * 0.5f;
 }
 
 std::int32_t
@@ -318,10 +319,26 @@ cv_route_graph::process_dsp_core(
   std::memset(output, 0, input.sample_count * sizeof(float));
   if (std::get<0>(param_ids) == -1 || std::get<2>(param_ids) == -1) return;
 
-  //float const* const* mix = state.mix(vinput, static_cast<cv_route_output>(std::get<0>(param_ids)), std::get<1>(param_ids));
-  //std::vector<float> cv_in(static_cast<std::size_t>(input.sample_count), automation.get(cv_route_param::plot_lvl, 0).real);
-  //for (std::int32_t i = 0; i < input.sample_count; i++)
-    //output[i] = cv_in[i] * mix[std::get<2>(param_ids)][i];
+  std::int32_t rt_part_index = std::get<1>(param_ids);
+  std::int32_t cv_route_output_id = std::get<0>(param_ids);
+  std::int32_t cv_route_target = std::get<2>(param_ids);
+  std::int32_t part_type = cv_route_part_mapping[cv_route_output_id];
+  std::int32_t param_index = cv_route_param_mapping[cv_route_output_id][cv_route_target];
+
+  std::vector<float> automated_buffer(topology()->input_param_count * input.sample_count);
+  std::vector<float*> automated(topology()->input_param_count);
+  for(std::size_t p = 0; p < topology()->input_param_count; p++)
+    automated[p] = automated_buffer.data() + p * input.sample_count;
+  std::int32_t rt_param_index_begin = topology()->param_bounds[part_type][rt_part_index];
+  std::int32_t rt_param_index = rt_param_index_begin + param_index;
+  for(std::int32_t i = 0; i < input.sample_count; i++)
+    automated[rt_param_index][i] = automation.get(cv_route_param::plot_lvl, 0).real;
+
+  automation_view automated_view = vinput.automation.rearrange_params(part_type, rt_part_index);
+  float const* const* modulated = state.modulate(vinput, automated_view, 
+    cv_route_param_mapping[cv_route_output_id], static_cast<cv_route_output>(cv_route_output_id), rt_part_index);
+  for (std::int32_t i = 0; i < input.sample_count; i++)
+    output[i] = modulated[param_index][i];
 }
  
 } // namespace svn::synth
