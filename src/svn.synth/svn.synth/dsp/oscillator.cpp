@@ -186,7 +186,7 @@ oscillator::process_block(voice_input const& input,
     float frequency = note_to_frequency(midi);
     float amp = automation.get(oscillator_param::amp, s).real;
     float panning = automation.get(oscillator_param::pan, s).real;
-    panning *= cv_in[cv_route_osc_output::pan][s];
+    //panning *= cv_in[cv_route_osc_output::pan][s];
     audio_sample32 sample = generate_unison(automation, s, midi, frequency, panning);
     audio_out[s].left = sanity_bipolar(sample.left * amp);
     audio_out[s].right = sanity_bipolar(sample.right * amp);

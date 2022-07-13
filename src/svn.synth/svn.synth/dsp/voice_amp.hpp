@@ -14,7 +14,7 @@ class voice_amp
 public:
   voice_amp() = default;
   explicit voice_amp(float sample_rate): _sample_rate(sample_rate) {}
-  void process_block(voice_input const& input, float const* env1_cv, 
+  void process_block(voice_input const& input, base::cv_sample const* env1_cv,
     base::audio_sample32 const* audio_in, base::audio_sample32* audio_out);
 };
 

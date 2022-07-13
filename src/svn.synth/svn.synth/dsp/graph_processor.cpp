@@ -49,18 +49,6 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
 
 namespace svn::synth {
 
-static void
-setup_graph_cv_input(
-  std::vector<float>& cv_buffer, std::vector<float*>& cv, 
-  std::int32_t cv_target_count, std::int32_t max_sample_count)
-{
-  cv.clear();
-  cv_buffer.clear();
-  cv_buffer.resize(cv_target_count * max_sample_count);
-  for(std::int32_t i = 0; i < cv_target_count; i++)
-    cv.push_back(cv_buffer.data() + i * max_sample_count);
-}
-
 static voice_input
 setup_graph_voice_input(
   block_input const& input, topology_info const* topology)
@@ -84,24 +72,22 @@ voice_lfo_graph::needs_repaint(std::int32_t runtime_param) const
 
 void
 voice_lfo_graph::process_dsp_core(
-  block_input const& input, float* output, float sample_rate, float bpm)
+  block_input const& input, base::cv_sample* output, float sample_rate, float bpm)
 {
   voice_lfo lfo(lfo_graph_rate);
-  std::memset(output, 0, input.sample_count * sizeof(float));
+  std::memset(output, 0, input.sample_count * sizeof(base::cv_sample));
   voice_input vinput = setup_graph_voice_input(input, topology());
   lfo.process_block(vinput, part_index(), output);
 }
 
 void
 voice_lfo_graph::dsp_to_plot(
-  param_value const* state, std::vector<float> const& dsp, 
+  param_value const* state, std::vector<base::cv_sample> const& dsp,
   std::vector<float>& plot, float sample_rate)
 {
   plot.resize(dsp.size());
-  std::int32_t begin = topology()->param_bounds[part_type::voice_lfo][part_index()];
-  bool unipolar = cv_kind_is_unipolar(state[begin + voice_lfo_param::kind].discrete);
   for(std::size_t i = 0; i < dsp.size(); i++)
-    plot[i] = unipolar? dsp[i]: (dsp[i] + 1.0f) * 0.5f;
+    plot[i] = dsp[i].bipolar? (dsp[i].value + 1.0f) * 0.5f: dsp[i].value;
 }
 
 std::int32_t
@@ -127,14 +113,12 @@ envelope_graph::needs_repaint(std::int32_t runtime_param) const
 
 void
 envelope_graph::dsp_to_plot(
-  param_value const* state, std::vector<float> const& dsp, 
+  param_value const* state, std::vector<base::cv_sample> const& dsp,
   std::vector<float>& plot, float sample_rate)
 {
   plot.resize(dsp.size());
-  std::int32_t begin = topology()->param_bounds[part_type::envelope][part_index()];
-  bool unipolar = cv_kind_is_unipolar(state[begin + envelope_param::kind].discrete);
   for (std::size_t i = 0; i < dsp.size(); i++)
-    plot[i] = unipolar ? dsp[i] : (dsp[i] + 1.0f) * 0.5f;
+    plot[i] = dsp[i].bipolar ? (dsp[i].value + 1.0f) * 0.5f : dsp[i].value;
 }
 
 std::int32_t 
@@ -151,13 +135,13 @@ envelope_graph::sample_count(param_value const* state, float sample_rate, float 
 
 void
 envelope_graph::process_dsp_core(
-  block_input const& input, float* output, float sample_rate, float bpm)
+  block_input const& input, base::cv_sample* output, float sample_rate, float bpm)
 {
   float delay, attack, hold, decay, release;
   setup_stages(input.automation, bpm, delay, attack, hold, decay, release);
   std::int32_t release_sample = static_cast<std::int32_t>(std::ceil(delay + attack + hold + decay));
   envelope env(env_graph_rate);
-  std::memset(output, 0, input.sample_count * sizeof(float));
+  std::memset(output, 0, input.sample_count * sizeof(base::cv_sample));
   voice_input vinput = setup_graph_voice_input(input, topology());
   env.process_block(vinput, part_index(), output, release_sample);
 }
@@ -233,13 +217,11 @@ void
 oscillator_wave_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
 {
-  std::vector<float*> cv;
-  std::vector<float> cv_buffer;
-  setup_graph_cv_input(cv_buffer, cv, cv_route_osc_output::count, input.sample_count);
+  cv_state cv(input.sample_count);
   oscillator osc(sample_rate, midi_note_c4);
   std::memset(output, 0, input.sample_count * sizeof(audio_sample32));
   voice_input vinput = setup_graph_voice_input(input, topology());
-  osc.process_block(vinput, part_index(), cv.data(), output);
+  osc.process_block(vinput, part_index(), cv, output);
 }
 
 std::int32_t
@@ -336,10 +318,10 @@ cv_route_graph::process_dsp_core(
   std::memset(output, 0, input.sample_count * sizeof(float));
   if (std::get<0>(param_ids) == -1 || std::get<2>(param_ids) == -1) return;
 
-  float const* const* mix = state.mix(vinput, static_cast<cv_route_output>(std::get<0>(param_ids)), std::get<1>(param_ids));
-  std::vector<float> cv_in(static_cast<std::size_t>(input.sample_count), automation.get(cv_route_param::plot_lvl, 0).real);
-  for (std::int32_t i = 0; i < input.sample_count; i++)
-    output[i] = cv_in[i] * mix[std::get<2>(param_ids)][i];
+  //float const* const* mix = state.mix(vinput, static_cast<cv_route_output>(std::get<0>(param_ids)), std::get<1>(param_ids));
+  //std::vector<float> cv_in(static_cast<std::size_t>(input.sample_count), automation.get(cv_route_param::plot_lvl, 0).real);
+  //for (std::int32_t i = 0; i < input.sample_count; i++)
+    //output[i] = cv_in[i] * mix[std::get<2>(param_ids)][i];
 }
  
 } // namespace svn::synth

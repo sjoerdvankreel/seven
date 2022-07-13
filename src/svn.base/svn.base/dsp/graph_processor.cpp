@@ -52,7 +52,8 @@ graph_processor<T>::plot(param_value const* state,
   return _graph_data;
 }
 
-template class graph_processor<float>; // Cv
-template class graph_processor<audio_sample32>; // Audio
+template class graph_processor<float>;
+template class graph_processor<cv_sample>;
+template class graph_processor<audio_sample32>;
 
 } // namespace svn::base

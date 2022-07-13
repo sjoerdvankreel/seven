@@ -1,13 +1,14 @@
 #ifndef SVN_SYNTH_DSP_GRAPH_PROCESSOR_HPP
 #define SVN_SYNTH_DSP_GRAPH_PROCESSOR_HPP
 
+#include <svn.base/dsp/support.hpp>
 #include <svn.base/dsp/graph_processor.hpp>
 #include <vector>
 
 namespace svn::synth {
 
 class envelope_graph:
-public svn::base::graph_processor<float>
+public svn::base::graph_processor<base::cv_sample>
 {
   static inline float constexpr env_graph_rate = 200.0f;
 
@@ -17,27 +18,27 @@ private:
 
 public:
   envelope_graph(topology_info const* topology, std::int32_t part_index) :
-  svn::base::graph_processor<float>(topology, part_index) {}
+  svn::base::graph_processor<base::cv_sample>(topology, part_index) {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
-  void process_dsp_core(block_input const& input, float* output, float sample_rate, float bpm) override;
-  void dsp_to_plot(base::param_value const* state, std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate) override;
+  void process_dsp_core(block_input const& input, base::cv_sample* output, float sample_rate, float bpm) override;
+  void dsp_to_plot(base::param_value const* state, std::vector<base::cv_sample> const& dsp, std::vector<float>& plot, float sample_rate) override;
 };
 
 class voice_lfo_graph:
-public svn::base::graph_processor<float>
+public svn::base::graph_processor<base::cv_sample>
 {
   static inline float constexpr lfo_graph_rate = 1000.0f;
 
 public:
   voice_lfo_graph(topology_info const* topology, std::int32_t part_index) :
-  svn::base::graph_processor<float>(topology, part_index) {}
+  svn::base::graph_processor<base::cv_sample>(topology, part_index) {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
-  void process_dsp_core(block_input const& input, float* output, float sample_rate, float bpm) override;
-  void dsp_to_plot(base::param_value const* state, std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate) override;
+  void process_dsp_core(block_input const& input, base::cv_sample* output, float sample_rate, float bpm) override;
+  void dsp_to_plot(base::param_value const* state, std::vector<base::cv_sample> const& dsp, std::vector<float>& plot, float sample_rate) override;
 };
 
 class cv_route_graph:

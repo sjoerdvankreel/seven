@@ -20,14 +20,17 @@ class cv_state
   static std::vector<std::pair<std::int32_t, std::int32_t>> const input_table_out;
   static std::vector<std::vector<std::vector<std::int32_t>>> const output_table_in;
 
-  // Of size max parameter count per part type * max sample count.
+  // Of size max modulated parameter count per part type * max sample count.
+  std::vector<float*> scratch;
+  std::vector<float> scratch_buffer;
   base::cv_sample const* input_buffer(std::int32_t input, std::int32_t index) const;
 
 public:
   explicit cv_state(std::int32_t max_sample_count);
   std::array<std::vector<base::cv_sample>, envelope_count> envelope;
   std::array<std::vector<base::cv_sample>, voice_lfo_count> voice_lfo;
-  void modulate(voice_input const& input, cv_route_output route_output, std::int32_t route_index, float* values) const;
+  float const* const* modulate(voice_input const& input, base::automation_view const& automated, 
+    std::int32_t const* mapping, cv_route_output route_output, std::int32_t route_index) const;
 };
 
 } // namespace svn::synth
