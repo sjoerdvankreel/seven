@@ -270,7 +270,7 @@ static param_descriptor const
 cv_route_params[cv_route_param::count] =  
 {  
   { "{98F5212C-89A1-458D-A464-F3B71D1695ED}", { L"Lvl", L"Plot level" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { false, false, 0, 1, 0, nullptr, 0 } },
-  { "{41FB9033-220C-4DA7-836A-22808E17167F}", { L"Time", L"Plot length" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 1, 1, 0, nullptr, 0 } },
+  { "{41FB9033-220C-4DA7-836A-22808E17167F}", { L"Time", L"Plot length" }, L"Sec", { 0.5f, 2, real_bounds::quadratic(0.01f, 10.0f), real_bounds::quadratic(0.01f, 10.0f) }, { false, false, 1, 1, 0, nullptr, 0 } },
   { "{CE1DC1C7-72C5-4811-8C35-8485FFAFFABC}", { L"Plot", L"Plot target" }, L"", false, 0, cv_outputs_count - 1, 0,& format_cv_output,& parse_cv_output, { true, false, 2, 1, 0, nullptr, 0 } },
   { "{3B025C6A-0230-491A-A51F-7CF1C81B69C9}", { L"In1", L"Input 1" }, L"", false, 0, cv_inputs_count - 1, 0, &format_cv_input, &parse_cv_input, {false, false, 3, 0, 1, nullptr, 0} },
   { "{5FDD8C86-8F2D-4613-BB98-BB673F502412}", { L"Out1", L"Output 1" }, L"", false, 0, cv_outputs_count - 1, 0, &format_cv_output, &parse_cv_output, { true, true, 4, 0, 0, nullptr, 0 } },

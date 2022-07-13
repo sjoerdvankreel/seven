@@ -264,16 +264,20 @@ voice_filter_ir_graph::process_dsp_core(
   filter->process_block(vinput, part_index(), _audio_in.data(), output);
 }
 
-std::int32_t
-cv_route_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
-{ return static_cast<std::int32_t>(std::ceil(cv_route_graph_rate)); }
-
 void
 cv_route_graph::dsp_to_plot(
   std::vector<float> const& dsp, std::vector<float>& plot, float sample_rate)
 {
   plot.resize(dsp.size());
   std::copy(dsp.begin(), dsp.end(), plot.begin());
+}
+
+std::int32_t
+cv_route_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
+{ 
+  std::int32_t begin = topology()->param_bounds[part_type::cv_route][0];
+  float seconds = state[begin + cv_route_param::plot_time].real;
+  return static_cast<std::int32_t>(std::ceil(seconds * cv_route_graph_rate));
 }
 
 bool
