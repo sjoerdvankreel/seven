@@ -1,10 +1,12 @@
 #ifndef SVN_SYNTH_DSP_SYNTH_VOICE_HPP
 #define SVN_SYNTH_DSP_SYNTH_VOICE_HPP
 
+#include <svn.synth/dsp/cv_state.hpp>
 #include <svn.synth/dsp/envelope.hpp>
 #include <svn.synth/dsp/voice_amp.hpp>
 #include <svn.synth/dsp/voice_lfo.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
+#include <svn.synth/dsp/audio_state.hpp>
 #include <svn.synth/dsp/voice_filter.hpp>
 #include <svn.synth/topology/topology.hpp>
 

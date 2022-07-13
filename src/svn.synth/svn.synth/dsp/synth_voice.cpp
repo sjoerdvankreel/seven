@@ -63,7 +63,7 @@ synth_voice::process_block(
 
   // Run amp section.
   base::audio_sample32 const* audio_in = audio.mix(input, audio_route_output::amp, 0);
-  _amp.process_block(input, cv, audio_in, audio.voice_amp.data());
+  _amp.process_block(input, cv.envelope[0].data(), audio_in, audio.voice_amp.data());
   return amp_env_end;
 } 
  

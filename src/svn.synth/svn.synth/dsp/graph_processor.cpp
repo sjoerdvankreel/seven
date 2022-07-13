@@ -1,12 +1,14 @@
 #include <svn.base/dsp/support.hpp>
 #include <svn.base/dsp/spectrum_analyzer.hpp>
+#include <svn.synth/topology/topology.hpp>
 #include <svn.synth/dsp/support.hpp>
 #include <svn.synth/dsp/envelope.hpp>
+#include <svn.synth/dsp/cv_state.hpp>
 #include <svn.synth/dsp/voice_lfo.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
+#include <svn.synth/dsp/audio_state.hpp>
 #include <svn.synth/dsp/voice_filter.hpp>
 #include <svn.synth/dsp/graph_processor.hpp>
-#include <svn.synth/topology/topology.hpp>
 
 #include <memory>
 #include <cassert>
