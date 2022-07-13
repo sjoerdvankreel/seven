@@ -158,9 +158,9 @@ synthesizer::process_block(block_input const& input, block_output& output)
       }
       // Else nothing to do, we ride along with the active automation values.     
 
-      std::int32_t processed = _voices[v].process_block(vinput, _cv, _voice_audio, release_sample);
-      base::add_audio(output.audio + voice_start, _voice_audio.voice_amp.data(), processed);
-      if(processed < vinput.sample_count) return_voice(v);
+      bool ended = _voices[v].process_block(vinput, _cv, _voice_audio, release_sample);
+      base::add_audio(output.audio + voice_start, _voice_audio.voice_amp.data(), vinput.sample_count);
+      if(ended) return_voice(v);
     }
 
     // Clip and set output info.

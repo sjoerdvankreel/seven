@@ -84,28 +84,31 @@ envelope::setup_stages(automation_view const& automation, std::int32_t s,
   release = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.get(envelope_param::release_sync, s).discrete]);
 }
 
-std::int32_t 
+bool
 envelope::process_block(voice_input const& input, std::int32_t index, base::cv_sample* cv_out, std::int32_t release_sample)
 {
   float delay, attack, hold, decay, release;
   automation_view automation(input.automation.rearrange_params(part_type::envelope, index));
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
+    if (_ended) { cv_out[s] = _end_sample; continue; }
     cv_out[s] = { 0.0f, false };
     if(automation.get(envelope_param::on, s).discrete == 0) return s;
     float sustain = automation.get(envelope_param::sustain_level, s).real;
     std::int32_t kind = automation.get(envelope_param::kind, s).discrete;
+    bool unipolar = cv_kind_is_unipolar(kind);
     bool dahdsr = automation.get(envelope_param::type, s).discrete == envelope_type::dahdsr;
     setup_stages(automation, s, input.bpm, delay, attack, hold, decay, release);
     auto stage = generate_stage(automation, s, dahdsr, delay, attack, hold, decay, sustain, release);
     if(cv_kind_is_unipolar(kind)) cv_out[s] = { sanity_unipolar(stage.second), false };
     else cv_out[s] = { sanity_bipolar(stage.second * 2.0f - 1.0f), true };
-    if(stage.first == envelope_stage::end) return s;
+    _end_sample = unipolar ? cv_sample({ 0.0f, false }) : cv_sample({ -1.0f, true });
+    if(stage.first == envelope_stage::end) { _ended = true; cv_out[s] = _end_sample; continue; }
     if(stage.first != envelope_stage::release) _release_level = stage.second;
     if(s == release_sample) _released = true, _position = static_cast<int32_t>(std::ceil(delay + attack + hold + decay));
     else if(!dahdsr || stage.first != envelope_stage::sustain) _position++;
   }
-  return input.sample_count; 
+  return _ended;
 } 
  
 } // namespace svn::synth

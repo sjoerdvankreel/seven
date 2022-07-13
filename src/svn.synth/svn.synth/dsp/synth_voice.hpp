@@ -51,12 +51,10 @@ public:
     float sample_rate, float velocity, std::int32_t midi_note);
 
   // With input and audio offset to the start of the voice within the current 
-  // block. Returns total number of samples rendered, which equals input 
-  // sample count if the voice did not finish within the current block. Release 
-  // sample is nonnegative if voice is released within the current block.
+  // block. Release sample is nonnegative if voice is released within the current block.
   // Automation should be fixed to the last active value if this voice is released,
-  // this is handled globally by the synth class.
-  std::int32_t
+  // this is handled globally by the synth class. Returns true if voice ended.
+  bool
   process_block(voice_input const& input, 
     cv_state& cv, audio_state& audio, std::int32_t release_sample);
 };

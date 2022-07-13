@@ -13,10 +13,12 @@ typedef envelope_stage_t::value envelope_stage;
 // Per-voice envelope generator.
 class envelope
 {
+  bool _ended = false;
   bool _released = false;
   float _sample_rate = 0.0f;
   std::int32_t _position = 0;
   float _release_level = 0.0f;
+  base::cv_sample _end_sample = {};
 public:
   envelope() = default;
   explicit envelope(float sample_rate) : _sample_rate(sample_rate) {}
@@ -28,8 +30,8 @@ private:
 public:
   void setup_stages(base::automation_view const& automation, std::int32_t s,
     float bpm, float& delay, float& attack, float& hold, float& decay, float& release);
-  // Returns less than sample count if done.
-  std::int32_t process_block(voice_input const& input, std::int32_t index, base::cv_sample* cv_out, std::int32_t release_sample);
+  // True if done.
+  bool process_block(voice_input const& input, std::int32_t index, base::cv_sample* cv_out, std::int32_t release_sample);
 };
 
 } // namespace svn::synth

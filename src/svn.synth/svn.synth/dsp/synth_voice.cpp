@@ -23,7 +23,7 @@ _topology(topology), _velocity(velocity), _amp(sample_rate)
   _oscillators.fill(oscillator(sample_rate, midi_note));
 }
 
-std::int32_t
+bool
 synth_voice::process_block(
   voice_input const& input, cv_state& cv, audio_state& audio, std::int32_t release_sample)
 {
@@ -35,12 +35,12 @@ synth_voice::process_block(
     _lfos[i].process_block(input, i, cv.voice_lfo[i].data());
 
   // Run envelopes.
-  std::int32_t amp_env_end = input.sample_count;
+  bool ended = false;
   for (std::int32_t i = 0; i < envelope_count; i++)
   {
     std::memset(cv.envelope[i].data(), 0, input.sample_count * sizeof(base::cv_sample));
-    std::int32_t processed = _envelopes[i].process_block(input, i, cv.envelope[i].data(), release_sample);
-    if(i == 0) amp_env_end = processed;
+    bool env_ended = _envelopes[i].process_block(input, i, cv.envelope[i].data(), release_sample);
+    if(i == 0) ended = env_ended;
   }
 
   // Run generators.
@@ -61,7 +61,7 @@ synth_voice::process_block(
   // Run amp section.
   base::audio_sample32 const* audio_in = audio.mix(input, audio_route_output::amp, 0);
   _amp.process_block(input, cv.envelope[0].data(), audio_in, audio.voice_amp.data());
-  return amp_env_end;
+  return ended;
 } 
  
 } // namespace svn::synth
