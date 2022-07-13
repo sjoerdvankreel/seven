@@ -12,18 +12,14 @@ std::vector<std::vector<std::vector<std::int32_t>>> const cv_state::output_table
 
 cv_state::
 cv_state(std::int32_t max_sample_count): 
-envelope(), voice_lfo(), scratch(), scratch_buffer()
+envelope(), voice_lfo()
 { 
-  std::vector<float> cv(static_cast<std::size_t>(max_sample_count));
+  std::vector<base::cv_sample> cv(static_cast<std::size_t>(max_sample_count));
   envelope.fill(cv);
   voice_lfo.fill(cv);
-  std::int32_t max_outputs = *std::max_element(cv_output_target_counts, cv_output_target_counts + cv_route_output::count);
-  scratch_buffer.resize(static_cast<std::size_t>(max_outputs * max_sample_count));
-  for(std::int32_t p = 0; p < max_outputs; p++)
-    scratch.push_back(scratch_buffer.data() + p * max_sample_count);
 }
 
-float const*
+base::cv_sample const*
 cv_state::input_buffer(std::int32_t input, std::int32_t index) const
 {
   switch (input)
@@ -35,9 +31,9 @@ cv_state::input_buffer(std::int32_t input, std::int32_t index) const
   }
 }
 
-float const* const*
-cv_state::mix(voice_input const& input,
-  cv_route_output route_output, std::int32_t route_index)
+void
+cv_state::modulate(voice_input const& input,
+  cv_route_output route_output, std::int32_t route_index, float* values) const
 {
   std::int32_t input_off = input_table_in[cv_route_input::off][0];
   base::automation_view automation = input.automation.rearrange_params(part_type::cv_route, 0);
@@ -47,7 +43,6 @@ cv_state::mix(voice_input const& input,
     std::int32_t output_id = output_table_in[route_output][route_index][p] - cv_route_param_offset;
     for (std::int32_t s = 0; s < input.sample_count; s++)
     {
-      scratch[p][s] = 1.0f;
       for (std::int32_t i = 0; i < cv_route_count; i++)
       {
         std::int32_t in = automation.get(i * 3 + cv_route_param_offset, s).discrete;
@@ -56,11 +51,10 @@ cv_state::mix(voice_input const& input,
         if (out != output_id) continue;
         float amt = automation.get(i * 3 + cv_route_param_offset + 2, s).real;
         std::pair<std::int32_t, std::int32_t> input_ids(input_table_out[in]);
-        scratch[p][s] = base::sanity_bipolar(scratch[p][s] * input_buffer(input_ids.first, input_ids.second)[s] * amt);
+        values[s] = base::modulate(values[s], input_buffer(input_ids.first, input_ids.second)[s], amt);
       }
     }
   }
-  return scratch.data();
 }
 
 } // namespace svn::synth

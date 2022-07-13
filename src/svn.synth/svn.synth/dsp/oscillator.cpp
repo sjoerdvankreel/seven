@@ -170,7 +170,7 @@ oscillator::generate_unison(
 
 void
 oscillator::process_block(voice_input const& input, 
-  std::int32_t index, float const* const* cv_in, audio_sample32* audio_out)
+  std::int32_t index, cv_state const& cv, audio_sample32* audio_out)
 {
   automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
   for (std::int32_t s = 0; s < input.sample_count; s++)

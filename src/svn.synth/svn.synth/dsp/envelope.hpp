@@ -1,7 +1,7 @@
 #ifndef SVN_SYNTH_DSP_ENVELOPE_HPP
 #define SVN_SYNTH_DSP_ENVELOPE_HPP
 
-#include <utility>
+#include <svn.base/dsp/support.hpp>
 #include <svn.synth/dsp/support.hpp>
 #include <svn.synth/topology/topology.hpp>
 
@@ -29,7 +29,7 @@ public:
   void setup_stages(base::automation_view const& automation, std::int32_t s,
     float bpm, float& delay, float& attack, float& hold, float& decay, float& release);
   // Returns less than sample count if done.
-  std::int32_t process_block(voice_input const& input, std::int32_t index, float* cv_out, std::int32_t release_sample);
+  std::int32_t process_block(voice_input const& input, std::int32_t index, base::cv_sample* cv_out, std::int32_t release_sample);
 };
 
 } // namespace svn::synth

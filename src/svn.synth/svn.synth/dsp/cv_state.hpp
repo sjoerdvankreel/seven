@@ -1,6 +1,7 @@
 #ifndef SVN_SYNTH_DSP_CV_STATE_HPP
 #define SVN_SYNTH_DSP_CV_STATE_HPP
 
+#include <svn.base/dsp/support.hpp>
 #include <svn.synth/dsp/support.hpp>
 #include <svn.synth/topology/topology.hpp>
 
@@ -20,17 +21,13 @@ class cv_state
   static std::vector<std::vector<std::vector<std::int32_t>>> const output_table_in;
 
   // Of size max parameter count per part type * max sample count.
-  std::vector<float*> scratch;
-  std::vector<float> scratch_buffer;
-  float const* input_buffer(std::int32_t input, std::int32_t index) const;
+  base::cv_sample const* input_buffer(std::int32_t input, std::int32_t index) const;
 
 public:
   explicit cv_state(std::int32_t max_sample_count);
-  std::array<std::vector<float>, envelope_count> envelope;
-  std::array<std::vector<float>, voice_lfo_count> voice_lfo;
-
-  float const* const* mix(voice_input const& input,
-    cv_route_output route_output, std::int32_t route_index);
+  std::array<std::vector<base::cv_sample>, envelope_count> envelope;
+  std::array<std::vector<base::cv_sample>, voice_lfo_count> voice_lfo;
+  void modulate(voice_input const& input, cv_route_output route_output, std::int32_t route_index, float* values) const;
 };
 
 } // namespace svn::synth

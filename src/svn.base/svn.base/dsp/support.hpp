@@ -17,8 +17,8 @@ inline std::int32_t constexpr midi_note_c4 = 60;
 // Any cv input e.g. lfos, envelopes.
 struct cv_sample
 {
-  float value;
-  bool bipolar;
+  float value = 0.0f;
+  bool bipolar = false;
 };
 
 // Note including cents.
