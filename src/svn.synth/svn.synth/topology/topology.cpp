@@ -38,18 +38,18 @@ voice_amp_params[voice_amp_param::count] =
 
 // ---- voice lfo ----
 
-static std::vector<std::pair<std::int32_t, std::int32_t>> const lfo_synced_timesig = beat_synced_timesig(16, false);
-static std::vector<std::wstring> const lfo_synced_timesig_names = beat_synced_timesig_names(lfo_synced_timesig);
-static std::vector<float> const lfo_synced_timesig_values_init = beat_synced_timesig_values(lfo_synced_timesig);
-std::int32_t const lfo_synced_timesig_count = static_cast<std::int32_t>(lfo_synced_timesig.size());
-float const* const lfo_synced_timesig_values = lfo_synced_timesig_values_init.data();
+static std::vector<std::pair<std::int32_t, std::int32_t>> const voice_lfo_synced_timesig = beat_synced_timesig(16, false);
+static std::vector<std::wstring> const voice_lfo_synced_timesig_names = beat_synced_timesig_names(voice_lfo_synced_timesig);
+static std::vector<float> const voice_lfo_synced_timesig_values_init = beat_synced_timesig_values(voice_lfo_synced_timesig);
+std::int32_t const voice_lfo_synced_timesig_count = static_cast<std::int32_t>(voice_lfo_synced_timesig.size());
+float const* const voice_lfo_synced_timesig_values = voice_lfo_synced_timesig_values_init.data();
 
 static graph_descriptor const voice_lfo_graph = { -1, 0, 2, 1, 1, L"LFO" };
-static param_relevance const lfo_time_relevance[1] = { { voice_lfo_param::sync_polarity, { cv_sync_polarity::time_bipolar, cv_sync_polarity::time_unipolar } } };
-static param_relevance const lfo_sync_relevance[1] = { { voice_lfo_param::sync_polarity, { cv_sync_polarity::sync_bipolar, cv_sync_polarity::sync_unipolar } } };
+static param_relevance const voice_lfo_time_relevance[1] = { { voice_lfo_param::sync_polarity, { cv_sync_polarity::time_bipolar, cv_sync_polarity::time_unipolar } } };
+static param_relevance const voice_lfo_sync_relevance[1] = { { voice_lfo_param::sync_polarity, { cv_sync_polarity::sync_bipolar, cv_sync_polarity::sync_unipolar } } };
 
-static std::wstring format_lfo_timesig(std::int32_t val) { return lfo_synced_timesig_names[val]; }
-static bool parse_lfo_timesig(std::wstring const& val, std::int32_t& result) { return list_parser(val, lfo_synced_timesig_names, result); }
+static std::wstring format_voice_lfo_timesig(std::int32_t val) { return voice_lfo_synced_timesig_names[val]; }
+static bool parse_voice_lfo_timesig(std::wstring const& val, std::int32_t& result) { return list_parser(val, voice_lfo_synced_timesig_names, result); }
 
 static item_name const 
 voice_lfo_types[voice_lfo_type::count] =
@@ -65,8 +65,8 @@ voice_lfo_params[voice_lfo_param::count] =
   { "{42FB0553-788E-470F-906A-D95FED2ED980}", { L"On", L"Enabled" }, false, { false, false, -1, 0, {}, {}}},
   { "{F744C553-8CFA-4262-98A7-37E187BF27FF}", { L"Type", L"Type" }, L"", false, voice_lfo_types, voice_lfo_type::count, { false, false, 0, 0, 0, nullptr, 0}},
   { "{83C1ED1B-095E-4F58-B091-39DA4F0125BF}", { L"SnPl", L"Sync/polarity" }, L"", false, cv_sync_polarities, cv_sync_polarity::count, { false, false, 1, 0, 0, nullptr, 0} },
-  { "{E320A1F0-2FCA-46F2-BBCB-0504D65503BC}", { L"Freq", L"Frequency" }, L"Hz", { 0.0f, 2, real_bounds::quadratic(voice_lfo_min_freq, voice_lfo_max_freq), real_bounds::quadratic(voice_lfo_min_freq, voice_lfo_max_freq) }, { false, false, 2, 0, 0, lfo_time_relevance, 1 } },
-  { "{09618D35-EFAD-4E2E-8FD0-04B6F5AC14D5}", { L"Step", L"Tempo" }, L"", true, 0, lfo_synced_timesig_count - 1, 0, format_lfo_timesig, parse_lfo_timesig, { false, false, 2, 0, 0, lfo_sync_relevance, 1 } }
+  { "{E320A1F0-2FCA-46F2-BBCB-0504D65503BC}", { L"Freq", L"Frequency" }, L"Hz", { 0.0f, 2, real_bounds::quadratic(voice_lfo_min_freq, voice_lfo_max_freq), real_bounds::quadratic(voice_lfo_min_freq, voice_lfo_max_freq) }, { false, false, 2, 0, 0, voice_lfo_time_relevance, 1 } },
+  { "{09618D35-EFAD-4E2E-8FD0-04B6F5AC14D5}", { L"Step", L"Tempo" }, L"", true, 0, voice_lfo_synced_timesig_count - 1, 0, format_voice_lfo_timesig, parse_voice_lfo_timesig, { false, false, 2, 0, 0, voice_lfo_sync_relevance, 1 } }
 };  
 
 // ---- envelope ----

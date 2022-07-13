@@ -104,7 +104,7 @@ std::int32_t
 voice_lfo_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 {
   std::int32_t const cycles = 2;
-  std::int32_t begin = topology()->param_bounds[part_type::voice_lfo][part_index()];
+  std::int32_t begin = topology()->param_bounds[part_type::voice_lfo][part_index()];  
   float frequency = state[begin + voice_lfo_param::freq].real;
   return static_cast<std::int32_t>(std::ceil(cycles * lfo_graph_rate / frequency));
 }
@@ -222,7 +222,7 @@ oscillator_wave_graph::process_dsp_core(
   std::vector<float> cv_buffer;
   setup_graph_cv_input(cv_buffer, cv, cv_route_osc_output::count, input.sample_count);
   oscillator osc(sample_rate, midi_note_c4);
-  base::clear_audio(output, input.sample_count);
+  std::memset(output, 0, input.sample_count * sizeof(audio_sample32));
   voice_input vinput = setup_graph_voice_input(input, topology());
   osc.process_block(vinput, part_index(), cv.data(), output);
 }
@@ -260,7 +260,7 @@ voice_filter_ir_graph::process_dsp_core(
   _audio_in.resize(input.sample_count);
   _audio_in[0] = 1.0f;
 
-  base::clear_audio(output, input.sample_count);
+  std::memset(output, 0, input.sample_count * sizeof(audio_sample32));
   voice_input vinput = setup_graph_voice_input(input, topology());
   auto filter = std::make_unique<voice_filter>(sample_rate, midi_note_c4);
   filter->process_block(vinput, part_index(), _audio_in.data(), output);

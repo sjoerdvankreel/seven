@@ -52,7 +52,7 @@ synth_voice::process_block(
 
   // Clear filter output in case user selected weird routing (i.e. filter 3 to filter 2).
   for (std::int32_t i = 0; i < voice_filter_count; i++)
-    base::clear_audio(audio.voice_filter[i].data(), input.sample_count);
+    std::memset(audio.voice_filter[i].data(), 0, input.sample_count * sizeof(base::audio_sample32));
 
   // Run filters.
   for (std::int32_t i = 0; i < voice_filter_count; i++)

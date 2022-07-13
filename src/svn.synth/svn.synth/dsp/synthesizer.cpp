@@ -118,8 +118,8 @@ synthesizer::process_block(block_input const& input, block_output& output)
     if(_voice_states[v].in_use)
       ++voice_count;
 
-  base::clear_audio(output.audio, input.sample_count);
   // Process voices that are active anywhere in this buffer.
+  std::memset(output.audio, 0, input.sample_count * sizeof(base::audio_sample32));
   for(std::int32_t v = 0; v < synth_polyphony; v++)
     if (_voice_states[v].in_use)
     {

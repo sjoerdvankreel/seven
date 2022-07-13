@@ -68,7 +68,7 @@ envelope::setup_stages(automation_view const& automation, std::int32_t s,
   float bpm, float& delay, float& attack, float& hold, float& decay, float& release)
 {
   std::int32_t sync_polarity = automation.get(envelope_param::sync_polarity, s).discrete;
-  if (sync_polarity == cv_sync_polarity::time_unipolar || sync_polarity == cv_sync_polarity::time_bipolar)
+  if (!cv_sync_polarity_is_synced(sync_polarity))
   { 
     delay = automation.get(envelope_param::delay_time, s).real * _sample_rate;
     attack = automation.get(envelope_param::attack_time, s).real * _sample_rate;
@@ -77,11 +77,11 @@ envelope::setup_stages(automation_view const& automation, std::int32_t s,
     release = automation.get(envelope_param::release_time, s).real * _sample_rate;
     return;
   }
-  delay = _sample_rate * 60.0f / bpm * env_synced_timesig_values[automation.get(envelope_param::delay_sync, s).discrete];
-  attack = _sample_rate * 60.0f / bpm * env_synced_timesig_values[automation.get(envelope_param::attack_sync, s).discrete];
-  hold = _sample_rate * 60.0f / bpm * env_synced_timesig_values[automation.get(envelope_param::hold_sync, s).discrete];
-  decay = _sample_rate * 60.0f / bpm * env_synced_timesig_values[automation.get(envelope_param::decay_sync, s).discrete];
-  release = _sample_rate * 60.0f / bpm * env_synced_timesig_values[automation.get(envelope_param::release_sync, s).discrete];
+  delay = timesig_to_samples(_sample_rate, bpm, env_synced_timesig_values[automation.get(envelope_param::delay_sync, s).discrete]);
+  attack = timesig_to_samples(_sample_rate, bpm, env_synced_timesig_values[automation.get(envelope_param::attack_sync, s).discrete]);
+  hold = timesig_to_samples(_sample_rate, bpm, env_synced_timesig_values[automation.get(envelope_param::hold_sync, s).discrete]);
+  decay = timesig_to_samples(_sample_rate, bpm, env_synced_timesig_values[automation.get(envelope_param::decay_sync, s).discrete]);
+  release = timesig_to_samples(_sample_rate, bpm, env_synced_timesig_values[automation.get(envelope_param::release_sync, s).discrete]);
 }
 
 std::int32_t 
@@ -98,10 +98,8 @@ envelope::process_block(voice_input const& input, std::int32_t index, float* cv_
     bool dahdsr = automation.get(envelope_param::type, s).discrete == envelope_type::dahdsr;
     setup_stages(automation, s, input.bpm, delay, attack, hold, decay, release);
     auto stage = generate_stage(automation, s, dahdsr, delay, attack, hold, decay, sustain, release);
-    if(sync_polarity == cv_sync_polarity::sync_unipolar || sync_polarity == cv_sync_polarity::time_unipolar)
-      cv_out[s] = sanity_unipolar(stage.second);
-    else
-      cv_out[s] = sanity_bipolar(stage.second * 2.0f - 1.0f);
+    if(cv_sync_polarity_is_unipolar(sync_polarity)) cv_out[s] = sanity_unipolar(stage.second);
+    else cv_out[s] = sanity_bipolar(stage.second * 2.0f - 1.0f);
     if(stage.first == envelope_stage::end) return s;
     if(stage.first != envelope_stage::release) _release_level = stage.second;
     if(s == release_sample) _released = true, _position = static_cast<int32_t>(std::ceil(delay + attack + hold + decay));

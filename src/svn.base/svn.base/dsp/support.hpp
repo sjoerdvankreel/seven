@@ -19,6 +19,11 @@ inline float
 note_to_frequency(float note)
 { return 440.0f * std::pow(2.0f, (note - 69.0f) / 12.0f); }
 
+// E.g. "3/4" -> sample count.
+inline float
+timesig_to_samples(float sample_rate, float bpm, float timesig_val)
+{ return sample_rate * 60.0f / bpm * timesig_val; }
+
 template <class T> inline T
 sanity(T val)
 {
@@ -70,15 +75,6 @@ next_pow2(std::uint64_t x)
   if (x && !(x & (x - 1))) return x;
   while (x != 0) x >>= 1, result++;
   return 1ULL << result;
-}
-
-inline void
-clear_audio(audio_sample32* audio, std::int32_t sample_count)
-{
-  assert(audio != nullptr);
-  assert(sample_count >= 0);
-  for (std::int32_t s = 0; s < sample_count; s++)
-    audio[s].left = audio[s].right = 0.0f;
 }
 
 inline bool
