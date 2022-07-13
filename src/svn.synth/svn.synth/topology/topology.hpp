@@ -5,6 +5,11 @@
 
 namespace svn::synth {
 
+// ---- shared ----
+
+struct cv_sync_polarity_t { enum value { time_unipolar, time_bipolar, sync_unipolar, sync_bipolar, count }; };
+typedef cv_sync_polarity_t::value cv_sync_polarity;
+
 // ---- global topo ----
 
 inline std::int32_t constexpr envelope_count = 3;
@@ -36,21 +41,19 @@ extern float const* const env_synced_timesig_values;
 
 struct envelope_type_t { enum value { dahdsr, dahdr, count }; };
 struct envelope_slope_t { enum value { lin, log, quad, sqrt, count }; };
-struct envelope_sync_polarity_t { enum value { time_unipolar, time_bipolar, sync_unipolar, sync_bipolar, count }; };
 struct envelope_param_t { enum value { on, type, sync_polarity, delay_time, delay_sync, hold_time, hold_sync, sustain_level, attack_time, attack_sync, attack_slope, attack_mid, decay_time, decay_sync, decay_slope, decay_mid, release_time, release_sync, release_slope, release_mid, count }; };
 
 typedef envelope_type_t::value envelope_type;
 typedef envelope_slope_t::value envelope_slope;
 typedef envelope_param_t::value envelope_param;
-typedef envelope_sync_polarity_t::value envelope_sync_polarity;
 
 // ---- voice lfo ----
 
 inline float constexpr voice_lfo_min_freq = 0.1f;
 inline float constexpr voice_lfo_max_freq = 20.0f;
 
-struct voice_lfo_param_t { enum value { on, type, freq, count }; };
 struct voice_lfo_type_t { enum value { sine, custom, random, count }; };
+struct voice_lfo_param_t { enum value { on, type, sync_polarity, freq_time, freq_sync, count }; };
 
 typedef voice_lfo_type_t::value voice_lfo_type;
 typedef voice_lfo_param_t::value voice_lfo_param;

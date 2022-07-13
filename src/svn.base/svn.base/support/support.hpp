@@ -99,7 +99,7 @@ zip_list_table_init_out(
 // 0/0, 1/4, 2/4, 3/4, 1/3, 2/3 etc.
 std::vector<std::pair<std::int32_t, std::int32_t>>
 beat_synced_timesig(
-  std::int32_t sig_count);
+  std::int32_t sig_count, bool with_zero);
 std::vector<float>
 beat_synced_timesig_values(
   std::vector<std::pair<std::int32_t, std::int32_t>> const& timesig);

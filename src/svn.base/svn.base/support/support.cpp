@@ -129,11 +129,12 @@ zip_list_names(
 }
 
 std::vector<std::pair<std::int32_t, std::int32_t>>
-beat_synced_timesig(std::int32_t sig_count)
+beat_synced_timesig(std::int32_t sig_count, bool with_zero)
 {
   // Make all signatures.
   std::vector<std::pair<std::int32_t, std::int32_t>> all;
-  all.push_back(std::make_pair(0, 0));
+  if(with_zero) 
+    all.push_back(std::make_pair(0, 0));
   for (std::int32_t num = 1; num <= sig_count; num++)
     for (std::int32_t den = 1; den <= sig_count; den++)
       all.push_back(std::make_pair(num, den));

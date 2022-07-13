@@ -68,7 +68,7 @@ envelope::setup_stages(automation_view const& automation, std::int32_t s,
   float bpm, float& delay, float& attack, float& hold, float& decay, float& release)
 {
   std::int32_t sync_polarity = automation.get(envelope_param::sync_polarity, s).discrete;
-  if (sync_polarity == envelope_sync_polarity::time_unipolar || sync_polarity == envelope_sync_polarity::time_bipolar)
+  if (sync_polarity == cv_sync_polarity::time_unipolar || sync_polarity == cv_sync_polarity::time_bipolar)
   { 
     delay = automation.get(envelope_param::delay_time, s).real * _sample_rate;
     attack = automation.get(envelope_param::attack_time, s).real * _sample_rate;
@@ -98,7 +98,7 @@ envelope::process_block(voice_input const& input, std::int32_t index, float* cv_
     bool dahdsr = automation.get(envelope_param::type, s).discrete == envelope_type::dahdsr;
     setup_stages(automation, s, input.bpm, delay, attack, hold, decay, release);
     auto stage = generate_stage(automation, s, dahdsr, delay, attack, hold, decay, sustain, release);
-    if(sync_polarity == envelope_sync_polarity::sync_unipolar || sync_polarity == envelope_sync_polarity::time_unipolar)
+    if(sync_polarity == cv_sync_polarity::sync_unipolar || sync_polarity == cv_sync_polarity::time_unipolar)
       cv_out[s] = sanity_unipolar(stage.second);
     else
       cv_out[s] = sanity_bipolar(stage.second * 2.0f - 1.0f);
