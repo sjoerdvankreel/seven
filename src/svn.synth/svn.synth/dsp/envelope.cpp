@@ -77,11 +77,11 @@ envelope::setup_stages(automation_view const& automation, std::int32_t s,
     release = automation.get(envelope_param::release_time, s).real * _sample_rate;
     return;
   }
-  delay = timesig_to_samples(_sample_rate, bpm, env_synced_timesig_values[automation.get(envelope_param::delay_sync, s).discrete]);
-  attack = timesig_to_samples(_sample_rate, bpm, env_synced_timesig_values[automation.get(envelope_param::attack_sync, s).discrete]);
-  hold = timesig_to_samples(_sample_rate, bpm, env_synced_timesig_values[automation.get(envelope_param::hold_sync, s).discrete]);
-  decay = timesig_to_samples(_sample_rate, bpm, env_synced_timesig_values[automation.get(envelope_param::decay_sync, s).discrete]);
-  release = timesig_to_samples(_sample_rate, bpm, env_synced_timesig_values[automation.get(envelope_param::release_sync, s).discrete]);
+  delay = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.get(envelope_param::delay_sync, s).discrete]);
+  attack = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.get(envelope_param::attack_sync, s).discrete]);
+  hold = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.get(envelope_param::hold_sync, s).discrete]);
+  decay = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.get(envelope_param::decay_sync, s).discrete]);
+  release = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.get(envelope_param::release_sync, s).discrete]);
 }
 
 std::int32_t 

@@ -23,7 +23,10 @@ voice_lfo::process_block(voice_input const& input, std::int32_t index, float* cv
     if(!cv_sync_polarity_is_synced(sync_polarity))
       frequency = automation.get(voice_lfo_param::freq_time, s).real;
     else
-      frequency = timesig_to_samples(_sample_rate, input.bpm, voice_lfo_synced_timesig_values[automation.get(voice_lfo_param::freq_sync, s).discrete]);
+    {
+      float timesig = voice_lfo_timesig_values[automation.get(voice_lfo_param::freq_sync, s).discrete];
+      frequency = timesig_to_frequency(_sample_rate, input.bpm, timesig);
+    }
     float sample = sanity_bipolar(std::sin(2.0f * std::numbers::pi * _phase));
     if (cv_sync_polarity_is_unipolar(sync_polarity)) cv_out[s] = (sample + 1.0f) * 0.5f;
     else cv_out[s] = sample;

@@ -181,131 +181,137 @@
             "envelope_2_release_log_midpoint": "119",
             "voice_lfo_0_enabled": "120",
             "voice_lfo_0_type": "121",
-            "voice_lfo_0_frequency": "122",
-            "voice_lfo_1_enabled": "123",
-            "voice_lfo_1_type": "124",
-            "voice_lfo_1_frequency": "125",
-            "voice_lfo_2_enabled": "126",
-            "voice_lfo_2_type": "127",
-            "voice_lfo_2_frequency": "128",
-            "voice_amp_0_level": "129",
-            "voice_amp_0_env1_to_level": "130",
-            "voice_amp_0_panning": "131",
-            "voice_filter_0_enabled": "132",
-            "voice_filter_0_type": "133",
-            "voice_filter_0_state_var_type": "134",
-            "voice_filter_0_state_var_frequency": "135",
-            "voice_filter_0_state_var_resonance": "136",
-            "voice_filter_0_state_var_keyboard_tracking": "137",
-            "voice_filter_0_comb_plus_delay": "138",
-            "voice_filter_0_comb_plus_gain": "139",
-            "voice_filter_0_comb_min_delay": "140",
-            "voice_filter_0_comb_min_gain": "141",
-            "voice_filter_1_enabled": "142",
-            "voice_filter_1_type": "143",
-            "voice_filter_1_state_var_type": "144",
-            "voice_filter_1_state_var_frequency": "145",
-            "voice_filter_1_state_var_resonance": "146",
-            "voice_filter_1_state_var_keyboard_tracking": "147",
-            "voice_filter_1_comb_plus_delay": "148",
-            "voice_filter_1_comb_plus_gain": "149",
-            "voice_filter_1_comb_min_delay": "150",
-            "voice_filter_1_comb_min_gain": "151",
-            "voice_filter_2_enabled": "152",
-            "voice_filter_2_type": "153",
-            "voice_filter_2_state_var_type": "154",
-            "voice_filter_2_state_var_frequency": "155",
-            "voice_filter_2_state_var_resonance": "156",
-            "voice_filter_2_state_var_keyboard_tracking": "157",
-            "voice_filter_2_comb_plus_delay": "158",
-            "voice_filter_2_comb_plus_gain": "159",
-            "voice_filter_2_comb_min_delay": "160",
-            "voice_filter_2_comb_min_gain": "161",
-            "audio_route_0_input_1": "162",
-            "audio_route_0_output_1": "163",
-            "audio_route_0_amount_1": "164",
-            "audio_route_0_input_2": "165",
-            "audio_route_0_output_2": "166",
-            "audio_route_0_amount_2": "167",
-            "audio_route_0_input_3": "168",
-            "audio_route_0_output_3": "169",
-            "audio_route_0_amount_3": "170",
-            "audio_route_0_input_4": "171",
-            "audio_route_0_output_4": "172",
-            "audio_route_0_amount_4": "173",
-            "audio_route_0_input_5": "174",
-            "audio_route_0_output_5": "175",
-            "audio_route_0_amount_5": "176",
-            "audio_route_0_input_6": "177",
-            "audio_route_0_output_6": "178",
-            "audio_route_0_amount_6": "179",
-            "audio_route_0_input_7": "180",
-            "audio_route_0_output_7": "181",
-            "audio_route_0_amount_7": "182",
-            "audio_route_0_input_8": "183",
-            "audio_route_0_output_8": "184",
-            "audio_route_0_amount_8": "185",
-            "audio_route_0_input_9": "186",
-            "audio_route_0_output_9": "187",
-            "audio_route_0_amount_9": "188",
-            "cv_route_0_plot_level": "189",
-            "cv_route_0_plot_length": "190",
-            "cv_route_0_plot_target": "191",
-            "cv_route_0_input_1": "192",
-            "cv_route_0_output_1": "193",
-            "cv_route_0_amount_1": "194",
-            "cv_route_0_input_2": "195",
-            "cv_route_0_output_2": "196",
-            "cv_route_0_amount_2": "197",
-            "cv_route_0_input_3": "198",
-            "cv_route_0_output_3": "199",
-            "cv_route_0_amount_3": "200",
-            "cv_route_0_input_4": "201",
-            "cv_route_0_output_4": "202",
-            "cv_route_0_amount_4": "203",
-            "cv_route_0_input_5": "204",
-            "cv_route_0_output_5": "205",
-            "cv_route_0_amount_5": "206",
-            "cv_route_0_input_6": "207",
-            "cv_route_0_output_6": "208",
-            "cv_route_0_amount_6": "209",
-            "cv_route_0_input_7": "210",
-            "cv_route_0_output_7": "211",
-            "cv_route_0_amount_7": "212",
-            "cv_route_0_input_8": "213",
-            "cv_route_0_output_8": "214",
-            "cv_route_0_amount_8": "215",
-            "cv_route_0_input_9": "216",
-            "cv_route_0_output_9": "217",
-            "cv_route_0_amount_9": "218",
-            "cv_route_0_input_10": "219",
-            "cv_route_0_output_10": "220",
-            "cv_route_0_amount_10": "221",
-            "cv_route_0_input_11": "222",
-            "cv_route_0_output_11": "223",
-            "cv_route_0_amount_11": "224",
-            "cv_route_0_input_12": "225",
-            "cv_route_0_output_12": "226",
-            "cv_route_0_amount_12": "227",
-            "cv_route_0_input_13": "228",
-            "cv_route_0_output_13": "229",
-            "cv_route_0_amount_13": "230",
-            "cv_route_0_input_14": "231",
-            "cv_route_0_output_14": "232",
-            "cv_route_0_amount_14": "233",
-            "cv_route_0_input_15": "234",
-            "cv_route_0_output_15": "235",
-            "cv_route_0_amount_15": "236",
-            "output_0_clip": "237",
-            "output_0_voices_exhausted": "238",
-            "output_0_voice_count": "239"
+            "voice_lfo_0_sync/polarity": "122",
+            "voice_lfo_0_frequency": "123",
+            "voice_lfo_0_tempo": "124",
+            "voice_lfo_1_enabled": "125",
+            "voice_lfo_1_type": "126",
+            "voice_lfo_1_sync/polarity": "127",
+            "voice_lfo_1_frequency": "128",
+            "voice_lfo_1_tempo": "129",
+            "voice_lfo_2_enabled": "130",
+            "voice_lfo_2_type": "131",
+            "voice_lfo_2_sync/polarity": "132",
+            "voice_lfo_2_frequency": "133",
+            "voice_lfo_2_tempo": "134",
+            "voice_amp_0_level": "135",
+            "voice_amp_0_env1_to_level": "136",
+            "voice_amp_0_panning": "137",
+            "voice_filter_0_enabled": "138",
+            "voice_filter_0_type": "139",
+            "voice_filter_0_state_var_type": "140",
+            "voice_filter_0_state_var_frequency": "141",
+            "voice_filter_0_state_var_resonance": "142",
+            "voice_filter_0_state_var_keyboard_tracking": "143",
+            "voice_filter_0_comb_plus_delay": "144",
+            "voice_filter_0_comb_plus_gain": "145",
+            "voice_filter_0_comb_min_delay": "146",
+            "voice_filter_0_comb_min_gain": "147",
+            "voice_filter_1_enabled": "148",
+            "voice_filter_1_type": "149",
+            "voice_filter_1_state_var_type": "150",
+            "voice_filter_1_state_var_frequency": "151",
+            "voice_filter_1_state_var_resonance": "152",
+            "voice_filter_1_state_var_keyboard_tracking": "153",
+            "voice_filter_1_comb_plus_delay": "154",
+            "voice_filter_1_comb_plus_gain": "155",
+            "voice_filter_1_comb_min_delay": "156",
+            "voice_filter_1_comb_min_gain": "157",
+            "voice_filter_2_enabled": "158",
+            "voice_filter_2_type": "159",
+            "voice_filter_2_state_var_type": "160",
+            "voice_filter_2_state_var_frequency": "161",
+            "voice_filter_2_state_var_resonance": "162",
+            "voice_filter_2_state_var_keyboard_tracking": "163",
+            "voice_filter_2_comb_plus_delay": "164",
+            "voice_filter_2_comb_plus_gain": "165",
+            "voice_filter_2_comb_min_delay": "166",
+            "voice_filter_2_comb_min_gain": "167",
+            "audio_route_0_input_1": "168",
+            "audio_route_0_output_1": "169",
+            "audio_route_0_amount_1": "170",
+            "audio_route_0_input_2": "171",
+            "audio_route_0_output_2": "172",
+            "audio_route_0_amount_2": "173",
+            "audio_route_0_input_3": "174",
+            "audio_route_0_output_3": "175",
+            "audio_route_0_amount_3": "176",
+            "audio_route_0_input_4": "177",
+            "audio_route_0_output_4": "178",
+            "audio_route_0_amount_4": "179",
+            "audio_route_0_input_5": "180",
+            "audio_route_0_output_5": "181",
+            "audio_route_0_amount_5": "182",
+            "audio_route_0_input_6": "183",
+            "audio_route_0_output_6": "184",
+            "audio_route_0_amount_6": "185",
+            "audio_route_0_input_7": "186",
+            "audio_route_0_output_7": "187",
+            "audio_route_0_amount_7": "188",
+            "audio_route_0_input_8": "189",
+            "audio_route_0_output_8": "190",
+            "audio_route_0_amount_8": "191",
+            "audio_route_0_input_9": "192",
+            "audio_route_0_output_9": "193",
+            "audio_route_0_amount_9": "194",
+            "cv_route_0_plot_level": "195",
+            "cv_route_0_plot_length": "196",
+            "cv_route_0_plot_target": "197",
+            "cv_route_0_input_1": "198",
+            "cv_route_0_output_1": "199",
+            "cv_route_0_amount_1": "200",
+            "cv_route_0_input_2": "201",
+            "cv_route_0_output_2": "202",
+            "cv_route_0_amount_2": "203",
+            "cv_route_0_input_3": "204",
+            "cv_route_0_output_3": "205",
+            "cv_route_0_amount_3": "206",
+            "cv_route_0_input_4": "207",
+            "cv_route_0_output_4": "208",
+            "cv_route_0_amount_4": "209",
+            "cv_route_0_input_5": "210",
+            "cv_route_0_output_5": "211",
+            "cv_route_0_amount_5": "212",
+            "cv_route_0_input_6": "213",
+            "cv_route_0_output_6": "214",
+            "cv_route_0_amount_6": "215",
+            "cv_route_0_input_7": "216",
+            "cv_route_0_output_7": "217",
+            "cv_route_0_amount_7": "218",
+            "cv_route_0_input_8": "219",
+            "cv_route_0_output_8": "220",
+            "cv_route_0_amount_8": "221",
+            "cv_route_0_input_9": "222",
+            "cv_route_0_output_9": "223",
+            "cv_route_0_amount_9": "224",
+            "cv_route_0_input_10": "225",
+            "cv_route_0_output_10": "226",
+            "cv_route_0_amount_10": "227",
+            "cv_route_0_input_11": "228",
+            "cv_route_0_output_11": "229",
+            "cv_route_0_amount_11": "230",
+            "cv_route_0_input_12": "231",
+            "cv_route_0_output_12": "232",
+            "cv_route_0_amount_12": "233",
+            "cv_route_0_input_13": "234",
+            "cv_route_0_output_13": "235",
+            "cv_route_0_amount_13": "236",
+            "cv_route_0_input_14": "237",
+            "cv_route_0_output_14": "238",
+            "cv_route_0_amount_14": "239",
+            "cv_route_0_input_15": "240",
+            "cv_route_0_output_15": "241",
+            "cv_route_0_amount_15": "242",
+            "output_0_clip": "243",
+            "output_0_voices_exhausted": "244",
+            "output_0_voice_count": "245"
         },
         "templates": {
             "view": {
                 "attributes": {
-                    "size": "732, 684",
-                    "minSize": "732, 684",
-                    "maxSize": "732, 684",
+                    "size": "732, 719",
+                    "minSize": "732, 719",
+                    "maxSize": "732, 719",
                     "class": "view_container_fix"
                 },
                 "children": {
@@ -4478,7 +4484,7 @@
                             "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "3, 543",
-                            "size": "240, 44",
+                            "size": "240, 66",
                             "background-offset": "50, 25"
                         },
                         "children": {
@@ -4486,7 +4492,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 44",
+                                    "size": "240, 66",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -4569,7 +4575,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 25",
+                                            "size": "240, 47",
                                             "frame-color": "color_FFC6FF80"
                                         }
                                     },
@@ -4577,7 +4583,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 25",
+                                            "size": "240, 47",
                                             "background-color": "color_FFC6FF20"
                                         },
                                         "children": {
@@ -4607,6 +4613,33 @@
                                                     "background-color": "color_00000040",
                                                     "class": "view_container_fix",
                                                     "origin": "81, 1",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 23"
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "background-color": "color_00000040",
+                                                    "class": "view_container_fix",
+                                                    "origin": "1, 23",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 23"
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "background-color": "color_00000040",
+                                                    "class": "view_container_fix",
+                                                    "origin": "81, 23",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 23"
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "background-color": "color_00000040",
+                                                    "class": "view_container_fix",
+                                                    "origin": "161, 23",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 23"
                                                 }
@@ -4664,6 +4697,51 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
+                                                    "COptionMenu": {
+                                                        "attributes": {
+                                                            "class": "COptionMenu",
+                                                            "size": "49, 19",
+                                                            "origin": "0, 0",
+                                                            "control-tag": "voice_lfo_0_sync/polarity",
+                                                            "tooltip": "VLFO 1 Sync/polarity",
+                                                            "font": "~ NormalFontSmall",
+                                                            "min-value": "0",
+                                                            "default-value": "0",
+                                                            "text-alignment": "left",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "menu-popup-style": "true",
+                                                            "menu-check-style": "false",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "max-value": "3",
+                                                            "font-color": "color_FFC6FFFF",
+                                                            "back-color": "color_FFC6FF40",
+                                                            "shadow-color": "color_FFC6FF80"
+                                                        }
+                                                    },
+                                                    "CTextLabel": {
+                                                        "attributes": {
+                                                            "class": "CTextLabel",
+                                                            "size": "28, 19",
+                                                            "origin": "52, 0",
+                                                            "transparent": "true",
+                                                            "text-alignment": "left",
+                                                            "font": "~ NormalFontSmall",
+                                                            "font-color": "color_FFC6FFFF",
+                                                            "title": "SnPl"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "class": "view_container_fix",
+                                                    "origin": "3, 25",
+                                                    "size": "80, 19",
+                                                    "background-color": "color_FFFFFF00"
+                                                },
+                                                "children": {
                                                     "seven_rotary_knob": {
                                                         "attributes": {
                                                             "class": "seven_rotary_knob",
@@ -4707,6 +4785,58 @@
                                                         }
                                                     }
                                                 }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "class": "view_container_fix",
+                                                    "origin": "3, 25",
+                                                    "size": "80, 19",
+                                                    "background-color": "color_FFFFFF00"
+                                                },
+                                                "children": {
+                                                    "seven_rotary_knob": {
+                                                        "attributes": {
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
+                                                            "origin": "0, 0",
+                                                            "control-tag": "voice_lfo_0_tempo",
+                                                            "tooltip": "VLFO 1 Tempo",
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_FFC6FFFF"
+                                                        }
+                                                    },
+                                                    "CTextLabel": {
+                                                        "attributes": {
+                                                            "class": "CTextLabel",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
+                                                            "transparent": "true",
+                                                            "text-alignment": "left",
+                                                            "font": "~ NormalFontSmall",
+                                                            "font-color": "color_FFC6FFFF",
+                                                            "title": "Step"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "voice_lfo_0_tempo",
+                                                            "tooltip": "VLFO 1 Tempo",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "158",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_FFC6FFFF"
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -4718,8 +4848,8 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "3, 590",
-                            "size": "240, 44",
+                            "origin": "3, 612",
+                            "size": "240, 104",
                             "background-offset": "50, 50"
                         },
                         "children": {
@@ -4727,7 +4857,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 44",
+                                    "size": "240, 104",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -4810,7 +4940,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 25",
+                                            "size": "240, 85",
                                             "frame-color": "color_FFC6FF80"
                                         }
                                     },
@@ -4818,7 +4948,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 25",
+                                            "size": "240, 85",
                                             "background-color": "color_FFC6FF20"
                                         },
                                         "children": {
@@ -4848,6 +4978,33 @@
                                                     "background-color": "color_00000040",
                                                     "class": "view_container_fix",
                                                     "origin": "81, 1",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 23"
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "background-color": "color_00000040",
+                                                    "class": "view_container_fix",
+                                                    "origin": "1, 23",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 23"
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "background-color": "color_00000040",
+                                                    "class": "view_container_fix",
+                                                    "origin": "81, 23",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 23"
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "background-color": "color_00000040",
+                                                    "class": "view_container_fix",
+                                                    "origin": "161, 23",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 23"
                                                 }
@@ -4905,6 +5062,51 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
+                                                    "COptionMenu": {
+                                                        "attributes": {
+                                                            "class": "COptionMenu",
+                                                            "size": "49, 19",
+                                                            "origin": "0, 0",
+                                                            "control-tag": "voice_lfo_1_sync/polarity",
+                                                            "tooltip": "VLFO 2 Sync/polarity",
+                                                            "font": "~ NormalFontSmall",
+                                                            "min-value": "0",
+                                                            "default-value": "0",
+                                                            "text-alignment": "left",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "menu-popup-style": "true",
+                                                            "menu-check-style": "false",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "max-value": "3",
+                                                            "font-color": "color_FFC6FFFF",
+                                                            "back-color": "color_FFC6FF40",
+                                                            "shadow-color": "color_FFC6FF80"
+                                                        }
+                                                    },
+                                                    "CTextLabel": {
+                                                        "attributes": {
+                                                            "class": "CTextLabel",
+                                                            "size": "28, 19",
+                                                            "origin": "52, 0",
+                                                            "transparent": "true",
+                                                            "text-alignment": "left",
+                                                            "font": "~ NormalFontSmall",
+                                                            "font-color": "color_FFC6FFFF",
+                                                            "title": "SnPl"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "class": "view_container_fix",
+                                                    "origin": "3, 25",
+                                                    "size": "80, 19",
+                                                    "background-color": "color_FFFFFF00"
+                                                },
+                                                "children": {
                                                     "seven_rotary_knob": {
                                                         "attributes": {
                                                             "class": "seven_rotary_knob",
@@ -4948,6 +5150,58 @@
                                                         }
                                                     }
                                                 }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "class": "view_container_fix",
+                                                    "origin": "3, 25",
+                                                    "size": "80, 19",
+                                                    "background-color": "color_FFFFFF00"
+                                                },
+                                                "children": {
+                                                    "seven_rotary_knob": {
+                                                        "attributes": {
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
+                                                            "origin": "0, 0",
+                                                            "control-tag": "voice_lfo_1_tempo",
+                                                            "tooltip": "VLFO 2 Tempo",
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_FFC6FFFF"
+                                                        }
+                                                    },
+                                                    "CTextLabel": {
+                                                        "attributes": {
+                                                            "class": "CTextLabel",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
+                                                            "transparent": "true",
+                                                            "text-alignment": "left",
+                                                            "font": "~ NormalFontSmall",
+                                                            "font-color": "color_FFC6FFFF",
+                                                            "title": "Step"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "voice_lfo_1_tempo",
+                                                            "tooltip": "VLFO 2 Tempo",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "158",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_FFC6FFFF"
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -4959,8 +5213,8 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "3, 637",
-                            "size": "240, 44",
+                            "origin": "246, 3",
+                            "size": "240, 66",
                             "background-offset": "75, 0"
                         },
                         "children": {
@@ -4968,7 +5222,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 44",
+                                    "size": "240, 66",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -5051,7 +5305,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 25",
+                                            "size": "240, 47",
                                             "frame-color": "color_FFC6FF80"
                                         }
                                     },
@@ -5059,7 +5313,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 25",
+                                            "size": "240, 47",
                                             "background-color": "color_FFC6FF20"
                                         },
                                         "children": {
@@ -5089,6 +5343,33 @@
                                                     "background-color": "color_00000040",
                                                     "class": "view_container_fix",
                                                     "origin": "81, 1",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 23"
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "background-color": "color_00000040",
+                                                    "class": "view_container_fix",
+                                                    "origin": "1, 23",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 23"
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "background-color": "color_00000040",
+                                                    "class": "view_container_fix",
+                                                    "origin": "81, 23",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 23"
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "background-color": "color_00000040",
+                                                    "class": "view_container_fix",
+                                                    "origin": "161, 23",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 23"
                                                 }
@@ -5146,6 +5427,51 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
+                                                    "COptionMenu": {
+                                                        "attributes": {
+                                                            "class": "COptionMenu",
+                                                            "size": "49, 19",
+                                                            "origin": "0, 0",
+                                                            "control-tag": "voice_lfo_2_sync/polarity",
+                                                            "tooltip": "VLFO 3 Sync/polarity",
+                                                            "font": "~ NormalFontSmall",
+                                                            "min-value": "0",
+                                                            "default-value": "0",
+                                                            "text-alignment": "left",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "menu-popup-style": "true",
+                                                            "menu-check-style": "false",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "max-value": "3",
+                                                            "font-color": "color_FFC6FFFF",
+                                                            "back-color": "color_FFC6FF40",
+                                                            "shadow-color": "color_FFC6FF80"
+                                                        }
+                                                    },
+                                                    "CTextLabel": {
+                                                        "attributes": {
+                                                            "class": "CTextLabel",
+                                                            "size": "28, 19",
+                                                            "origin": "52, 0",
+                                                            "transparent": "true",
+                                                            "text-alignment": "left",
+                                                            "font": "~ NormalFontSmall",
+                                                            "font-color": "color_FFC6FFFF",
+                                                            "title": "SnPl"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "class": "view_container_fix",
+                                                    "origin": "3, 25",
+                                                    "size": "80, 19",
+                                                    "background-color": "color_FFFFFF00"
+                                                },
+                                                "children": {
                                                     "seven_rotary_knob": {
                                                         "attributes": {
                                                             "class": "seven_rotary_knob",
@@ -5189,6 +5515,58 @@
                                                         }
                                                     }
                                                 }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "class": "view_container_fix",
+                                                    "origin": "3, 25",
+                                                    "size": "80, 19",
+                                                    "background-color": "color_FFFFFF00"
+                                                },
+                                                "children": {
+                                                    "seven_rotary_knob": {
+                                                        "attributes": {
+                                                            "class": "seven_rotary_knob",
+                                                            "size": "20, 19",
+                                                            "origin": "0, 0",
+                                                            "control-tag": "voice_lfo_2_tempo",
+                                                            "tooltip": "VLFO 3 Tempo",
+                                                            "angle-start": "20",
+                                                            "angle-range": "320",
+                                                            "color": "color_FFC6FFFF"
+                                                        }
+                                                    },
+                                                    "CTextLabel": {
+                                                        "attributes": {
+                                                            "class": "CTextLabel",
+                                                            "size": "26, 19",
+                                                            "origin": "23, 0",
+                                                            "transparent": "true",
+                                                            "text-alignment": "left",
+                                                            "font": "~ NormalFontSmall",
+                                                            "font-color": "color_FFC6FFFF",
+                                                            "title": "Step"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "28, 19",
+                                                            "origin": "49, 0",
+                                                            "control-tag": "voice_lfo_2_tempo",
+                                                            "tooltip": "VLFO 3 Tempo",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "right",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "158",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_FFC6FFFF"
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -5200,7 +5578,7 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "246, 3",
+                            "origin": "246, 72",
                             "size": "240, 66",
                             "background-offset": "75, 50"
                         },
@@ -5870,7 +6248,7 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "246, 72",
+                            "origin": "246, 141",
                             "size": "240, 66",
                             "background-offset": "100, 0"
                         },
@@ -6540,7 +6918,7 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "246, 141",
+                            "origin": "246, 210",
                             "size": "240, 66",
                             "background-offset": "100, 25"
                         },
@@ -7210,7 +7588,7 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "246, 210",
+                            "origin": "246, 279",
                             "size": "240, 132",
                             "background-offset": "25, 25"
                         },
@@ -8523,7 +8901,7 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "246, 345",
+                            "origin": "246, 414",
                             "size": "240, 132",
                             "background-offset": "25, 50"
                         },
@@ -9836,8 +10214,8 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "246, 480",
-                            "size": "240, 132",
+                            "origin": "246, 549",
+                            "size": "240, 167",
                             "background-offset": "50, 0"
                         },
                         "children": {
@@ -9845,7 +10223,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 132",
+                                    "size": "240, 167",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -9928,7 +10306,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 113",
+                                            "size": "240, 148",
                                             "frame-color": "color_A0C4FF80"
                                         }
                                     },
@@ -9936,7 +10314,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 113",
+                                            "size": "240, 148",
                                             "background-color": "color_A0C4FF20"
                                         },
                                         "children": {
@@ -11149,8 +11527,8 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "246, 615",
-                            "size": "240, 66",
+                            "origin": "489, 3",
+                            "size": "240, 44",
                             "background-offset": "75, 25"
                         },
                         "children": {
@@ -11158,7 +11536,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 66",
+                                    "size": "240, 44",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -11225,7 +11603,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 47",
+                                            "size": "240, 25",
                                             "frame-color": "color_FDFFB680"
                                         }
                                     },
@@ -11233,7 +11611,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 47",
+                                            "size": "240, 25",
                                             "background-color": "color_FDFFB620"
                                         },
                                         "children": {
@@ -11448,7 +11826,7 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "489, 3",
+                            "origin": "489, 50",
                             "size": "240, 220",
                             "background-offset": "100, 50"
                         },
@@ -13229,7 +13607,7 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "489, 226",
+                            "origin": "489, 273",
                             "size": "240, 396",
                             "background-offset": "125, 0"
                         },
@@ -16347,8 +16725,8 @@
                         "attributes": {
                             "bitmap": "background",
                             "class": "view_container_fix",
-                            "origin": "489, 625",
-                            "size": "240, 56",
+                            "origin": "489, 672",
+                            "size": "240, 44",
                             "background-offset": "125, 25"
                         },
                         "children": {
@@ -16356,7 +16734,7 @@
                                 "attributes": {
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 56",
+                                    "size": "240, 44",
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
@@ -16423,7 +16801,7 @@
                                             "round-rect-radius": "3",
                                             "origin": "0, 19",
                                             "back-color": "color_00000000",
-                                            "size": "240, 37",
+                                            "size": "240, 25",
                                             "frame-color": "color_9BF6FF80"
                                         }
                                     },
@@ -16431,7 +16809,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 19",
-                                            "size": "240, 37",
+                                            "size": "240, 25",
                                             "background-color": "color_9BF6FF20"
                                         },
                                         "children": {

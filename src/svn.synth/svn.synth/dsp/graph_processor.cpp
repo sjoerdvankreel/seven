@@ -105,8 +105,13 @@ voice_lfo_graph::sample_count(param_value const* state, float sample_rate, float
 {
   std::int32_t const cycles = 2;
   std::int32_t begin = topology()->param_bounds[part_type::voice_lfo][part_index()];  
-  float frequency = state[begin + voice_lfo_param::freq].real;
-  return static_cast<std::int32_t>(std::ceil(cycles * lfo_graph_rate / frequency));
+  float samples = lfo_graph_rate / state[begin + voice_lfo_param::freq_time].real;
+  if(cv_sync_polarity_is_synced(state[begin + voice_lfo_param::sync_polarity].discrete))
+  {
+    float timesig = voice_lfo_timesig_values[state[begin + voice_lfo_param::freq_sync].discrete];
+    samples = timesig_to_samples(lfo_graph_rate, lfo_graph_bpm, timesig);
+  }
+  return static_cast<std::int32_t>(std::ceil(cycles * samples));
 }
 
 void

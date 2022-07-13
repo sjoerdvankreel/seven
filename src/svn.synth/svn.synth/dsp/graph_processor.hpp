@@ -9,7 +9,7 @@ namespace svn::synth {
 class envelope_graph:
 public svn::base::graph_processor<float>
 {
-  static inline std::int32_t constexpr env_graph_rate = 200.0f;
+  static inline float constexpr env_graph_rate = 200.0f;
 
 private:
   void setup_stages(param_value const* const* automation, float bpm, 
@@ -28,7 +28,8 @@ public:
 class voice_lfo_graph:
 public svn::base::graph_processor<float>
 {
-  static inline std::int32_t constexpr lfo_graph_rate = 1000.0f;
+  static inline float constexpr lfo_graph_bpm = 120.0f;
+  static inline float constexpr lfo_graph_rate = 1000.0f;
 
 public:
   voice_lfo_graph(topology_info const* topology, std::int32_t part_index) :
@@ -43,7 +44,7 @@ public:
 class cv_route_graph:
 public svn::base::graph_processor<float>
 {
-  static inline std::int32_t constexpr cv_route_graph_rate = 1000.0f;
+  static inline float constexpr cv_route_graph_rate = 1000.0f;
 
 public:
   cv_route_graph(topology_info const* topology) :

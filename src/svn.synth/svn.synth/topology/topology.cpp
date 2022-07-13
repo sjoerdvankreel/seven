@@ -38,18 +38,18 @@ voice_amp_params[voice_amp_param::count] =
 
 // ---- voice lfo ----
 
-static std::vector<std::pair<std::int32_t, std::int32_t>> const voice_lfo_synced_timesig = beat_synced_timesig(16, false);
-static std::vector<std::wstring> const voice_lfo_synced_timesig_names = beat_synced_timesig_names(voice_lfo_synced_timesig);
-static std::vector<float> const voice_lfo_synced_timesig_values_init = beat_synced_timesig_values(voice_lfo_synced_timesig);
-std::int32_t const voice_lfo_synced_timesig_count = static_cast<std::int32_t>(voice_lfo_synced_timesig.size());
-float const* const voice_lfo_synced_timesig_values = voice_lfo_synced_timesig_values_init.data();
+static std::vector<std::pair<std::int32_t, std::int32_t>> const voice_lfo_timesig = beat_synced_timesig(16, false);
+static std::vector<std::wstring> const voice_lfo_timesig_names = beat_synced_timesig_names(voice_lfo_timesig);
+static std::vector<float> const voice_lfo_timesig_values_init = beat_synced_timesig_values(voice_lfo_timesig);
+std::int32_t const voice_lfo_timesig_count = static_cast<std::int32_t>(voice_lfo_timesig.size());
+float const* const voice_lfo_timesig_values = voice_lfo_timesig_values_init.data();
 
 static graph_descriptor const voice_lfo_graph = { -1, 0, 2, 1, 1, L"LFO" };
 static param_relevance const voice_lfo_time_relevance[1] = { { voice_lfo_param::sync_polarity, { cv_sync_polarity::time_bipolar, cv_sync_polarity::time_unipolar } } };
 static param_relevance const voice_lfo_sync_relevance[1] = { { voice_lfo_param::sync_polarity, { cv_sync_polarity::sync_bipolar, cv_sync_polarity::sync_unipolar } } };
 
-static std::wstring format_voice_lfo_timesig(std::int32_t val) { return voice_lfo_synced_timesig_names[val]; }
-static bool parse_voice_lfo_timesig(std::wstring const& val, std::int32_t& result) { return list_parser(val, voice_lfo_synced_timesig_names, result); }
+static std::wstring format_voice_lfo_timesig(std::int32_t val) { return voice_lfo_timesig_names[val]; }
+static bool parse_voice_lfo_timesig(std::wstring const& val, std::int32_t& result) { return list_parser(val, voice_lfo_timesig_names, result); }
 
 static item_name const 
 voice_lfo_types[voice_lfo_type::count] =
@@ -66,16 +66,16 @@ voice_lfo_params[voice_lfo_param::count] =
   { "{F744C553-8CFA-4262-98A7-37E187BF27FF}", { L"Type", L"Type" }, L"", false, voice_lfo_types, voice_lfo_type::count, { false, false, 0, 0, 0, nullptr, 0}},
   { "{83C1ED1B-095E-4F58-B091-39DA4F0125BF}", { L"SnPl", L"Sync/polarity" }, L"", false, cv_sync_polarities, cv_sync_polarity::count, { false, false, 1, 0, 0, nullptr, 0} },
   { "{E320A1F0-2FCA-46F2-BBCB-0504D65503BC}", { L"Freq", L"Frequency" }, L"Hz", { 0.0f, 2, real_bounds::quadratic(voice_lfo_min_freq, voice_lfo_max_freq), real_bounds::quadratic(voice_lfo_min_freq, voice_lfo_max_freq) }, { false, false, 2, 0, 0, voice_lfo_time_relevance, 1 } },
-  { "{09618D35-EFAD-4E2E-8FD0-04B6F5AC14D5}", { L"Step", L"Tempo" }, L"", true, 0, voice_lfo_synced_timesig_count - 1, 0, format_voice_lfo_timesig, parse_voice_lfo_timesig, { false, false, 2, 0, 0, voice_lfo_sync_relevance, 1 } }
+  { "{09618D35-EFAD-4E2E-8FD0-04B6F5AC14D5}", { L"Step", L"Tempo" }, L"", true, 0, voice_lfo_timesig_count - 1, 0, format_voice_lfo_timesig, parse_voice_lfo_timesig, { false, false, 2, 0, 0, voice_lfo_sync_relevance, 1 } }
 };  
 
 // ---- envelope ----
 
-static std::vector<std::pair<std::int32_t, std::int32_t>> const env_synced_timesig = beat_synced_timesig(16, true);
-static std::vector<std::wstring> const env_synced_timesig_names = beat_synced_timesig_names(env_synced_timesig);
-static std::vector<float> const env_synced_timesig_values_init = beat_synced_timesig_values(env_synced_timesig);
-std::int32_t const env_synced_timesig_count = static_cast<std::int32_t>(env_synced_timesig.size());
-float const* const env_synced_timesig_values = env_synced_timesig_values_init.data();
+static std::vector<std::pair<std::int32_t, std::int32_t>> const env_timesig = beat_synced_timesig(16, true);
+static std::vector<std::wstring> const env_timesig_names = beat_synced_timesig_names(env_timesig);
+static std::vector<float> const env_timesig_values_init = beat_synced_timesig_values(env_timesig);
+std::int32_t const env_timesig_count = static_cast<std::int32_t>(env_timesig.size());
+float const* const env_timesig_values = env_timesig_values_init.data();
 
 static graph_descriptor const envelope_graph = { -1, 0, 2, 1, 1, L"Envelope" };
 static param_relevance const envelope_decay_log_relevance[1] = { { envelope_param::decay_slope, { envelope_slope::log } } };
@@ -84,8 +84,8 @@ static param_relevance const envelope_release_log_relevance[1] = { { envelope_pa
 static param_relevance const envelope_time_relevance[1] = { { envelope_param::sync_polarity, { cv_sync_polarity::time_bipolar, cv_sync_polarity::time_unipolar } } };
 static param_relevance const envelope_sync_relevance[1] = { { envelope_param::sync_polarity, { cv_sync_polarity::sync_bipolar, cv_sync_polarity::sync_unipolar } } };
 
-static std::wstring format_env_timesig(std::int32_t val) { return env_synced_timesig_names[val]; }
-static bool parse_env_timesig(std::wstring const& val, std::int32_t& result) { return list_parser(val, env_synced_timesig_names, result); }
+static std::wstring format_env_timesig(std::int32_t val) { return env_timesig_names[val]; }
+static bool parse_env_timesig(std::wstring const& val, std::int32_t& result) { return list_parser(val, env_timesig_names, result); }
 
 static item_name const
 envelope_types[envelope_type::count] =
@@ -110,20 +110,20 @@ envelope_params[envelope_param::count] =
   { "{D622D344-A08E-4109-84D8-C310B81C2769}", { L"Type", L"Type" }, L"", false, envelope_types, envelope_type::count, { false, false, 0, 0, 0, nullptr, 0}},
   { "{F468AAD5-B183-4DCB-B6F3-88842FC647F6}", { L"SnPl", L"Sync/polarity" }, L"", false, cv_sync_polarities, cv_sync_polarity::count, { false, false, 1, 0, 0, nullptr, 0} },
   { "{B1D30C73-FF09-452C-A9D5-00BB8B2CE58D}", { L"Dly", L"Delay time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 2, 2, 0, envelope_time_relevance, 1 } },
-  { "{70C49337-7141-42BC-B336-78B28F4770E3}", { L"Dly", L"Delay sync" }, L"", true, 0, env_synced_timesig_count - 1, 0, format_env_timesig, parse_env_timesig, { false, false, 2, 2, 0, envelope_sync_relevance, 1}},
+  { "{70C49337-7141-42BC-B336-78B28F4770E3}", { L"Dly", L"Delay sync" }, L"", true, 0, env_timesig_count - 1, 0, format_env_timesig, parse_env_timesig, { false, false, 2, 2, 0, envelope_sync_relevance, 1}},
   { "{AADD118E-B9CE-464E-83C0-1FAE5A62F530}", { L"Hld", L"Hold time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 3, 2, 0, envelope_time_relevance, 1 } },
-  { "{AC5D88B7-8CDB-4401-9FB0-20EF0195ABD8}", { L"Hld", L"Hold sync" }, L"", true, 0, env_synced_timesig_count - 1, 0, format_env_timesig, parse_env_timesig, { false, false, 3, 2, 0, envelope_sync_relevance, 1 } },
+  { "{AC5D88B7-8CDB-4401-9FB0-20EF0195ABD8}", { L"Hld", L"Hold sync" }, L"", true, 0, env_timesig_count - 1, 0, format_env_timesig, parse_env_timesig, { false, false, 3, 2, 0, envelope_sync_relevance, 1 } },
   { "{721AFEB5-A17E-4C37-BF3A-94F645234B73}", { L"Sus", L"Sustain level" }, L"dB", { 0.5f, 1, real_bounds::unit(), real_bounds::decibel() }, { false, false, 4, 2, 0, nullptr, 0 } },
   { "{E0A45A06-3C0C-4409-BBFA-A2834F0C7BAD}", { L"Att", L"Attack time" }, L"Sec", { 0.05f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 5, 2, 0, envelope_time_relevance, 1 } },
-  { "{E0CFCBB7-B050-4C47-B78C-2511AD2EE6B6}", { L"Att", L"Attack sync" }, L"", true, 0, env_synced_timesig_count - 1, 1, format_env_timesig, parse_env_timesig, { false, false, 5, 2, 0, envelope_sync_relevance, 1 } },
+  { "{E0CFCBB7-B050-4C47-B78C-2511AD2EE6B6}", { L"Att", L"Attack sync" }, L"", true, 0, env_timesig_count - 1, 1, format_env_timesig, parse_env_timesig, { false, false, 5, 2, 0, envelope_sync_relevance, 1 } },
   { "{1400CEB5-25B1-42B1-ADA1-B5FDF8C6D1E5}", { L"Slp", L"Attack slope" }, L"", false, envelope_slopes, envelope_slope::count, { false, false, 6, 1, 0, nullptr, 0 } },
   { "{5A57D560-64D2-44D5-BD78-82B7C4BEA79C}", { L"Mid", L"Attack log midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { false, false, 7, 1, 0, envelope_attack_log_relevance, 1 } },
   { "{A62B5DB0-4D41-4DA4-AE14-E25A2C983B21}", { L"Dcy", L"Decay time" }, L"Sec", { 0.1f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 8, 2, 0, envelope_time_relevance, 1 } },
-  { "{09B32681-21EF-4C65-B5FD-9FA64ED4AF5E}", { L"Dcy", L"Decay sync" }, L"", true, 0, env_synced_timesig_count - 1, 9, format_env_timesig, parse_env_timesig, { false, false, 8, 2, 0, envelope_sync_relevance, 1 } },
+  { "{09B32681-21EF-4C65-B5FD-9FA64ED4AF5E}", { L"Dcy", L"Decay sync" }, L"", true, 0, env_timesig_count - 1, 9, format_env_timesig, parse_env_timesig, { false, false, 8, 2, 0, envelope_sync_relevance, 1 } },
   { "{62381FB9-9060-4425-97A6-B57ECB2BECCA}", { L"Slp", L"Decay slope" }, L"", false, envelope_slopes, envelope_slope::count, { false, false, 9, 1, 0, nullptr, 0 } },
   { "{8B5D1F67-DA80-4170-982D-909CC8A025E2}", { L"Mid", L"Decay log midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { false, false, 10, 1, 0, envelope_decay_log_relevance, 1 } },
   { "{75ACC8A6-F228-445C-9788-A367AE32EAAA}", { L"Rel", L"Release time" }, L"Sec", { 0.2f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 11, 2, 0, envelope_time_relevance, 1 } },
-  { "{DDA55E4D-A100-40BA-A7C2-F4C284CACE08}", { L"Rel", L"Release sync" }, L"", true, 0, env_synced_timesig_count - 1, 15, format_env_timesig, parse_env_timesig, { false, false, 11, 2, 0, envelope_sync_relevance, 1 } },
+  { "{DDA55E4D-A100-40BA-A7C2-F4C284CACE08}", { L"Rel", L"Release sync" }, L"", true, 0, env_timesig_count - 1, 15, format_env_timesig, parse_env_timesig, { false, false, 11, 2, 0, envelope_sync_relevance, 1 } },
   { "{6B978A93-54D1-4990-BD2E-BC143EA816AF}", { L"Slp", L"Release slope" }, L"", false, envelope_slopes, envelope_slope::count, { false, false, 12, 1, 0, nullptr, 0 } },
   { "{4E2A6D8B-275C-4E1E-84BE-B21FE16E1E0F}", { L"Mid", L"Release log midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { false, false, 13, 1, 0, envelope_release_log_relevance, 1 } }
 }; 

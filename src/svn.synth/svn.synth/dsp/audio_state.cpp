@@ -5,13 +5,13 @@ namespace svn::synth {
 
 std::vector<std::vector<std::int32_t>> const audio_state::input_table_in
 = svn::base::multi_list_table_init_in(audio_input_counts, audio_route_input::count);
-std::vector<std::vector<std::int32_t>> const const audio_state::output_table_in
+std::vector<std::vector<std::int32_t>> const audio_state::output_table_in
 = svn::base::multi_list_table_init_in(audio_output_counts, audio_route_output::count);
 std::vector<std::pair<std::int32_t, std::int32_t>> const audio_state::input_table_out
 = svn::base::multi_list_table_init_out(audio_input_counts, audio_route_input::count);
 
 audio_state::
-audio_state(std::int32_t max_sample_count): 
+audio_state(std::int32_t max_sample_count):  
 oscillator(), voice_filter()
 {
   std::vector<base::audio_sample32> audio(static_cast<std::size_t>(max_sample_count));

@@ -36,8 +36,8 @@ typedef output_param_t::value output_param;
 
 // ---- envelope ----
 
-extern std::int32_t const env_synced_timesig_count;
-extern float const* const env_synced_timesig_values;
+extern std::int32_t const env_timesig_count;
+extern float const* const env_timesig_values;
 
 struct envelope_type_t { enum value { dahdsr, dahdr, count }; };
 struct envelope_slope_t { enum value { lin, log, quad, sqrt, count }; };
@@ -52,8 +52,8 @@ typedef envelope_param_t::value envelope_param;
 inline float constexpr voice_lfo_min_freq = 0.1f;
 inline float constexpr voice_lfo_max_freq = 20.0f;
 
-extern std::int32_t const voice_lfo_synced_timesig_count;
-extern float const* const voice_lfo_synced_timesig_values;
+extern std::int32_t const voice_lfo_timesig_count;
+extern float const* const voice_lfo_timesig_values;
 
 struct voice_lfo_type_t { enum value { sine, custom, random, count }; };
 struct voice_lfo_param_t { enum value { on, type, sync_polarity, freq_time, freq_sync, count }; };
