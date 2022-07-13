@@ -270,8 +270,7 @@ cv_route_graph::dsp_to_plot(
   std::vector<float>& plot, float sample_rate)
 {
   plot.resize(dsp.size());
-  for (std::size_t i = 0; i < dsp.size(); i++)
-    plot[i] = (dsp[i] + 1.0f) * 0.5f;
+  std::copy(dsp.begin(), dsp.end(), plot.begin());
 }
 
 std::int32_t
@@ -325,16 +324,18 @@ cv_route_graph::process_dsp_core(
   std::int32_t part_type = cv_route_part_mapping[cv_route_output_id];
   std::int32_t param_index = cv_route_param_mapping[cv_route_output_id][cv_route_target];
 
-  std::vector<float> automated_buffer(topology()->input_param_count * input.sample_count);
-  std::vector<float*> automated(topology()->input_param_count);
+  std::vector<base::param_value> automated_buffer(topology()->input_param_count * input.sample_count);
+  std::vector<base::param_value*> automated(topology()->input_param_count);
   for(std::size_t p = 0; p < topology()->input_param_count; p++)
     automated[p] = automated_buffer.data() + p * input.sample_count;
   std::int32_t rt_param_index_begin = topology()->param_bounds[part_type][rt_part_index];
   std::int32_t rt_param_index = rt_param_index_begin + param_index;
   for(std::int32_t i = 0; i < input.sample_count; i++)
-    automated[rt_param_index][i] = automation.get(cv_route_param::plot_lvl, 0).real;
+    automated[rt_param_index][i].real = automation.get(cv_route_param::plot_lvl, 0).real;
 
-  automation_view automated_view = vinput.automation.rearrange_params(part_type, rt_part_index);
+  automation_view automated_view(topology(), nullptr, automated.data(), 
+    topology()->input_param_count, topology()->input_param_count, 0, input.sample_count, 0, input.sample_count);
+  automated_view = automated_view.rearrange_params(part_type, rt_part_index);
   float const* const* modulated = state.modulate(vinput, automated_view, 
     cv_route_param_mapping[cv_route_output_id], static_cast<cv_route_output>(cv_route_output_id), rt_part_index);
   for (std::int32_t i = 0; i < input.sample_count; i++)
