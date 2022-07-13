@@ -72,6 +72,6 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
     path->addLine(graph_data[i].x + padx, render_size.y - graph_data[i].y + pady);
   context->drawGraphicsPath(path, CDrawContext::kPathStroked);
   path->forget();
-} 
+}   
 
 } // namespace svn::vst::base

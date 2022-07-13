@@ -69,7 +69,7 @@ envelope::setup_stages(automation_view const& automation, std::int32_t s,
 {
   std::int32_t sync_polarity = automation.get(envelope_param::sync_polarity, s).discrete;
   if (sync_polarity == envelope_sync_polarity::time_unipolar || sync_polarity == envelope_sync_polarity::time_bipolar)
-  {
+  { 
     delay = automation.get(envelope_param::delay_time, s).real * _sample_rate;
     attack = automation.get(envelope_param::attack_time, s).real * _sample_rate;
     hold = automation.get(envelope_param::hold_time, s).real * _sample_rate;
@@ -108,6 +108,6 @@ envelope::process_block(voice_input const& input, std::int32_t index, float* cv_
     else if(!dahdsr || stage.first != envelope_stage::sustain) _position++;
   }
   return input.sample_count; 
-}
+} 
 
 } // namespace svn::synth
