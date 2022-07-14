@@ -20,8 +20,8 @@ inline std::int32_t constexpr voice_filter_count = 3;
 extern base::part_descriptor const part_descriptors[];
 inline std::int32_t constexpr synth_polyphony = 32;
 inline std::int32_t constexpr synth_max_ui_height = 760;
-inline base::ui_color constexpr synth_ui_end_color = { 0x1D, 0xF8, 0xBF };
-inline base::ui_color constexpr synth_ui_start_color = { 0x90, 0xA2, 0xFD }; 
+inline base::ui_color constexpr synth_ui_end_color = { 0x4A, 0xF9, 0xCB };
+inline base::ui_color constexpr synth_ui_start_color = { 0xA6, 0xB4, 0xFD }; 
 
 struct part_type_t { enum value { oscillator, envelope, voice_lfo, voice_amp, voice_filter, audio_route, cv_route, output, count }; };
 typedef part_type_t::value part_type;
