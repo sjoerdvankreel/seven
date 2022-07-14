@@ -20,6 +20,7 @@ struct voice_input
 struct cpu_usage
 {
   double cv;
+  double aux;
   double env;
   double osc;
   double vamp;

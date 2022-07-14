@@ -311,7 +311,8 @@
             "output_0_envelope_cpu": "249",
             "output_0_voice_amp_cpu": "250",
             "output_0_audio_route_cpu": "251",
-            "output_0_cv_route_cpu": "252"
+            "output_0_cv_route_cpu": "252",
+            "output_0_auxiliary_cpu": "253"
         },
         "templates": {
             "view": {
@@ -16923,6 +16924,15 @@
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
+                                                    "background-color": "color_FFFFFF20",
+                                                    "class": "view_container_fix",
+                                                    "origin": "162, 68",
+                                                    "background-color-draw-style": "filled",
+                                                    "size": "79, 21"
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
                                                     "background-color": "color_00000040",
                                                     "class": "view_container_fix",
                                                     "origin": "161, 67",
@@ -17353,6 +17363,46 @@
                                                             "origin": "41, 0",
                                                             "control-tag": "output_0_cv_route_cpu",
                                                             "tooltip": "Out Cv route cpu (%)",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "left",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "100",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_6EFAD5FF"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "class": "view_container_fix",
+                                                    "origin": "163, 69",
+                                                    "size": "80, 19",
+                                                    "background-color": "color_FFFFFF00"
+                                                },
+                                                "children": {
+                                                    "CTextLabel": {
+                                                        "attributes": {
+                                                            "class": "CTextLabel",
+                                                            "size": "38, 19",
+                                                            "origin": "0, 0",
+                                                            "transparent": "true",
+                                                            "text-alignment": "left",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "font-color": "color_6EFAD5FF",
+                                                            "title": "Aux cpu"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "35, 19",
+                                                            "origin": "41, 0",
+                                                            "control-tag": "output_0_auxiliary_cpu",
+                                                            "tooltip": "Out Auxiliary cpu (%)",
                                                             "style-no-frame": "true",
                                                             "style-round-rect": "true",
                                                             "text-alignment": "left",

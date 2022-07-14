@@ -31,7 +31,8 @@ output_params[output_param::count] =
   { "{0DF43E23-9273-46BC-8BBE-52B2C0E612F7}", { L"Env cpu", L"Envelope cpu" }, L"%", false, 0, 100, 0, { false, true, 7, 1, nullptr, 0 } },
   { "{DC142F66-E4B2-4BEA-8B2E-A9501B32B1FB}", { L"Amp cpu", L"Voice amp cpu" }, L"%", false, 0, 100, 0, { false, true, 8, 1, nullptr, 0 } },
   { "{295F92F6-37CD-453E-B8C2-E03B6648A1E4}", { L"Audio cpu", L"Audio route cpu" }, L"%", false, 0, 100, 0, { false, true, 9, 1, nullptr, 0 } },
-  { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"CV cpu", L"Cv route cpu" }, L"%", false, 0, 100, 0, { false, true, 10, 1, nullptr, 0 } }
+  { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"CV cpu", L"Cv route cpu" }, L"%", false, 0, 100, 0, { false, true, 10, 1, nullptr, 0 } },
+  { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"Aux cpu", L"Auxiliary cpu" }, L"%", false, 0, 100, 0, { false, true, 11, 1, nullptr, 0 } }
 };
 
 // ---- amp ---- 
