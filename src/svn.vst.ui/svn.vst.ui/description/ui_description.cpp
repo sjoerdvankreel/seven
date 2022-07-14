@@ -50,9 +50,9 @@ part_ui_description::create(
   result.columns = part.descriptor->ui.param_columns;
   result.rows = result.occupied_cell_count / result.columns;
   if (result.occupied_cell_count % result.columns != 0) ++result.rows;
-  result.color = part.descriptor->ui.color;
   result.width = result.columns * param_total_width;
   result.height = (result.rows + 1) * (param_row_height + margin);
+  result.color = ui_color_gradient(topology, part.descriptor->ui.part_index);
 
   result.enabled_param.row = 0;
   result.enabled_param.runtime_param_index = -1;

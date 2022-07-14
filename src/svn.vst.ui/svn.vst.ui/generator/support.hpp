@@ -13,9 +13,9 @@ namespace svn::vst::ui {
 
 std::string size_to_string(std::int32_t w, std::int32_t h);
 std::string get_control_tag(svn::base::topology_info const& topology, std::size_t p);
-std::string get_color_name(svn::base::part_ui_color const& color, std::int32_t alpha_index);
-std::string get_color_value(svn::base::part_ui_color const& color, std::int32_t alpha_index);
-std::string print_rgb_hex(svn::base::part_ui_color const& color, bool print_alpha, std::int32_t alpha_index);
+std::string get_color_name(svn::base::ui_color const& color, std::int32_t alpha_index);
+std::string get_color_value(svn::base::ui_color const& color, std::int32_t alpha_index);
+std::string print_rgb_hex(svn::base::ui_color const& color, bool print_alpha, std::int32_t alpha_index);
 
 std::string get_param_control_class(
   svn::base::topology_info const& topology,

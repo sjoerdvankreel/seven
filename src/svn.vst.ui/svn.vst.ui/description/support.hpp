@@ -1,13 +1,14 @@
 #ifndef SVN_VST_UI_DESCRIPTION_SUPPORT_HPP
 #define SVN_VST_UI_DESCRIPTION_SUPPORT_HPP
 
+#include <svn.base/topology/topology_info.hpp>
 #include <cstdint>
 #include <cstdlib>
 
 namespace svn::vst::ui {
 
-inline svn::base::part_ui_color constexpr white = { 0xFF, 0xFF, 0xFF };
-inline svn::base::part_ui_color constexpr black = { 0x00, 0x00, 0x00 };
+inline svn::base::ui_color constexpr white = { 0xFF, 0xFF, 0xFF };
+inline svn::base::ui_color constexpr black = { 0x00, 0x00, 0x00 };
 
 struct color_alpha_t { enum value { transparent, eight, quarter, half, opaque, count }; };
 typedef color_alpha_t::value color_alpha;

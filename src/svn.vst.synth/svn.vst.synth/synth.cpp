@@ -14,12 +14,13 @@ using namespace svn::synth;
 
 // Bindings to vst base project.
 extern "C" {
-  
+   
 topology_info const*
 svn_vst_create_topology()
 { return topology_info::create(
-    part_descriptors, part_type::count,
-    synth_polyphony, synth_max_ui_height); }
+    part_descriptors, part_type::count, synth_polyphony, 
+    synth_max_ui_height, synth_ui_start_color, synth_ui_end_color); 
+}
       
 audio_processor*
 svn_vst_create_audio_processor(

@@ -27,7 +27,7 @@ struct part_ui_description
   std::int32_t rows; // Grid rows.
   std::int32_t column; // Own column.
   std::int32_t columns; // Grid columns.
-  svn::base::part_ui_color color; // Index into color wheel.
+  svn::base::ui_color color; // Gradient color.
   std::int32_t runtime_part_index; // Part runtime index.
   std::int32_t occupied_cell_count; // Param unique ui indices plus graphs sizes.
   wchar_t const* info; // Extra header info.

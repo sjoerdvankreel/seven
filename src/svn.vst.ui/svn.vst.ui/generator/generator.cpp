@@ -29,14 +29,14 @@ static Value
 build_ui_colors(topology_info const& topology, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  std::vector<part_ui_color> colors;
+  std::vector<ui_color> colors;
   for (std::int32_t a = 0; a < color_alpha::count; a++)
   {
     add_member(result, get_color_name(white, a), get_color_value(white, a), allocator);
     add_member(result, get_color_name(black, a), get_color_value(black, a), allocator);
     for (std::int32_t i = 0; i < topology.static_part_count; i++)
     {
-      part_ui_color color = topology.static_parts[i].ui.color;
+      ui_color color = ui_color_gradient(topology, i);
       add_member(result, get_color_name(color, a), get_color_value(color, a), allocator);
     }
   }
@@ -92,7 +92,7 @@ build_ui_param_control_base(
 static Value
 build_ui_param_checkbox(
   topology_info const& topology, part_ui_description const& part,
-  param_ui_description const& param, part_ui_color const& color, std::int32_t left,
+  param_ui_description const& param, ui_color const& color, std::int32_t left,
   std::int32_t width, std::int32_t top_margin, Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);

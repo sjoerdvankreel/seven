@@ -32,8 +32,8 @@ topology_info::state_check(param_value const* state) const
 }
   
 topology_info const*
-topology_info::create(part_descriptor const* static_parts,
-  std::int32_t part_count, std::int32_t max_note_events, std::int32_t max_ui_height)
+topology_info::create(part_descriptor const* static_parts, std::int32_t part_count, 
+  std::int32_t max_note_events, std::int32_t max_ui_height, ui_color start_ui_color, ui_color end_ui_color)
 {
   bool seen_output = false;   
   assert(part_count > 0);
@@ -48,6 +48,8 @@ topology_info::create(part_descriptor const* static_parts,
   result->static_part_count = part_count;
   result->max_note_events = max_note_events;
   result->ui.max_height = max_ui_height;
+  result->ui.start_color = start_ui_color;
+  result->ui.end_color = end_ui_color;
 
   std::int32_t part_index = 0; 
   std::int32_t param_index = 0;
