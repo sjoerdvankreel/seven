@@ -26,14 +26,15 @@ class graph_processor_base
 public:
   virtual ~graph_processor_base() = 0 {}
 
-  // This is the main entry point for the graph plot.
-  virtual std::vector<graph_point> const& plot(
-    param_value const* state, float sample_rate, 
-    float bpm, std::int32_t width, std::int32_t height) = 0;
-
   // Allow for some reuse between graphs.
   // Repaint if that parameter changes?
   virtual bool needs_repaint(std::int32_t runtime_param) const = 0;
+
+  // This is the main entry point for the graph plot.
+  // Data must be in [0, 1] even if bipolar.
+  virtual std::vector<graph_point> const& plot(
+    param_value const* state, float sample_rate, 
+    float bpm, std::int32_t width, std::int32_t height, bool& bipolar) = 0;
 };
 
 // Renders pretty images.
@@ -72,14 +73,14 @@ public:
 
   std::vector<graph_point> const& plot(
     param_value const* state, float sample_rate,
-    float bpm, std::int32_t width, std::int32_t height) override;
+    float bpm, std::int32_t width, std::int32_t height, bool& bipolar) override;
 
   // Need to know size up front.
   virtual std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const = 0;
   // Renders data in sample_count samples.
   virtual void process_dsp_core(block_input const& input, T* output, float sample_rate, float bpm) = 0;
   // Transforms raw data to plot in (0, 1).
-  virtual void dsp_to_plot(param_value const* state, std::vector<T> const& dsp, std::vector<float>& plot, float sample_rate) = 0;
+  virtual void dsp_to_plot(param_value const* state, std::vector<T> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) = 0;
 };
 
 } // namespace svn::base

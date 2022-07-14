@@ -39,11 +39,11 @@ graph_processor<T>::process_dsp(param_value const* state, float sample_rate, flo
 template <class T>
 std::vector<graph_point> const&
 graph_processor<T>::plot(param_value const* state, 
-  float sample_rate, float bpm, std::int32_t width, std::int32_t height)
+  float sample_rate, float bpm, std::int32_t width, std::int32_t height, bool& bipolar)
 {
   _plot_data.clear();
   process_dsp(state, sample_rate, bpm);
-  dsp_to_plot(state, _raw_data, _plot_data, sample_rate);
+  dsp_to_plot(state, _raw_data, _plot_data, sample_rate, bipolar);
 
   _graph_data.clear();
   float transform = width / static_cast<float>(_plot_data.size());

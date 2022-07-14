@@ -83,9 +83,10 @@ voice_lfo_graph::process_dsp_core(
 void
 voice_lfo_graph::dsp_to_plot(
   param_value const* state, std::vector<base::cv_sample> const& dsp,
-  std::vector<float>& plot, float sample_rate)
+  std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
   plot.resize(dsp.size());
+  bipolar = dsp[0].bipolar;
   for(std::size_t i = 0; i < dsp.size(); i++)
     plot[i] = dsp[i].bipolar? (dsp[i].value + 1.0f) * 0.5f: dsp[i].value;
 }
@@ -114,9 +115,10 @@ envelope_graph::needs_repaint(std::int32_t runtime_param) const
 void
 envelope_graph::dsp_to_plot(
   param_value const* state, std::vector<base::cv_sample> const& dsp,
-  std::vector<float>& plot, float sample_rate)
+  std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
   plot.resize(dsp.size());
+  bipolar = dsp[0].bipolar;
   for (std::size_t i = 0; i < dsp.size(); i++)
     plot[i] = dsp[i].bipolar ? (dsp[i].value + 1.0f) * 0.5f : dsp[i].value;
 }
@@ -174,8 +176,9 @@ oscillator_spectrum_graph::sample_count(
 void
 oscillator_spectrum_graph::dsp_to_plot(
   param_value const* state, std::vector<audio_sample32> const& dsp, 
-  std::vector<float>& plot, float sample_rate)
+  std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
+  bipolar = false;
   _mono.clear();
   for(std::size_t s = 0; s < dsp.size(); s++)
     _mono.push_back(dsp[s].mono());
@@ -194,8 +197,9 @@ oscillator_wave_graph::needs_repaint(std::int32_t runtime_param) const
 void
 oscillator_wave_graph::dsp_to_plot(
   param_value const* state, std::vector<base::audio_sample32> const& dsp, 
-  std::vector<float>& plot, float sample_rate)
+  std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
+  bipolar = true;
   for (std::size_t s = 0; s < dsp.size(); s++)
     plot.push_back((dsp[s].mono() + 1.0f) * 0.5f);
 }
@@ -244,8 +248,9 @@ voice_filter_ir_graph::needs_repaint(std::int32_t runtime_param) const
 void
 voice_filter_ir_graph::dsp_to_plot(
   param_value const* state, std::vector<base::audio_sample32> const& dsp, 
-  std::vector<float>& plot, float sample_rate)
+  std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
+  bipolar = true;
   for (std::size_t s = 0; s < dsp.size(); s++)
     plot.push_back(std::clamp((dsp[s].mono() + 1.0f) * 0.5f, 0.0f, 1.0f));
 }
@@ -267,8 +272,9 @@ voice_filter_ir_graph::process_dsp_core(
 void
 cv_route_graph::dsp_to_plot(
   param_value const* state, std::vector<float> const& dsp, 
-  std::vector<float>& plot, float sample_rate)
+  std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
+  bipolar = false;
   plot.resize(dsp.size());
   std::copy(dsp.begin(), dsp.end(), plot.begin());
 }
