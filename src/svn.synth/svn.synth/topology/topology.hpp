@@ -109,6 +109,8 @@ inline std::int32_t constexpr audio_input_counts[audio_route_input::count] = { 1
 // ---- cv route ----
 
 struct cv_route_input_t { enum value { off, envelope, vlfo, count }; };
+struct cv_route_input_op_t { enum value { add, mul, count }; };
+
 struct cv_route_output_t { enum value { off, osc, vflt, vamp, count }; };
 struct cv_route_vamp_output_t { enum value { lvl, pan, count }; };
 struct cv_route_osc_output_t { enum value { amp, pan, anlg_pw, dsf_distance, dsf_rolloff, cent, uni_detune, uni_spread, count }; };
@@ -117,6 +119,7 @@ struct cv_route_param_t { enum value { plot_tgt, plot_time, in1, out1, amt1, in2
 
 typedef cv_route_param_t::value cv_route_param;
 typedef cv_route_input_t::value cv_route_input;
+typedef cv_route_input_op_t::value cv_route_input_op;
 typedef cv_route_output_t::value cv_route_output;
 typedef cv_route_osc_output_t::value cv_route_osc_output;
 typedef cv_route_vamp_output_t::value cv_route_vamp_output;
@@ -130,8 +133,9 @@ inline std::int32_t const* const cv_route_param_mapping[cv_route_output_t::count
 
 inline std::int32_t constexpr cv_route_count = 15;
 inline std::int32_t constexpr cv_route_param_offset = 2; // for plot params
-inline std::int32_t constexpr cv_inputs_count = 1 + envelope_count + voice_lfo_count;
 inline std::int32_t constexpr cv_input_counts[cv_route_input::count] = { 1, envelope_count, voice_lfo_count };
+inline std::int32_t constexpr cv_input_op_counts[cv_route_input::count] = { 0, cv_route_input_op::count, cv_route_input_op::count };
+inline std::int32_t constexpr cv_inputs_count = 1 + envelope_count * cv_route_input_op::count + voice_lfo_count * cv_route_input_op::count;
 inline std::int32_t constexpr cv_output_counts[cv_route_output::count] = { 1, oscillator_count, voice_filter_count, 1 };
 inline std::int32_t constexpr cv_output_modulated_counts[cv_route_output::count] = { 0, oscillator_param::count, voice_filter_param::count, voice_amp_param::count };
 inline std::int32_t constexpr cv_output_target_counts[cv_route_output::count] = { 0, cv_route_osc_output::count, cv_route_vflt_output::count, cv_route_vamp_output::count };

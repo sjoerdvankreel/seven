@@ -5,10 +5,10 @@
 
 namespace svn::synth {
 
-std::vector<std::vector<std::int32_t>> const cv_state::input_table_in
-= svn::base::multi_list_table_init_in(cv_input_counts, cv_route_input::count);
-std::vector<std::pair<std::int32_t, std::int32_t>> const cv_state::input_table_out
-= svn::base::multi_list_table_init_out(cv_input_counts, cv_route_input::count);
+std::vector<std::vector<std::vector<std::int32_t>>> const cv_state::input_table_in
+= svn::base::zip_list_table_init_in(cv_input_counts, cv_input_op_counts, cv_route_input::count, 0);
+std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> const cv_state::input_table_out
+= svn::base::zip_list_table_init_out(cv_input_counts, cv_input_op_counts, cv_route_input::count);
 std::vector<std::vector<std::vector<std::int32_t>>> const cv_state::output_table_in
 = svn::base::zip_list_table_init_in(cv_output_counts, cv_output_target_counts, cv_route_output::count, cv_route_param_offset);
 
@@ -43,7 +43,7 @@ float const* const*
 cv_state::modulate(voice_input const& input, base::automation_view const& automated,
   std::int32_t const* mapping, cv_route_output route_output, std::int32_t route_index) const
 {
-  std::int32_t input_off = input_table_in[cv_route_input::off][0];
+  std::int32_t input_off = input_table_in[cv_route_input::off][0][0];
   base::automation_view automation = input.automation.rearrange_params(part_type::cv_route, 0);
   for(std::int32_t p = 0; p < cv_output_target_counts[route_output]; p++)
   {
@@ -59,9 +59,13 @@ cv_state::modulate(voice_input const& input, base::automation_view const& automa
         std::int32_t out = automation.get(i * 3 + cv_route_param_offset + 1, s).discrete;
         if (out != output_id) continue;
         float amt = automation.get(i * 3 + cv_route_param_offset + 2, s).real;
-        std::pair<std::int32_t, std::int32_t> input_ids(input_table_out[in]);
-        scratch[mapping[p]][s] += input_buffer(input_ids.first, input_ids.second)[s].value * amt;
+        std::tuple<std::int32_t, std::int32_t, std::int32_t> input_ids(input_table_out[in]);
+        float cv = input_buffer(std::get<0>(input_ids), std::get<1>(input_ids))[s].value * amt;
+        bool multiply = std::get<2>(input_ids) == cv_route_input_op::mul;
+        if(multiply) scratch[mapping[p]][s] *= cv;
+        else scratch[mapping[p]][s] += cv;
       }
+      scratch[mapping[p]][s] = std::clamp(scratch[mapping[p]][s], 0.0f, 1.0f);
     }
   }
   return scratch.data();

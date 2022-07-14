@@ -16,9 +16,9 @@ namespace svn::synth {
 // Internal cv state.
 class cv_state
 {
-  static std::vector<std::vector<std::int32_t>> const input_table_in;
-  static std::vector<std::pair<std::int32_t, std::int32_t>> const input_table_out;
+  static std::vector<std::vector<std::vector<std::int32_t>>> const input_table_in;
   static std::vector<std::vector<std::vector<std::int32_t>>> const output_table_in;
+  static std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> const input_table_out;
 
   // Of size max modulated parameter count per part type * max sample count.
   std::vector<float*> scratch;

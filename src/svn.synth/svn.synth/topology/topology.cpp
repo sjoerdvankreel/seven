@@ -268,19 +268,21 @@ audio_route_params[audio_route_param::count] =
    
 static graph_descriptor const cv_route_graph = { -1, 0, 1, 2, 2, L"CV" };
 static wchar_t const* const cv_input_names[cv_route_input::count] = { L"Off", L"Env", L"VLFO" };
+static wchar_t const* const cv_input_op_name[cv_route_input_op::count] = { L"Add", L"Mul" };
+static wchar_t const* const* const cv_input_op_names[cv_route_input::count] = { nullptr, cv_input_op_name, cv_input_op_name };
 static wchar_t const* const cv_output_names[cv_route_output::count] = { L"Off", L"Osc", L"VFlt", L"Amp" };
 static wchar_t const* const cv_vamp_output_names[cv_route_vamp_output::count] = { L"Lvl", L"Pan" };
 static wchar_t const* const cv_vflt_output_names[cv_route_vflt_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
 static wchar_t const* const cv_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"Pw", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
 static wchar_t const* const* const cv_output_target_names[cv_route_output::count] = { nullptr, cv_osc_output_names, cv_vflt_output_names, cv_vamp_output_names };
-static std::vector<std::wstring> const cv_input_names_list = multi_list_names(cv_input_names, cv_input_counts, cv_route_input::count);
+static std::vector<std::wstring> const cv_input_names_list = zip_list_names(cv_input_names, cv_input_counts, cv_input_op_names, cv_input_op_counts, cv_route_input::count);
 static std::vector<std::wstring> const cv_output_names_list = zip_list_names(cv_output_names, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count);
    
 static std::wstring format_cv_input(std::int32_t val) { return cv_input_names_list[val]; }
 static std::wstring format_cv_output(std::int32_t val) { return cv_output_names_list[val]; }
 static bool parse_cv_input(std::wstring const& val, std::int32_t& result) { return list_parser(val, cv_input_names_list, result); }
 static bool parse_cv_output(std::wstring const& val, std::int32_t& result) { return list_parser(val, cv_output_names_list, result); }
-  
+    
 static param_descriptor const 
 cv_route_params[cv_route_param::count] =  
 {  
