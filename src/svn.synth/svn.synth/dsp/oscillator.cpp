@@ -173,9 +173,9 @@ oscillator::process_block(voice_input const& input, std::int32_t index,
   cv_state const& cv, audio_sample32* audio_out, double& mod_time)
 {
   float const* const* modulated;
-  double start_time_sec = performance_counter();
   automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
   mod_time += cv.modulate(input, automation, cv_route_osc_mapping, cv_route_output::osc, index, modulated);
+  double start_time_sec = performance_counter();
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {  
     audio_out[s] = 0.0f;
