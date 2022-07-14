@@ -5,7 +5,6 @@
 #include <vector>
 #include <cstdint>
 #include <utility>
-#include <immintrin.h>
 
 namespace svn::base {
 
@@ -37,24 +36,11 @@ inline item_name const note_names[12] =
   { L"A", L"A" }, { L"A#", L"A#" }, { L"B", L"B" }
 };
 
-inline std::uint64_t
-disable_denormals()
-{
-  std::uint32_t ftz = _MM_GET_FLUSH_ZERO_MODE();
-  std::uint32_t daz = _MM_GET_DENORMALS_ZERO_MODE();
-  _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
-  _MM_SET_DENORMALS_ZERO_MODE(_MM_DENORMALS_ZERO_ON);
-  return ((static_cast<std::uint64_t>(ftz) << 32) & 0xFFFFFFFF00000000) | daz;
-}
-
-inline void
-restore_denormals(std::uint64_t state)
-{
-  std::uint32_t daz = static_cast<std::uint32_t>(state & 0x00000000FFFFFFFF);
-  std::uint32_t ftz = static_cast<std::uint32_t>((state & 0xFFFFFFFF00000000) >> 32);
-  _MM_SET_FLUSH_ZERO_MODE(ftz);
-  _MM_SET_DENORMALS_ZERO_MODE(daz);
-}
+// Qpc, in seconds.
+double performance_counter();
+// Toggle daz/ftz.
+std::uint64_t disable_denormals();
+void restore_denormals(std::uint64_t state);
 
 // Returns index of item.
 bool

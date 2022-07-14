@@ -21,14 +21,15 @@ cv_kinds[cv_kind::count] =
 static param_descriptor const 
 output_params[output_param::count] =
 {
-  { "{A6024C5F-CF37-48C8-BE5B-713191155AE5}", { L"Clip", L"Clip" }, false, { false, false, 0, 1, nullptr, 0}},
-  { "{8363D40B-6D49-4CF0-8D86-5449997034DE}", { L"Drain", L"Voices exhausted" }, false, { false, false, 1, 1, nullptr, 0}},
-  { "{6190497F-E08C-49DC-8C74-BAEF6D889BCB}", { L"Voices", L"Voice count" }, L"", false, 0, synth_polyphony, 0, { false, false, 2, 2, nullptr, 0}}
+  { "{A6024C5F-CF37-48C8-BE5B-713191155AE5}", { L"Clip", L"Clip" }, false, { false, false, 0, 0, nullptr, 0 } },
+  { "{8363D40B-6D49-4CF0-8D86-5449997034DE}", { L"Drain", L"Voices exhausted" }, false, { false, false, 1, 0, nullptr, 0 } },
+  { "{6190497F-E08C-49DC-8C74-BAEF6D889BCB}", { L"Voices", L"Voice count" }, L"", false, 0, synth_polyphony, 0, { false, false, 2, 0, nullptr, 0 } },
+  { "{485325E3-3E15-46C4-84FA-5D743BB75C3A}", { L"CPU total", L"CPU total" }, L"%", false, 0, 100, 0, { false, true, 3, 0, nullptr, 0 } }
 };
 
-// ---- amp ----
-
-static param_descriptor const 
+// ---- amp ---- 
+  
+static param_descriptor const  
 voice_amp_params[voice_amp_param::count] =
 { 
   { "{5A2DF5BA-7D6F-4053-983E-AA6DC5084373}", { L"Amp", L"Level" }, L"dB", {1.0f, 1, real_bounds::unit(), real_bounds::decibel()}, { false, false, 0, 0, nullptr, 0}},

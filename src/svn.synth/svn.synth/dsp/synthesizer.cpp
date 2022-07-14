@@ -1,6 +1,7 @@
 #include <svn.base/dsp/support.hpp>
 #include <svn.synth/dsp/synthesizer.hpp>
 
+#include <Windows.h>
 #include <cassert>
 #include <algorithm>
 
@@ -93,6 +94,7 @@ synthesizer::process_block(block_input const& input, block_output& output)
 {
   voice_input vinput;
   vinput.bpm = input.bpm;
+  double start_time_sec = performance_counter();
    
   // Correct voice info for leftovers from previous round.
   for(std::int32_t v = 0; v < synth_polyphony; v++)
@@ -161,19 +163,22 @@ synthesizer::process_block(block_input const& input, block_output& output)
       bool ended = _voices[v].process_block(vinput, _cv, _voice_audio, release_sample);
       base::add_audio(output.audio + voice_start, _voice_audio.voice_amp.data(), vinput.sample_count);
       if(ended) return_voice(v);
-    }
+    } 
 
-    // Clip and set output info.
-    bool clip = base::clip_audio(output.audio, input.sample_count);
-    output.output_params[output_param::clip].discrete = clip? 1: 0;
-    output.output_params[output_param::voices].discrete = voice_count;
-    output.output_params[output_param::drain].discrete = _voices_drained ? 1: 0;
-
-    // Remember last automation values in case a note is released on the 
-    // next round at sample index 0. Because if a voice is released at
-    // time T then we fix it to the automation values at time T-1.
-    for (std::int32_t p = 0; p < topology()->input_param_count; p++)
-      _last_automation_previous_block[p] = input.automation[p][input.sample_count - 1];
+  // Remember last automation values in case a note is released on the 
+  // next round at sample index 0. Because if a voice is released at
+  // time T then we fix it to the automation values at time T-1.
+  for (std::int32_t p = 0; p < topology()->input_param_count; p++)
+    _last_automation_previous_block[p] = input.automation[p][input.sample_count - 1];
+  
+  // Clip and set output info.
+  double end_time_sec = performance_counter();
+  double process_time_sec = input.sample_count / sample_rate();
+  bool clip = base::clip_audio(output.audio, input.sample_count);
+  output.output_params[output_param::clip].discrete = clip? 1: 0;
+  output.output_params[output_param::voices].discrete = voice_count;
+  output.output_params[output_param::drain].discrete = _voices_drained ? 1: 0;
+  output.output_params[output_param::total_cpu].discrete = static_cast<std::int32_t>((end_time_sec - start_time_sec) * 100.0 / process_time_sec);
 }
 
 } // namespace svn::synth

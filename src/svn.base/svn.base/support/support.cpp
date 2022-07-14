@@ -1,10 +1,46 @@
 #include <svn.base/support/support.hpp>
 
+#define NOMINMAX 1
+#include <Windows.h>
+#include <immintrin.h>
+
 #include <cassert>
 #include <sstream>
 #include <algorithm>
 
 namespace svn::base {
+
+std::uint64_t
+disable_denormals()
+{
+  std::uint32_t ftz = _MM_GET_FLUSH_ZERO_MODE();
+  std::uint32_t daz = _MM_GET_DENORMALS_ZERO_MODE();
+  _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
+  _MM_SET_DENORMALS_ZERO_MODE(_MM_DENORMALS_ZERO_ON);
+  return ((static_cast<std::uint64_t>(ftz) << 32) & 0xFFFFFFFF00000000) | daz;
+}
+
+void
+restore_denormals(std::uint64_t state)
+{
+  std::uint32_t daz = static_cast<std::uint32_t>(state & 0x00000000FFFFFFFF);
+  std::uint32_t ftz = static_cast<std::uint32_t>((state & 0xFFFFFFFF00000000) >> 32);
+  _MM_SET_FLUSH_ZERO_MODE(ftz);
+  _MM_SET_DENORMALS_ZERO_MODE(daz);
+}
+
+double
+performance_counter()
+{
+  bool ok;
+  LARGE_INTEGER counter;
+  LARGE_INTEGER frequency;
+  ok = QueryPerformanceCounter(&counter);
+  assert(ok);
+  ok = QueryPerformanceFrequency(&frequency);
+  assert(ok);
+  return static_cast<double>(counter.QuadPart) / static_cast<double>(frequency.QuadPart);
+}
 
 bool
 list_parser(

@@ -303,7 +303,8 @@
             "cv_route_0_amount_15": "241",
             "output_0_clip": "242",
             "output_0_voices_exhausted": "243",
-            "output_0_voice_count": "244"
+            "output_0_voice_count": "244",
+            "output_0_cpu_total": "245"
         },
         "templates": {
             "view": {
@@ -16744,29 +16745,11 @@
                                         "children": {
                                             "view_container_fix": {
                                                 "attributes": {
-                                                    "background-color": "color_FFFFFF20",
-                                                    "class": "view_container_fix",
-                                                    "origin": "2, 2",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 21"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
                                                     "background-color": "color_00000040",
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 23"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_FFFFFF20",
-                                                    "class": "view_container_fix",
-                                                    "origin": "82, 2",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 21"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -16780,18 +16763,36 @@
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
-                                                    "background-color": "color_6EFAD520",
+                                                    "background-color": "color_00000040",
                                                     "class": "view_container_fix",
-                                                    "origin": "162, 2",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 21"
+                                                    "origin": "161, 1",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 23"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "background-color": "color_00000040",
                                                     "class": "view_container_fix",
-                                                    "origin": "161, 1",
+                                                    "origin": "1, 23",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 23"
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "background-color": "color_00000040",
+                                                    "class": "view_container_fix",
+                                                    "origin": "81, 23",
+                                                    "background-color-draw-style": "stroked",
+                                                    "size": "81, 23"
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "background-color": "color_00000040",
+                                                    "class": "view_container_fix",
+                                                    "origin": "161, 23",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 23"
                                                 }
@@ -16906,6 +16907,46 @@
                                                             "text-inset": "3, 0",
                                                             "round-rect-radius": "3",
                                                             "value-precision": "32",
+                                                            "back-color": "color_00000020",
+                                                            "font-color": "color_6EFAD5FF"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "view_container_fix": {
+                                                "attributes": {
+                                                    "class": "view_container_fix",
+                                                    "origin": "3, 25",
+                                                    "size": "80, 19",
+                                                    "background-color": "color_FFFFFF00"
+                                                },
+                                                "children": {
+                                                    "CTextLabel": {
+                                                        "attributes": {
+                                                            "class": "CTextLabel",
+                                                            "size": "38, 19",
+                                                            "origin": "0, 0",
+                                                            "transparent": "true",
+                                                            "text-alignment": "left",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "font-color": "color_6EFAD5FF",
+                                                            "title": "CPU total"
+                                                        }
+                                                    },
+                                                    "CTextEdit": {
+                                                        "attributes": {
+                                                            "class": "CTextEdit",
+                                                            "size": "35, 19",
+                                                            "origin": "41, 0",
+                                                            "control-tag": "output_0_cpu_total",
+                                                            "tooltip": "Out CPU total (%)",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "text-alignment": "left",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "value-precision": "100",
                                                             "back-color": "color_00000020",
                                                             "font-color": "color_6EFAD5FF"
                                                         }
