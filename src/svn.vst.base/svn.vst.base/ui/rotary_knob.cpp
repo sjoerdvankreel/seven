@@ -1,3 +1,4 @@
+#include <svn.vst.base/ui/support.hpp>
 #include <svn.vst.base/ui/rotary_knob.hpp>
 #include <vstgui/uidescription/uiviewcreator.h>
 
@@ -6,28 +7,7 @@
 
 using namespace VSTGUI;
 
-namespace svn::vst::base { 
-
-static CColor 
-darken(CColor const& color, float amt, std::uint8_t new_alpha)
-{
-  float r = static_cast<std::uint8_t>(color.red * (1.0f - amt));
-  float g = static_cast<std::uint8_t>(color.green * (1.0f - amt));
-  float b = static_cast<std::uint8_t>(color.blue * (1.0f - amt));
-  return CColor(r, g, b, new_alpha);
-}
-
-static CColor
-lighten(CColor const& color, float amt, std::uint8_t new_alpha)
-{
-  float r = color.red / 255.0f;
-  float g = color.green / 255.0f;
-  float b = color.blue / 255.0f;
-  std::uint8_t rn = static_cast<std::uint8_t>((r + (1.0 - r) * amt) * 255.0f);
-  std::uint8_t gn = static_cast<std::uint8_t>((g + (1.0 - g) * amt) * 255.0f);
-  std::uint8_t bn = static_cast<std::uint8_t>((b + (1.0 - b) * amt) * 255.0f);
-  return CColor(rn, gn, bn, new_alpha);
-}
+namespace svn::vst::base {
 
 CView* 
 rotary_knob_creator::create(
@@ -59,11 +39,11 @@ rotary_knob::draw(VSTGUI::CDrawContext* context)
   context->drawEllipse(CRect(CPoint(1, 1), size - CPoint(2, 2)), kDrawFilled);
 
   // outer border
-  context->setFrameColor(darken(_color, 0.5f, 255));
+  context->setFrameColor(color_darken(_color, 0.5f, 255));
   context->drawEllipse(CRect(CPoint(1, 1), size - CPoint(2, 2)), kDrawStroked);
 
   // inner border
-  context->setFrameColor(lighten(_color, 0.25f, 255));
+  context->setFrameColor(color_lighten(_color, 0.25f, 255));
   context->drawEllipse(CRect(CPoint(2, 2), size - CPoint(4, 4)), kDrawStroked);
 
   // marker
@@ -75,7 +55,7 @@ rotary_knob::draw(VSTGUI::CDrawContext* context)
   float theta = -(start + angle * range);
   float x = radius * std::sin(theta) + center;
   float y = radius * std::cos(theta) + center;
-  context->setFrameColor(lighten(_color, 0.5f, 192));
+  context->setFrameColor(color_lighten(_color, 0.5f, 192));
   context->drawLine(CPoint(center, center), CPoint(x, y));
 
   // light settings

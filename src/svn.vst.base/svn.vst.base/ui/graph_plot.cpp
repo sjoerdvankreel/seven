@@ -1,3 +1,4 @@
+#include <svn.vst.base/ui/support.hpp>
 #include <svn.vst.base/ui/graph_plot.hpp>
 #include <svn.vst.base/sdk/controller.hpp>
 #include <svn.vst.base/support/bootstrap.hpp>
@@ -45,7 +46,7 @@ void
 graph_plot::draw(VSTGUI::CDrawContext* context)
 {
   std::int32_t const padx = 2;
-  std::int32_t const pady = 4;
+  std::int32_t const pady = 3;
 
   auto size = getViewSize().getSize();
   auto pos = getViewSize().getTopLeft();
@@ -61,17 +62,33 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
   context->setFrameColor(border);
   context->drawRect(CRect(CPoint(1, 1), inner_size), CDrawStyle::kDrawStroked);
 
-  context->setFrameColor(_color);
-  context->setDrawMode(kAntiAliasing);
-  CGraphicsPath* path = context->createGraphicsPath();
   auto editor = static_cast<VST3Editor*>(getFrame()->getEditor());
   auto state = static_cast<controller const*>(editor->getController())->state();
+  //CGraphicsPath* path = context->createGraphicsPath();
   std::vector<graph_point> const& graph_data = _processor->plot(state, sample_rate, bpm, render_size.x, render_size.y);
-  path->beginSubpath(CPoint(graph_data[0].x + padx, render_size.y - graph_data[0].y + pady));
+  //CGraphicsPath* path = context->createGraphicsPath();
+  //path->beginSubpath(CPoint(graph_data[0].x + padx, render_size.y - graph_data[0].y + pady));
+  //for(std::size_t i = 1; i < graph_data.size(); i++)
+    //path->addLine(graph_data[i].x + padx, render_size.y - graph_data[i].y + pady);
+  
+  context->setDrawMode(kAntiAliasing);
+  context->setFillColor(color_darken(_color, 0.33, 192));
+  CGraphicsPath* fill_path = context->createGraphicsPath();
+  fill_path->beginSubpath(CPoint(graph_data[0].x + padx, render_size.y + pady + 1.0));
+  for(std::size_t i = 0; i < graph_data.size(); i++)
+    fill_path->addLine(graph_data[i].x + padx, render_size.y - graph_data[i].y + pady + 1.0);
+  fill_path->addLine(render_size.x + padx, render_size.y + pady + 1.0);
+  context->drawGraphicsPath(fill_path, CDrawContext::kPathFilled);
+  fill_path->forget();
+
+  context->setLineWidth(1.0);
+  context->setFrameColor(color_lighten(_color, 0.33, 255));
+  CGraphicsPath* stroke_path = context->createGraphicsPath();
+  stroke_path->beginSubpath(CPoint(graph_data[0].x + padx, render_size.y - graph_data[0].y + pady));
   for(std::size_t i = 1; i < graph_data.size(); i++)
-    path->addLine(graph_data[i].x + padx, render_size.y - graph_data[i].y + pady);
-  context->drawGraphicsPath(path, CDrawContext::kPathStroked);
-  path->forget();
-}   
+    stroke_path->addLine(graph_data[i].x + padx, render_size.y - graph_data[i].y + pady);
+  context->drawGraphicsPath(stroke_path, CDrawContext::kPathStroked);
+  stroke_path->forget();
+}
 
 } // namespace svn::vst::base
