@@ -53,7 +53,6 @@ struct param_ui_descriptor
   bool const label_font_small; // For any labels.
   std::int32_t const param_index; // Relative index within the grid.
   std::int32_t const param_group; // Group together related params within a part.
-  std::int32_t const skip_before; // Skip ui cells before this param.
   param_relevance const* const relevance; // Relevant if all other params relevance.if_param[i] have any of values relevance.if_values[i].
   std::int32_t const relevance_count;
 };

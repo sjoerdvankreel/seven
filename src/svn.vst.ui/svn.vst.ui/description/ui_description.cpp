@@ -35,7 +35,6 @@ part_ui_description::create(
   std::int32_t runtime_part_index)
 {
   part_ui_description result;
-  std::int32_t skip_cells = 0;
   result.occupied_cell_count = 0;
   auto const& part = topology.parts[runtime_part_index];
   result.info = part.descriptor->ui.info;
@@ -43,11 +42,7 @@ part_ui_description::create(
   result.graph_count = part.descriptor->graph_count;
 
   for(std::int32_t i = 0; i < part.descriptor->param_count; i++)
-  {
-    skip_cells += part.descriptor->params[i].ui.skip_before;
     result.occupied_cell_count = std::max(result.occupied_cell_count, part.descriptor->params[i].ui.param_index + 1);
-  }
-  result.occupied_cell_count += skip_cells;
   for(std::int32_t g = 0; g < result.graph_count; g++)
     result.occupied_cell_count += result.graphs[g].row_span * result.graphs[g].column_span;
 
@@ -64,7 +59,7 @@ part_ui_description::create(
   result.enabled_param.column = result.columns - 1;
 
   // Map ui index to parameter list (param id and skip-before count).
-  std::map<std::int32_t, std::vector<std::pair<std::int32_t, std::int32_t>>> layout;
+  std::map<std::int32_t, std::vector<std::int32_t>> layout;
   for (std::int32_t i = 0; i < part.descriptor->param_count; i++)
   {
     auto const& ui_desc = part.descriptor->params[i].ui;
@@ -75,9 +70,8 @@ part_ui_description::create(
       continue;
     }
     if (layout.find(ui_index) == layout.end())
-      layout.insert(std::make_pair(ui_index, std::vector<std::pair<std::int32_t, std::int32_t>>()));
-    layout.at(ui_index).push_back(std::make_pair(i, ui_desc.skip_before));
-    assert(ui_desc.skip_before == layout.at(ui_index).at(0).second);
+      layout.insert(std::make_pair(ui_index, std::vector<std::int32_t>()));
+    layout.at(ui_index).push_back(i);
   }
    
   // Build param positions around the (optional) graphs.
@@ -86,14 +80,11 @@ part_ui_description::create(
   {
     while (param_inside_graphs(result, grid_index))
       grid_index++;
-    grid_index += ui_index->second.at(0).second;
-    while (param_inside_graphs(result, grid_index))
-      grid_index++;
     for (auto param_index = ui_index->second.begin(); param_index != ui_index->second.end(); param_index++)
     {
       std::int32_t row = grid_index / result.columns;
       std::int32_t column = grid_index % result.columns;
-      result.params.push_back({ row, column, part.runtime_param_start + param_index->first });
+      result.params.push_back({ row, column, part.runtime_param_start + *param_index });
     }
     grid_index++;
   }

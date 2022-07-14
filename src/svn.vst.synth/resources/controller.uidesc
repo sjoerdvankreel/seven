@@ -254,57 +254,56 @@
             "audio_route_0_input_9": "192",
             "audio_route_0_output_9": "193",
             "audio_route_0_amount_9": "194",
-            "cv_route_0_plot_level": "195",
+            "cv_route_0_plot_target": "195",
             "cv_route_0_plot_length": "196",
-            "cv_route_0_plot_target": "197",
-            "cv_route_0_input_1": "198",
-            "cv_route_0_output_1": "199",
-            "cv_route_0_amount_1": "200",
-            "cv_route_0_input_2": "201",
-            "cv_route_0_output_2": "202",
-            "cv_route_0_amount_2": "203",
-            "cv_route_0_input_3": "204",
-            "cv_route_0_output_3": "205",
-            "cv_route_0_amount_3": "206",
-            "cv_route_0_input_4": "207",
-            "cv_route_0_output_4": "208",
-            "cv_route_0_amount_4": "209",
-            "cv_route_0_input_5": "210",
-            "cv_route_0_output_5": "211",
-            "cv_route_0_amount_5": "212",
-            "cv_route_0_input_6": "213",
-            "cv_route_0_output_6": "214",
-            "cv_route_0_amount_6": "215",
-            "cv_route_0_input_7": "216",
-            "cv_route_0_output_7": "217",
-            "cv_route_0_amount_7": "218",
-            "cv_route_0_input_8": "219",
-            "cv_route_0_output_8": "220",
-            "cv_route_0_amount_8": "221",
-            "cv_route_0_input_9": "222",
-            "cv_route_0_output_9": "223",
-            "cv_route_0_amount_9": "224",
-            "cv_route_0_input_10": "225",
-            "cv_route_0_output_10": "226",
-            "cv_route_0_amount_10": "227",
-            "cv_route_0_input_11": "228",
-            "cv_route_0_output_11": "229",
-            "cv_route_0_amount_11": "230",
-            "cv_route_0_input_12": "231",
-            "cv_route_0_output_12": "232",
-            "cv_route_0_amount_12": "233",
-            "cv_route_0_input_13": "234",
-            "cv_route_0_output_13": "235",
-            "cv_route_0_amount_13": "236",
-            "cv_route_0_input_14": "237",
-            "cv_route_0_output_14": "238",
-            "cv_route_0_amount_14": "239",
-            "cv_route_0_input_15": "240",
-            "cv_route_0_output_15": "241",
-            "cv_route_0_amount_15": "242",
-            "output_0_clip": "243",
-            "output_0_voices_exhausted": "244",
-            "output_0_voice_count": "245"
+            "cv_route_0_input_1": "197",
+            "cv_route_0_output_1": "198",
+            "cv_route_0_amount_1": "199",
+            "cv_route_0_input_2": "200",
+            "cv_route_0_output_2": "201",
+            "cv_route_0_amount_2": "202",
+            "cv_route_0_input_3": "203",
+            "cv_route_0_output_3": "204",
+            "cv_route_0_amount_3": "205",
+            "cv_route_0_input_4": "206",
+            "cv_route_0_output_4": "207",
+            "cv_route_0_amount_4": "208",
+            "cv_route_0_input_5": "209",
+            "cv_route_0_output_5": "210",
+            "cv_route_0_amount_5": "211",
+            "cv_route_0_input_6": "212",
+            "cv_route_0_output_6": "213",
+            "cv_route_0_amount_6": "214",
+            "cv_route_0_input_7": "215",
+            "cv_route_0_output_7": "216",
+            "cv_route_0_amount_7": "217",
+            "cv_route_0_input_8": "218",
+            "cv_route_0_output_8": "219",
+            "cv_route_0_amount_8": "220",
+            "cv_route_0_input_9": "221",
+            "cv_route_0_output_9": "222",
+            "cv_route_0_amount_9": "223",
+            "cv_route_0_input_10": "224",
+            "cv_route_0_output_10": "225",
+            "cv_route_0_amount_10": "226",
+            "cv_route_0_input_11": "227",
+            "cv_route_0_output_11": "228",
+            "cv_route_0_amount_11": "229",
+            "cv_route_0_input_12": "230",
+            "cv_route_0_output_12": "231",
+            "cv_route_0_amount_12": "232",
+            "cv_route_0_input_13": "233",
+            "cv_route_0_output_13": "234",
+            "cv_route_0_amount_13": "235",
+            "cv_route_0_input_14": "236",
+            "cv_route_0_output_14": "237",
+            "cv_route_0_amount_14": "238",
+            "cv_route_0_input_15": "239",
+            "cv_route_0_output_15": "240",
+            "cv_route_0_amount_15": "241",
+            "output_0_clip": "242",
+            "output_0_voices_exhausted": "243",
+            "output_0_voice_count": "244"
         },
         "templates": {
             "view": {
@@ -13699,7 +13698,7 @@
                                                 "attributes": {
                                                     "class": "seven_graph_plot",
                                                     "origin": "81, 1",
-                                                    "size": "161, 23",
+                                                    "size": "161, 45",
                                                     "color": "color_BDB2FFFF",
                                                     "graph-type": "-1",
                                                     "part-index": "0",
@@ -13739,24 +13738,6 @@
                                                     "background-color": "color_00000040",
                                                     "class": "view_container_fix",
                                                     "origin": "1, 23",
-                                                    "background-color-draw-style": "stroked",
-                                                    "size": "81, 23"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_FFFFFF20",
-                                                    "class": "view_container_fix",
-                                                    "origin": "82, 24",
-                                                    "background-color-draw-style": "filled",
-                                                    "size": "79, 21"
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "background-color": "color_00000040",
-                                                    "class": "view_container_fix",
-                                                    "origin": "81, 23",
                                                     "background-color-draw-style": "stroked",
                                                     "size": "81, 23"
                                                 }
@@ -14444,46 +14425,39 @@
                                                     "background-color": "color_FFFFFF00"
                                                 },
                                                 "children": {
-                                                    "seven_rotary_knob": {
+                                                    "COptionMenu": {
                                                         "attributes": {
-                                                            "class": "seven_rotary_knob",
-                                                            "size": "20, 19",
+                                                            "class": "COptionMenu",
+                                                            "size": "49, 19",
                                                             "origin": "0, 0",
-                                                            "control-tag": "cv_route_0_plot_level",
-                                                            "tooltip": "CV Plot level",
-                                                            "angle-start": "20",
-                                                            "angle-range": "320",
-                                                            "color": "color_BDB2FFFF"
+                                                            "control-tag": "cv_route_0_plot_target",
+                                                            "tooltip": "CV Plot target",
+                                                            "font": "~ NormalFontVerySmall",
+                                                            "min-value": "0",
+                                                            "default-value": "0",
+                                                            "text-alignment": "left",
+                                                            "style-no-frame": "true",
+                                                            "style-round-rect": "true",
+                                                            "menu-popup-style": "true",
+                                                            "menu-check-style": "false",
+                                                            "text-inset": "3, 0",
+                                                            "round-rect-radius": "3",
+                                                            "max-value": "55",
+                                                            "font-color": "color_BDB2FFFF",
+                                                            "back-color": "color_BDB2FF40",
+                                                            "shadow-color": "color_BDB2FF80"
                                                         }
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
                                                             "class": "CTextLabel",
-                                                            "size": "26, 19",
-                                                            "origin": "23, 0",
+                                                            "size": "28, 19",
+                                                            "origin": "52, 0",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "font-color": "color_BDB2FFFF",
-                                                            "title": "Lvl"
-                                                        }
-                                                    },
-                                                    "CTextEdit": {
-                                                        "attributes": {
-                                                            "class": "CTextEdit",
-                                                            "size": "28, 19",
-                                                            "origin": "49, 0",
-                                                            "control-tag": "cv_route_0_plot_level",
-                                                            "tooltip": "CV Plot level",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "text-alignment": "right",
-                                                            "font": "~ NormalFontVerySmall",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "value-precision": "2",
-                                                            "back-color": "color_00000020",
-                                                            "font-color": "color_BDB2FFFF"
+                                                            "title": "Plot"
                                                         }
                                                     }
                                                 }
@@ -14536,51 +14510,6 @@
                                                             "value-precision": "2",
                                                             "back-color": "color_00000020",
                                                             "font-color": "color_BDB2FFFF"
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "view_container_fix": {
-                                                "attributes": {
-                                                    "class": "view_container_fix",
-                                                    "origin": "83, 25",
-                                                    "size": "80, 19",
-                                                    "background-color": "color_FFFFFF00"
-                                                },
-                                                "children": {
-                                                    "COptionMenu": {
-                                                        "attributes": {
-                                                            "class": "COptionMenu",
-                                                            "size": "49, 19",
-                                                            "origin": "0, 0",
-                                                            "control-tag": "cv_route_0_plot_target",
-                                                            "tooltip": "CV Plot target",
-                                                            "font": "~ NormalFontVerySmall",
-                                                            "min-value": "0",
-                                                            "default-value": "0",
-                                                            "text-alignment": "left",
-                                                            "style-no-frame": "true",
-                                                            "style-round-rect": "true",
-                                                            "menu-popup-style": "true",
-                                                            "menu-check-style": "false",
-                                                            "text-inset": "3, 0",
-                                                            "round-rect-radius": "3",
-                                                            "max-value": "55",
-                                                            "font-color": "color_BDB2FFFF",
-                                                            "back-color": "color_BDB2FF40",
-                                                            "shadow-color": "color_BDB2FF80"
-                                                        }
-                                                    },
-                                                    "CTextLabel": {
-                                                        "attributes": {
-                                                            "class": "CTextLabel",
-                                                            "size": "28, 19",
-                                                            "origin": "52, 0",
-                                                            "transparent": "true",
-                                                            "text-alignment": "left",
-                                                            "font": "~ NormalFontSmall",
-                                                            "font-color": "color_BDB2FFFF",
-                                                            "title": "Plot"
                                                         }
                                                     }
                                                 }
