@@ -78,11 +78,12 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
   context->drawGraphicsPath(stroke_path, CDrawContext::kPathStroked);
   stroke_path->forget();
 
+  double base_y = bipolar? 0.5: 1.0;
   CGraphicsPath* fill_path = context->createGraphicsPath();
-  fill_path->beginSubpath(CPoint(graph_data[0].x + padx, render_size.y / 2.0 + pady + 1.0));
+  fill_path->beginSubpath(CPoint(graph_data[0].x + padx, render_size.y * base_y + pady + 1.0));
   for(std::size_t i = 0; i < graph_data.size(); i++)
     fill_path->addLine(graph_data[i].x + padx, render_size.y - graph_data[i].y + pady + 1.0);
-  fill_path->addLine(render_size.x + padx, render_size.y / 2.0 + pady + 1.0);
+  fill_path->addLine(render_size.x + padx, render_size.y * base_y + pady + 1.0);
   context->drawGraphicsPath(fill_path, CDrawContext::kPathFilled);
   fill_path->forget();
 }
