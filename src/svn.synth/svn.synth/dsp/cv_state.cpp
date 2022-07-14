@@ -60,7 +60,7 @@ cv_state::modulate(voice_input const& input, base::automation_view const& automa
         if (out != output_id) continue;
         float amt = automation.get(i * 3 + cv_route_param_offset + 2, s).real;
         std::pair<std::int32_t, std::int32_t> input_ids(input_table_out[in]);
-        scratch[mapping[p]][s] = base::modulate(scratch[mapping[p]][s], input_buffer(input_ids.first, input_ids.second)[s], amt);
+        scratch[mapping[p]][s] += input_buffer(input_ids.first, input_ids.second)[s].value * amt;
       }
     }
   }

@@ -122,20 +122,5 @@ transform_to_dsp(topology_info const* topology, std::int32_t param, param_value 
   return param_value(val.discrete);
 }
 
-// Apply either unipolar or bipolar modulation.
-// Source signal must be unipolar in [0, 1].
-inline float
-modulate(float val, cv_sample cv, float amount)
-{
-  assert(0.0f <= val && val <= 1.0f);
-  if (cv.bipolar)
-  {
-    float range = val <= 0.5f ? val : 1.0f - val;
-    return sanity_unipolar(val + cv.value * range * amount);
-  }
-  if (amount >= 0.0f) return sanity_unipolar(val + cv.value * (1.0f - val) * amount);
-  return sanity_unipolar(val + cv.value * val * amount);
-}
-
 } // namespace svn::base
 #endif // SVN_BASE_DSP_SUPPORT_HPP
