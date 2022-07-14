@@ -61,7 +61,7 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
   CColor border(255, 255, 255, 64);
   context->setFrameColor(border);
   context->drawRect(CRect(CPoint(1, 1), inner_size), CDrawStyle::kDrawStroked);
-
+   
   bool bipolar;
   auto editor = static_cast<VST3Editor*>(getFrame()->getEditor());
   auto state = static_cast<controller const*>(editor->getController())->state();
