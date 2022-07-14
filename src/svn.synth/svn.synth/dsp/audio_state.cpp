@@ -33,10 +33,11 @@ audio_state::input_buffer(std::int32_t input, std::int32_t index) const
   }
 }
 
-svn::base::audio_sample32 const*
-audio_state::mix(voice_input const& input,
-  audio_route_output route_output, std::int32_t route_index)
+double
+audio_state::mix(voice_input const& input, audio_route_output route_output, 
+  std::int32_t route_index, svn::base::audio_sample32 const*& result)
 {
+  double start_time = base::performance_counter();
   std::int32_t input_off = input_table_in[audio_route_input::off][0];
   std::int32_t output_id = output_table_in[route_output][route_index];
   base::automation_view automation = input.automation.rearrange_params(part_type::audio_route, 0);
@@ -54,7 +55,8 @@ audio_state::mix(voice_input const& input,
       scratch[s] = base::sanity_audio(scratch[s] + input_buffer(input_ids.first, input_ids.second)[s] * amt);
     }
   }
-  return scratch.data();
+  result = scratch.data();
+  return base::performance_counter() - start_time;
 }
 
 } // namespace svn::synth

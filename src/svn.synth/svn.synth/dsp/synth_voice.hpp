@@ -55,8 +55,8 @@ public:
   // Automation should be fixed to the last active value if this voice is released,
   // this is handled globally by the synth class. Returns true if voice ended.
   bool
-  process_block(voice_input const& input, 
-    cv_state& cv, audio_state& audio, std::int32_t release_sample);
+  process_block(voice_input const& input, cv_state& cv, 
+    audio_state& audio, std::int32_t release_sample, cpu_usage& usage);
 };
 
 } // namespace svn::synth

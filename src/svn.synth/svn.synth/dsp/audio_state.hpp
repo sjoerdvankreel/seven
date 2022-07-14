@@ -29,8 +29,8 @@ public:
   std::array<std::vector<base::audio_sample32>, voice_filter_count> voice_filter;
   
   explicit audio_state(std::int32_t max_sample_count);
-  svn::base::audio_sample32 const* mix(voice_input const& input, 
-    audio_route_output route_output, std::int32_t route_index);
+  double mix(voice_input const& input, audio_route_output route_output, 
+    std::int32_t route_index, svn::base::audio_sample32 const*& result);
 };
 
 } // namespace svn::base

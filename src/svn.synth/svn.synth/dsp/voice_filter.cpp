@@ -75,10 +75,11 @@ voice_filter::process_comb(
   return sanity_audio(_comb.output.get(0));
 }
 
-void 
+double 
 voice_filter::process_block(voice_input const& input, std::int32_t index,
   base::audio_sample32 const* audio_in, base::audio_sample32* audio_out)
 {
+  double start_time = performance_counter();
   automation_view automation(input.automation.rearrange_params(part_type::voice_filter, index));
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
@@ -99,6 +100,7 @@ voice_filter::process_block(voice_input const& input, std::int32_t index,
       break;
     }
   }
+  return performance_counter() - start_time;
 }
 
 } // namespace svn::synth

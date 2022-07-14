@@ -33,7 +33,7 @@ typedef voice_amp_param_t::value voice_amp_param;
 
 // ---- output ----
 
-struct output_param_t { enum value { clip, drain, voices, total_cpu, count }; };
+struct output_param_t { enum value { clip, drain, voices, total_cpu, osc_cpu, vlfo_cpu, vflt_cpu, env_cpu, vamp_cpu, audio_cpu, cv_cpu,  count }; };
 typedef output_param_t::value output_param;
 
 // ---- envelope ----

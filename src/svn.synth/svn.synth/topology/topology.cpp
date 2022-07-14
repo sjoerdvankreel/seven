@@ -24,7 +24,14 @@ output_params[output_param::count] =
   { "{A6024C5F-CF37-48C8-BE5B-713191155AE5}", { L"Clip", L"Clip" }, false, { false, false, 0, 0, nullptr, 0 } },
   { "{8363D40B-6D49-4CF0-8D86-5449997034DE}", { L"Drain", L"Voices exhausted" }, false, { false, false, 1, 0, nullptr, 0 } },
   { "{6190497F-E08C-49DC-8C74-BAEF6D889BCB}", { L"Voices", L"Voice count" }, L"", false, 0, synth_polyphony, 0, { false, false, 2, 0, nullptr, 0 } },
-  { "{485325E3-3E15-46C4-84FA-5D743BB75C3A}", { L"CPU total", L"CPU total" }, L"%", false, 0, 100, 0, { false, true, 3, 0, nullptr, 0 } }
+  { "{485325E3-3E15-46C4-84FA-5D743BB75C3A}", { L"Total cpu", L"Total cpu" }, L"%", false, 0, 100, 0, { false, true, 3, 1, nullptr, 0 } },
+  { "{1A5EA805-8678-4B9F-A03F-92E1A9D3C519}", { L"Osc cpu", L"Osc cpu" }, L"%", false, 0, 100, 0, { false, true, 4, 1, nullptr, 0 } },
+  { "{C39636DA-EBF5-4AA5-AFBB-BBCD5762D979}", { L"VLFO cpu", L"Voice LFO cpu" }, L"%", false, 0, 100, 0, { false, true, 5, 1, nullptr, 0 } },
+  { "{C3FBB5D7-E5EA-4EEB-9795-22298F7380B9}", { L"VFlt cpu", L"Voice filter cpu" }, L"%", false, 0, 100, 0, { false, true, 6, 1, nullptr, 0 } },
+  { "{0DF43E23-9273-46BC-8BBE-52B2C0E612F7}", { L"Env cpu", L"Envelope cpu" }, L"%", false, 0, 100, 0, { false, true, 7, 1, nullptr, 0 } },
+  { "{DC142F66-E4B2-4BEA-8B2E-A9501B32B1FB}", { L"Amp cpu", L"Voice amp cpu" }, L"%", false, 0, 100, 0, { false, true, 8, 1, nullptr, 0 } },
+  { "{295F92F6-37CD-453E-B8C2-E03B6648A1E4}", { L"Audio cpu", L"Audio route cpu" }, L"%", false, 0, 100, 0, { false, true, 9, 1, nullptr, 0 } },
+  { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"CV cpu", L"Cv route cpu" }, L"%", false, 0, 100, 0, { false, true, 10, 1, nullptr, 0 } }
 };
 
 // ---- amp ---- 

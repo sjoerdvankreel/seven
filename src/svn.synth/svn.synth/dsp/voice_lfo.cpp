@@ -10,10 +10,11 @@ using namespace svn::base;
 
 namespace svn::synth {
 
-void 
+double
 voice_lfo::process_block(voice_input const& input, std::int32_t index, base::cv_sample* cv_out)
 {
   float frequency = 0.0f;
+  double start_time = performance_counter();
   automation_view automation(input.automation.rearrange_params(part_type::voice_lfo, index));
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
@@ -33,6 +34,7 @@ voice_lfo::process_block(voice_input const& input, std::int32_t index, base::cv_
     _phase += frequency / _sample_rate;
     _phase -= std::floor(_phase);
   }
+  return performance_counter() - start_time;
 }
 
 } // namespace svn::synth

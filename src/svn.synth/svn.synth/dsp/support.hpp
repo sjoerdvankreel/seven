@@ -16,6 +16,19 @@ struct voice_input
   base::automation_view automation;
 };
 
+// Cpu usage time in seconds.
+struct cpu_usage
+{
+  double cv;
+  double env;
+  double osc;
+  double vamp;
+  double vlfo;
+  double total;
+  double audio;
+  double vfilter;
+};
+
 inline bool cv_kind_is_synced(std::int32_t kind)
 { return kind == cv_kind::sync_unipolar || kind == cv_kind::sync_bipolar; }
 inline bool cv_kind_is_unipolar(std::int32_t kind)

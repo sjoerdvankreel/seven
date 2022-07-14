@@ -24,28 +24,29 @@ _topology(topology), _velocity(velocity), _amp(sample_rate)
 }
 
 bool
-synth_voice::process_block(
-  voice_input const& input, cv_state& cv, audio_state& audio, std::int32_t release_sample)
+synth_voice::process_block(voice_input const& input, cv_state& cv, 
+  audio_state& audio, std::int32_t release_sample, cpu_usage& usage)
 {
   assert(release_sample >= -1);
   assert(release_sample < input.sample_count);
 
   // Run lfo's.
   for(std::int32_t i = 0; i < voice_lfo_count; i++)
-    _lfos[i].process_block(input, i, cv.voice_lfo[i].data());
+    usage.vlfo += _lfos[i].process_block(input, i, cv.voice_lfo[i].data());
 
   // Run envelopes.
   bool ended = false;
+  bool env_ended = false;
   for (std::int32_t i = 0; i < envelope_count; i++)
   {
     std::memset(cv.envelope[i].data(), 0, input.sample_count * sizeof(base::cv_sample));
-    bool env_ended = _envelopes[i].process_block(input, i, cv.envelope[i].data(), release_sample);
+    usage.env += _envelopes[i].process_block(input, i, cv.envelope[i].data(), release_sample, env_ended);
     if(i == 0) ended = env_ended;
   }
 
   // Run generators.
   for (std::int32_t i = 0; i < oscillator_count; i++)
-    _oscillators[i].process_block(input, i, cv, audio.oscillator[i].data());
+    usage.osc += _oscillators[i].process_block(input, i, cv, audio.oscillator[i].data(), usage.cv);
 
   // Clear filter output in case user selected weird routing (i.e. filter 3 to filter 2).
   for (std::int32_t i = 0; i < voice_filter_count; i++)
@@ -54,13 +55,15 @@ synth_voice::process_block(
   // Run filters.
   for (std::int32_t i = 0; i < voice_filter_count; i++)
   {
-    base::audio_sample32 const* audio_in = audio.mix(input, audio_route_output::filter, i);
-    _filters[i].process_block(input, i, audio_in, audio.voice_filter[i].data());
+    base::audio_sample32 const* audio_in;
+    usage.audio += audio.mix(input, audio_route_output::filter, i, audio_in);
+    usage.vfilter += _filters[i].process_block(input, i, audio_in, audio.voice_filter[i].data());
   }
 
   // Run amp section.
-  base::audio_sample32 const* audio_in = audio.mix(input, audio_route_output::amp, 0);
-  _amp.process_block(input, cv.envelope[0].data(), audio_in, audio.voice_amp.data());
+  base::audio_sample32 const* audio_in;
+  usage.audio += audio.mix(input, audio_route_output::amp, 0, audio_in);
+  usage.vamp += _amp.process_block(input, cv.envelope[0].data(), audio_in, audio.voice_amp.data());
   return ended;
 } 
  

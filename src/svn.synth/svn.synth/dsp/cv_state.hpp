@@ -29,8 +29,8 @@ public:
   explicit cv_state(std::int32_t max_sample_count);
   std::array<std::vector<base::cv_sample>, envelope_count> envelope;
   std::array<std::vector<base::cv_sample>, voice_lfo_count> voice_lfo;
-  float const* const* modulate(voice_input const& input, base::automation_view const& automated, 
-    std::int32_t const* mapping, cv_route_output route_output, std::int32_t route_index) const;
+  double modulate(voice_input const& input, base::automation_view const& automated, std::int32_t const* mapping, 
+    cv_route_output route_output, std::int32_t route_index, float const* const*& result) const;
 };
 
 } // namespace svn::synth

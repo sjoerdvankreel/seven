@@ -22,16 +22,17 @@ class envelope
 public:
   envelope() = default;
   explicit envelope(float sample_rate) : _sample_rate(sample_rate) {}
-private:
-  float generate_slope(base::automation_view const& automation, 
-    std::int32_t slope_param, std::int32_t mid_param, std::int32_t s, float stage_pos);
-  std::pair<envelope_stage, float> generate_stage(base::automation_view const& automation, 
-    std::int32_t s, bool dahdsr, float delay, float attack, float hold, float decay, float sustain, float release);
 public:
+  // True if done.
+  double process_block(voice_input const& input, std::int32_t index,
+    base::cv_sample* cv_out, std::int32_t release_sample, bool& result);
   void setup_stages(base::automation_view const& automation, std::int32_t s,
     float bpm, float& delay, float& attack, float& hold, float& decay, float& release);
-  // True if done.
-  bool process_block(voice_input const& input, std::int32_t index, base::cv_sample* cv_out, std::int32_t release_sample);
+private:
+  float generate_slope(base::automation_view const& automation,
+    std::int32_t slope_param, std::int32_t mid_param, std::int32_t s, float stage_pos);
+  std::pair<envelope_stage, float> generate_stage(base::automation_view const& automation,
+    std::int32_t s, bool dahdsr, float delay, float attack, float hold, float decay, float sustain, float release);
 };
 
 } // namespace svn::synth

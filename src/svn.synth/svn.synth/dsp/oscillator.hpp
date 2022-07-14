@@ -22,7 +22,7 @@ class oscillator
 public:
   oscillator() = default;
   oscillator(float sample_rate, std::int32_t midi_note);
-  void process_block(voice_input const& input, std::int32_t index, cv_state const& cv, base::audio_sample32* audio_out);
+  double process_block(voice_input const& input, std::int32_t index, cv_state const& cv, base::audio_sample32* audio_out, double& mod_time);
 
 private:
   float generate_blep_saw(float phase, float increment) const;

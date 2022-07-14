@@ -39,10 +39,11 @@ cv_state::input_buffer(std::int32_t input, std::int32_t index) const
   }
 }
 
-float const* const* 
+double 
 cv_state::modulate(voice_input const& input, base::automation_view const& automated,
-  std::int32_t const* mapping, cv_route_output route_output, std::int32_t route_index) const
+  std::int32_t const* mapping, cv_route_output route_output, std::int32_t route_index, float const* const*& result) const
 {
+  double start_time = base::performance_counter();
   std::int32_t input_off = input_table_in[cv_route_input::off][0][0];
   base::automation_view automation = input.automation.rearrange_params(part_type::cv_route, 0);
   for(std::int32_t p = 0; p < cv_output_target_counts[route_output]; p++)
@@ -68,7 +69,8 @@ cv_state::modulate(voice_input const& input, base::automation_view const& automa
       scratch[mapping[p]][s] = std::clamp(scratch[mapping[p]][s], 0.0f, 1.0f);
     }
   }
-  return scratch.data();
+  result = scratch.data();
+  return base::performance_counter() - start_time;
 }
 
 } // namespace svn::synth

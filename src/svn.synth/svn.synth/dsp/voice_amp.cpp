@@ -7,10 +7,11 @@ using namespace svn::base;
 
 namespace svn::synth {
 
-void
+double
 voice_amp::process_block(voice_input const& input, base::cv_sample const* env1_cv,
   base::audio_sample32 const* audio_in, base::audio_sample32* audio_out)
 {
+  double start_time = performance_counter();
   automation_view automation(input.automation.rearrange_params(part_type::voice_amp, 0));
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
@@ -23,6 +24,7 @@ voice_amp::process_block(voice_input const& input, base::cv_sample const* env1_c
     float right = audio_in[s].right * final_amp * panning;
     audio_out[s] = sanity_audio(audio_sample32({left, right}));
   }
+  return performance_counter() - start_time;
 }
 
 } // namespace svn::synth

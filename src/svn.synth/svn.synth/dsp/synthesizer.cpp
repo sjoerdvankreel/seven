@@ -94,7 +94,8 @@ synthesizer::process_block(block_input const& input, block_output& output)
 {
   voice_input vinput;
   vinput.bpm = input.bpm;
-  double start_time_sec = performance_counter();
+  cpu_usage usage = { 0.0 };
+  double start_time = performance_counter();
    
   // Correct voice info for leftovers from previous round.
   for(std::int32_t v = 0; v < synth_polyphony; v++)
@@ -160,7 +161,7 @@ synthesizer::process_block(block_input const& input, block_output& output)
       }
       // Else nothing to do, we ride along with the active automation values.     
 
-      bool ended = _voices[v].process_block(vinput, _cv, _voice_audio, release_sample);
+      bool ended = _voices[v].process_block(vinput, _cv, _voice_audio, release_sample, usage);
       base::add_audio(output.audio + voice_start, _voice_audio.voice_amp.data(), vinput.sample_count);
       if(ended) return_voice(v);
     } 
@@ -172,13 +173,20 @@ synthesizer::process_block(block_input const& input, block_output& output)
     _last_automation_previous_block[p] = input.automation[p][input.sample_count - 1];
   
   // Clip and set output info.
-  double end_time_sec = performance_counter();
-  double process_time_sec = input.sample_count / sample_rate();
+  usage.total = performance_counter() - start_time;
   bool clip = base::clip_audio(output.audio, input.sample_count);
+  double process_time_factor = 100.0 * sample_rate() / input.sample_count; 
   output.output_params[output_param::clip].discrete = clip? 1: 0;
   output.output_params[output_param::voices].discrete = voice_count;
   output.output_params[output_param::drain].discrete = _voices_drained ? 1: 0;
-  output.output_params[output_param::total_cpu].discrete = static_cast<std::int32_t>((end_time_sec - start_time_sec) * 100.0 / process_time_sec);
+  output.output_params[output_param::cv_cpu].discrete = static_cast<std::int32_t>(usage.cv * process_time_factor);
+  output.output_params[output_param::osc_cpu].discrete = static_cast<std::int32_t>(usage.osc * process_time_factor);
+  output.output_params[output_param::env_cpu].discrete = static_cast<std::int32_t>(usage.env * process_time_factor);
+  output.output_params[output_param::vlfo_cpu].discrete = static_cast<std::int32_t>(usage.vlfo * process_time_factor);
+  output.output_params[output_param::vamp_cpu].discrete = static_cast<std::int32_t>(usage.vamp * process_time_factor);
+  output.output_params[output_param::audio_cpu].discrete = static_cast<std::int32_t>(usage.audio * process_time_factor);
+  output.output_params[output_param::total_cpu].discrete = static_cast<std::int32_t>(usage.total * process_time_factor);
+  output.output_params[output_param::vflt_cpu].discrete = static_cast<std::int32_t>(usage.vfilter * process_time_factor);
 }
 
 } // namespace svn::synth

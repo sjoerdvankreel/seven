@@ -16,7 +16,7 @@ public:
   voice_lfo() = default;
   explicit voice_lfo(float sample_rate) : _sample_rate(sample_rate) {}
 public:
-  void process_block(voice_input const& input, std::int32_t index, base::cv_sample* cv_out);
+  double process_block(voice_input const& input, std::int32_t index, base::cv_sample* cv_out);
 };
 
 } // namespace svn::synth

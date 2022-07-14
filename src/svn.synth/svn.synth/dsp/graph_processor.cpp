@@ -139,13 +139,14 @@ void
 envelope_graph::process_dsp_core(
   block_input const& input, base::cv_sample* output, float sample_rate, float bpm)
 {
+  bool ended = false;
   float delay, attack, hold, decay, release;
   setup_stages(input.automation, bpm, delay, attack, hold, decay, release);
   std::int32_t release_sample = static_cast<std::int32_t>(std::ceil(delay + attack + hold + decay));
   envelope env(env_graph_rate);
   std::memset(output, 0, input.sample_count * sizeof(base::cv_sample));
   voice_input vinput = setup_graph_voice_input(input, topology());
-  env.process_block(vinput, part_index(), output, release_sample);
+  env.process_block(vinput, part_index(), output, release_sample, ended);
 }
 
 void
@@ -221,11 +222,12 @@ void
 oscillator_wave_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
 {
+  double mod_time = 0.0; 
   cv_state cv(input.sample_count);
   oscillator osc(sample_rate, midi_note_c4);
   std::memset(output, 0, input.sample_count * sizeof(audio_sample32));
   voice_input vinput = setup_graph_voice_input(input, topology());
-  osc.process_block(vinput, part_index(), cv, output);
+  osc.process_block(vinput, part_index(), cv, output, mod_time);
 }
 
 std::int32_t
@@ -295,12 +297,13 @@ void
 cv_route_graph::process_dsp_core(
   block_input const& input, float* output, float sample_rate, float bpm)
 {
+  bool ended = false;
   cv_state state(input.sample_count);  
   voice_input vinput = setup_graph_voice_input(input, topology());
   for(std::int32_t i = 0; i < voice_lfo_count; i++)
     voice_lfo(cv_route_graph_rate).process_block(vinput, i, state.voice_lfo[i].data());
   for (std::int32_t i = 0; i < envelope_count; i++)
-    envelope(cv_route_graph_rate).process_block(vinput, i, state.envelope[i].data(), input.sample_count);
+    envelope(cv_route_graph_rate).process_block(vinput, i, state.envelope[i].data(), input.sample_count, ended);
 
   std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> output_table_out
     = zip_list_table_init_out(cv_output_counts, cv_output_target_counts, cv_route_output::count);
@@ -310,14 +313,15 @@ cv_route_graph::process_dsp_core(
   std::memset(output, 0, input.sample_count * sizeof(float));
   if (std::get<0>(param_ids) == -1 || std::get<2>(param_ids) == -1) return;
 
+  float const* const* modulated;
   std::int32_t rt_part_index = std::get<1>(param_ids);
   std::int32_t cv_route_output_id = std::get<0>(param_ids);
   std::int32_t cv_route_target = std::get<2>(param_ids);
   std::int32_t part_type = cv_route_part_mapping[cv_route_output_id];
   std::int32_t param_index = cv_route_param_mapping[cv_route_output_id][cv_route_target];
   automation_view automated_view = vinput.automation.rearrange_params(part_type, rt_part_index);
-  float const* const* modulated = state.modulate(vinput, automated_view, 
-    cv_route_param_mapping[cv_route_output_id], static_cast<cv_route_output>(cv_route_output_id), rt_part_index);
+  state.modulate(vinput, automated_view, cv_route_param_mapping[cv_route_output_id], 
+    static_cast<cv_route_output>(cv_route_output_id), rt_part_index, modulated);
   for (std::int32_t i = 0; i < input.sample_count; i++)
     output[i] = modulated[param_index][i];
 }

@@ -84,10 +84,12 @@ envelope::setup_stages(automation_view const& automation, std::int32_t s,
   release = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.get(envelope_param::release_sync, s).discrete]);
 }
 
-bool
-envelope::process_block(voice_input const& input, std::int32_t index, base::cv_sample* cv_out, std::int32_t release_sample)
+double
+envelope::process_block(voice_input const& input, std::int32_t index, 
+  base::cv_sample* cv_out, std::int32_t release_sample, bool& result)
 {
   float delay, attack, hold, decay, release;
+  double start_time = performance_counter();
   automation_view automation(input.automation.rearrange_params(part_type::envelope, index));
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
@@ -108,7 +110,8 @@ envelope::process_block(voice_input const& input, std::int32_t index, base::cv_s
     if(s == release_sample) _released = true, _position = static_cast<int32_t>(std::ceil(delay + attack + hold + decay));
     else if(!dahdsr || stage.first != envelope_stage::sustain) _position++;
   }
-  return _ended;
+  result = _ended;
+  return performance_counter() - start_time;
 } 
  
 } // namespace svn::synth

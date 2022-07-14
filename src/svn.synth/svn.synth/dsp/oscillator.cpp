@@ -168,12 +168,14 @@ oscillator::generate_unison(
   return result / static_cast<float>(voices);
 }
 
-void
-oscillator::process_block(voice_input const& input, 
-  std::int32_t index, cv_state const& cv, audio_sample32* audio_out)
+double
+oscillator::process_block(voice_input const& input, std::int32_t index, 
+  cv_state const& cv, audio_sample32* audio_out, double& mod_time)
 {
+  float const* const* modulated;
+  double start_time_sec = performance_counter();
   automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
-  float const* const* modulated = cv.modulate(input, automation, cv_route_osc_mapping, cv_route_output::osc, index);
+  mod_time += cv.modulate(input, automation, cv_route_osc_mapping, cv_route_output::osc, index, modulated);
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {  
     audio_out[s] = 0.0f;
@@ -191,6 +193,7 @@ oscillator::process_block(voice_input const& input,
     audio_out[s].left = sanity_bipolar(sample.left * amp);
     audio_out[s].right = sanity_bipolar(sample.right * amp);
   }
+  return performance_counter() - start_time_sec;
 }
 
 } // namespace svn::synth
