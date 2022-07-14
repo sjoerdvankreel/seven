@@ -10,10 +10,10 @@
 #include <pluginterfaces/vst/ivstaudioprocessor.h>
 
 using namespace svn::base;
-using namespace svn::synth;
+using namespace svn::synth; 
 
 // Bindings to vst base project.
-extern "C" {
+extern "C" { 
    
 topology_info const*
 svn_vst_create_topology()
