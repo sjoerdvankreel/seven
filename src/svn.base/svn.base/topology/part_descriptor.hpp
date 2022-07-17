@@ -23,7 +23,8 @@ struct part_ui_descriptor
 {
   std::int32_t const part_index; // Index within the grid.
   std::int32_t const param_columns; // Number of parameters stacked left-to-right.
-  std::int32_t const enabled_param; // Index into params which identifies the part on/off switch, or -1 if always on.
+  std::int32_t const enabled_param; // Index into own params which identifies the part on/off switch, or -1 if always on.
+  std::int32_t const selector_param; // Index into selector params which identifies the part index switch param if this part type has more then 1 runtime part, or -1 if part count is 1.
   wchar_t const* const info; // Extra info for part header ui.
 };
 
@@ -34,6 +35,7 @@ struct part_descriptor
   item_name const static_name; // Static name, e.g. "Osc", "Filter".
   std::int32_t const type; // Type id, e.g. Osc, Filter.
   bool const output; // Part contains output parameters.
+  bool const selector; // Part contains selector parameters (e.g. switch Osc1/2). At most 1 part containing selector params.
   std::int32_t const part_count; // Part count of this type, e.g. 2 filters.
   param_descriptor const* const params; // Pointer to parameter descriptor array.
   std::int32_t const param_count; // Parameter count for a part of this type, e.g. 2: frequency, resonance.

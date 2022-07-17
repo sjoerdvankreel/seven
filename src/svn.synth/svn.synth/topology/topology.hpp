@@ -23,13 +23,18 @@ inline std::int32_t constexpr synth_max_ui_height = 760;
 inline base::ui_color constexpr synth_ui_end_color = { 0x6E, 0xFA, 0xD5 };
 inline base::ui_color constexpr synth_ui_start_color = { 0xB7, 0xC3, 0xFD }; 
 
-struct part_type_t { enum value { oscillator, envelope, voice_lfo, voice_amp, voice_filter, audio_route, cv_route, output, count }; };
+struct part_type_t { enum value { oscillator, envelope, voice_lfo, voice_amp, voice_filter, audio_route, cv_route, selector, output, count }; };
 typedef part_type_t::value part_type;
   
 // ---- amp ----
 
 struct voice_amp_param_t { enum value { level, env1, pan, count }; };
 typedef voice_amp_param_t::value voice_amp_param;
+
+// ---- selector ----
+
+struct selector_param_t { enum value { osc, vlfo, vflt, env, count }; };
+typedef selector_param_t::value selector_param;
 
 // ---- output ----
 
