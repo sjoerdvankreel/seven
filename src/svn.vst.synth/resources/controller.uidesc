@@ -325,18 +325,18 @@
                 "children": {
                     "view_container_fix": {
                         "attributes": {
-                            "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "3, 3",
-                            "size": "240, 132",
-                            "background-offset": "0, 0"
+                            "size": "240, 132"
                         },
                         "children": {
                             "view_container_fix": {
                                 "attributes": {
+                                    "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "3, 3",
-                                    "size": "240, 132"
+                                    "origin": "0, 0",
+                                    "size": "240, 132",
+                                    "background-offset": "0, 0"
                                 },
                                 "children": {
                                     "view_container_fix": {
@@ -1375,18 +1375,18 @@
                     },
                     "view_container_fix": {
                         "attributes": {
-                            "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "3, 138",
-                            "size": "240, 66",
-                            "background-offset": "0, 25"
+                            "size": "240, 66"
                         },
                         "children": {
                             "view_container_fix": {
                                 "attributes": {
+                                    "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "3, 3",
-                                    "size": "240, 66"
+                                    "origin": "0, 0",
+                                    "size": "240, 66",
+                                    "background-offset": "50, 25"
                                 },
                                 "children": {
                                     "view_container_fix": {
@@ -1749,18 +1749,18 @@
                     },
                     "view_container_fix": {
                         "attributes": {
-                            "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "3, 207",
-                            "size": "240, 66",
-                            "background-offset": "0, 50"
+                            "size": "240, 66"
                         },
                         "children": {
                             "view_container_fix": {
                                 "attributes": {
+                                    "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "3, 3",
-                                    "size": "240, 66"
+                                    "origin": "0, 0",
+                                    "size": "240, 66",
+                                    "background-offset": "75, 50"
                                 },
                                 "children": {
                                     "view_container_fix": {
@@ -2428,18 +2428,18 @@
                     },
                     "view_container_fix": {
                         "attributes": {
-                            "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "3, 276",
-                            "size": "240, 132",
-                            "background-offset": "25, 0"
+                            "size": "240, 132"
                         },
                         "children": {
                             "view_container_fix": {
                                 "attributes": {
+                                    "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "3, 3",
-                                    "size": "240, 132"
+                                    "origin": "0, 0",
+                                    "size": "240, 132",
+                                    "background-offset": "25, 25"
                                 },
                                 "children": {
                                     "view_container_fix": {
@@ -3750,18 +3750,18 @@
                     },
                     "view_container_fix": {
                         "attributes": {
-                            "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "3, 411",
-                            "size": "240, 44",
-                            "background-offset": "25, 25"
+                            "size": "240, 44"
                         },
                         "children": {
                             "view_container_fix": {
                                 "attributes": {
+                                    "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "3, 3",
-                                    "size": "240, 44"
+                                    "origin": "0, 0",
+                                    "size": "240, 44",
+                                    "background-offset": "75, 25"
                                 },
                                 "children": {
                                     "view_container_fix": {
@@ -4058,18 +4058,18 @@
                     },
                     "view_container_fix": {
                         "attributes": {
-                            "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "3, 458",
-                            "size": "240, 220",
-                            "background-offset": "25, 50"
+                            "size": "240, 220"
                         },
                         "children": {
                             "view_container_fix": {
                                 "attributes": {
+                                    "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "3, 3",
-                                    "size": "240, 220"
+                                    "origin": "0, 0",
+                                    "size": "240, 220",
+                                    "background-offset": "100, 50"
                                 },
                                 "children": {
                                     "view_container_fix": {
@@ -5848,18 +5848,18 @@
                     },
                     "view_container_fix": {
                         "attributes": {
-                            "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "246, 3",
-                            "size": "240, 396",
-                            "background-offset": "50, 0"
+                            "size": "240, 396"
                         },
                         "children": {
                             "view_container_fix": {
                                 "attributes": {
+                                    "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "3, 3",
-                                    "size": "240, 396"
+                                    "origin": "0, 0",
+                                    "size": "240, 396",
+                                    "background-offset": "125, 0"
                                 },
                                 "children": {
                                     "view_container_fix": {
@@ -8905,25 +8905,25 @@
                     },
                     "view_container_fix": {
                         "attributes": {
-                            "bitmap": "background",
                             "class": "view_container_fix",
                             "origin": "246, 402",
-                            "size": "240, 276",
-                            "background-offset": "50, 25"
+                            "size": "240, 276"
                         },
                         "children": {
                             "view_container_fix": {
                                 "attributes": {
+                                    "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "3, 3",
-                                    "size": "240, 110"
+                                    "origin": "0, 0",
+                                    "size": "240, 276",
+                                    "background-offset": "125, 25"
                                 },
                                 "children": {
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 110",
+                                            "size": "240, 276",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -8990,7 +8990,7 @@
                                                     "round-rect-radius": "3",
                                                     "origin": "0, 19",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 91",
+                                                    "size": "240, 257",
                                                     "frame-color": "color_6EFAD580"
                                                 }
                                             },
@@ -8998,7 +8998,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "0, 19",
-                                                    "size": "240, 91",
+                                                    "size": "240, 257",
                                                     "background-color": "color_6EFAD520"
                                                 },
                                                 "children": {

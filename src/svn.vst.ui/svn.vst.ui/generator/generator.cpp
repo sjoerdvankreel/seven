@@ -494,26 +494,26 @@ build_ui_part_outer_container(
   part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
+  std::int32_t offset_space = 25;
+  std::int32_t offset_x = part.runtime_part_index / 3;
+  std::int32_t offset_y = part.runtime_part_index % 3;
+  add_attribute(result, "bitmap", "background", allocator);
   add_attribute(result, "class", "view_container_fix", allocator);
-  add_attribute(result, "origin", size_to_string(margin, margin), allocator);
+  add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "size", size_to_string(part.width, part.height), allocator);
+  add_attribute(result, "background-offset", size_to_string(offset_x * offset_space, offset_y * offset_space), allocator);
   add_child(result, "view_container_fix", build_ui_part_inner_container(topology, type, part, allocator), allocator);
   return result;
 }
 
 static Value
 build_ui_part_type_container(topology_info const& topology,
-  part_type_ui_description const& type, std::int32_t index, Document::AllocatorType& allocator)
+  part_type_ui_description const& type, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  std::int32_t offset_space = 25;
-  std::int32_t offset_x = index / 3;
-  std::int32_t offset_y = index % 3;
-  add_attribute(result, "bitmap", "background", allocator);
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(type.left, type.top), allocator);
   add_attribute(result, "size", size_to_string(type.width, type.height), allocator);
-  add_attribute(result, "background-offset", size_to_string(offset_x * offset_space, offset_y * offset_space), allocator);
   add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type.parts[0], allocator), allocator);
   return result;
 }
@@ -530,7 +530,7 @@ build_ui_template(topology_info const& topology,
   add_attribute(view, "class", "view_container_fix", allocator);
   for (std::size_t type = 0; type < descriptor.part_types.size(); type++)
     add_child(view, "view_container_fix", build_ui_part_type_container(
-      topology, descriptor.part_types[type], type, allocator), allocator);
+      topology, descriptor.part_types[type], allocator), allocator);
   Value result(kObjectType);
   result.AddMember("view", view, allocator);
   return result;

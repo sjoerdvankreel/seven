@@ -168,14 +168,22 @@ controller_ui_description::create(
   result.width = margin;
   for (std::size_t c = 0; c < result.column_widths.size(); c++)
     result.width += result.column_widths[c] + margin;
-  for (std::size_t p = 0; p < result.part_types.size(); p++)
-    result.part_types[p].width = result.column_widths[result.part_types[p].column];
+  for (std::size_t pt = 0; pt < result.part_types.size(); pt++)
+  {
+    result.part_types[pt].width = result.column_widths[result.part_types[pt].column];
+    for (std::size_t p = 0; p < result.part_types[pt].parts.size(); p++)
+      result.part_types[pt].parts[p].width = result.part_types[pt].width;
+  }
 
   // Fix up last block height.
   result.height = max_column_height;
-  for (std::size_t p = 0; p < result.part_types.size(); p++)
-    if (p == result.part_types.size() - 1 || result.part_types[p].column != result.part_types[p + 1].column)
-      result.part_types[p].height = result.height - result.part_types[p].top - margin;
+  for (std::size_t pt = 0; pt < result.part_types.size(); pt++)
+    if (pt == result.part_types.size() - 1 || result.part_types[pt].column != result.part_types[pt + 1].column)
+    {
+      result.part_types[pt].height = result.height - result.part_types[pt].top - margin;
+      for(std::size_t p = 0; p < result.part_types[pt].parts.size(); p++)
+        result.part_types[pt].parts[p].height = result.part_types[pt].height;
+    }
 
   return result;
 }
