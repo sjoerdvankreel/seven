@@ -15,7 +15,7 @@ cv_kinds[cv_kind::count] =
   { L"UniSync", L"Unipolar synced" },
   { L"BipSync", L"Bipolar synced" }
 }; 
-    
+       
 // ---- output ----  
  
 static param_descriptor const 

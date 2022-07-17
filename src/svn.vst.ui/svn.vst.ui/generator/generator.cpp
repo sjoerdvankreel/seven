@@ -497,9 +497,10 @@ build_ui_part_outer_container(
   std::int32_t offset_space = 25;
   std::int32_t offset_x = part.runtime_part_index / 3;
   std::int32_t offset_y = part.runtime_part_index % 3;
+  std::int32_t top = type.parts.size() == 1? 0: param_row_height + margin;
   add_attribute(result, "bitmap", "background", allocator);
   add_attribute(result, "class", "view_container_fix", allocator);
-  add_attribute(result, "origin", size_to_string(0, 0), allocator);
+  add_attribute(result, "origin", size_to_string(0, top), allocator);
   add_attribute(result, "size", size_to_string(part.width, part.height), allocator);
   add_attribute(result, "background-offset", size_to_string(offset_x * offset_space, offset_y * offset_space), allocator);
   add_child(result, "view_container_fix", build_ui_part_inner_container(topology, type, part, allocator), allocator);
@@ -514,7 +515,8 @@ build_ui_part_type_container(topology_info const& topology,
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(type.left, type.top), allocator);
   add_attribute(result, "size", size_to_string(type.width, type.height), allocator);
-  add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type.parts[0], allocator), allocator);
+  for(std::size_t i = 0; i < type.parts.size(); i++)
+    add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
   return result;
 }
 
