@@ -176,20 +176,21 @@ synthesizer::process_block(block_input const& input, block_output& output)
   // Clip and set output info.
   usage.total = performance_counter() - start_time;
   bool clip = base::clip_audio(output.audio, input.sample_count);
-  double process_time_factor = 100.0 * sample_rate() / input.sample_count; 
+  double part_time_factor = 100.0 / usage.total;
+  double total_time_factor = 100.0 * sample_rate() / input.sample_count; 
   double part_proc_time = usage.cv + usage.osc + usage.env + usage.vlfo + usage.vamp + usage.audio + usage.vfilter;
   output.output_params[output_param::clip].discrete = clip? 1: 0;
   output.output_params[output_param::voices].discrete = voice_count; 
   output.output_params[output_param::drain].discrete = _voices_drained ? 1: 0;
-  output.output_params[output_param::cv_cpu].discrete = static_cast<std::int32_t>(usage.cv * process_time_factor);
-  output.output_params[output_param::osc_cpu].discrete = static_cast<std::int32_t>(usage.osc * process_time_factor);
-  output.output_params[output_param::env_cpu].discrete = static_cast<std::int32_t>(usage.env * process_time_factor);
-  output.output_params[output_param::vlfo_cpu].discrete = static_cast<std::int32_t>(usage.vlfo * process_time_factor);
-  output.output_params[output_param::vamp_cpu].discrete = static_cast<std::int32_t>(usage.vamp * process_time_factor);
-  output.output_params[output_param::audio_cpu].discrete = static_cast<std::int32_t>(usage.audio * process_time_factor);
-  output.output_params[output_param::total_cpu].discrete = static_cast<std::int32_t>(usage.total * process_time_factor);
-  output.output_params[output_param::vflt_cpu].discrete = static_cast<std::int32_t>(usage.vfilter * process_time_factor);
-  output.output_params[output_param::aux_cpu].discrete = static_cast<std::int32_t>((usage.total - part_proc_time) * process_time_factor);
+  output.output_params[output_param::cv_cpu].discrete = static_cast<std::int32_t>(usage.cv * part_time_factor);
+  output.output_params[output_param::osc_cpu].discrete = static_cast<std::int32_t>(usage.osc * part_time_factor);
+  output.output_params[output_param::env_cpu].discrete = static_cast<std::int32_t>(usage.env * part_time_factor);
+  output.output_params[output_param::vlfo_cpu].discrete = static_cast<std::int32_t>(usage.vlfo * part_time_factor);
+  output.output_params[output_param::vamp_cpu].discrete = static_cast<std::int32_t>(usage.vamp * part_time_factor);
+  output.output_params[output_param::audio_cpu].discrete = static_cast<std::int32_t>(usage.audio * part_time_factor);
+  output.output_params[output_param::vflt_cpu].discrete = static_cast<std::int32_t>(usage.vfilter * part_time_factor);
+  output.output_params[output_param::total_cpu].discrete = static_cast<std::int32_t>(usage.total * total_time_factor);
+  output.output_params[output_param::aux_cpu].discrete = static_cast<std::int32_t>((usage.total - part_proc_time) * part_time_factor);
 } 
  
 } // namespace svn::synth
