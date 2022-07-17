@@ -317,9 +317,9 @@
         "templates": {
             "view": {
                 "attributes": {
-                    "size": "489, 738",
-                    "minSize": "489, 738",
-                    "maxSize": "489, 738",
+                    "size": "489, 681",
+                    "minSize": "489, 681",
+                    "maxSize": "489, 681",
                     "class": "view_container_fix"
                 },
                 "children": {
@@ -327,7 +327,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "3, 3",
-                            "size": "240, 154"
+                            "size": "240, 132"
                         },
                         "children": {
                             "view_container_fix": {
@@ -352,7 +352,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 132",
                                     "background-offset": "0, 0"
                                 },
@@ -1393,7 +1393,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 132",
                                     "background-offset": "0, 25"
                                 },
@@ -2434,7 +2434,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 132",
                                     "background-offset": "0, 50"
                                 },
@@ -3475,7 +3475,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 132",
                                     "background-offset": "25, 0"
                                 },
@@ -4517,8 +4517,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 160",
-                            "size": "240, 88"
+                            "origin": "3, 138",
+                            "size": "240, 66"
                         },
                         "children": {
                             "view_container_fix": {
@@ -4543,7 +4543,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 66",
                                     "background-offset": "50, 25"
                                 },
@@ -4908,7 +4908,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 66",
                                     "background-offset": "50, 50"
                                 },
@@ -5273,7 +5273,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 66",
                                     "background-offset": "75, 0"
                                 },
@@ -5639,8 +5639,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 251",
-                            "size": "240, 88"
+                            "origin": "3, 207",
+                            "size": "240, 66"
                         },
                         "children": {
                             "view_container_fix": {
@@ -5665,7 +5665,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 66",
                                     "background-offset": "75, 50"
                                 },
@@ -6335,7 +6335,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 66",
                                     "background-offset": "100, 0"
                                 },
@@ -7005,7 +7005,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 66",
                                     "background-offset": "100, 25"
                                 },
@@ -7676,8 +7676,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 342",
-                            "size": "240, 154"
+                            "origin": "3, 276",
+                            "size": "240, 132"
                         },
                         "children": {
                             "view_container_fix": {
@@ -7702,7 +7702,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 132",
                                     "background-offset": "25, 25"
                                 },
@@ -9015,7 +9015,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 132",
                                     "background-offset": "25, 50"
                                 },
@@ -10328,7 +10328,7 @@
                                 "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
-                                    "origin": "0, 22",
+                                    "origin": "0, 0",
                                     "size": "240, 132",
                                     "background-offset": "50, 0"
                                 },
@@ -11642,8 +11642,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 499",
-                            "size": "240, 236"
+                            "origin": "3, 411",
+                            "size": "240, 44"
                         },
                         "children": {
                             "view_container_fix": {
@@ -11651,7 +11651,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 236",
+                                    "size": "240, 44",
                                     "background-offset": "75, 25"
                                 },
                                 "children": {
@@ -11659,7 +11659,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 236",
+                                            "size": "240, 44",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -11726,7 +11726,7 @@
                                                     "round-rect-radius": "3",
                                                     "origin": "0, 19",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 217",
+                                                    "size": "240, 25",
                                                     "frame-color": "color_8DE2E680"
                                                 }
                                             },
@@ -11734,7 +11734,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "0, 19",
-                                                    "size": "240, 217",
+                                                    "size": "240, 25",
                                                     "background-color": "color_8DE2E620"
                                                 },
                                                 "children": {
@@ -11950,7 +11950,7 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "246, 3",
+                            "origin": "3, 458",
                             "size": "240, 220"
                         },
                         "children": {
@@ -13740,7 +13740,7 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "246, 226",
+                            "origin": "246, 3",
                             "size": "240, 396"
                         },
                         "children": {
@@ -16797,8 +16797,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "246, 625",
-                            "size": "240, 110"
+                            "origin": "246, 402",
+                            "size": "240, 276"
                         },
                         "children": {
                             "view_container_fix": {
@@ -16806,7 +16806,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 110",
+                                    "size": "240, 276",
                                     "background-offset": "125, 25"
                                 },
                                 "children": {
@@ -16814,7 +16814,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 110",
+                                            "size": "240, 276",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -16881,7 +16881,7 @@
                                                     "round-rect-radius": "3",
                                                     "origin": "0, 19",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 91",
+                                                    "size": "240, 257",
                                                     "frame-color": "color_6EFAD580"
                                                 }
                                             },
@@ -16889,7 +16889,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "0, 19",
-                                                    "size": "240, 91",
+                                                    "size": "240, 257",
                                                     "background-color": "color_6EFAD520"
                                                 },
                                                 "children": {

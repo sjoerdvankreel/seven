@@ -115,9 +115,6 @@ part_type_ui_description::create(
     result.parts.push_back(part_ui_description::create(topology, runtime_part_indices[i]));
   result.width = result.parts[0].width;
   result.height = result.parts[0].height;
-  // Tab headers.
-  if(result.parts.size() > 1)
-    result.height += param_row_height + margin;
   return result;
 }
 
