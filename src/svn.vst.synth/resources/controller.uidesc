@@ -332,6 +332,24 @@
                         "children": {
                             "view_container_fix": {
                                 "attributes": {
+                                    "class": "view_container_fix",
+                                    "origin": "0, 0",
+                                    "size": "240, 19"
+                                },
+                                "children": {
+                                    "CHorizontalSwitch": {
+                                        "attributes": {
+                                            "class": "CHorizontalSwitch",
+                                            "origin": "0, 0",
+                                            "sub-pixmaps": "4",
+                                            "size": "240, 19",
+                                            "height-of-one-image": "19"
+                                        }
+                                    }
+                                }
+                            },
+                            "view_container_fix": {
+                                "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 22",
@@ -4505,6 +4523,24 @@
                         "children": {
                             "view_container_fix": {
                                 "attributes": {
+                                    "class": "view_container_fix",
+                                    "origin": "0, 0",
+                                    "size": "240, 19"
+                                },
+                                "children": {
+                                    "CHorizontalSwitch": {
+                                        "attributes": {
+                                            "class": "CHorizontalSwitch",
+                                            "origin": "0, 0",
+                                            "sub-pixmaps": "3",
+                                            "size": "240, 19",
+                                            "height-of-one-image": "19"
+                                        }
+                                    }
+                                }
+                            },
+                            "view_container_fix": {
+                                "attributes": {
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 22",
@@ -5607,6 +5643,24 @@
                             "size": "240, 88"
                         },
                         "children": {
+                            "view_container_fix": {
+                                "attributes": {
+                                    "class": "view_container_fix",
+                                    "origin": "0, 0",
+                                    "size": "240, 19"
+                                },
+                                "children": {
+                                    "CHorizontalSwitch": {
+                                        "attributes": {
+                                            "class": "CHorizontalSwitch",
+                                            "origin": "0, 0",
+                                            "sub-pixmaps": "3",
+                                            "size": "240, 19",
+                                            "height-of-one-image": "19"
+                                        }
+                                    }
+                                }
+                            },
                             "view_container_fix": {
                                 "attributes": {
                                     "bitmap": "background",
@@ -7626,6 +7680,24 @@
                             "size": "240, 154"
                         },
                         "children": {
+                            "view_container_fix": {
+                                "attributes": {
+                                    "class": "view_container_fix",
+                                    "origin": "0, 0",
+                                    "size": "240, 19"
+                                },
+                                "children": {
+                                    "CHorizontalSwitch": {
+                                        "attributes": {
+                                            "class": "CHorizontalSwitch",
+                                            "origin": "0, 0",
+                                            "sub-pixmaps": "3",
+                                            "size": "240, 19",
+                                            "height-of-one-image": "19"
+                                        }
+                                    }
+                                }
+                            },
                             "view_container_fix": {
                                 "attributes": {
                                     "bitmap": "background",
