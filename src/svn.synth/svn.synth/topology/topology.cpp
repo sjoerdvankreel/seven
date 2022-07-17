@@ -16,7 +16,7 @@ cv_kinds[cv_kind::count] =
   { L"BipSync", L"Bipolar synced" }
 }; 
   
-// ---- output ----
+// ---- output ----  
  
 static param_descriptor const 
 output_params[output_param::count] =

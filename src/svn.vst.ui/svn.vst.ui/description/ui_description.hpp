@@ -20,17 +20,12 @@ struct param_ui_description
 // Complete part with graph and params.
 struct part_ui_description
 {
-  std::int32_t top;
-  std::int32_t left;
   std::int32_t width;
   std::int32_t height;
   std::int32_t rows; // Grid rows.
-  std::int32_t column; // Own column.
   std::int32_t columns; // Grid columns.
-  svn::base::ui_color color; // Gradient color.
   std::int32_t runtime_part_index; // Part runtime index.
   std::int32_t occupied_cell_count; // Param unique ui indices plus graphs sizes.
-  wchar_t const* info; // Extra header info.
 
   std::int32_t graph_count;
   param_ui_description enabled_param;
@@ -38,7 +33,29 @@ struct part_ui_description
   std::vector<param_ui_description> params;
 
   static part_ui_description 
-  create(svn::base::topology_info const& topology, std::int32_t runtime_part_index);
+  create(
+    svn::base::topology_info const& topology, 
+    std::int32_t runtime_part_index);
+};
+
+// Part type container, tabbed if more than 1.
+struct part_type_ui_description
+{
+  std::int32_t top;
+  std::int32_t left;
+  std::int32_t width;
+  std::int32_t height;
+  std::int32_t column; // Own column.
+  wchar_t const* info; // Extra header info.
+  wchar_t const* name; // Extra header info.
+  svn::base::ui_color color; // Gradient color.
+  std::vector<part_ui_description> parts;
+
+  static part_type_ui_description
+  create(
+    svn::base::topology_info const& topology,
+    svn::base::part_descriptor const& descriptor,
+    std::vector<std::int32_t> runtime_part_indices);
 };
 
 // Complete controller editor ui.
@@ -46,8 +63,8 @@ struct controller_ui_description
 {
   std::int32_t width;
   std::int32_t height;
-  std::vector<part_ui_description> parts;
   std::vector<std::int32_t> column_widths;
+  std::vector<part_type_ui_description> part_types;
 
   static controller_ui_description
   create(svn::base::topology_info const& topology);

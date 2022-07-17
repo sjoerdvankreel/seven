@@ -91,9 +91,9 @@ build_ui_param_control_base(
 
 static Value
 build_ui_param_checkbox(
-  topology_info const& topology, part_ui_description const& part,
-  param_ui_description const& param, ui_color const& color, std::int32_t left,
-  std::int32_t width, std::int32_t top_margin, Document::AllocatorType& allocator)
+  topology_info const& topology, part_type_ui_description const& type,
+  part_ui_description const& part, param_ui_description const& param, ui_color const& color, 
+  std::int32_t left, std::int32_t width, std::int32_t top_margin, Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);
   Value result(build_ui_param_control_base(topology, param, class_name, left, width, top_margin, allocator));
@@ -102,28 +102,30 @@ build_ui_param_checkbox(
   add_attribute(result, "draw-crossbox", "true", allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "boxfill-color", get_color_name(color, color_alpha::quarter), allocator);
-  add_attribute(result, "boxframe-color", get_color_name(part.color, color_alpha::opaque), allocator);
-  add_attribute(result, "checkmark-color", get_color_name(part.color, color_alpha::opaque), allocator);
+  add_attribute(result, "boxframe-color", get_color_name(type.color, color_alpha::opaque), allocator);
+  add_attribute(result, "checkmark-color", get_color_name(type.color, color_alpha::opaque), allocator);
   return result;
 }
 
 static Value
 build_ui_param_knob(
-  topology_info const& topology, part_ui_description const& part,
-  param_ui_description const& param, Document::AllocatorType& allocator)
+  topology_info const& topology, part_type_ui_description const& type, 
+  part_ui_description const& part, param_ui_description const& param, 
+  Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);
   Value result(build_ui_param_control_base(topology, param, class_name, 0, param_col1_width, 0, allocator));
   add_attribute(result, "angle-start", "20", allocator);
   add_attribute(result, "angle-range", "320", allocator);
-  add_attribute(result, "color", get_color_name(part.color, color_alpha::opaque), allocator);
+  add_attribute(result, "color", get_color_name(type.color, color_alpha::opaque), allocator);
   return result;
 }
 
 static Value
 build_ui_param_menu(
-  topology_info const& topology, part_ui_description const& part,
-  param_ui_description const& param, Document::AllocatorType& allocator)
+  topology_info const& topology, part_type_ui_description const& type, 
+  part_ui_description const& part, param_ui_description const& param, 
+  Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, param);
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
@@ -140,17 +142,17 @@ build_ui_param_menu(
   add_attribute(result, "text-inset", size_to_string(margin, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "max-value", std::to_string(descriptor.discrete.max), allocator);
-  add_attribute(result, "font-color", get_color_name(part.color, color_alpha::opaque), allocator);
-  add_attribute(result, "back-color", get_color_name(part.color, color_alpha::quarter), allocator);
-  add_attribute(result, "shadow-color", get_color_name(part.color, color_alpha::half), allocator);
+  add_attribute(result, "font-color", get_color_name(type.color, color_alpha::opaque), allocator);
+  add_attribute(result, "back-color", get_color_name(type.color, color_alpha::quarter), allocator);
+  add_attribute(result, "shadow-color", get_color_name(type.color, color_alpha::half), allocator);
   return result;
 }
 
 static Value
 build_ui_param_label(
-  topology_info const& topology, part_ui_description const& part,
-  param_ui_description const& param, std::int32_t left, std::int32_t width,
-  Document::AllocatorType& allocator)
+  topology_info const& topology, part_type_ui_description const& type,
+  part_ui_description const& part, param_ui_description const& param, 
+  std::int32_t left, std::int32_t width, Document::AllocatorType& allocator)
 {
   Value result(build_ui_param_item_base("CTextLabel", left, width, 0, allocator));
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
@@ -158,7 +160,7 @@ build_ui_param_label(
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
   add_attribute(result, "font", font, allocator);
-  add_attribute(result, "font-color", get_color_name(part.color, color_alpha::opaque), allocator);
+  add_attribute(result, "font-color", get_color_name(type.color, color_alpha::opaque), allocator);
   std::string title = narrow_assume_ascii(topology.params[param.runtime_param_index].descriptor->static_name.short_);
   add_attribute(result, "title", title, allocator);
   return result;
@@ -166,9 +168,10 @@ build_ui_param_label(
 
 static Value
 build_ui_param_edit(
-  topology_info const& topology, part_ui_description const& part,
-  param_ui_description const& param, std::int32_t left, std::int32_t width,
-  std::string const& alignment, Document::AllocatorType& allocator)
+  topology_info const& topology, part_type_ui_description const& type, 
+  part_ui_description const& part, param_ui_description const& param, 
+  std::int32_t left, std::int32_t width, std::string const& alignment, 
+  Document::AllocatorType& allocator)
 {
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
   Value result(build_ui_param_control_base(topology, param, "CTextEdit", left, width, 0, allocator));
@@ -180,14 +183,15 @@ build_ui_param_edit(
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "value-precision", std::to_string(descriptor.real.precision), allocator);
   add_attribute(result, "back-color", get_color_name(black, color_alpha::eight), allocator);
-  add_attribute(result, "font-color", get_color_name(part.color, color_alpha::opaque), allocator);
+  add_attribute(result, "font-color", get_color_name(type.color, color_alpha::opaque), allocator);
   return result;
 }
 
 static Value
 build_ui_param_background_or_border(
-  part_ui_description const& part, std::int32_t row, 
-  std::int32_t column, std::int32_t group_index, Document::AllocatorType& allocator)
+  part_type_ui_description const& type, part_ui_description const& part, 
+  std::int32_t row, std::int32_t column, std::int32_t group_index, 
+  Document::AllocatorType& allocator)
 {
   std::string color;
   Value result(kObjectType);
@@ -207,7 +211,7 @@ build_ui_param_background_or_border(
     color = get_color_name(black, color_alpha::quarter);
   }
   if (group_index == 1) color = get_color_name(white, color_alpha::eight);
-  if (group_index == 2) color = get_color_name(part.color, color_alpha::eight);
+  if (group_index == 2) color = get_color_name(type.color, color_alpha::eight);
 
   add_attribute(result, "background-color", color, allocator);
   add_attribute(result, "class", "view_container_fix", allocator);
@@ -219,8 +223,9 @@ build_ui_param_background_or_border(
 
 static void
 add_ui_input_param(
-  topology_info const& topology, part_ui_description const& part,
-  Value& container, std::size_t index, Document::AllocatorType& allocator)
+  topology_info const& topology, part_type_ui_description const& type,
+  part_ui_description const& part, Value& container, 
+  std::size_t index, Document::AllocatorType& allocator)
 {
   Value checkbox;
   std::int32_t left_col2 = param_col1_width + margin;
@@ -231,24 +236,24 @@ add_ui_input_param(
   switch (topology.params[param.runtime_param_index].descriptor->type)
   {
   case param_type::list:
-    add_child(container, control_class, build_ui_param_menu(topology, part, param, allocator), allocator);
-    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col3, param_col3_width, allocator), allocator);
+    add_child(container, control_class, build_ui_param_menu(topology, type, part, param, allocator), allocator);
+    add_child(container, "CTextLabel", build_ui_param_label(topology, type, part, param, left_col3, param_col3_width, allocator), allocator);
     break;
   case param_type::text:
-    add_child(container, control_class, build_ui_param_edit(topology, part, param, 0, col12_and_magin, "right", allocator), allocator);
-    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col3, param_col3_width, allocator), allocator);
+    add_child(container, control_class, build_ui_param_edit(topology, type, part, param, 0, col12_and_magin, "right", allocator), allocator);
+    add_child(container, "CTextLabel", build_ui_param_label(topology, type, part, param, left_col3, param_col3_width, allocator), allocator);
     break;
   case param_type::real:
   case param_type::knob:
   case param_type::knob_list:
-    add_child(container, control_class, build_ui_param_knob(topology, part, param, allocator), allocator);
-    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col2, param_col2_width, allocator), allocator);
-    add_child(container, "CTextEdit", build_ui_param_edit(topology, part, param, col12_and_magin, param_col3_width, "right", allocator), allocator);
+    add_child(container, control_class, build_ui_param_knob(topology, type, part, param, allocator), allocator);
+    add_child(container, "CTextLabel", build_ui_param_label(topology, type, part, param, left_col2, param_col2_width, allocator), allocator);
+    add_child(container, "CTextEdit", build_ui_param_edit(topology, type, part, param, col12_and_magin, param_col3_width, "right", allocator), allocator);
     break;
   case param_type::toggle:
-    checkbox = build_ui_param_checkbox(topology, part, param, part.color, margin, param_col1_width, 0, allocator);
+    checkbox = build_ui_param_checkbox(topology, type, part, param, type.color, margin, param_col1_width, 0, allocator);
     add_child(container, control_class, checkbox, allocator);
-    add_child(container, "CTextLabel", build_ui_param_label(topology, part, param, left_col2, param_col2_width + margin + param_col3_width, allocator), allocator);
+    add_child(container, "CTextLabel", build_ui_param_label(topology, type, part, param, left_col2, param_col2_width + margin + param_col3_width, allocator), allocator);
     break;  
   default:
     assert(false);
@@ -257,21 +262,22 @@ add_ui_input_param(
 
 static void
 add_ui_output_param(
-  topology_info const& topology, part_ui_description const& part,
-  Value& container, std::size_t index, Document::AllocatorType& allocator)
+  topology_info const& topology, part_type_ui_description const& type,
+  part_ui_description const& part, Value& container, 
+  std::size_t index, Document::AllocatorType& allocator)
 {
   param_ui_description const& param = part.params[index];
   std::string control_class = get_param_control_class(topology, param);
   add_child(container, "CTextLabel", build_ui_param_label(
-    topology, part, param, 0, param_output_col_width, allocator), allocator);
+    topology, type, part, param, 0, param_output_col_width, allocator), allocator);
   switch (topology.params[param.runtime_param_index].descriptor->type)
   {
   case param_type::toggle:
-    add_child(container, control_class, build_ui_param_checkbox(topology, part, param, part.color,
-      param_output_col_width + margin, param_output_col_width, 0, allocator), allocator);
+    add_child(container, control_class, build_ui_param_checkbox(topology, type, part, param, 
+      type.color, param_output_col_width + margin, param_output_col_width, 0, allocator), allocator);
     break;
   case param_type::text:
-    add_child(container, control_class, build_ui_param_edit(topology, part, param,
+    add_child(container, control_class, build_ui_param_edit(topology, type, part, param,
       param_output_col_width + margin, param_output_col_width - margin, "left", allocator), allocator);
     break;
   default:
@@ -281,8 +287,8 @@ add_ui_output_param(
 
 static Value
 build_ui_part_single_param_container(
-  topology_info const& topology, part_ui_description const& description,
-  std::size_t index, Document::AllocatorType& allocator)
+  topology_info const& topology, part_type_ui_description const& type,
+  part_ui_description const& description, std::size_t index, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   auto const& param = description.params[index];
@@ -294,18 +300,20 @@ build_ui_part_single_param_container(
   add_attribute(result, "size", size_to_string(param_total_width, param_row_height), allocator);
   add_attribute(result, "background-color", get_color_name(white, color_alpha::transparent), allocator); 
   if (part.descriptor->output)
-    add_ui_output_param(topology, description, result, index, allocator);
+    add_ui_output_param(topology, type, description, result, index, allocator);
   else
-    add_ui_input_param(topology, description, result, index, allocator);
+    add_ui_input_param(topology, type, description, result, index, allocator);
   return result;
 }
 
 static Value
-build_ui_part_graph(topology_info const& topology,
-  part_ui_description const& description, std::int32_t index, Document::AllocatorType& allocator)
+build_ui_part_graph(
+  topology_info const& topology, part_type_ui_description const& type,
+  part_ui_description const& part, std::int32_t index, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  auto const& graph = description.graphs[index];
+  auto const& graph = part.graphs[index];
+  auto const& part_desc = topology.parts[part.runtime_part_index];
   std::int32_t left = graph.column * param_total_width + padding_param_group;
   std::int32_t top = graph.row * (param_row_height + margin) + padding_param_group;
   std::int32_t height = graph.row_span * (param_row_height + margin) + margin - 2 * padding_param_group;
@@ -313,39 +321,40 @@ build_ui_part_graph(topology_info const& topology,
   add_attribute(result, "class", "seven_graph_plot", allocator);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   add_attribute(result, "size", size_to_string(width, height), allocator);
-  add_attribute(result, "color", get_color_name(description.color, color_alpha::opaque), allocator);
-  auto const& part = topology.parts[description.runtime_part_index];
+  add_attribute(result, "color", get_color_name(type.color, color_alpha::opaque), allocator);
   add_attribute(result, "graph-type", std::to_string(graph.type), allocator);
-  add_attribute(result, "part-index", std::to_string(part.type_index), allocator);
+  add_attribute(result, "part-index", std::to_string(part_desc.type_index), allocator);
   add_attribute(result, "tooltip", narrow_assume_ascii(graph.description), allocator);
-  add_attribute(result, "part-type", std::to_string(part.descriptor->type), allocator);
+  add_attribute(result, "part-type", std::to_string(part_desc.descriptor->type), allocator);
   return result;
 }
 
 static Value
-build_ui_part_param_container(topology_info const& topology,
-  part_ui_description const& description, Document::AllocatorType& allocator)
+build_ui_part_param_container(
+  topology_info const& topology, part_type_ui_description const& type,
+  part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(0, param_row_height), allocator);
-  add_attribute(result, "size", size_to_string(description.width, description.height - param_row_height), allocator);
-  add_attribute(result, "background-color", get_color_name(description.color, color_alpha::eight), allocator);
+  add_attribute(result, "size", size_to_string(part.width, part.height - param_row_height), allocator);
+  add_attribute(result, "background-color", get_color_name(type.color, color_alpha::eight), allocator);
   
   // Build graph content.
-  for(std::int32_t g = 0; g < description.graph_count; g++)
-    add_child(result, "seven_graph_plot", build_ui_part_graph(topology, description, g, allocator), allocator);
+  for(std::int32_t g = 0; g < part.graph_count; g++)
+    add_child(result, "seven_graph_plot", build_ui_part_graph(
+      topology, type, part, g, allocator), allocator);
   
   // Build cell decoration and filler cells.
   std::set<std::pair<std::int32_t, std::int32_t>> cells_decorated;
-  for (std::size_t p = 0; p < description.params.size(); p++)
+  for (std::size_t p = 0; p < part.params.size(); p++)
   {
-    auto const& param = description.params[p];
+    auto const& param = part.params[p];
     if(param.runtime_param_index == -1)
     {
       // Empty cell filler.
       add_child(result, "view_container_fix", build_ui_param_background_or_border(
-        description, param.row, param.column, 0, allocator), allocator);
+        type, part, param.row, param.column, 0, allocator), allocator);
       continue;
     }
 
@@ -354,24 +363,26 @@ build_ui_part_param_container(topology_info const& topology,
     if(cells_decorated.find({ param.row, param.column}) == cells_decorated.end())
     {
       add_child(result, "view_container_fix", build_ui_param_background_or_border(
-        description, param.row, param.column, param_descriptor.ui.param_group, allocator), allocator);
+        type, part, param.row, param.column, param_descriptor.ui.param_group, allocator), allocator);
       if (param_descriptor.ui.param_group != 0)
         add_child(result, "view_container_fix", build_ui_param_background_or_border(
-          description, param.row, param.column, 0, allocator), allocator);
+          type, part, param.row, param.column, 0, allocator), allocator);
     }
     cells_decorated.insert({ param.row, param.column });
   }
 
   // Build actual parameter content.
-  for (std::size_t p = 0; p < description.params.size(); p++)
-    if (description.params[p].runtime_param_index != -1)
-      add_child(result, "view_container_fix", build_ui_part_single_param_container(topology, description, p, allocator), allocator);
+  for (std::size_t p = 0; p < part.params.size(); p++)
+    if (part.params[p].runtime_param_index != -1)
+      add_child(result, "view_container_fix", build_ui_part_single_param_container(
+        topology, type, part, p, allocator), allocator);
   return result;
 }
 
 static Value
-build_ui_part_param_container_border(topology_info const& topology,
-  part_ui_description const& description, Document::AllocatorType& allocator)
+build_ui_part_param_container_border(
+  topology_info const& topology, part_type_ui_description const& type,
+  part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "class", "CTextLabel", allocator);
@@ -379,15 +390,16 @@ build_ui_part_param_container_border(topology_info const& topology,
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "origin", size_to_string(0, param_row_height), allocator);
   add_attribute(result, "back-color", get_color_name(black, color_alpha::transparent), allocator);
-  add_attribute(result, "size", size_to_string(description.width, description.height - param_row_height), allocator);
-  add_attribute(result, "frame-color", get_color_name(description.color, color_alpha::half), allocator);
+  add_attribute(result, "size", size_to_string(part.width, part.height - param_row_height), allocator);
+  add_attribute(result, "frame-color", get_color_name(type.color, color_alpha::half), allocator);
   return result;
 }
 
 static Value
-build_ui_part_header_label(topology_info const& topology, 
-  part_ui_description const& description, std::string const& alignment, 
-  std::string const& title, std::int32_t left, Document::AllocatorType& allocator)
+build_ui_part_header_label(
+  topology_info const& topology, part_type_ui_description const& type, 
+  std::string const& alignment, std::string const& title, 
+  std::int32_t left, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "title", title, allocator);
@@ -397,52 +409,55 @@ build_ui_part_header_label(topology_info const& topology,
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "origin", size_to_string(left, -1), allocator);
   add_attribute(result, "size", size_to_string(param_total_width, param_row_height), allocator);
-  add_attribute(result, "font-color", get_color_name(description.color, color_alpha::opaque), allocator);
-  add_attribute(result, "background-color", get_color_name(description.color, color_alpha::half), allocator);
+  add_attribute(result, "font-color", get_color_name(type.color, color_alpha::opaque), allocator);
+  add_attribute(result, "background-color", get_color_name(type.color, color_alpha::half), allocator);
   return result;
 }
 
 static Value
-build_ui_part_header_container(topology_info const& topology,
-  part_ui_description const& description, Document::AllocatorType& allocator)
+build_ui_part_header_container(
+  topology_info const& topology, part_type_ui_description const& type, 
+  part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(1, 1), allocator);
-  add_attribute(result, "size", size_to_string(description.width - 2, param_row_height - 2), allocator);
+  add_attribute(result, "size", size_to_string(part.width - 2, param_row_height - 2), allocator);
   add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
 
-  std::string title = " " + narrow_assume_ascii(topology.parts[description.runtime_part_index].runtime_name);
-  if (description.enabled_param.runtime_param_index != -1)
+  std::string title = " " + narrow_assume_ascii(topology.parts[part.runtime_part_index].runtime_name);
+  if (part.enabled_param.runtime_param_index != -1)
   {
-    Value enabled_box = build_ui_param_checkbox(topology, description, description.enabled_param, black, margin, header_checkbox_width, -1, allocator);
+    Value enabled_box = build_ui_param_checkbox(topology, type, part, part.enabled_param, black, margin, header_checkbox_width, -1, allocator);
     add_child(result, "CCheckBox", enabled_box, allocator);
-    add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, "left", title, header_checkbox_width + margin, allocator), allocator);
+    add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", title, header_checkbox_width + margin, allocator), allocator);
   } else
-    add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, "left", title, 0, allocator), allocator);
+    add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", title, 0, allocator), allocator);
 
-  std::int32_t left = description.width - param_total_width - 2 * margin;
-  std::string info = " " + narrow_assume_ascii(topology.parts[description.runtime_part_index].descriptor->ui.info);
-  add_child(result, "CTextLabel", build_ui_part_header_label(topology, description, "right", info, left, allocator), allocator);
+  std::int32_t left = part.width - param_total_width - 2 * margin;
+  std::string info = " " + narrow_assume_ascii(topology.parts[part.runtime_part_index].descriptor->ui.info);
+  add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "right", info, left, allocator), allocator);
   return result;
 }
 
 static Value
-build_ui_part_header_container_background(topology_info const& topology,
-  part_ui_description const& description, Document::AllocatorType& allocator)
+build_ui_part_header_container_background(
+  topology_info const& topology, part_type_ui_description const& type,
+  part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "background-color-draw-style", "filled", allocator);
-  add_attribute(result, "size", size_to_string(description.width, param_row_height + 1), allocator);
-  add_attribute(result, "background-color", get_color_name(description.color, color_alpha::quarter), allocator);
+  add_attribute(result, "size", size_to_string(part.width, param_row_height + 1), allocator);
+  add_attribute(result, "background-color", get_color_name(type.color, color_alpha::quarter), allocator);
   return result;
 }
 
 static Value
-build_ui_part_header_container_border(topology_info const& topology,
-  part_ui_description const& description, Document::AllocatorType& allocator)
+build_ui_part_header_container_border(
+  topology_info const& topology, part_type_ui_description const& type,
+  part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "class", "CTextLabel", allocator);
@@ -450,42 +465,56 @@ build_ui_part_header_container_border(topology_info const& topology,
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "back-color", get_color_name(black, color_alpha::transparent), allocator);
-  add_attribute(result, "size", size_to_string(description.width, param_row_height + 1), allocator);
-  add_attribute(result, "frame-color", get_color_name(description.color, color_alpha::half), allocator);
+  add_attribute(result, "size", size_to_string(part.width, param_row_height + 1), allocator);
+  add_attribute(result, "frame-color", get_color_name(type.color, color_alpha::half), allocator);
   return result;
 }
 
 static Value
-build_ui_part_inner_container(topology_info const& topology,
-  part_ui_description const& description, Document::AllocatorType& allocator)
+build_ui_part_inner_container(
+  topology_info const& topology, part_type_ui_description const& type,
+  part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
-  add_attribute(result, "size", size_to_string(description.width, description.height), allocator);
+  add_attribute(result, "size", size_to_string(part.width, part.height), allocator);
   add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
-  add_child(result, "view_container_fix", build_ui_part_header_container_background(topology, description, allocator), allocator);
-  add_child(result, "view_container_fix", build_ui_part_header_container_border(topology, description, allocator), allocator);
-  add_child(result, "view_container_fix", build_ui_part_header_container(topology, description, allocator), allocator);
-  add_child(result, "view_container_fix", build_ui_part_param_container_border(topology, description, allocator), allocator);
-  add_child(result, "view_container_fix", build_ui_part_param_container(topology, description, allocator), allocator);
+  add_child(result, "view_container_fix", build_ui_part_header_container_background(topology, type, part, allocator), allocator);
+  add_child(result, "view_container_fix", build_ui_part_header_container_border(topology, type, part, allocator), allocator);
+  add_child(result, "view_container_fix", build_ui_part_header_container(topology, type, part, allocator), allocator);
+  add_child(result, "view_container_fix", build_ui_part_param_container_border(topology, type, part, allocator), allocator);
+  add_child(result, "view_container_fix", build_ui_part_param_container(topology, type, part, allocator), allocator);
   return result;
 }
 
 static Value
-build_ui_part_outer_container(topology_info const& topology,
-  part_ui_description const& description, Document::AllocatorType& allocator)
+build_ui_part_outer_container(
+  topology_info const& topology, part_type_ui_description const& type,
+  part_ui_description const& part, Document::AllocatorType& allocator)
+{
+  Value result(kObjectType);
+  add_attribute(result, "class", "view_container_fix", allocator);
+  add_attribute(result, "origin", size_to_string(margin, margin), allocator);
+  add_attribute(result, "size", size_to_string(part.width, part.height), allocator);
+  add_child(result, "view_container_fix", build_ui_part_inner_container(topology, type, part, allocator), allocator);
+  return result;
+}
+
+static Value
+build_ui_part_type_container(topology_info const& topology,
+  part_type_ui_description const& type, std::int32_t index, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   std::int32_t offset_space = 25;
-  std::int32_t offset_x = description.runtime_part_index / 3;
-  std::int32_t offset_y = description.runtime_part_index % 3;
+  std::int32_t offset_x = index / 3;
+  std::int32_t offset_y = index % 3;
   add_attribute(result, "bitmap", "background", allocator);
   add_attribute(result, "class", "view_container_fix", allocator);
-  add_attribute(result, "origin", size_to_string(description.left, description.top), allocator);
-  add_attribute(result, "size", size_to_string(description.width, description.height), allocator);
+  add_attribute(result, "origin", size_to_string(type.left, type.top), allocator);
+  add_attribute(result, "size", size_to_string(type.width, type.height), allocator);
   add_attribute(result, "background-offset", size_to_string(offset_x * offset_space, offset_y * offset_space), allocator);
-  add_child(result, "view_container_fix", build_ui_part_inner_container(topology, description, allocator), allocator);
+  add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type.parts[0], allocator), allocator);
   return result;
 }
 
@@ -499,8 +528,9 @@ build_ui_template(topology_info const& topology,
   add_attribute(view, "minSize", size, allocator);
   add_attribute(view, "maxSize", size, allocator);
   add_attribute(view, "class", "view_container_fix", allocator);
-  for (std::size_t p = 0; p < descriptor.parts.size(); p++)
-    add_child(view, "view_container_fix", build_ui_part_outer_container(topology, descriptor.parts[p], allocator), allocator);
+  for (std::size_t type = 0; type < descriptor.part_types.size(); type++)
+    add_child(view, "view_container_fix", build_ui_part_type_container(
+      topology, descriptor.part_types[type], type, allocator), allocator);
   Value result(kObjectType);
   result.AddMember("view", view, allocator);
   return result;

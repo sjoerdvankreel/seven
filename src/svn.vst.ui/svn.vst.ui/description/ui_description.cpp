@@ -37,7 +37,6 @@ part_ui_description::create(
   part_ui_description result;
   result.occupied_cell_count = 0;
   auto const& part = topology.parts[runtime_part_index];
-  result.info = part.descriptor->ui.info;
   result.graphs = part.descriptor->graphs;
   result.graph_count = part.descriptor->graph_count;
 
@@ -52,7 +51,6 @@ part_ui_description::create(
   if (result.occupied_cell_count % result.columns != 0) ++result.rows;
   result.width = result.columns * param_total_width;
   result.height = (result.rows + 1) * (param_row_height + margin);
-  result.color = ui_color_gradient(topology, part.descriptor->ui.part_index);
 
   result.enabled_param.row = 0;
   result.enabled_param.runtime_param_index = -1;
@@ -103,27 +101,39 @@ part_ui_description::create(
   return result;
 }
 
+part_type_ui_description
+part_type_ui_description::create(
+  svn::base::topology_info const& topology, 
+  svn::base::part_descriptor const& descriptor,
+  std::vector<std::int32_t> runtime_part_indices)
+{
+  part_type_ui_description result;
+  result.info = descriptor.ui.info;
+  result.name = descriptor.static_name.short_;
+  result.color = ui_color_gradient(topology, descriptor.ui.part_index);
+  for(std::int32_t i = 0; i < descriptor.part_count; i++)
+    result.parts.push_back(part_ui_description::create(topology, runtime_part_indices[i]));
+  result.width = result.parts[0].width;
+  result.height = result.parts[0].height;
+  return result;
+}
+
 controller_ui_description
 controller_ui_description::create(
   svn::base::topology_info const& topology)
 {
   // Build part list.
   controller_ui_description result;
-  std::vector<std::pair<std::int32_t, std::int32_t>> part_ui_indices;
+  std::vector<std::pair<std::int32_t, std::int32_t>> part_type_ui_indices;
   for(std::int32_t i = 0; i < topology.static_part_count; i++)
-    part_ui_indices.push_back(std::make_pair(i, topology.static_parts[i].ui.part_index));
-  std::sort(part_ui_indices.begin(), part_ui_indices.end(), [](auto const& l, auto const& r) -> bool { return l.second < r.second; });
-  for (std::int32_t p = 0; p < topology.static_part_count; p++)
+    part_type_ui_indices.push_back(std::make_pair(i, topology.static_parts[i].ui.part_index));
+  std::sort(part_type_ui_indices.begin(), part_type_ui_indices.end(), 
+    [](auto const& l, auto const& r) -> bool { return l.second < r.second; });
+  for (std::size_t p = 0; p < part_type_ui_indices.size(); p++)
   {
-    auto const& static_part = topology.static_parts[part_ui_indices[p].first];
-    for (std::int32_t c = 0; c < static_part.part_count; c++)
-    {
-      std::int32_t runtime_part_index = topology.part_bounds[part_ui_indices[p].first][c];
-      part_ui_description description(part_ui_description::create(topology, runtime_part_index));
-      if (description.height + 2 * margin > topology.ui.max_height)
-        throw std::runtime_error("Part height exceeds max ui height.");
-      result.parts.push_back(description);
-    }
+    std::int32_t index = part_type_ui_indices[p].first;
+    auto const& static_part = topology.static_parts[index];
+    result.part_types.push_back(part_type_ui_description::create(topology, static_part, topology.part_bounds[index]));
   }
 
   // Fix up top/left/column.
@@ -132,10 +142,10 @@ controller_ui_description::create(
   std::int32_t left = margin;
   std::int32_t column_width = 0;
   std::int32_t max_column_height = 0;
-  for (std::size_t p = 0; p < result.parts.size(); p++)
+  for (std::size_t p = 0; p < result.part_types.size(); p++)
   {
-    auto& part = result.parts[p];
-    if (top + part.height + margin > topology.ui.max_height)
+    auto& part_type = result.part_types[p];
+    if (top + part_type.height + margin > topology.ui.max_height)
     {
       max_column_height = std::max(top, max_column_height);
       column++;
@@ -145,11 +155,11 @@ controller_ui_description::create(
       column_width = 0;
     }
 
-    part.top = top;
-    part.left = left;
-    part.column = column;
-    column_width = std::max(column_width, part.width);
-    top += part.height + margin;
+    part_type.top = top;
+    part_type.left = left;
+    part_type.column = column;
+    column_width = std::max(column_width, part_type.width);
+    top += part_type.height + margin;
   }
   result.column_widths.push_back(column_width);
   max_column_height = std::max(top, max_column_height);
@@ -158,14 +168,14 @@ controller_ui_description::create(
   result.width = margin;
   for (std::size_t c = 0; c < result.column_widths.size(); c++)
     result.width += result.column_widths[c] + margin;
-  for (std::size_t p = 0; p < result.parts.size(); p++)
-    result.parts[p].width = result.column_widths[result.parts[p].column];
+  for (std::size_t p = 0; p < result.part_types.size(); p++)
+    result.part_types[p].width = result.column_widths[result.part_types[p].column];
 
   // Fix up last block height.
   result.height = max_column_height;
-  for (std::size_t p = 0; p < result.parts.size(); p++)
-    if (p == result.parts.size() - 1 || result.parts[p].column != result.parts[p + 1].column)
-      result.parts[p].height = result.height - result.parts[p].top - margin;
+  for (std::size_t p = 0; p < result.part_types.size(); p++)
+    if (p == result.part_types.size() - 1 || result.part_types[p].column != result.part_types[p + 1].column)
+      result.part_types[p].height = result.height - result.part_types[p].top - margin;
 
   return result;
 }
@@ -180,45 +190,57 @@ controller_ui_description::print(svn::base::topology_info const& topology, std::
   for (std::size_t c = 0; c < column_widths.size(); c++)
     os << column_widths[c] << " ";
   os << "\n";
-  for (std::size_t part = 0; part < parts.size(); part++)
+  for (std::size_t part_type = 0; part_type < part_types.size(); part_type++)
   {
-    std::int32_t rt_index = parts[part].runtime_part_index;
-    os << "\tPart " << part << ":\n";
-    os << "\t\tName: " << narrow_assume_ascii(topology.parts[rt_index].runtime_name) << "\n";
-    os << "\t\tColumn: " << parts[part].column << "\n";
-    os << "\t\tParams: " << parts[part].params.size() << "\n";
-    os << "\t\tColumns: " << parts[part].columns << "\n";
-    os << "\t\tRows: " << parts[part].rows << "\n";
-    os << "\t\tWidth: " << parts[part].width << "\n";
-    os << "\t\tHeight: " << parts[part].height << "\n";
-    os << "\t\tLeft: " << parts[part].left << "\n";
-    os << "\t\tTop: " << parts[part].top << "\n";
-    os << "\t\tOccupied cell count: " << parts[part].occupied_cell_count << "\n";
-    os << "\t\tEnabled index: " << parts[part].enabled_param.runtime_param_index << "\n";
+    os << "\tPart type " << part_type << ":\n";
+    os << "\t\tName: " << narrow_assume_ascii(part_types[part_type].name) << "\n";
+    os << "\t\tTop: " << part_types[part_type].top << "\n";
+    os << "\t\tLeft: " << part_types[part_type].left << "\n";
+    os << "\t\tWidth: " << part_types[part_type].width << "\n";
+    os << "\t\tHeight: " << part_types[part_type].height << "\n";
+    os << "\t\tColumn: " << part_types[part_type].column << "\n";
+    os << "\t\tInfo: " << narrow_assume_ascii(part_types[part_type].info) << "\n";
     os << "\t\tColor:";
-    os << " " << static_cast<std::int32_t>(parts[part].color.r);
-    os << " " << static_cast<std::int32_t>(parts[part].color.g);
-    os << " " << static_cast<std::int32_t>(parts[part].color.b);
+    os << " " << static_cast<std::int32_t>(part_types[part_type].color.r);
+    os << " " << static_cast<std::int32_t>(part_types[part_type].color.g);
+    os << " " << static_cast<std::int32_t>(part_types[part_type].color.b);
     os << "\n";
-    for(std::int32_t g = 0; g < parts[part].graph_count; g++)
+
+    for(std::size_t part = 0; part < part_types[part_type].parts.size(); part++)
     {
-      os << "\t\tGraph " << (g + 1) << " position: ";
-      os << "top: " << parts[part].graphs[g].row << ", ";
-      os << "left: " << parts[part].graphs[g].column << ", ";
-      os << "height: " << parts[part].graphs[g].row_span << ", ";
-      os << "width: " << parts[part].graphs[g].column_span << "\n";
-    }
-    os << "\t\tParam cells:\n";
-    for (std::size_t param = 0; param < parts[part].params.size(); param++)
-    {
-      auto const& param_ui = parts[part].params[param];
-      std::string name = "(Filler)";
-      if(param_ui.runtime_param_index != -1)
+      auto const& part_desc = part_types[part_type].parts[part];
+      std::int32_t rt_index = part_desc.runtime_part_index;
+      os << "\t\tPart " << part << ":\n";
+      os << "\t\t\tName: " << narrow_assume_ascii(topology.parts[rt_index].runtime_name) << "\n";
+      os << "\t\t\tParams: " << part_desc.params.size() << "\n";
+      os << "\t\t\tColumns: " << part_desc.columns << "\n";
+      os << "\t\t\tRows: " << part_desc.rows << "\n";
+      os << "\t\t\tWidth: " << part_desc.width << "\n";
+      os << "\t\t\tHeight: " << part_desc.height << "\n";
+      os << "\t\t\tOccupied cell count: " << part_desc.occupied_cell_count << "\n";
+      os << "\t\t\tEnabled index: " << part_desc.enabled_param.runtime_param_index << "\n";
+  
+      for(std::int32_t g = 0; g < part_desc.graph_count; g++)
       {
-        auto const& descriptor = *topology.params[param_ui.runtime_param_index].descriptor;
-        name = narrow_assume_ascii(descriptor.static_name.short_);
+        os << "\t\t\tGraph " << (g + 1) << " position: ";
+        os << "top: " << part_desc.graphs[g].row << ", ";
+        os << "left: " << part_desc.graphs[g].column << ", ";
+        os << "height: " << part_desc.graphs[g].row_span << ", ";
+        os << "width: " << part_desc.graphs[g].column_span << "\n";
       }
-      std::cout << "\t\t\t" << name << " (" << param_ui.row << ", " << param_ui.column << ")\n";
+    
+      os << "\t\t\tParam cells:\n";
+      for (std::size_t param = 0; param < part_desc.params.size(); param++)
+      {
+        auto const& param_ui = part_desc.params[param];
+        std::string name = "(Filler)";
+        if(param_ui.runtime_param_index != -1)
+        {
+          auto const& descriptor = *topology.params[param_ui.runtime_param_index].descriptor;
+          name = narrow_assume_ascii(descriptor.static_name.short_);
+        }
+        std::cout << "\t\t\t\t" << name << " (" << param_ui.row << ", " << param_ui.column << ")\n";
+      }
     }
   }
   os << "\n";
