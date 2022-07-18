@@ -321,9 +321,9 @@
         "templates": {
             "view": {
                 "attributes": {
-                    "size": "489, 681",
-                    "minSize": "489, 681",
-                    "maxSize": "489, 681",
+                    "size": "489, 705",
+                    "minSize": "489, 705",
+                    "maxSize": "489, 705",
                     "class": "view_container_fix"
                 },
                 "children": {
@@ -331,7 +331,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "3, 3",
-                            "size": "240, 132"
+                            "size": "240, 136"
                         },
                         "children": {
                             "view_container_fix": {
@@ -339,7 +339,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 132",
+                                    "size": "240, 136",
                                     "background-offset": "0, 0"
                                 },
                                 "children": {
@@ -347,7 +347,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 132",
+                                            "size": "240, 136",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -428,18 +428,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_B7C3FD80",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 113",
-                                                    "frame-color": "color_B7C3FD80"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 113",
-                                                    "background-color": "color_B7C3FD20"
+                                                    "background-color": "color_B7C3FD20",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -1380,7 +1380,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 132",
+                                    "size": "240, 136",
                                     "background-offset": "0, 25"
                                 },
                                 "children": {
@@ -1388,7 +1388,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 132",
+                                            "size": "240, 136",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -1469,18 +1469,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_B7C3FD80",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 113",
-                                                    "frame-color": "color_B7C3FD80"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 113",
-                                                    "background-color": "color_B7C3FD20"
+                                                    "background-color": "color_B7C3FD20",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -2421,7 +2421,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 132",
+                                    "size": "240, 136",
                                     "background-offset": "0, 50"
                                 },
                                 "children": {
@@ -2429,7 +2429,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 132",
+                                            "size": "240, 136",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -2510,18 +2510,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_B7C3FD80",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 113",
-                                                    "frame-color": "color_B7C3FD80"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 113",
-                                                    "background-color": "color_B7C3FD20"
+                                                    "background-color": "color_B7C3FD20",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -3462,7 +3462,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 132",
+                                    "size": "240, 136",
                                     "background-offset": "25, 0"
                                 },
                                 "children": {
@@ -3470,7 +3470,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 132",
+                                            "size": "240, 136",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -3551,18 +3551,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_B7C3FD80",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 113",
-                                                    "frame-color": "color_B7C3FD80"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 113",
-                                                    "background-color": "color_B7C3FD20"
+                                                    "background-color": "color_B7C3FD20",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -4526,8 +4526,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 138",
-                            "size": "240, 66"
+                            "origin": "3, 142",
+                            "size": "240, 70"
                         },
                         "children": {
                             "view_container_fix": {
@@ -4535,7 +4535,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 66",
+                                    "size": "240, 70",
                                     "background-offset": "50, 25"
                                 },
                                 "children": {
@@ -4543,7 +4543,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 66",
+                                            "size": "240, 70",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -4624,18 +4624,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_ACCAF780",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 47",
-                                                    "frame-color": "color_ACCAF780"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 47"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 47",
-                                                    "background-color": "color_ACCAF720"
+                                                    "background-color": "color_ACCAF720",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 47"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -4900,7 +4900,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 66",
+                                    "size": "240, 70",
                                     "background-offset": "50, 50"
                                 },
                                 "children": {
@@ -4908,7 +4908,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 66",
+                                            "size": "240, 70",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -4989,18 +4989,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_ACCAF780",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 47",
-                                                    "frame-color": "color_ACCAF780"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 47"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 47",
-                                                    "background-color": "color_ACCAF720"
+                                                    "background-color": "color_ACCAF720",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 47"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -5265,7 +5265,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 66",
+                                    "size": "240, 70",
                                     "background-offset": "75, 0"
                                 },
                                 "children": {
@@ -5273,7 +5273,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 66",
+                                            "size": "240, 70",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -5354,18 +5354,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_ACCAF780",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 47",
-                                                    "frame-color": "color_ACCAF780"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 47"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 47",
-                                                    "background-color": "color_ACCAF720"
+                                                    "background-color": "color_ACCAF720",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 47"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -5653,8 +5653,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 207",
-                            "size": "240, 66"
+                            "origin": "3, 215",
+                            "size": "240, 70"
                         },
                         "children": {
                             "view_container_fix": {
@@ -5662,7 +5662,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 66",
+                                    "size": "240, 70",
                                     "background-offset": "75, 50"
                                 },
                                 "children": {
@@ -5670,7 +5670,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 66",
+                                            "size": "240, 70",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -5751,18 +5751,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_A2D2F180",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 47",
-                                                    "frame-color": "color_A2D2F180"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 47"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 47",
-                                                    "background-color": "color_A2D2F120"
+                                                    "background-color": "color_A2D2F120",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 47"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -6332,7 +6332,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 66",
+                                    "size": "240, 70",
                                     "background-offset": "100, 0"
                                 },
                                 "children": {
@@ -6340,7 +6340,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 66",
+                                            "size": "240, 70",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -6421,18 +6421,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_A2D2F180",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 47",
-                                                    "frame-color": "color_A2D2F180"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 47"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 47",
-                                                    "background-color": "color_A2D2F120"
+                                                    "background-color": "color_A2D2F120",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 47"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -7002,7 +7002,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 66",
+                                    "size": "240, 70",
                                     "background-offset": "100, 25"
                                 },
                                 "children": {
@@ -7010,7 +7010,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 66",
+                                            "size": "240, 70",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -7091,18 +7091,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_A2D2F180",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 47",
-                                                    "frame-color": "color_A2D2F180"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 47"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 47",
-                                                    "background-color": "color_A2D2F120"
+                                                    "background-color": "color_A2D2F120",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 47"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -7695,8 +7695,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 276",
-                            "size": "240, 132"
+                            "origin": "3, 288",
+                            "size": "240, 136"
                         },
                         "children": {
                             "view_container_fix": {
@@ -7704,7 +7704,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 132",
+                                    "size": "240, 136",
                                     "background-offset": "25, 25"
                                 },
                                 "children": {
@@ -7712,7 +7712,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 132",
+                                            "size": "240, 136",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -7793,18 +7793,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_97DAEB80",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 113",
-                                                    "frame-color": "color_97DAEB80"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 113",
-                                                    "background-color": "color_97DAEB20"
+                                                    "background-color": "color_97DAEB20",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -9017,7 +9017,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 132",
+                                    "size": "240, 136",
                                     "background-offset": "25, 50"
                                 },
                                 "children": {
@@ -9025,7 +9025,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 132",
+                                            "size": "240, 136",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -9106,18 +9106,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_97DAEB80",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 113",
-                                                    "frame-color": "color_97DAEB80"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 113",
-                                                    "background-color": "color_97DAEB20"
+                                                    "background-color": "color_97DAEB20",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -10330,7 +10330,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 132",
+                                    "size": "240, 136",
                                     "background-offset": "50, 0"
                                 },
                                 "children": {
@@ -10338,7 +10338,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 132",
+                                            "size": "240, 136",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -10419,18 +10419,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_97DAEB80",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 113",
-                                                    "frame-color": "color_97DAEB80"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 113",
-                                                    "background-color": "color_97DAEB20"
+                                                    "background-color": "color_97DAEB20",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 113"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -11666,8 +11666,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 411",
-                            "size": "240, 44"
+                            "origin": "3, 427",
+                            "size": "240, 48"
                         },
                         "children": {
                             "view_container_fix": {
@@ -11675,7 +11675,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 44",
+                                    "size": "240, 48",
                                     "background-offset": "75, 25"
                                 },
                                 "children": {
@@ -11683,7 +11683,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 44",
+                                            "size": "240, 48",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -11748,18 +11748,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_8DE2E680",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 25",
-                                                    "frame-color": "color_8DE2E680"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 25"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 25",
-                                                    "background-color": "color_8DE2E620"
+                                                    "background-color": "color_8DE2E620",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 25"
                                                 },
                                                 "children": {
                                                     "view_container_fix": {
@@ -11974,8 +11974,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 458",
-                            "size": "240, 220"
+                            "origin": "3, 478",
+                            "size": "240, 224"
                         },
                         "children": {
                             "view_container_fix": {
@@ -11983,7 +11983,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 220",
+                                    "size": "240, 224",
                                     "background-offset": "100, 50"
                                 },
                                 "children": {
@@ -11991,7 +11991,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 220",
+                                            "size": "240, 224",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -12056,18 +12056,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_82EAE080",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 201",
-                                                    "frame-color": "color_82EAE080"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 201"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 201",
-                                                    "background-color": "color_82EAE020"
+                                                    "background-color": "color_82EAE020",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 201"
                                                 },
                                                 "children": {
                                                     "view_container_fix": {
@@ -13765,7 +13765,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "246, 3",
-                            "size": "240, 396"
+                            "size": "240, 400"
                         },
                         "children": {
                             "view_container_fix": {
@@ -13773,7 +13773,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 396",
+                                    "size": "240, 400",
                                     "background-offset": "125, 0"
                                 },
                                 "children": {
@@ -13781,7 +13781,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 396",
+                                            "size": "240, 400",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -13846,18 +13846,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_78F2DA80",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 377",
-                                                    "frame-color": "color_78F2DA80"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 377"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 377",
-                                                    "background-color": "color_78F2DA20"
+                                                    "background-color": "color_78F2DA20",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 377"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
@@ -16821,8 +16821,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "246, 402",
-                            "size": "240, 276"
+                            "origin": "246, 406",
+                            "size": "240, 296"
                         },
                         "children": {
                             "view_container_fix": {
@@ -16830,7 +16830,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "240, 276",
+                                    "size": "240, 296",
                                     "background-offset": "125, 50"
                                 },
                                 "children": {
@@ -16838,7 +16838,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "240, 276",
+                                            "size": "240, 296",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -16903,18 +16903,18 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "origin": "0, 19",
+                                                    "frame-color": "color_6EFAD580",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 257",
-                                                    "frame-color": "color_6EFAD580"
+                                                    "origin": "0, 23",
+                                                    "size": "240, 273"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 19",
-                                                    "size": "240, 257",
-                                                    "background-color": "color_6EFAD520"
+                                                    "background-color": "color_6EFAD520",
+                                                    "origin": "0, 23",
+                                                    "size": "240, 273"
                                                 },
                                                 "children": {
                                                     "view_container_fix": {

@@ -336,9 +336,9 @@ build_ui_part_param_container(
 {
   Value result(kObjectType);
   add_attribute(result, "class", "view_container_fix", allocator);
-  add_attribute(result, "origin", size_to_string(0, param_row_height), allocator);
-  add_attribute(result, "size", size_to_string(part.width, part.height - param_row_height), allocator);
   add_attribute(result, "background-color", get_color_name(type.color, color_alpha::eight), allocator);
+  add_attribute(result, "origin", size_to_string(0, param_row_height + padding_param_group * 4), allocator);
+  add_attribute(result, "size", size_to_string(part.width, part.height - param_row_height - padding_param_group * 4), allocator);
   
   // Build graph content.
   for(std::int32_t g = 0; g < part.graph_count; g++)
@@ -388,10 +388,10 @@ build_ui_part_param_container_border(
   add_attribute(result, "class", "CTextLabel", allocator);
   add_attribute(result, "style-round-rect", "true", allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
-  add_attribute(result, "origin", size_to_string(0, param_row_height), allocator);
-  add_attribute(result, "back-color", get_color_name(black, color_alpha::transparent), allocator);
-  add_attribute(result, "size", size_to_string(part.width, part.height - param_row_height), allocator);
   add_attribute(result, "frame-color", get_color_name(type.color, color_alpha::half), allocator);
+  add_attribute(result, "back-color", get_color_name(black, color_alpha::transparent), allocator);
+  add_attribute(result, "origin", size_to_string(0, param_row_height + padding_param_group * 4), allocator);
+  add_attribute(result, "size", size_to_string(part.width, part.height - param_row_height - padding_param_group * 4), allocator);
   return result;
 }
 

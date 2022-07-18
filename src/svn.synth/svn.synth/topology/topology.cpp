@@ -10,12 +10,12 @@ namespace svn::synth {
 static std::vector<std::wstring> const cv_kinds = { L"Unipolar", L"Bipolar", L"UniSync", L"BipSync" };
 
 // ---- selector ---- 
-
+ 
 static std::vector<std::wstring> const osc_selector_names = list_names(L"Osc", oscillator_count);
 static std::vector<std::wstring> const vlfo_selector_names = list_names(L"VLFO", voice_lfo_count);
 static std::vector<std::wstring> const vflt_selector_names = list_names(L"VFlt", voice_filter_count);
 static std::vector<std::wstring> const envelope_selector_names = list_names(L"Env", envelope_count);
-
+     
 static param_descriptor const
 selector_params[selector_param::count] = 
 {
