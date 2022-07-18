@@ -11,10 +11,6 @@
 
 namespace svn::base {
 
-// Optional formatter callbacks for discrete params.
-typedef std::wstring (*param_formatter)(std::int32_t val);
-typedef bool (*param_parser)(std::wstring const& val, std::int32_t& result);
-
 // Discrete param types.
 struct param_type_t { enum value { real, toggle, knob, text, list, knob_list, count }; };
 typedef param_type_t::value param_type;
@@ -34,9 +30,7 @@ struct discrete_descriptor
   std::int32_t const min;
   std::int32_t const max;
   std::int32_t const default_;
-  item_name const* const items; // Pointer to items for a list parameter.
-  param_parser const parser; // Parser callback.
-  param_formatter const formatter; // Formatter callback.
+  std::vector<std::wstring> const* const items; // Items for a list parameter.
 };
 
 // For ui generator.
@@ -83,26 +77,19 @@ struct param_descriptor
   param_descriptor(std::string const& guid, item_name const& static_name, 
   bool default_, param_ui_descriptor const& ui) :
   guid(guid), static_name(static_name), type(param_type::toggle),
-  unit(L""), discrete(discrete_descriptor(0, 1, default_, nullptr, nullptr, nullptr)), ui(ui) {}
-
-  // List/knob list with item list.
-  param_descriptor(std::string const& guid, item_name const& static_name, wchar_t const* unit, 
-  bool knob, item_name const* const items, std::int32_t count, param_ui_descriptor const& ui) :
-  guid(guid), static_name(static_name), type(knob? param_type::knob_list: param_type::list),
-  unit(unit), discrete(discrete_descriptor(0, count - 1, 0, items, nullptr, nullptr)), ui(ui) {}
+  unit(L""), discrete(discrete_descriptor(0, 1, default_,  nullptr)), ui(ui) {}
 
   // Knob/text.
   param_descriptor(std::string const& guid, item_name const& static_name, wchar_t const* unit,
   bool knob, std::int32_t min, std::int32_t max, std::int32_t default_, param_ui_descriptor const& ui) :
   guid(guid), static_name(static_name), type(knob? param_type::knob: param_type::text),
-  unit(unit), discrete(discrete_descriptor(min, max, default_, nullptr, nullptr, nullptr)), ui(ui) {}
+  unit(unit), discrete(discrete_descriptor(min, max, default_, nullptr)), ui(ui) {}
    
-  // List/knob list with formatter callbacks.
-  param_descriptor(std::string const& guid, item_name const& static_name, 
-  wchar_t const* unit, bool knob, std::int32_t min, std::int32_t max, std::int32_t default_, 
-  param_formatter formatter, param_parser parser, param_ui_descriptor const& ui) :
+  // List/knob list with item list.
+  param_descriptor(std::string const& guid, item_name const& static_name, wchar_t const* unit, 
+  bool knob, std::vector<std::wstring> const* items, param_ui_descriptor const& ui) :
   guid(guid), static_name(static_name), type(knob? param_type::knob_list: param_type::list),
-  unit(unit), discrete(discrete_descriptor(min, max, default_, nullptr, parser, formatter)), ui(ui) {}
+  unit(unit), discrete(discrete_descriptor(0, static_cast<std::int32_t>(items->size() - 1), 0, items)), ui(ui) {}
 };
 
 } // namespace svn::base

@@ -28,13 +28,7 @@ struct item_name
 };
 
 // Somebody's bound to need this.
-inline item_name const note_names[12] =
-{
-  { L"C", L"C" }, { L"C#", L"C#" }, { L"D", L"D" },
-  { L"D#", L"D#" }, { L"E", L"E" }, { L"F", L"F" },
-  { L"F#", L"F#" }, { L"G", L"G" }, { L"G#", L"G#" },
-  { L"A", L"A" }, { L"A#", L"A#" }, { L"B", L"B" }
-};
+inline std::vector<std::wstring> const note_names = { L"C", L"C#", L"D", L"D#", L"E", L"F", L"F#", L"G", L"G#", L"A", L"A#", L"B" };
 
 // Qpc, in seconds.
 double performance_counter();

@@ -21,18 +21,6 @@ param_descriptor::parse(wchar_t const* buffer, param_value& val) const
     if (val.discrete < discrete.min) return false;
     if (val.discrete > discrete.max) return false;
     return true;
-  case param_type::list:
-  case param_type::knob_list:
-    if(discrete.items != nullptr)
-    {
-      for (std::int32_t i = 0; i <= discrete.max; i++)
-        if (!std::wcscmp(discrete.items[i].short_, buffer))
-          return val.discrete = i, true;
-      return false;
-    }
-    if(!discrete.parser(str.str(), discrete_val)) return false;
-    val.discrete = discrete_val;
-    return true;
   case param_type::real:
     str >> val.real;
     if (!std::wcscmp(L"-inf", buffer)) val.real = -inf;
@@ -43,7 +31,13 @@ param_descriptor::parse(wchar_t const* buffer, param_value& val) const
     if (!std::wcscmp(L"On", buffer)) val.discrete = 1;
     else if (!std::wcscmp(L"Off", buffer)) val.discrete = 0;
     else return false;
-    return true; 
+    return true;
+  case param_type::list:
+  case param_type::knob_list:
+    for (std::int32_t i = 0; i <= discrete.max; i++)
+      if (!std::wcscmp((*discrete.items)[i].c_str(), buffer))
+        return val.discrete = i, true;
+    return false;
   default:
     assert(false);
     return false;
@@ -59,10 +53,7 @@ param_descriptor::format(param_value val, wchar_t* buffer, std::size_t size) con
   case param_type::knob: case param_type::text: stream << val.discrete; break;
   case param_type::toggle: stream << (val.discrete == 0 ? L"Off" : L"On"); break;
   case param_type::real: stream << std::setprecision(real.precision) << std::fixed << val.real; break;
-  case param_type::list: case param_type::knob_list: 
-    if(discrete.items != nullptr) stream << discrete.items[val.discrete].short_;
-    else stream << discrete.formatter(val.discrete);
-    break;
+  case param_type::list: case param_type::knob_list: stream << (*discrete.items)[val.discrete]; break;
   default: assert(false); break;
   }
   std::wstring str = stream.str();
@@ -70,6 +61,6 @@ param_descriptor::format(param_value val, wchar_t* buffer, std::size_t size) con
   std::memset(buffer, 0, size * sizeof(wchar_t));
   std::wcsncpy(buffer, str.c_str(), size - 1);
   return str.length() + 1;
-}
+} 
  
 } // namespace svn::base
