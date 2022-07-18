@@ -397,7 +397,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " Osc 1",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -1438,7 +1438,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " Osc 2",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -2479,7 +2479,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " Osc 3",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -3520,7 +3520,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " Osc 4",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -4497,6 +4497,29 @@
                                         }
                                     }
                                 }
+                            },
+                            "COptionMenu": {
+                                "attributes": {
+                                    "class": "COptionMenu",
+                                    "size": "49, 19",
+                                    "origin": "0, 0",
+                                    "control-tag": "selector_0_oscillator",
+                                    "tooltip": "Selector Oscillator",
+                                    "font": "~ NormalFontSmall",
+                                    "min-value": "0",
+                                    "default-value": "0",
+                                    "text-alignment": "left",
+                                    "style-no-frame": "true",
+                                    "style-round-rect": "true",
+                                    "menu-popup-style": "true",
+                                    "menu-check-style": "false",
+                                    "text-inset": "3, 0",
+                                    "round-rect-radius": "3",
+                                    "max-value": "3",
+                                    "font-color": "color_B7C3FDFF",
+                                    "back-color": "color_B7C3FD40",
+                                    "shadow-color": "color_B7C3FD80"
+                                }
                             }
                         }
                     },
@@ -4570,7 +4593,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " VLFO 1",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -4935,7 +4958,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " VLFO 2",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -5300,7 +5323,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " VLFO 3",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -5601,6 +5624,29 @@
                                         }
                                     }
                                 }
+                            },
+                            "COptionMenu": {
+                                "attributes": {
+                                    "class": "COptionMenu",
+                                    "size": "49, 19",
+                                    "origin": "0, 0",
+                                    "control-tag": "selector_0_voice_lfo",
+                                    "tooltip": "Selector Voice LFO",
+                                    "font": "~ NormalFontSmall",
+                                    "min-value": "0",
+                                    "default-value": "0",
+                                    "text-alignment": "left",
+                                    "style-no-frame": "true",
+                                    "style-round-rect": "true",
+                                    "menu-popup-style": "true",
+                                    "menu-check-style": "false",
+                                    "text-inset": "3, 0",
+                                    "round-rect-radius": "3",
+                                    "max-value": "2",
+                                    "font-color": "color_ACCAF7FF",
+                                    "back-color": "color_ACCAF740",
+                                    "shadow-color": "color_ACCAF780"
+                                }
                             }
                         }
                     },
@@ -5674,7 +5720,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " VFilter 1",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -6344,7 +6390,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " VFilter 2",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -7014,7 +7060,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " VFilter 3",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -7620,6 +7666,29 @@
                                         }
                                     }
                                 }
+                            },
+                            "COptionMenu": {
+                                "attributes": {
+                                    "class": "COptionMenu",
+                                    "size": "49, 19",
+                                    "origin": "0, 0",
+                                    "control-tag": "selector_0_voice_filter",
+                                    "tooltip": "Selector Voice filter",
+                                    "font": "~ NormalFontSmall",
+                                    "min-value": "0",
+                                    "default-value": "0",
+                                    "text-alignment": "left",
+                                    "style-no-frame": "true",
+                                    "style-round-rect": "true",
+                                    "menu-popup-style": "true",
+                                    "menu-check-style": "false",
+                                    "text-inset": "3, 0",
+                                    "round-rect-radius": "3",
+                                    "max-value": "2",
+                                    "font-color": "color_A2D2F1FF",
+                                    "back-color": "color_A2D2F140",
+                                    "shadow-color": "color_A2D2F180"
+                                }
                             }
                         }
                     },
@@ -7693,7 +7762,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " Env 1",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -9006,7 +9075,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " Env 2",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -10319,7 +10388,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " Env 3",
+                                                            "title": "Enabled",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "left",
@@ -11567,6 +11636,29 @@
                                             }
                                         }
                                     }
+                                }
+                            },
+                            "COptionMenu": {
+                                "attributes": {
+                                    "class": "COptionMenu",
+                                    "size": "49, 19",
+                                    "origin": "0, 0",
+                                    "control-tag": "selector_0_envelope",
+                                    "tooltip": "Selector Envelope",
+                                    "font": "~ NormalFontSmall",
+                                    "min-value": "0",
+                                    "default-value": "0",
+                                    "text-alignment": "left",
+                                    "style-no-frame": "true",
+                                    "style-round-rect": "true",
+                                    "menu-popup-style": "true",
+                                    "menu-check-style": "false",
+                                    "text-inset": "3, 0",
+                                    "round-rect-radius": "3",
+                                    "max-value": "2",
+                                    "font-color": "color_97DAEBFF",
+                                    "back-color": "color_97DAEB40",
+                                    "shadow-color": "color_97DAEB80"
                                 }
                             }
                         }

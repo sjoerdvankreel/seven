@@ -65,11 +65,9 @@ add_attribute(
 }
 
 std::string
-get_param_control_class(
-  topology_info const& topology,
-  param_ui_description const& param)
+get_param_control_class(topology_info const& topology, std::int32_t runtime_param_index)
 { 
-  switch (topology.params[param.runtime_param_index].descriptor->type)
+  switch (topology.params[runtime_param_index].descriptor->type)
   {
   case param_type::text: return "CTextEdit";
   case param_type::list: return "COptionMenu";

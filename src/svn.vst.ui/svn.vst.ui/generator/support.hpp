@@ -16,10 +16,7 @@ std::string get_control_tag(svn::base::topology_info const& topology, std::size_
 std::string get_color_name(svn::base::ui_color const& color, std::int32_t alpha_index);
 std::string get_color_value(svn::base::ui_color const& color, std::int32_t alpha_index);
 std::string print_rgb_hex(svn::base::ui_color const& color, bool print_alpha, std::int32_t alpha_index);
-
-std::string get_param_control_class(
-  svn::base::topology_info const& topology,
-  param_ui_description const& param);
+std::string get_param_control_class(svn::base::topology_info const& topology, std::int32_t runtime_param_index);
 
 rapidjson::Value& add_member(
   rapidjson::Value& container, std::string const& key,
