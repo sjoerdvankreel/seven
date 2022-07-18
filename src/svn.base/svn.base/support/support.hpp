@@ -49,6 +49,10 @@ list_parser(
   std::vector<std::wstring> const& names,
   std::int32_t& result);
 
+// E.g. "Osc", 2 -> "Osc 1", "Osc 2".
+std::vector<std::wstring>
+list_names(wchar_t const* name, std::int32_t count);
+
 // Pass list of names with count per name.
 // E.g. ["Osc", "Flt"], [2, 1] -> ["Osc 1", "Osc 2", "Flt"].
 std::vector<std::wstring>

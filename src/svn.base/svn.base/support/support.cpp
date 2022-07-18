@@ -57,6 +57,15 @@ list_parser(
   return false;    
 }
 
+std::vector<std::wstring>
+list_names(wchar_t const* name, std::int32_t count)
+{
+  std::vector<std::wstring> result;
+  for(std::int32_t i = 0; i < count; i++)
+    result.push_back(name + std::to_wstring(i + 1));
+  return result;
+}
+
 std::vector<std::vector<std::int32_t>> 
 multi_list_table_init_in(
   std::int32_t const* counts, std::int32_t count)

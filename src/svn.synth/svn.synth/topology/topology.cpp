@@ -18,13 +18,28 @@ cv_kinds[cv_kind::count] =
 
 // ---- selector ----
 
+static std::vector<std::wstring> const osc_selector_names = list_names(L"Osc", oscillator_count);
+static std::vector<std::wstring> const vlfo_selector_names = list_names(L"VLFO", voice_lfo_count);
+static std::vector<std::wstring> const vflt_selector_names = list_names(L"VFlt", voice_filter_count);
+static std::vector<std::wstring> const envelope_selector_names = list_names(L"Env", envelope_count);
+
+static std::wstring format_osc_selector_name(std::int32_t val) { return osc_selector_names[val]; }
+static std::wstring format_vlfo_selector_name(std::int32_t val) { return vlfo_selector_names[val]; }
+static std::wstring format_vflt_selector_name(std::int32_t val) { return vflt_selector_names[val]; }
+static std::wstring format_envelope_selector_name(std::int32_t val) { return envelope_selector_names[val]; }
+
+static bool parse_osc_selector_name(std::wstring const& val, std::int32_t& result) { return list_parser(val, osc_selector_names, result); }
+static bool parse_vlfo_selector_name(std::wstring const& val, std::int32_t& result) { return list_parser(val, vlfo_selector_names, result); }
+static bool parse_vflt_selector_name(std::wstring const& val, std::int32_t& result) { return list_parser(val, vflt_selector_names, result); }
+static bool parse_envelope_selector_name(std::wstring const& val, std::int32_t& result) { return list_parser(val, envelope_selector_names, result); }
+
 static param_descriptor const
 selector_params[selector_param::count] = 
 {
-  { "{0EEADBD0-D37B-4B53-A2D5-F22E2154F2D8}", { L"Osc", L"Oscillator" }, L"", false, voice_lfo_types, voice_lfo_type::count, { false, false, 0, 0, nullptr, 0 } },
-  { "{EEA97414-8C1C-4378-A68B-409692FFA920}", { L"VLFO", L"Voice LFO" }, L"", false, voice_lfo_types, voice_lfo_type::count, { false, false, 0, 0, nullptr, 0 } },
-  { "{D5DD0DFC-AC9D-42E6-9D2B-924786382825}", { L"VFlt", L"Voice filter" }, L"", false, voice_lfo_types, voice_lfo_type::count, { false, false, 0, 0, nullptr, 0 } },
-  { "{556BF692-55B0-48B4-BD6A-E2CEFA17B012}", { L"Envelope", L"Envelope" }, L"", false, voice_lfo_types, voice_lfo_type::count, { false, false, 0, 0, nullptr, 0 } }
+  { "{0EEADBD0-D37B-4B53-A2D5-F22E2154F2D8}", { L"Osc", L"Oscillator" }, L"", false, 0, oscillator_count - 1, 0, format_osc_selector_name, parse_osc_selector_name, { false, false, -1, -1, nullptr, 0 } },
+  { "{EEA97414-8C1C-4378-A68B-409692FFA920}", { L"VLFO", L"Voice LFO" }, L"", false, 0, voice_lfo_count - 1, 0, format_vlfo_selector_name, parse_vlfo_selector_name, { false, false, -1, -1, nullptr, 0 } },
+  { "{D5DD0DFC-AC9D-42E6-9D2B-924786382825}", { L"VFlt", L"Voice filter" }, L"", false, 0, voice_filter_count - 1, 0, format_vflt_selector_name, parse_vflt_selector_name, { false, false, -1, -1, nullptr, 0 } },
+  { "{556BF692-55B0-48B4-BD6A-E2CEFA17B012}", { L"Envelope", L"Envelope" }, L"", false, 0, envelope_count - 1, 0, format_envelope_selector_name, parse_envelope_selector_name, { false, false, -1, -1, nullptr, 0 } }
 };
          
 // ---- output ----  
