@@ -337,17 +337,19 @@
                             "UIViewSwitchContainer": {
                                 "attributes": {
                                     "template-switch-control": "selector_0_oscillator",
-                                    "class": "UIViewSwitchContainer",
                                     "origin": "0, 0",
+                                    "template-names": "0, 1, 2, 3",
+                                    "class": "UIViewSwitchContainer",
                                     "size": "240, 136"
                                 },
                                 "children": {
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 136",
+                                            "name": "0",
                                             "background-offset": "0, 0"
                                         },
                                         "children": {
@@ -1383,12 +1385,13 @@
                                             }
                                         }
                                     },
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 136",
+                                            "name": "1",
                                             "background-offset": "0, 25"
                                         },
                                         "children": {
@@ -2424,12 +2427,13 @@
                                             }
                                         }
                                     },
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 136",
+                                            "name": "2",
                                             "background-offset": "0, 50"
                                         },
                                         "children": {
@@ -3465,12 +3469,13 @@
                                             }
                                         }
                                     },
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 136",
+                                            "name": "3",
                                             "background-offset": "25, 0"
                                         },
                                         "children": {
@@ -4543,17 +4548,19 @@
                             "UIViewSwitchContainer": {
                                 "attributes": {
                                     "template-switch-control": "selector_0_voice_lfo",
-                                    "class": "UIViewSwitchContainer",
                                     "origin": "0, 0",
+                                    "template-names": "7, 8, 9",
+                                    "class": "UIViewSwitchContainer",
                                     "size": "240, 70"
                                 },
                                 "children": {
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 70",
+                                            "name": "7",
                                             "background-offset": "50, 25"
                                         },
                                         "children": {
@@ -4913,12 +4920,13 @@
                                             }
                                         }
                                     },
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 70",
+                                            "name": "8",
                                             "background-offset": "50, 50"
                                         },
                                         "children": {
@@ -5278,12 +5286,13 @@
                                             }
                                         }
                                     },
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 70",
+                                            "name": "9",
                                             "background-offset": "75, 0"
                                         },
                                         "children": {
@@ -5680,17 +5689,19 @@
                             "UIViewSwitchContainer": {
                                 "attributes": {
                                     "template-switch-control": "selector_0_voice_filter",
-                                    "class": "UIViewSwitchContainer",
                                     "origin": "0, 0",
+                                    "template-names": "11, 12, 13",
+                                    "class": "UIViewSwitchContainer",
                                     "size": "240, 70"
                                 },
                                 "children": {
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 70",
+                                            "name": "11",
                                             "background-offset": "75, 50"
                                         },
                                         "children": {
@@ -6355,12 +6366,13 @@
                                             }
                                         }
                                     },
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 70",
+                                            "name": "12",
                                             "background-offset": "100, 0"
                                         },
                                         "children": {
@@ -7025,12 +7037,13 @@
                                             }
                                         }
                                     },
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 70",
+                                            "name": "13",
                                             "background-offset": "100, 25"
                                         },
                                         "children": {
@@ -7732,17 +7745,19 @@
                             "UIViewSwitchContainer": {
                                 "attributes": {
                                     "template-switch-control": "selector_0_envelope",
-                                    "class": "UIViewSwitchContainer",
                                     "origin": "0, 0",
+                                    "template-names": "4, 5, 6",
+                                    "class": "UIViewSwitchContainer",
                                     "size": "240, 136"
                                 },
                                 "children": {
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 136",
+                                            "name": "4",
                                             "background-offset": "25, 25"
                                         },
                                         "children": {
@@ -9050,12 +9065,13 @@
                                             }
                                         }
                                     },
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 136",
+                                            "name": "5",
                                             "background-offset": "25, 50"
                                         },
                                         "children": {
@@ -10363,12 +10379,13 @@
                                             }
                                         }
                                     },
-                                    "view_container_fix": {
+                                    "template": {
                                         "attributes": {
                                             "bitmap": "background",
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
                                             "size": "240, 136",
+                                            "name": "6",
                                             "background-offset": "50, 0"
                                         },
                                         "children": {
@@ -11716,6 +11733,7 @@
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
                                     "size": "240, 48",
+                                    "name": "10",
                                     "background-offset": "75, 25"
                                 },
                                 "children": {
@@ -12024,6 +12042,7 @@
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
                                     "size": "240, 224",
+                                    "name": "14",
                                     "background-offset": "100, 50"
                                 },
                                 "children": {
@@ -13814,6 +13833,7 @@
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
                                     "size": "240, 400",
+                                    "name": "15",
                                     "background-offset": "125, 0"
                                 },
                                 "children": {
@@ -16871,6 +16891,7 @@
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
                                     "size": "240, 296",
+                                    "name": "17",
                                     "background-offset": "125, 50"
                                 },
                                 "children": {

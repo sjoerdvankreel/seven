@@ -505,6 +505,7 @@ build_ui_part_outer_container(
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "size", size_to_string(part.width, part.height), allocator);
+  add_attribute(result, "name", std::to_string(part.runtime_part_index), allocator);
   add_attribute(result, "background-offset", size_to_string(offset_x * offset_space, offset_y * offset_space), allocator);
   add_child(result, "view_container_fix", build_ui_part_inner_container(topology, type, part, allocator), allocator);
   return result;
@@ -515,13 +516,20 @@ build_ui_part_switch_container(topology_info const& topology,
   part_type_ui_description const& type, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
+  std::string template_names = "";
   std::string tag = get_control_tag(topology, type.selector_param.runtime_param_index);
+  for(std::int32_t i = 0; i < type.parts.size(); i++)
+  {
+    template_names += std::to_string(type.parts[i].runtime_part_index);
+    if(i < type.parts.size() - 1) template_names += ", ";
+  }
   add_attribute(result, "template-switch-control", tag, allocator);
-  add_attribute(result, "class", "UIViewSwitchContainer", allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
+  add_attribute(result, "template-names", template_names, allocator);
+  add_attribute(result, "class", "UIViewSwitchContainer", allocator);
   add_attribute(result, "size", size_to_string(type.width, type.height), allocator);
   for (std::size_t i = 0; i < type.parts.size(); i++)
-    add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
+    add_child(result, "template", build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
   return result;
 }
 
