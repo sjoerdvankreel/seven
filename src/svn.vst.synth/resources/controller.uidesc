@@ -356,7 +356,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_B7C3FD40"
                                                 }
                                             },
@@ -367,7 +367,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_B7C3FD80"
                                                 }
                                             },
@@ -375,7 +375,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -403,9 +403,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_B7C3FDFF",
-                                                            "background-color": "color_B7C3FD80"
+                                                            "background-color": "color_B7C3FD80",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -416,9 +416,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_B7C3FDFF",
-                                                            "background-color": "color_B7C3FD80"
+                                                            "background-color": "color_B7C3FD80",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -1397,7 +1397,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_B7C3FD40"
                                                 }
                                             },
@@ -1408,7 +1408,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_B7C3FD80"
                                                 }
                                             },
@@ -1416,7 +1416,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -1444,9 +1444,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_B7C3FDFF",
-                                                            "background-color": "color_B7C3FD80"
+                                                            "background-color": "color_B7C3FD80",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -1457,9 +1457,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_B7C3FDFF",
-                                                            "background-color": "color_B7C3FD80"
+                                                            "background-color": "color_B7C3FD80",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -2438,7 +2438,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_B7C3FD40"
                                                 }
                                             },
@@ -2449,7 +2449,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_B7C3FD80"
                                                 }
                                             },
@@ -2457,7 +2457,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -2485,9 +2485,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_B7C3FDFF",
-                                                            "background-color": "color_B7C3FD80"
+                                                            "background-color": "color_B7C3FD80",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -2498,9 +2498,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_B7C3FDFF",
-                                                            "background-color": "color_B7C3FD80"
+                                                            "background-color": "color_B7C3FD80",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -3479,7 +3479,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_B7C3FD40"
                                                 }
                                             },
@@ -3490,7 +3490,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_B7C3FD80"
                                                 }
                                             },
@@ -3498,7 +3498,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -3526,9 +3526,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_B7C3FDFF",
-                                                            "background-color": "color_B7C3FD80"
+                                                            "background-color": "color_B7C3FD80",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -3539,9 +3539,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_B7C3FDFF",
-                                                            "background-color": "color_B7C3FD80"
+                                                            "background-color": "color_B7C3FD80",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -4552,7 +4552,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_ACCAF740"
                                                 }
                                             },
@@ -4563,7 +4563,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_ACCAF780"
                                                 }
                                             },
@@ -4571,7 +4571,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -4599,9 +4599,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_ACCAF7FF",
-                                                            "background-color": "color_ACCAF780"
+                                                            "background-color": "color_ACCAF780",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -4612,9 +4612,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_ACCAF7FF",
-                                                            "background-color": "color_ACCAF780"
+                                                            "background-color": "color_ACCAF780",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -4917,7 +4917,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_ACCAF740"
                                                 }
                                             },
@@ -4928,7 +4928,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_ACCAF780"
                                                 }
                                             },
@@ -4936,7 +4936,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -4964,9 +4964,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_ACCAF7FF",
-                                                            "background-color": "color_ACCAF780"
+                                                            "background-color": "color_ACCAF780",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -4977,9 +4977,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_ACCAF7FF",
-                                                            "background-color": "color_ACCAF780"
+                                                            "background-color": "color_ACCAF780",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -5282,7 +5282,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_ACCAF740"
                                                 }
                                             },
@@ -5293,7 +5293,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_ACCAF780"
                                                 }
                                             },
@@ -5301,7 +5301,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -5329,9 +5329,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_ACCAF7FF",
-                                                            "background-color": "color_ACCAF780"
+                                                            "background-color": "color_ACCAF780",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -5342,9 +5342,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_ACCAF7FF",
-                                                            "background-color": "color_ACCAF780"
+                                                            "background-color": "color_ACCAF780",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -5679,7 +5679,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_A2D2F140"
                                                 }
                                             },
@@ -5690,7 +5690,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_A2D2F180"
                                                 }
                                             },
@@ -5698,7 +5698,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -5726,9 +5726,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_A2D2F1FF",
-                                                            "background-color": "color_A2D2F180"
+                                                            "background-color": "color_A2D2F180",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -5739,9 +5739,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_A2D2F1FF",
-                                                            "background-color": "color_A2D2F180"
+                                                            "background-color": "color_A2D2F180",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -6349,7 +6349,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_A2D2F140"
                                                 }
                                             },
@@ -6360,7 +6360,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_A2D2F180"
                                                 }
                                             },
@@ -6368,7 +6368,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -6396,9 +6396,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_A2D2F1FF",
-                                                            "background-color": "color_A2D2F180"
+                                                            "background-color": "color_A2D2F180",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -6409,9 +6409,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_A2D2F1FF",
-                                                            "background-color": "color_A2D2F180"
+                                                            "background-color": "color_A2D2F180",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -7019,7 +7019,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_A2D2F140"
                                                 }
                                             },
@@ -7030,7 +7030,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_A2D2F180"
                                                 }
                                             },
@@ -7038,7 +7038,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -7066,9 +7066,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_A2D2F1FF",
-                                                            "background-color": "color_A2D2F180"
+                                                            "background-color": "color_A2D2F180",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -7079,9 +7079,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_A2D2F1FF",
-                                                            "background-color": "color_A2D2F180"
+                                                            "background-color": "color_A2D2F180",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -7721,7 +7721,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_97DAEB40"
                                                 }
                                             },
@@ -7732,7 +7732,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_97DAEB80"
                                                 }
                                             },
@@ -7740,7 +7740,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -7768,9 +7768,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_97DAEBFF",
-                                                            "background-color": "color_97DAEB80"
+                                                            "background-color": "color_97DAEB80",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -7781,9 +7781,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_97DAEBFF",
-                                                            "background-color": "color_97DAEB80"
+                                                            "background-color": "color_97DAEB80",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -9034,7 +9034,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_97DAEB40"
                                                 }
                                             },
@@ -9045,7 +9045,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_97DAEB80"
                                                 }
                                             },
@@ -9053,7 +9053,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -9081,9 +9081,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_97DAEBFF",
-                                                            "background-color": "color_97DAEB80"
+                                                            "background-color": "color_97DAEB80",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -9094,9 +9094,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_97DAEBFF",
-                                                            "background-color": "color_97DAEB80"
+                                                            "background-color": "color_97DAEB80",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -10347,7 +10347,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_97DAEB40"
                                                 }
                                             },
@@ -10358,7 +10358,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_97DAEB80"
                                                 }
                                             },
@@ -10366,7 +10366,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -10394,9 +10394,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "66, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_97DAEBFF",
-                                                            "background-color": "color_97DAEB80"
+                                                            "background-color": "color_97DAEB80",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -10407,9 +10407,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_97DAEBFF",
-                                                            "background-color": "color_97DAEB80"
+                                                            "background-color": "color_97DAEB80",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -11692,7 +11692,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_8DE2E640"
                                                 }
                                             },
@@ -11703,7 +11703,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_8DE2E680"
                                                 }
                                             },
@@ -11711,7 +11711,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -11723,9 +11723,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "0, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_8DE2E6FF",
-                                                            "background-color": "color_8DE2E680"
+                                                            "background-color": "color_8DE2E680",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -11736,9 +11736,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_8DE2E6FF",
-                                                            "background-color": "color_8DE2E680"
+                                                            "background-color": "color_8DE2E680",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -12000,7 +12000,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_82EAE040"
                                                 }
                                             },
@@ -12011,7 +12011,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_82EAE080"
                                                 }
                                             },
@@ -12019,7 +12019,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -12031,9 +12031,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "0, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_82EAE0FF",
-                                                            "background-color": "color_82EAE080"
+                                                            "background-color": "color_82EAE080",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -12044,9 +12044,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_82EAE0FF",
-                                                            "background-color": "color_82EAE080"
+                                                            "background-color": "color_82EAE080",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -13790,7 +13790,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_78F2DA40"
                                                 }
                                             },
@@ -13801,7 +13801,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_78F2DA80"
                                                 }
                                             },
@@ -13809,7 +13809,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -13821,9 +13821,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "0, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_78F2DAFF",
-                                                            "background-color": "color_78F2DA80"
+                                                            "background-color": "color_78F2DA80",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -13834,9 +13834,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_78F2DAFF",
-                                                            "background-color": "color_78F2DA80"
+                                                            "background-color": "color_78F2DA80",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }
@@ -16847,7 +16847,7 @@
                                                     "class": "view_container_fix",
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "background-color": "color_6EFAD540"
                                                 }
                                             },
@@ -16858,7 +16858,7 @@
                                                     "origin": "0, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "240, 24",
                                                     "frame-color": "color_6EFAD580"
                                                 }
                                             },
@@ -16866,7 +16866,7 @@
                                                 "attributes": {
                                                     "class": "view_container_fix",
                                                     "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "size": "238, 21",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -16878,9 +16878,9 @@
                                                             "text-alignment": "left",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "0, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_6EFAD5FF",
-                                                            "background-color": "color_6EFAD580"
+                                                            "background-color": "color_6EFAD580",
+                                                            "size": "80, 23"
                                                         }
                                                     },
                                                     "CTextLabel": {
@@ -16891,9 +16891,9 @@
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
                                                             "origin": "154, -1",
-                                                            "size": "80, 19",
                                                             "font-color": "color_6EFAD5FF",
-                                                            "background-color": "color_6EFAD580"
+                                                            "background-color": "color_6EFAD580",
+                                                            "size": "80, 23"
                                                         }
                                                     }
                                                 }

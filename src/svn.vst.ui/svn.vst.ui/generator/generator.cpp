@@ -408,9 +408,9 @@ build_ui_part_header_label(
   add_attribute(result, "text-alignment", alignment, allocator);
   add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "origin", size_to_string(left, -1), allocator);
-  add_attribute(result, "size", size_to_string(param_total_width, param_row_height), allocator);
   add_attribute(result, "font-color", get_color_name(type.color, color_alpha::opaque), allocator);
   add_attribute(result, "background-color", get_color_name(type.color, color_alpha::half), allocator);
+  add_attribute(result, "size", size_to_string(param_total_width, param_row_height + padding_param_group * 4), allocator);
   return result;
 }
 
@@ -422,7 +422,7 @@ build_ui_part_header_container(
   Value result(kObjectType);
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(1, 1), allocator);
-  add_attribute(result, "size", size_to_string(part.width - 2, param_row_height - 2), allocator);
+  add_attribute(result, "size", size_to_string(part.width - 2, param_row_height - 2 + padding_param_group * 4), allocator);
   add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
 
   std::int32_t selector_offset = type.selector_param.runtime_param_index == -1? 0: param_col1_width + param_col2_width + margin;
@@ -451,7 +451,7 @@ build_ui_part_header_container_background(
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "background-color-draw-style", "filled", allocator);
-  add_attribute(result, "size", size_to_string(part.width, param_row_height + 1), allocator);
+  add_attribute(result, "size", size_to_string(part.width, param_row_height + 1 + padding_param_group * 4), allocator);
   add_attribute(result, "background-color", get_color_name(type.color, color_alpha::quarter), allocator);
   return result;
 }
@@ -467,7 +467,7 @@ build_ui_part_header_container_border(
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "back-color", get_color_name(black, color_alpha::transparent), allocator);
-  add_attribute(result, "size", size_to_string(part.width, param_row_height + 1), allocator);
+  add_attribute(result, "size", size_to_string(part.width, param_row_height + 1 + padding_param_group * 4), allocator);
   add_attribute(result, "frame-color", get_color_name(type.color, color_alpha::half), allocator);
   return result;
 }
