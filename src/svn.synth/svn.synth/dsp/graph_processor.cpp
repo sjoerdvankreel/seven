@@ -103,7 +103,7 @@ voice_lfo_graph::sample_count(param_value const* state, float sample_rate, float
     samples = timesig_to_samples(lfo_graph_rate, bpm, timesig);
   }
   return static_cast<std::int32_t>(std::ceil(cycles * samples));
-} 
+}  
 
 bool
 envelope_graph::needs_repaint(std::int32_t runtime_param) const

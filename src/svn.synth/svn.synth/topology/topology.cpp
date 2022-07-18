@@ -9,7 +9,7 @@ namespace svn::synth {
 
 static std::vector<std::wstring> const cv_kinds = { L"Unipolar", L"Bipolar", L"UniSync", L"BipSync" };
 
-// ---- selector ----
+// ---- selector ---- 
 
 static std::vector<std::wstring> const osc_selector_names = list_names(L"Osc", oscillator_count);
 static std::vector<std::wstring> const vlfo_selector_names = list_names(L"VLFO", voice_lfo_count);

@@ -420,23 +420,23 @@ build_ui_part_header_container(
   part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  std::int32_t left = type.selector_param.runtime_param_index == -1 ? 0 : param_col1_width + param_col2_width + 3 * margin;
   add_attribute(result, "class", "view_container_fix", allocator);
-  add_attribute(result, "origin", size_to_string(left + 1, 1), allocator);
-  add_attribute(result, "size", size_to_string(part.width - 2 - left, param_row_height - 2), allocator);
+  add_attribute(result, "origin", size_to_string(1, 1), allocator);
+  add_attribute(result, "size", size_to_string(part.width - 2, param_row_height - 2), allocator);
   add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
 
+  std::int32_t selector_offset = type.selector_param.runtime_param_index == -1? 0: param_col1_width + param_col2_width + margin;
   std::string title = " " + narrow_assume_ascii(topology.parts[part.runtime_part_index].runtime_name);
   if (part.enabled_param.runtime_param_index != -1)
   {
-    Value enabled_box = build_ui_param_checkbox(topology, type, part, part.enabled_param, black, margin, header_checkbox_width, -1, allocator);
+    Value enabled_box = build_ui_param_checkbox(topology, type, part, part.enabled_param, black, margin + selector_offset, header_checkbox_width, -1, allocator);
     add_child(result, "CCheckBox", enabled_box, allocator);
     std::string enabled = type.selector_param.runtime_param_index == -1? title: "Enabled";
-    add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", enabled, header_checkbox_width + margin, allocator), allocator);
+    add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", enabled, header_checkbox_width + margin + selector_offset, allocator), allocator);
   } else
-    add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", title, 0, allocator), allocator);
+    add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", title, selector_offset, allocator), allocator);
 
-  std::int32_t info_left = part.width - param_total_width - 2 * margin - left;
+  std::int32_t info_left = part.width - param_total_width - 2 * margin;
   std::string info = " " + narrow_assume_ascii(topology.parts[part.runtime_part_index].descriptor->ui.info);
   add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "right", info, info_left, allocator), allocator);
   return result;
@@ -448,11 +448,10 @@ build_ui_part_header_container_background(
   part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  std::int32_t left = type.selector_param.runtime_param_index == -1 ? 0 : param_col1_width + param_col2_width + 3 * margin;
   add_attribute(result, "class", "view_container_fix", allocator);
-  add_attribute(result, "origin", size_to_string(left, 0), allocator);
+  add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "background-color-draw-style", "filled", allocator);
-  add_attribute(result, "size", size_to_string(part.width - left, param_row_height + 1), allocator);
+  add_attribute(result, "size", size_to_string(part.width, param_row_height + 1), allocator);
   add_attribute(result, "background-color", get_color_name(type.color, color_alpha::quarter), allocator);
   return result;
 }
@@ -463,13 +462,12 @@ build_ui_part_header_container_border(
   part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  std::int32_t left = type.selector_param.runtime_param_index == -1 ? 0 : param_col1_width + param_col2_width + 3 * margin;
   add_attribute(result, "class", "CTextLabel", allocator);
   add_attribute(result, "style-round-rect", "true", allocator);
-  add_attribute(result, "origin", size_to_string(left, 0), allocator);
+  add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "back-color", get_color_name(black, color_alpha::transparent), allocator);
-  add_attribute(result, "size", size_to_string(part.width - left, param_row_height + 1), allocator);
+  add_attribute(result, "size", size_to_string(part.width, param_row_height + 1), allocator);
   add_attribute(result, "frame-color", get_color_name(type.color, color_alpha::half), allocator);
   return result;
 }
@@ -511,23 +509,6 @@ build_ui_part_outer_container(
 }
 
 static Value
-build_ui_part_selector_container(
-  topology_info const& topology, part_type_ui_description const& type, 
-  std::int32_t runtime_param_index, Document::AllocatorType& allocator)
-{
-  Value result(kObjectType);
-  std::int32_t width = param_col1_width + param_col2_width + 2 * margin;
-  add_attribute(result, "class", "CTextLabel", allocator);
-  add_attribute(result, "style-round-rect", "true", allocator);
-  add_attribute(result, "origin", size_to_string(0, 0), allocator);
-  add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
-  add_attribute(result, "back-color", get_color_name(black, color_alpha::transparent), allocator);
-  add_attribute(result, "size", size_to_string(width, param_row_height), allocator);
-  add_attribute(result, "frame-color", get_color_name(type.color, color_alpha::half), allocator);
-  return result;
-}
-
-static Value
 build_ui_part_type_container(topology_info const& topology,
   part_type_ui_description const& type, Document::AllocatorType& allocator)
 {
@@ -539,10 +520,7 @@ build_ui_part_type_container(topology_info const& topology,
   for(std::size_t i = 0; i < type.parts.size(); i++)
     add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
   if (selector_index != -1)
-  {
-    add_child(result, "CTextLabel", build_ui_part_selector_container(topology, type, selector_index, allocator), allocator);
     add_child(result, "COptionMenu", build_ui_param_menu(topology, type, selector_index, margin, 0, allocator), allocator);
-  }
   return result;
 }
 
