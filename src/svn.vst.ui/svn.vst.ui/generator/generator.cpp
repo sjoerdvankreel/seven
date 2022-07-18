@@ -125,12 +125,12 @@ build_ui_param_knob(
 static Value
 build_ui_param_menu(
   topology_info const& topology, part_type_ui_description const& type, 
-  std::int32_t runtime_param_index, Document::AllocatorType& allocator)
+  std::int32_t runtime_param_index, std::int32_t left, std::int32_t top_margin, Document::AllocatorType& allocator)
 {
   std::string class_name = get_param_control_class(topology, runtime_param_index);
   auto const& descriptor = *topology.params[runtime_param_index].descriptor;
   std::string font = descriptor.ui.control_font_small? "~ NormalFontVerySmall": "~ NormalFontSmall";
-  Value result(build_ui_param_control_base(topology, runtime_param_index, class_name, 0, param_col1_width + margin + param_col2_width, 0, allocator));
+  Value result(build_ui_param_control_base(topology, runtime_param_index, class_name, left, param_col1_width + margin + param_col2_width, top_margin, allocator));
   add_attribute(result, "font", font, allocator);
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
@@ -236,7 +236,7 @@ add_ui_input_param(
   switch (topology.params[param.runtime_param_index].descriptor->type)
   {
   case param_type::list:
-    add_child(container, control_class, build_ui_param_menu(topology, type, param.runtime_param_index, allocator), allocator);
+    add_child(container, control_class, build_ui_param_menu(topology, type, param.runtime_param_index, 0, 0, allocator), allocator);
     add_child(container, "CTextLabel", build_ui_param_label(topology, type, part, param, left_col3, param_col3_width, allocator), allocator);
     break;
   case param_type::text:
@@ -420,7 +420,7 @@ build_ui_part_header_container(
   part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  std::int32_t left = type.selector_param.runtime_param_index == -1 ? 0 : param_col1_width + param_col2_width + 2 * margin;
+  std::int32_t left = type.selector_param.runtime_param_index == -1 ? 0 : param_col1_width + param_col2_width + 3 * margin;
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(left + 1, 1), allocator);
   add_attribute(result, "size", size_to_string(part.width - 2 - left, param_row_height - 2), allocator);
@@ -448,7 +448,7 @@ build_ui_part_header_container_background(
   part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  std::int32_t left = type.selector_param.runtime_param_index == -1 ? 0 : param_col1_width + param_col2_width + 2 * margin;
+  std::int32_t left = type.selector_param.runtime_param_index == -1 ? 0 : param_col1_width + param_col2_width + 3 * margin;
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(left, 0), allocator);
   add_attribute(result, "background-color-draw-style", "filled", allocator);
@@ -463,7 +463,7 @@ build_ui_part_header_container_border(
   part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
-  std::int32_t left = type.selector_param.runtime_param_index == -1 ? 0 : param_col1_width + param_col2_width + 2 * margin;
+  std::int32_t left = type.selector_param.runtime_param_index == -1 ? 0 : param_col1_width + param_col2_width + 3 * margin;
   add_attribute(result, "class", "CTextLabel", allocator);
   add_attribute(result, "style-round-rect", "true", allocator);
   add_attribute(result, "origin", size_to_string(left, 0), allocator);
@@ -515,7 +515,7 @@ build_part_selector(
   topology_info const& topology, part_type_ui_description const& type, 
   std::int32_t runtime_param_index, Document::AllocatorType& allocator)
 {
-  return build_ui_param_menu(topology, type, runtime_param_index, allocator);
+  return build_ui_param_menu(topology, type, runtime_param_index, 1, 1, allocator);
 }
 
 static Value
@@ -523,14 +523,15 @@ build_ui_part_type_container(topology_info const& topology,
   part_type_ui_description const& type, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
+  std::int32_t selector_index = type.selector_param.runtime_param_index;
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(type.left, type.top), allocator);
   add_attribute(result, "size", size_to_string(type.width, type.height), allocator);
   for(std::size_t i = 0; i < type.parts.size(); i++)
     add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
-  if (type.selector_param.runtime_param_index != -1)
-    add_child(result, get_param_control_class(topology, type.selector_param.runtime_param_index),
-      build_part_selector(topology, type, type.selector_param.runtime_param_index, allocator), allocator);
+  if (selector_index != -1)
+    add_child(result, get_param_control_class(topology, selector_index),
+      build_ui_param_menu(topology, type, selector_index, margin, 0, allocator), allocator);
   return result;
 }
 

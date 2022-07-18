@@ -48,7 +48,7 @@ std::size_t
 param_descriptor::format(param_value val, wchar_t* buffer, std::size_t size) const
 {
   std::wstringstream stream;
-  switch (type)
+  switch (type) 
   { 
   case param_type::knob: case param_type::text: stream << val.discrete; break;
   case param_type::toggle: stream << (val.discrete == 0 ? L"Off" : L"On"); break;
