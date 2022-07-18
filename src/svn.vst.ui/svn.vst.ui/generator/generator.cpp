@@ -429,10 +429,12 @@ build_ui_part_header_container(
   std::string title = " " + narrow_assume_ascii(topology.parts[part.runtime_part_index].runtime_name);
   if (part.enabled_param.runtime_param_index != -1)
   {
-    Value enabled_box = build_ui_param_checkbox(topology, type, part, part.enabled_param, black, margin + selector_offset, header_checkbox_width, -1, allocator);
+    Value enabled_box = build_ui_param_checkbox(
+      topology, type, part, part.enabled_param, black, margin + selector_offset, header_checkbox_width, 2 * padding_param_group - 1, allocator);
     add_child(result, "CCheckBox", enabled_box, allocator);
     std::string enabled = type.selector_param.runtime_param_index == -1? title: "Enabled";
-    add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", enabled, header_checkbox_width + margin + selector_offset, allocator), allocator);
+    add_child(result, "CTextLabel", build_ui_part_header_label(
+      topology, type, "left", enabled, header_checkbox_width + margin + selector_offset, allocator), allocator);
   } else
     add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", title, selector_offset, allocator), allocator);
 
@@ -520,7 +522,7 @@ build_ui_part_type_container(topology_info const& topology,
   for(std::size_t i = 0; i < type.parts.size(); i++)
     add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
   if (selector_index != -1)
-    add_child(result, "COptionMenu", build_ui_param_menu(topology, type, selector_index, margin, 0, allocator), allocator);
+    add_child(result, "COptionMenu", build_ui_param_menu(topology, type, selector_index, margin, 2 * padding_param_group, allocator), allocator);
   return result;
 }
 
