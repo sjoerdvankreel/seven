@@ -4498,6 +4498,17 @@
                                     }
                                 }
                             },
+                            "CTextLabel": {
+                                "attributes": {
+                                    "class": "CTextLabel",
+                                    "style-round-rect": "true",
+                                    "origin": "0, 0",
+                                    "round-rect-radius": "3",
+                                    "back-color": "color_00000000",
+                                    "size": "52, 19",
+                                    "frame-color": "color_B7C3FD80"
+                                }
+                            },
                             "COptionMenu": {
                                 "attributes": {
                                     "class": "COptionMenu",
@@ -5623,6 +5634,17 @@
                                             }
                                         }
                                     }
+                                }
+                            },
+                            "CTextLabel": {
+                                "attributes": {
+                                    "class": "CTextLabel",
+                                    "style-round-rect": "true",
+                                    "origin": "0, 0",
+                                    "round-rect-radius": "3",
+                                    "back-color": "color_00000000",
+                                    "size": "52, 19",
+                                    "frame-color": "color_ACCAF780"
                                 }
                             },
                             "COptionMenu": {
@@ -7665,6 +7687,17 @@
                                             }
                                         }
                                     }
+                                }
+                            },
+                            "CTextLabel": {
+                                "attributes": {
+                                    "class": "CTextLabel",
+                                    "style-round-rect": "true",
+                                    "origin": "0, 0",
+                                    "round-rect-radius": "3",
+                                    "back-color": "color_00000000",
+                                    "size": "52, 19",
+                                    "frame-color": "color_A2D2F180"
                                 }
                             },
                             "COptionMenu": {
@@ -11636,6 +11669,17 @@
                                             }
                                         }
                                     }
+                                }
+                            },
+                            "CTextLabel": {
+                                "attributes": {
+                                    "class": "CTextLabel",
+                                    "style-round-rect": "true",
+                                    "origin": "0, 0",
+                                    "round-rect-radius": "3",
+                                    "back-color": "color_00000000",
+                                    "size": "52, 19",
+                                    "frame-color": "color_97DAEB80"
                                 }
                             },
                             "COptionMenu": {

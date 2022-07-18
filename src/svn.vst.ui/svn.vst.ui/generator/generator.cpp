@@ -511,11 +511,20 @@ build_ui_part_outer_container(
 }
 
 static Value
-build_part_selector(
+build_ui_part_selector_container(
   topology_info const& topology, part_type_ui_description const& type, 
   std::int32_t runtime_param_index, Document::AllocatorType& allocator)
 {
-  return build_ui_param_menu(topology, type, runtime_param_index, 1, 1, allocator);
+  Value result(kObjectType);
+  std::int32_t width = param_col1_width + param_col2_width + 2 * margin;
+  add_attribute(result, "class", "CTextLabel", allocator);
+  add_attribute(result, "style-round-rect", "true", allocator);
+  add_attribute(result, "origin", size_to_string(0, 0), allocator);
+  add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
+  add_attribute(result, "back-color", get_color_name(black, color_alpha::transparent), allocator);
+  add_attribute(result, "size", size_to_string(width, param_row_height), allocator);
+  add_attribute(result, "frame-color", get_color_name(type.color, color_alpha::half), allocator);
+  return result;
 }
 
 static Value
@@ -530,8 +539,10 @@ build_ui_part_type_container(topology_info const& topology,
   for(std::size_t i = 0; i < type.parts.size(); i++)
     add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
   if (selector_index != -1)
-    add_child(result, get_param_control_class(topology, selector_index),
-      build_ui_param_menu(topology, type, selector_index, margin, 0, allocator), allocator);
+  {
+    add_child(result, "CTextLabel", build_ui_part_selector_container(topology, type, selector_index, allocator), allocator);
+    add_child(result, "COptionMenu", build_ui_param_menu(topology, type, selector_index, margin, 0, allocator), allocator);
+  }
   return result;
 }
 
