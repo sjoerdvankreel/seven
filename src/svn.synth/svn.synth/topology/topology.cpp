@@ -19,10 +19,10 @@ static std::vector<std::wstring> const envelope_selector_names = list_names(L"En
 static param_descriptor const
 selector_params[selector_param::count] = 
 {
-  { "{0EEADBD0-D37B-4B53-A2D5-F22E2154F2D8}", { L"Osc", L"Oscillator" }, L"", false, &osc_selector_names, { false, false, -1, -1, nullptr, 0 } },
-  { "{EEA97414-8C1C-4378-A68B-409692FFA920}", { L"VLFO", L"Voice LFO" }, L"", false, &vlfo_selector_names, { false, false, -1, -1, nullptr, 0 } },
-  { "{D5DD0DFC-AC9D-42E6-9D2B-924786382825}", { L"VFlt", L"Voice filter" }, L"", false, &vflt_selector_names, { false, false, -1, -1, nullptr, 0 } },
-  { "{556BF692-55B0-48B4-BD6A-E2CEFA17B012}", { L"Envelope", L"Envelope" }, L"", false, &envelope_selector_names, { false, false, -1, -1, nullptr, 0 } }
+  { "{0EEADBD0-D37B-4B53-A2D5-F22E2154F2D8}", { L"Osc", L"Oscillator" }, L"", false, &osc_selector_names, param_no_ui },
+  { "{EEA97414-8C1C-4378-A68B-409692FFA920}", { L"VLFO", L"Voice LFO" }, L"", false, &vlfo_selector_names, param_no_ui },
+  { "{D5DD0DFC-AC9D-42E6-9D2B-924786382825}", { L"VFlt", L"Voice filter" }, L"", false, &vflt_selector_names, param_no_ui },
+  { "{556BF692-55B0-48B4-BD6A-E2CEFA17B012}", { L"Envelope", L"Envelope" }, L"", false, &envelope_selector_names, param_no_ui }
 };
          
 // ---- output ----  
@@ -295,7 +295,7 @@ part_descriptors[part_type::count] =
   { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"VFilter", L"Voice filter" }, part_type::voice_filter, false, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 2, 3, 0, selector_param::vflt, L"Voice" } },
   { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 5, 3, -1, -1, L"Route" } },
   { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, false, 1, cv_route_params, cv_route_param::count, &cv_route_graph, 1, { 6, 3, -1, -1, L"Route" } },
-  { "{C972E264-1739-4DB6-B1DB-5D31057BD218}", { L"Selector", L"Selector" }, part_type::selector, false, true, 1, selector_params, selector_param::count, nullptr, 0, { -1, -1, -1, -1, nullptr } },
+  { "{C972E264-1739-4DB6-B1DB-5D31057BD218}", { L"Selector", L"Selector" }, part_type::selector, false, true, 1, selector_params, selector_param::count, nullptr, 0, part_no_ui },
   { "{FEEBA3F5-F248-4C1B-BD8C-F3A492D084E2}", { L"Out", L"Output" }, part_type::output, true, false, 1, output_params, output_param::count, nullptr, 0, { 7, 3, -1, -1, L"Global" } }
 };    
        

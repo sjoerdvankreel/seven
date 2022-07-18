@@ -28,6 +28,9 @@ struct part_ui_descriptor
   wchar_t const* const info; // Extra info for part header ui.
 };
 
+// For selector.
+inline part_ui_descriptor constexpr part_no_ui = { -1, -1, -1, -1, nullptr };
+
 // Static part info.
 struct part_descriptor
 {

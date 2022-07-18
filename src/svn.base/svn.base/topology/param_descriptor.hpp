@@ -51,6 +51,9 @@ struct param_ui_descriptor
   std::int32_t const relevance_count;
 };
 
+// For selector.
+inline param_ui_descriptor constexpr param_no_ui = { false, false, -1, -1, nullptr, 0 };
+
 // Describes automation input.
 struct param_descriptor
 {
