@@ -105,14 +105,20 @@ part_type_ui_description
 part_type_ui_description::create(
   svn::base::topology_info const& topology, 
   svn::base::part_descriptor const& descriptor,
+  std::int32_t runtime_selector_indices_start,
   std::vector<std::int32_t> runtime_part_indices)
 {
   part_type_ui_description result;
   result.info = descriptor.ui.info;
+  result.selector_param.row = -1;
+  result.selector_param.column = -1;
+  result.selector_param.runtime_param_index = -1;
   result.name = descriptor.static_name.short_;
   result.color = ui_color_gradient(topology, descriptor.ui.part_index);
   for(std::int32_t i = 0; i < descriptor.part_count; i++)
     result.parts.push_back(part_ui_description::create(topology, runtime_part_indices[i]));
+  if (descriptor.ui.selector_param != -1)
+    result.selector_param.runtime_param_index = runtime_selector_indices_start + descriptor.ui.selector_param;
   result.width = result.parts[0].width;
   result.height = result.parts[0].height;
   return result;
@@ -123,18 +129,25 @@ controller_ui_description::create(
   svn::base::topology_info const& topology)
 {
   // Build part list.
+  std::int32_t selector_part = -1;
   controller_ui_description result;
   std::vector<std::pair<std::int32_t, std::int32_t>> part_type_ui_indices;
   for(std::int32_t i = 0; i < topology.static_part_count; i++)
-    part_type_ui_indices.push_back(std::make_pair(i, topology.static_parts[i].ui.part_index));
+    if(topology.static_parts[i].selector)
+      selector_part = i;
+    else
+      part_type_ui_indices.push_back(std::make_pair(i, topology.static_parts[i].ui.part_index));
+
+  std::int32_t runtime_selector_indices_start = -1;
+  if(selector_part != -1) runtime_selector_indices_start = topology.param_bounds[selector_part][0];
   std::sort(part_type_ui_indices.begin(), part_type_ui_indices.end(), 
     [](auto const& l, auto const& r) -> bool { return l.second < r.second; });
   for (std::size_t p = 0; p < part_type_ui_indices.size(); p++)
   {
     std::int32_t index = part_type_ui_indices[p].first;
     auto const& static_part = topology.static_parts[index];
-    if(static_part.selector) continue;
-    result.part_types.push_back(part_type_ui_description::create(topology, static_part, topology.part_bounds[index]));
+    result.part_types.push_back(part_type_ui_description::create(
+      topology, static_part, runtime_selector_indices_start, topology.part_bounds[index]));
   }
 
   // Fix up top/left/column.
@@ -208,6 +221,7 @@ controller_ui_description::print(svn::base::topology_info const& topology, std::
     os << "\t\tWidth: " << part_types[part_type].width << "\n";
     os << "\t\tHeight: " << part_types[part_type].height << "\n";
     os << "\t\tColumn: " << part_types[part_type].column << "\n";
+    os << "\t\tSelector: " << part_types[part_type].selector_param.runtime_param_index << "\n";
     os << "\t\tInfo: " << narrow_assume_ascii(part_types[part_type].info) << "\n";
     os << "\t\tColor:";
     os << " " << static_cast<std::int32_t>(part_types[part_type].color.r);

@@ -49,12 +49,14 @@ struct part_type_ui_description
   wchar_t const* info; // Extra header info.
   wchar_t const* name; // Extra header info.
   svn::base::ui_color color; // Gradient color.
+  param_ui_description selector_param; // Osc1/2 etc.
   std::vector<part_ui_description> parts;
 
   static part_type_ui_description
   create(
     svn::base::topology_info const& topology,
     svn::base::part_descriptor const& descriptor,
+    std::int32_t runtime_selector_indices_start,
     std::vector<std::int32_t> runtime_part_indices);
 };
 
