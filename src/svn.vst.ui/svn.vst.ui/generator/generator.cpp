@@ -511,31 +511,6 @@ build_ui_part_outer_container(
 }
 
 static Value
-build_ui_part_tab_header(topology_info const& topology,
-  part_type_ui_description const& type, Document::AllocatorType& allocator)
-{
-  Value result(kObjectType);
-  add_attribute(result, "class", "CHorizontalSwitch", allocator);
-  add_attribute(result, "origin", size_to_string(0, 0), allocator);
-  add_attribute(result, "sub-pixmaps", std::to_string(type.parts.size()), allocator);
-  add_attribute(result, "size", size_to_string(type.width, param_row_height), allocator);
-  add_attribute(result, "height-of-one-image", std::to_string(param_row_height), allocator);
-  return result;
-}
-
-static Value
-build_ui_part_tab_header_container(topology_info const& topology,
-  part_type_ui_description const& type, Document::AllocatorType& allocator)
-{
-  Value result(kObjectType);
-  add_attribute(result, "class", "view_container_fix", allocator);
-  add_attribute(result, "origin", size_to_string(0, 0), allocator);
-  add_attribute(result, "size", size_to_string(type.width, param_row_height), allocator);
-  add_child(result, "CHorizontalSwitch", build_ui_part_tab_header(topology, type, allocator), allocator);
-  return result;
-}
-
-static Value
 build_ui_part_type_container(topology_info const& topology,
   part_type_ui_description const& type, Document::AllocatorType& allocator)
 {
@@ -543,8 +518,6 @@ build_ui_part_type_container(topology_info const& topology,
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(type.left, type.top), allocator);
   add_attribute(result, "size", size_to_string(type.width, type.height), allocator);
-  if(type.parts.size() > 1)
-    add_child(result, "view_container_fix", build_ui_part_tab_header_container(topology, type, allocator), allocator);
   for(std::size_t i = 0; i < type.parts.size(); i++)
     add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
   return result;
