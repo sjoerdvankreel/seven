@@ -371,7 +371,7 @@ cv_route_params[cv_route_param::count] =
 };  
                
 // ---- global topo ---- 
-  
+   
 part_descriptor const      
 part_descriptors[part_type::count] =    
 {   
@@ -382,7 +382,7 @@ part_descriptors[part_type::count] =
   { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"VFilter", L"Voice filter" }, part_type::voice_filter, false, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 2, 3, 0, -1, L"Voice" } },
   { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 5, 3, -1, -1, L"Route" } },
   { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, false, 1, cv_route_params, cv_route_param::count, &cv_route_graph, 1, { 6, 3, -1, -1, L"Route" } },
-  { "{C972E264-1739-4DB6-B1DB-5D31057BD218}", { L"Selector", L"Selector" }, part_type::selector, false, true, 1, output_params, selector_param::count, nullptr, 0, { -1, -1, -1, -1, nullptr } },
+  { "{C972E264-1739-4DB6-B1DB-5D31057BD218}", { L"Selector", L"Selector" }, part_type::selector, false, true, 1, selector_params, selector_param::count, nullptr, 0, { -1, -1, -1, -1, nullptr } },
   { "{FEEBA3F5-F248-4C1B-BD8C-F3A492D084E2}", { L"Out", L"Output" }, part_type::output, true, false, 1, output_params, output_param::count, nullptr, 0, { 7, 3, -1, -1, L"Global" } }
 };    
        

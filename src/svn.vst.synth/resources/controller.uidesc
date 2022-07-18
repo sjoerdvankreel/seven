@@ -301,18 +301,22 @@
             "cv_route_0_input_15": "239",
             "cv_route_0_output_15": "240",
             "cv_route_0_amount_15": "241",
-            "output_0_clip": "242",
-            "output_0_voices_exhausted": "243",
-            "output_0_voice_count": "244",
-            "output_0_total_cpu": "245",
-            "output_0_osc_cpu": "246",
-            "output_0_voice_lfo_cpu": "247",
-            "output_0_voice_filter_cpu": "248",
-            "output_0_envelope_cpu": "249",
-            "output_0_voice_amp_cpu": "250",
-            "output_0_audio_route_cpu": "251",
-            "output_0_cv_route_cpu": "252",
-            "output_0_auxiliary_cpu": "253"
+            "selector_0_oscillator": "242",
+            "selector_0_voice_lfo": "243",
+            "selector_0_voice_filter": "244",
+            "selector_0_envelope": "245",
+            "output_0_clip": "246",
+            "output_0_voices_exhausted": "247",
+            "output_0_voice_count": "248",
+            "output_0_total_cpu": "249",
+            "output_0_osc_cpu": "250",
+            "output_0_voice_lfo_cpu": "251",
+            "output_0_voice_filter_cpu": "252",
+            "output_0_envelope_cpu": "253",
+            "output_0_voice_amp_cpu": "254",
+            "output_0_audio_route_cpu": "255",
+            "output_0_cv_route_cpu": "256",
+            "output_0_auxiliary_cpu": "257"
         },
         "templates": {
             "view": {
@@ -16807,7 +16811,7 @@
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
                                     "size": "240, 276",
-                                    "background-offset": "125, 25"
+                                    "background-offset": "125, 50"
                                 },
                                 "children": {
                                     "view_container_fix": {

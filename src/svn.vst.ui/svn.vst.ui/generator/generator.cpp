@@ -36,6 +36,7 @@ build_ui_colors(topology_info const& topology, Document::AllocatorType& allocato
     add_member(result, get_color_name(black, a), get_color_value(black, a), allocator);
     for (std::int32_t i = 0; i < topology.static_part_count; i++)
     {
+      if(topology.static_parts[i].selector) continue;
       ui_color color = ui_color_gradient(topology, i);
       add_member(result, get_color_name(color, a), get_color_value(color, a), allocator);
     }

@@ -133,6 +133,7 @@ controller_ui_description::create(
   {
     std::int32_t index = part_type_ui_indices[p].first;
     auto const& static_part = topology.static_parts[index];
+    if(static_part.selector) continue;
     result.part_types.push_back(part_type_ui_description::create(topology, static_part, topology.part_bounds[index]));
   }
 
