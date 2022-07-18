@@ -372,9 +372,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_B7C3FD40"
                                                 }
                                             },
@@ -382,18 +382,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_B7C3FD80"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -433,7 +433,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_B7C3FDFF",
                                                             "background-color": "color_B7C3FD80"
@@ -1413,9 +1413,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_B7C3FD40"
                                                 }
                                             },
@@ -1423,18 +1423,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_B7C3FD80"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -1474,7 +1474,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_B7C3FDFF",
                                                             "background-color": "color_B7C3FD80"
@@ -2454,9 +2454,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_B7C3FD40"
                                                 }
                                             },
@@ -2464,18 +2464,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_B7C3FD80"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -2515,7 +2515,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_B7C3FDFF",
                                                             "background-color": "color_B7C3FD80"
@@ -3495,9 +3495,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_B7C3FD40"
                                                 }
                                             },
@@ -3505,18 +3505,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_B7C3FD80"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -3556,7 +3556,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_B7C3FDFF",
                                                             "background-color": "color_B7C3FD80"
@@ -4563,9 +4563,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_ACCAF740"
                                                 }
                                             },
@@ -4573,18 +4573,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_ACCAF780"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -4624,7 +4624,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_ACCAF7FF",
                                                             "background-color": "color_ACCAF780"
@@ -4928,9 +4928,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_ACCAF740"
                                                 }
                                             },
@@ -4938,18 +4938,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_ACCAF780"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -4989,7 +4989,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_ACCAF7FF",
                                                             "background-color": "color_ACCAF780"
@@ -5293,9 +5293,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_ACCAF740"
                                                 }
                                             },
@@ -5303,18 +5303,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_ACCAF780"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -5354,7 +5354,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_ACCAF7FF",
                                                             "background-color": "color_ACCAF780"
@@ -5685,9 +5685,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_A2D2F140"
                                                 }
                                             },
@@ -5695,18 +5695,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_A2D2F180"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -5746,7 +5746,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_A2D2F1FF",
                                                             "background-color": "color_A2D2F180"
@@ -6355,9 +6355,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_A2D2F140"
                                                 }
                                             },
@@ -6365,18 +6365,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_A2D2F180"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -6416,7 +6416,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_A2D2F1FF",
                                                             "background-color": "color_A2D2F180"
@@ -7025,9 +7025,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_A2D2F140"
                                                 }
                                             },
@@ -7035,18 +7035,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_A2D2F180"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -7086,7 +7086,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_A2D2F1FF",
                                                             "background-color": "color_A2D2F180"
@@ -7722,9 +7722,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_97DAEB40"
                                                 }
                                             },
@@ -7732,18 +7732,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_97DAEB80"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -7783,7 +7783,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_97DAEBFF",
                                                             "background-color": "color_97DAEB80"
@@ -9035,9 +9035,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_97DAEB40"
                                                 }
                                             },
@@ -9045,18 +9045,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_97DAEB80"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -9096,7 +9096,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_97DAEBFF",
                                                             "background-color": "color_97DAEB80"
@@ -10348,9 +10348,9 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "background-color-draw-style": "filled",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "background-color": "color_97DAEB40"
                                                 }
                                             },
@@ -10358,18 +10358,18 @@
                                                 "attributes": {
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
-                                                    "origin": "0, 0",
+                                                    "origin": "52, 0",
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
-                                                    "size": "240, 20",
+                                                    "size": "188, 20",
                                                     "frame-color": "color_97DAEB80"
                                                 }
                                             },
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "origin": "1, 1",
-                                                    "size": "238, 17",
+                                                    "origin": "53, 1",
+                                                    "size": "186, 17",
                                                     "background-color": "color_00000080"
                                                 },
                                                 "children": {
@@ -10409,7 +10409,7 @@
                                                             "transparent": "true",
                                                             "text-alignment": "right",
                                                             "font": "~ NormalFontSmall",
-                                                            "origin": "154, -1",
+                                                            "origin": "102, -1",
                                                             "size": "80, 19",
                                                             "font-color": "color_97DAEBFF",
                                                             "background-color": "color_97DAEB80"

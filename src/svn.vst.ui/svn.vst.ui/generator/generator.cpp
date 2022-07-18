@@ -421,9 +421,10 @@ build_ui_part_header_container(
   part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
+  std::int32_t left = type.selector_param.runtime_param_index == -1 ? 0 : param_col1_width + param_col2_width + 2 * margin;
   add_attribute(result, "class", "view_container_fix", allocator);
-  add_attribute(result, "origin", size_to_string(1, 1), allocator);
-  add_attribute(result, "size", size_to_string(part.width - 2, param_row_height - 2), allocator);
+  add_attribute(result, "origin", size_to_string(left + 1, 1), allocator);
+  add_attribute(result, "size", size_to_string(part.width - 2 - left, param_row_height - 2), allocator);
   add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
 
   std::string title = " " + narrow_assume_ascii(topology.parts[part.runtime_part_index].runtime_name);
@@ -435,9 +436,9 @@ build_ui_part_header_container(
   } else
     add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", title, 0, allocator), allocator);
 
-  std::int32_t left = part.width - param_total_width - 2 * margin;
+  std::int32_t info_left = part.width - param_total_width - 2 * margin - left;
   std::string info = " " + narrow_assume_ascii(topology.parts[part.runtime_part_index].descriptor->ui.info);
-  add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "right", info, left, allocator), allocator);
+  add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "right", info, info_left, allocator), allocator);
   return result;
 }
 
@@ -447,10 +448,11 @@ build_ui_part_header_container_background(
   part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
+  std::int32_t left = type.selector_param.runtime_param_index == -1 ? 0 : param_col1_width + param_col2_width + 2 * margin;
   add_attribute(result, "class", "view_container_fix", allocator);
-  add_attribute(result, "origin", size_to_string(0, 0), allocator);
+  add_attribute(result, "origin", size_to_string(left, 0), allocator);
   add_attribute(result, "background-color-draw-style", "filled", allocator);
-  add_attribute(result, "size", size_to_string(part.width, param_row_height + 1), allocator);
+  add_attribute(result, "size", size_to_string(part.width - left, param_row_height + 1), allocator);
   add_attribute(result, "background-color", get_color_name(type.color, color_alpha::quarter), allocator);
   return result;
 }
@@ -461,12 +463,13 @@ build_ui_part_header_container_border(
   part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
+  std::int32_t left = type.selector_param.runtime_param_index == -1 ? 0 : param_col1_width + param_col2_width + 2 * margin;
   add_attribute(result, "class", "CTextLabel", allocator);
   add_attribute(result, "style-round-rect", "true", allocator);
-  add_attribute(result, "origin", size_to_string(0, 0), allocator);
+  add_attribute(result, "origin", size_to_string(left, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "back-color", get_color_name(black, color_alpha::transparent), allocator);
-  add_attribute(result, "size", size_to_string(part.width, param_row_height + 1), allocator);
+  add_attribute(result, "size", size_to_string(part.width - left, param_row_height + 1), allocator);
   add_attribute(result, "frame-color", get_color_name(type.color, color_alpha::half), allocator);
   return result;
 }
