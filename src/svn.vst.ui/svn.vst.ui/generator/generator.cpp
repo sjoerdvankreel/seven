@@ -557,17 +557,15 @@ static Value
 build_ui_template(topology_info const& topology,
   controller_ui_description const& descriptor, Document::AllocatorType& allocator)
 {
-  Value view(kObjectType);
-  std::string size = size_to_string(descriptor.width, descriptor.height);
-  add_attribute(view, "size", size, allocator);
-  add_attribute(view, "minSize", size, allocator);
-  add_attribute(view, "maxSize", size, allocator);
-  add_attribute(view, "class", "view_container_fix", allocator);
-  for (std::size_t type = 0; type < descriptor.part_types.size(); type++)
-    add_child(view, "view_container_fix", build_ui_part_type_container(
-      topology, descriptor.part_types[type], allocator), allocator);
   Value result(kObjectType);
-  result.AddMember("view", view, allocator);
+  std::string size = size_to_string(descriptor.width, descriptor.height);
+  add_attribute(result, "size", size, allocator);
+  add_attribute(result, "minSize", size, allocator);
+  add_attribute(result, "maxSize", size, allocator);
+  add_attribute(result, "class", "view_container_fix", allocator);
+  for (std::size_t type = 0; type < descriptor.part_types.size(); type++)
+    add_child(result, "view_container_fix", build_ui_part_type_container(
+      topology, descriptor.part_types[type], allocator), allocator);
   return result;
 }
 
@@ -580,11 +578,13 @@ build_vstgui_json(
   result.SetObject();
   Document::AllocatorType& allocator = result.GetAllocator();
   Value root(kObjectType);
+  Value templates(kObjectType);
+  add_member(templates, "view", build_ui_template(topology, description, allocator), allocator);
   root.AddMember("version", "1", allocator);
   root.AddMember("bitmaps", build_ui_bitmaps(allocator), allocator);
   root.AddMember("colors", build_ui_colors(topology, allocator), allocator);
   root.AddMember("control-tags", build_ui_control_tags(topology, allocator), allocator);
-  root.AddMember("templates", build_ui_template(topology, description, allocator), allocator);
+  root.AddMember("templates", templates, allocator);
   result.AddMember("vstgui-ui-description", root, allocator);
   return result;
 }
