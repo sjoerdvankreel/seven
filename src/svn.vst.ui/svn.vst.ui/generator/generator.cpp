@@ -512,15 +512,19 @@ build_ui_part_outer_container(
 }
 
 static Value
-build_ui_part_switch_container(topology_info const& topology,
-  part_type_ui_description const& type, Document::AllocatorType& allocator)
+build_ui_part_switch_container(
+  topology_info const& topology, part_type_ui_description const& type, 
+  Value& templates_part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   std::string template_names = "";
+  std::vector<std::string> template_names_list;
   std::string tag = get_control_tag(topology, type.selector_param.runtime_param_index);
   for(std::int32_t i = 0; i < type.parts.size(); i++)
   {
-    template_names += std::to_string(type.parts[i].runtime_part_index);
+    std::string template_name = std::to_string(type.parts[i].runtime_part_index);
+    template_names_list.push_back(template_name);
+    template_names += template_name;
     if(i < type.parts.size() - 1) template_names += ", ";
   }
   add_attribute(result, "template-switch-control", tag, allocator);
@@ -529,13 +533,15 @@ build_ui_part_switch_container(topology_info const& topology,
   add_attribute(result, "class", "UIViewSwitchContainer", allocator);
   add_attribute(result, "size", size_to_string(type.width, type.height), allocator);
   for (std::size_t i = 0; i < type.parts.size(); i++)
-    add_child(result, "template", build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
+    add_member(templates_part, template_names_list[i], 
+      build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
   return result;
 }
 
 static Value
-build_ui_part_type_container(topology_info const& topology,
-  part_type_ui_description const& type, Document::AllocatorType& allocator)
+build_ui_part_type_container(
+  topology_info const& topology, part_type_ui_description const& type, 
+  Value& templates_part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   std::int32_t selector_index = type.selector_param.runtime_param_index;
@@ -547,15 +553,16 @@ build_ui_part_type_container(topology_info const& topology,
       add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
   else
   {
-    add_child(result, "UIViewSwitchContainer", build_ui_part_switch_container(topology, type, allocator), allocator);
+    add_child(result, "UIViewSwitchContainer", build_ui_part_switch_container(topology, type, templates_part, allocator), allocator);
     add_child(result, "COptionMenu", build_ui_param_menu(topology, type, selector_index, margin, 2 * padding_param_group, allocator), allocator);
   }
   return result;
 }
 
 static Value
-build_ui_template(topology_info const& topology,
-  controller_ui_description const& descriptor, Document::AllocatorType& allocator)
+build_ui_template(
+  topology_info const& topology, controller_ui_description const& descriptor, 
+  Value& templates_part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   std::string size = size_to_string(descriptor.width, descriptor.height);
@@ -565,7 +572,7 @@ build_ui_template(topology_info const& topology,
   add_attribute(result, "class", "view_container_fix", allocator);
   for (std::size_t type = 0; type < descriptor.part_types.size(); type++)
     add_child(result, "view_container_fix", build_ui_part_type_container(
-      topology, descriptor.part_types[type], allocator), allocator);
+      topology, descriptor.part_types[type], templates_part, allocator), allocator);
   return result;
 }
 
@@ -579,7 +586,7 @@ build_vstgui_json(
   Document::AllocatorType& allocator = result.GetAllocator();
   Value root(kObjectType);
   Value templates(kObjectType);
-  add_member(templates, "view", build_ui_template(topology, description, allocator), allocator);
+  add_member(templates, "view", build_ui_template(topology, description, templates, allocator), allocator);
   root.AddMember("version", "1", allocator);
   root.AddMember("bitmaps", build_ui_bitmaps(allocator), allocator);
   root.AddMember("colors", build_ui_colors(topology, allocator), allocator);
