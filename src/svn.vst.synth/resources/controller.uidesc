@@ -11559,7 +11559,7 @@
                                 "attributes": {
                                     "template-switch-control": "selector_0_oscillator",
                                     "origin": "0, 0",
-                                    "template-names": "0, 1, 2, 3",
+                                    "template-names": "0,1,2,3",
                                     "class": "UIViewSwitchContainer",
                                     "size": "240, 136"
                                 }
@@ -11600,7 +11600,7 @@
                                 "attributes": {
                                     "template-switch-control": "selector_0_voice_lfo",
                                     "origin": "0, 0",
-                                    "template-names": "7, 8, 9",
+                                    "template-names": "7,8,9",
                                     "class": "UIViewSwitchContainer",
                                     "size": "240, 70"
                                 }
@@ -11641,7 +11641,7 @@
                                 "attributes": {
                                     "template-switch-control": "selector_0_voice_filter",
                                     "origin": "0, 0",
-                                    "template-names": "11, 12, 13",
+                                    "template-names": "11,12,13",
                                     "class": "UIViewSwitchContainer",
                                     "size": "240, 70"
                                 }
@@ -11682,7 +11682,7 @@
                                 "attributes": {
                                     "template-switch-control": "selector_0_envelope",
                                     "origin": "0, 0",
-                                    "template-names": "4, 5, 6",
+                                    "template-names": "4,5,6",
                                     "class": "UIViewSwitchContainer",
                                     "size": "240, 136"
                                 }

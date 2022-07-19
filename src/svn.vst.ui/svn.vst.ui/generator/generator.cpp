@@ -525,7 +525,7 @@ build_ui_part_switch_container(
     std::string template_name = std::to_string(type.parts[i].runtime_part_index);
     template_names_list.push_back(template_name);
     template_names += template_name;
-    if(i < type.parts.size() - 1) template_names += ", ";
+    if(i < type.parts.size() - 1) template_names += ",";
   }
   add_attribute(result, "template-switch-control", tag, allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
