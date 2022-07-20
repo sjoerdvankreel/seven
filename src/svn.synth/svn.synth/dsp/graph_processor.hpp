@@ -26,13 +26,13 @@ public:
   void dsp_to_plot(base::param_value const* state, std::vector<base::cv_sample> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) override;
 };
 
-class voice_lfo_graph:
+class lfo_graph:
 public svn::base::graph_processor<base::cv_sample>
 {
   static inline float constexpr lfo_graph_rate = 1000.0f;
 
 public:
-  voice_lfo_graph(topology_info const* topology, std::int32_t part_index) :
+  lfo_graph(topology_info const* topology, std::int32_t part_index) :
   svn::base::graph_processor<base::cv_sample>(topology, part_index) {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;

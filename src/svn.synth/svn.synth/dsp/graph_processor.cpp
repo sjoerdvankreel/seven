@@ -1,10 +1,10 @@
 #include <svn.base/dsp/support.hpp>
 #include <svn.base/dsp/spectrum_analyzer.hpp>
 #include <svn.synth/topology/topology.hpp>
+#include <svn.synth/dsp/lfo.hpp>
 #include <svn.synth/dsp/support.hpp>
 #include <svn.synth/dsp/envelope.hpp>
 #include <svn.synth/dsp/cv_state.hpp>
-#include <svn.synth/dsp/voice_lfo.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
 #include <svn.synth/dsp/audio_state.hpp>
 #include <svn.synth/dsp/voice_filter.hpp>
@@ -23,10 +23,10 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
   {
   case svn::synth::part_type::cv_route:
     return new svn::synth::cv_route_graph(topology);
+  case svn::synth::part_type::lfo:
+    return new svn::synth::lfo_graph(topology, part_index);
   case svn::synth::part_type::envelope:
     return new svn::synth::envelope_graph(topology, part_index);
-  case svn::synth::part_type::voice_lfo:
-    return new svn::synth::voice_lfo_graph(topology, part_index);
   case svn::synth::part_type::voice_filter:
     return new svn::synth::voice_filter_ir_graph(topology, part_index);
   case svn::synth::part_type::oscillator:
@@ -64,24 +64,24 @@ setup_graph_voice_input(
 }
 
 bool
-voice_lfo_graph::needs_repaint(std::int32_t runtime_param) const
+lfo_graph::needs_repaint(std::int32_t runtime_param) const
 {
-  std::int32_t begin = topology()->param_bounds[part_type::voice_lfo][part_index()];
-  return begin <= runtime_param && runtime_param < begin + voice_lfo_param::count;
+  std::int32_t begin = topology()->param_bounds[part_type::lfo][part_index()];
+  return begin <= runtime_param && runtime_param < begin + lfo_param::count;
 }
 
 void
-voice_lfo_graph::process_dsp_core(
+lfo_graph::process_dsp_core(
   block_input const& input, base::cv_sample* output, float sample_rate, float bpm)
 {
-  voice_lfo lfo(lfo_graph_rate);
+  lfo lfo(lfo_graph_rate);
   std::memset(output, 0, input.sample_count * sizeof(base::cv_sample));
   voice_input vinput = setup_graph_voice_input(input, topology());
   lfo.process_block(vinput, part_index(), output);
 }
 
 void
-voice_lfo_graph::dsp_to_plot(
+lfo_graph::dsp_to_plot(
   param_value const* state, std::vector<base::cv_sample> const& dsp,
   std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
@@ -92,14 +92,14 @@ voice_lfo_graph::dsp_to_plot(
 }
 
 std::int32_t
-voice_lfo_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
+lfo_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 {
   std::int32_t const cycles = 2;
-  std::int32_t begin = topology()->param_bounds[part_type::voice_lfo][part_index()];  
-  float samples = lfo_graph_rate / state[begin + voice_lfo_param::freq_time].real;
-  if(cv_kind_is_synced(state[begin + voice_lfo_param::kind].discrete))
+  std::int32_t begin = topology()->param_bounds[part_type::lfo][part_index()];  
+  float samples = lfo_graph_rate / state[begin + lfo_param::frequency_time].real;
+  if(cv_kind_is_synced(state[begin + lfo_param::kind].discrete))
   {
-    float timesig = voice_lfo_timesig_values[state[begin + voice_lfo_param::freq_sync].discrete];
+    float timesig = lfo_timesig_values[state[begin + lfo_param::frequency_sync].discrete];
     samples = timesig_to_samples(lfo_graph_rate, bpm, timesig);
   }
   return static_cast<std::int32_t>(std::ceil(cycles * samples));
@@ -300,8 +300,8 @@ cv_route_graph::process_dsp_core(
   bool ended = false;
   cv_state state(input.sample_count);  
   voice_input vinput = setup_graph_voice_input(input, topology());
-  for(std::int32_t i = 0; i < voice_lfo_count; i++)
-    voice_lfo(cv_route_graph_rate).process_block(vinput, i, state.voice_lfo[i].data());
+  for(std::int32_t i = 0; i < lfo_count; i++)
+    lfo(cv_route_graph_rate).process_block(vinput, i, state.lfo[i].data());
   for (std::int32_t i = 0; i < envelope_count; i++)
     envelope(cv_route_graph_rate).process_block(vinput, i, state.envelope[i].data(), input.sample_count, ended);
 

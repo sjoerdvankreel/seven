@@ -21,10 +21,10 @@ struct cpu_usage
 {
   double cv;
   double aux;
+  double lfo;
   double env;
   double osc;
   double vamp;
-  double vlfo;
   double total;
   double audio;
   double vfilter;

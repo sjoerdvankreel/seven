@@ -14,11 +14,11 @@ std::vector<std::vector<std::vector<std::int32_t>>> const cv_state::output_table
 
 cv_state::
 cv_state(std::int32_t max_sample_count) :
-  envelope(), voice_lfo(), scratch(), scratch_buffer()
+  envelope(), lfo(), scratch(), scratch_buffer()
 {
   std::vector<base::cv_sample> cv(static_cast<std::size_t>(max_sample_count));
+  lfo.fill(cv);
   envelope.fill(cv);
-  voice_lfo.fill(cv);
   std::int32_t max_param_count = 0;
   for(std::int32_t i = 0; i < cv_route_output::count; i++)
     max_param_count = std::max(max_param_count, cv_output_modulated_counts[i]);
@@ -33,7 +33,7 @@ cv_state::input_buffer(std::int32_t input, std::int32_t index) const
   switch (input)
   {
   case cv_route_input::off: return nullptr;
-  case cv_route_input::vlfo: return voice_lfo[index].data();
+  case cv_route_input::lfo: return lfo[index].data();
   case cv_route_input::envelope: return envelope[index].data();
   default: assert(false); return nullptr;
   }

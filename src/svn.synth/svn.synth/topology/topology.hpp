@@ -13,9 +13,9 @@ typedef cv_kind_t::value cv_kind;
 
 // ---- global topo ----
 
+inline std::int32_t constexpr lfo_count = 3;
 inline std::int32_t constexpr envelope_count = 3;
 inline std::int32_t constexpr oscillator_count = 4;
-inline std::int32_t constexpr voice_lfo_count = 3;
 inline std::int32_t constexpr voice_filter_count = 3;
 
 extern base::part_descriptor const part_descriptors[];
@@ -24,7 +24,7 @@ inline std::int32_t constexpr synth_max_ui_height = 760;
 inline base::ui_color constexpr synth_ui_end_color = { 0x6E, 0xFA, 0xD5 };
 inline base::ui_color constexpr synth_ui_start_color = { 0xB7, 0xC3, 0xFD }; 
 
-struct part_type_t { enum value { oscillator, envelope, voice_lfo, voice_amp, voice_filter, audio_route, cv_route, active, output, count }; };
+struct part_type_t { enum value { oscillator, envelope, lfo, voice_amp, voice_filter, audio_route, cv_route, active, output, count }; };
 typedef part_type_t::value part_type;
   
 // ---- amp ----
@@ -39,7 +39,7 @@ typedef active_param_t::value active_param;
 
 // ---- output ----
 
-struct output_param_t { enum value { clip, drain, voices, total_cpu, osc_cpu, vlfo_cpu, vflt_cpu, env_cpu, vamp_cpu, audio_cpu, cv_cpu, aux_cpu, count }; };
+struct output_param_t { enum value { clip, drain, voices, total_cpu, osc_cpu, lfo_cpu, vflt_cpu, env_cpu, vamp_cpu, audio_cpu, cv_cpu, aux_cpu, count }; };
 typedef output_param_t::value output_param;
 
 // ---- envelope ----
@@ -53,17 +53,17 @@ typedef envelope_type_t::value envelope_type;
 typedef envelope_slope_t::value envelope_slope;
 typedef envelope_param_t::value envelope_param;
 
-// ---- voice lfo ----
+// ---- lfo ----
 
-inline float constexpr voice_lfo_min_freq = 0.1f;
-inline float constexpr voice_lfo_max_freq = 20.0f;
-extern std::vector<float> const voice_lfo_timesig_values;
+inline float constexpr lfo_min_freq = 0.1f;
+inline float constexpr lfo_max_freq = 20.0f;
+extern std::vector<float> const lfo_timesig_values;
 
-struct voice_lfo_type_t { enum value { sine, custom, random, count }; };
-struct voice_lfo_param_t { enum value { on, type, kind, freq_time, freq_sync, count }; };
+struct lfo_type_t { enum value { sine, custom, random, count }; };
+struct lfo_param_t { enum value { on, type, kind, frequency_time, frequency_sync, count }; };
 
-typedef voice_lfo_type_t::value voice_lfo_type;
-typedef voice_lfo_param_t::value voice_lfo_param;
+typedef lfo_type_t::value lfo_type;
+typedef lfo_param_t::value lfo_param;
 
 // ---- voice filter ----
 
@@ -115,7 +115,7 @@ inline std::int32_t constexpr audio_input_counts[audio_route_input::count] = { 1
 
 // ---- cv route ----
 
-struct cv_route_input_t { enum value { off, envelope, vlfo, count }; };
+struct cv_route_input_t { enum value { off, envelope, lfo, count }; };
 struct cv_route_input_op_t { enum value { add, mul, count }; };
 
 struct cv_route_output_t { enum value { off, osc, vflt, vamp, count }; };
@@ -140,9 +140,9 @@ inline std::int32_t const* const cv_route_param_mapping[cv_route_output_t::count
 
 inline std::int32_t constexpr cv_route_count = 15;
 inline std::int32_t constexpr cv_route_param_offset = 2; // for plot params
-inline std::int32_t constexpr cv_input_counts[cv_route_input::count] = { 1, envelope_count, voice_lfo_count };
+inline std::int32_t constexpr cv_input_counts[cv_route_input::count] = { 1, envelope_count, lfo_count };
 inline std::int32_t constexpr cv_input_op_counts[cv_route_input::count] = { 0, cv_route_input_op::count, cv_route_input_op::count };
-inline std::int32_t constexpr cv_inputs_count = 1 + envelope_count * cv_route_input_op::count + voice_lfo_count * cv_route_input_op::count;
+inline std::int32_t constexpr cv_inputs_count = 1 + envelope_count * cv_route_input_op::count + lfo_count * cv_route_input_op::count;
 inline std::int32_t constexpr cv_output_counts[cv_route_output::count] = { 1, oscillator_count, voice_filter_count, 1 };
 inline std::int32_t constexpr cv_output_modulated_counts[cv_route_output::count] = { 0, oscillator_param::count, voice_filter_param::count, voice_amp_param::count };
 inline std::int32_t constexpr cv_output_target_counts[cv_route_output::count] = { 0, cv_route_osc_output::count, cv_route_vflt_output::count, cv_route_vamp_output::count };

@@ -1,10 +1,10 @@
 #ifndef SVN_SYNTH_DSP_SYNTH_VOICE_HPP
 #define SVN_SYNTH_DSP_SYNTH_VOICE_HPP
 
+#include <svn.synth/dsp/lfo.hpp>
 #include <svn.synth/dsp/cv_state.hpp>
 #include <svn.synth/dsp/envelope.hpp>
 #include <svn.synth/dsp/voice_amp.hpp>
-#include <svn.synth/dsp/voice_lfo.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
 #include <svn.synth/dsp/audio_state.hpp>
 #include <svn.synth/dsp/voice_filter.hpp>
@@ -40,7 +40,7 @@ private:
   voice_amp _amp;
   float _velocity;
   base::topology_info const* _topology;
-  std::array<voice_lfo, voice_lfo_count> _lfos;
+  std::array<lfo, lfo_count> _lfos;
   std::array<envelope, envelope_count> _envelopes;
   std::array<oscillator, oscillator_count> _oscillators;
   std::array<voice_filter, voice_filter_count> _filters;
