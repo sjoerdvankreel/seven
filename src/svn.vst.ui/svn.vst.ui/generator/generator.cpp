@@ -322,11 +322,13 @@ build_ui_part_graph(
   add_attribute(result, "class", "seven_graph_plot", allocator);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   add_attribute(result, "size", size_to_string(width, height), allocator);
-  add_attribute(result, "color", get_color_name(type.color, color_alpha::opaque), allocator);
   add_attribute(result, "graph-type", std::to_string(graph.type), allocator);
-  add_attribute(result, "part-index", std::to_string(part_desc.type_index), allocator);
+  add_attribute(result, "row-span", std::to_string(graph.row_span), allocator);
+  add_attribute(result, "column-span", std::to_string(graph.column_span), allocator);
   add_attribute(result, "tooltip", narrow_assume_ascii(graph.description), allocator);
+  add_attribute(result, "part-index", std::to_string(part_desc.type_index), allocator);
   add_attribute(result, "part-type", std::to_string(part_desc.descriptor->type), allocator);
+  add_attribute(result, "color", get_color_name(type.color, color_alpha::opaque), allocator);
   return result;
 } 
 

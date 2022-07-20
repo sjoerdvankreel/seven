@@ -433,11 +433,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "114, 2",
                                             "size": "111, 71",
-                                            "color": "color_B7C3FDFF",
                                             "graph-type": "0",
-                                            "part-index": "0",
+                                            "row-span": "3",
+                                            "column-span": "1",
                                             "tooltip": "Waveform",
-                                            "part-type": "0"
+                                            "part-index": "0",
+                                            "part-type": "0",
+                                            "color": "color_B7C3FDFF"
                                         }
                                     },
                                     "seven_graph_plot": {
@@ -445,11 +447,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 71",
-                                            "color": "color_B7C3FDFF",
                                             "graph-type": "1",
-                                            "part-index": "0",
+                                            "row-span": "3",
+                                            "column-span": "1",
                                             "tooltip": "Frequency spectrum",
-                                            "part-type": "0"
+                                            "part-index": "0",
+                                            "part-type": "0",
+                                            "color": "color_B7C3FDFF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -1475,11 +1479,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "114, 2",
                                             "size": "111, 71",
-                                            "color": "color_B7C3FDFF",
                                             "graph-type": "0",
-                                            "part-index": "1",
+                                            "row-span": "3",
+                                            "column-span": "1",
                                             "tooltip": "Waveform",
-                                            "part-type": "0"
+                                            "part-index": "1",
+                                            "part-type": "0",
+                                            "color": "color_B7C3FDFF"
                                         }
                                     },
                                     "seven_graph_plot": {
@@ -1487,11 +1493,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 71",
-                                            "color": "color_B7C3FDFF",
                                             "graph-type": "1",
-                                            "part-index": "1",
+                                            "row-span": "3",
+                                            "column-span": "1",
                                             "tooltip": "Frequency spectrum",
-                                            "part-type": "0"
+                                            "part-index": "1",
+                                            "part-type": "0",
+                                            "color": "color_B7C3FDFF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -2517,11 +2525,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "114, 2",
                                             "size": "111, 71",
-                                            "color": "color_B7C3FDFF",
                                             "graph-type": "0",
-                                            "part-index": "2",
+                                            "row-span": "3",
+                                            "column-span": "1",
                                             "tooltip": "Waveform",
-                                            "part-type": "0"
+                                            "part-index": "2",
+                                            "part-type": "0",
+                                            "color": "color_B7C3FDFF"
                                         }
                                     },
                                     "seven_graph_plot": {
@@ -2529,11 +2539,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 71",
-                                            "color": "color_B7C3FDFF",
                                             "graph-type": "1",
-                                            "part-index": "2",
+                                            "row-span": "3",
+                                            "column-span": "1",
                                             "tooltip": "Frequency spectrum",
-                                            "part-type": "0"
+                                            "part-index": "2",
+                                            "part-type": "0",
+                                            "color": "color_B7C3FDFF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -3559,11 +3571,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "114, 2",
                                             "size": "111, 71",
-                                            "color": "color_B7C3FDFF",
                                             "graph-type": "0",
-                                            "part-index": "3",
+                                            "row-span": "3",
+                                            "column-span": "1",
                                             "tooltip": "Waveform",
-                                            "part-type": "0"
+                                            "part-index": "3",
+                                            "part-type": "0",
+                                            "color": "color_B7C3FDFF"
                                         }
                                     },
                                     "seven_graph_plot": {
@@ -3571,11 +3585,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 71",
-                                            "color": "color_B7C3FDFF",
                                             "graph-type": "1",
-                                            "part-index": "3",
+                                            "row-span": "3",
+                                            "column-span": "1",
                                             "tooltip": "Frequency spectrum",
-                                            "part-type": "0"
+                                            "part-index": "3",
+                                            "part-type": "0",
+                                            "color": "color_B7C3FDFF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -4601,11 +4617,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 23",
-                                            "color": "color_ACCAF7FF",
                                             "graph-type": "-1",
-                                            "part-index": "0",
+                                            "row-span": "1",
+                                            "column-span": "1",
                                             "tooltip": "LFO",
-                                            "part-type": "2"
+                                            "part-index": "0",
+                                            "part-type": "2",
+                                            "color": "color_ACCAF7FF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -4967,11 +4985,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 23",
-                                            "color": "color_ACCAF7FF",
                                             "graph-type": "-1",
-                                            "part-index": "1",
+                                            "row-span": "1",
+                                            "column-span": "1",
                                             "tooltip": "LFO",
-                                            "part-type": "2"
+                                            "part-index": "1",
+                                            "part-type": "2",
+                                            "color": "color_ACCAF7FF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -5333,11 +5353,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 23",
-                                            "color": "color_ACCAF7FF",
                                             "graph-type": "-1",
-                                            "part-index": "2",
+                                            "row-span": "1",
+                                            "column-span": "1",
                                             "tooltip": "LFO",
-                                            "part-type": "2"
+                                            "part-index": "2",
+                                            "part-type": "2",
+                                            "color": "color_ACCAF7FF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -5699,11 +5721,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 23",
-                                            "color": "color_A2D2F1FF",
                                             "graph-type": "-1",
-                                            "part-index": "0",
+                                            "row-span": "1",
+                                            "column-span": "1",
                                             "tooltip": "Impulse response",
-                                            "part-type": "4"
+                                            "part-index": "0",
+                                            "part-type": "4",
+                                            "color": "color_A2D2F1FF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -6370,11 +6394,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 23",
-                                            "color": "color_A2D2F1FF",
                                             "graph-type": "-1",
-                                            "part-index": "1",
+                                            "row-span": "1",
+                                            "column-span": "1",
                                             "tooltip": "Impulse response",
-                                            "part-type": "4"
+                                            "part-index": "1",
+                                            "part-type": "4",
+                                            "color": "color_A2D2F1FF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -7041,11 +7067,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 23",
-                                            "color": "color_A2D2F1FF",
                                             "graph-type": "-1",
-                                            "part-index": "2",
+                                            "row-span": "1",
+                                            "column-span": "1",
                                             "tooltip": "Impulse response",
-                                            "part-type": "4"
+                                            "part-index": "2",
+                                            "part-type": "4",
+                                            "color": "color_A2D2F1FF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -7712,11 +7740,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 23",
-                                            "color": "color_97DAEBFF",
                                             "graph-type": "-1",
-                                            "part-index": "0",
+                                            "row-span": "1",
+                                            "column-span": "1",
                                             "tooltip": "Envelope",
-                                            "part-type": "1"
+                                            "part-index": "0",
+                                            "part-type": "1",
+                                            "color": "color_97DAEBFF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -9026,11 +9056,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 23",
-                                            "color": "color_97DAEBFF",
                                             "graph-type": "-1",
-                                            "part-index": "1",
+                                            "row-span": "1",
+                                            "column-span": "1",
                                             "tooltip": "Envelope",
-                                            "part-type": "1"
+                                            "part-index": "1",
+                                            "part-type": "1",
+                                            "color": "color_97DAEBFF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -10340,11 +10372,13 @@
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
                                             "size": "111, 23",
-                                            "color": "color_97DAEBFF",
                                             "graph-type": "-1",
-                                            "part-index": "2",
+                                            "row-span": "1",
+                                            "column-span": "1",
                                             "tooltip": "Envelope",
-                                            "part-type": "1"
+                                            "part-index": "2",
+                                            "part-type": "1",
+                                            "color": "color_97DAEBFF"
                                         }
                                     },
                                     "view_container_fix": {
@@ -13917,11 +13951,13 @@
                                                             "class": "seven_graph_plot",
                                                             "origin": "114, 2",
                                                             "size": "223, 47",
-                                                            "color": "color_78F2DAFF",
                                                             "graph-type": "-1",
-                                                            "part-index": "0",
+                                                            "row-span": "2",
+                                                            "column-span": "2",
                                                             "tooltip": "CV",
-                                                            "part-type": "6"
+                                                            "part-index": "0",
+                                                            "part-type": "6",
+                                                            "color": "color_78F2DAFF"
                                                         }
                                                     },
                                                     "view_container_fix": {

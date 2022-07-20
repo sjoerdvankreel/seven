@@ -16,14 +16,18 @@ public VSTGUI::CView
   static inline float const sample_rate = 48000.0f;
 
   VSTGUI::CColor const _color;
+  std::int32_t const _row_span;
+  std::int32_t const _column_span;
   svn::base::graph_processor_base* const _processor;
+public:
+  void draw(VSTGUI::CDrawContext* context) override;
+  graph_plot(VSTGUI::CColor const& color, std::int32_t row_span,
+    std::int32_t column_span, svn::base::graph_processor_base* processor):
+  VSTGUI::CView(VSTGUI::CRect(0, 0, 0, 0)), _color(color), 
+  _row_span(row_span), _column_span(column_span), _processor(processor) { }
 public:
   ~graph_plot() override { delete _processor; }
   svn::base::graph_processor_base* const processor() const { return _processor; }
-public:
-  void draw(VSTGUI::CDrawContext* context) override;
-  graph_plot(VSTGUI::CColor const& color, svn::base::graph_processor_base* processor):
-  VSTGUI::CView(VSTGUI::CRect(0, 0, 0, 0)), _color(color), _processor(processor) { }
 };
 
 // VSTGUI graph factory.
