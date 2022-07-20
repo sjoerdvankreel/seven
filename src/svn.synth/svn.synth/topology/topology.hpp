@@ -73,6 +73,7 @@ inline float constexpr comb_filter_max_ms = 5.0f;
 inline float constexpr max_sample_rate = 384000.0f;
 
 struct filter_type_t { enum value { state_var, comb, count }; };
+struct filter_graph_t { enum value { impulse, frequency, count }; };
 struct filter_state_var_type_t { enum value { lpf, hpf, bpf, bsf, apf, count }; };
 struct filter_param_t { enum value { 
   on, type, 
@@ -80,6 +81,7 @@ struct filter_param_t { enum value {
   comb_dly_plus, comb_gain_plus, comb_dly_min, comb_gain_min, count }; };
 
 typedef filter_type_t::value filter_type;
+typedef filter_graph_t::value filter_graph;
 typedef filter_param_t::value filter_param;
 typedef filter_state_var_type_t::value filter_state_var_type;
 

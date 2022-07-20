@@ -114,10 +114,16 @@ envelope_params[envelope_param::count] =
 }; 
   
 // ---- filter ---- 
+ 
+static graph_descriptor const
+filter_graphs[filter_graph::count] =
+{
+  { filter_graph::impulse, 0, 1, 2, 1, L"Impulse response"},
+  { filter_graph::frequency, 0, 2, 2, 1, L"Frequency response" }
+};
 
 static std::vector<std::wstring> const filter_types = { L"StateVar", L"Comb" };
 static std::vector<std::wstring> const filter_state_var_types = { L"LPF", L"HPF", L"BPF", L"BSF", L"APF" };
-static graph_descriptor const filter_graph = { -1, 0, 2, 1, 1, L"Impulse response" };
 static param_relevance const filter_comb_relevance[1] = { { filter_param::type, { filter_type::comb } } };
 static param_relevance const filter_state_var_relevance[1] = { { filter_param::type, { filter_type::state_var } } };
    
@@ -129,7 +135,7 @@ filter_params[filter_param::count] =
   { "{7498AB5E-4BE6-45B0-8CBF-8D166FF82E32}", { L"StVar", L"State variable type" }, L"", false, &filter_state_var_types, 0, { false, false, 1, 2, filter_state_var_relevance, 1 } },
   { "{99F7D808-53EB-4A4F-9FBF-4F1F57E4B742}", { L"Freq", L"State variable frequency" }, L"Hz", { 0.25f, 0, real_bounds::quadratic(filter_min_freq, filter_max_freq), real_bounds::quadratic(filter_min_freq, filter_max_freq) }, { false, false, 2, 2, filter_state_var_relevance, 1 } },
   { "{AA394A33-B616-4EAF-830D-313F2FE316AF}", { L"Res", L"State variable resonance" }, L"%", { 0.0f, 2, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f) }, { false, false, 3, 2, filter_state_var_relevance, 1 } },
-  { "{BF8775C6-FD22-4653-BC21-64CDC8D24AFF}", { L"Kbd", L"State variable keyboard tracking" }, L"", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-1.0f, 1.0f) }, { false, false, 4, 2, filter_state_var_relevance, 1 } },
+  { "{BF8775C6-FD22-4653-BC21-64CDC8D24AFF}", { L"Kbd", L"State variable keyboard tracking" }, L"%", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, false, 4, 2, filter_state_var_relevance, 1 } },
   { "{36AA381A-82F4-4259-9D87-431B8C49EAB4}", { L"Delay+", L"Comb+ delay" }, L"Ms", { 0.5f, 2, real_bounds::linear(0.0f, 0.005f), real_bounds::linear(0.0f, 5.0f) }, { false, false, 1, 2, filter_comb_relevance, 1 } },
   { "{9B330083-CF9C-4161-9A66-74AF468EF521}", { L"Gain+", L"Comb+ gain" }, L"%", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, false, 2, 2, filter_comb_relevance, 1 } },
   { "{25A32954-6975-4591-87B0-F0718206E965}", { L"Delay-", L"Comb- delay" }, L"Ms", { 0.5f, 2, real_bounds::linear(0.0f, 0.005f), real_bounds::linear(0.0f, 5.0f) }, { false, false, 3, 2, filter_comb_relevance, 1 } },
@@ -291,7 +297,7 @@ part_descriptors[part_type::count] =
   { "{FC4885FE-431C-477A-B5B7-84863DB8C07D}", { L"Env", L"Envelope" }, part_type::envelope, false, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 2, 3, 0, active_param::envelope, L"Voice" } },
   { "{56DE75BB-BE73-4B27-B37F-77F6E408F986}", { L"LFO", L"LFO" }, part_type::lfo, false, false, lfo_count, lfo_params, lfo_param::count, &lfo_graph, 1, { 3, 3, 0, active_param::lfo, L"Voice" } },
   { "{E6344937-C1F7-4F2A-83E7-EA27D48DEC4E}", { L"Amp", L"Voice amp" }, part_type::voice_amp, false, false, 1, voice_amp_params, voice_amp_param::count, nullptr, 0, { 4, 3, -1, -1, L"Voice" } },
-  { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"Filter", L"Filter" }, part_type::filter, false, false, filter_count, filter_params, filter_param::count, &filter_graph, 1, { 1, 3, 0, active_param::filter, L"Voice" } },
+  { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"Filter", L"Filter" }, part_type::filter, false, false, filter_count, filter_params, filter_param::count, filter_graphs, filter_graph::count, { 1, 3, 0, active_param::filter, L"Voice" } },
   { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 6, 3, -1, -1, L"Route" } },
   { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, false, 1, cv_route_params, cv_route_param::count, &cv_route_graph, 1, { 7, 3, -1, -1, L"Route" } },
   { "{C972E264-1739-4DB6-B1DB-5D31057BD218}", { L"Active", L"Active" }, part_type::active, false, true, 1, active_params, active_param::count, nullptr, -1, part_no_ui },
