@@ -86,13 +86,16 @@ inline std::int32_t constexpr oscillator_max_voices = 8;
 
 struct oscillator_type_t { enum value { analog, dsf, count }; };
 struct oscillator_graph_t { enum value { wave, spectrum, count }; };
-struct oscillator_anlg_type_t { enum value { sin, saw, pulse, tri, count }; };
-struct oscillator_param_t { enum value { on, amp, pan, type, anlg_type, anlg_pw, dsf_partials, dsf_distance, dsf_rolloff, oct, note, cent, uni_voices, uni_detune, uni_spread, count }; };
+struct oscillator_analog_type_t { enum value { sine, saw, pulse, triangle, count }; };
+struct oscillator_param_t { enum value { 
+  on, amp, pan, type, analog_type, analog_pw, 
+  dsf_partials, dsf_distance, dsf_rolloff, 
+  octave, note, cent, unison, unison_detune, unison_spread, count }; };
 
 typedef oscillator_type_t::value oscillator_type;
 typedef oscillator_param_t::value oscillator_param;
 typedef oscillator_graph_t::value oscillator_graph;
-typedef oscillator_anlg_type_t::value oscillator_anlg_type;
+typedef oscillator_analog_type_t::value oscillator_analog_type;
 
 // ---- audio route ----
 
@@ -131,7 +134,7 @@ typedef cv_route_vflt_output_t::value cv_route_vflt_output;
 
 inline std::int32_t constexpr cv_route_part_mapping[cv_route_output_t::count] = { -1, part_type::oscillator, part_type::voice_filter, part_type::voice_amp };
 inline std::int32_t constexpr cv_route_vamp_mapping[cv_route_vamp_output::count] = { voice_amp_param::level, voice_amp_param::pan };
-inline std::int32_t constexpr cv_route_osc_mapping[cv_route_osc_output::count] = { oscillator_param::amp, oscillator_param::pan, oscillator_param::anlg_pw, oscillator_param::dsf_distance, oscillator_param::dsf_rolloff, oscillator_param::cent, oscillator_param::uni_detune, oscillator_param::uni_spread };
+inline std::int32_t constexpr cv_route_osc_mapping[cv_route_osc_output::count] = { oscillator_param::amp, oscillator_param::pan, oscillator_param::analog_pw, oscillator_param::dsf_distance, oscillator_param::dsf_rolloff, oscillator_param::cent, oscillator_param::unison_detune, oscillator_param::unison_spread };
 inline std::int32_t constexpr cv_route_vflt_mapping[cv_route_vflt_output::count] = { voice_filter_param::stvar_freq, voice_filter_param::stvar_res, voice_filter_param::stvar_kbd, voice_filter_param::comb_dly_plus, voice_filter_param::comb_gain_plus, voice_filter_param::comb_dly_min, voice_filter_param::comb_gain_min };
 inline std::int32_t const* const cv_route_param_mapping[cv_route_output_t::count] = { nullptr, cv_route_osc_mapping , cv_route_vflt_mapping, cv_route_vamp_mapping };
 

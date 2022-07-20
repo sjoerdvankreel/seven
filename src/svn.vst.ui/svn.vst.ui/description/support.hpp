@@ -14,10 +14,10 @@ struct color_alpha_t { enum value { transparent, eight, quarter, half, opaque, c
 typedef color_alpha_t::value color_alpha;
 extern std::uint8_t const color_alphas[];
 
-inline std::int32_t constexpr param_row_height = 19;
-inline std::int32_t constexpr param_col1_width = 20;
-inline std::int32_t constexpr param_col2_width = 26;
-inline std::int32_t constexpr param_col3_width = 28;
+inline std::int32_t constexpr param_row_height = 21;
+inline std::int32_t constexpr param_col1_width = 22;
+inline std::int32_t constexpr param_col2_width = 42;
+inline std::int32_t constexpr param_col3_width = 38;
 inline std::int32_t constexpr header_checkbox_width = 14;
 
 inline std::int32_t constexpr margin = 3;

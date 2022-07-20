@@ -75,7 +75,7 @@ float
 oscillator::generate_blep_pulse(
   automation_view const& automation, std::int32_t sample, float phase, float increment) const
 {
-  float pw = (min_pw + (1.0f - min_pw) * automation.get(oscillator_param::anlg_pw, sample).real) * 0.5f;
+  float pw = (min_pw + (1.0f - min_pw) * automation.get(oscillator_param::analog_pw, sample).real) * 0.5f;
   float saw1 = generate_blep_saw(phase, increment);
   float saw2 = generate_blep_saw(phase + pw, increment);
   return (saw1 - saw2) * 0.5f;
@@ -85,16 +85,16 @@ float
 oscillator::generate_analog(
   automation_view const& automation, std::int32_t sample, float phase, float increment) const
 {
-  std::int32_t type = automation.get(oscillator_param::anlg_type, sample).discrete;
+  std::int32_t type = automation.get(oscillator_param::analog_type, sample).discrete;
   switch (type)
   {
-  case oscillator_anlg_type::saw: return generate_blep_saw(phase, increment);
-  case oscillator_anlg_type::tri: return generate_blamp_triangle(phase, increment);
-  case oscillator_anlg_type::sin: return std::sin(2.0f * std::numbers::pi * phase);
-  case oscillator_anlg_type::pulse: return generate_blep_pulse(automation, sample, phase, increment);
+  case oscillator_analog_type::saw: return generate_blep_saw(phase, increment);
+  case oscillator_analog_type::sine: return std::sin(2.0f * std::numbers::pi * phase);
+  case oscillator_analog_type::triangle: return generate_blamp_triangle(phase, increment);
+  case oscillator_analog_type::pulse: return generate_blep_pulse(automation, sample, phase, increment);
   default: assert(false); return 0.0f;
   }
-}
+}   
 
 // https://www.verklagekasper.de/synths/dsfsynthesis/dsfsynthesis.html
 float 
@@ -138,7 +138,7 @@ base::audio_sample32
 oscillator::generate_unison(
   automation_view const& automation, std::int32_t s, float midi, float frequency, float panning)
 {
-  std::int32_t voices = automation.get(oscillator_param::uni_voices, s).discrete;
+  std::int32_t voices = automation.get(oscillator_param::unison, s).discrete;
   if (voices == 1) 
   { 
     float sample = generate_wave(automation, s, _phases[0], frequency, frequency / _sample_rate);
@@ -148,8 +148,8 @@ oscillator::generate_unison(
   }
 
   base::audio_sample32 result = { 0.0f, 0.0f };
-  float detune = automation.get(oscillator_param::uni_detune, s).real;
-  float spread = automation.get(oscillator_param::uni_spread, s).real;
+  float detune = automation.get(oscillator_param::unison_detune, s).real;
+  float spread = automation.get(oscillator_param::unison_spread, s).real;
   float pan_range = panning < 0.5f? panning: 1.0f - panning;
   float pan_min = panning - spread * pan_range;
   float pan_max = panning + spread * pan_range;
@@ -184,7 +184,7 @@ oscillator::process_block(voice_input const& input, std::int32_t index,
         
     float cent = automation.get(oscillator_param::cent, s).real;
     std::int32_t note = automation.get(oscillator_param::note, s).discrete;
-    std::int32_t octave = automation.get(oscillator_param::oct, s).discrete;
+    std::int32_t octave = automation.get(oscillator_param::octave, s).discrete;
     float midi = 12 * (octave + 1) + note + cent + _midi_note - 60;
     float frequency = note_to_frequency(midi);
     float amp = automation.get(oscillator_param::amp, s).real;

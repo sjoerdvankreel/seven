@@ -140,23 +140,24 @@ voice_filter_params[voice_filter_param::count] =
  
 // ---- oscillator ----
 
-static param_relevance const osc_anlg_pw_relevance[2] =
-{
-  { oscillator_param::type, { oscillator_type::analog } },
-  { oscillator_param::anlg_type, { oscillator_anlg_type::pulse } }
-};
-
 static graph_descriptor const
 oscillator_graphs[oscillator_graph::count] =
 {
-  { oscillator_graph::wave, 0, 2, 2, 1, L"Waveform"},
-  { oscillator_graph::spectrum, 2, 2, 1, 1, L"Frequency spectrum"}
-}; 
+  { oscillator_graph::wave, 0, 1, 3, 1, L"Waveform"},
+  { oscillator_graph::spectrum, 0, 2, 3, 1, L"Frequency spectrum" }
+};  
 
-static std::vector<std::wstring> const oscillator_types = { L"Anlg", L"Dsf" };
-static std::vector<std::wstring> const oscillator_anlg_types = { L"Sin", L"Saw", L"Pulse", L"Tri" };
-static param_relevance const osc_dsf_relevance[1] = { { oscillator_param::type, { oscillator_type::dsf } } };
-static param_relevance const osc_anlg_relevance[1] = { { oscillator_param::type, { oscillator_type::analog } } };
+static param_relevance const 
+oscillator_analog_pw_relevance[2] =
+{
+  { oscillator_param::type, { oscillator_type::analog } },
+  { oscillator_param::analog_type, { oscillator_analog_type::pulse } }
+};
+
+static std::vector<std::wstring> const oscillator_types = { L"Analog", L"DSF" };
+static std::vector<std::wstring> const oscillator_analog_types = { L"Sine", L"Saw", L"Pulse", L"Triangle" };
+static param_relevance const oscillator_dsf_relevance[1] = { { oscillator_param::type, { oscillator_type::dsf } } };
+static param_relevance const oscillator_analog_relevance[1] = { { oscillator_param::type, { oscillator_type::analog } } };
 
 static param_descriptor const
 oscillator_params[oscillator_param::count] =
@@ -165,17 +166,17 @@ oscillator_params[oscillator_param::count] =
   { "{C5C4B00A-3D26-4342-ACE6-0AE936FFBCA3}", { L"Amp", L"Level" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { false, false, 0, 2, nullptr, 0 } },
   { "{63C96678-9823-4B96-B2C0-78014A268DB5}", { L"Pan", L"Panning" }, L"%", { 0.5f, 0, real_bounds::unit(), real_bounds::linear(-100.0f, 100.0f) }, { false, false, 1, 2, nullptr, 0 } },
   { "{84A7AEC8-25E9-4242-B32E-2E9E780F0E31}", { L"Type", L"Type" }, L"", false, &oscillator_types, { false, false, 2, 2, nullptr, 0 } },
-  { "{EAFF1105-BA8D-4C55-8BEC-6B73AECF95E2}", { L"Anlg", L"Analog type" }, L"", false, &oscillator_anlg_types, { false, false, 3, 2, osc_anlg_relevance, 1 } },
-  { "{35DAF80A-6EE0-4A3C-9E81-B225A466F4B2}", { L"Pw", L"Analog pulse width" }, L"%", { 1.0f, 0, real_bounds::linear(0.0f, 1.0f), real_bounds::linear(0.0f, 100.0f) }, { false, false, 5, 2, osc_anlg_pw_relevance, 2 } },
-  { "{8B45133B-38AA-4E23-9CB9-B05A4954A947}", { L"Prts", L"Dsf partials" }, L"", true, 0, 9999, 0, { false, false, 3, 2, osc_dsf_relevance, 1 } },
-  { "{083A6619-0309-48CA-8E9E-9A309EA61044}", { L"Dist", L"Dsf distance" }, L"", { (1.0f - 0.05f) / (20.0f - 0.05f), 2, real_bounds::linear(0.05f, 20.0f), real_bounds::linear(0.05f, 20.0f) }, { false, false, 4, 2, osc_dsf_relevance, 1 } },
-  { "{FFD6C9F3-B7D4-4819-A63A-40BC907F91AF}", { L"Roll", L"Dsf rolloff" }, L"", { 0.5f, 4, real_bounds::unit(), real_bounds::unit() }, { false, false, 5, 2, osc_dsf_relevance, 1 } },
-  { "{5E3DB4DC-B459-43C4-9BBD-0FF8F2232AFA}", { L"Oct", L"Octave" }, L"", true, 0, 9, 4, { false, false, 6, 0, nullptr, 0 } },
+  { "{EAFF1105-BA8D-4C55-8BEC-6B73AECF95E2}", { L"Analog", L"Analog type" }, L"", false, &oscillator_analog_types, { false, false, 3, 2, oscillator_analog_relevance, 1 } },
+  { "{35DAF80A-6EE0-4A3C-9E81-B225A466F4B2}", { L"Pw", L"Analog pulse width" }, L"%", { 1.0f, 0, real_bounds::linear(0.0f, 1.0f), real_bounds::linear(0.0f, 100.0f) }, { false, false, 5, 2, oscillator_analog_pw_relevance, 2 } },
+  { "{8B45133B-38AA-4E23-9CB9-B05A4954A947}", { L"Partials", L"DSF partials" }, L"", true, 0, 9999, 0, { false, false, 3, 2, oscillator_dsf_relevance, 1 } },
+  { "{083A6619-0309-48CA-8E9E-9A309EA61044}", { L"Distance", L"DSF distance" }, L"", { (1.0f - 0.05f) / (20.0f - 0.05f), 2, real_bounds::linear(0.05f, 20.0f), real_bounds::linear(0.05f, 20.0f) }, { false, false, 4, 2, oscillator_dsf_relevance, 1 } },
+  { "{FFD6C9F3-B7D4-4819-A63A-40BC907F91AF}", { L"Rolloff", L"DSF rolloff" }, L"", { 0.5f, 4, real_bounds::unit(), real_bounds::unit() }, { false, false, 5, 2, oscillator_dsf_relevance, 1 } },
+  { "{5E3DB4DC-B459-43C4-9BBD-0FF8F2232AFA}", { L"Octave", L"Octave" }, L"", true, 0, 9, 4, { false, false, 6, 0, nullptr, 0 } },
   { "{501C5217-5A5B-48D8-AEFE-CFE67417E8AD}", { L"Note", L"Note" }, L"", true, &note_names, { false, false, 7, 0, nullptr, 0 } },
   { "{FD0A2D20-FCCD-4939-B1CC-BD2EBD998A25}", { L"Cent", L"Cent" }, L"", { 0.5f, 0, real_bounds::linear(-0.5f, 0.5f), real_bounds::linear(-50.0f, 50.0f) }, { false, false, 8, 0, nullptr, 0 } },
-  { "{F5B30B84-5C3E-471F-9B27-D1FB6E06D0AF}", { L"Uni", L"Unison voices" }, L"", true, 1, oscillator_max_voices, 1, { false, false, 9, 1, nullptr, 0 } },
-  { "{70C38B3D-E81C-42D9-A59A-9619DB318DFD}", { L"Dtn", L"Unison detune" }, L"", { 0.0f, 1, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f)}, { false, false, 10, 1, nullptr, 0 } },
-  { "{412B4D8D-4272-40ED-949F-479FB8407BF7}", { L"Sprd", L"Unison stereo spread" }, L"", { 0.0f, 0, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f) }, { false, false, 11, 1, nullptr, 0 } }
+  { "{F5B30B84-5C3E-471F-9B27-D1FB6E06D0AF}", { L"Unison", L"Unison voices" }, L"", true, 1, oscillator_max_voices, 1, { false, false, 9, 1, nullptr, 0 } },
+  { "{70C38B3D-E81C-42D9-A59A-9619DB318DFD}", { L"Detune", L"Unison detune" }, L"", { 0.0f, 1, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f)}, { false, false, 10, 1, nullptr, 0 } },
+  { "{412B4D8D-4272-40ED-949F-479FB8407BF7}", { L"Spread", L"Unison stereo spread" }, L"", { 0.0f, 0, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f) }, { false, false, 11, 1, nullptr, 0 } }
 };    
  
 // ---- audio route ---- 
@@ -286,7 +287,7 @@ cv_route_params[cv_route_param::count] =
 // ---- global topo ---- 
    
 part_descriptor const      
-part_descriptors[part_type::count] =    
+part_descriptors[part_type::count] =     
 {   
   { "{5C9D2CD3-2D4C-4205-893E-6B5DE9D62ADE}", { L"Osc", L"Oscillator" }, part_type::oscillator, false, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 0, 3, 0, selector_param::osc, L"Voice" } },
   { "{FC4885FE-431C-477A-B5B7-84863DB8C07D}", { L"Env", L"Envelope" }, part_type::envelope, false, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 3, 3, 0, selector_param::env, L"Voice" } },

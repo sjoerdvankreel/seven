@@ -213,7 +213,7 @@ oscillator_wave_graph::sample_count(
   std::int32_t begin = topology()->param_bounds[part_type::oscillator][part_index()];
   float cent = state[begin + oscillator_param::cent].real;
   std::int32_t note = state[begin + oscillator_param::note].discrete;
-  std::int32_t octave = state[begin + oscillator_param::oct].discrete;
+  std::int32_t octave = state[begin + oscillator_param::octave].discrete;
   float frequency = note_to_frequency(12 * (octave + 1) + note + cent);
   return static_cast<std::int32_t>(std::ceil(cycles * sample_rate / frequency));
 }
