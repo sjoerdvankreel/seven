@@ -498,12 +498,12 @@ build_ui_part_inner_container(
 static Value
 build_ui_part_outer_container(
   topology_info const& topology, part_type_ui_description const& type,
-  part_ui_description const& part, Document::AllocatorType& allocator)
+  std::int32_t type_index, part_ui_description const& part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   std::int32_t offset_space = 25;
-  std::int32_t offset_x = part.runtime_part_index / 3;
-  std::int32_t offset_y = part.runtime_part_index % 3;
+  std::int32_t offset_x = type_index / 3;
+  std::int32_t offset_y = type_index % 3;
   add_attribute(result, "bitmap", "background", allocator);
   add_attribute(result, "class", "view_container_fix", allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
@@ -517,7 +517,7 @@ build_ui_part_outer_container(
 static Value
 build_ui_part_switch_container(
   topology_info const& topology, part_type_ui_description const& type, 
-  Value& templates_part, Document::AllocatorType& allocator)
+  std::int32_t type_index, Value& templates_part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   std::string template_names = "";
@@ -530,6 +530,7 @@ build_ui_part_switch_container(
     template_names += template_name;
     if(i < type.parts.size() - 1) template_names += ",";
   }
+  add_attribute(result, "animation-time", "0", allocator);
   add_attribute(result, "template-switch-control", tag, allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "template-names", template_names, allocator);
@@ -537,14 +538,14 @@ build_ui_part_switch_container(
   add_attribute(result, "size", size_to_string(type.width, type.height), allocator);
   for (std::size_t i = 0; i < type.parts.size(); i++)
     add_member(templates_part, template_names_list[i], 
-      build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
+      build_ui_part_outer_container(topology, type, type_index, type.parts[i], allocator), allocator);
   return result;
 }
 
 static Value
 build_ui_part_type_container(
   topology_info const& topology, part_type_ui_description const& type, 
-  Value& templates_part, Document::AllocatorType& allocator)
+  std::int32_t type_index, Value& templates_part, Document::AllocatorType& allocator)
 {
   Value result(kObjectType);
   std::int32_t selector_index = type.selector_param.runtime_param_index;
@@ -553,10 +554,10 @@ build_ui_part_type_container(
   add_attribute(result, "size", size_to_string(type.width, type.height), allocator);
   if(selector_index == -1)
     for (std::size_t i = 0; i < type.parts.size(); i++)
-      add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type.parts[i], allocator), allocator);
+      add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type_index, type.parts[i], allocator), allocator);
   else
   {
-    add_child(result, "UIViewSwitchContainer", build_ui_part_switch_container(topology, type, templates_part, allocator), allocator);
+    add_child(result, "UIViewSwitchContainer", build_ui_part_switch_container(topology, type, type_index, templates_part, allocator), allocator);
     add_child(result, "COptionMenu", build_ui_param_menu(topology, type, selector_index, margin, 2 * padding_param_group, allocator), allocator);
   }
   return result;
@@ -575,7 +576,7 @@ build_ui_template(
   add_attribute(result, "class", "view_container_fix", allocator);
   for (std::size_t type = 0; type < descriptor.part_types.size(); type++)
     add_child(result, "view_container_fix", build_ui_part_type_container(
-      topology, descriptor.part_types[type], templates_part, allocator), allocator);
+      topology, descriptor.part_types[type], static_cast<std::int32_t>(type), templates_part, allocator), allocator);
   return result;
 }
 

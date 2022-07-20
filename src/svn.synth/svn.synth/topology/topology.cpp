@@ -15,7 +15,7 @@ static std::vector<std::wstring> const active_lfo_names = list_names(L"LFO", voi
 static std::vector<std::wstring> const active_envelope_names = list_names(L"Env", envelope_count);
 static std::vector<std::wstring> const active_oscillator_names = list_names(L"Osc", oscillator_count);
 static std::vector<std::wstring> const active_filter_names = list_names(L"Filter", voice_filter_count);
-
+ 
 static param_descriptor const
 active_params[active_param::count] =
 {

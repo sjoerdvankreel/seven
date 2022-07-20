@@ -1372,7 +1372,7 @@
                     "origin": "0, 0",
                     "size": "339, 172",
                     "name": "1",
-                    "background-offset": "0, 25"
+                    "background-offset": "0, 0"
                 },
                 "children": {
                     "view_container_fix": {
@@ -2418,7 +2418,7 @@
                     "origin": "0, 0",
                     "size": "339, 172",
                     "name": "2",
-                    "background-offset": "0, 50"
+                    "background-offset": "0, 0"
                 },
                 "children": {
                     "view_container_fix": {
@@ -3464,7 +3464,7 @@
                     "origin": "0, 0",
                     "size": "339, 172",
                     "name": "3",
-                    "background-offset": "25, 0"
+                    "background-offset": "0, 0"
                 },
                 "children": {
                     "view_container_fix": {
@@ -4510,7 +4510,7 @@
                     "origin": "0, 0",
                     "size": "339, 76",
                     "name": "7",
-                    "background-offset": "50, 25"
+                    "background-offset": "0, 25"
                 },
                 "children": {
                     "view_container_fix": {
@@ -4878,7 +4878,7 @@
                     "origin": "0, 0",
                     "size": "339, 76",
                     "name": "8",
-                    "background-offset": "50, 50"
+                    "background-offset": "0, 25"
                 },
                 "children": {
                     "view_container_fix": {
@@ -5246,7 +5246,7 @@
                     "origin": "0, 0",
                     "size": "339, 76",
                     "name": "9",
-                    "background-offset": "75, 0"
+                    "background-offset": "0, 25"
                 },
                 "children": {
                     "view_container_fix": {
@@ -5614,7 +5614,7 @@
                     "origin": "0, 0",
                     "size": "339, 76",
                     "name": "11",
-                    "background-offset": "75, 50"
+                    "background-offset": "0, 50"
                 },
                 "children": {
                     "view_container_fix": {
@@ -6287,7 +6287,7 @@
                     "origin": "0, 0",
                     "size": "339, 76",
                     "name": "12",
-                    "background-offset": "100, 0"
+                    "background-offset": "0, 50"
                 },
                 "children": {
                     "view_container_fix": {
@@ -6960,7 +6960,7 @@
                     "origin": "0, 0",
                     "size": "339, 76",
                     "name": "13",
-                    "background-offset": "100, 25"
+                    "background-offset": "0, 50"
                 },
                 "children": {
                     "view_container_fix": {
@@ -7633,7 +7633,7 @@
                     "origin": "0, 0",
                     "size": "339, 148",
                     "name": "4",
-                    "background-offset": "25, 25"
+                    "background-offset": "25, 0"
                 },
                 "children": {
                     "view_container_fix": {
@@ -8949,7 +8949,7 @@
                     "origin": "0, 0",
                     "size": "339, 148",
                     "name": "5",
-                    "background-offset": "25, 50"
+                    "background-offset": "25, 0"
                 },
                 "children": {
                     "view_container_fix": {
@@ -10265,7 +10265,7 @@
                     "origin": "0, 0",
                     "size": "339, 148",
                     "name": "6",
-                    "background-offset": "50, 0"
+                    "background-offset": "25, 0"
                 },
                 "children": {
                     "view_container_fix": {
@@ -11591,6 +11591,7 @@
                         "children": {
                             "UIViewSwitchContainer": {
                                 "attributes": {
+                                    "animation-time": "0",
                                     "template-switch-control": "active_0_oscillator",
                                     "origin": "0, 0",
                                     "template-names": "0,1,2,3",
@@ -11632,6 +11633,7 @@
                         "children": {
                             "UIViewSwitchContainer": {
                                 "attributes": {
+                                    "animation-time": "0",
                                     "template-switch-control": "active_0_lfo",
                                     "origin": "0, 0",
                                     "template-names": "7,8,9",
@@ -11673,6 +11675,7 @@
                         "children": {
                             "UIViewSwitchContainer": {
                                 "attributes": {
+                                    "animation-time": "0",
                                     "template-switch-control": "active_0_filter",
                                     "origin": "0, 0",
                                     "template-names": "11,12,13",
@@ -11714,6 +11717,7 @@
                         "children": {
                             "UIViewSwitchContainer": {
                                 "attributes": {
+                                    "animation-time": "0",
                                     "template-switch-control": "active_0_envelope",
                                     "origin": "0, 0",
                                     "template-names": "4,5,6",
@@ -11760,7 +11764,7 @@
                                     "origin": "0, 0",
                                     "size": "339, 199",
                                     "name": "10",
-                                    "background-offset": "75, 25"
+                                    "background-offset": "25, 25"
                                 },
                                 "children": {
                                     "view_container_fix": {
@@ -12069,7 +12073,7 @@
                                     "origin": "0, 0",
                                     "size": "339, 244",
                                     "name": "14",
-                                    "background-offset": "100, 50"
+                                    "background-offset": "25, 50"
                                 },
                                 "children": {
                                     "view_container_fix": {
@@ -13860,7 +13864,7 @@
                                     "origin": "0, 0",
                                     "size": "339, 436",
                                     "name": "15",
-                                    "background-offset": "125, 0"
+                                    "background-offset": "50, 0"
                                 },
                                 "children": {
                                     "view_container_fix": {
@@ -16920,7 +16924,7 @@
                                     "origin": "0, 0",
                                     "size": "339, 683",
                                     "name": "17",
-                                    "background-offset": "125, 50"
+                                    "background-offset": "50, 25"
                                 },
                                 "children": {
                                     "view_container_fix": {
