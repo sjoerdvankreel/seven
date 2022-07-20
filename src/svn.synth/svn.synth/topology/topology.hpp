@@ -60,7 +60,7 @@ inline float constexpr lfo_max_freq = 20.0f;
 extern std::vector<float> const lfo_timesig_values;
 
 struct lfo_type_t { enum value { sine, custom, random, count }; };
-struct lfo_param_t { enum value { on, type, kind, frequency_time, frequency_sync, count }; };
+struct lfo_param_t { enum value { on, type, bipolar, synced, frequency_time, frequency_sync, count }; };
 
 typedef lfo_type_t::value lfo_type;
 typedef lfo_param_t::value lfo_param;

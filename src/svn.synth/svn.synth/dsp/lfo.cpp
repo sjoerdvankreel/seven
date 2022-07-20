@@ -20,8 +20,7 @@ lfo::process_block(voice_input const& input, std::int32_t index, base::cv_sample
   {
     cv_out[s] = { 0.0f, false };
     if(automation.get(lfo_param::on, s).discrete == 0) continue;
-    std::int32_t kind = automation.get(envelope_param::kind, s).discrete;
-    if(!cv_kind_is_synced(kind))
+    if(automation.get(lfo_param::synced, s).discrete == 0)
       frequency = automation.get(lfo_param::frequency_time, s).real;
     else
     {
@@ -29,8 +28,8 @@ lfo::process_block(voice_input const& input, std::int32_t index, base::cv_sample
       frequency = timesig_to_frequency(_sample_rate, input.bpm, timesig);
     }
     float sample = sanity_bipolar(std::sin(2.0f * std::numbers::pi * _phase));
-    if (cv_kind_is_unipolar(kind)) cv_out[s] = { (sample + 1.0f) * 0.5f, false };
-    else cv_out[s] = { sample, true };
+    if (automation.get(lfo_param::bipolar, s).discrete == 0) cv_out[s] = { (sample + 1.0f) * 0.5f, false };
+    else cv_out[s] = { sample, true }; 
     _phase += frequency / _sample_rate;
     _phase -= std::floor(_phase);
   }

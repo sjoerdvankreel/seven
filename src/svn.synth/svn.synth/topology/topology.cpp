@@ -62,17 +62,18 @@ static std::vector<float> const lfo_timesig_values = beat_synced_timesig_values(
 
 static graph_descriptor const lfo_graph = { -1, 0, 2, 2, 1, L"LFO" };
 static std::vector<std::wstring> const lfo_types = { L"Sine", L"Custom", L"Random" };
-static param_relevance const lfo_time_relevance[1] = { { lfo_param::kind, { cv_kind::time_bipolar, cv_kind::time_unipolar } } };
-static param_relevance const lfo_sync_relevance[1] = { { lfo_param::kind, { cv_kind::sync_bipolar, cv_kind::sync_unipolar } } };
+static param_relevance const lfo_time_relevance[1] = { { lfo_param::synced, { 0 } } };
+static param_relevance const lfo_sync_relevance[1] = { { lfo_param::synced, { 1 } } };
 
 static param_descriptor const
 lfo_params[lfo_param::count] =
 {
   { "{42FB0553-788E-470F-906A-D95FED2ED980}", { L"On", L"Enabled" }, false, { false, false, -1, 0, {}, {}}},
   { "{F744C553-8CFA-4262-98A7-37E187BF27FF}", { L"Type", L"Type" }, L"", false, &lfo_types, { false, false, 0, 0, nullptr, 0 } },
-  { "{83C1ED1B-095E-4F58-B091-39DA4F0125BF}", { L"Kind", L"Sync/polarity kind" }, L"", false, &cv_kinds, { false, false, 1, 0, nullptr, 0} },
-  { "{E320A1F0-2FCA-46F2-BBCB-0504D65503BC}", { L"Freq", L"Frequency" }, L"Hz", { 0.0f, 2, real_bounds::quadratic(lfo_min_freq, lfo_max_freq), real_bounds::quadratic(lfo_min_freq, lfo_max_freq) }, { false, false, 2, 0, lfo_time_relevance, 1 } },
-  { "{09618D35-EFAD-4E2E-8FD0-04B6F5AC14D5}", { L"Step", L"Tempo" }, L"", true, &lfo_timesig_names, { false, false, 2, 0, lfo_sync_relevance, 1 } }
+  { "{0E9A5C22-34A2-4658-9DE6-718DF9028ECD}", { L"Bipolar", L"Bipolar" }, false, { false, false, 2, 1, nullptr, 0 } },
+  { "{83C1ED1B-095E-4F58-B091-39DA4F0125BF}", { L"Sync", L"Sync to beat" }, false, { false, false, 3, 1, nullptr, 0 } },
+  { "{E320A1F0-2FCA-46F2-BBCB-0504D65503BC}", { L"Freq", L"Frequency" }, L"Hz", { 0.0f, 2, real_bounds::quadratic(lfo_min_freq, lfo_max_freq), real_bounds::quadratic(lfo_min_freq, lfo_max_freq) }, { false, false, 1, 2, lfo_time_relevance, 1 } },
+  { "{09618D35-EFAD-4E2E-8FD0-04B6F5AC14D5}", { L"Step", L"Tempo" }, L"", true, &lfo_timesig_names, { false, false, 1, 2, lfo_sync_relevance, 1 } }
 };  
 
 // ---- envelope ----

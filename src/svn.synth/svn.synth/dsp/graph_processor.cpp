@@ -97,7 +97,7 @@ lfo_graph::sample_count(param_value const* state, float sample_rate, float bpm) 
   std::int32_t const cycles = 2;
   std::int32_t begin = topology()->param_bounds[part_type::lfo][part_index()];  
   float samples = lfo_graph_rate / state[begin + lfo_param::frequency_time].real;
-  if(cv_kind_is_synced(state[begin + lfo_param::kind].discrete))
+  if(state[begin + lfo_param::synced].discrete != 0)
   {
     float timesig = lfo_timesig_values[state[begin + lfo_param::frequency_sync].discrete];
     samples = timesig_to_samples(lfo_graph_rate, bpm, timesig);
