@@ -37,6 +37,18 @@ typedef active_param_t::value active_param;
 struct output_param_t { enum value { clip, drain, voices, total_cpu, osc_cpu, lfo_cpu, vflt_cpu, env_cpu, vamp_cpu, audio_cpu, cv_cpu, aux_cpu, count }; };
 typedef output_param_t::value output_param;
 
+// ---- lfo ----
+
+inline float constexpr lfo_min_period = 0.05f;
+inline float constexpr lfo_max_period = 10.0f;
+extern std::vector<float> const lfo_timesig_values;
+
+struct lfo_type_t { enum value { sine, custom, random, count }; };
+struct lfo_param_t { enum value { on, type, bipolar, synced, period_time, period_sync, count }; };
+
+typedef lfo_type_t::value lfo_type;
+typedef lfo_param_t::value lfo_param;
+
 // ---- envelope ----
 
 extern std::vector<float> const env_timesig_values;
@@ -52,18 +64,6 @@ struct envelope_param_t { enum value {
 typedef envelope_type_t::value envelope_type;
 typedef envelope_slope_t::value envelope_slope;
 typedef envelope_param_t::value envelope_param;
-
-// ---- lfo ----
-
-inline float constexpr lfo_min_freq = 0.1f;
-inline float constexpr lfo_max_freq = 20.0f;
-extern std::vector<float> const lfo_timesig_values;
-
-struct lfo_type_t { enum value { sine, custom, random, count }; };
-struct lfo_param_t { enum value { on, type, bipolar, synced, frequency_time, frequency_sync, count }; };
-
-typedef lfo_type_t::value lfo_type;
-typedef lfo_param_t::value lfo_param;
 
 // ---- voice filter ----
 

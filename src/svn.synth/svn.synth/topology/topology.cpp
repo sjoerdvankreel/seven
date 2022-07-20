@@ -68,7 +68,7 @@ lfo_params[lfo_param::count] =
   { "{F744C553-8CFA-4262-98A7-37E187BF27FF}", { L"Type", L"Type" }, L"", false, &lfo_types, 0, { false, false, 0, 0, nullptr, 0 } },
   { "{0E9A5C22-34A2-4658-9DE6-718DF9028ECD}", { L"Bipolar", L"Bipolar" }, false, { false, false, 2, 1, nullptr, 0 } },
   { "{83C1ED1B-095E-4F58-B091-39DA4F0125BF}", { L"Sync", L"Sync to beat" }, false, { false, false, 3, 1, nullptr, 0 } },
-  { "{E320A1F0-2FCA-46F2-BBCB-0504D65503BC}", { L"Freq", L"Frequency" }, L"Hz", { 0.0f, 2, real_bounds::quadratic(lfo_min_freq, lfo_max_freq), real_bounds::quadratic(lfo_min_freq, lfo_max_freq) }, { false, false, 1, 2, lfo_time_relevance, 1 } },
+  { "{E320A1F0-2FCA-46F2-BBCB-0504D65503BC}", { L"Period", L"Period" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(lfo_min_period, lfo_max_period), real_bounds::quadratic(lfo_min_period, lfo_max_period) }, { false, false, 1, 2, lfo_time_relevance, 1 } },
   { "{09618D35-EFAD-4E2E-8FD0-04B6F5AC14D5}", { L"Step", L"Tempo" }, L"", true, &lfo_timesig_names, 0, { false, false, 1, 2, lfo_sync_relevance, 1 } }
 };  
 

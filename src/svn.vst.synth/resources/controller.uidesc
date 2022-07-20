@@ -186,19 +186,19 @@
             "lfo_0_type": "124",
             "lfo_0_bipolar": "125",
             "lfo_0_sync_to_beat": "126",
-            "lfo_0_frequency": "127",
+            "lfo_0_period": "127",
             "lfo_0_tempo": "128",
             "lfo_1_enabled": "129",
             "lfo_1_type": "130",
             "lfo_1_bipolar": "131",
             "lfo_1_sync_to_beat": "132",
-            "lfo_1_frequency": "133",
+            "lfo_1_period": "133",
             "lfo_1_tempo": "134",
             "lfo_2_enabled": "135",
             "lfo_2_type": "136",
             "lfo_2_bipolar": "137",
             "lfo_2_sync_to_beat": "138",
-            "lfo_2_frequency": "139",
+            "lfo_2_period": "139",
             "lfo_2_tempo": "140",
             "voice_amp_0_level": "141",
             "voice_amp_0_env1_to_level": "142",
@@ -10840,8 +10840,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "lfo_0_frequency",
-                                                    "tooltip": "LFO 1 Frequency (Hz)",
+                                                    "control-tag": "lfo_0_period",
+                                                    "tooltip": "LFO 1 Period (Sec)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_97DAEBFF"
@@ -10856,7 +10856,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_97DAEBFF",
-                                                    "title": "Freq"
+                                                    "title": "Period"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -10864,8 +10864,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "42, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "lfo_0_frequency",
-                                                    "tooltip": "LFO 1 Frequency (Hz)",
+                                                    "control-tag": "lfo_0_period",
+                                                    "tooltip": "LFO 1 Period (Sec)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -11257,8 +11257,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "lfo_1_frequency",
-                                                    "tooltip": "LFO 2 Frequency (Hz)",
+                                                    "control-tag": "lfo_1_period",
+                                                    "tooltip": "LFO 2 Period (Sec)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_97DAEBFF"
@@ -11273,7 +11273,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_97DAEBFF",
-                                                    "title": "Freq"
+                                                    "title": "Period"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -11281,8 +11281,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "42, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "lfo_1_frequency",
-                                                    "tooltip": "LFO 2 Frequency (Hz)",
+                                                    "control-tag": "lfo_1_period",
+                                                    "tooltip": "LFO 2 Period (Sec)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -11674,8 +11674,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "lfo_2_frequency",
-                                                    "tooltip": "LFO 3 Frequency (Hz)",
+                                                    "control-tag": "lfo_2_period",
+                                                    "tooltip": "LFO 3 Period (Sec)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_97DAEBFF"
@@ -11690,7 +11690,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_97DAEBFF",
-                                                    "title": "Freq"
+                                                    "title": "Period"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -11698,8 +11698,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "42, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "lfo_2_frequency",
-                                                    "tooltip": "LFO 3 Frequency (Hz)",
+                                                    "control-tag": "lfo_2_period",
+                                                    "tooltip": "LFO 3 Period (Sec)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",

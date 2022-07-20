@@ -18,13 +18,13 @@ lfo::process_block(voice_input const& input, std::int32_t index, base::cv_sample
   automation_view automation(input.automation.rearrange_params(part_type::lfo, index));
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
-    cv_out[s] = { 0.0f, false };
+    cv_out[s] = { 0.0f, false }; 
     if(automation.get(lfo_param::on, s).discrete == 0) continue;
     if(automation.get(lfo_param::synced, s).discrete == 0)
-      frequency = automation.get(lfo_param::frequency_time, s).real;
+      frequency = 1.0f / automation.get(lfo_param::period_time, s).real;
     else
     {  
-      float timesig = lfo_timesig_values[automation.get(lfo_param::frequency_sync, s).discrete];
+      float timesig = lfo_timesig_values[automation.get(lfo_param::period_sync, s).discrete];
       frequency = timesig_to_frequency(_sample_rate, input.bpm, timesig);
     }
     float sample = sanity_bipolar(std::sin(2.0f * std::numbers::pi * _phase));
