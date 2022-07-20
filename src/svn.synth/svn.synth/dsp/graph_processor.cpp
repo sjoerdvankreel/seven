@@ -132,7 +132,9 @@ envelope_graph::sample_count(param_value const* state, float sample_rate, float 
   for (std::int32_t i = 0; i < topology()->input_param_count; i++)
     automation[i] = &state[i];
   setup_stages(automation.data(), bpm, delay, attack, hold, decay, release);
-  return static_cast<std::int32_t>(std::ceil(delay + attack + hold + decay + release));
+  std::int32_t result = static_cast<std::int32_t>(std::ceil(delay + attack + hold + decay + release));
+  assert(result > 0);
+  return result;
 }
 
 void

@@ -12,6 +12,7 @@ graph_processor<T>::process_dsp(param_value const* state, float sample_rate, flo
   _automation.clear();
   _automation_buffer.clear();
   std::int32_t samples = sample_count(state, sample_rate, bpm);
+  assert(samples > 0);
   for (std::int32_t p = 0; p < topology()->input_param_count; p++)
     for (std::int32_t s = 0; s < samples; s++)
       _automation_buffer.push_back(state[p]);

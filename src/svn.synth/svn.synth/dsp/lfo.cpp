@@ -30,7 +30,7 @@ lfo::process_block(voice_input const& input, std::int32_t index, base::cv_sample
     float sample = sanity_bipolar(std::sin(2.0f * std::numbers::pi * _phase));
     if (automation.get(lfo_param::bipolar, s).discrete == 0) cv_out[s] = { (sample + 1.0f) * 0.5f, false };
     else cv_out[s] = { sample, true }; 
-    _phase += frequency / _sample_rate;
+    _phase += frequency / _sample_rate; 
     _phase -= std::floor(_phase);
   }
   return performance_counter() - start_time;

@@ -10,7 +10,7 @@ using namespace svn::base;
 namespace svn::synth {
 
 static const float inv_log_half = 1.0f / std::log(0.5f);
-
+ 
 float 
 envelope::generate_slope(base::automation_view const& automation,
   std::int32_t slope_param, std::int32_t mid_param, std::int32_t s, float stage_pos)
@@ -22,7 +22,7 @@ envelope::generate_slope(base::automation_view const& automation,
   case envelope_slope::inverted: return sanity_unipolar(std::sqrt(stage_pos));
   case envelope_slope::quadratic: return sanity_unipolar(stage_pos * stage_pos);
   default:
-    assert(slope == envelope_slope::log);
+    assert(slope == envelope_slope::logarithmic);
     break;
   }
   float mid = automation.get(mid_param, s).real;

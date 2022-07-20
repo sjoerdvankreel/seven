@@ -1581,7 +1581,7 @@
                     "bitmap": "background",
                     "class": "view_container_fix",
                     "origin": "0, 0",
-                    "size": "339, 268",
+                    "size": "339, 172",
                     "name": "4",
                     "background-offset": "0, 25"
                 },
@@ -1590,7 +1590,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "0, 0",
-                            "size": "339, 268",
+                            "size": "339, 172",
                             "background-color": "color_00000080"
                         },
                         "children": {
@@ -1674,7 +1674,7 @@
                                     "frame-color": "color_ACCAF780",
                                     "back-color": "color_00000000",
                                     "origin": "0, 25",
-                                    "size": "339, 243"
+                                    "size": "339, 147"
                                 }
                             },
                             "view_container_fix": {
@@ -1682,7 +1682,7 @@
                                     "class": "view_container_fix",
                                     "background-color": "color_ACCAF720",
                                     "origin": "0, 25",
-                                    "size": "339, 243"
+                                    "size": "339, 147"
                                 },
                                 "children": {
                                     "seven_graph_plot": {
@@ -1944,123 +1944,6 @@
                                     },
                                     "view_container_fix": {
                                         "attributes": {
-                                            "background-color": "color_ACCAF720",
-                                            "class": "view_container_fix",
-                                            "origin": "2, 146",
-                                            "background-color-draw-style": "filled",
-                                            "size": "111, 23"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "1, 145",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "113, 145",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 145",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "1, 169",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "113, 169",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 169",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "1, 193",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "113, 193",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 193",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "1, 217",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "113, 217",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 217",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "3, 3",
                                             "size": "112, 21",
@@ -2202,6 +2085,58 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "159",
+                                                    "back-color": "color_00000020",
+                                                    "font-color": "color_ACCAF7FF"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "class": "view_container_fix",
+                                            "origin": "3, 27",
+                                            "size": "112, 21",
+                                            "background-color": "color_FFFFFF00"
+                                        },
+                                        "children": {
+                                            "seven_rotary_knob": {
+                                                "attributes": {
+                                                    "class": "seven_rotary_knob",
+                                                    "size": "22, 21",
+                                                    "origin": "0, 0",
+                                                    "control-tag": "envelope_0_hold_time",
+                                                    "tooltip": "Env 1 Hold time (Sec)",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "color": "color_ACCAF7FF"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "42, 21",
+                                                    "origin": "25, -1",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFont",
+                                                    "font-color": "color_ACCAF7FF",
+                                                    "title": "Hold"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "42, 21",
+                                                    "origin": "67, 0",
+                                                    "control-tag": "envelope_0_hold_time",
+                                                    "tooltip": "Env 1 Hold time (Sec)",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_ACCAF7FF"
                                                 }
@@ -2990,58 +2925,6 @@
                                                 }
                                             }
                                         }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "class": "view_container_fix",
-                                            "origin": "3, 147",
-                                            "size": "112, 21",
-                                            "background-color": "color_FFFFFF00"
-                                        },
-                                        "children": {
-                                            "seven_rotary_knob": {
-                                                "attributes": {
-                                                    "class": "seven_rotary_knob",
-                                                    "size": "22, 21",
-                                                    "origin": "0, 0",
-                                                    "control-tag": "envelope_0_hold_time",
-                                                    "tooltip": "Env 1 Hold time (Sec)",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "color": "color_ACCAF7FF"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "42, 21",
-                                                    "origin": "25, -1",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFont",
-                                                    "font-color": "color_ACCAF7FF",
-                                                    "title": "Hold"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "42, 21",
-                                                    "origin": "67, 0",
-                                                    "control-tag": "envelope_0_hold_time",
-                                                    "tooltip": "Env 1 Hold time (Sec)",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "text-alignment": "right",
-                                                    "font": "~ NormalFontSmall",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "value-precision": "2",
-                                                    "back-color": "color_00000020",
-                                                    "font-color": "color_ACCAF7FF"
-                                                }
-                                            }
-                                        }
                                     }
                                 }
                             }
@@ -3054,7 +2937,7 @@
                     "bitmap": "background",
                     "class": "view_container_fix",
                     "origin": "0, 0",
-                    "size": "339, 268",
+                    "size": "339, 172",
                     "name": "5",
                     "background-offset": "0, 25"
                 },
@@ -3063,7 +2946,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "0, 0",
-                            "size": "339, 268",
+                            "size": "339, 172",
                             "background-color": "color_00000080"
                         },
                         "children": {
@@ -3147,7 +3030,7 @@
                                     "frame-color": "color_ACCAF780",
                                     "back-color": "color_00000000",
                                     "origin": "0, 25",
-                                    "size": "339, 243"
+                                    "size": "339, 147"
                                 }
                             },
                             "view_container_fix": {
@@ -3155,7 +3038,7 @@
                                     "class": "view_container_fix",
                                     "background-color": "color_ACCAF720",
                                     "origin": "0, 25",
-                                    "size": "339, 243"
+                                    "size": "339, 147"
                                 },
                                 "children": {
                                     "seven_graph_plot": {
@@ -3417,123 +3300,6 @@
                                     },
                                     "view_container_fix": {
                                         "attributes": {
-                                            "background-color": "color_ACCAF720",
-                                            "class": "view_container_fix",
-                                            "origin": "2, 146",
-                                            "background-color-draw-style": "filled",
-                                            "size": "111, 23"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "1, 145",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "113, 145",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 145",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "1, 169",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "113, 169",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 169",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "1, 193",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "113, 193",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 193",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "1, 217",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "113, 217",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 217",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "3, 3",
                                             "size": "112, 21",
@@ -3675,6 +3441,58 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "159",
+                                                    "back-color": "color_00000020",
+                                                    "font-color": "color_ACCAF7FF"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "class": "view_container_fix",
+                                            "origin": "3, 27",
+                                            "size": "112, 21",
+                                            "background-color": "color_FFFFFF00"
+                                        },
+                                        "children": {
+                                            "seven_rotary_knob": {
+                                                "attributes": {
+                                                    "class": "seven_rotary_knob",
+                                                    "size": "22, 21",
+                                                    "origin": "0, 0",
+                                                    "control-tag": "envelope_1_hold_time",
+                                                    "tooltip": "Env 2 Hold time (Sec)",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "color": "color_ACCAF7FF"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "42, 21",
+                                                    "origin": "25, -1",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFont",
+                                                    "font-color": "color_ACCAF7FF",
+                                                    "title": "Hold"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "42, 21",
+                                                    "origin": "67, 0",
+                                                    "control-tag": "envelope_1_hold_time",
+                                                    "tooltip": "Env 2 Hold time (Sec)",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_ACCAF7FF"
                                                 }
@@ -4463,58 +4281,6 @@
                                                 }
                                             }
                                         }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "class": "view_container_fix",
-                                            "origin": "3, 147",
-                                            "size": "112, 21",
-                                            "background-color": "color_FFFFFF00"
-                                        },
-                                        "children": {
-                                            "seven_rotary_knob": {
-                                                "attributes": {
-                                                    "class": "seven_rotary_knob",
-                                                    "size": "22, 21",
-                                                    "origin": "0, 0",
-                                                    "control-tag": "envelope_1_hold_time",
-                                                    "tooltip": "Env 2 Hold time (Sec)",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "color": "color_ACCAF7FF"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "42, 21",
-                                                    "origin": "25, -1",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFont",
-                                                    "font-color": "color_ACCAF7FF",
-                                                    "title": "Hold"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "42, 21",
-                                                    "origin": "67, 0",
-                                                    "control-tag": "envelope_1_hold_time",
-                                                    "tooltip": "Env 2 Hold time (Sec)",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "text-alignment": "right",
-                                                    "font": "~ NormalFontSmall",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "value-precision": "2",
-                                                    "back-color": "color_00000020",
-                                                    "font-color": "color_ACCAF7FF"
-                                                }
-                                            }
-                                        }
                                     }
                                 }
                             }
@@ -4527,7 +4293,7 @@
                     "bitmap": "background",
                     "class": "view_container_fix",
                     "origin": "0, 0",
-                    "size": "339, 268",
+                    "size": "339, 172",
                     "name": "6",
                     "background-offset": "0, 25"
                 },
@@ -4536,7 +4302,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "0, 0",
-                            "size": "339, 268",
+                            "size": "339, 172",
                             "background-color": "color_00000080"
                         },
                         "children": {
@@ -4620,7 +4386,7 @@
                                     "frame-color": "color_ACCAF780",
                                     "back-color": "color_00000000",
                                     "origin": "0, 25",
-                                    "size": "339, 243"
+                                    "size": "339, 147"
                                 }
                             },
                             "view_container_fix": {
@@ -4628,7 +4394,7 @@
                                     "class": "view_container_fix",
                                     "background-color": "color_ACCAF720",
                                     "origin": "0, 25",
-                                    "size": "339, 243"
+                                    "size": "339, 147"
                                 },
                                 "children": {
                                     "seven_graph_plot": {
@@ -4890,123 +4656,6 @@
                                     },
                                     "view_container_fix": {
                                         "attributes": {
-                                            "background-color": "color_ACCAF720",
-                                            "class": "view_container_fix",
-                                            "origin": "2, 146",
-                                            "background-color-draw-style": "filled",
-                                            "size": "111, 23"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "1, 145",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "113, 145",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 145",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "1, 169",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "113, 169",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 169",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "1, 193",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "113, 193",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 193",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "1, 217",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "113, 217",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 217",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "3, 3",
                                             "size": "112, 21",
@@ -5148,6 +4797,58 @@
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
                                                     "value-precision": "159",
+                                                    "back-color": "color_00000020",
+                                                    "font-color": "color_ACCAF7FF"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "class": "view_container_fix",
+                                            "origin": "3, 27",
+                                            "size": "112, 21",
+                                            "background-color": "color_FFFFFF00"
+                                        },
+                                        "children": {
+                                            "seven_rotary_knob": {
+                                                "attributes": {
+                                                    "class": "seven_rotary_knob",
+                                                    "size": "22, 21",
+                                                    "origin": "0, 0",
+                                                    "control-tag": "envelope_2_hold_time",
+                                                    "tooltip": "Env 3 Hold time (Sec)",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "color": "color_ACCAF7FF"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "42, 21",
+                                                    "origin": "25, -1",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFont",
+                                                    "font-color": "color_ACCAF7FF",
+                                                    "title": "Hold"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "42, 21",
+                                                    "origin": "67, 0",
+                                                    "control-tag": "envelope_2_hold_time",
+                                                    "tooltip": "Env 3 Hold time (Sec)",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_ACCAF7FF"
                                                 }
@@ -5924,58 +5625,6 @@
                                                     "origin": "67, 0",
                                                     "control-tag": "envelope_2_release_log_midpoint",
                                                     "tooltip": "Env 3 Release log midpoint",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "text-alignment": "right",
-                                                    "font": "~ NormalFontSmall",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "value-precision": "2",
-                                                    "back-color": "color_00000020",
-                                                    "font-color": "color_ACCAF7FF"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "class": "view_container_fix",
-                                            "origin": "3, 147",
-                                            "size": "112, 21",
-                                            "background-color": "color_FFFFFF00"
-                                        },
-                                        "children": {
-                                            "seven_rotary_knob": {
-                                                "attributes": {
-                                                    "class": "seven_rotary_knob",
-                                                    "size": "22, 21",
-                                                    "origin": "0, 0",
-                                                    "control-tag": "envelope_2_hold_time",
-                                                    "tooltip": "Env 3 Hold time (Sec)",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "color": "color_ACCAF7FF"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "42, 21",
-                                                    "origin": "25, -1",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFont",
-                                                    "font-color": "color_ACCAF7FF",
-                                                    "title": "Hold"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "42, 21",
-                                                    "origin": "67, 0",
-                                                    "control-tag": "envelope_2_hold_time",
-                                                    "tooltip": "Env 3 Hold time (Sec)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -12200,9 +11849,9 @@
             },
             "view": {
                 "attributes": {
-                    "size": "1029, 662",
-                    "minSize": "1029, 662",
-                    "maxSize": "1029, 662",
+                    "size": "687, 693",
+                    "minSize": "687, 693",
+                    "maxSize": "687, 693",
                     "class": "view_container_fix"
                 },
                 "children": {
@@ -12252,7 +11901,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "3, 82",
-                            "size": "339, 268"
+                            "size": "339, 172"
                         },
                         "children": {
                             "UIViewSwitchContainer": {
@@ -12262,7 +11911,7 @@
                                     "origin": "0, 0",
                                     "template-names": "4,5,6",
                                     "class": "UIViewSwitchContainer",
-                                    "size": "339, 268"
+                                    "size": "339, 172"
                                 }
                             },
                             "COptionMenu": {
@@ -12293,7 +11942,7 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 353",
+                            "origin": "3, 257",
                             "size": "339, 172"
                         },
                         "children": {
@@ -12335,7 +11984,7 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 528",
+                            "origin": "3, 432",
                             "size": "339, 76"
                         },
                         "children": {
@@ -12377,7 +12026,7 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 607",
+                            "origin": "3, 511",
                             "size": "339, 52"
                         },
                         "children": {
@@ -12686,7 +12335,7 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "345, 3",
+                            "origin": "3, 566",
                             "size": "339, 124"
                         },
                         "children": {
@@ -13459,8 +13108,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "345, 130",
-                            "size": "339, 529"
+                            "origin": "345, 3",
+                            "size": "339, 244"
                         },
                         "children": {
                             "view_container_fix": {
@@ -13468,7 +13117,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "339, 529",
+                                    "size": "339, 244",
                                     "name": "14",
                                     "background-offset": "50, 0"
                                 },
@@ -13477,7 +13126,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "339, 529",
+                                            "size": "339, 244",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -13545,7 +13194,7 @@
                                                     "frame-color": "color_78F2DA80",
                                                     "back-color": "color_00000000",
                                                     "origin": "0, 25",
-                                                    "size": "339, 504"
+                                                    "size": "339, 219"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -13553,7 +13202,7 @@
                                                     "class": "view_container_fix",
                                                     "background-color": "color_78F2DA20",
                                                     "origin": "0, 25",
-                                                    "size": "339, 504"
+                                                    "size": "339, 219"
                                                 },
                                                 "children": {
                                                     "view_container_fix": {
@@ -15250,8 +14899,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "687, 3",
-                            "size": "339, 656"
+                            "origin": "345, 250",
+                            "size": "339, 440"
                         },
                         "children": {
                             "view_container_fix": {
@@ -15259,7 +14908,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "339, 656",
+                                    "size": "339, 440",
                                     "name": "15",
                                     "background-offset": "50, 25"
                                 },
@@ -15268,7 +14917,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "339, 656",
+                                            "size": "339, 440",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -15336,7 +14985,7 @@
                                                     "frame-color": "color_6EFAD580",
                                                     "back-color": "color_00000000",
                                                     "origin": "0, 25",
-                                                    "size": "339, 631"
+                                                    "size": "339, 415"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -15344,7 +14993,7 @@
                                                     "class": "view_container_fix",
                                                     "background-color": "color_6EFAD520",
                                                     "origin": "0, 25",
-                                                    "size": "339, 631"
+                                                    "size": "339, 415"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
