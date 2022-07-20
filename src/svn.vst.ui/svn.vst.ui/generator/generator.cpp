@@ -154,7 +154,7 @@ build_ui_param_label(
   part_ui_description const& part, param_ui_description const& param, 
   std::int32_t left, std::int32_t width, Document::AllocatorType& allocator)
 {
-  Value result(build_ui_param_item_base("CTextLabel", left, width, 0, allocator));
+  Value result(build_ui_param_item_base("CTextLabel", left, width, -1, allocator));
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
   std::string font = descriptor.ui.label_font_small ? "~ NormalFontSmall" : "~ NormalFont";
   add_attribute(result, "transparent", "true", allocator);
@@ -407,7 +407,7 @@ build_ui_part_header_label(
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "text-alignment", alignment, allocator);
   add_attribute(result, "font", "~ NormalFont", allocator);
-  add_attribute(result, "origin", size_to_string(left, -1), allocator);
+  add_attribute(result, "origin", size_to_string(left, -2), allocator);
   add_attribute(result, "font-color", get_color_name(type.color, color_alpha::opaque), allocator);
   add_attribute(result, "background-color", get_color_name(type.color, color_alpha::half), allocator);
   add_attribute(result, "size", size_to_string(param_total_width, param_row_height + padding_param_group * 4), allocator);
@@ -430,11 +430,11 @@ build_ui_part_header_container(
   if (part.enabled_param.runtime_param_index != -1)
   {
     Value enabled_box = build_ui_param_checkbox(
-      topology, type, part, part.enabled_param, black, margin + selector_offset, header_checkbox_width, 2 * padding_param_group - 1, allocator);
+      topology, type, part, part.enabled_param, black, 2 * margin + selector_offset, header_checkbox_width, 2 * padding_param_group - 1, allocator);
     add_child(result, "CCheckBox", enabled_box, allocator);
     std::string enabled = type.selector_param.runtime_param_index == -1? title: "Enabled";
     add_child(result, "CTextLabel", build_ui_part_header_label(
-      topology, type, "left", enabled, header_checkbox_width + margin + selector_offset, allocator), allocator);
+      topology, type, "left", enabled, header_checkbox_width + 3 * margin + selector_offset, allocator), allocator);
   } else
     add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", title, selector_offset, allocator), allocator);
 

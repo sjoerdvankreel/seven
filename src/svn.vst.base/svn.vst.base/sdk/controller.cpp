@@ -12,7 +12,7 @@
 #include <cassert>
 #include <cstring>
 #include <cstdint>
-
+   
 using namespace VSTGUI;
 using namespace svn::base;
 using namespace Steinberg;
@@ -61,7 +61,7 @@ controller::createView(char const* name)
 tresult PLUGIN_API
 controller::setComponentState(IBStream* state)
 {
-  param_value value;
+  param_value value;   
   if (state == nullptr) return kResultFalse;
 
   // Load state into temporary buffer.
