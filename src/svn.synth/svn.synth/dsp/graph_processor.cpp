@@ -133,7 +133,6 @@ envelope_graph::sample_count(param_value const* state, float sample_rate, float 
     automation[i] = &state[i];
   setup_stages(automation.data(), bpm, delay, attack, hold, decay, release);
   std::int32_t result = static_cast<std::int32_t>(std::ceil(delay + attack + hold + decay + release));
-  assert(result > 0);
   return result;
 }
 
@@ -158,8 +157,8 @@ envelope_graph::setup_stages(param_value const* const* automation, float bpm,
   envelope env(env_graph_rate);
   base::automation_view view(topology(), nullptr, automation,
     topology()->input_param_count, topology()->input_param_count, 0, 1, 0, 1);
-  env.setup_stages(view.rearrange_params(part_type::envelope, part_index()),
-    0, bpm, delay, attack, hold, decay, release);
+  automation_view env_view = view.rearrange_params(part_type::envelope, part_index());
+  env.setup_stages(env_view, 0, bpm, delay, attack, hold, decay, release);
 }
 
 bool 

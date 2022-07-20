@@ -87,6 +87,7 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
   auto editor = static_cast<VST3Editor*>(getFrame()->getEditor());
   auto state = static_cast<controller const*>(editor->getController())->state();
   std::vector<graph_point> const& graph_data = _processor->plot(state, sample_rate, bpm, render_size.x, render_size.y, bipolar);
+  if(graph_data.size() == 0) return;
    
   // Path.
   context->setLineWidth(1.0);
