@@ -12,13 +12,13 @@ std::vector<std::pair<std::int32_t, std::int32_t>> const audio_state::input_tabl
 
 audio_state::
 audio_state(std::int32_t max_sample_count):  
-oscillator(), voice_filter()
+oscillator(), filter()
 {
   std::vector<base::audio_sample32> audio(static_cast<std::size_t>(max_sample_count));
   scratch = audio;
   voice_amp = audio;
+  filter.fill(audio);
   oscillator.fill(audio);
-  voice_filter.fill(audio);
 }
 
 base::audio_sample32 const*
@@ -27,8 +27,8 @@ audio_state::input_buffer(std::int32_t input, std::int32_t index) const
   switch (input)
   {
   case audio_route_input::off: return nullptr;
+  case audio_route_input::filter: return filter[index].data();
   case audio_route_input::osc: return oscillator[index].data();
-  case audio_route_input::filter: return voice_filter[index].data();
   default: assert(false); return nullptr;
   }
 }

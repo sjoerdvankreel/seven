@@ -2,12 +2,12 @@
 #include <svn.base/dsp/spectrum_analyzer.hpp>
 #include <svn.synth/topology/topology.hpp>
 #include <svn.synth/dsp/lfo.hpp>
+#include <svn.synth/dsp/filter.hpp>
 #include <svn.synth/dsp/support.hpp>
 #include <svn.synth/dsp/envelope.hpp>
 #include <svn.synth/dsp/cv_state.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
 #include <svn.synth/dsp/audio_state.hpp>
-#include <svn.synth/dsp/voice_filter.hpp>
 #include <svn.synth/dsp/graph_processor.hpp>
 
 #include <memory>
@@ -27,8 +27,8 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
     return new svn::synth::lfo_graph(topology, part_index);
   case svn::synth::part_type::envelope:
     return new svn::synth::envelope_graph(topology, part_index);
-  case svn::synth::part_type::voice_filter:
-    return new svn::synth::voice_filter_ir_graph(topology, part_index);
+  case svn::synth::part_type::filter:
+    return new svn::synth::filter_ir_graph(topology, part_index);
   case svn::synth::part_type::oscillator:
     assert(0 <= part_index && part_index < svn::synth::oscillator_count);
     switch (graph_type)
@@ -232,24 +232,24 @@ oscillator_wave_graph::process_dsp_core(
 }
 
 std::int32_t
-voice_filter_ir_graph::sample_count(
+filter_ir_graph::sample_count(
   param_value const* state, float sample_rate, float bpm) const
 {
-  std::int32_t begin = topology()->param_bounds[part_type::voice_filter][part_index()];
-  std::int32_t type = state[begin + voice_filter_param::type].discrete;
-  std::int32_t length_ms = type == voice_filter_type::state_var? 5: 50;
+  std::int32_t begin = topology()->param_bounds[part_type::filter][part_index()];
+  std::int32_t type = state[begin + filter_param::type].discrete;
+  std::int32_t length_ms = type == filter_type::state_var? 5: 50;
   return static_cast<std::int32_t>(std::ceil(length_ms * sample_rate / 1000.0f));
 }
 
 bool
-voice_filter_ir_graph::needs_repaint(std::int32_t runtime_param) const
+filter_ir_graph::needs_repaint(std::int32_t runtime_param) const
 {
-  std::int32_t begin = topology()->param_bounds[part_type::voice_filter][part_index()];
+  std::int32_t begin = topology()->param_bounds[part_type::filter][part_index()];
   return begin <= runtime_param && runtime_param < begin + oscillator_param::count;
 }
 
 void
-voice_filter_ir_graph::dsp_to_plot(
+filter_ir_graph::dsp_to_plot(
   param_value const* state, std::vector<base::audio_sample32> const& dsp, 
   std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
@@ -259,7 +259,7 @@ voice_filter_ir_graph::dsp_to_plot(
 }
 
 void 
-voice_filter_ir_graph::process_dsp_core(
+filter_ir_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
 {
   _audio_in.clear();
@@ -268,8 +268,8 @@ voice_filter_ir_graph::process_dsp_core(
 
   std::memset(output, 0, input.sample_count * sizeof(audio_sample32));
   voice_input vinput = setup_graph_voice_input(input, topology());
-  auto filter = std::make_unique<voice_filter>(sample_rate, midi_note_c4);
-  filter->process_block(vinput, part_index(), _audio_in.data(), output);
+  auto flt = std::make_unique<filter>(sample_rate, midi_note_c4);
+  flt->process_block(vinput, part_index(), _audio_in.data(), output);
 }
 
 bool

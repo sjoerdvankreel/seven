@@ -27,7 +27,7 @@ struct cpu_usage
   double vamp;
   double total;
   double audio;
-  double vfilter;
+  double filter;
 };
 
 } // namespace svn::base

@@ -25,8 +25,8 @@ class audio_state
 
 public:
   std::vector<base::audio_sample32> voice_amp;
+  std::array<std::vector<base::audio_sample32>, filter_count> filter;
   std::array<std::vector<base::audio_sample32>, oscillator_count> oscillator;
-  std::array<std::vector<base::audio_sample32>, voice_filter_count> voice_filter;
   
   explicit audio_state(std::int32_t max_sample_count);
   double mix(voice_input const& input, audio_route_output route_output, 

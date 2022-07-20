@@ -203,36 +203,36 @@
             "voice_amp_0_level": "141",
             "voice_amp_0_env1_to_level": "142",
             "voice_amp_0_panning": "143",
-            "voice_filter_0_enabled": "144",
-            "voice_filter_0_type": "145",
-            "voice_filter_0_state_var_type": "146",
-            "voice_filter_0_state_var_frequency": "147",
-            "voice_filter_0_state_var_resonance": "148",
-            "voice_filter_0_state_var_keyboard_tracking": "149",
-            "voice_filter_0_comb_plus_delay": "150",
-            "voice_filter_0_comb_plus_gain": "151",
-            "voice_filter_0_comb_min_delay": "152",
-            "voice_filter_0_comb_min_gain": "153",
-            "voice_filter_1_enabled": "154",
-            "voice_filter_1_type": "155",
-            "voice_filter_1_state_var_type": "156",
-            "voice_filter_1_state_var_frequency": "157",
-            "voice_filter_1_state_var_resonance": "158",
-            "voice_filter_1_state_var_keyboard_tracking": "159",
-            "voice_filter_1_comb_plus_delay": "160",
-            "voice_filter_1_comb_plus_gain": "161",
-            "voice_filter_1_comb_min_delay": "162",
-            "voice_filter_1_comb_min_gain": "163",
-            "voice_filter_2_enabled": "164",
-            "voice_filter_2_type": "165",
-            "voice_filter_2_state_var_type": "166",
-            "voice_filter_2_state_var_frequency": "167",
-            "voice_filter_2_state_var_resonance": "168",
-            "voice_filter_2_state_var_keyboard_tracking": "169",
-            "voice_filter_2_comb_plus_delay": "170",
-            "voice_filter_2_comb_plus_gain": "171",
-            "voice_filter_2_comb_min_delay": "172",
-            "voice_filter_2_comb_min_gain": "173",
+            "filter_0_enabled": "144",
+            "filter_0_type": "145",
+            "filter_0_state_variable_type": "146",
+            "filter_0_state_variable_frequency": "147",
+            "filter_0_state_variable_resonance": "148",
+            "filter_0_state_variable_keyboard_tracking": "149",
+            "filter_0_comb+_delay": "150",
+            "filter_0_comb+_gain": "151",
+            "filter_0_comb-_delay": "152",
+            "filter_0_comb-_gain": "153",
+            "filter_1_enabled": "154",
+            "filter_1_type": "155",
+            "filter_1_state_variable_type": "156",
+            "filter_1_state_variable_frequency": "157",
+            "filter_1_state_variable_resonance": "158",
+            "filter_1_state_variable_keyboard_tracking": "159",
+            "filter_1_comb+_delay": "160",
+            "filter_1_comb+_gain": "161",
+            "filter_1_comb-_delay": "162",
+            "filter_1_comb-_gain": "163",
+            "filter_2_enabled": "164",
+            "filter_2_type": "165",
+            "filter_2_state_variable_type": "166",
+            "filter_2_state_variable_frequency": "167",
+            "filter_2_state_variable_resonance": "168",
+            "filter_2_state_variable_keyboard_tracking": "169",
+            "filter_2_comb+_delay": "170",
+            "filter_2_comb+_gain": "171",
+            "filter_2_comb-_delay": "172",
+            "filter_2_comb-_gain": "173",
             "audio_route_0_input_1": "174",
             "audio_route_0_output_1": "175",
             "audio_route_0_amount_1": "176",
@@ -317,7 +317,7 @@
             "output_0_total_cpu": "255",
             "output_0_osc_cpu": "256",
             "output_0_lfo_cpu": "257",
-            "output_0_voice_filter_cpu": "258",
+            "output_0_filter_cpu": "258",
             "output_0_envelope_cpu": "259",
             "output_0_voice_amp_cpu": "260",
             "output_0_audio_route_cpu": "261",
@@ -4560,8 +4560,8 @@
                                             "class": "CCheckBox",
                                             "size": "14, 21",
                                             "origin": "73, 1",
-                                            "control-tag": "voice_filter_0_enabled",
-                                            "tooltip": "VFilter 1 Enabled",
+                                            "control-tag": "filter_0_enabled",
+                                            "tooltip": "Filter 1 Enabled",
                                             "title": "",
                                             "frame-width": "1",
                                             "draw-crossbox": "true",
@@ -4735,8 +4735,8 @@
                                                     "class": "COptionMenu",
                                                     "size": "67, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_0_type",
-                                                    "tooltip": "VFilter 1 Type",
+                                                    "control-tag": "filter_0_type",
+                                                    "tooltip": "Filter 1 Type",
                                                     "font": "~ NormalFont",
                                                     "min-value": "0",
                                                     "default-value": "0",
@@ -4780,8 +4780,8 @@
                                                     "class": "COptionMenu",
                                                     "size": "67, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_0_state_var_type",
-                                                    "tooltip": "VFilter 1 State var type",
+                                                    "control-tag": "filter_0_state_variable_type",
+                                                    "tooltip": "Filter 1 State variable type",
                                                     "font": "~ NormalFont",
                                                     "min-value": "0",
                                                     "default-value": "0",
@@ -4807,7 +4807,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Stvr"
+                                                    "title": "StVar"
                                                 }
                                             }
                                         }
@@ -4825,8 +4825,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_0_comb_plus_delay",
-                                                    "tooltip": "VFilter 1 Comb plus delay (Ms)",
+                                                    "control-tag": "filter_0_comb+_delay",
+                                                    "tooltip": "Filter 1 Comb+ delay (Ms)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -4841,7 +4841,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dly+"
+                                                    "title": "Delay+"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -4849,8 +4849,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_0_comb_plus_delay",
-                                                    "tooltip": "VFilter 1 Comb plus delay (Ms)",
+                                                    "control-tag": "filter_0_comb+_delay",
+                                                    "tooltip": "Filter 1 Comb+ delay (Ms)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -4877,8 +4877,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_0_state_var_frequency",
-                                                    "tooltip": "VFilter 1 State var frequency (Hz)",
+                                                    "control-tag": "filter_0_state_variable_frequency",
+                                                    "tooltip": "Filter 1 State variable frequency (Hz)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -4901,8 +4901,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_0_state_var_frequency",
-                                                    "tooltip": "VFilter 1 State var frequency (Hz)",
+                                                    "control-tag": "filter_0_state_variable_frequency",
+                                                    "tooltip": "Filter 1 State variable frequency (Hz)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -4929,8 +4929,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_0_comb_plus_gain",
-                                                    "tooltip": "VFilter 1 Comb plus gain",
+                                                    "control-tag": "filter_0_comb+_gain",
+                                                    "tooltip": "Filter 1 Comb+ gain (%)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -4945,7 +4945,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Gn+"
+                                                    "title": "Gain+"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -4953,8 +4953,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_0_comb_plus_gain",
-                                                    "tooltip": "VFilter 1 Comb plus gain",
+                                                    "control-tag": "filter_0_comb+_gain",
+                                                    "tooltip": "Filter 1 Comb+ gain (%)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -4981,8 +4981,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_0_state_var_resonance",
-                                                    "tooltip": "VFilter 1 State var resonance (%)",
+                                                    "control-tag": "filter_0_state_variable_resonance",
+                                                    "tooltip": "Filter 1 State variable resonance (%)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -5005,8 +5005,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_0_state_var_resonance",
-                                                    "tooltip": "VFilter 1 State var resonance (%)",
+                                                    "control-tag": "filter_0_state_variable_resonance",
+                                                    "tooltip": "Filter 1 State variable resonance (%)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -5033,8 +5033,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_0_comb_min_delay",
-                                                    "tooltip": "VFilter 1 Comb min delay (Ms)",
+                                                    "control-tag": "filter_0_comb-_delay",
+                                                    "tooltip": "Filter 1 Comb- delay (Ms)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -5049,7 +5049,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dly-"
+                                                    "title": "Delay-"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5057,8 +5057,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_0_comb_min_delay",
-                                                    "tooltip": "VFilter 1 Comb min delay (Ms)",
+                                                    "control-tag": "filter_0_comb-_delay",
+                                                    "tooltip": "Filter 1 Comb- delay (Ms)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -5085,8 +5085,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_0_state_var_keyboard_tracking",
-                                                    "tooltip": "VFilter 1 State var keyboard tracking",
+                                                    "control-tag": "filter_0_state_variable_keyboard_tracking",
+                                                    "tooltip": "Filter 1 State variable keyboard tracking",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -5109,8 +5109,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_0_state_var_keyboard_tracking",
-                                                    "tooltip": "VFilter 1 State var keyboard tracking",
+                                                    "control-tag": "filter_0_state_variable_keyboard_tracking",
+                                                    "tooltip": "Filter 1 State variable keyboard tracking",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -5137,8 +5137,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_0_comb_min_gain",
-                                                    "tooltip": "VFilter 1 Comb min gain",
+                                                    "control-tag": "filter_0_comb-_gain",
+                                                    "tooltip": "Filter 1 Comb- gain (%)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -5153,7 +5153,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Gn-"
+                                                    "title": "Gain-"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5161,8 +5161,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_0_comb_min_gain",
-                                                    "tooltip": "VFilter 1 Comb min gain",
+                                                    "control-tag": "filter_0_comb-_gain",
+                                                    "tooltip": "Filter 1 Comb- gain (%)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -5233,8 +5233,8 @@
                                             "class": "CCheckBox",
                                             "size": "14, 21",
                                             "origin": "73, 1",
-                                            "control-tag": "voice_filter_1_enabled",
-                                            "tooltip": "VFilter 2 Enabled",
+                                            "control-tag": "filter_1_enabled",
+                                            "tooltip": "Filter 2 Enabled",
                                             "title": "",
                                             "frame-width": "1",
                                             "draw-crossbox": "true",
@@ -5408,8 +5408,8 @@
                                                     "class": "COptionMenu",
                                                     "size": "67, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_1_type",
-                                                    "tooltip": "VFilter 2 Type",
+                                                    "control-tag": "filter_1_type",
+                                                    "tooltip": "Filter 2 Type",
                                                     "font": "~ NormalFont",
                                                     "min-value": "0",
                                                     "default-value": "0",
@@ -5453,8 +5453,8 @@
                                                     "class": "COptionMenu",
                                                     "size": "67, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_1_state_var_type",
-                                                    "tooltip": "VFilter 2 State var type",
+                                                    "control-tag": "filter_1_state_variable_type",
+                                                    "tooltip": "Filter 2 State variable type",
                                                     "font": "~ NormalFont",
                                                     "min-value": "0",
                                                     "default-value": "0",
@@ -5480,7 +5480,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Stvr"
+                                                    "title": "StVar"
                                                 }
                                             }
                                         }
@@ -5498,8 +5498,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_1_comb_plus_delay",
-                                                    "tooltip": "VFilter 2 Comb plus delay (Ms)",
+                                                    "control-tag": "filter_1_comb+_delay",
+                                                    "tooltip": "Filter 2 Comb+ delay (Ms)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -5514,7 +5514,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dly+"
+                                                    "title": "Delay+"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5522,8 +5522,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_1_comb_plus_delay",
-                                                    "tooltip": "VFilter 2 Comb plus delay (Ms)",
+                                                    "control-tag": "filter_1_comb+_delay",
+                                                    "tooltip": "Filter 2 Comb+ delay (Ms)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -5550,8 +5550,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_1_state_var_frequency",
-                                                    "tooltip": "VFilter 2 State var frequency (Hz)",
+                                                    "control-tag": "filter_1_state_variable_frequency",
+                                                    "tooltip": "Filter 2 State variable frequency (Hz)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -5574,8 +5574,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_1_state_var_frequency",
-                                                    "tooltip": "VFilter 2 State var frequency (Hz)",
+                                                    "control-tag": "filter_1_state_variable_frequency",
+                                                    "tooltip": "Filter 2 State variable frequency (Hz)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -5602,8 +5602,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_1_comb_plus_gain",
-                                                    "tooltip": "VFilter 2 Comb plus gain",
+                                                    "control-tag": "filter_1_comb+_gain",
+                                                    "tooltip": "Filter 2 Comb+ gain (%)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -5618,7 +5618,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Gn+"
+                                                    "title": "Gain+"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5626,8 +5626,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_1_comb_plus_gain",
-                                                    "tooltip": "VFilter 2 Comb plus gain",
+                                                    "control-tag": "filter_1_comb+_gain",
+                                                    "tooltip": "Filter 2 Comb+ gain (%)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -5654,8 +5654,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_1_state_var_resonance",
-                                                    "tooltip": "VFilter 2 State var resonance (%)",
+                                                    "control-tag": "filter_1_state_variable_resonance",
+                                                    "tooltip": "Filter 2 State variable resonance (%)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -5678,8 +5678,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_1_state_var_resonance",
-                                                    "tooltip": "VFilter 2 State var resonance (%)",
+                                                    "control-tag": "filter_1_state_variable_resonance",
+                                                    "tooltip": "Filter 2 State variable resonance (%)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -5706,8 +5706,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_1_comb_min_delay",
-                                                    "tooltip": "VFilter 2 Comb min delay (Ms)",
+                                                    "control-tag": "filter_1_comb-_delay",
+                                                    "tooltip": "Filter 2 Comb- delay (Ms)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -5722,7 +5722,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dly-"
+                                                    "title": "Delay-"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5730,8 +5730,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_1_comb_min_delay",
-                                                    "tooltip": "VFilter 2 Comb min delay (Ms)",
+                                                    "control-tag": "filter_1_comb-_delay",
+                                                    "tooltip": "Filter 2 Comb- delay (Ms)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -5758,8 +5758,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_1_state_var_keyboard_tracking",
-                                                    "tooltip": "VFilter 2 State var keyboard tracking",
+                                                    "control-tag": "filter_1_state_variable_keyboard_tracking",
+                                                    "tooltip": "Filter 2 State variable keyboard tracking",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -5782,8 +5782,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_1_state_var_keyboard_tracking",
-                                                    "tooltip": "VFilter 2 State var keyboard tracking",
+                                                    "control-tag": "filter_1_state_variable_keyboard_tracking",
+                                                    "tooltip": "Filter 2 State variable keyboard tracking",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -5810,8 +5810,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_1_comb_min_gain",
-                                                    "tooltip": "VFilter 2 Comb min gain",
+                                                    "control-tag": "filter_1_comb-_gain",
+                                                    "tooltip": "Filter 2 Comb- gain (%)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -5826,7 +5826,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Gn-"
+                                                    "title": "Gain-"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5834,8 +5834,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_1_comb_min_gain",
-                                                    "tooltip": "VFilter 2 Comb min gain",
+                                                    "control-tag": "filter_1_comb-_gain",
+                                                    "tooltip": "Filter 2 Comb- gain (%)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -5906,8 +5906,8 @@
                                             "class": "CCheckBox",
                                             "size": "14, 21",
                                             "origin": "73, 1",
-                                            "control-tag": "voice_filter_2_enabled",
-                                            "tooltip": "VFilter 3 Enabled",
+                                            "control-tag": "filter_2_enabled",
+                                            "tooltip": "Filter 3 Enabled",
                                             "title": "",
                                             "frame-width": "1",
                                             "draw-crossbox": "true",
@@ -6081,8 +6081,8 @@
                                                     "class": "COptionMenu",
                                                     "size": "67, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_2_type",
-                                                    "tooltip": "VFilter 3 Type",
+                                                    "control-tag": "filter_2_type",
+                                                    "tooltip": "Filter 3 Type",
                                                     "font": "~ NormalFont",
                                                     "min-value": "0",
                                                     "default-value": "0",
@@ -6126,8 +6126,8 @@
                                                     "class": "COptionMenu",
                                                     "size": "67, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_2_state_var_type",
-                                                    "tooltip": "VFilter 3 State var type",
+                                                    "control-tag": "filter_2_state_variable_type",
+                                                    "tooltip": "Filter 3 State variable type",
                                                     "font": "~ NormalFont",
                                                     "min-value": "0",
                                                     "default-value": "0",
@@ -6153,7 +6153,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Stvr"
+                                                    "title": "StVar"
                                                 }
                                             }
                                         }
@@ -6171,8 +6171,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_2_comb_plus_delay",
-                                                    "tooltip": "VFilter 3 Comb plus delay (Ms)",
+                                                    "control-tag": "filter_2_comb+_delay",
+                                                    "tooltip": "Filter 3 Comb+ delay (Ms)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -6187,7 +6187,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dly+"
+                                                    "title": "Delay+"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -6195,8 +6195,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_2_comb_plus_delay",
-                                                    "tooltip": "VFilter 3 Comb plus delay (Ms)",
+                                                    "control-tag": "filter_2_comb+_delay",
+                                                    "tooltip": "Filter 3 Comb+ delay (Ms)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -6223,8 +6223,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_2_state_var_frequency",
-                                                    "tooltip": "VFilter 3 State var frequency (Hz)",
+                                                    "control-tag": "filter_2_state_variable_frequency",
+                                                    "tooltip": "Filter 3 State variable frequency (Hz)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -6247,8 +6247,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_2_state_var_frequency",
-                                                    "tooltip": "VFilter 3 State var frequency (Hz)",
+                                                    "control-tag": "filter_2_state_variable_frequency",
+                                                    "tooltip": "Filter 3 State variable frequency (Hz)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -6275,8 +6275,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_2_comb_plus_gain",
-                                                    "tooltip": "VFilter 3 Comb plus gain",
+                                                    "control-tag": "filter_2_comb+_gain",
+                                                    "tooltip": "Filter 3 Comb+ gain (%)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -6291,7 +6291,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Gn+"
+                                                    "title": "Gain+"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -6299,8 +6299,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_2_comb_plus_gain",
-                                                    "tooltip": "VFilter 3 Comb plus gain",
+                                                    "control-tag": "filter_2_comb+_gain",
+                                                    "tooltip": "Filter 3 Comb+ gain (%)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -6327,8 +6327,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_2_state_var_resonance",
-                                                    "tooltip": "VFilter 3 State var resonance (%)",
+                                                    "control-tag": "filter_2_state_variable_resonance",
+                                                    "tooltip": "Filter 3 State variable resonance (%)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -6351,8 +6351,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_2_state_var_resonance",
-                                                    "tooltip": "VFilter 3 State var resonance (%)",
+                                                    "control-tag": "filter_2_state_variable_resonance",
+                                                    "tooltip": "Filter 3 State variable resonance (%)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -6379,8 +6379,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_2_comb_min_delay",
-                                                    "tooltip": "VFilter 3 Comb min delay (Ms)",
+                                                    "control-tag": "filter_2_comb-_delay",
+                                                    "tooltip": "Filter 3 Comb- delay (Ms)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -6395,7 +6395,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dly-"
+                                                    "title": "Delay-"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -6403,8 +6403,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_2_comb_min_delay",
-                                                    "tooltip": "VFilter 3 Comb min delay (Ms)",
+                                                    "control-tag": "filter_2_comb-_delay",
+                                                    "tooltip": "Filter 3 Comb- delay (Ms)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -6431,8 +6431,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_2_state_var_keyboard_tracking",
-                                                    "tooltip": "VFilter 3 State var keyboard tracking",
+                                                    "control-tag": "filter_2_state_variable_keyboard_tracking",
+                                                    "tooltip": "Filter 3 State variable keyboard tracking",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -6455,8 +6455,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_2_state_var_keyboard_tracking",
-                                                    "tooltip": "VFilter 3 State var keyboard tracking",
+                                                    "control-tag": "filter_2_state_variable_keyboard_tracking",
+                                                    "tooltip": "Filter 3 State variable keyboard tracking",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -6483,8 +6483,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "voice_filter_2_comb_min_gain",
-                                                    "tooltip": "VFilter 3 Comb min gain",
+                                                    "control-tag": "filter_2_comb-_gain",
+                                                    "tooltip": "Filter 3 Comb- gain (%)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -6499,7 +6499,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Gn-"
+                                                    "title": "Gain-"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -6507,8 +6507,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "44, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "voice_filter_2_comb_min_gain",
-                                                    "tooltip": "VFilter 3 Comb min gain",
+                                                    "control-tag": "filter_2_comb-_gain",
+                                                    "tooltip": "Filter 3 Comb- gain (%)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -12754,7 +12754,7 @@
                                                                     "text-alignment": "left",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_82EAE0FF",
-                                                                    "title": "Total cpu"
+                                                                    "title": "Total CPU"
                                                                 }
                                                             },
                                                             "CTextEdit": {
@@ -12763,7 +12763,7 @@
                                                                     "size": "52, 21",
                                                                     "origin": "58, 0",
                                                                     "control-tag": "output_0_total_cpu",
-                                                                    "tooltip": "Out Total cpu (%)",
+                                                                    "tooltip": "Out Total CPU (%)",
                                                                     "style-no-frame": "true",
                                                                     "style-round-rect": "true",
                                                                     "text-alignment": "left",
@@ -12794,7 +12794,7 @@
                                                                     "text-alignment": "left",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_82EAE0FF",
-                                                                    "title": "Osc cpu"
+                                                                    "title": "Osc CPU"
                                                                 }
                                                             },
                                                             "CTextEdit": {
@@ -12803,7 +12803,7 @@
                                                                     "size": "52, 21",
                                                                     "origin": "58, 0",
                                                                     "control-tag": "output_0_osc_cpu",
-                                                                    "tooltip": "Out Osc cpu (%)",
+                                                                    "tooltip": "Out Osc CPU (%)",
                                                                     "style-no-frame": "true",
                                                                     "style-round-rect": "true",
                                                                     "text-alignment": "left",
@@ -12834,7 +12834,7 @@
                                                                     "text-alignment": "left",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_82EAE0FF",
-                                                                    "title": "LFO cpu"
+                                                                    "title": "LFO CPU"
                                                                 }
                                                             },
                                                             "CTextEdit": {
@@ -12843,7 +12843,7 @@
                                                                     "size": "52, 21",
                                                                     "origin": "58, 0",
                                                                     "control-tag": "output_0_lfo_cpu",
-                                                                    "tooltip": "Out LFO cpu (%)",
+                                                                    "tooltip": "Out LFO CPU (%)",
                                                                     "style-no-frame": "true",
                                                                     "style-round-rect": "true",
                                                                     "text-alignment": "left",
@@ -12874,7 +12874,7 @@
                                                                     "text-alignment": "left",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_82EAE0FF",
-                                                                    "title": "VFlt cpu"
+                                                                    "title": "Filter CPU"
                                                                 }
                                                             },
                                                             "CTextEdit": {
@@ -12882,8 +12882,8 @@
                                                                     "class": "CTextEdit",
                                                                     "size": "52, 21",
                                                                     "origin": "58, 0",
-                                                                    "control-tag": "output_0_voice_filter_cpu",
-                                                                    "tooltip": "Out Voice filter cpu (%)",
+                                                                    "control-tag": "output_0_filter_cpu",
+                                                                    "tooltip": "Out Filter CPU (%)",
                                                                     "style-no-frame": "true",
                                                                     "style-round-rect": "true",
                                                                     "text-alignment": "left",
@@ -12914,7 +12914,7 @@
                                                                     "text-alignment": "left",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_82EAE0FF",
-                                                                    "title": "Env cpu"
+                                                                    "title": "Env CPU"
                                                                 }
                                                             },
                                                             "CTextEdit": {
@@ -12923,7 +12923,7 @@
                                                                     "size": "52, 21",
                                                                     "origin": "58, 0",
                                                                     "control-tag": "output_0_envelope_cpu",
-                                                                    "tooltip": "Out Envelope cpu (%)",
+                                                                    "tooltip": "Out Envelope CPU (%)",
                                                                     "style-no-frame": "true",
                                                                     "style-round-rect": "true",
                                                                     "text-alignment": "left",
@@ -12954,7 +12954,7 @@
                                                                     "text-alignment": "left",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_82EAE0FF",
-                                                                    "title": "Amp cpu"
+                                                                    "title": "Amp CPU"
                                                                 }
                                                             },
                                                             "CTextEdit": {
@@ -12963,7 +12963,7 @@
                                                                     "size": "52, 21",
                                                                     "origin": "58, 0",
                                                                     "control-tag": "output_0_voice_amp_cpu",
-                                                                    "tooltip": "Out Voice amp cpu (%)",
+                                                                    "tooltip": "Out Voice amp CPU (%)",
                                                                     "style-no-frame": "true",
                                                                     "style-round-rect": "true",
                                                                     "text-alignment": "left",
@@ -12994,7 +12994,7 @@
                                                                     "text-alignment": "left",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_82EAE0FF",
-                                                                    "title": "Audio cpu"
+                                                                    "title": "Audio CPU"
                                                                 }
                                                             },
                                                             "CTextEdit": {
@@ -13003,7 +13003,7 @@
                                                                     "size": "52, 21",
                                                                     "origin": "58, 0",
                                                                     "control-tag": "output_0_audio_route_cpu",
-                                                                    "tooltip": "Out Audio route cpu (%)",
+                                                                    "tooltip": "Out Audio route CPU (%)",
                                                                     "style-no-frame": "true",
                                                                     "style-round-rect": "true",
                                                                     "text-alignment": "left",
@@ -13034,7 +13034,7 @@
                                                                     "text-alignment": "left",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_82EAE0FF",
-                                                                    "title": "CV cpu"
+                                                                    "title": "CV CPU"
                                                                 }
                                                             },
                                                             "CTextEdit": {
@@ -13043,7 +13043,7 @@
                                                                     "size": "52, 21",
                                                                     "origin": "58, 0",
                                                                     "control-tag": "output_0_cv_route_cpu",
-                                                                    "tooltip": "Out Cv route cpu (%)",
+                                                                    "tooltip": "Out CV route CPU (%)",
                                                                     "style-no-frame": "true",
                                                                     "style-round-rect": "true",
                                                                     "text-alignment": "left",
@@ -13074,7 +13074,7 @@
                                                                     "text-alignment": "left",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_82EAE0FF",
-                                                                    "title": "Aux cpu"
+                                                                    "title": "Aux CPU"
                                                                 }
                                                             },
                                                             "CTextEdit": {
@@ -13083,7 +13083,7 @@
                                                                     "size": "52, 21",
                                                                     "origin": "58, 0",
                                                                     "control-tag": "output_0_auxiliary_cpu",
-                                                                    "tooltip": "Out Auxiliary cpu (%)",
+                                                                    "tooltip": "Out Auxiliary CPU (%)",
                                                                     "style-no-frame": "true",
                                                                     "style-round-rect": "true",
                                                                     "text-alignment": "left",

@@ -8,9 +8,9 @@ namespace svn::synth {
 // ---- active ----  
  
 static std::vector<std::wstring> const active_lfo_names = list_names(L"LFO", lfo_count);
+static std::vector<std::wstring> const active_filter_names = list_names(L"Filter", filter_count);
 static std::vector<std::wstring> const active_envelope_names = list_names(L"Env", envelope_count);
 static std::vector<std::wstring> const active_oscillator_names = list_names(L"Osc", oscillator_count);
-static std::vector<std::wstring> const active_filter_names = list_names(L"Filter", voice_filter_count);
  
 static param_descriptor const
 active_params[active_param::count] =
@@ -29,15 +29,15 @@ output_params[output_param::count] =
   { "{A6024C5F-CF37-48C8-BE5B-713191155AE5}", { L"Clip", L"Clip" }, false, { false, false, 0, 0, nullptr, 0 } },
   { "{8363D40B-6D49-4CF0-8D86-5449997034DE}", { L"Drain", L"Voices exhausted" }, false, { false, false, 1, 0, nullptr, 0 } },
   { "{6190497F-E08C-49DC-8C74-BAEF6D889BCB}", { L"Voices", L"Voice count" }, L"", false, 0, synth_polyphony, 0, { false, false, 2, 0, nullptr, 0 } },
-  { "{485325E3-3E15-46C4-84FA-5D743BB75C3A}", { L"Total cpu", L"Total cpu" }, L"%", false, 0, 100, 0, { false, true, 3, 1, nullptr, 0 } },
-  { "{1A5EA805-8678-4B9F-A03F-92E1A9D3C519}", { L"Osc cpu", L"Osc cpu" }, L"%", false, 0, 100, 0, { false, true, 4, 1, nullptr, 0 } },
-  { "{C39636DA-EBF5-4AA5-AFBB-BBCD5762D979}", { L"LFO cpu", L"LFO cpu" }, L"%", false, 0, 100, 0, { false, true, 5, 1, nullptr, 0 } },
-  { "{C3FBB5D7-E5EA-4EEB-9795-22298F7380B9}", { L"VFlt cpu", L"Voice filter cpu" }, L"%", false, 0, 100, 0, { false, true, 6, 1, nullptr, 0 } },
-  { "{0DF43E23-9273-46BC-8BBE-52B2C0E612F7}", { L"Env cpu", L"Envelope cpu" }, L"%", false, 0, 100, 0, { false, true, 7, 1, nullptr, 0 } },
-  { "{DC142F66-E4B2-4BEA-8B2E-A9501B32B1FB}", { L"Amp cpu", L"Voice amp cpu" }, L"%", false, 0, 100, 0, { false, true, 8, 1, nullptr, 0 } },
-  { "{295F92F6-37CD-453E-B8C2-E03B6648A1E4}", { L"Audio cpu", L"Audio route cpu" }, L"%", false, 0, 100, 0, { false, true, 9, 1, nullptr, 0 } },
-  { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"CV cpu", L"Cv route cpu" }, L"%", false, 0, 100, 0, { false, true, 10, 1, nullptr, 0 } },
-  { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"Aux cpu", L"Auxiliary cpu" }, L"%", false, 0, 100, 0, { false, true, 11, 1, nullptr, 0 } }
+  { "{485325E3-3E15-46C4-84FA-5D743BB75C3A}", { L"Total CPU", L"Total CPU" }, L"%", false, 0, 100, 0, { false, true, 3, 1, nullptr, 0 } },
+  { "{1A5EA805-8678-4B9F-A03F-92E1A9D3C519}", { L"Osc CPU", L"Osc CPU" }, L"%", false, 0, 100, 0, { false, true, 4, 1, nullptr, 0 } },
+  { "{C39636DA-EBF5-4AA5-AFBB-BBCD5762D979}", { L"LFO CPU", L"LFO CPU" }, L"%", false, 0, 100, 0, { false, true, 5, 1, nullptr, 0 } },
+  { "{C3FBB5D7-E5EA-4EEB-9795-22298F7380B9}", { L"Filter CPU", L"Filter CPU" }, L"%", false, 0, 100, 0, { false, true, 6, 1, nullptr, 0 } },
+  { "{0DF43E23-9273-46BC-8BBE-52B2C0E612F7}", { L"Env CPU", L"Envelope CPU" }, L"%", false, 0, 100, 0, { false, true, 7, 1, nullptr, 0 } },
+  { "{DC142F66-E4B2-4BEA-8B2E-A9501B32B1FB}", { L"Amp CPU", L"Voice amp CPU" }, L"%", false, 0, 100, 0, { false, true, 8, 1, nullptr, 0 } },
+  { "{295F92F6-37CD-453E-B8C2-E03B6648A1E4}", { L"Audio CPU", L"Audio route CPU" }, L"%", false, 0, 100, 0, { false, true, 9, 1, nullptr, 0 } },
+  { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"CV CPU", L"CV route CPU" }, L"%", false, 0, 100, 0, { false, true, 10, 1, nullptr, 0 } },
+  { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"Aux CPU", L"Auxiliary CPU" }, L"%", false, 0, 100, 0, { false, true, 11, 1, nullptr, 0 } }
 };
 
 // ---- amp ---- 
@@ -113,27 +113,27 @@ envelope_params[envelope_param::count] =
   { "{4E2A6D8B-275C-4E1E-84BE-B21FE16E1E0F}", { L"Mid", L"Release log midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { false, false, 14, 1, envelope_release_log_relevance, 1 } }
 }; 
   
-// ---- voice filter ---- 
+// ---- filter ---- 
 
-static std::vector<std::wstring> const voice_filter_types = { L"StVar", L"Comb" };
-static std::vector<std::wstring> const voice_filter_stvar_types = { L"LPF", L"HPF", L"BPF", L"BSF", L"APF" };
-static graph_descriptor const voice_filter_graph = { -1, 0, 2, 1, 1, L"Impulse response" };
-static param_relevance const vfilter_comb_relevance[1] = { { voice_filter_param::type, { voice_filter_type::comb } } };
-static param_relevance const vfilter_stvar_relevance[1] = { { voice_filter_param::type, { voice_filter_type::state_var } } };
-  
-static param_descriptor const
-voice_filter_params[voice_filter_param::count] =
+static std::vector<std::wstring> const filter_types = { L"StateVar", L"Comb" };
+static std::vector<std::wstring> const filter_state_var_types = { L"LPF", L"HPF", L"BPF", L"BSF", L"APF" };
+static graph_descriptor const filter_graph = { -1, 0, 2, 1, 1, L"Impulse response" };
+static param_relevance const filter_comb_relevance[1] = { { filter_param::type, { filter_type::comb } } };
+static param_relevance const filter_state_var_relevance[1] = { { filter_param::type, { filter_type::state_var } } };
+   
+static param_descriptor const  
+filter_params[filter_param::count] =
 {  
   { "{5813593C-E25A-4C8B-B7E5-7C95DAC257C2}", { L"On", L"Enabled" }, false, { false, false, -1, 0, {}, {}}},
-  { "{956F08A1-B3C6-412B-AEEA-55E722744AE8}", { L"Type", L"Type" }, L"", false, &voice_filter_types, 0, { false, false, 0, 2, nullptr, 0 } },
-  { "{7498AB5E-4BE6-45B0-8CBF-8D166FF82E32}", { L"Stvr", L"State var type" }, L"", false, &voice_filter_stvar_types, 0, { false, false, 1, 2, vfilter_stvar_relevance, 1 } },
-  { "{99F7D808-53EB-4A4F-9FBF-4F1F57E4B742}", { L"Freq", L"State var frequency" }, L"Hz", { 0.25f, 0, real_bounds::quadratic(filter_min_freq, filter_max_freq), real_bounds::quadratic(filter_min_freq, filter_max_freq) }, { false, false, 2, 2, vfilter_stvar_relevance, 1 } },
-  { "{AA394A33-B616-4EAF-830D-313F2FE316AF}", { L"Res", L"State var resonance" }, L"%", { 0.0f, 2, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f) }, { false, false, 3, 2, vfilter_stvar_relevance, 1 } },
-  { "{BF8775C6-FD22-4653-BC21-64CDC8D24AFF}", { L"Kbd", L"State var keyboard tracking" }, L"", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-1.0f, 1.0f) }, { false, false, 4, 2, vfilter_stvar_relevance, 1 } },
-  { "{36AA381A-82F4-4259-9D87-431B8C49EAB4}", { L"Dly+", L"Comb plus delay" }, L"Ms", { 0.5f, 2, real_bounds::linear(0.0f, 0.005f), real_bounds::linear(0.0f, 5.0f) }, { false, false, 1, 2, vfilter_comb_relevance, 1 } },
-  { "{9B330083-CF9C-4161-9A66-74AF468EF521}", { L"Gn+", L"Comb plus gain" }, L"", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-1.0f, 1.0f) }, { false, false, 2, 2, vfilter_comb_relevance, 1 } },
-  { "{25A32954-6975-4591-87B0-F0718206E965}", { L"Dly-", L"Comb min delay" }, L"Ms", { 0.5f, 2, real_bounds::linear(0.0f, 0.005f), real_bounds::linear(0.0f, 5.0f) }, { false, false, 3, 2, vfilter_comb_relevance, 1 } },
-  { "{E67FACFD-E13D-4618-85B6-5FED1E3761F3}", { L"Gn-", L"Comb min gain" }, L"", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-1.0f, 1.0f) }, { false, false, 4, 2, vfilter_comb_relevance, 1 } }
+  { "{956F08A1-B3C6-412B-AEEA-55E722744AE8}", { L"Type", L"Type" }, L"", false, &filter_types, 0, { false, false, 0, 2, nullptr, 0 } },
+  { "{7498AB5E-4BE6-45B0-8CBF-8D166FF82E32}", { L"StVar", L"State variable type" }, L"", false, &filter_state_var_types, 0, { false, false, 1, 2, filter_state_var_relevance, 1 } },
+  { "{99F7D808-53EB-4A4F-9FBF-4F1F57E4B742}", { L"Freq", L"State variable frequency" }, L"Hz", { 0.25f, 0, real_bounds::quadratic(filter_min_freq, filter_max_freq), real_bounds::quadratic(filter_min_freq, filter_max_freq) }, { false, false, 2, 2, filter_state_var_relevance, 1 } },
+  { "{AA394A33-B616-4EAF-830D-313F2FE316AF}", { L"Res", L"State variable resonance" }, L"%", { 0.0f, 2, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f) }, { false, false, 3, 2, filter_state_var_relevance, 1 } },
+  { "{BF8775C6-FD22-4653-BC21-64CDC8D24AFF}", { L"Kbd", L"State variable keyboard tracking" }, L"", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-1.0f, 1.0f) }, { false, false, 4, 2, filter_state_var_relevance, 1 } },
+  { "{36AA381A-82F4-4259-9D87-431B8C49EAB4}", { L"Delay+", L"Comb+ delay" }, L"Ms", { 0.5f, 2, real_bounds::linear(0.0f, 0.005f), real_bounds::linear(0.0f, 5.0f) }, { false, false, 1, 2, filter_comb_relevance, 1 } },
+  { "{9B330083-CF9C-4161-9A66-74AF468EF521}", { L"Gain+", L"Comb+ gain" }, L"%", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, false, 2, 2, filter_comb_relevance, 1 } },
+  { "{25A32954-6975-4591-87B0-F0718206E965}", { L"Delay-", L"Comb- delay" }, L"Ms", { 0.5f, 2, real_bounds::linear(0.0f, 0.005f), real_bounds::linear(0.0f, 5.0f) }, { false, false, 3, 2, filter_comb_relevance, 1 } },
+  { "{E67FACFD-E13D-4618-85B6-5FED1E3761F3}", { L"Gain-", L"Comb- gain" }, L"%", { 0.5f, 2, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, false, 4, 2, filter_comb_relevance, 1 } }
 };
  
 // ---- oscillator ----
@@ -179,8 +179,8 @@ oscillator_params[oscillator_param::count] =
   
 // ---- audio route ---- 
  
-static wchar_t const* const audio_input_names[audio_route_input::count] = { L"Off", L"Osc", L"VFlt" }; 
-static wchar_t const* const audio_output_names[audio_route_output::count] = { L"Off", L"VFlt", L"Amp" };
+static wchar_t const* const audio_input_names[audio_route_input::count] = { L"Off", L"Osc", L"Filter" }; 
+static wchar_t const* const audio_output_names[audio_route_output::count] = { L"Off", L"Filter", L"Amp" };
 static std::vector<std::wstring> const audio_input_names_list = multi_list_names(audio_input_names, audio_input_counts, audio_route_input::count);
 static std::vector<std::wstring> const audio_output_names_list = multi_list_names(audio_output_names, audio_output_counts, audio_route_output::count);
 
@@ -222,11 +222,11 @@ static graph_descriptor const cv_route_graph = { -1, 0, 1, 2, 2, L"CV" };
 static wchar_t const* const cv_input_names[cv_route_input::count] = { L"Off", L"Env", L"LFO" };
 static wchar_t const* const cv_input_op_name[cv_route_input_op::count] = { L"Add", L"Mul" };
 static wchar_t const* const* const cv_input_op_names[cv_route_input::count] = { nullptr, cv_input_op_name, cv_input_op_name };
-static wchar_t const* const cv_output_names[cv_route_output::count] = { L"Off", L"Osc", L"VFlt", L"Amp" };
+static wchar_t const* const cv_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Filter", L"Amp" };
 static wchar_t const* const cv_vamp_output_names[cv_route_vamp_output::count] = { L"Lvl", L"Pan" };
-static wchar_t const* const cv_vflt_output_names[cv_route_vflt_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
+static wchar_t const* const cv_filter_output_names[cv_route_filter_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
 static wchar_t const* const cv_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"Pw", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
-static wchar_t const* const* const cv_output_target_names[cv_route_output::count] = { nullptr, cv_osc_output_names, cv_vflt_output_names, cv_vamp_output_names };
+static wchar_t const* const* const cv_output_target_names[cv_route_output::count] = { nullptr, cv_osc_output_names, cv_filter_output_names, cv_vamp_output_names };
 static std::vector<std::wstring> const cv_input_names_list = zip_list_names(cv_input_names, cv_input_counts, cv_input_op_names, cv_input_op_counts, cv_route_input::count);
 static std::vector<std::wstring> const cv_output_names_list = zip_list_names(cv_output_names, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count);
     
@@ -291,7 +291,7 @@ part_descriptors[part_type::count] =
   { "{FC4885FE-431C-477A-B5B7-84863DB8C07D}", { L"Env", L"Envelope" }, part_type::envelope, false, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 2, 3, 0, active_param::envelope, L"Voice" } },
   { "{56DE75BB-BE73-4B27-B37F-77F6E408F986}", { L"LFO", L"LFO" }, part_type::lfo, false, false, lfo_count, lfo_params, lfo_param::count, &lfo_graph, 1, { 3, 3, 0, active_param::lfo, L"Voice" } },
   { "{E6344937-C1F7-4F2A-83E7-EA27D48DEC4E}", { L"Amp", L"Voice amp" }, part_type::voice_amp, false, false, 1, voice_amp_params, voice_amp_param::count, nullptr, 0, { 4, 3, -1, -1, L"Voice" } },
-  { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"VFilter", L"Voice filter" }, part_type::voice_filter, false, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 1, 3, 0, active_param::filter, L"Voice" } },
+  { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"Filter", L"Filter" }, part_type::filter, false, false, filter_count, filter_params, filter_param::count, &filter_graph, 1, { 1, 3, 0, active_param::filter, L"Voice" } },
   { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 6, 3, -1, -1, L"Route" } },
   { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, false, 1, cv_route_params, cv_route_param::count, &cv_route_graph, 1, { 7, 3, -1, -1, L"Route" } },
   { "{C972E264-1739-4DB6-B1DB-5D31057BD218}", { L"Active", L"Active" }, part_type::active, false, true, 1, active_params, active_param::count, nullptr, -1, part_no_ui },

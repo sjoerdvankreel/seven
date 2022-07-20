@@ -87,12 +87,12 @@ public:
   void dsp_to_plot(base::param_value const* state, std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) override;
 };
 
-class voice_filter_ir_graph:
+class filter_ir_graph:
 public svn::base::graph_processor<base::audio_sample32>
 {
   std::vector<base::audio_sample32> _audio_in;
 public:
-  voice_filter_ir_graph(topology_info const* topology, std::int32_t part_index) :
+  filter_ir_graph(topology_info const* topology, std::int32_t part_index) :
   svn::base::graph_processor<base::audio_sample32>(topology, part_index), _audio_in() {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;

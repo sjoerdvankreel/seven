@@ -16,8 +16,8 @@ _topology(topology), _velocity(velocity), _amp(sample_rate)
   assert(topology != nullptr);  
   assert(0 <= midi_note && midi_note < 128);
   assert(0.0f <= velocity && velocity <= 1.0f);
-  for(std::int32_t i = 0; i < voice_filter_count; i++)
-    new(&_filters[i]) voice_filter(sample_rate, midi_note);
+  for(std::int32_t i = 0; i < filter_count; i++)
+    new(&_filters[i]) filter(sample_rate, midi_note);
   _lfos.fill(lfo(sample_rate));
   _envelopes.fill(envelope(sample_rate));
   _oscillators.fill(oscillator(sample_rate, midi_note));
@@ -49,15 +49,15 @@ synth_voice::process_block(voice_input const& input, cv_state& cv,
     usage.osc += _oscillators[i].process_block(input, i, cv, audio.oscillator[i].data(), usage.cv);
 
   // Clear filter output in case user selected weird routing (i.e. filter 3 to filter 2).
-  for (std::int32_t i = 0; i < voice_filter_count; i++)
-    std::memset(audio.voice_filter[i].data(), 0, input.sample_count * sizeof(base::audio_sample32));
+  for (std::int32_t i = 0; i < filter_count; i++)
+    std::memset(audio.filter[i].data(), 0, input.sample_count * sizeof(base::audio_sample32));
 
   // Run filters.
-  for (std::int32_t i = 0; i < voice_filter_count; i++)
+  for (std::int32_t i = 0; i < filter_count; i++)
   {
     base::audio_sample32 const* audio_in;
     usage.audio += audio.mix(input, audio_route_output::filter, i, audio_in);
-    usage.vfilter += _filters[i].process_block(input, i, audio_in, audio.voice_filter[i].data());
+    usage.filter += _filters[i].process_block(input, i, audio_in, audio.filter[i].data());
   }
 
   // Run amp section.
