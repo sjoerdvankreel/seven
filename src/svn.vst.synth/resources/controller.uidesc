@@ -696,7 +696,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "1",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -748,7 +748,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "0",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -1046,7 +1046,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "4",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -1202,7 +1202,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "0",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -1306,7 +1306,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "1",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -1358,7 +1358,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "0",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -1742,7 +1742,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "1",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -1794,7 +1794,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "0",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -2092,7 +2092,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "4",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -2248,7 +2248,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "0",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -2352,7 +2352,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "1",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -2404,7 +2404,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "0",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -2788,7 +2788,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "1",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -2840,7 +2840,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "0",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -3138,7 +3138,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "4",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -3294,7 +3294,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "0",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -3398,7 +3398,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "1",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -3450,7 +3450,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "0",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -3834,7 +3834,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "1",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -3886,7 +3886,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "0",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -4184,7 +4184,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "4",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -4340,7 +4340,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "0",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -4444,7 +4444,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "1",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -4496,7 +4496,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "0",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_B7C3FDFF"
                                                 }
@@ -7192,7 +7192,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "1",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_A2D2F1FF"
                                                 }
@@ -8548,7 +8548,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "1",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_A2D2F1FF"
                                                 }
@@ -9904,7 +9904,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "value-precision": "1",
+                                                    "value-precision": "2",
                                                     "back-color": "color_00000020",
                                                     "font-color": "color_A2D2F1FF"
                                                 }
@@ -12213,7 +12213,7 @@
                                                                     "font": "~ NormalFontSmall",
                                                                     "text-inset": "3, 0",
                                                                     "round-rect-radius": "3",
-                                                                    "value-precision": "1",
+                                                                    "value-precision": "2",
                                                                     "back-color": "color_00000020",
                                                                     "font-color": "color_8DE2E6FF"
                                                                 }
@@ -12317,7 +12317,7 @@
                                                                     "font": "~ NormalFontSmall",
                                                                     "text-inset": "3, 0",
                                                                     "round-rect-radius": "3",
-                                                                    "value-precision": "0",
+                                                                    "value-precision": "2",
                                                                     "back-color": "color_00000020",
                                                                     "font-color": "color_8DE2E6FF"
                                                                 }
