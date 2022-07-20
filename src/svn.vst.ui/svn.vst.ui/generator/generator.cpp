@@ -314,7 +314,7 @@ build_ui_part_graph(
   Value result(kObjectType);
   auto const& graph = part.graphs[index];
   auto const& part_desc = topology.parts[part.runtime_part_index];
-
+   
   std::int32_t width = graph.column_span * param_total_width - padding_param_group;
   std::int32_t left = graph.column * param_total_width + 2 * padding_param_group;
   std::int32_t top = graph.row * (param_row_height + margin) + 2 * padding_param_group;

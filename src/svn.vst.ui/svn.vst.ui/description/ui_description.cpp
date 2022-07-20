@@ -49,7 +49,7 @@ part_ui_description::create(
   result.columns = part.descriptor->ui.param_columns;
   result.rows = result.occupied_cell_count / result.columns;
   if (result.occupied_cell_count % result.columns != 0) ++result.rows;
-  result.width = result.columns * param_total_width;
+  result.width = result.columns * param_total_width + margin;
   result.height = (result.rows + 1) * (param_row_height + margin) + padding_param_group * 4;
 
   result.enabled_param.row = 0;
