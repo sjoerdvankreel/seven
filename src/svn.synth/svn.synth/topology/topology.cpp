@@ -80,37 +80,37 @@ static std::vector<float> const env_timesig_values = beat_synced_timesig_values(
 
 static graph_descriptor const envelope_graph = { -1, 0, 2, 3, 1, L"Envelope" };
 static std::vector<std::wstring> const envelope_types = { L"DAHDSR", L"DAHDR" };
-static std::vector<std::wstring> const envelope_slopes = { L"Linear", L"Logarithmic", L"Quadratic", L"Inverted" };
+static std::vector<std::wstring> const envelope_slopes = { L"Linear", L"Log", L"Quadratic", L"Inverted" };
 static param_relevance const envelope_time_relevance[1] = { { envelope_param::synced, { 0 } } };
 static param_relevance const envelope_sync_relevance[1] = { { envelope_param::synced, { 1 } } };
 static param_relevance const envelope_decay_log_relevance[1] = { { envelope_param::decay_slope, { envelope_slope::logarithmic } } };
 static param_relevance const envelope_attack_log_relevance[1] = { { envelope_param::attack_slope, { envelope_slope::logarithmic } } };
 static param_relevance const envelope_release_log_relevance[1] = { { envelope_param::release_slope, { envelope_slope::logarithmic } } };
 
-static param_descriptor const
+static param_descriptor const 
 envelope_params[envelope_param::count] =  
 {  
   { "{FC3CE4BC-D8F0-487E-9BB6-826988B4B812}", { L"On", L"Enabled" }, false, { false, false, -1, 0, {}, {}}},
   { "{D622D344-A08E-4109-84D8-C310B81C2769}", { L"Type", L"Type" }, L"", false, &envelope_types, { false, false, 0, 0, nullptr, 0}},
-  { "{2D8C38A2-99AD-4080-8262-26D24F7644F0}", { L"Bipolar", L"Bipolar" }, false, { false, false, 1, 0, nullptr, 0 } },
-  { "{82B2C892-1A12-4FDC-A26D-7733C3C3B782}", { L"Sync", L"Sync to beat" }, false, { false, false, 2, 0, nullptr, 0 } },
-  { "{B1D30C73-FF09-452C-A9D5-00BB8B2CE58D}", { L"Delay", L"Delay time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 3, 2, envelope_time_relevance, 1 } },
-  { "{70C49337-7141-42BC-B336-78B28F4770E3}", { L"Delay", L"Delay sync" }, L"", true, &env_timesig_names, { false, false, 3, 2, envelope_sync_relevance, 1}},
-  { "{AADD118E-B9CE-464E-83C0-1FAE5A62F530}", { L"Hold", L"Hold time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 4, 2, envelope_time_relevance, 1 } },
-  { "{AC5D88B7-8CDB-4401-9FB0-20EF0195ABD8}", { L"Hold", L"Hold sync" }, L"", true, &env_timesig_names, { false, false, 4, 2, envelope_sync_relevance, 1 } },
-  { "{721AFEB5-A17E-4C37-BF3A-94F645234B73}", { L"Sustain", L"Sustain level" }, L"dB", { 0.5f, 1, real_bounds::unit(), real_bounds::decibel() }, { false, false, 5, 2, nullptr, 0 } },
+  { "{2D8C38A2-99AD-4080-8262-26D24F7644F0}", { L"Bipolar", L"Bipolar" }, false, { false, false, 4, 0, nullptr, 0 } },
+  { "{82B2C892-1A12-4FDC-A26D-7733C3C3B782}", { L"Sync", L"Sync to beat" }, false, { false, false, 5, 0, nullptr, 0 } },
+  { "{B1D30C73-FF09-452C-A9D5-00BB8B2CE58D}", { L"Delay", L"Delay time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 1, 2, envelope_time_relevance, 1 } },
+  { "{70C49337-7141-42BC-B336-78B28F4770E3}", { L"Delay", L"Delay sync" }, L"", true, &env_timesig_names, { false, false, 1, 2, envelope_sync_relevance, 1}},
+  { "{AADD118E-B9CE-464E-83C0-1FAE5A62F530}", { L"Hold", L"Hold time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 24, 2, envelope_time_relevance, 1 } },
+  { "{AC5D88B7-8CDB-4401-9FB0-20EF0195ABD8}", { L"Hold", L"Hold sync" }, L"", true, &env_timesig_names, { false, false, 2, 2, envelope_sync_relevance, 1 } },
+  { "{721AFEB5-A17E-4C37-BF3A-94F645234B73}", { L"Sustain", L"Sustain level" }, L"dB", { 0.5f, 1, real_bounds::unit(), real_bounds::decibel() }, { false, false, 3, 2, nullptr, 0 } },
   { "{E0A45A06-3C0C-4409-BBFA-A2834F0C7BAD}", { L"Attack", L"Attack time" }, L"Sec", { 0.05f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 6, 2, envelope_time_relevance, 1 } },
   { "{E0CFCBB7-B050-4C47-B78C-2511AD2EE6B6}", { L"Attack", L"Attack sync" }, L"", true, &env_timesig_names, { false, false, 6, 2, envelope_sync_relevance, 1 } },
   { "{1400CEB5-25B1-42B1-ADA1-B5FDF8C6D1E5}", { L"Slope", L"Attack slope" }, L"", false, &envelope_slopes, { false, false, 7, 1, nullptr, 0 } },
-  { "{5A57D560-64D2-44D5-BD78-82B7C4BEA79C}", { L"Midpoint", L"Attack log midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { false, false, 8, 1, envelope_attack_log_relevance, 1 } },
+  { "{5A57D560-64D2-44D5-BD78-82B7C4BEA79C}", { L"Mid", L"Attack log midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { false, false, 8, 1, envelope_attack_log_relevance, 1 } },
   { "{A62B5DB0-4D41-4DA4-AE14-E25A2C983B21}", { L"Decay", L"Decay time" }, L"Sec", { 0.1f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 9, 2, envelope_time_relevance, 1 } },
   { "{09B32681-21EF-4C65-B5FD-9FA64ED4AF5E}", { L"Decay", L"Decay sync" }, L"", true, &env_timesig_names, { false, false, 9, 2, envelope_sync_relevance, 1 } },
   { "{62381FB9-9060-4425-97A6-B57ECB2BECCA}", { L"Slope", L"Decay slope" }, L"", false, &envelope_slopes, { false, false, 10, 1, nullptr, 0 } },
-  { "{8B5D1F67-DA80-4170-982D-909CC8A025E2}", { L"Midpoint", L"Decay log midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { false, false, 11, 1, envelope_decay_log_relevance, 1 } },
-  { "{75ACC8A6-F228-445C-9788-A367AE32EAAA}", { L"Release", L"Release time" }, L"Sec", { 0.2f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 12, 2, envelope_time_relevance, 1 } },
-  { "{DDA55E4D-A100-40BA-A7C2-F4C284CACE08}", { L"Release", L"Release sync" }, L"", true, &env_timesig_names, { false, false, 12, 2, envelope_sync_relevance, 1 } },
+  { "{8B5D1F67-DA80-4170-982D-909CC8A025E2}", { L"Mid", L"Decay log midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { false, false, 11, 1, envelope_decay_log_relevance, 1 } },
+  { "{75ACC8A6-F228-445C-9788-A367AE32EAAA}", { L"Rel", L"Release time" }, L"Sec", { 0.2f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { false, false, 12, 2, envelope_time_relevance, 1 } },
+  { "{DDA55E4D-A100-40BA-A7C2-F4C284CACE08}", { L"Rel", L"Release sync" }, L"", true, &env_timesig_names, { false, false, 12, 2, envelope_sync_relevance, 1 } },
   { "{6B978A93-54D1-4990-BD2E-BC143EA816AF}", { L"Slope", L"Release slope" }, L"", false, &envelope_slopes, { false, false, 13, 1, nullptr, 0 } },
-  { "{4E2A6D8B-275C-4E1E-84BE-B21FE16E1E0F}", { L"Midpoint", L"Release log midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { false, false, 14, 1, envelope_release_log_relevance, 1 } }
+  { "{4E2A6D8B-275C-4E1E-84BE-B21FE16E1E0F}", { L"Mid", L"Release log midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { false, false, 14, 1, envelope_release_log_relevance, 1 } }
 }; 
   
 // ---- voice filter ---- 
