@@ -90,9 +90,9 @@ struct param_descriptor
    
   // List/knob list with item list.
   param_descriptor(std::string const& guid, item_name const& static_name, wchar_t const* unit, 
-  bool knob, std::vector<std::wstring> const* items, param_ui_descriptor const& ui) :
+  bool knob, std::vector<std::wstring> const* items, std::int32_t default_, param_ui_descriptor const& ui) :
   guid(guid), static_name(static_name), type(knob? param_type::knob_list: param_type::list),
-  unit(unit), discrete(discrete_descriptor(0, static_cast<std::int32_t>(items->size() - 1), 0, items)), ui(ui) {}
+  unit(unit), discrete(discrete_descriptor(0, static_cast<std::int32_t>(items->size() - 1), default_, items)), ui(ui) {}
 };
 
 } // namespace svn::base
