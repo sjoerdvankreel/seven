@@ -101,5 +101,20 @@ public:
   void dsp_to_plot(base::param_value const* state, std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) override;
 };
 
+class filter_fr_graph:
+public svn::base::graph_processor<base::audio_sample32>
+{
+  filter_ir_graph _ir;
+  std::vector<float> _mono;
+public:
+  filter_fr_graph(topology_info const* topology, std::int32_t part_index) :
+  svn::base::graph_processor<base::audio_sample32>(topology, part_index), _ir(topology, part_index), _mono() {}
+
+  bool needs_repaint(std::int32_t runtime_param) const override;
+  std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
+  void process_dsp_core(block_input const& input, base::audio_sample32* output, float sample_rate, float bpm) override;
+  void dsp_to_plot(base::param_value const* state, std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) override;
+};
+
 } // namespace svn::synth
 #endif // SVN_SYNTH_DSP_GRAPH_PROCESSOR_HPP

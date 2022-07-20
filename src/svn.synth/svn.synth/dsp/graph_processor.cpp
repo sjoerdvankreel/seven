@@ -28,7 +28,17 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
   case svn::synth::part_type::envelope:
     return new svn::synth::envelope_graph(topology, part_index);
   case svn::synth::part_type::filter:
-    return new svn::synth::filter_ir_graph(topology, part_index);
+    assert(0 <= part_index && part_index < svn::synth::filter_count);
+    switch (graph_type)
+    {
+    case svn::synth::filter_graph::impulse:
+      return new svn::synth::filter_ir_graph(topology, part_index);
+    case svn::synth::filter_graph::frequency:
+      return new svn::synth::filter_fr_graph(topology, part_index);
+    default:
+      assert(false);
+      return nullptr;
+    }
   case svn::synth::part_type::oscillator:
     assert(0 <= part_index && part_index < svn::synth::oscillator_count);
     switch (graph_type)
@@ -232,6 +242,35 @@ oscillator_wave_graph::process_dsp_core(
 }
 
 std::int32_t
+filter_fr_graph::sample_count(
+  param_value const* state, float sample_rate, float bpm) const
+{ return _ir.sample_count(state, sample_rate, bpm); }
+
+bool 
+filter_fr_graph::needs_repaint(std::int32_t runtime_param) const
+{ return _ir.needs_repaint(runtime_param); }
+
+void 
+filter_fr_graph::process_dsp_core(
+  block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
+{ return _ir.process_dsp_core(input, output, sample_rate, bpm); }
+
+void
+filter_fr_graph::dsp_to_plot(
+  param_value const* state, std::vector<audio_sample32> const& dsp, 
+  std::vector<float>& plot, float sample_rate, bool& bipolar)
+{
+  bipolar = false;
+  _mono.clear();
+  for(std::size_t s = 0; s < dsp.size(); s++)
+    _mono.push_back(dsp[s].mono());
+
+  float const* spectrum = spectrum_analyzer().analyze(_mono.data(), _mono.size(), sample_rate);
+  for(std::size_t i = 0; i < spectrum_analyzer::bucket_count; i++)
+    plot.push_back(spectrum[i]);
+}
+
+std::int32_t
 filter_ir_graph::sample_count(
   param_value const* state, float sample_rate, float bpm) const
 {
@@ -256,7 +295,7 @@ filter_ir_graph::dsp_to_plot(
   bipolar = true;
   for (std::size_t s = 0; s < dsp.size(); s++)
     plot.push_back(std::clamp((dsp[s].mono() + 1.0f) * 0.5f, 0.0f, 1.0f));
-}
+} 
 
 void 
 filter_ir_graph::process_dsp_core(
