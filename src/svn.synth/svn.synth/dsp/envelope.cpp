@@ -18,9 +18,9 @@ envelope::generate_slope(base::automation_view const& automation,
   std::int32_t slope = automation.get(slope_param, s).discrete;
   switch (slope)
   {
-  case envelope_slope::lin: return stage_pos;
-  case envelope_slope::sqrt: return sanity_unipolar(std::sqrt(stage_pos));
-  case envelope_slope::quad: return sanity_unipolar(stage_pos * stage_pos);
+  case envelope_slope::linear: return stage_pos;
+  case envelope_slope::inverted: return sanity_unipolar(std::sqrt(stage_pos));
+  case envelope_slope::quadratic: return sanity_unipolar(stage_pos * stage_pos);
   default:
     assert(slope == envelope_slope::log);
     break;
@@ -67,8 +67,7 @@ void
 envelope::setup_stages(automation_view const& automation, std::int32_t s,
   float bpm, float& delay, float& attack, float& hold, float& decay, float& release)
 {
-  std::int32_t kind = automation.get(envelope_param::kind, s).discrete;
-  if (!cv_kind_is_synced(kind))
+  if (automation.get(envelope_param::synced, s).discrete == 0)
   { 
     delay = automation.get(envelope_param::delay_time, s).real * _sample_rate;
     attack = automation.get(envelope_param::attack_time, s).real * _sample_rate;
@@ -97,12 +96,11 @@ envelope::process_block(voice_input const& input, std::int32_t index,
     cv_out[s] = { 0.0f, false };
     if(automation.get(envelope_param::on, s).discrete == 0) return s;
     float sustain = automation.get(envelope_param::sustain_level, s).real;
-    std::int32_t kind = automation.get(envelope_param::kind, s).discrete;
-    bool unipolar = cv_kind_is_unipolar(kind);
+    bool unipolar = automation.get(envelope_param::bipolar, s).discrete == 0;
     bool dahdsr = automation.get(envelope_param::type, s).discrete == envelope_type::dahdsr;
     setup_stages(automation, s, input.bpm, delay, attack, hold, decay, release);
     auto stage = generate_stage(automation, s, dahdsr, delay, attack, hold, decay, sustain, release);
-    if(cv_kind_is_unipolar(kind)) cv_out[s] = { sanity_unipolar(stage.second), false };
+    if(unipolar) cv_out[s] = { sanity_unipolar(stage.second), false };
     else cv_out[s] = { sanity_bipolar(stage.second * 2.0f - 1.0f), true };
     _end_sample = unipolar ? cv_sample({ 0.0f, false }) : cv_sample({ -1.0f, true });
     if(stage.first == envelope_stage::end) { _ended = true; cv_out[s] = _end_sample; continue; }

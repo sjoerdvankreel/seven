@@ -121,205 +121,208 @@
             "oscillator_3_unison_stereo_spread": "59",
             "envelope_0_enabled": "60",
             "envelope_0_type": "61",
-            "envelope_0_sync/polarity_kind": "62",
-            "envelope_0_delay_time": "63",
-            "envelope_0_delay_sync": "64",
-            "envelope_0_hold_time": "65",
-            "envelope_0_hold_sync": "66",
-            "envelope_0_sustain_level": "67",
-            "envelope_0_attack_time": "68",
-            "envelope_0_attack_sync": "69",
-            "envelope_0_attack_slope": "70",
-            "envelope_0_attack_log_midpoint": "71",
-            "envelope_0_decay_time": "72",
-            "envelope_0_decay_sync": "73",
-            "envelope_0_decay_slope": "74",
-            "envelope_0_decay_log_midpoint": "75",
-            "envelope_0_release_time": "76",
-            "envelope_0_release_sync": "77",
-            "envelope_0_release_slope": "78",
-            "envelope_0_release_log_midpoint": "79",
-            "envelope_1_enabled": "80",
-            "envelope_1_type": "81",
-            "envelope_1_sync/polarity_kind": "82",
-            "envelope_1_delay_time": "83",
-            "envelope_1_delay_sync": "84",
-            "envelope_1_hold_time": "85",
-            "envelope_1_hold_sync": "86",
-            "envelope_1_sustain_level": "87",
-            "envelope_1_attack_time": "88",
-            "envelope_1_attack_sync": "89",
-            "envelope_1_attack_slope": "90",
-            "envelope_1_attack_log_midpoint": "91",
-            "envelope_1_decay_time": "92",
-            "envelope_1_decay_sync": "93",
-            "envelope_1_decay_slope": "94",
-            "envelope_1_decay_log_midpoint": "95",
-            "envelope_1_release_time": "96",
-            "envelope_1_release_sync": "97",
-            "envelope_1_release_slope": "98",
-            "envelope_1_release_log_midpoint": "99",
-            "envelope_2_enabled": "100",
-            "envelope_2_type": "101",
-            "envelope_2_sync/polarity_kind": "102",
-            "envelope_2_delay_time": "103",
-            "envelope_2_delay_sync": "104",
-            "envelope_2_hold_time": "105",
-            "envelope_2_hold_sync": "106",
-            "envelope_2_sustain_level": "107",
-            "envelope_2_attack_time": "108",
-            "envelope_2_attack_sync": "109",
-            "envelope_2_attack_slope": "110",
-            "envelope_2_attack_log_midpoint": "111",
-            "envelope_2_decay_time": "112",
-            "envelope_2_decay_sync": "113",
-            "envelope_2_decay_slope": "114",
-            "envelope_2_decay_log_midpoint": "115",
-            "envelope_2_release_time": "116",
-            "envelope_2_release_sync": "117",
-            "envelope_2_release_slope": "118",
-            "envelope_2_release_log_midpoint": "119",
-            "lfo_0_enabled": "120",
-            "lfo_0_type": "121",
-            "lfo_0_bipolar": "122",
-            "lfo_0_sync_to_beat": "123",
-            "lfo_0_frequency": "124",
-            "lfo_0_tempo": "125",
-            "lfo_1_enabled": "126",
-            "lfo_1_type": "127",
-            "lfo_1_bipolar": "128",
-            "lfo_1_sync_to_beat": "129",
-            "lfo_1_frequency": "130",
-            "lfo_1_tempo": "131",
-            "lfo_2_enabled": "132",
-            "lfo_2_type": "133",
-            "lfo_2_bipolar": "134",
-            "lfo_2_sync_to_beat": "135",
-            "lfo_2_frequency": "136",
-            "lfo_2_tempo": "137",
-            "voice_amp_0_level": "138",
-            "voice_amp_0_env1_to_level": "139",
-            "voice_amp_0_panning": "140",
-            "voice_filter_0_enabled": "141",
-            "voice_filter_0_type": "142",
-            "voice_filter_0_state_var_type": "143",
-            "voice_filter_0_state_var_frequency": "144",
-            "voice_filter_0_state_var_resonance": "145",
-            "voice_filter_0_state_var_keyboard_tracking": "146",
-            "voice_filter_0_comb_plus_delay": "147",
-            "voice_filter_0_comb_plus_gain": "148",
-            "voice_filter_0_comb_min_delay": "149",
-            "voice_filter_0_comb_min_gain": "150",
-            "voice_filter_1_enabled": "151",
-            "voice_filter_1_type": "152",
-            "voice_filter_1_state_var_type": "153",
-            "voice_filter_1_state_var_frequency": "154",
-            "voice_filter_1_state_var_resonance": "155",
-            "voice_filter_1_state_var_keyboard_tracking": "156",
-            "voice_filter_1_comb_plus_delay": "157",
-            "voice_filter_1_comb_plus_gain": "158",
-            "voice_filter_1_comb_min_delay": "159",
-            "voice_filter_1_comb_min_gain": "160",
-            "voice_filter_2_enabled": "161",
-            "voice_filter_2_type": "162",
-            "voice_filter_2_state_var_type": "163",
-            "voice_filter_2_state_var_frequency": "164",
-            "voice_filter_2_state_var_resonance": "165",
-            "voice_filter_2_state_var_keyboard_tracking": "166",
-            "voice_filter_2_comb_plus_delay": "167",
-            "voice_filter_2_comb_plus_gain": "168",
-            "voice_filter_2_comb_min_delay": "169",
-            "voice_filter_2_comb_min_gain": "170",
-            "audio_route_0_input_1": "171",
-            "audio_route_0_output_1": "172",
-            "audio_route_0_amount_1": "173",
-            "audio_route_0_input_2": "174",
-            "audio_route_0_output_2": "175",
-            "audio_route_0_amount_2": "176",
-            "audio_route_0_input_3": "177",
-            "audio_route_0_output_3": "178",
-            "audio_route_0_amount_3": "179",
-            "audio_route_0_input_4": "180",
-            "audio_route_0_output_4": "181",
-            "audio_route_0_amount_4": "182",
-            "audio_route_0_input_5": "183",
-            "audio_route_0_output_5": "184",
-            "audio_route_0_amount_5": "185",
-            "audio_route_0_input_6": "186",
-            "audio_route_0_output_6": "187",
-            "audio_route_0_amount_6": "188",
-            "audio_route_0_input_7": "189",
-            "audio_route_0_output_7": "190",
-            "audio_route_0_amount_7": "191",
-            "audio_route_0_input_8": "192",
-            "audio_route_0_output_8": "193",
-            "audio_route_0_amount_8": "194",
-            "audio_route_0_input_9": "195",
-            "audio_route_0_output_9": "196",
-            "audio_route_0_amount_9": "197",
-            "cv_route_0_plot_target": "198",
-            "cv_route_0_plot_length": "199",
-            "cv_route_0_input_1": "200",
-            "cv_route_0_output_1": "201",
-            "cv_route_0_amount_1": "202",
-            "cv_route_0_input_2": "203",
-            "cv_route_0_output_2": "204",
-            "cv_route_0_amount_2": "205",
-            "cv_route_0_input_3": "206",
-            "cv_route_0_output_3": "207",
-            "cv_route_0_amount_3": "208",
-            "cv_route_0_input_4": "209",
-            "cv_route_0_output_4": "210",
-            "cv_route_0_amount_4": "211",
-            "cv_route_0_input_5": "212",
-            "cv_route_0_output_5": "213",
-            "cv_route_0_amount_5": "214",
-            "cv_route_0_input_6": "215",
-            "cv_route_0_output_6": "216",
-            "cv_route_0_amount_6": "217",
-            "cv_route_0_input_7": "218",
-            "cv_route_0_output_7": "219",
-            "cv_route_0_amount_7": "220",
-            "cv_route_0_input_8": "221",
-            "cv_route_0_output_8": "222",
-            "cv_route_0_amount_8": "223",
-            "cv_route_0_input_9": "224",
-            "cv_route_0_output_9": "225",
-            "cv_route_0_amount_9": "226",
-            "cv_route_0_input_10": "227",
-            "cv_route_0_output_10": "228",
-            "cv_route_0_amount_10": "229",
-            "cv_route_0_input_11": "230",
-            "cv_route_0_output_11": "231",
-            "cv_route_0_amount_11": "232",
-            "cv_route_0_input_12": "233",
-            "cv_route_0_output_12": "234",
-            "cv_route_0_amount_12": "235",
-            "cv_route_0_input_13": "236",
-            "cv_route_0_output_13": "237",
-            "cv_route_0_amount_13": "238",
-            "cv_route_0_input_14": "239",
-            "cv_route_0_output_14": "240",
-            "cv_route_0_amount_14": "241",
-            "cv_route_0_input_15": "242",
-            "cv_route_0_output_15": "243",
-            "cv_route_0_amount_15": "244",
-            "active_0_oscillator": "245",
-            "active_0_lfo": "246",
-            "active_0_filter": "247",
-            "active_0_envelope": "248",
-            "output_0_clip": "249",
-            "output_0_voices_exhausted": "250",
-            "output_0_voice_count": "251",
-            "output_0_total_cpu": "252",
-            "output_0_osc_cpu": "253",
-            "output_0_lfo_cpu": "254",
-            "output_0_voice_filter_cpu": "255",
-            "output_0_envelope_cpu": "256",
-            "output_0_voice_amp_cpu": "257",
-            "output_0_audio_route_cpu": "258",
-            "output_0_cv_route_cpu": "259",
-            "output_0_auxiliary_cpu": "260"
+            "envelope_0_bipolar": "62",
+            "envelope_0_sync_to_beat": "63",
+            "envelope_0_delay_time": "64",
+            "envelope_0_delay_sync": "65",
+            "envelope_0_hold_time": "66",
+            "envelope_0_hold_sync": "67",
+            "envelope_0_sustain_level": "68",
+            "envelope_0_attack_time": "69",
+            "envelope_0_attack_sync": "70",
+            "envelope_0_attack_slope": "71",
+            "envelope_0_attack_log_midpoint": "72",
+            "envelope_0_decay_time": "73",
+            "envelope_0_decay_sync": "74",
+            "envelope_0_decay_slope": "75",
+            "envelope_0_decay_log_midpoint": "76",
+            "envelope_0_release_time": "77",
+            "envelope_0_release_sync": "78",
+            "envelope_0_release_slope": "79",
+            "envelope_0_release_log_midpoint": "80",
+            "envelope_1_enabled": "81",
+            "envelope_1_type": "82",
+            "envelope_1_bipolar": "83",
+            "envelope_1_sync_to_beat": "84",
+            "envelope_1_delay_time": "85",
+            "envelope_1_delay_sync": "86",
+            "envelope_1_hold_time": "87",
+            "envelope_1_hold_sync": "88",
+            "envelope_1_sustain_level": "89",
+            "envelope_1_attack_time": "90",
+            "envelope_1_attack_sync": "91",
+            "envelope_1_attack_slope": "92",
+            "envelope_1_attack_log_midpoint": "93",
+            "envelope_1_decay_time": "94",
+            "envelope_1_decay_sync": "95",
+            "envelope_1_decay_slope": "96",
+            "envelope_1_decay_log_midpoint": "97",
+            "envelope_1_release_time": "98",
+            "envelope_1_release_sync": "99",
+            "envelope_1_release_slope": "100",
+            "envelope_1_release_log_midpoint": "101",
+            "envelope_2_enabled": "102",
+            "envelope_2_type": "103",
+            "envelope_2_bipolar": "104",
+            "envelope_2_sync_to_beat": "105",
+            "envelope_2_delay_time": "106",
+            "envelope_2_delay_sync": "107",
+            "envelope_2_hold_time": "108",
+            "envelope_2_hold_sync": "109",
+            "envelope_2_sustain_level": "110",
+            "envelope_2_attack_time": "111",
+            "envelope_2_attack_sync": "112",
+            "envelope_2_attack_slope": "113",
+            "envelope_2_attack_log_midpoint": "114",
+            "envelope_2_decay_time": "115",
+            "envelope_2_decay_sync": "116",
+            "envelope_2_decay_slope": "117",
+            "envelope_2_decay_log_midpoint": "118",
+            "envelope_2_release_time": "119",
+            "envelope_2_release_sync": "120",
+            "envelope_2_release_slope": "121",
+            "envelope_2_release_log_midpoint": "122",
+            "lfo_0_enabled": "123",
+            "lfo_0_type": "124",
+            "lfo_0_bipolar": "125",
+            "lfo_0_sync_to_beat": "126",
+            "lfo_0_frequency": "127",
+            "lfo_0_tempo": "128",
+            "lfo_1_enabled": "129",
+            "lfo_1_type": "130",
+            "lfo_1_bipolar": "131",
+            "lfo_1_sync_to_beat": "132",
+            "lfo_1_frequency": "133",
+            "lfo_1_tempo": "134",
+            "lfo_2_enabled": "135",
+            "lfo_2_type": "136",
+            "lfo_2_bipolar": "137",
+            "lfo_2_sync_to_beat": "138",
+            "lfo_2_frequency": "139",
+            "lfo_2_tempo": "140",
+            "voice_amp_0_level": "141",
+            "voice_amp_0_env1_to_level": "142",
+            "voice_amp_0_panning": "143",
+            "voice_filter_0_enabled": "144",
+            "voice_filter_0_type": "145",
+            "voice_filter_0_state_var_type": "146",
+            "voice_filter_0_state_var_frequency": "147",
+            "voice_filter_0_state_var_resonance": "148",
+            "voice_filter_0_state_var_keyboard_tracking": "149",
+            "voice_filter_0_comb_plus_delay": "150",
+            "voice_filter_0_comb_plus_gain": "151",
+            "voice_filter_0_comb_min_delay": "152",
+            "voice_filter_0_comb_min_gain": "153",
+            "voice_filter_1_enabled": "154",
+            "voice_filter_1_type": "155",
+            "voice_filter_1_state_var_type": "156",
+            "voice_filter_1_state_var_frequency": "157",
+            "voice_filter_1_state_var_resonance": "158",
+            "voice_filter_1_state_var_keyboard_tracking": "159",
+            "voice_filter_1_comb_plus_delay": "160",
+            "voice_filter_1_comb_plus_gain": "161",
+            "voice_filter_1_comb_min_delay": "162",
+            "voice_filter_1_comb_min_gain": "163",
+            "voice_filter_2_enabled": "164",
+            "voice_filter_2_type": "165",
+            "voice_filter_2_state_var_type": "166",
+            "voice_filter_2_state_var_frequency": "167",
+            "voice_filter_2_state_var_resonance": "168",
+            "voice_filter_2_state_var_keyboard_tracking": "169",
+            "voice_filter_2_comb_plus_delay": "170",
+            "voice_filter_2_comb_plus_gain": "171",
+            "voice_filter_2_comb_min_delay": "172",
+            "voice_filter_2_comb_min_gain": "173",
+            "audio_route_0_input_1": "174",
+            "audio_route_0_output_1": "175",
+            "audio_route_0_amount_1": "176",
+            "audio_route_0_input_2": "177",
+            "audio_route_0_output_2": "178",
+            "audio_route_0_amount_2": "179",
+            "audio_route_0_input_3": "180",
+            "audio_route_0_output_3": "181",
+            "audio_route_0_amount_3": "182",
+            "audio_route_0_input_4": "183",
+            "audio_route_0_output_4": "184",
+            "audio_route_0_amount_4": "185",
+            "audio_route_0_input_5": "186",
+            "audio_route_0_output_5": "187",
+            "audio_route_0_amount_5": "188",
+            "audio_route_0_input_6": "189",
+            "audio_route_0_output_6": "190",
+            "audio_route_0_amount_6": "191",
+            "audio_route_0_input_7": "192",
+            "audio_route_0_output_7": "193",
+            "audio_route_0_amount_7": "194",
+            "audio_route_0_input_8": "195",
+            "audio_route_0_output_8": "196",
+            "audio_route_0_amount_8": "197",
+            "audio_route_0_input_9": "198",
+            "audio_route_0_output_9": "199",
+            "audio_route_0_amount_9": "200",
+            "cv_route_0_plot_target": "201",
+            "cv_route_0_plot_length": "202",
+            "cv_route_0_input_1": "203",
+            "cv_route_0_output_1": "204",
+            "cv_route_0_amount_1": "205",
+            "cv_route_0_input_2": "206",
+            "cv_route_0_output_2": "207",
+            "cv_route_0_amount_2": "208",
+            "cv_route_0_input_3": "209",
+            "cv_route_0_output_3": "210",
+            "cv_route_0_amount_3": "211",
+            "cv_route_0_input_4": "212",
+            "cv_route_0_output_4": "213",
+            "cv_route_0_amount_4": "214",
+            "cv_route_0_input_5": "215",
+            "cv_route_0_output_5": "216",
+            "cv_route_0_amount_5": "217",
+            "cv_route_0_input_6": "218",
+            "cv_route_0_output_6": "219",
+            "cv_route_0_amount_6": "220",
+            "cv_route_0_input_7": "221",
+            "cv_route_0_output_7": "222",
+            "cv_route_0_amount_7": "223",
+            "cv_route_0_input_8": "224",
+            "cv_route_0_output_8": "225",
+            "cv_route_0_amount_8": "226",
+            "cv_route_0_input_9": "227",
+            "cv_route_0_output_9": "228",
+            "cv_route_0_amount_9": "229",
+            "cv_route_0_input_10": "230",
+            "cv_route_0_output_10": "231",
+            "cv_route_0_amount_10": "232",
+            "cv_route_0_input_11": "233",
+            "cv_route_0_output_11": "234",
+            "cv_route_0_amount_11": "235",
+            "cv_route_0_input_12": "236",
+            "cv_route_0_output_12": "237",
+            "cv_route_0_amount_12": "238",
+            "cv_route_0_input_13": "239",
+            "cv_route_0_output_13": "240",
+            "cv_route_0_amount_13": "241",
+            "cv_route_0_input_14": "242",
+            "cv_route_0_output_14": "243",
+            "cv_route_0_amount_14": "244",
+            "cv_route_0_input_15": "245",
+            "cv_route_0_output_15": "246",
+            "cv_route_0_amount_15": "247",
+            "active_0_oscillator": "248",
+            "active_0_lfo": "249",
+            "active_0_filter": "250",
+            "active_0_envelope": "251",
+            "output_0_clip": "252",
+            "output_0_voices_exhausted": "253",
+            "output_0_voice_count": "254",
+            "output_0_total_cpu": "255",
+            "output_0_osc_cpu": "256",
+            "output_0_lfo_cpu": "257",
+            "output_0_voice_filter_cpu": "258",
+            "output_0_envelope_cpu": "259",
+            "output_0_voice_amp_cpu": "260",
+            "output_0_audio_route_cpu": "261",
+            "output_0_cv_route_cpu": "262",
+            "output_0_auxiliary_cpu": "263"
         },
         "templates": {
             "7": {
@@ -1578,7 +1581,7 @@
                     "bitmap": "background",
                     "class": "view_container_fix",
                     "origin": "0, 0",
-                    "size": "339, 148",
+                    "size": "339, 172",
                     "name": "4",
                     "background-offset": "0, 25"
                 },
@@ -1587,7 +1590,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "0, 0",
-                            "size": "339, 148",
+                            "size": "339, 172",
                             "background-color": "color_00000080"
                         },
                         "children": {
@@ -1671,7 +1674,7 @@
                                     "frame-color": "color_ACCAF780",
                                     "back-color": "color_00000000",
                                     "origin": "0, 25",
-                                    "size": "339, 123"
+                                    "size": "339, 147"
                                 }
                             },
                             "view_container_fix": {
@@ -1679,16 +1682,16 @@
                                     "class": "view_container_fix",
                                     "background-color": "color_ACCAF720",
                                     "origin": "0, 25",
-                                    "size": "339, 123"
+                                    "size": "339, 147"
                                 },
                                 "children": {
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
-                                            "size": "111, 23",
+                                            "size": "111, 71",
                                             "graph-type": "-1",
-                                            "row-span": "1",
+                                            "row-span": "3",
                                             "column-span": "1",
                                             "tooltip": "Envelope",
                                             "part-index": "0",
@@ -1712,15 +1715,6 @@
                                             "origin": "113, 1",
                                             "background-color-draw-style": "stroked",
                                             "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_ACCAF720",
-                                            "class": "view_container_fix",
-                                            "origin": "2, 26",
-                                            "background-color-draw-style": "filled",
-                                            "size": "111, 23"
                                         }
                                     },
                                     "view_container_fix": {
@@ -1754,24 +1748,6 @@
                                         "attributes": {
                                             "background-color": "color_ACCAF720",
                                             "class": "view_container_fix",
-                                            "origin": "226, 26",
-                                            "background-color-draw-style": "filled",
-                                            "size": "111, 23"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 25",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_ACCAF720",
-                                            "class": "view_container_fix",
                                             "origin": "2, 50",
                                             "background-color-draw-style": "filled",
                                             "size": "111, 23"
@@ -1788,7 +1764,7 @@
                                     },
                                     "view_container_fix": {
                                         "attributes": {
-                                            "background-color": "color_FFFFFF20",
+                                            "background-color": "color_ACCAF720",
                                             "class": "view_container_fix",
                                             "origin": "114, 50",
                                             "background-color-draw-style": "filled",
@@ -1800,24 +1776,6 @@
                                             "background-color": "color_00000040",
                                             "class": "view_container_fix",
                                             "origin": "113, 49",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_FFFFFF20",
-                                            "class": "view_container_fix",
-                                            "origin": "226, 50",
-                                            "background-color-draw-style": "filled",
-                                            "size": "111, 23"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 49",
                                             "background-color-draw-style": "stroked",
                                             "size": "113, 25"
                                         }
@@ -1932,6 +1890,60 @@
                                     },
                                     "view_container_fix": {
                                         "attributes": {
+                                            "background-color": "color_ACCAF720",
+                                            "class": "view_container_fix",
+                                            "origin": "2, 122",
+                                            "background-color-draw-style": "filled",
+                                            "size": "111, 23"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_00000040",
+                                            "class": "view_container_fix",
+                                            "origin": "1, 121",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "113, 25"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_FFFFFF20",
+                                            "class": "view_container_fix",
+                                            "origin": "114, 122",
+                                            "background-color-draw-style": "filled",
+                                            "size": "111, 23"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_00000040",
+                                            "class": "view_container_fix",
+                                            "origin": "113, 121",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "113, 25"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_FFFFFF20",
+                                            "class": "view_container_fix",
+                                            "origin": "226, 122",
+                                            "background-color-draw-style": "filled",
+                                            "size": "111, 23"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_00000040",
+                                            "class": "view_container_fix",
+                                            "origin": "225, 121",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "113, 25"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "3, 3",
                                             "size": "112, 21",
@@ -1983,39 +1995,32 @@
                                             "background-color": "color_FFFFFF00"
                                         },
                                         "children": {
-                                            "COptionMenu": {
+                                            "CCheckBox": {
                                                 "attributes": {
-                                                    "class": "COptionMenu",
-                                                    "size": "67, 21",
-                                                    "origin": "0, 0",
-                                                    "control-tag": "envelope_0_sync/polarity_kind",
-                                                    "tooltip": "Env 1 Sync/polarity kind",
-                                                    "font": "~ NormalFont",
-                                                    "min-value": "0",
-                                                    "default-value": "0",
-                                                    "text-alignment": "left",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "menu-popup-style": "true",
-                                                    "menu-check-style": "false",
-                                                    "text-inset": "3, 0",
+                                                    "class": "CCheckBox",
+                                                    "size": "22, 21",
+                                                    "origin": "3, 0",
+                                                    "control-tag": "envelope_0_bipolar",
+                                                    "tooltip": "Env 1 Bipolar",
+                                                    "title": "",
+                                                    "frame-width": "1",
+                                                    "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
-                                                    "max-value": "3",
-                                                    "font-color": "color_ACCAF7FF",
-                                                    "back-color": "color_ACCAF740",
-                                                    "shadow-color": "color_ACCAF780"
+                                                    "boxfill-color": "color_ACCAF740",
+                                                    "boxframe-color": "color_ACCAF7FF",
+                                                    "checkmark-color": "color_ACCAF7FF"
                                                 }
                                             },
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "42, 21",
-                                                    "origin": "70, -1",
+                                                    "size": "87, 21",
+                                                    "origin": "25, -1",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Kind"
+                                                    "title": "Bipolar"
                                                 }
                                             }
                                         }
@@ -2028,98 +2033,32 @@
                                             "background-color": "color_FFFFFF00"
                                         },
                                         "children": {
-                                            "seven_rotary_knob": {
+                                            "CCheckBox": {
                                                 "attributes": {
-                                                    "class": "seven_rotary_knob",
+                                                    "class": "CCheckBox",
                                                     "size": "22, 21",
-                                                    "origin": "0, 0",
-                                                    "control-tag": "envelope_0_delay_time",
-                                                    "tooltip": "Env 1 Delay time (Sec)",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "color": "color_ACCAF7FF"
+                                                    "origin": "3, 0",
+                                                    "control-tag": "envelope_0_sync_to_beat",
+                                                    "tooltip": "Env 1 Sync to beat",
+                                                    "title": "",
+                                                    "frame-width": "1",
+                                                    "draw-crossbox": "true",
+                                                    "round-rect-radius": "3",
+                                                    "boxfill-color": "color_ACCAF740",
+                                                    "boxframe-color": "color_ACCAF7FF",
+                                                    "checkmark-color": "color_ACCAF7FF"
                                                 }
                                             },
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "42, 21",
+                                                    "size": "87, 21",
                                                     "origin": "25, -1",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dly"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "42, 21",
-                                                    "origin": "67, 0",
-                                                    "control-tag": "envelope_0_delay_time",
-                                                    "tooltip": "Env 1 Delay time (Sec)",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "text-alignment": "right",
-                                                    "font": "~ NormalFontSmall",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "value-precision": "2",
-                                                    "back-color": "color_00000020",
-                                                    "font-color": "color_ACCAF7FF"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "class": "view_container_fix",
-                                            "origin": "3, 27",
-                                            "size": "112, 21",
-                                            "background-color": "color_FFFFFF00"
-                                        },
-                                        "children": {
-                                            "seven_rotary_knob": {
-                                                "attributes": {
-                                                    "class": "seven_rotary_knob",
-                                                    "size": "22, 21",
-                                                    "origin": "0, 0",
-                                                    "control-tag": "envelope_0_delay_sync",
-                                                    "tooltip": "Env 1 Delay sync",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "color": "color_ACCAF7FF"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "42, 21",
-                                                    "origin": "25, -1",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFont",
-                                                    "font-color": "color_ACCAF7FF",
-                                                    "title": "Dly"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "42, 21",
-                                                    "origin": "67, 0",
-                                                    "control-tag": "envelope_0_delay_sync",
-                                                    "tooltip": "Env 1 Delay sync",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "text-alignment": "right",
-                                                    "font": "~ NormalFontSmall",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "value-precision": "159",
-                                                    "back-color": "color_00000020",
-                                                    "font-color": "color_ACCAF7FF"
+                                                    "title": "Sync"
                                                 }
                                             }
                                         }
@@ -2137,8 +2076,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "envelope_0_hold_time",
-                                                    "tooltip": "Env 1 Hold time (Sec)",
+                                                    "control-tag": "envelope_0_delay_time",
+                                                    "tooltip": "Env 1 Delay time (Sec)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -2153,7 +2092,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Hld"
+                                                    "title": "Delay"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2161,8 +2100,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "42, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "envelope_0_hold_time",
-                                                    "tooltip": "Env 1 Hold time (Sec)",
+                                                    "control-tag": "envelope_0_delay_time",
+                                                    "tooltip": "Env 1 Delay time (Sec)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -2189,6 +2128,110 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
+                                                    "control-tag": "envelope_0_delay_sync",
+                                                    "tooltip": "Env 1 Delay sync",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "color": "color_ACCAF7FF"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "42, 21",
+                                                    "origin": "25, -1",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFont",
+                                                    "font-color": "color_ACCAF7FF",
+                                                    "title": "Delay"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "42, 21",
+                                                    "origin": "67, 0",
+                                                    "control-tag": "envelope_0_delay_sync",
+                                                    "tooltip": "Env 1 Delay sync",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "value-precision": "159",
+                                                    "back-color": "color_00000020",
+                                                    "font-color": "color_ACCAF7FF"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "class": "view_container_fix",
+                                            "origin": "3, 51",
+                                            "size": "112, 21",
+                                            "background-color": "color_FFFFFF00"
+                                        },
+                                        "children": {
+                                            "seven_rotary_knob": {
+                                                "attributes": {
+                                                    "class": "seven_rotary_knob",
+                                                    "size": "22, 21",
+                                                    "origin": "0, 0",
+                                                    "control-tag": "envelope_0_hold_time",
+                                                    "tooltip": "Env 1 Hold time (Sec)",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "color": "color_ACCAF7FF"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "42, 21",
+                                                    "origin": "25, -1",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFont",
+                                                    "font-color": "color_ACCAF7FF",
+                                                    "title": "Hold"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "42, 21",
+                                                    "origin": "67, 0",
+                                                    "control-tag": "envelope_0_hold_time",
+                                                    "tooltip": "Env 1 Hold time (Sec)",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "value-precision": "2",
+                                                    "back-color": "color_00000020",
+                                                    "font-color": "color_ACCAF7FF"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "class": "view_container_fix",
+                                            "origin": "3, 51",
+                                            "size": "112, 21",
+                                            "background-color": "color_FFFFFF00"
+                                        },
+                                        "children": {
+                                            "seven_rotary_knob": {
+                                                "attributes": {
+                                                    "class": "seven_rotary_knob",
+                                                    "size": "22, 21",
+                                                    "origin": "0, 0",
                                                     "control-tag": "envelope_0_hold_sync",
                                                     "tooltip": "Env 1 Hold sync",
                                                     "angle-start": "20",
@@ -2205,7 +2248,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Hld"
+                                                    "title": "Hold"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2231,7 +2274,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "227, 27",
+                                            "origin": "115, 51",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2257,7 +2300,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Sus"
+                                                    "title": "Sustain"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2283,7 +2326,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 51",
+                                            "origin": "3, 75",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2309,7 +2352,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Att"
+                                                    "title": "Attack"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2335,7 +2378,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 51",
+                                            "origin": "3, 75",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2361,7 +2404,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Att"
+                                                    "title": "Attack"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2387,7 +2430,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "115, 51",
+                                            "origin": "115, 75",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2424,7 +2467,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Slp"
+                                                    "title": "Slope"
                                                 }
                                             }
                                         }
@@ -2432,7 +2475,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "227, 51",
+                                            "origin": "227, 75",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2458,7 +2501,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Mid"
+                                                    "title": "Midpoint"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2484,7 +2527,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 75",
+                                            "origin": "3, 99",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2510,7 +2553,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dcy"
+                                                    "title": "Decay"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2536,7 +2579,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 75",
+                                            "origin": "3, 99",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2562,7 +2605,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dcy"
+                                                    "title": "Decay"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2588,7 +2631,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "115, 75",
+                                            "origin": "115, 99",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2625,7 +2668,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Slp"
+                                                    "title": "Slope"
                                                 }
                                             }
                                         }
@@ -2633,7 +2676,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "227, 75",
+                                            "origin": "227, 99",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2659,7 +2702,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Mid"
+                                                    "title": "Midpoint"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2685,7 +2728,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 99",
+                                            "origin": "3, 123",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2711,7 +2754,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Rel"
+                                                    "title": "Release"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2737,7 +2780,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 99",
+                                            "origin": "3, 123",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2763,7 +2806,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Rel"
+                                                    "title": "Release"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2789,7 +2832,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "115, 99",
+                                            "origin": "115, 123",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2826,7 +2869,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Slp"
+                                                    "title": "Slope"
                                                 }
                                             }
                                         }
@@ -2834,7 +2877,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "227, 99",
+                                            "origin": "227, 123",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -2860,7 +2903,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Mid"
+                                                    "title": "Midpoint"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2894,7 +2937,7 @@
                     "bitmap": "background",
                     "class": "view_container_fix",
                     "origin": "0, 0",
-                    "size": "339, 148",
+                    "size": "339, 172",
                     "name": "5",
                     "background-offset": "0, 25"
                 },
@@ -2903,7 +2946,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "0, 0",
-                            "size": "339, 148",
+                            "size": "339, 172",
                             "background-color": "color_00000080"
                         },
                         "children": {
@@ -2987,7 +3030,7 @@
                                     "frame-color": "color_ACCAF780",
                                     "back-color": "color_00000000",
                                     "origin": "0, 25",
-                                    "size": "339, 123"
+                                    "size": "339, 147"
                                 }
                             },
                             "view_container_fix": {
@@ -2995,16 +3038,16 @@
                                     "class": "view_container_fix",
                                     "background-color": "color_ACCAF720",
                                     "origin": "0, 25",
-                                    "size": "339, 123"
+                                    "size": "339, 147"
                                 },
                                 "children": {
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
-                                            "size": "111, 23",
+                                            "size": "111, 71",
                                             "graph-type": "-1",
-                                            "row-span": "1",
+                                            "row-span": "3",
                                             "column-span": "1",
                                             "tooltip": "Envelope",
                                             "part-index": "1",
@@ -3028,15 +3071,6 @@
                                             "origin": "113, 1",
                                             "background-color-draw-style": "stroked",
                                             "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_ACCAF720",
-                                            "class": "view_container_fix",
-                                            "origin": "2, 26",
-                                            "background-color-draw-style": "filled",
-                                            "size": "111, 23"
                                         }
                                     },
                                     "view_container_fix": {
@@ -3070,24 +3104,6 @@
                                         "attributes": {
                                             "background-color": "color_ACCAF720",
                                             "class": "view_container_fix",
-                                            "origin": "226, 26",
-                                            "background-color-draw-style": "filled",
-                                            "size": "111, 23"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 25",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_ACCAF720",
-                                            "class": "view_container_fix",
                                             "origin": "2, 50",
                                             "background-color-draw-style": "filled",
                                             "size": "111, 23"
@@ -3104,7 +3120,7 @@
                                     },
                                     "view_container_fix": {
                                         "attributes": {
-                                            "background-color": "color_FFFFFF20",
+                                            "background-color": "color_ACCAF720",
                                             "class": "view_container_fix",
                                             "origin": "114, 50",
                                             "background-color-draw-style": "filled",
@@ -3116,24 +3132,6 @@
                                             "background-color": "color_00000040",
                                             "class": "view_container_fix",
                                             "origin": "113, 49",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_FFFFFF20",
-                                            "class": "view_container_fix",
-                                            "origin": "226, 50",
-                                            "background-color-draw-style": "filled",
-                                            "size": "111, 23"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 49",
                                             "background-color-draw-style": "stroked",
                                             "size": "113, 25"
                                         }
@@ -3248,6 +3246,60 @@
                                     },
                                     "view_container_fix": {
                                         "attributes": {
+                                            "background-color": "color_ACCAF720",
+                                            "class": "view_container_fix",
+                                            "origin": "2, 122",
+                                            "background-color-draw-style": "filled",
+                                            "size": "111, 23"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_00000040",
+                                            "class": "view_container_fix",
+                                            "origin": "1, 121",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "113, 25"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_FFFFFF20",
+                                            "class": "view_container_fix",
+                                            "origin": "114, 122",
+                                            "background-color-draw-style": "filled",
+                                            "size": "111, 23"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_00000040",
+                                            "class": "view_container_fix",
+                                            "origin": "113, 121",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "113, 25"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_FFFFFF20",
+                                            "class": "view_container_fix",
+                                            "origin": "226, 122",
+                                            "background-color-draw-style": "filled",
+                                            "size": "111, 23"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_00000040",
+                                            "class": "view_container_fix",
+                                            "origin": "225, 121",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "113, 25"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "3, 3",
                                             "size": "112, 21",
@@ -3299,39 +3351,32 @@
                                             "background-color": "color_FFFFFF00"
                                         },
                                         "children": {
-                                            "COptionMenu": {
+                                            "CCheckBox": {
                                                 "attributes": {
-                                                    "class": "COptionMenu",
-                                                    "size": "67, 21",
-                                                    "origin": "0, 0",
-                                                    "control-tag": "envelope_1_sync/polarity_kind",
-                                                    "tooltip": "Env 2 Sync/polarity kind",
-                                                    "font": "~ NormalFont",
-                                                    "min-value": "0",
-                                                    "default-value": "0",
-                                                    "text-alignment": "left",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "menu-popup-style": "true",
-                                                    "menu-check-style": "false",
-                                                    "text-inset": "3, 0",
+                                                    "class": "CCheckBox",
+                                                    "size": "22, 21",
+                                                    "origin": "3, 0",
+                                                    "control-tag": "envelope_1_bipolar",
+                                                    "tooltip": "Env 2 Bipolar",
+                                                    "title": "",
+                                                    "frame-width": "1",
+                                                    "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
-                                                    "max-value": "3",
-                                                    "font-color": "color_ACCAF7FF",
-                                                    "back-color": "color_ACCAF740",
-                                                    "shadow-color": "color_ACCAF780"
+                                                    "boxfill-color": "color_ACCAF740",
+                                                    "boxframe-color": "color_ACCAF7FF",
+                                                    "checkmark-color": "color_ACCAF7FF"
                                                 }
                                             },
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "42, 21",
-                                                    "origin": "70, -1",
+                                                    "size": "87, 21",
+                                                    "origin": "25, -1",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Kind"
+                                                    "title": "Bipolar"
                                                 }
                                             }
                                         }
@@ -3344,98 +3389,32 @@
                                             "background-color": "color_FFFFFF00"
                                         },
                                         "children": {
-                                            "seven_rotary_knob": {
+                                            "CCheckBox": {
                                                 "attributes": {
-                                                    "class": "seven_rotary_knob",
+                                                    "class": "CCheckBox",
                                                     "size": "22, 21",
-                                                    "origin": "0, 0",
-                                                    "control-tag": "envelope_1_delay_time",
-                                                    "tooltip": "Env 2 Delay time (Sec)",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "color": "color_ACCAF7FF"
+                                                    "origin": "3, 0",
+                                                    "control-tag": "envelope_1_sync_to_beat",
+                                                    "tooltip": "Env 2 Sync to beat",
+                                                    "title": "",
+                                                    "frame-width": "1",
+                                                    "draw-crossbox": "true",
+                                                    "round-rect-radius": "3",
+                                                    "boxfill-color": "color_ACCAF740",
+                                                    "boxframe-color": "color_ACCAF7FF",
+                                                    "checkmark-color": "color_ACCAF7FF"
                                                 }
                                             },
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "42, 21",
+                                                    "size": "87, 21",
                                                     "origin": "25, -1",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dly"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "42, 21",
-                                                    "origin": "67, 0",
-                                                    "control-tag": "envelope_1_delay_time",
-                                                    "tooltip": "Env 2 Delay time (Sec)",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "text-alignment": "right",
-                                                    "font": "~ NormalFontSmall",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "value-precision": "2",
-                                                    "back-color": "color_00000020",
-                                                    "font-color": "color_ACCAF7FF"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "class": "view_container_fix",
-                                            "origin": "3, 27",
-                                            "size": "112, 21",
-                                            "background-color": "color_FFFFFF00"
-                                        },
-                                        "children": {
-                                            "seven_rotary_knob": {
-                                                "attributes": {
-                                                    "class": "seven_rotary_knob",
-                                                    "size": "22, 21",
-                                                    "origin": "0, 0",
-                                                    "control-tag": "envelope_1_delay_sync",
-                                                    "tooltip": "Env 2 Delay sync",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "color": "color_ACCAF7FF"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "42, 21",
-                                                    "origin": "25, -1",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFont",
-                                                    "font-color": "color_ACCAF7FF",
-                                                    "title": "Dly"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "42, 21",
-                                                    "origin": "67, 0",
-                                                    "control-tag": "envelope_1_delay_sync",
-                                                    "tooltip": "Env 2 Delay sync",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "text-alignment": "right",
-                                                    "font": "~ NormalFontSmall",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "value-precision": "159",
-                                                    "back-color": "color_00000020",
-                                                    "font-color": "color_ACCAF7FF"
+                                                    "title": "Sync"
                                                 }
                                             }
                                         }
@@ -3453,8 +3432,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "envelope_1_hold_time",
-                                                    "tooltip": "Env 2 Hold time (Sec)",
+                                                    "control-tag": "envelope_1_delay_time",
+                                                    "tooltip": "Env 2 Delay time (Sec)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -3469,7 +3448,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Hld"
+                                                    "title": "Delay"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -3477,8 +3456,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "42, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "envelope_1_hold_time",
-                                                    "tooltip": "Env 2 Hold time (Sec)",
+                                                    "control-tag": "envelope_1_delay_time",
+                                                    "tooltip": "Env 2 Delay time (Sec)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -3505,6 +3484,110 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
+                                                    "control-tag": "envelope_1_delay_sync",
+                                                    "tooltip": "Env 2 Delay sync",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "color": "color_ACCAF7FF"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "42, 21",
+                                                    "origin": "25, -1",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFont",
+                                                    "font-color": "color_ACCAF7FF",
+                                                    "title": "Delay"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "42, 21",
+                                                    "origin": "67, 0",
+                                                    "control-tag": "envelope_1_delay_sync",
+                                                    "tooltip": "Env 2 Delay sync",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "value-precision": "159",
+                                                    "back-color": "color_00000020",
+                                                    "font-color": "color_ACCAF7FF"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "class": "view_container_fix",
+                                            "origin": "3, 51",
+                                            "size": "112, 21",
+                                            "background-color": "color_FFFFFF00"
+                                        },
+                                        "children": {
+                                            "seven_rotary_knob": {
+                                                "attributes": {
+                                                    "class": "seven_rotary_knob",
+                                                    "size": "22, 21",
+                                                    "origin": "0, 0",
+                                                    "control-tag": "envelope_1_hold_time",
+                                                    "tooltip": "Env 2 Hold time (Sec)",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "color": "color_ACCAF7FF"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "42, 21",
+                                                    "origin": "25, -1",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFont",
+                                                    "font-color": "color_ACCAF7FF",
+                                                    "title": "Hold"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "42, 21",
+                                                    "origin": "67, 0",
+                                                    "control-tag": "envelope_1_hold_time",
+                                                    "tooltip": "Env 2 Hold time (Sec)",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "value-precision": "2",
+                                                    "back-color": "color_00000020",
+                                                    "font-color": "color_ACCAF7FF"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "class": "view_container_fix",
+                                            "origin": "3, 51",
+                                            "size": "112, 21",
+                                            "background-color": "color_FFFFFF00"
+                                        },
+                                        "children": {
+                                            "seven_rotary_knob": {
+                                                "attributes": {
+                                                    "class": "seven_rotary_knob",
+                                                    "size": "22, 21",
+                                                    "origin": "0, 0",
                                                     "control-tag": "envelope_1_hold_sync",
                                                     "tooltip": "Env 2 Hold sync",
                                                     "angle-start": "20",
@@ -3521,7 +3604,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Hld"
+                                                    "title": "Hold"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -3547,7 +3630,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "227, 27",
+                                            "origin": "115, 51",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -3573,7 +3656,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Sus"
+                                                    "title": "Sustain"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -3599,7 +3682,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 51",
+                                            "origin": "3, 75",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -3625,7 +3708,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Att"
+                                                    "title": "Attack"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -3651,7 +3734,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 51",
+                                            "origin": "3, 75",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -3677,7 +3760,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Att"
+                                                    "title": "Attack"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -3703,7 +3786,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "115, 51",
+                                            "origin": "115, 75",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -3740,7 +3823,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Slp"
+                                                    "title": "Slope"
                                                 }
                                             }
                                         }
@@ -3748,7 +3831,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "227, 51",
+                                            "origin": "227, 75",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -3774,7 +3857,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Mid"
+                                                    "title": "Midpoint"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -3800,7 +3883,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 75",
+                                            "origin": "3, 99",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -3826,7 +3909,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dcy"
+                                                    "title": "Decay"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -3852,7 +3935,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 75",
+                                            "origin": "3, 99",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -3878,7 +3961,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dcy"
+                                                    "title": "Decay"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -3904,7 +3987,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "115, 75",
+                                            "origin": "115, 99",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -3941,7 +4024,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Slp"
+                                                    "title": "Slope"
                                                 }
                                             }
                                         }
@@ -3949,7 +4032,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "227, 75",
+                                            "origin": "227, 99",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -3975,7 +4058,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Mid"
+                                                    "title": "Midpoint"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -4001,7 +4084,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 99",
+                                            "origin": "3, 123",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -4027,7 +4110,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Rel"
+                                                    "title": "Release"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -4053,7 +4136,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 99",
+                                            "origin": "3, 123",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -4079,7 +4162,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Rel"
+                                                    "title": "Release"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -4105,7 +4188,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "115, 99",
+                                            "origin": "115, 123",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -4142,7 +4225,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Slp"
+                                                    "title": "Slope"
                                                 }
                                             }
                                         }
@@ -4150,7 +4233,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "227, 99",
+                                            "origin": "227, 123",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -4176,7 +4259,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Mid"
+                                                    "title": "Midpoint"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -4210,7 +4293,7 @@
                     "bitmap": "background",
                     "class": "view_container_fix",
                     "origin": "0, 0",
-                    "size": "339, 148",
+                    "size": "339, 172",
                     "name": "6",
                     "background-offset": "0, 25"
                 },
@@ -4219,7 +4302,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "0, 0",
-                            "size": "339, 148",
+                            "size": "339, 172",
                             "background-color": "color_00000080"
                         },
                         "children": {
@@ -4303,7 +4386,7 @@
                                     "frame-color": "color_ACCAF780",
                                     "back-color": "color_00000000",
                                     "origin": "0, 25",
-                                    "size": "339, 123"
+                                    "size": "339, 147"
                                 }
                             },
                             "view_container_fix": {
@@ -4311,16 +4394,16 @@
                                     "class": "view_container_fix",
                                     "background-color": "color_ACCAF720",
                                     "origin": "0, 25",
-                                    "size": "339, 123"
+                                    "size": "339, 147"
                                 },
                                 "children": {
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
                                             "origin": "226, 2",
-                                            "size": "111, 23",
+                                            "size": "111, 71",
                                             "graph-type": "-1",
-                                            "row-span": "1",
+                                            "row-span": "3",
                                             "column-span": "1",
                                             "tooltip": "Envelope",
                                             "part-index": "2",
@@ -4344,15 +4427,6 @@
                                             "origin": "113, 1",
                                             "background-color-draw-style": "stroked",
                                             "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_ACCAF720",
-                                            "class": "view_container_fix",
-                                            "origin": "2, 26",
-                                            "background-color-draw-style": "filled",
-                                            "size": "111, 23"
                                         }
                                     },
                                     "view_container_fix": {
@@ -4386,24 +4460,6 @@
                                         "attributes": {
                                             "background-color": "color_ACCAF720",
                                             "class": "view_container_fix",
-                                            "origin": "226, 26",
-                                            "background-color-draw-style": "filled",
-                                            "size": "111, 23"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 25",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_ACCAF720",
-                                            "class": "view_container_fix",
                                             "origin": "2, 50",
                                             "background-color-draw-style": "filled",
                                             "size": "111, 23"
@@ -4420,7 +4476,7 @@
                                     },
                                     "view_container_fix": {
                                         "attributes": {
-                                            "background-color": "color_FFFFFF20",
+                                            "background-color": "color_ACCAF720",
                                             "class": "view_container_fix",
                                             "origin": "114, 50",
                                             "background-color-draw-style": "filled",
@@ -4432,24 +4488,6 @@
                                             "background-color": "color_00000040",
                                             "class": "view_container_fix",
                                             "origin": "113, 49",
-                                            "background-color-draw-style": "stroked",
-                                            "size": "113, 25"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_FFFFFF20",
-                                            "class": "view_container_fix",
-                                            "origin": "226, 50",
-                                            "background-color-draw-style": "filled",
-                                            "size": "111, 23"
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "background-color": "color_00000040",
-                                            "class": "view_container_fix",
-                                            "origin": "225, 49",
                                             "background-color-draw-style": "stroked",
                                             "size": "113, 25"
                                         }
@@ -4564,6 +4602,60 @@
                                     },
                                     "view_container_fix": {
                                         "attributes": {
+                                            "background-color": "color_ACCAF720",
+                                            "class": "view_container_fix",
+                                            "origin": "2, 122",
+                                            "background-color-draw-style": "filled",
+                                            "size": "111, 23"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_00000040",
+                                            "class": "view_container_fix",
+                                            "origin": "1, 121",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "113, 25"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_FFFFFF20",
+                                            "class": "view_container_fix",
+                                            "origin": "114, 122",
+                                            "background-color-draw-style": "filled",
+                                            "size": "111, 23"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_00000040",
+                                            "class": "view_container_fix",
+                                            "origin": "113, 121",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "113, 25"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_FFFFFF20",
+                                            "class": "view_container_fix",
+                                            "origin": "226, 122",
+                                            "background-color-draw-style": "filled",
+                                            "size": "111, 23"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "background-color": "color_00000040",
+                                            "class": "view_container_fix",
+                                            "origin": "225, 121",
+                                            "background-color-draw-style": "stroked",
+                                            "size": "113, 25"
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "3, 3",
                                             "size": "112, 21",
@@ -4615,39 +4707,32 @@
                                             "background-color": "color_FFFFFF00"
                                         },
                                         "children": {
-                                            "COptionMenu": {
+                                            "CCheckBox": {
                                                 "attributes": {
-                                                    "class": "COptionMenu",
-                                                    "size": "67, 21",
-                                                    "origin": "0, 0",
-                                                    "control-tag": "envelope_2_sync/polarity_kind",
-                                                    "tooltip": "Env 3 Sync/polarity kind",
-                                                    "font": "~ NormalFont",
-                                                    "min-value": "0",
-                                                    "default-value": "0",
-                                                    "text-alignment": "left",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "menu-popup-style": "true",
-                                                    "menu-check-style": "false",
-                                                    "text-inset": "3, 0",
+                                                    "class": "CCheckBox",
+                                                    "size": "22, 21",
+                                                    "origin": "3, 0",
+                                                    "control-tag": "envelope_2_bipolar",
+                                                    "tooltip": "Env 3 Bipolar",
+                                                    "title": "",
+                                                    "frame-width": "1",
+                                                    "draw-crossbox": "true",
                                                     "round-rect-radius": "3",
-                                                    "max-value": "3",
-                                                    "font-color": "color_ACCAF7FF",
-                                                    "back-color": "color_ACCAF740",
-                                                    "shadow-color": "color_ACCAF780"
+                                                    "boxfill-color": "color_ACCAF740",
+                                                    "boxframe-color": "color_ACCAF7FF",
+                                                    "checkmark-color": "color_ACCAF7FF"
                                                 }
                                             },
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "42, 21",
-                                                    "origin": "70, -1",
+                                                    "size": "87, 21",
+                                                    "origin": "25, -1",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Kind"
+                                                    "title": "Bipolar"
                                                 }
                                             }
                                         }
@@ -4660,98 +4745,32 @@
                                             "background-color": "color_FFFFFF00"
                                         },
                                         "children": {
-                                            "seven_rotary_knob": {
+                                            "CCheckBox": {
                                                 "attributes": {
-                                                    "class": "seven_rotary_knob",
+                                                    "class": "CCheckBox",
                                                     "size": "22, 21",
-                                                    "origin": "0, 0",
-                                                    "control-tag": "envelope_2_delay_time",
-                                                    "tooltip": "Env 3 Delay time (Sec)",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "color": "color_ACCAF7FF"
+                                                    "origin": "3, 0",
+                                                    "control-tag": "envelope_2_sync_to_beat",
+                                                    "tooltip": "Env 3 Sync to beat",
+                                                    "title": "",
+                                                    "frame-width": "1",
+                                                    "draw-crossbox": "true",
+                                                    "round-rect-radius": "3",
+                                                    "boxfill-color": "color_ACCAF740",
+                                                    "boxframe-color": "color_ACCAF7FF",
+                                                    "checkmark-color": "color_ACCAF7FF"
                                                 }
                                             },
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "42, 21",
+                                                    "size": "87, 21",
                                                     "origin": "25, -1",
                                                     "transparent": "true",
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dly"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "42, 21",
-                                                    "origin": "67, 0",
-                                                    "control-tag": "envelope_2_delay_time",
-                                                    "tooltip": "Env 3 Delay time (Sec)",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "text-alignment": "right",
-                                                    "font": "~ NormalFontSmall",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "value-precision": "2",
-                                                    "back-color": "color_00000020",
-                                                    "font-color": "color_ACCAF7FF"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "view_container_fix": {
-                                        "attributes": {
-                                            "class": "view_container_fix",
-                                            "origin": "3, 27",
-                                            "size": "112, 21",
-                                            "background-color": "color_FFFFFF00"
-                                        },
-                                        "children": {
-                                            "seven_rotary_knob": {
-                                                "attributes": {
-                                                    "class": "seven_rotary_knob",
-                                                    "size": "22, 21",
-                                                    "origin": "0, 0",
-                                                    "control-tag": "envelope_2_delay_sync",
-                                                    "tooltip": "Env 3 Delay sync",
-                                                    "angle-start": "20",
-                                                    "angle-range": "320",
-                                                    "color": "color_ACCAF7FF"
-                                                }
-                                            },
-                                            "CTextLabel": {
-                                                "attributes": {
-                                                    "class": "CTextLabel",
-                                                    "size": "42, 21",
-                                                    "origin": "25, -1",
-                                                    "transparent": "true",
-                                                    "text-alignment": "left",
-                                                    "font": "~ NormalFont",
-                                                    "font-color": "color_ACCAF7FF",
-                                                    "title": "Dly"
-                                                }
-                                            },
-                                            "CTextEdit": {
-                                                "attributes": {
-                                                    "class": "CTextEdit",
-                                                    "size": "42, 21",
-                                                    "origin": "67, 0",
-                                                    "control-tag": "envelope_2_delay_sync",
-                                                    "tooltip": "Env 3 Delay sync",
-                                                    "style-no-frame": "true",
-                                                    "style-round-rect": "true",
-                                                    "text-alignment": "right",
-                                                    "font": "~ NormalFontSmall",
-                                                    "text-inset": "3, 0",
-                                                    "round-rect-radius": "3",
-                                                    "value-precision": "159",
-                                                    "back-color": "color_00000020",
-                                                    "font-color": "color_ACCAF7FF"
+                                                    "title": "Sync"
                                                 }
                                             }
                                         }
@@ -4769,8 +4788,8 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
-                                                    "control-tag": "envelope_2_hold_time",
-                                                    "tooltip": "Env 3 Hold time (Sec)",
+                                                    "control-tag": "envelope_2_delay_time",
+                                                    "tooltip": "Env 3 Delay time (Sec)",
                                                     "angle-start": "20",
                                                     "angle-range": "320",
                                                     "color": "color_ACCAF7FF"
@@ -4785,7 +4804,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Hld"
+                                                    "title": "Delay"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -4793,8 +4812,8 @@
                                                     "class": "CTextEdit",
                                                     "size": "42, 21",
                                                     "origin": "67, 0",
-                                                    "control-tag": "envelope_2_hold_time",
-                                                    "tooltip": "Env 3 Hold time (Sec)",
+                                                    "control-tag": "envelope_2_delay_time",
+                                                    "tooltip": "Env 3 Delay time (Sec)",
                                                     "style-no-frame": "true",
                                                     "style-round-rect": "true",
                                                     "text-alignment": "right",
@@ -4821,6 +4840,110 @@
                                                     "class": "seven_rotary_knob",
                                                     "size": "22, 21",
                                                     "origin": "0, 0",
+                                                    "control-tag": "envelope_2_delay_sync",
+                                                    "tooltip": "Env 3 Delay sync",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "color": "color_ACCAF7FF"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "42, 21",
+                                                    "origin": "25, -1",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFont",
+                                                    "font-color": "color_ACCAF7FF",
+                                                    "title": "Delay"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "42, 21",
+                                                    "origin": "67, 0",
+                                                    "control-tag": "envelope_2_delay_sync",
+                                                    "tooltip": "Env 3 Delay sync",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "value-precision": "159",
+                                                    "back-color": "color_00000020",
+                                                    "font-color": "color_ACCAF7FF"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "class": "view_container_fix",
+                                            "origin": "3, 51",
+                                            "size": "112, 21",
+                                            "background-color": "color_FFFFFF00"
+                                        },
+                                        "children": {
+                                            "seven_rotary_knob": {
+                                                "attributes": {
+                                                    "class": "seven_rotary_knob",
+                                                    "size": "22, 21",
+                                                    "origin": "0, 0",
+                                                    "control-tag": "envelope_2_hold_time",
+                                                    "tooltip": "Env 3 Hold time (Sec)",
+                                                    "angle-start": "20",
+                                                    "angle-range": "320",
+                                                    "color": "color_ACCAF7FF"
+                                                }
+                                            },
+                                            "CTextLabel": {
+                                                "attributes": {
+                                                    "class": "CTextLabel",
+                                                    "size": "42, 21",
+                                                    "origin": "25, -1",
+                                                    "transparent": "true",
+                                                    "text-alignment": "left",
+                                                    "font": "~ NormalFont",
+                                                    "font-color": "color_ACCAF7FF",
+                                                    "title": "Hold"
+                                                }
+                                            },
+                                            "CTextEdit": {
+                                                "attributes": {
+                                                    "class": "CTextEdit",
+                                                    "size": "42, 21",
+                                                    "origin": "67, 0",
+                                                    "control-tag": "envelope_2_hold_time",
+                                                    "tooltip": "Env 3 Hold time (Sec)",
+                                                    "style-no-frame": "true",
+                                                    "style-round-rect": "true",
+                                                    "text-alignment": "right",
+                                                    "font": "~ NormalFontSmall",
+                                                    "text-inset": "3, 0",
+                                                    "round-rect-radius": "3",
+                                                    "value-precision": "2",
+                                                    "back-color": "color_00000020",
+                                                    "font-color": "color_ACCAF7FF"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "view_container_fix": {
+                                        "attributes": {
+                                            "class": "view_container_fix",
+                                            "origin": "3, 51",
+                                            "size": "112, 21",
+                                            "background-color": "color_FFFFFF00"
+                                        },
+                                        "children": {
+                                            "seven_rotary_knob": {
+                                                "attributes": {
+                                                    "class": "seven_rotary_knob",
+                                                    "size": "22, 21",
+                                                    "origin": "0, 0",
                                                     "control-tag": "envelope_2_hold_sync",
                                                     "tooltip": "Env 3 Hold sync",
                                                     "angle-start": "20",
@@ -4837,7 +4960,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Hld"
+                                                    "title": "Hold"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -4863,7 +4986,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "227, 27",
+                                            "origin": "115, 51",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -4889,7 +5012,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Sus"
+                                                    "title": "Sustain"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -4915,7 +5038,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 51",
+                                            "origin": "3, 75",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -4941,7 +5064,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Att"
+                                                    "title": "Attack"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -4967,7 +5090,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 51",
+                                            "origin": "3, 75",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -4993,7 +5116,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Att"
+                                                    "title": "Attack"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5019,7 +5142,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "115, 51",
+                                            "origin": "115, 75",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -5056,7 +5179,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Slp"
+                                                    "title": "Slope"
                                                 }
                                             }
                                         }
@@ -5064,7 +5187,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "227, 51",
+                                            "origin": "227, 75",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -5090,7 +5213,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Mid"
+                                                    "title": "Midpoint"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5116,7 +5239,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 75",
+                                            "origin": "3, 99",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -5142,7 +5265,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dcy"
+                                                    "title": "Decay"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5168,7 +5291,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 75",
+                                            "origin": "3, 99",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -5194,7 +5317,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Dcy"
+                                                    "title": "Decay"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5220,7 +5343,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "115, 75",
+                                            "origin": "115, 99",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -5257,7 +5380,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Slp"
+                                                    "title": "Slope"
                                                 }
                                             }
                                         }
@@ -5265,7 +5388,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "227, 75",
+                                            "origin": "227, 99",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -5291,7 +5414,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Mid"
+                                                    "title": "Midpoint"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5317,7 +5440,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 99",
+                                            "origin": "3, 123",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -5343,7 +5466,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Rel"
+                                                    "title": "Release"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5369,7 +5492,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "3, 99",
+                                            "origin": "3, 123",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -5395,7 +5518,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Rel"
+                                                    "title": "Release"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -5421,7 +5544,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "115, 99",
+                                            "origin": "115, 123",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -5458,7 +5581,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Slp"
+                                                    "title": "Slope"
                                                 }
                                             }
                                         }
@@ -5466,7 +5589,7 @@
                                     "view_container_fix": {
                                         "attributes": {
                                             "class": "view_container_fix",
-                                            "origin": "227, 99",
+                                            "origin": "227, 123",
                                             "size": "112, 21",
                                             "background-color": "color_FFFFFF00"
                                         },
@@ -5492,7 +5615,7 @@
                                                     "text-alignment": "left",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
-                                                    "title": "Mid"
+                                                    "title": "Midpoint"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -11726,9 +11849,9 @@
             },
             "view": {
                 "attributes": {
-                    "size": "687, 689",
-                    "minSize": "687, 689",
-                    "maxSize": "687, 689",
+                    "size": "687, 693",
+                    "minSize": "687, 693",
+                    "maxSize": "687, 693",
                     "class": "view_container_fix"
                 },
                 "children": {
@@ -11778,7 +11901,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "3, 82",
-                            "size": "339, 148"
+                            "size": "339, 172"
                         },
                         "children": {
                             "UIViewSwitchContainer": {
@@ -11788,7 +11911,7 @@
                                     "origin": "0, 0",
                                     "template-names": "4,5,6",
                                     "class": "UIViewSwitchContainer",
-                                    "size": "339, 148"
+                                    "size": "339, 172"
                                 }
                             },
                             "COptionMenu": {
@@ -11819,7 +11942,7 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 233",
+                            "origin": "3, 257",
                             "size": "339, 172"
                         },
                         "children": {
@@ -11861,7 +11984,7 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 408",
+                            "origin": "3, 432",
                             "size": "339, 76"
                         },
                         "children": {
@@ -11903,7 +12026,7 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 487",
+                            "origin": "3, 511",
                             "size": "339, 52"
                         },
                         "children": {
@@ -12212,8 +12335,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "3, 542",
-                            "size": "339, 144"
+                            "origin": "3, 566",
+                            "size": "339, 124"
                         },
                         "children": {
                             "view_container_fix": {
@@ -12221,7 +12344,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "339, 144",
+                                    "size": "339, 124",
                                     "name": "17",
                                     "background-offset": "25, 50"
                                 },
@@ -12230,7 +12353,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "339, 144",
+                                            "size": "339, 124",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -12298,7 +12421,7 @@
                                                     "frame-color": "color_82EAE080",
                                                     "back-color": "color_00000000",
                                                     "origin": "0, 25",
-                                                    "size": "339, 119"
+                                                    "size": "339, 99"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -12306,7 +12429,7 @@
                                                     "class": "view_container_fix",
                                                     "background-color": "color_82EAE020",
                                                     "origin": "0, 25",
-                                                    "size": "339, 119"
+                                                    "size": "339, 99"
                                                 },
                                                 "children": {
                                                     "view_container_fix": {
@@ -14777,7 +14900,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "345, 250",
-                            "size": "339, 436"
+                            "size": "339, 440"
                         },
                         "children": {
                             "view_container_fix": {
@@ -14785,7 +14908,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "339, 436",
+                                    "size": "339, 440",
                                     "name": "15",
                                     "background-offset": "50, 25"
                                 },
@@ -14794,7 +14917,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "339, 436",
+                                            "size": "339, 440",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -14862,7 +14985,7 @@
                                                     "frame-color": "color_6EFAD580",
                                                     "back-color": "color_00000000",
                                                     "origin": "0, 25",
-                                                    "size": "339, 411"
+                                                    "size": "339, 415"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -14870,7 +14993,7 @@
                                                     "class": "view_container_fix",
                                                     "background-color": "color_6EFAD520",
                                                     "origin": "0, 25",
-                                                    "size": "339, 411"
+                                                    "size": "339, 415"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
