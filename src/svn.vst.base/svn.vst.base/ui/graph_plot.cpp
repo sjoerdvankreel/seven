@@ -50,17 +50,16 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
 
   auto size = getViewSize().getSize();
   auto pos = getViewSize().getTopLeft();
-  CPoint inner_size = size - CPoint(2, 2);
   CPoint render_size(size.x - padx * 2, size.y - pady * 2);
   CDrawContext::Transform transform(*context, CGraphicsTransform().translate(pos));
   
   CColor background(0, 0, 0, 128);
   context->setFillColor(background);
-  context->drawRect(CRect(CPoint(1, 1), inner_size), CDrawStyle::kDrawFilled);
-
+  context->drawRect(CRect(CPoint(0, 0), size), CDrawStyle::kDrawFilled);
+        
   CColor border(255, 255, 255, 64);
   context->setFrameColor(border);
-  context->drawRect(CRect(CPoint(1, 1), inner_size), CDrawStyle::kDrawStroked);
+  context->drawRect(CRect(CPoint(0, 0), size), CDrawStyle::kDrawStroked);
    
   bool bipolar;
   auto editor = static_cast<VST3Editor*>(getFrame()->getEditor());
@@ -77,7 +76,7 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
     stroke_path->addLine(graph_data[i].x + padx, render_size.y - graph_data[i].y + pady);
   context->drawGraphicsPath(stroke_path, CDrawContext::kPathStroked);
   stroke_path->forget();
-
+   
   double base_y = bipolar? 0.5: 1.0;
   CGraphicsPath* fill_path = context->createGraphicsPath();
   fill_path->beginSubpath(CPoint(graph_data[0].x + padx, render_size.y * base_y + pady + 1.0));

@@ -56,7 +56,7 @@ controller::createView(char const* name)
 {
   if (ConstString(name) != ViewType::kEditor) return nullptr;
   return _editor = new editor(this, "view", "controller.uidesc", _topology);
-}
+}   
 
 tresult PLUGIN_API
 controller::setComponentState(IBStream* state)

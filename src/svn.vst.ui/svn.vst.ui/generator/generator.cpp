@@ -314,10 +314,11 @@ build_ui_part_graph(
   Value result(kObjectType);
   auto const& graph = part.graphs[index];
   auto const& part_desc = topology.parts[part.runtime_part_index];
-  std::int32_t left = graph.column * param_total_width + padding_param_group;
-  std::int32_t top = graph.row * (param_row_height + margin) + padding_param_group;
-  std::int32_t height = graph.row_span * (param_row_height + margin) + margin - 2 * padding_param_group;
-  std::int32_t width = graph.column_span * param_total_width + (graph.column_span - 1) * margin - 2 * padding_param_group;
+
+  std::int32_t width = graph.column_span * param_total_width - padding_param_group;
+  std::int32_t left = graph.column * param_total_width + 2 * padding_param_group;
+  std::int32_t top = graph.row * (param_row_height + margin) + 2 * padding_param_group;
+  std::int32_t height = graph.row_span * param_row_height + (graph.row_span - 1) * margin + 2 * padding_param_group;
   add_attribute(result, "class", "seven_graph_plot", allocator);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   add_attribute(result, "size", size_to_string(width, height), allocator);
@@ -327,7 +328,7 @@ build_ui_part_graph(
   add_attribute(result, "tooltip", narrow_assume_ascii(graph.description), allocator);
   add_attribute(result, "part-type", std::to_string(part_desc.descriptor->type), allocator);
   return result;
-}
+} 
 
 static Value
 build_ui_part_param_container(
