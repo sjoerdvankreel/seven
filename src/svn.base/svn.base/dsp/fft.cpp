@@ -1,5 +1,5 @@
+#include <svn.base/dsp/fft.hpp>
 #include <svn.base/dsp/support.hpp>
-#include <svn.base/dsp/spectrum_analyzer.hpp>
 
 #include <numbers>
 #include <cassert>
@@ -8,7 +8,7 @@ namespace svn::base {
 
 // https://rosettacode.org/wiki/Fast_Fourier_transform#C.2B.2B
 void
-spectrum_analyzer::fft(std::complex<float>* inout, 
+fft::transform(std::complex<float>* inout, 
   std::complex<float>* scratch, std::size_t count)
 {
   if (count < 2) return;
@@ -17,8 +17,8 @@ spectrum_analyzer::fft(std::complex<float>* inout,
   std::complex<float>* odd = scratch + count / 2;
   for (std::size_t i = 0; i < count / 2; i++) even[i] = inout[i * 2];
   for (std::size_t i = 0; i < count / 2; i++) odd[i] = inout[i * 2 + 1];
-  fft(odd, inout, count / 2);
-  fft(even, inout, count / 2);
+  transform(odd, inout, count / 2);
+  transform(even, inout, count / 2);
   for (std::size_t i = 0; i < count / 2; i++)
   {
     float im = -2.0f * std::numbers::pi * i / count;
@@ -28,19 +28,35 @@ spectrum_analyzer::fft(std::complex<float>* inout,
   }
 }
 
+std::vector<std::complex<float>> const& 
+fft::transform(float const* audio, std::size_t count)
+{
+  _fft.clear();
+  std::size_t pow2 = next_pow2(count);
+  for (std::size_t i = 0; i < count; i++)
+    _fft.push_back(std::complex<float>(audio[i], 0.0f));
+  _fft.insert(_fft.end(), pow2 - count, std::complex<float>(0.0f, 0.0f));
+  _scratch.resize(pow2);
+  transform(_fft.data(), _scratch.data(), pow2);
+  // Discard above nyquist.
+  _fft.erase(_fft.begin() + _fft.size() / 2, _fft.end());
+  return _fft;
+}
+
 // https://stackoverflow.com/questions/604453/analyze-audio-using-fast-fourier-transform
 // https://dsp.stackexchange.com/questions/46692/calculating-1-3-octave-spectrum-from-fft-dft
 float 
-spectrum_analyzer::power_at_note(std::int32_t midi, float sample_rate) const
+spectrum_analyzer::power_at_note(
+  std::vector<std::complex<float>> const& fft, std::int32_t midi, float sample_rate) const
 {
   float result = 0.0f;
-  float freq_to_bin = sample_rate / (_fft_inout.size() * 2.0f);
+  float freq_to_bin = sample_rate / (fft.size() * 2.0f);
   std::size_t bin1 = static_cast<size_t>(note_to_frequency(midi) * freq_to_bin);
   std::size_t bin2 = static_cast<size_t>(note_to_frequency(midi + 1) * freq_to_bin);
-  for (std::size_t i = bin1; i < bin2 && i < _fft_inout.size(); i++)
+  for (std::size_t i = bin1; i < bin2 && i < fft.size(); i++)
   {
-    float real2 = _fft_inout[i].real() * _fft_inout[i].real();
-    float imag2 = _fft_inout[i].imag() * _fft_inout[i].imag();
+    float real2 = fft[i].real() * fft[i].real();
+    float imag2 = fft[i].imag() * fft[i].imag();
     result += real2 + imag2;
   }
   return sanity(std::sqrtf(result));
@@ -49,21 +65,12 @@ spectrum_analyzer::power_at_note(std::int32_t midi, float sample_rate) const
 float const*
 spectrum_analyzer::analyze(float* audio, std::size_t count, float sample_rate)
 {
-  _fft_inout.clear();
-  std::size_t pow2 = next_pow2(count);
-  for (std::size_t i = 0; i < count; i++)
-    _fft_inout.push_back(std::complex<float>(audio[i], 0.0f));
-  _fft_inout.insert(_fft_inout.end(), pow2 - count, std::complex<float>(0.0f, 0.0f));
-  _fft_scratch.resize(pow2);
-  fft(_fft_inout.data(), _fft_scratch.data(), pow2);
-  // Discard above nyquist.
-  _fft_inout.erase(_fft_inout.begin() + _fft_inout.size() / 2, _fft_inout.end());
-
+  std::vector<std::complex<float>> const& fft = _fft.transform(audio, count);
   _output.clear();
   float max = 0.0f;
   for (std::int32_t oct = 0; oct < 12; oct++)
     for (std::int32_t note = 0; note < 12; note++)
-      _output.push_back(power_at_note(oct * 12 + note, sample_rate));
+      _output.push_back(power_at_note(fft, oct * 12 + note, sample_rate));
   for (std::size_t i = 0; i < _output.size(); i++) max = std::max(_output[i], max);
   for (std::size_t i = 0; i < _output.size(); i++) _output[i] = max == 0.0f ? 0.0f : sanity_unipolar(_output[i] / max);
   return _output.data();

@@ -1,5 +1,5 @@
+#include <svn.base/dsp/fft.hpp>
 #include <svn.base/dsp/support.hpp>
-#include <svn.base/dsp/spectrum_analyzer.hpp>
 #include <svn.synth/topology/topology.hpp>
 #include <svn.synth/dsp/lfo.hpp>
 #include <svn.synth/dsp/filter.hpp>
