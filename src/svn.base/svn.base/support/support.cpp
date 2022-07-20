@@ -57,15 +57,6 @@ list_parser(
   return false;    
 }
 
-std::vector<std::wstring>
-list_names(wchar_t const* name, std::int32_t count)
-{
-  std::vector<std::wstring> result;
-  for(std::int32_t i = 0; i < count; i++)
-    result.push_back(name + std::to_wstring(i + 1));
-  return result;
-}
-
 std::vector<std::vector<std::int32_t>> 
 multi_list_table_init_in(
   std::int32_t const* counts, std::int32_t count)
@@ -134,6 +125,15 @@ zip_list_table_init_out(
 }
 
 std::vector<std::wstring>
+list_names(wchar_t const* name, std::int32_t count)
+{
+  std::vector<std::wstring> result;
+  for (std::int32_t i = 0; i < count; i++)
+    result.push_back(name + std::wstring(L" ") + std::to_wstring(i + 1));
+  return result;
+}
+
+std::vector<std::wstring>
 multi_list_names(
   wchar_t const* const* names,
   std::int32_t const* counts, std::int32_t count)
@@ -143,7 +143,7 @@ multi_list_names(
     for(std::int32_t j = 0; j < counts[i]; j++)
     {
       std::wstring name = names[i];
-      if(counts[i] > 1) name += std::to_wstring(j + 1);
+      if(counts[i] > 1) name += L" " + std::to_wstring(j + 1);
       result.push_back(name);
     }
   return result;
@@ -161,16 +161,16 @@ zip_list_names(
       if (counts2[i] == 0)
       {
         std::wstring name = names1[i];
-        if (counts1[i] > 1) name += std::to_wstring(j + 1);
+        if (counts1[i] > 1) name += L" " + std::to_wstring(j + 1);
         result.push_back(name);
       }
       else for(std::int32_t k = 0; k < counts2[i]; k++)
       {
         std::wstring name = names1[i];
-        if(counts1[i] > 1) name += std::to_wstring(j + 1);
+        if(counts1[i] > 1) name += L" " + std::to_wstring(j + 1);
         result.push_back(name + L" " + names2[i][k]);
       }
-  return result;
+  return result; 
 }
 
 std::vector<std::pair<std::int32_t, std::int32_t>>
