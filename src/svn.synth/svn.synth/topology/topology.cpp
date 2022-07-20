@@ -284,20 +284,20 @@ cv_route_params[cv_route_param::count] =
   { "{F6DA01D0-6BFD-4F14-9776-95250FC57CA6}", { L"Amt15", L"Amount 15" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { false, true, 46, 2, nullptr, 0 } }
 };  
                
-// ---- global topo ----  
+// ---- global topo ----   
    
 part_descriptor const      
 part_descriptors[part_type::count] =     
 {   
-  { "{5C9D2CD3-2D4C-4205-893E-6B5DE9D62ADE}", { L"Osc", L"Oscillator" }, part_type::oscillator, false, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 0, 3, 0, active_param::oscillator, L"Voice" } },
-  { "{FC4885FE-431C-477A-B5B7-84863DB8C07D}", { L"Env", L"Envelope" }, part_type::envelope, false, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 3, 3, 0, active_param::envelope, L"Voice" } },
-  { "{56DE75BB-BE73-4B27-B37F-77F6E408F986}", { L"VLFO", L"Voice LFO" }, part_type::voice_lfo, false, false, voice_lfo_count, voice_lfo_params, voice_lfo_param::count, &voice_lfo_graph, 1, { 1, 3, 0, active_param::lfo, L"Voice" } },
+  { "{5C9D2CD3-2D4C-4205-893E-6B5DE9D62ADE}", { L"Osc", L"Oscillator" }, part_type::oscillator, false, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 2, 3, 0, active_param::oscillator, L"Voice" } },
+  { "{FC4885FE-431C-477A-B5B7-84863DB8C07D}", { L"Env", L"Envelope" }, part_type::envelope, false, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 1, 3, 0, active_param::envelope, L"Voice" } },
+  { "{56DE75BB-BE73-4B27-B37F-77F6E408F986}", { L"VLFO", L"Voice LFO" }, part_type::voice_lfo, false, false, voice_lfo_count, voice_lfo_params, voice_lfo_param::count, &voice_lfo_graph, 1, { 0, 3, 0, active_param::lfo, L"Voice" } },
   { "{E6344937-C1F7-4F2A-83E7-EA27D48DEC4E}", { L"Amp", L"Voice amp" }, part_type::voice_amp, false, false, 1, voice_amp_params, voice_amp_param::count, nullptr, 0, { 4, 3, -1, -1, L"Voice" } },
-  { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"VFilter", L"Voice filter" }, part_type::voice_filter, false, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 2, 3, 0, active_param::filter, L"Voice" } },
-  { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 5, 3, -1, -1, L"Route" } },
-  { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, false, 1, cv_route_params, cv_route_param::count, &cv_route_graph, 1, { 6, 3, -1, -1, L"Route" } },
-  { "{C972E264-1739-4DB6-B1DB-5D31057BD218}", { L"Active", L"Active" }, part_type::active, false, true, 1, active_params, active_param::count, nullptr, 0, part_no_ui },
-  { "{FEEBA3F5-F248-4C1B-BD8C-F3A492D084E2}", { L"Out", L"Output" }, part_type::output, true, false, 1, output_params, output_param::count, nullptr, 0, { 7, 3, -1, -1, L"Global" } }
+  { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"VFilter", L"Voice filter" }, part_type::voice_filter, false, false, voice_filter_count, voice_filter_params, voice_filter_param::count, &voice_filter_graph, 1, { 3, 3, 0, active_param::filter, L"Voice" } },
+  { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 6, 3, -1, -1, L"Route" } },
+  { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, false, 1, cv_route_params, cv_route_param::count, &cv_route_graph, 1, { 7, 3, -1, -1, L"Route" } },
+  { "{C972E264-1739-4DB6-B1DB-5D31057BD218}", { L"Active", L"Active" }, part_type::active, false, true, 1, active_params, active_param::count, nullptr, -1, part_no_ui },
+  { "{FEEBA3F5-F248-4C1B-BD8C-F3A492D084E2}", { L"Out", L"Output" }, part_type::output, true, false, 1, output_params, output_param::count, nullptr, 0, { 5, 3, -1, -1, L"Global" } }
 };    
        
 } // namespace svn::synth           
