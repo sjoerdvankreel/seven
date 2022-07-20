@@ -10,7 +10,7 @@ namespace svn::synth {
 class envelope_graph:
 public svn::base::graph_processor<base::cv_sample>
 {
-  static inline float constexpr env_graph_rate = 200.0f;
+  static inline float constexpr env_graph_rate = 1000.0f;
 
 private:
   void setup_stages(param_value const* const* automation, float bpm, 
