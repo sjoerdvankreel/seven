@@ -45,7 +45,7 @@ rotary_knob::draw(VSTGUI::CDrawContext* context)
   // inner border
   context->setFrameColor(color_lighten(_color, 0.25f, 255));
   context->drawEllipse(CRect(CPoint(2, 2), size - CPoint(4, 4)), kDrawStroked);
-
+   
   // marker
   float center = (size.x - 1.0f) / 2.0f;
   float radius = center - 3.0f;
