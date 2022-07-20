@@ -301,10 +301,10 @@
             "cv_route_0_input_15": "239",
             "cv_route_0_output_15": "240",
             "cv_route_0_amount_15": "241",
-            "selector_0_oscillator": "242",
-            "selector_0_voice_lfo": "243",
-            "selector_0_voice_filter": "244",
-            "selector_0_envelope": "245",
+            "active_0_oscillator": "242",
+            "active_0_lfo": "243",
+            "active_0_filter": "244",
+            "active_0_envelope": "245",
             "output_0_clip": "246",
             "output_0_voices_exhausted": "247",
             "output_0_voice_count": "248",
@@ -11591,7 +11591,7 @@
                         "children": {
                             "UIViewSwitchContainer": {
                                 "attributes": {
-                                    "template-switch-control": "selector_0_oscillator",
+                                    "template-switch-control": "active_0_oscillator",
                                     "origin": "0, 0",
                                     "template-names": "0,1,2,3",
                                     "class": "UIViewSwitchContainer",
@@ -11603,8 +11603,8 @@
                                     "class": "COptionMenu",
                                     "size": "67, 21",
                                     "origin": "3, 2",
-                                    "control-tag": "selector_0_oscillator",
-                                    "tooltip": "Selector Oscillator",
+                                    "control-tag": "active_0_oscillator",
+                                    "tooltip": "Active Oscillator",
                                     "font": "~ NormalFont",
                                     "min-value": "0",
                                     "default-value": "0",
@@ -11632,7 +11632,7 @@
                         "children": {
                             "UIViewSwitchContainer": {
                                 "attributes": {
-                                    "template-switch-control": "selector_0_voice_lfo",
+                                    "template-switch-control": "active_0_lfo",
                                     "origin": "0, 0",
                                     "template-names": "7,8,9",
                                     "class": "UIViewSwitchContainer",
@@ -11644,8 +11644,8 @@
                                     "class": "COptionMenu",
                                     "size": "67, 21",
                                     "origin": "3, 2",
-                                    "control-tag": "selector_0_voice_lfo",
-                                    "tooltip": "Selector Voice LFO",
+                                    "control-tag": "active_0_lfo",
+                                    "tooltip": "Active LFO",
                                     "font": "~ NormalFont",
                                     "min-value": "0",
                                     "default-value": "0",
@@ -11673,7 +11673,7 @@
                         "children": {
                             "UIViewSwitchContainer": {
                                 "attributes": {
-                                    "template-switch-control": "selector_0_voice_filter",
+                                    "template-switch-control": "active_0_filter",
                                     "origin": "0, 0",
                                     "template-names": "11,12,13",
                                     "class": "UIViewSwitchContainer",
@@ -11685,8 +11685,8 @@
                                     "class": "COptionMenu",
                                     "size": "67, 21",
                                     "origin": "3, 2",
-                                    "control-tag": "selector_0_voice_filter",
-                                    "tooltip": "Selector Voice filter",
+                                    "control-tag": "active_0_filter",
+                                    "tooltip": "Active Filter",
                                     "font": "~ NormalFont",
                                     "min-value": "0",
                                     "default-value": "0",
@@ -11714,7 +11714,7 @@
                         "children": {
                             "UIViewSwitchContainer": {
                                 "attributes": {
-                                    "template-switch-control": "selector_0_envelope",
+                                    "template-switch-control": "active_0_envelope",
                                     "origin": "0, 0",
                                     "template-names": "4,5,6",
                                     "class": "UIViewSwitchContainer",
@@ -11726,8 +11726,8 @@
                                     "class": "COptionMenu",
                                     "size": "67, 21",
                                     "origin": "3, 2",
-                                    "control-tag": "selector_0_envelope",
-                                    "tooltip": "Selector Envelope",
+                                    "control-tag": "active_0_envelope",
+                                    "tooltip": "Active Envelope",
                                     "font": "~ NormalFont",
                                     "min-value": "0",
                                     "default-value": "0",
