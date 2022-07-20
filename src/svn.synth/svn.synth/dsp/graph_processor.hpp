@@ -104,11 +104,12 @@ public:
 class filter_fr_graph:
 public svn::base::graph_processor<base::audio_sample32>
 {
+  base::fft _fft;
   filter_ir_graph _ir;
   std::vector<float> _mono;
 public:
   filter_fr_graph(topology_info const* topology, std::int32_t part_index) :
-  svn::base::graph_processor<base::audio_sample32>(topology, part_index), _ir(topology, part_index), _mono() {}
+  svn::base::graph_processor<base::audio_sample32>(topology, part_index), _fft(), _ir(topology, part_index), _mono() {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;

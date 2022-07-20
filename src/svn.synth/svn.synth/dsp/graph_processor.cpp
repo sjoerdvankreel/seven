@@ -264,10 +264,9 @@ filter_fr_graph::dsp_to_plot(
   _mono.clear();
   for(std::size_t s = 0; s < dsp.size(); s++)
     _mono.push_back(dsp[s].mono());
-
-  float const* spectrum = spectrum_analyzer().analyze(_mono.data(), _mono.size(), sample_rate);
-  for(std::size_t i = 0; i < spectrum_analyzer::bucket_count; i++)
-    plot.push_back(spectrum[i]);
+  std::vector<std::complex<float>> const& fft = _fft.transform(_mono.data(), _mono.size());
+  for(std::size_t i = 0; i < fft.size(); i++)
+    plot.push_back(fft[i].real());
 }
 
 std::int32_t
