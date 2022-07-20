@@ -49,7 +49,7 @@ graph_processor<T>::plot(param_value const* state,
   dsp_to_plot(state, _raw_data, _plot_data, sample_rate, bipolar);
   float transform = width / static_cast<float>(_plot_data.size());
   for (std::size_t i = 0; i < _plot_data.size(); i++)
-    _graph_data.push_back({ static_cast<float>(i * transform), _plot_data[i] * height});
+    _graph_data.push_back({ static_cast<float>(i * transform), sanity_unipolar(_plot_data[i]) * height});
   return _graph_data;
 }
 

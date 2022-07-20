@@ -255,6 +255,7 @@ filter_fr_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
 { return _ir.process_dsp_core(input, output, sample_rate, bpm); }
 
+// https://dsp.stackexchange.com/questions/20500/negative-values-of-the-fft
 void
 filter_fr_graph::dsp_to_plot(
   param_value const* state, std::vector<audio_sample32> const& dsp, 
@@ -262,11 +263,14 @@ filter_fr_graph::dsp_to_plot(
 {
   bipolar = false;
   _mono.clear();
+  float max = 0.0f;
   for(std::size_t s = 0; s < dsp.size(); s++)
     _mono.push_back(dsp[s].mono());
   std::vector<std::complex<float>> const& fft = _fft.transform(_mono.data(), _mono.size());
   for(std::size_t i = 0; i < fft.size(); i++)
-    plot.push_back(fft[i].real());
+    max = std::max(max, std::abs(fft[i].real()));
+  for (std::size_t i = 0; i < fft.size(); i++)
+    plot.push_back(std::abs(fft[i].real()) / max);
 }
 
 std::int32_t
