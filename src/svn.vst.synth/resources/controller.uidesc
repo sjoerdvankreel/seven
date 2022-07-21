@@ -789,10 +789,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_B7C3FDFF",
                                                     "title": "Type"
@@ -834,10 +834,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_B7C3FDFF",
                                                     "title": "Analog"
@@ -1835,10 +1835,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_B7C3FDFF",
                                                     "title": "Type"
@@ -1880,10 +1880,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_B7C3FDFF",
                                                     "title": "Analog"
@@ -2881,10 +2881,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_B7C3FDFF",
                                                     "title": "Type"
@@ -2926,10 +2926,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_B7C3FDFF",
                                                     "title": "Analog"
@@ -3927,10 +3927,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_B7C3FDFF",
                                                     "title": "Type"
@@ -3972,10 +3972,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_B7C3FDFF",
                                                     "title": "Analog"
@@ -4770,10 +4770,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
                                                     "title": "Type"
@@ -4815,10 +4815,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
                                                     "title": "StVar"
@@ -5457,10 +5457,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
                                                     "title": "Type"
@@ -5502,10 +5502,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
                                                     "title": "StVar"
@@ -6144,10 +6144,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
                                                     "title": "Type"
@@ -6189,10 +6189,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_ACCAF7FF",
                                                     "title": "StVar"
@@ -6970,10 +6970,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_A2D2F1FF",
                                                     "title": "Type"
@@ -7455,10 +7455,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_A2D2F1FF",
                                                     "title": "Slope"
@@ -7656,10 +7656,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_A2D2F1FF",
                                                     "title": "Slope"
@@ -7857,10 +7857,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_A2D2F1FF",
                                                     "title": "Slope"
@@ -8326,10 +8326,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_A2D2F1FF",
                                                     "title": "Type"
@@ -8811,10 +8811,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_A2D2F1FF",
                                                     "title": "Slope"
@@ -9012,10 +9012,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_A2D2F1FF",
                                                     "title": "Slope"
@@ -9213,10 +9213,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_A2D2F1FF",
                                                     "title": "Slope"
@@ -9682,10 +9682,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_A2D2F1FF",
                                                     "title": "Type"
@@ -10167,10 +10167,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_A2D2F1FF",
                                                     "title": "Slope"
@@ -10368,10 +10368,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_A2D2F1FF",
                                                     "title": "Slope"
@@ -10569,10 +10569,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_A2D2F1FF",
                                                     "title": "Slope"
@@ -10858,10 +10858,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_97DAEBFF",
                                                     "title": "Type"
@@ -11275,10 +11275,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_97DAEBFF",
                                                     "title": "Type"
@@ -11692,10 +11692,10 @@
                                             "CTextLabel": {
                                                 "attributes": {
                                                     "class": "CTextLabel",
-                                                    "size": "44, 21",
+                                                    "size": "38, 21",
                                                     "origin": "70, -1",
                                                     "transparent": "true",
-                                                    "text-alignment": "left",
+                                                    "text-alignment": "right",
                                                     "font": "~ NormalFont",
                                                     "font-color": "color_97DAEBFF",
                                                     "title": "Type"
@@ -13686,10 +13686,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "In1"
@@ -13731,10 +13731,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "Out1"
@@ -13828,10 +13828,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "In2"
@@ -13873,10 +13873,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "Out2"
@@ -13970,10 +13970,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "In3"
@@ -14015,10 +14015,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "Out3"
@@ -14112,10 +14112,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "In4"
@@ -14157,10 +14157,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "Out4"
@@ -14254,10 +14254,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "In5"
@@ -14299,10 +14299,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "Out5"
@@ -14396,10 +14396,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "In6"
@@ -14441,10 +14441,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "Out6"
@@ -14538,10 +14538,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "In7"
@@ -14583,10 +14583,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "Out7"
@@ -14680,10 +14680,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "In8"
@@ -14725,10 +14725,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "Out8"
@@ -14822,10 +14822,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "In9"
@@ -14867,10 +14867,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_78F2DAFF",
                                                                     "title": "Out9"
@@ -15797,10 +15797,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Plot"
@@ -15894,10 +15894,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In1"
@@ -15939,10 +15939,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out1"
@@ -16036,10 +16036,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In2"
@@ -16081,10 +16081,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out2"
@@ -16178,10 +16178,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In3"
@@ -16223,10 +16223,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out3"
@@ -16320,10 +16320,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In4"
@@ -16365,10 +16365,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out4"
@@ -16462,10 +16462,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In5"
@@ -16507,10 +16507,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out5"
@@ -16604,10 +16604,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In6"
@@ -16649,10 +16649,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out6"
@@ -16746,10 +16746,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In7"
@@ -16791,10 +16791,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out7"
@@ -16888,10 +16888,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In8"
@@ -16933,10 +16933,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out8"
@@ -17030,10 +17030,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In9"
@@ -17075,10 +17075,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out9"
@@ -17172,10 +17172,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In10"
@@ -17217,10 +17217,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out10"
@@ -17314,10 +17314,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In11"
@@ -17359,10 +17359,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out11"
@@ -17456,10 +17456,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In12"
@@ -17501,10 +17501,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out12"
@@ -17598,10 +17598,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In13"
@@ -17643,10 +17643,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out13"
@@ -17740,10 +17740,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In14"
@@ -17785,10 +17785,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out14"
@@ -17882,10 +17882,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFont",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "In15"
@@ -17927,10 +17927,10 @@
                                                             "CTextLabel": {
                                                                 "attributes": {
                                                                     "class": "CTextLabel",
-                                                                    "size": "44, 21",
+                                                                    "size": "38, 21",
                                                                     "origin": "70, -1",
                                                                     "transparent": "true",
-                                                                    "text-alignment": "left",
+                                                                    "text-alignment": "right",
                                                                     "font": "~ NormalFontSmall",
                                                                     "font-color": "color_6EFAD5FF",
                                                                     "title": "Out15"
