@@ -979,7 +979,7 @@
                                                     "font": "~ NormalFont",
                                                     "text-alignment": "left",
                                                     "font-color": "color_B7C3FDFF",
-                                                    "title": "Dist"
+                                                    "title": "Distance"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -1031,7 +1031,7 @@
                                                     "font": "~ NormalFont",
                                                     "text-alignment": "left",
                                                     "font-color": "color_B7C3FDFF",
-                                                    "title": "Pw"
+                                                    "title": "PW"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2025,7 +2025,7 @@
                                                     "font": "~ NormalFont",
                                                     "text-alignment": "left",
                                                     "font-color": "color_B7C3FDFF",
-                                                    "title": "Dist"
+                                                    "title": "Distance"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -2077,7 +2077,7 @@
                                                     "font": "~ NormalFont",
                                                     "text-alignment": "left",
                                                     "font-color": "color_B7C3FDFF",
-                                                    "title": "Pw"
+                                                    "title": "PW"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -3071,7 +3071,7 @@
                                                     "font": "~ NormalFont",
                                                     "text-alignment": "left",
                                                     "font-color": "color_B7C3FDFF",
-                                                    "title": "Dist"
+                                                    "title": "Distance"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -3123,7 +3123,7 @@
                                                     "font": "~ NormalFont",
                                                     "text-alignment": "left",
                                                     "font-color": "color_B7C3FDFF",
-                                                    "title": "Pw"
+                                                    "title": "PW"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -4117,7 +4117,7 @@
                                                     "font": "~ NormalFont",
                                                     "text-alignment": "left",
                                                     "font-color": "color_B7C3FDFF",
-                                                    "title": "Dist"
+                                                    "title": "Distance"
                                                 }
                                             },
                                             "CTextEdit": {
@@ -4169,7 +4169,7 @@
                                                     "font": "~ NormalFont",
                                                     "text-alignment": "left",
                                                     "font-color": "color_B7C3FDFF",
-                                                    "title": "Pw"
+                                                    "title": "PW"
                                                 }
                                             },
                                             "CTextEdit": {

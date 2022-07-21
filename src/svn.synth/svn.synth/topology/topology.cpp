@@ -173,7 +173,7 @@ static std::vector<std::wstring> const oscillator_types = { L"Analog", L"DSF" };
 static std::vector<std::wstring> const oscillator_analog_types = { L"Sine", L"Saw", L"Pulse", L"Triangle" };
 static param_relevance const oscillator_dsf_relevance[1] = { { oscillator_param::type, { oscillator_type::dsf } } };
 static param_relevance const oscillator_analog_relevance[1] = { { oscillator_param::type, { oscillator_type::analog } } };
-
+ 
 static param_descriptor const
 oscillator_params[oscillator_param::count] =
 { 
@@ -182,9 +182,9 @@ oscillator_params[oscillator_param::count] =
   { "{63C96678-9823-4B96-B2C0-78014A268DB5}", { L"Pan", L"Panning" }, L"%", { 0.5f, 2, real_bounds::unit(), real_bounds::linear(-100.0f, 100.0f) }, { 1, 2, nullptr, 0 } },
   { "{84A7AEC8-25E9-4242-B32E-2E9E780F0E31}", { L"Type", L"Type" }, L"", false, &oscillator_types, 0, { 2, 2, nullptr, 0 } },
   { "{EAFF1105-BA8D-4C55-8BEC-6B73AECF95E2}", { L"Analog", L"Analog type" }, L"", false, &oscillator_analog_types, 0, { 3, 2, oscillator_analog_relevance, 1 } },
-  { "{35DAF80A-6EE0-4A3C-9E81-B225A466F4B2}", { L"Pw", L"Analog pulse width" }, L"%", { 1.0f, 0, real_bounds::linear(0.0f, 1.0f), real_bounds::linear(0.0f, 100.0f) }, { 5, 2, oscillator_analog_pw_relevance, 2 } },
+  { "{35DAF80A-6EE0-4A3C-9E81-B225A466F4B2}", { L"PW", L"Analog pulse width" }, L"%", { 1.0f, 0, real_bounds::linear(0.0f, 1.0f), real_bounds::linear(0.0f, 100.0f) }, { 5, 2, oscillator_analog_pw_relevance, 2 } },
   { "{8B45133B-38AA-4E23-9CB9-B05A4954A947}", { L"Partials", L"DSF partials" }, L"", true, 0, 9999, 0, { 3, 2, oscillator_dsf_relevance, 1 } },
-  { "{083A6619-0309-48CA-8E9E-9A309EA61044}", { L"Dist", L"DSF distance" }, L"", { (1.0f - 0.05f) / (20.0f - 0.05f), 2, real_bounds::linear(0.05f, 20.0f), real_bounds::linear(0.05f, 20.0f) }, { 4, 2, oscillator_dsf_relevance, 1 } },
+  { "{083A6619-0309-48CA-8E9E-9A309EA61044}", { L"Distance", L"DSF distance" }, L"", { (1.0f - 0.05f) / (20.0f - 0.05f), 2, real_bounds::linear(0.05f, 20.0f), real_bounds::linear(0.05f, 20.0f) }, { 4, 2, oscillator_dsf_relevance, 1 } },
   { "{FFD6C9F3-B7D4-4819-A63A-40BC907F91AF}", { L"Rolloff", L"DSF rolloff" }, L"%", { 0.5f, 2, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f) }, { 5, 2, oscillator_dsf_relevance, 1 } },
   { "{5E3DB4DC-B459-43C4-9BBD-0FF8F2232AFA}", { L"Octave", L"Octave" }, L"", true, 0, 9, 4, { 6, 0, nullptr, 0 } },
   { "{501C5217-5A5B-48D8-AEFE-CFE67417E8AD}", { L"Note", L"Note" }, L"", true, &note_names, 0, { 7, 0, nullptr, 0 } },
@@ -243,12 +243,12 @@ static wchar_t const* const* const cv_input_op_names[cv_route_input::count] = { 
 static wchar_t const* const cv_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Filter", L"Amp" };
 static wchar_t const* const cv_amp_output_names[cv_route_amp_output::count] = { L"Lvl", L"Pan" };
 static wchar_t const* const cv_filter_output_names[cv_route_filter_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
-static wchar_t const* const cv_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"Pw", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
+static wchar_t const* const cv_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"PW", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
 static wchar_t const* const* const cv_output_target_names[cv_route_output::count] = { nullptr, cv_osc_output_names, cv_filter_output_names, cv_amp_output_names };
 static std::vector<std::wstring> const cv_input_names_list = zip_list_names(cv_input_names, cv_input_infos, cv_input_counts, cv_input_op_names, cv_input_op_counts, cv_route_input::count);
 static std::vector<std::wstring> const cv_output_names_list = zip_list_names(cv_output_names, nullptr, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count);
      
-static param_descriptor const 
+static param_descriptor const  
 cv_route_params[cv_route_param::count] =  
 {  
   { "{CE1DC1C7-72C5-4811-8C35-8485FFAFFABC}", { L"Plot", L"Plot target" }, L"", false, &cv_output_names_list, 0, { 0, 1, nullptr, 0 } },
