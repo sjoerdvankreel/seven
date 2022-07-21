@@ -8,9 +8,9 @@ namespace svn::synth {
 
 // ---- global topo ----
 
-inline std::int32_t constexpr lfo_count = 3;
-inline std::int32_t constexpr filter_count = 3;
-inline std::int32_t constexpr envelope_count = 3;
+inline std::int32_t constexpr lfo_count = 6;
+inline std::int32_t constexpr filter_count = 4;
+inline std::int32_t constexpr envelope_count = 4;
 inline std::int32_t constexpr oscillator_count = 4;
 
 extern base::part_descriptor const part_descriptors[];
