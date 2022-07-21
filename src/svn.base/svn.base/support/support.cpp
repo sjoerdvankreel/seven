@@ -125,11 +125,20 @@ zip_list_table_init_out(
 }
 
 std::vector<std::wstring>
-list_names(wchar_t const* name, std::int32_t count)
+list_names(wchar_t const* name, std::int32_t count, list_item_info info)
 {
   std::vector<std::wstring> result;
   for (std::int32_t i = 0; i < count; i++)
-    result.push_back(name + std::wstring(L" ") + std::to_wstring(i + 1));
+  {
+    std::wstring item = name + std::wstring(L" ") + std::to_wstring(i + 1);
+    if (info != nullptr)
+    {
+      wchar_t const* extra = info(i);
+      if (extra != nullptr)
+        item = std::wstring(extra) + L" " + name;
+    }
+    result.push_back(item);
+  }
   return result;
 }
 

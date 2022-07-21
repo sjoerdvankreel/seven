@@ -27,6 +27,8 @@ struct item_name
   item_name(wchar_t const* short_, wchar_t const* detail): short_(short_), detail(detail) {}
 };
 
+typedef wchar_t const* (*list_item_info)(std::int32_t index);
+
 // Somebody's bound to need this.
 inline std::vector<std::wstring> const note_names = { L"C", L"C#", L"D", L"D#", L"E", L"F", L"F#", L"G", L"G#", L"A", L"A#", L"B" };
 
@@ -45,7 +47,7 @@ list_parser(
 
 // E.g. "Osc", 2 -> "Osc 1", "Osc 2".
 std::vector<std::wstring>
-list_names(wchar_t const* name, std::int32_t count);
+list_names(wchar_t const* name, std::int32_t count, list_item_info info);
 
 // Pass list of names with count per name.
 // E.g. ["Osc", "Flt"], [2, 1] -> ["Osc 1", "Osc 2", "Flt"].

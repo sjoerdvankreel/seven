@@ -6,11 +6,14 @@ using namespace svn::base;
 namespace svn::synth {
 
 // ---- active ----  
+
+wchar_t const* envelope_item_info(std::int32_t index)
+{ return index > 0? nullptr: L"Amp"; };
  
-static std::vector<std::wstring> const active_lfo_names = list_names(L"LFO", lfo_count);
-static std::vector<std::wstring> const active_filter_names = list_names(L"Filter", filter_count);
-static std::vector<std::wstring> const active_envelope_names = list_names(L"Env", envelope_count);
-static std::vector<std::wstring> const active_oscillator_names = list_names(L"Osc", oscillator_count);
+static std::vector<std::wstring> const active_lfo_names = list_names(L"LFO", lfo_count, nullptr);
+static std::vector<std::wstring> const active_filter_names = list_names(L"Filter", filter_count, nullptr);
+static std::vector<std::wstring> const active_oscillator_names = list_names(L"Osc", oscillator_count, nullptr);
+static std::vector<std::wstring> const active_envelope_names = list_names(L"Env", envelope_count, envelope_item_info);
  
 static param_descriptor const
 active_params[active_param::count] =
