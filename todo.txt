@@ -2,3 +2,4 @@
 * Separate output/cpu sections
 * Speed up osc & cv
 * Drop windows dependencies
+* Check group coloring

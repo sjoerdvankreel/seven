@@ -15209,9 +15209,9 @@
             },
             "view": {
                 "attributes": {
-                    "size": "747, 772",
-                    "minSize": "747, 772",
-                    "maxSize": "747, 772",
+                    "size": "747, 748",
+                    "minSize": "747, 748",
+                    "maxSize": "747, 748",
                     "class": "view_container_fix"
                 },
                 "children": {
@@ -15747,11 +15747,29 @@
                                                     },
                                                     "view_container_fix": {
                                                         "attributes": {
+                                                            "background-color": "color_FFFFFF20",
+                                                            "class": "view_container_fix",
+                                                            "origin": "124, 2",
+                                                            "background-color-draw-style": "filled",
+                                                            "size": "121, 23"
+                                                        }
+                                                    },
+                                                    "view_container_fix": {
+                                                        "attributes": {
                                                             "background-color": "color_00000040",
                                                             "class": "view_container_fix",
                                                             "origin": "123, 1",
                                                             "background-color-draw-style": "stroked",
                                                             "size": "123, 25"
+                                                        }
+                                                    },
+                                                    "view_container_fix": {
+                                                        "attributes": {
+                                                            "background-color": "color_89E5E420",
+                                                            "class": "view_container_fix",
+                                                            "origin": "246, 2",
+                                                            "background-color-draw-style": "filled",
+                                                            "size": "121, 23"
                                                         }
                                                     },
                                                     "view_container_fix": {
@@ -15891,7 +15909,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "3, 645",
-                            "size": "369, 124"
+                            "size": "369, 100"
                         },
                         "children": {
                             "view_container_fix": {
@@ -15899,7 +15917,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "369, 124",
+                                    "size": "369, 100",
                                     "name": "23",
                                     "background-offset": "50, 0"
                                 },
@@ -15908,7 +15926,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "369, 124",
+                                            "size": "369, 100",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -15976,7 +15994,7 @@
                                                     "frame-color": "color_80ECDF80",
                                                     "back-color": "color_00000000",
                                                     "origin": "0, 25",
-                                                    "size": "369, 99"
+                                                    "size": "369, 75"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -15984,18 +16002,9 @@
                                                     "class": "view_container_fix",
                                                     "background-color": "color_80ECDF20",
                                                     "origin": "0, 25",
-                                                    "size": "369, 99"
+                                                    "size": "369, 75"
                                                 },
                                                 "children": {
-                                                    "view_container_fix": {
-                                                        "attributes": {
-                                                            "background-color": "color_FFFFFF20",
-                                                            "class": "view_container_fix",
-                                                            "origin": "2, 2",
-                                                            "background-color-draw-style": "filled",
-                                                            "size": "121, 23"
-                                                        }
-                                                    },
                                                     "view_container_fix": {
                                                         "attributes": {
                                                             "background-color": "color_00000040",
@@ -16025,7 +16034,7 @@
                                                     },
                                                     "view_container_fix": {
                                                         "attributes": {
-                                                            "background-color": "color_FFFFFF20",
+                                                            "background-color": "color_80ECDF20",
                                                             "class": "view_container_fix",
                                                             "origin": "246, 2",
                                                             "background-color-draw-style": "filled",
@@ -16039,15 +16048,6 @@
                                                             "origin": "245, 1",
                                                             "background-color-draw-style": "stroked",
                                                             "size": "123, 25"
-                                                        }
-                                                    },
-                                                    "view_container_fix": {
-                                                        "attributes": {
-                                                            "background-color": "color_FFFFFF20",
-                                                            "class": "view_container_fix",
-                                                            "origin": "2, 26",
-                                                            "background-color-draw-style": "filled",
-                                                            "size": "121, 23"
                                                         }
                                                     },
                                                     "view_container_fix": {
@@ -16079,7 +16079,7 @@
                                                     },
                                                     "view_container_fix": {
                                                         "attributes": {
-                                                            "background-color": "color_FFFFFF20",
+                                                            "background-color": "color_80ECDF20",
                                                             "class": "view_container_fix",
                                                             "origin": "246, 26",
                                                             "background-color-draw-style": "filled",
@@ -16093,15 +16093,6 @@
                                                             "origin": "245, 25",
                                                             "background-color-draw-style": "stroked",
                                                             "size": "123, 25"
-                                                        }
-                                                    },
-                                                    "view_container_fix": {
-                                                        "attributes": {
-                                                            "background-color": "color_FFFFFF20",
-                                                            "class": "view_container_fix",
-                                                            "origin": "2, 50",
-                                                            "background-color-draw-style": "filled",
-                                                            "size": "121, 23"
                                                         }
                                                     },
                                                     "view_container_fix": {
@@ -16133,7 +16124,7 @@
                                                     },
                                                     "view_container_fix": {
                                                         "attributes": {
-                                                            "background-color": "color_FFFFFF20",
+                                                            "background-color": "color_80ECDF20",
                                                             "class": "view_container_fix",
                                                             "origin": "246, 50",
                                                             "background-color-draw-style": "filled",
@@ -16145,33 +16136,6 @@
                                                             "background-color": "color_00000040",
                                                             "class": "view_container_fix",
                                                             "origin": "245, 49",
-                                                            "background-color-draw-style": "stroked",
-                                                            "size": "123, 25"
-                                                        }
-                                                    },
-                                                    "view_container_fix": {
-                                                        "attributes": {
-                                                            "background-color": "color_00000040",
-                                                            "class": "view_container_fix",
-                                                            "origin": "1, 73",
-                                                            "background-color-draw-style": "stroked",
-                                                            "size": "123, 25"
-                                                        }
-                                                    },
-                                                    "view_container_fix": {
-                                                        "attributes": {
-                                                            "background-color": "color_00000040",
-                                                            "class": "view_container_fix",
-                                                            "origin": "123, 73",
-                                                            "background-color-draw-style": "stroked",
-                                                            "size": "123, 25"
-                                                        }
-                                                    },
-                                                    "view_container_fix": {
-                                                        "attributes": {
-                                                            "background-color": "color_00000040",
-                                                            "class": "view_container_fix",
-                                                            "origin": "245, 73",
                                                             "background-color-draw-style": "stroked",
                                                             "size": "123, 25"
                                                         }
@@ -18339,7 +18303,7 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "375, 250",
-                            "size": "369, 519"
+                            "size": "369, 495"
                         },
                         "children": {
                             "view_container_fix": {
@@ -18347,7 +18311,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "369, 519",
+                                    "size": "369, 495",
                                     "name": "20",
                                     "background-offset": "50, 50"
                                 },
@@ -18356,7 +18320,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "369, 519",
+                                            "size": "369, 495",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -18424,7 +18388,7 @@
                                                     "frame-color": "color_77F3DA80",
                                                     "back-color": "color_00000000",
                                                     "origin": "0, 25",
-                                                    "size": "369, 494"
+                                                    "size": "369, 470"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -18432,7 +18396,7 @@
                                                     "class": "view_container_fix",
                                                     "background-color": "color_77F3DA20",
                                                     "origin": "0, 25",
-                                                    "size": "369, 494"
+                                                    "size": "369, 470"
                                                 },
                                                 "children": {
                                                     "seven_graph_plot": {
