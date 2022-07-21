@@ -276,7 +276,7 @@ add_ui_output_param(
     break;
   case param_type::text:
     add_child(container, control_class, build_ui_param_edit(topology, type, part, param,
-      param_output_col_width + margin, param_output_col_width - margin, "left", allocator), allocator);
+      param_output_col_width + margin, param_output_col_width - margin, "right", allocator), allocator);
     break;
   default:
     assert(false);
