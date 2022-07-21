@@ -133,13 +133,13 @@ filter_graphs[filter_graph::count] =
   { filter_graph::frequency, 0, 2, 2, 1, L"Frequency response" }
 };
 
-static std::vector<std::wstring> const filter_types = { L"StateVar", L"Comb" };
+static std::vector<std::wstring> const filter_types = { L"StateVariable", L"Comb" };
 static std::vector<std::wstring> const filter_state_var_types = { L"LPF", L"HPF", L"BPF", L"BSF", L"APF" };
 static param_relevance const filter_comb_relevance[1] = { { filter_param::type, { filter_type::comb } } };
 static param_relevance const filter_state_var_relevance[1] = { { filter_param::type, { filter_type::state_var } } };
    
 static param_descriptor const  
-filter_params[filter_param::count] =
+filter_params[filter_param::count] = 
 {  
   { "{5813593C-E25A-4C8B-B7E5-7C95DAC257C2}", { L"On", L"Enabled" }, false, { -1, 0, {}, {}}},
   { "{956F08A1-B3C6-412B-AEEA-55E722744AE8}", { L"Type", L"Type" }, L"", false, &filter_types, 0, { 0, 2, nullptr, 0 } },
