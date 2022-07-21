@@ -12,7 +12,7 @@ using namespace svn::base;
 
 namespace svn::vst::base {   
     
-editor::
+editor::  
 editor(EditController* controller, UTF8StringPtr template_name,
   UTF8StringPtr xml_file, svn::base::topology_info const* topology):
 VST3Editor(controller, template_name, xml_file),

@@ -129,9 +129,7 @@ build_ui_param_menu(
 {
   std::string class_name = get_param_control_class(topology, runtime_param_index);
   auto const& descriptor = *topology.params[runtime_param_index].descriptor;
-  std::string font = descriptor.ui.label_font_small ? "~ NormalFontSmall" : "~ NormalFont";
   Value result(build_ui_param_control_base(topology, runtime_param_index, class_name, left, param_col1_width + margin + param_col2_width, top_margin, allocator));
-  add_attribute(result, "font", font, allocator);
   add_attribute(result, "min-value", "0", allocator);
   add_attribute(result, "default-value", "0", allocator);
   add_attribute(result, "text-alignment", "left", allocator);
@@ -139,6 +137,7 @@ build_ui_param_menu(
   add_attribute(result, "style-round-rect", "true", allocator);
   add_attribute(result, "menu-popup-style", "true", allocator);
   add_attribute(result, "menu-check-style", "false", allocator);
+  add_attribute(result, "font", "~ NormalFontSmall", allocator);
   add_attribute(result, "text-inset", size_to_string(margin, 0), allocator);
   add_attribute(result, "round-rect-radius", std::to_string(margin), allocator);
   add_attribute(result, "max-value", std::to_string(descriptor.discrete.max), allocator);
@@ -156,10 +155,9 @@ build_ui_param_label(
 {
   Value result(build_ui_param_item_base("CTextLabel", left, width, -1, allocator));
   auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
-  std::string font = descriptor.ui.label_font_small ? "~ NormalFontSmall" : "~ NormalFont";
   add_attribute(result, "transparent", "true", allocator);
+  add_attribute(result, "font", "~ NormalFont", allocator);
   add_attribute(result, "text-alignment", alignment, allocator);
-  add_attribute(result, "font", font, allocator);
   add_attribute(result, "font-color", get_color_name(type.color, color_alpha::opaque), allocator);
   std::string title = narrow_assume_ascii(topology.params[param.runtime_param_index].descriptor->static_name.short_);
   add_attribute(result, "title", title, allocator);
@@ -408,8 +406,8 @@ build_ui_part_header_label(
   add_attribute(result, "title", title, allocator);
   add_attribute(result, "class", "CTextLabel", allocator);
   add_attribute(result, "transparent", "true", allocator);
-  add_attribute(result, "text-alignment", alignment, allocator);
   add_attribute(result, "font", "~ NormalFont", allocator);
+  add_attribute(result, "text-alignment", alignment, allocator);
   add_attribute(result, "origin", size_to_string(left, -2), allocator);
   add_attribute(result, "font-color", get_color_name(type.color, color_alpha::opaque), allocator);
   add_attribute(result, "background-color", get_color_name(type.color, color_alpha::half), allocator);

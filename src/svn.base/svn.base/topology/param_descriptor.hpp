@@ -43,8 +43,6 @@ struct param_relevance
 // For ui generator.
 struct param_ui_descriptor
 {
-  bool const control_font_small; // For list params.
-  bool const label_font_small; // For any labels.
   std::int32_t const param_index; // Relative index within the grid.
   std::int32_t const param_group; // Group together related params within a part.
   param_relevance const* const relevance; // Relevant if all other params relevance.if_param[i] have any of values relevance.if_values[i].
@@ -52,7 +50,7 @@ struct param_ui_descriptor
 };
 
 // For selector.
-inline param_ui_descriptor constexpr param_no_ui = { false, false, -1, -1, nullptr, 0 };
+inline param_ui_descriptor constexpr param_no_ui = { -1, -1, nullptr, 0 };
 
 // Describes automation input.
 struct param_descriptor
