@@ -239,7 +239,7 @@ static wchar_t const* const cv_osc_output_names[cv_route_osc_output::count] = { 
 static wchar_t const* const* const cv_output_target_names[cv_route_output::count] = { nullptr, cv_osc_output_names, cv_filter_output_names, cv_amp_output_names };
 static std::vector<std::wstring> const cv_input_names_list = zip_list_names(cv_input_names, cv_input_infos, cv_input_counts, cv_input_op_names, cv_input_op_counts, cv_route_input::count);
 static std::vector<std::wstring> const cv_output_names_list = zip_list_names(cv_output_names, nullptr, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count);
-    
+     
 static param_descriptor const 
 cv_route_params[cv_route_param::count] =  
 {  

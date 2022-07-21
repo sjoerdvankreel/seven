@@ -16,7 +16,7 @@ extern std::uint8_t const color_alphas[];
  
 inline std::int32_t constexpr param_row_height = 21;
 inline std::int32_t constexpr param_col1_width = 22;
-inline std::int32_t constexpr param_col2_width = 42;
+inline std::int32_t constexpr param_col2_width = 50;
 inline std::int32_t constexpr param_col3_width = 44;
 inline std::int32_t constexpr header_checkbox_width = 14;
 
