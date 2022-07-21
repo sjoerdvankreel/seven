@@ -94,7 +94,7 @@ envelope::process_block(voice_input const& input, std::int32_t index,
   {
     if (_ended) { cv_out[s] = _end_sample; continue; }
     cv_out[s] = { 0.0f, false };
-    if(automation.get(envelope_param::on, s).discrete == 0) return s;
+    if(index > 0 && automation.get(envelope_param::on, s).discrete == 0) return s;
     float sustain = automation.get(envelope_param::sustain_level, s).real;
     bool unipolar = automation.get(envelope_param::bipolar, s).discrete == 0;
     bool dahdsr = automation.get(envelope_param::type, s).discrete == envelope_type::dahdsr;
