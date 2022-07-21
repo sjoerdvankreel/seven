@@ -174,23 +174,27 @@ synthesizer::process_block(block_input const& input, block_output& output)
     _last_automation_previous_block[p] = input.automation[p][input.sample_count - 1];
   
   // Clip and set output info.
-  usage.total = performance_counter() - start_time;
   bool clip = base::clip_audio(output.audio, input.sample_count);
+  std::int32_t output_start = topology()->param_bounds[part_type::output][0] - topology()->input_param_count;
+  output.output_params[output_start + output_param::clip].discrete = clip ? 1 : 0;
+  output.output_params[output_start + output_param::voices].discrete = voice_count;
+  output.output_params[output_start + output_param::drain].discrete = _voices_drained ? 1 : 0;
+
+  // Set cpu usage. 
+  usage.total = performance_counter() - start_time;
   double part_time_factor = 100.0 / usage.total;
   double total_time_factor = 100.0 * sample_rate() / input.sample_count; 
   double part_proc_time = usage.cv + usage.osc + usage.env + usage.lfo + usage.amp + usage.audio + usage.filter;
-  output.output_params[output_param::clip].discrete = clip? 1: 0;
-  output.output_params[output_param::voices].discrete = voice_count; 
-  output.output_params[output_param::drain].discrete = _voices_drained ? 1: 0;
-  output.output_params[output_param::cv_cpu].discrete = static_cast<std::int32_t>(usage.cv * part_time_factor);
-  output.output_params[output_param::osc_cpu].discrete = static_cast<std::int32_t>(usage.osc * part_time_factor);
-  output.output_params[output_param::env_cpu].discrete = static_cast<std::int32_t>(usage.env * part_time_factor);
-  output.output_params[output_param::lfo_cpu].discrete = static_cast<std::int32_t>(usage.lfo * part_time_factor);
-  output.output_params[output_param::amp_cpu].discrete = static_cast<std::int32_t>(usage.amp * part_time_factor);
-  output.output_params[output_param::audio_cpu].discrete = static_cast<std::int32_t>(usage.audio * part_time_factor);
-  output.output_params[output_param::total_cpu].discrete = static_cast<std::int32_t>(usage.total * total_time_factor);
-  output.output_params[output_param::filter_cpu].discrete = static_cast<std::int32_t>(usage.filter * part_time_factor);
-  output.output_params[output_param::aux_cpu].discrete = static_cast<std::int32_t>((usage.total - part_proc_time) * part_time_factor);
+  std::int32_t cpu_start = topology()->param_bounds[part_type::cpu][0] - topology()->input_param_count;
+  output.output_params[cpu_start + cpu_param::cv].discrete = static_cast<std::int32_t>(usage.cv * part_time_factor);
+  output.output_params[cpu_start + cpu_param::osc].discrete = static_cast<std::int32_t>(usage.osc * part_time_factor);
+  output.output_params[cpu_start + cpu_param::env].discrete = static_cast<std::int32_t>(usage.env * part_time_factor);
+  output.output_params[cpu_start + cpu_param::lfo].discrete = static_cast<std::int32_t>(usage.lfo * part_time_factor);
+  output.output_params[cpu_start + cpu_param::amp].discrete = static_cast<std::int32_t>(usage.amp * part_time_factor);
+  output.output_params[cpu_start + cpu_param::audio].discrete = static_cast<std::int32_t>(usage.audio * part_time_factor);
+  output.output_params[cpu_start + cpu_param::total].discrete = static_cast<std::int32_t>(usage.total * total_time_factor);
+  output.output_params[cpu_start + cpu_param::filter].discrete = static_cast<std::int32_t>(usage.filter * part_time_factor);
+  output.output_params[cpu_start + cpu_param::aux].discrete = static_cast<std::int32_t>((usage.total - part_proc_time) * part_time_factor);
 }  
- 
+  
 } // namespace svn::synth

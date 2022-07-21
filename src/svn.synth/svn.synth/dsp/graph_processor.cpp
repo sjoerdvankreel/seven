@@ -259,7 +259,7 @@ oscillator_wave_graph::sample_count(
   float frequency = note_to_frequency(12 * (octave + 1) + note + cent);
   return static_cast<std::int32_t>(std::ceil(cycles * sample_rate / frequency));
 } 
-
+ 
 void 
 oscillator_wave_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)

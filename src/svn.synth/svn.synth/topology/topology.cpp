@@ -31,16 +31,23 @@ output_params[output_param::count] =
 {
   { "{A6024C5F-CF37-48C8-BE5B-713191155AE5}", { L"Clip", L"Clip" }, false, { 0, 0, nullptr, 0 } },
   { "{8363D40B-6D49-4CF0-8D86-5449997034DE}", { L"Drain", L"Voices exhausted" }, false, { 1, 0, nullptr, 0 } },
-  { "{6190497F-E08C-49DC-8C74-BAEF6D889BCB}", { L"Voices", L"Voice count" }, L"", false, 0, synth_polyphony, 0, { 2, 0, nullptr, 0 } },
-  { "{485325E3-3E15-46C4-84FA-5D743BB75C3A}", { L"Total CPU", L"Total CPU" }, L"%", false, 0, 100, 0, { 3, 1, nullptr, 0 } },
-  { "{1A5EA805-8678-4B9F-A03F-92E1A9D3C519}", { L"Osc CPU", L"Osc CPU" }, L"%", false, 0, 100, 0, { 4, 1, nullptr, 0 } },
-  { "{C39636DA-EBF5-4AA5-AFBB-BBCD5762D979}", { L"LFO CPU", L"LFO CPU" }, L"%", false, 0, 100, 0, { 5, 1, nullptr, 0 } },
-  { "{C3FBB5D7-E5EA-4EEB-9795-22298F7380B9}", { L"Filter CPU", L"Filter CPU" }, L"%", false, 0, 100, 0, { 6, 1, nullptr, 0 } },
-  { "{0DF43E23-9273-46BC-8BBE-52B2C0E612F7}", { L"Env CPU", L"Envelope CPU" }, L"%", false, 0, 100, 0, { 7, 1, nullptr, 0 } },
-  { "{DC142F66-E4B2-4BEA-8B2E-A9501B32B1FB}", { L"Amp CPU", L"Amp CPU" }, L"%", false, 0, 100, 0, { 8, 1, nullptr, 0 } },
-  { "{295F92F6-37CD-453E-B8C2-E03B6648A1E4}", { L"Audio CPU", L"Audio route CPU" }, L"%", false, 0, 100, 0, { 9, 1, nullptr, 0 } },
-  { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"CV CPU", L"CV route CPU" }, L"%", false, 0, 100, 0, { 10, 1, nullptr, 0 } },
-  { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"Aux CPU", L"Auxiliary CPU" }, L"%", false, 0, 100, 0, { 11, 1, nullptr, 0 } }
+  { "{6190497F-E08C-49DC-8C74-BAEF6D889BCB}", { L"Voices", L"Voice count" }, L"", false, 0, synth_polyphony, 0, { 2, 0, nullptr, 0 } }
+};
+
+// ---- cpu ----  
+
+static param_descriptor const
+cpu_params[cpu_param::count] =
+{
+  { "{485325E3-3E15-46C4-84FA-5D743BB75C3A}", { L"Total", L"Total" }, L"%", false, 0, 100, 0, { 3, 1, nullptr, 0 } },
+  { "{1A5EA805-8678-4B9F-A03F-92E1A9D3C519}", { L"Osc", L"Oscillator" }, L"%", false, 0, 100, 0, { 4, 1, nullptr, 0 } },
+  { "{C39636DA-EBF5-4AA5-AFBB-BBCD5762D979}", { L"LFO", L"LFO" }, L"%", false, 0, 100, 0, { 5, 1, nullptr, 0 } },
+  { "{C3FBB5D7-E5EA-4EEB-9795-22298F7380B9}", { L"Filter", L"Filter" }, L"%", false, 0, 100, 0, { 6, 1, nullptr, 0 } },
+  { "{0DF43E23-9273-46BC-8BBE-52B2C0E612F7}", { L"Env", L"Envelope" }, L"%", false, 0, 100, 0, { 7, 1, nullptr, 0 } },
+  { "{DC142F66-E4B2-4BEA-8B2E-A9501B32B1FB}", { L"Amp", L"Amplitude" }, L"%", false, 0, 100, 0, { 8, 1, nullptr, 0 } },
+  { "{295F92F6-37CD-453E-B8C2-E03B6648A1E4}", { L"Audio", L"Audio route" }, L"%", false, 0, 100, 0, { 9, 1, nullptr, 0 } },
+  { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"CV", L"CV route" }, L"%", false, 0, 100, 0, { 10, 1, nullptr, 0 } },
+  { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"Aux", L"Auxiliary" }, L"%", false, 0, 100, 0, { 11, 1, nullptr, 0 } }
 };
 
 // ---- amp ---- 
@@ -303,10 +310,11 @@ part_descriptors[part_type::count] =
   { "{56DE75BB-BE73-4B27-B37F-77F6E408F986}", { L"LFO", L"LFO" }, part_type::lfo, false, false, lfo_count, lfo_params, lfo_param::count, &lfo_graph, 1, { 4, 3, 0, 0, active_param::lfo, L"Voice CV" } },
   { "{E6344937-C1F7-4F2A-83E7-EA27D48DEC4E}", { L"Amp", L"Amplitude" }, part_type::amplitude, false, false, 1, amplitude_params, amplitude_param::count, &amp_graph, 1, { 2, 3, -1, -1, -1, L"Voice audio" } },
   { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"Filter", L"Filter" }, part_type::filter, false, false, filter_count, filter_params, filter_param::count, filter_graphs, filter_graph::count, { 1, 3, 0, 0, active_param::filter, L"Voice audio" } },
-  { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 6, 3, -1, -1, -1, L"Voice route" } },
-  { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, false, 1, cv_route_params, cv_route_param::count, &cv_route_graph, 1, { 7, 3, -1, -1, -1, L"Voice route" } },
+  { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 7, 3, -1, -1, -1, L"Voice route" } },
+  { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, false, 1, cv_route_params, cv_route_param::count, &cv_route_graph, 1, { 8, 3, -1, -1, -1, L"Voice route" } },
   { "{C972E264-1739-4DB6-B1DB-5D31057BD218}", { L"Active", L"Active" }, part_type::active, false, true, 1, active_params, active_param::count, nullptr, -1, part_no_ui },
-  { "{FEEBA3F5-F248-4C1B-BD8C-F3A492D084E2}", { L"Out", L"Output" }, part_type::output, true, false, 1, output_params, output_param::count, nullptr, 0, { 5, 3, -1, -1, -1, L"Global" } }
+  { "{FEEBA3F5-F248-4C1B-BD8C-F3A492D084E2}", { L"Output", L"Output" }, part_type::output, true, false, 1, output_params, output_param::count, nullptr, 0, { 5, 3, -1, -1, -1, L"Global" } },
+  { "{93F3BCD1-30CC-4CC4-BFA8-B363786DBEAB}", { L"CPU", L"CPU usage" }, part_type::cpu, true, false, 1, cpu_params, cpu_param::count, nullptr, 0, { 6, 3, -1, -1, -1, L"Global" } }
 };    
         
 } // namespace svn::synth           

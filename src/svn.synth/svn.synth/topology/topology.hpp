@@ -15,11 +15,11 @@ inline std::int32_t constexpr oscillator_count = 4;
 
 extern base::part_descriptor const part_descriptors[];
 inline std::int32_t constexpr synth_polyphony = 32;
-inline std::int32_t constexpr synth_max_ui_height = 760;
+inline std::int32_t constexpr synth_max_ui_height = 800;
 inline base::ui_color constexpr synth_ui_end_color = { 0x6E, 0xFA, 0xD5 };
 inline base::ui_color constexpr synth_ui_start_color = { 0xB7, 0xC3, 0xFD }; 
 
-struct part_type_t { enum value { oscillator, envelope, lfo, amplitude, filter, audio_route, cv_route, active, output, count }; };
+struct part_type_t { enum value { oscillator, envelope, lfo, amplitude, filter, audio_route, cv_route, active, output, cpu, count }; };
 typedef part_type_t::value part_type;
   
 // ---- amp ----
@@ -34,8 +34,13 @@ typedef active_param_t::value active_param;
 
 // ---- output ----
 
-struct output_param_t { enum value { clip, drain, voices, total_cpu, osc_cpu, lfo_cpu, filter_cpu, env_cpu, amp_cpu, audio_cpu, cv_cpu, aux_cpu, count }; };
+struct output_param_t { enum value { clip, drain, voices, count }; };
 typedef output_param_t::value output_param;
+
+// ---- cpu ----
+
+struct cpu_param_t { enum value { total, osc, lfo, filter, env, amp, audio, cv, aux, count }; };
+typedef cpu_param_t::value cpu_param;
 
 // ---- lfo ----
 
