@@ -24,12 +24,13 @@ struct part_ui_descriptor
   std::int32_t const part_index; // Index within the grid.
   std::int32_t const param_columns; // Number of parameters stacked left-to-right.
   std::int32_t const enabled_param; // Index into own params which identifies the part on/off switch, or -1 if always on.
+  std::int32_t const enabled_relevant_if_rt_index_gt; // Enabled param has no effect if rt part index < N.
   std::int32_t const selector_param; // Index into selector params which identifies the part index switch param if this part type has more then 1 runtime part, or -1 if part count is 1.
   wchar_t const* const info; // Extra info for part header ui.
 };
 
 // For selector.
-inline part_ui_descriptor constexpr part_no_ui = { -1, -1, -1, -1, nullptr };
+inline part_ui_descriptor constexpr part_no_ui = { -1, -1, -1, -1, -1, nullptr };
 
 // Static part info.
 struct part_descriptor

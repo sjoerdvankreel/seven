@@ -32,6 +32,7 @@ param_inside_graphs(part_ui_description const& part, std::int32_t grid_index)
 part_ui_description 
 part_ui_description::create(
   svn::base::topology_info const& topology,
+  std::int32_t static_part_index,
   std::int32_t runtime_part_index)
 {
   part_ui_description result;
@@ -39,6 +40,7 @@ part_ui_description::create(
   auto const& part = topology.parts[runtime_part_index];
   result.graphs = part.descriptor->graphs;
   result.graph_count = part.descriptor->graph_count;
+  result.enabled_param_relevant = static_part_index >= part.descriptor->ui.enabled_relevant_if_rt_index_gt;
 
   for(std::int32_t i = 0; i < part.descriptor->param_count; i++)
     result.occupied_cell_count = std::max(result.occupied_cell_count, part.descriptor->params[i].ui.param_index + 1);
@@ -116,7 +118,7 @@ part_type_ui_description::create(
   result.name = descriptor.static_name.short_;
   result.color = ui_color_gradient(topology, descriptor.ui.part_index);
   for(std::int32_t i = 0; i < descriptor.part_count; i++)
-    result.parts.push_back(part_ui_description::create(topology, runtime_part_indices[i]));
+    result.parts.push_back(part_ui_description::create(topology, i, runtime_part_indices[i]));
   if (descriptor.ui.selector_param != -1)
     result.selector_param.runtime_param_index = runtime_selector_indices_start + descriptor.ui.selector_param;
   result.width = result.parts[0].width;
@@ -241,6 +243,7 @@ controller_ui_description::print(svn::base::topology_info const& topology, std::
       os << "\t\t\tWidth: " << part_desc.width << "\n";
       os << "\t\t\tHeight: " << part_desc.height << "\n";
       os << "\t\t\tOccupied cell count: " << part_desc.occupied_cell_count << "\n";
+      os << "\t\t\tEnabled relevant: " << part_desc.enabled_param_relevant << "\n";
       os << "\t\t\tEnabled index: " << part_desc.enabled_param.runtime_param_index << "\n";
   
       for(std::int32_t g = 0; g < part_desc.graph_count; g++)

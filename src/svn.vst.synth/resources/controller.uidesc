@@ -7352,30 +7352,14 @@
                                     "background-color": "color_00000080"
                                 },
                                 "children": {
-                                    "CCheckBox": {
-                                        "attributes": {
-                                            "class": "CCheckBox",
-                                            "size": "14, 21",
-                                            "origin": "73, 1",
-                                            "control-tag": "envelope_0_enabled",
-                                            "tooltip": "Env 1 Enabled",
-                                            "title": "",
-                                            "frame-width": "1",
-                                            "draw-crossbox": "true",
-                                            "round-rect-radius": "3",
-                                            "boxfill-color": "color_00000040",
-                                            "boxframe-color": "color_97DAEBFF",
-                                            "checkmark-color": "color_97DAEBFF"
-                                        }
-                                    },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": "Enabled",
+                                            "title": " Env 1",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "font": "~ NormalFont",
                                             "text-alignment": "left",
-                                            "origin": "90, -2",
+                                            "origin": "67, -2",
                                             "font-color": "color_97DAEBFF",
                                             "background-color": "color_97DAEB80",
                                             "size": "114, 25"

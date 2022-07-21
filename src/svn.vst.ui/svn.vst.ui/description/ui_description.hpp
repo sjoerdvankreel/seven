@@ -28,13 +28,15 @@ struct part_ui_description
   std::int32_t occupied_cell_count; // Param unique ui indices plus graphs sizes.
 
   std::int32_t graph_count;
+  bool enabled_param_relevant;
   param_ui_description enabled_param;
   base::graph_descriptor const* graphs;
   std::vector<param_ui_description> params;
 
   static part_ui_description 
   create(
-    svn::base::topology_info const& topology, 
+    svn::base::topology_info const& topology,
+    std::int32_t static_part_index,
     std::int32_t runtime_part_index);
 };
 

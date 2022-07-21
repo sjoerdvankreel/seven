@@ -428,7 +428,7 @@ build_ui_part_header_container(
 
   std::int32_t selector_offset = type.selector_param.runtime_param_index == -1? 0: param_col1_width + param_col2_width + margin;
   std::string title = " " + narrow_assume_ascii(topology.parts[part.runtime_part_index].runtime_name);
-  if (part.enabled_param.runtime_param_index != -1)
+  if (part.enabled_param.runtime_param_index != -1 && part.enabled_param_relevant)
   {
     Value enabled_box = build_ui_param_checkbox(
       topology, type, part, part.enabled_param, black, 2 * margin + selector_offset, header_checkbox_width, 2 * padding_param_group - 1, allocator);

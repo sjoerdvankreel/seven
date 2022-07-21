@@ -98,6 +98,6 @@ controller::initialize(FUnknown* context)
     parameters.addParameter(new parameter(p, part, &_topology->params[p]));
   }
   return kResultTrue;
-}
+} 
 
 } // namespace svn::vst::base
