@@ -21,6 +21,8 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
 {
   switch (part_type)
   {
+  case svn::synth::part_type::amplitude:
+    return new svn::synth::amp_graph(topology);
   case svn::synth::part_type::cv_route:
     return new svn::synth::cv_route_graph(topology);
   case svn::synth::part_type::lfo:
@@ -114,6 +116,35 @@ lfo_graph::sample_count(param_value const* state, float sample_rate, float bpm) 
   }
   return static_cast<std::int32_t>(std::ceil(cycles * samples));
 }  
+
+std::int32_t
+amp_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
+{ return _env.sample_count(state, sample_rate, bpm); }
+
+void
+amp_graph::process_dsp_core(
+  block_input const& input, base::cv_sample* output, float sample_rate, float bpm)
+{ _env.process_dsp_core(input, output, sample_rate, bpm); }
+
+bool
+amp_graph::needs_repaint(std::int32_t runtime_param) const
+{
+  std::int32_t begin = topology()->param_bounds[part_type::amplitude][0];
+  if(begin <= runtime_param && runtime_param < begin + amplitude_param::count) return true;
+  return _env.needs_repaint(runtime_param);
+}
+
+void
+amp_graph::dsp_to_plot(
+  param_value const* state, std::vector<base::cv_sample> const& dsp,
+  std::vector<float>& plot, float sample_rate, bool& bipolar)
+{
+  bipolar = false;
+  plot.resize(dsp.size());
+  float amp = state[topology()->param_bounds[part_type::amplitude][amplitude_param::level]].real;
+  for(std::size_t i = 0; i < dsp.size(); i++)
+    plot[i] = (dsp[i].bipolar? (dsp[i].value + 1.0f) * 0.5f: dsp[i].value) * amp;
+}
 
 bool
 envelope_graph::needs_repaint(std::int32_t runtime_param) const
@@ -212,7 +243,7 @@ oscillator_wave_graph::dsp_to_plot(
   std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
   bipolar = true;
-  for (std::size_t s = 0; s < dsp.size(); s++)
+  for (std::size_t s = 0; s < dsp.size(); s++) 
     plot.push_back((dsp[s].mono() + 1.0f) * 0.5f);
 }
 

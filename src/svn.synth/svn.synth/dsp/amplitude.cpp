@@ -15,11 +15,10 @@ amplitude::process_block(voice_input const& input, base::cv_sample const* env1_c
   automation_view automation(input.automation.rearrange_params(part_type::amplitude, 0));
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
-    float env1 = automation.get(amplitude_param::env1, s).real;
     float level = automation.get(amplitude_param::level, s).real;
     float panning = automation.get(amplitude_param::pan, s).real;
     float env1_uni = !env1_cv[s].bipolar? env1_cv[s].value: (env1_cv[s].value + 1.0f) * 0.5f;
-    float final_amp = level * env1 * env1_uni;
+    float final_amp = level * env1_uni;
     float left = audio_in[s].left * final_amp * (1.0f - panning);
     float right = audio_in[s].right * final_amp * panning;
     audio_out[s] = sanity_audio(audio_sample32({left, right}));

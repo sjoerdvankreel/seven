@@ -24,7 +24,7 @@ typedef part_type_t::value part_type;
   
 // ---- amp ----
 
-struct amplitude_param_t { enum value { level, env1, pan, count }; };
+struct amplitude_param_t { enum value { level, pan, count }; };
 typedef amplitude_param_t::value amplitude_param;
 
 // ---- active ----

@@ -41,6 +41,21 @@ public:
   void dsp_to_plot(base::param_value const* state, std::vector<base::cv_sample> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) override;
 };
 
+class amp_graph:
+public svn::base::graph_processor<base::cv_sample>
+{
+  envelope_graph _env;
+
+public:
+  amp_graph(topology_info const* topology) :
+  svn::base::graph_processor<base::cv_sample>(topology, 0), _env(topology, 0) {}
+
+  bool needs_repaint(std::int32_t runtime_param) const override;
+  std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
+  void process_dsp_core(block_input const& input, base::cv_sample* output, float sample_rate, float bpm) override;
+  void dsp_to_plot(base::param_value const* state, std::vector<base::cv_sample> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) override;
+};
+
 class cv_route_graph:
 public svn::base::graph_processor<float>
 {
