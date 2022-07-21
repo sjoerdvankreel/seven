@@ -11,7 +11,7 @@ synth_voice(
   base::topology_info const* topology,
   float sample_rate, float velocity, std::int32_t midi_note):
 _envelopes(), _filters(), _oscillators(), _lfos(),
-_topology(topology), _velocity(velocity), _amp(sample_rate)
+_topology(topology), _velocity(velocity), _amplitude(sample_rate)
 {
   assert(topology != nullptr);  
   assert(0 <= midi_note && midi_note < 128);
@@ -63,7 +63,7 @@ synth_voice::process_block(voice_input const& input, cv_state& cv,
   // Run amp section.
   base::audio_sample32 const* audio_in;
   usage.audio += audio.mix(input, audio_route_output::amp, 0, audio_in);
-  usage.vamp += _amp.process_block(input, cv.envelope[0].data(), audio_in, audio.voice_amp.data());
+  usage.amp += _amplitude.process_block(input, cv.envelope[0].data(), audio_in, audio.amplitude.data());
   return ended;
 } 
  

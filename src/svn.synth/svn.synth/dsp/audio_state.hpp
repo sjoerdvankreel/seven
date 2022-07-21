@@ -24,7 +24,7 @@ class audio_state
   base::audio_sample32 const* input_buffer(std::int32_t input, std::int32_t index) const;
 
 public:
-  std::vector<base::audio_sample32> voice_amp;
+  std::vector<base::audio_sample32> amplitude;
   std::array<std::vector<base::audio_sample32>, filter_count> filter;
   std::array<std::vector<base::audio_sample32>, oscillator_count> oscillator;
   

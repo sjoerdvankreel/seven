@@ -24,7 +24,7 @@ struct cpu_usage
   double lfo;
   double env;
   double osc;
-  double vamp;
+  double amp;
   double total;
   double audio;
   double filter;

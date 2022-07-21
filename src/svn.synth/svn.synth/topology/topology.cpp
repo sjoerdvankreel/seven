@@ -34,7 +34,7 @@ output_params[output_param::count] =
   { "{C39636DA-EBF5-4AA5-AFBB-BBCD5762D979}", { L"LFO CPU", L"LFO CPU" }, L"%", false, 0, 100, 0, { 5, 1, nullptr, 0 } },
   { "{C3FBB5D7-E5EA-4EEB-9795-22298F7380B9}", { L"Filter CPU", L"Filter CPU" }, L"%", false, 0, 100, 0, { 6, 1, nullptr, 0 } },
   { "{0DF43E23-9273-46BC-8BBE-52B2C0E612F7}", { L"Env CPU", L"Envelope CPU" }, L"%", false, 0, 100, 0, { 7, 1, nullptr, 0 } },
-  { "{DC142F66-E4B2-4BEA-8B2E-A9501B32B1FB}", { L"Amp CPU", L"Voice amp CPU" }, L"%", false, 0, 100, 0, { 8, 1, nullptr, 0 } },
+  { "{DC142F66-E4B2-4BEA-8B2E-A9501B32B1FB}", { L"Amp CPU", L"Amp CPU" }, L"%", false, 0, 100, 0, { 8, 1, nullptr, 0 } },
   { "{295F92F6-37CD-453E-B8C2-E03B6648A1E4}", { L"Audio CPU", L"Audio route CPU" }, L"%", false, 0, 100, 0, { 9, 1, nullptr, 0 } },
   { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"CV CPU", L"CV route CPU" }, L"%", false, 0, 100, 0, { 10, 1, nullptr, 0 } },
   { "{BCF00561-4D8E-4AB8-94CE-AF7EF65881FB}", { L"Aux CPU", L"Auxiliary CPU" }, L"%", false, 0, 100, 0, { 11, 1, nullptr, 0 } }
@@ -43,7 +43,7 @@ output_params[output_param::count] =
 // ---- amp ---- 
    
 static param_descriptor const  
-voice_amp_params[voice_amp_param::count] =
+amplitude_params[amplitude_param::count] =
 { 
   { "{5A2DF5BA-7D6F-4053-983E-AA6DC5084373}", { L"Amp", L"Level" }, L"dB", {1.0f, 2, real_bounds::unit(), real_bounds::decibel()}, { 0, 0, nullptr, 0}},
   { "{461FFE68-7EF6-49B6-A3E9-590E2D0D99FB}", { L"Env1", L"Env1 to level" }, L"%", { 1.0f, 2, real_bounds::unit(), real_bounds::linear(0.0f, 100.0f)}, { 1, 1, nullptr, 0}},
@@ -229,10 +229,10 @@ static wchar_t const* const cv_input_names[cv_route_input::count] = { L"Off", L"
 static wchar_t const* const cv_input_op_name[cv_route_input_op::count] = { L"Add", L"Mul" };
 static wchar_t const* const* const cv_input_op_names[cv_route_input::count] = { nullptr, cv_input_op_name, cv_input_op_name };
 static wchar_t const* const cv_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Filter", L"Amp" };
-static wchar_t const* const cv_vamp_output_names[cv_route_vamp_output::count] = { L"Lvl", L"Pan" };
+static wchar_t const* const cv_amp_output_names[cv_route_amp_output::count] = { L"Lvl", L"Pan" };
 static wchar_t const* const cv_filter_output_names[cv_route_filter_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
 static wchar_t const* const cv_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"Pw", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
-static wchar_t const* const* const cv_output_target_names[cv_route_output::count] = { nullptr, cv_osc_output_names, cv_filter_output_names, cv_vamp_output_names };
+static wchar_t const* const* const cv_output_target_names[cv_route_output::count] = { nullptr, cv_osc_output_names, cv_filter_output_names, cv_amp_output_names };
 static std::vector<std::wstring> const cv_input_names_list = zip_list_names(cv_input_names, cv_input_counts, cv_input_op_names, cv_input_op_counts, cv_route_input::count);
 static std::vector<std::wstring> const cv_output_names_list = zip_list_names(cv_output_names, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count);
     
@@ -291,12 +291,12 @@ cv_route_params[cv_route_param::count] =
 // ---- global topo ----   
     
 part_descriptor const      
-part_descriptors[part_type::count] =     
+part_descriptors[part_type::count] =       
 {   
   { "{5C9D2CD3-2D4C-4205-893E-6B5DE9D62ADE}", { L"Osc", L"Oscillator" }, part_type::oscillator, false, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 0, 3, 0, active_param::oscillator, L"Voice audio" } },
-  { "{FC4885FE-431C-477A-B5B7-84863DB8C07D}", { L"Env", L"Envelope" }, part_type::envelope, false, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 2, 3, 0, active_param::envelope, L"Voice CV" } },
-  { "{56DE75BB-BE73-4B27-B37F-77F6E408F986}", { L"LFO", L"LFO" }, part_type::lfo, false, false, lfo_count, lfo_params, lfo_param::count, &lfo_graph, 1, { 3, 3, 0, active_param::lfo, L"Voice CV" } },
-  { "{E6344937-C1F7-4F2A-83E7-EA27D48DEC4E}", { L"Amp", L"Voice amp" }, part_type::voice_amp, false, false, 1, voice_amp_params, voice_amp_param::count, nullptr, 0, { 4, 3, -1, -1, L"Voice audio" } },
+  { "{FC4885FE-431C-477A-B5B7-84863DB8C07D}", { L"Env", L"Envelope" }, part_type::envelope, false, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 3, 3, 0, active_param::envelope, L"Voice CV" } },
+  { "{56DE75BB-BE73-4B27-B37F-77F6E408F986}", { L"LFO", L"LFO" }, part_type::lfo, false, false, lfo_count, lfo_params, lfo_param::count, &lfo_graph, 1, { 4, 3, 0, active_param::lfo, L"Voice CV" } },
+  { "{E6344937-C1F7-4F2A-83E7-EA27D48DEC4E}", { L"Amp", L"Amplitude" }, part_type::amplitude, false, false, 1, amplitude_params, amplitude_param::count, nullptr, 0, { 2, 3, -1, -1, L"Voice audio" } },
   { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"Filter", L"Filter" }, part_type::filter, false, false, filter_count, filter_params, filter_param::count, filter_graphs, filter_graph::count, { 1, 3, 0, active_param::filter, L"Voice audio" } },
   { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 6, 3, -1, -1, L"Voice route" } },
   { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, false, 1, cv_route_params, cv_route_param::count, &cv_route_graph, 1, { 7, 3, -1, -1, L"Voice route" } },

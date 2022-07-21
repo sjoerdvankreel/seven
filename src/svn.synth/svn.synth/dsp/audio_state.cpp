@@ -16,7 +16,7 @@ oscillator(), filter()
 {
   std::vector<base::audio_sample32> audio(static_cast<std::size_t>(max_sample_count));
   scratch = audio;
-  voice_amp = audio;
+  amplitude = audio;
   filter.fill(audio);
   oscillator.fill(audio);
 }

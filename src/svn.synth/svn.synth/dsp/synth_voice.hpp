@@ -5,7 +5,7 @@
 #include <svn.synth/dsp/filter.hpp>
 #include <svn.synth/dsp/cv_state.hpp>
 #include <svn.synth/dsp/envelope.hpp>
-#include <svn.synth/dsp/voice_amp.hpp>
+#include <svn.synth/dsp/amplitude.hpp>
 #include <svn.synth/dsp/oscillator.hpp>
 #include <svn.synth/dsp/audio_state.hpp>
 #include <svn.synth/topology/topology.hpp>
@@ -37,8 +37,8 @@ struct voice_state
 class synth_voice
 {
 private:
-  voice_amp _amp;
   float _velocity;
+  amplitude _amplitude;
   base::topology_info const* _topology;
   std::array<lfo, lfo_count> _lfos;
   std::array<filter, filter_count> _filters;
