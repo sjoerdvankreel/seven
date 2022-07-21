@@ -58,7 +58,7 @@ typedef lfo_param_t::value lfo_param;
 
 extern std::vector<float> const env_timesig_values;
 struct envelope_type_t { enum value { dahdsr, dahdr, count }; };
-struct envelope_slope_t { enum value { linear, logarithmic, quadratic, inverted, count }; };
+struct envelope_slope_t { enum value { linear, quadratic, inverted, logarithmic, count }; };
 struct envelope_param_t { enum value { 
   on, type, bipolar, synced, 
   delay_time, delay_sync, hold_time, hold_sync, sustain_level, 
