@@ -402,7 +402,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice audio",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -1448,7 +1448,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice audio",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -2494,7 +2494,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice audio",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -3540,7 +3540,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice audio",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -4586,7 +4586,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice audio",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -5273,7 +5273,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice audio",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -5960,7 +5960,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice audio",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -6647,7 +6647,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice CV",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -8003,7 +8003,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice CV",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -9359,7 +9359,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice CV",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -10715,7 +10715,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice CV",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -11132,7 +11132,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice CV",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -11549,7 +11549,7 @@
                                     },
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Voice",
+                                            "title": " Voice CV",
                                             "class": "CTextLabel",
                                             "transparent": "true",
                                             "text-alignment": "right",
@@ -12133,7 +12133,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " Voice",
+                                                            "title": " Voice audio",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "right",
@@ -13215,7 +13215,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " Route",
+                                                            "title": " Voice route",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "right",
@@ -15006,7 +15006,7 @@
                                                     },
                                                     "CTextLabel": {
                                                         "attributes": {
-                                                            "title": " Route",
+                                                            "title": " Voice route",
                                                             "class": "CTextLabel",
                                                             "transparent": "true",
                                                             "text-alignment": "right",
