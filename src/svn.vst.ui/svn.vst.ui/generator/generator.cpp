@@ -436,7 +436,7 @@ build_ui_part_header_container(
     std::string enabled = type.selector_param.runtime_param_index == -1? title: "Enabled";
     add_child(result, "CTextLabel", build_ui_part_header_label(
       topology, type, "left", enabled, header_checkbox_width + 3 * margin + selector_offset, allocator), allocator);
-  } else
+  } else if(part.enabled_param.runtime_param_index == -1)
     add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", title, selector_offset, allocator), allocator);
 
   std::int32_t info_left = part.width - param_total_width - 2 * margin;

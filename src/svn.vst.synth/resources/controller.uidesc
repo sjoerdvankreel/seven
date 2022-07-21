@@ -7354,19 +7354,6 @@
                                 "children": {
                                     "CTextLabel": {
                                         "attributes": {
-                                            "title": " Env 1",
-                                            "class": "CTextLabel",
-                                            "transparent": "true",
-                                            "font": "~ NormalFont",
-                                            "text-alignment": "left",
-                                            "origin": "67, -2",
-                                            "font-color": "color_97DAEBFF",
-                                            "background-color": "color_97DAEB80",
-                                            "size": "114, 25"
-                                        }
-                                    },
-                                    "CTextLabel": {
-                                        "attributes": {
                                             "title": " Voice CV",
                                             "class": "CTextLabel",
                                             "transparent": "true",
