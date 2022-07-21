@@ -61,7 +61,7 @@ multi_list_names(
 // -> ["Osc 1 Amp", "Osc 1 Pan", "Osc 2 Amp", "Osc 2 Pan", "Flt Freq", "Flt Res"] 
 std::vector<std::wstring>
 zip_list_names(
-  wchar_t const* const* names1, std::int32_t const* counts1,
+  wchar_t const* const* names1, list_item_info const* infos, std::int32_t const* counts1,
   wchar_t const* const* const* names2, std::int32_t const* counts2,
   std::int32_t count);
 

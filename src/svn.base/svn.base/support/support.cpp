@@ -160,7 +160,7 @@ multi_list_names(
 
 std::vector<std::wstring>
 zip_list_names(
-  wchar_t const* const* names1, std::int32_t const* counts1,
+  wchar_t const* const* names1, list_item_info const* infos, std::int32_t const* counts1,
   wchar_t const* const* const* names2, std::int32_t const* counts2,
   std::int32_t count)
 {
@@ -176,7 +176,16 @@ zip_list_names(
       else for(std::int32_t k = 0; k < counts2[i]; k++)
       {
         std::wstring name = names1[i];
-        if(counts1[i] > 1) name += L" " + std::to_wstring(j + 1);
+        if(counts1[i] > 1)
+        { 
+          name += L" " + std::to_wstring(j + 1);
+          if (infos != nullptr && infos[i] != nullptr)
+          {
+            wchar_t const* extra = infos[i](j);
+            if(extra != nullptr)
+              name = std::wstring(extra) + L" " + names1[i];
+          }
+        }
         result.push_back(name + L" " + names2[i][k]);
       }
   return result; 

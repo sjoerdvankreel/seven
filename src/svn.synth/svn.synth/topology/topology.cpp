@@ -229,6 +229,7 @@ audio_route_params[audio_route_param::count] =
     
 static graph_descriptor const cv_route_graph = { -1, 0, 1, 2, 2, L"CV" };
 static wchar_t const* const cv_input_names[cv_route_input::count] = { L"Off", L"Env", L"LFO" };
+static list_item_info const cv_input_infos[cv_route_input::count] = { nullptr, envelope_item_info, nullptr };
 static wchar_t const* const cv_input_op_name[cv_route_input_op::count] = { L"Add", L"Mul" };
 static wchar_t const* const* const cv_input_op_names[cv_route_input::count] = { nullptr, cv_input_op_name, cv_input_op_name };
 static wchar_t const* const cv_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Filter", L"Amp" };
@@ -236,8 +237,8 @@ static wchar_t const* const cv_amp_output_names[cv_route_amp_output::count] = { 
 static wchar_t const* const cv_filter_output_names[cv_route_filter_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
 static wchar_t const* const cv_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"Pw", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
 static wchar_t const* const* const cv_output_target_names[cv_route_output::count] = { nullptr, cv_osc_output_names, cv_filter_output_names, cv_amp_output_names };
-static std::vector<std::wstring> const cv_input_names_list = zip_list_names(cv_input_names, cv_input_counts, cv_input_op_names, cv_input_op_counts, cv_route_input::count);
-static std::vector<std::wstring> const cv_output_names_list = zip_list_names(cv_output_names, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count);
+static std::vector<std::wstring> const cv_input_names_list = zip_list_names(cv_input_names, cv_input_infos, cv_input_counts, cv_input_op_names, cv_input_op_counts, cv_route_input::count);
+static std::vector<std::wstring> const cv_output_names_list = zip_list_names(cv_output_names, nullptr, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count);
     
 static param_descriptor const 
 cv_route_params[cv_route_param::count] =  
