@@ -86,12 +86,12 @@ lfo_params[lfo_param::count] =
 // ---- envelope ----
 
 static std::vector<std::pair<std::int32_t, std::int32_t>> const env_timesig = beat_synced_timesig(16, true);
-static std::vector<std::wstring> const env_timesig_names = beat_synced_timesig_names(env_timesig);
+static std::vector<std::wstring> const env_timesig_names = beat_synced_timesig_names(env_timesig); 
 static std::vector<float> const env_timesig_values = beat_synced_timesig_values(env_timesig);
 
 static graph_descriptor const envelope_graph = { -1, 0, 2, 3, 1, L"Envelope" };
 static std::vector<std::wstring> const envelope_types = { L"DAHDSR", L"DAHDR" };
-static std::vector<std::wstring> const envelope_slopes = { L"Linear", L"Log", L"Quadratic", L"Inverted" };
+static std::vector<std::wstring> const envelope_slopes = { L"Linear", L"Logarithmic", L"Quadratic", L"Inverted" };
 static param_relevance const envelope_time_relevance[1] = { { envelope_param::synced, { 0 } } };
 static param_relevance const envelope_sync_relevance[1] = { { envelope_param::synced, { 1 } } };
 static param_relevance const envelope_decay_log_relevance[1] = { { envelope_param::decay_slope, { envelope_slope::logarithmic } } };
