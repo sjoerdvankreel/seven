@@ -12,6 +12,7 @@ inline std::int32_t constexpr lfo_count = 6;
 inline std::int32_t constexpr filter_count = 4;
 inline std::int32_t constexpr envelope_count = 4;
 inline std::int32_t constexpr oscillator_count = 4;
+inline std::int32_t constexpr audio_route_count = 4;
 
 extern base::part_descriptor const part_descriptors[];
 inline std::int32_t constexpr synth_polyphony = 32;
@@ -29,7 +30,7 @@ typedef amplitude_param_t::value amplitude_param;
 
 // ---- active ----
 
-struct active_param_t { enum value { oscillator, lfo, filter, envelope, count }; };
+struct active_param_t { enum value { oscillator, lfo, filter, envelope, audio_route, count }; };
 typedef active_param_t::value active_param;
 
 // ---- output ----
@@ -111,17 +112,16 @@ typedef oscillator_analog_type_t::value oscillator_analog_type;
 
 struct audio_route_input_t { enum value { off, osc, filter, count }; };
 struct audio_route_output_t { enum value { off, filter, amp, count }; };
-struct audio_route_param_t { enum value { in1, out1, amt1, in2, out2, amt2, in3, out3, amt3, in4, out4, amt4, in5, out5, amt5, in6, out6, amt6, in7, out7, amt7, in8, out8, amt8, in9, out9, amt9, count }; };
+struct audio_route_param_t { enum value { on, in1, out1, amt1, in2, out2, amt2, in3, out3, amt3, count }; };
 
 typedef audio_route_param_t::value audio_route_param;
 typedef audio_route_input_t::value audio_route_input;
 typedef audio_route_output_t::value audio_route_output;
 
-inline std::int32_t constexpr audio_route_count = 9;
-inline std::int32_t constexpr audio_outputs_count = 1 + filter_count + 1;
-inline std::int32_t constexpr audio_inputs_count = 1 + oscillator_count + filter_count;
-inline std::int32_t constexpr audio_output_counts[audio_route_output::count] = { 1, filter_count, 1 };
-inline std::int32_t constexpr audio_input_counts[audio_route_input::count] = { 1, oscillator_count, filter_count };
+inline std::int32_t constexpr audio_route_route_count = 3;
+inline std::int32_t constexpr audio_route_param_offset = 1; // for enabled
+inline std::int32_t constexpr audio_route_output_counts[audio_route_output::count] = { 1 /* off */, filter_count, 1 /* amp */ };
+inline std::int32_t constexpr audio_route_input_counts[audio_route_input::count] = { 1 /* off */, oscillator_count, filter_count };
 
 // ---- cv route ----
 

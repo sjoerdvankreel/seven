@@ -13,6 +13,7 @@ wchar_t const* envelope_item_info(std::int32_t index)
 static std::vector<std::wstring> const active_lfo_names = list_names(L"LFO", lfo_count, nullptr);
 static std::vector<std::wstring> const active_filter_names = list_names(L"Filter", filter_count, nullptr);
 static std::vector<std::wstring> const active_oscillator_names = list_names(L"Osc", oscillator_count, nullptr);
+static std::vector<std::wstring> const active_audio_route_names = list_names(L"Audio", audio_route_count, nullptr);
 static std::vector<std::wstring> const active_envelope_names = list_names(L"Env", envelope_count, envelope_item_info);
  
 static param_descriptor const
@@ -21,7 +22,8 @@ active_params[active_param::count] =
   { "{0EEADBD0-D37B-4B53-A2D5-F22E2154F2D8}", { L"Oscillator", L"Oscillator" }, L"", false, &active_oscillator_names, 0, param_no_ui },
   { "{EEA97414-8C1C-4378-A68B-409692FFA920}", { L"LFO", L"LFO" }, L"", false, &active_lfo_names, 0, param_no_ui },
   { "{D5DD0DFC-AC9D-42E6-9D2B-924786382825}", { L"Filter", L"Filter" }, L"", false, &active_filter_names, 0, param_no_ui },
-  { "{556BF692-55B0-48B4-BD6A-E2CEFA17B012}", { L"Envelope", L"Envelope" }, L"", false, &active_envelope_names, 0, param_no_ui }
+  { "{556BF692-55B0-48B4-BD6A-E2CEFA17B012}", { L"Envelope", L"Envelope" }, L"", false, &active_envelope_names, 0, param_no_ui },
+  { "{556BF692-55B0-48B4-BD6A-E2CEFA17B012}", { L"Audio", L"Audio route" }, L"", false, &active_audio_route_names, 0, param_no_ui },
 };
          
 // ---- output ----  
@@ -75,7 +77,7 @@ static param_relevance const lfo_sync_relevance[1] = { { lfo_param::synced, { 1 
 static param_descriptor const
 lfo_params[lfo_param::count] =
 {
-  { "{42FB0553-788E-470F-906A-D95FED2ED980}", { L"On", L"Enabled" }, false, { -1, 0, {}, {}}},
+  { "{42FB0553-788E-470F-906A-D95FED2ED980}", { L"On", L"Enabled" }, false, { -1, 0, nullptr, 0 } },
   { "{F744C553-8CFA-4262-98A7-37E187BF27FF}", { L"Type", L"Type" }, L"", false, &lfo_types, 0, { 0, 0, nullptr, 0 } },
   { "{0E9A5C22-34A2-4658-9DE6-718DF9028ECD}", { L"Bipolar", L"Bipolar" }, false, { 2, 1, nullptr, 0 } },
   { "{83C1ED1B-095E-4F58-B091-39DA4F0125BF}", { L"Beat sync", L"Sync to beat" }, false, { 3, 1, nullptr, 0 } },
@@ -101,7 +103,7 @@ static param_relevance const envelope_release_log_relevance[1] = { { envelope_pa
 static param_descriptor const 
 envelope_params[envelope_param::count] =   
 {   
-  { "{FC3CE4BC-D8F0-487E-9BB6-826988B4B812}", { L"On", L"Enabled" }, false, { -1, 0, {}, {}}},
+  { "{FC3CE4BC-D8F0-487E-9BB6-826988B4B812}", { L"On", L"Enabled" }, false, { -1, 0, nullptr, 0 } },
   { "{D622D344-A08E-4109-84D8-C310B81C2769}", { L"Type", L"Type" }, L"", false, &envelope_types, 0, { 0, 0, nullptr, 0}},
   { "{2D8C38A2-99AD-4080-8262-26D24F7644F0}", { L"Bipolar", L"Bipolar" }, false, { 4, 0, nullptr, 0 } },
   { "{82B2C892-1A12-4FDC-A26D-7733C3C3B782}", { L"Beat sync", L"Sync to beat" }, false, { 5, 0, nullptr, 0 } },
@@ -141,7 +143,7 @@ static param_relevance const filter_state_var_relevance[1] = { { filter_param::t
 static param_descriptor const  
 filter_params[filter_param::count] = 
 {  
-  { "{5813593C-E25A-4C8B-B7E5-7C95DAC257C2}", { L"On", L"Enabled" }, false, { -1, 0, {}, {}}},
+  { "{5813593C-E25A-4C8B-B7E5-7C95DAC257C2}", { L"On", L"Enabled" }, false, { -1, 0, nullptr, 0 } },
   { "{956F08A1-B3C6-412B-AEEA-55E722744AE8}", { L"Type", L"Type" }, L"", false, &filter_types, 0, { 0, 2, nullptr, 0 } },
   { "{7498AB5E-4BE6-45B0-8CBF-8D166FF82E32}", { L"StVar", L"State variable type" }, L"", false, &filter_state_var_types, 0, { 1, 2, filter_state_var_relevance, 1 } },
   { "{99F7D808-53EB-4A4F-9FBF-4F1F57E4B742}", { L"Freq", L"State variable frequency" }, L"Hz", { 0.25f, 0, real_bounds::quadratic(filter_min_freq, filter_max_freq), real_bounds::quadratic(filter_min_freq, filter_max_freq) }, { 2, 2, filter_state_var_relevance, 1 } },
@@ -177,7 +179,7 @@ static param_relevance const oscillator_analog_relevance[1] = { { oscillator_par
 static param_descriptor const
 oscillator_params[oscillator_param::count] =
 { 
-  { "{CA9274AE-9F57-4373-8C59-3786ACC1C1CD}", { L"On", L"Enabled" }, false, { -1, 0, {}, {}}},
+  { "{CA9274AE-9F57-4373-8C59-3786ACC1C1CD}", { L"On", L"Enabled" }, false, { -1, 0, nullptr, 0 } },
   { "{C5C4B00A-3D26-4342-ACE6-0AE936FFBCA3}", { L"Amp", L"Level" }, L"dB", { 1.0f, 2, real_bounds::unit(), real_bounds::decibel() }, { 0, 2, nullptr, 0 } },
   { "{63C96678-9823-4B96-B2C0-78014A268DB5}", { L"Pan", L"Panning" }, L"%", { 0.5f, 2, real_bounds::unit(), real_bounds::linear(-100.0f, 100.0f) }, { 1, 2, nullptr, 0 } },
   { "{84A7AEC8-25E9-4242-B32E-2E9E780F0E31}", { L"Type", L"Type" }, L"", false, &oscillator_types, 0, { 2, 2, nullptr, 0 } },
@@ -198,42 +200,25 @@ oscillator_params[oscillator_param::count] =
  
 static wchar_t const* const audio_input_names[audio_route_input::count] = { L"Off", L"Osc", L"Filter" }; 
 static wchar_t const* const audio_output_names[audio_route_output::count] = { L"Off", L"Filter", L"Amp" };
-static std::vector<std::wstring> const audio_input_names_list = multi_list_names(audio_input_names, audio_input_counts, audio_route_input::count);
-static std::vector<std::wstring> const audio_output_names_list = multi_list_names(audio_output_names, audio_output_counts, audio_route_output::count);
+static std::vector<std::wstring> const audio_input_names_list = multi_list_names(audio_input_names, audio_route_input_counts, audio_route_input::count);
+static std::vector<std::wstring> const audio_output_names_list = multi_list_names(audio_output_names, audio_route_output_counts, audio_route_output::count);
 
 static param_descriptor const
 audio_route_params[audio_route_param::count] =
 {
+  { "{14096099-485D-4EB9-B055-E393DE2E993C}", { L"On", L"Enabled" }, false, { -1, 0, nullptr, 0 } },
   { "{2E9F0478-B911-43DF-BB51-0C5836E4853F}", { L"In1", L"Input 1" }, L"", false, &audio_input_names_list, 0, { 0, 0, nullptr, 0}},
   { "{295DC5F0-FB32-4D43-8799-D79F23FD3AA9}", { L"Out1", L"Output 1" }, L"", false, &audio_output_names_list, 0, { 1, 0, nullptr, 0 } },
   { "{A3B15FE9-56DB-493B-A4E1-31A004F3C937}", { L"Amt1", L"Amount 1" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 2, 0, nullptr, 0 } },
-  { "{A3A59082-CF73-4C28-A3FC-037729C9CB42}", { L"In2", L"Input 2" }, L"", false, &audio_input_names_list, 0, { 3, 0, nullptr, 0 } },
-  { "{843EB41C-199F-4FAC-ACC4-841B3663248D}", { L"Out2", L"Output 2" }, L"", false, &audio_output_names_list, 0, { 4, 0, nullptr, 0 } },
-  { "{810B55DF-6230-45C7-B478-7A3569DC9127}", { L"Amt2", L"Amount 2" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 5, 0, nullptr, 0 } },
-  { "{A8E6882A-8945-4F59-92B9-78004EAF5818}", { L"In3", L"Input 3" }, L"", false, &audio_input_names_list, 0, { 6, 0, nullptr, 0 } },
-  { "{D2E34E63-DE9E-4620-924D-1897614BF983}", { L"Out3", L"Output 3" }, L"", false, &audio_output_names_list, 0, { 7, 0, nullptr, 0 } },
-  { "{6721B1EC-9688-48A3-B5B8-0ADD0A9CF16B}", { L"Amt3", L"Amount 3" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 8, 0, nullptr, 0 } },
-  { "{89316C97-EB2A-4066-A675-7FCA8A81E908}", { L"In4", L"Input 4" }, L"", false, &audio_input_names_list, 0, { 9, 1, nullptr, 0 } },
-  { "{D76EABE0-2383-4E35-A996-9FAFFF309AD2}", { L"Out4", L"Output 4" }, L"", false, &audio_output_names_list, 0, { 10, 1, nullptr, 0 } },
-  { "{72593AE1-72BB-408F-819D-3D0C8E632AA8}", { L"Amt4", L"Amount 4" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 11, 1, nullptr, 0 } },
-  { "{A87E3D26-1F7F-4D2B-ACA6-CA681126210C}", { L"In5", L"Input 5" }, L"", false, &audio_input_names_list, 0, { 12, 1, nullptr, 0 } },
-  { "{CD659D0E-4818-4D36-9D01-1256C24F8A1F}", { L"Out5", L"Output 5" }, L"", false, &audio_output_names_list, 0, { 13, 1, nullptr, 0 } },
-  { "{B7BABC4D-C3D0-4CD6-A43C-6E63C502C88D}", { L"Amt5", L"Amount 5" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 14, 1, nullptr, 0 } },
-  { "{EEDC9213-70B9-4BB6-8D5C-7979D6ABF41F}", { L"In6", L"Input 6" }, L"", false, &audio_input_names_list, 0, { 15, 1, nullptr, 0 } },
-  { "{2437E287-4170-4F98-B179-060FF03D8ACF}", { L"Out6", L"Output 6" }, L"", false, &audio_output_names_list, 0, { 16, 1, nullptr, 0 } },
-  { "{E8016B91-9823-4B4C-AED8-C1F954FC0C70}", { L"Amt6", L"Amount 6" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 17, 1, nullptr, 0 } },
-  { "{FABC471B-29FA-45A4-9ACA-6DD21582550F}", { L"In7", L"Input 7" }, L"", false, &audio_input_names_list, 0, { 18, 2, nullptr, 0 } },
-  { "{BD316F66-A86A-46DD-B901-DA3EB0E4CB29}", { L"Out7", L"Output 7" }, L"", false, &audio_output_names_list, 0, { 19, 2, nullptr, 0 } },
-  { "{D765242F-C63B-4B5F-824B-0E8C5E3732EA}", { L"Amt7", L"Amount 7" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 20, 2, nullptr, 0 } },
-  { "{61A21B33-F174-4BB8-B70E-D0ABED3AFC32}", { L"In8", L"Input 8" }, L"", false, &audio_input_names_list, 0, { 21, 2, nullptr, 0 } },
-  { "{F52DEACA-9B5C-4D4C-9381-79967288389B}", { L"Out8", L"Output 8" }, L"", false, &audio_output_names_list, 0, { 22, 2, nullptr, 0 } },
-  { "{AAF3C200-9937-4CE2-BB76-DB0FA6FE43AB}", { L"Amt8", L"Amount 8" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 23, 2, nullptr, 0 } },
-  { "{EE82872C-0641-48CA-A030-5FCBA09FC0F7}", { L"In9", L"Input 9" }, L"", false, &audio_input_names_list, 0, { 24, 2, nullptr, 0 } },
-  { "{DDD8D342-8ACA-4203-85EC-AA8EEE666A16}", { L"Out9", L"Output 9" }, L"", false, &audio_output_names_list, 0, { 25, 2, nullptr, 0 } },
-  { "{D0CBABC4-9772-471B-AF8B-FE6BF6197CA8}", { L"Amt9", L"Amount 9" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 26, 2, nullptr, 0 } }
-};
+  { "{A3A59082-CF73-4C28-A3FC-037729C9CB42}", { L"In2", L"Input 2" }, L"", false, &audio_input_names_list, 0, { 3, 1, nullptr, 0 } },
+  { "{843EB41C-199F-4FAC-ACC4-841B3663248D}", { L"Out2", L"Output 2" }, L"", false, &audio_output_names_list, 0, { 4, 1, nullptr, 0 } },
+  { "{810B55DF-6230-45C7-B478-7A3569DC9127}", { L"Amt2", L"Amount 2" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 5, 1, nullptr, 0 } },
+  { "{A8E6882A-8945-4F59-92B9-78004EAF5818}", { L"In3", L"Input 3" }, L"", false, &audio_input_names_list, 0, { 6, 2, nullptr, 0 } },
+  { "{D2E34E63-DE9E-4620-924D-1897614BF983}", { L"Out3", L"Output 3" }, L"", false, &audio_output_names_list, 0, { 7, 2, nullptr, 0 } },
+  { "{6721B1EC-9688-48A3-B5B8-0ADD0A9CF16B}", { L"Amt3", L"Amount 3" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 8, 2, nullptr, 0 } }
+}; 
 
-// ---- cv route ----               
+// ---- cv route ----                
     
 static graph_descriptor const cv_route_graph = { -1, 0, 1, 2, 2, L"CV" };
 static wchar_t const* const cv_input_names[cv_route_input::count] = { L"Off", L"Env", L"LFO" };
@@ -301,7 +286,7 @@ cv_route_params[cv_route_param::count] =
 };   
                
 // ---- global topo ----   
-      
+       
 part_descriptor const      
 part_descriptors[part_type::count] =       
 {   
@@ -310,11 +295,11 @@ part_descriptors[part_type::count] =
   { "{56DE75BB-BE73-4B27-B37F-77F6E408F986}", { L"LFO", L"LFO" }, part_type::lfo, false, false, lfo_count, lfo_params, lfo_param::count, &lfo_graph, 1, { 4, 3, 0, 0, active_param::lfo, L"Voice CV" } },
   { "{E6344937-C1F7-4F2A-83E7-EA27D48DEC4E}", { L"Amp", L"Amplitude" }, part_type::amplitude, false, false, 1, amplitude_params, amplitude_param::count, &amp_graph, 1, { 2, 3, -1, -1, -1, L"Voice audio" } },
   { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"Filter", L"Filter" }, part_type::filter, false, false, filter_count, filter_params, filter_param::count, filter_graphs, filter_graph::count, { 1, 3, 0, 0, active_param::filter, L"Voice audio" } },
-  { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, 1, audio_route_params, audio_route_param::count, nullptr, 0, { 7, 3, -1, -1, -1, L"Voice route" } },
+  { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, audio_route_count, audio_route_params, audio_route_param::count, nullptr, 0, { 7, 3, 0, 0, active_param::audio_route, L"Voice route" } },
   { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, false, 1, cv_route_params, cv_route_param::count, &cv_route_graph, 1, { 8, 3, -1, -1, -1, L"Voice route" } },
   { "{C972E264-1739-4DB6-B1DB-5D31057BD218}", { L"Active", L"Active" }, part_type::active, false, true, 1, active_params, active_param::count, nullptr, -1, part_no_ui },
   { "{FEEBA3F5-F248-4C1B-BD8C-F3A492D084E2}", { L"Output", L"Output" }, part_type::output, true, false, 1, output_params, output_param::count, nullptr, 0, { 5, 3, -1, -1, -1, L"Global" } },
   { "{93F3BCD1-30CC-4CC4-BFA8-B363786DBEAB}", { L"CPU", L"CPU usage" }, part_type::cpu, true, false, 1, cpu_params, cpu_param::count, nullptr, 0, { 6, 3, -1, -1, -1, L"Global" } }
 };    
         
-} // namespace svn::synth           
+} // namespace svn::synth            
