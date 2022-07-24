@@ -1,4 +1,2 @@
-* color-wheel interpolation (constant intensity)
 * Speed up osc & cv
 * Drop windows dependencies
-* Check group coloring
