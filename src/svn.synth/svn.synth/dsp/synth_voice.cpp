@@ -60,7 +60,7 @@ synth_voice::process_block(voice_input const& input, cv_state& cv,
   {
     base::audio_sample32 const* audio_in;
     usage.audio += audio.mix(input, audio_route_output::filter, i, audio_in);
-    usage.filter += _filters[i].process_block(input, i, audio_in, audio.filter[i].data());
+    usage.filter += _filters[i].process_block(input, i, cv, audio_in, audio.filter[i].data(), usage.cv);
   }
 
   // Run amp section.

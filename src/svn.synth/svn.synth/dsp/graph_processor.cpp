@@ -340,10 +340,12 @@ filter_ir_graph::process_dsp_core(
   _audio_in.resize(input.sample_count);
   _audio_in[0] = 1.0f;
 
+  double mod_time = 0.0;
+  cv_state cv(input.sample_count);
   std::memset(output, 0, input.sample_count * sizeof(audio_sample32));
   voice_input vinput = setup_graph_voice_input(input, topology());
   auto flt = std::make_unique<filter>(sample_rate, midi_note_c4);
-  flt->process_block(vinput, part_index(), _audio_in.data(), output);
+  flt->process_block(vinput, part_index(), cv, _audio_in.data(), output, mod_time);
 }
 
 bool

@@ -2,6 +2,7 @@
 #define SVN_SYNTH_FILTER_HPP
 
 #include <svn.synth/dsp/support.hpp>
+#include <svn.synth/dsp/cv_state.hpp>
 #include <svn.synth/topology/topology.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
 #include <svn.base/dsp/delay_buffer.hpp>
@@ -35,17 +36,15 @@ class filter
   comb_state _comb;
   state_var_state _state_var;
 private:
-  base::audio_sample32 process_comb(
-    svn::base::automation_view const& automation,
-    svn::base::audio_sample32 source, std::int32_t sample);
-  base::audio_sample32 process_state_variable(
-    svn::base::automation_view const& automation,
-    svn::base::audio_sample32 source, std::int32_t sample);
+  base::audio_sample32 process_comb(svn::base::automation_view const& automation, 
+    svn::base::audio_sample32 source, std::int32_t sample, float const* const* modulated);
+  base::audio_sample32 process_state_variable(svn::base::automation_view const& automation,
+    svn::base::audio_sample32 source, std::int32_t sample, float const* const* modulated);
 public:
   filter() = default;
   filter(float sample_rate, std::int32_t midi_note);
-  double process_block(voice_input const& input, std::int32_t index, 
-    base::audio_sample32 const* audio_in, base::audio_sample32* audio_out);
+  double process_block(voice_input const& input, std::int32_t index, cv_state const& cv, 
+    base::audio_sample32 const* audio_in, base::audio_sample32* audio_out, double& mod_time);
 };
 
 } // namespace svn::synth
