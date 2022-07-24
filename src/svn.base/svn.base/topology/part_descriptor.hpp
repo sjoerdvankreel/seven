@@ -13,6 +13,13 @@ struct ui_color
   std::uint8_t r;
   std::uint8_t g;
   std::uint8_t b;
+
+  ui_color() = default;
+  constexpr ui_color(std::uint8_t r, std::uint8_t g, std::uint8_t b): r(r), g(g), b(b) {}
+  constexpr ui_color(std::uint32_t rgb):
+    r(static_cast<std::uint8_t>((rgb & 0xFF0000) >> 16)), 
+    g(static_cast<std::uint8_t>((rgb & 0xFF00) >> 8)), 
+    b(static_cast<std::uint8_t>(rgb)) {}
 };
 
 // Optional single graph within 1 part.

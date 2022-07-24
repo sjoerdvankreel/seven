@@ -7,13 +7,13 @@
 
 namespace svn::vst::ui {
 
-inline svn::base::ui_color constexpr white = { 0xFF, 0xFF, 0xFF };
-inline svn::base::ui_color constexpr black = { 0x00, 0x00, 0x00 };
+inline svn::base::ui_color constexpr white(0xFFFFFF);
+inline svn::base::ui_color constexpr black(0x000000);
 
 struct color_alpha_t { enum value { transparent, eight, quarter, half, opaque, count }; };
 typedef color_alpha_t::value color_alpha;
 extern std::uint8_t const color_alphas[];
- 
+  
 inline std::int32_t constexpr param_row_height = 21;
 inline std::int32_t constexpr param_col1_width = 22;
 inline std::int32_t constexpr param_col2_width = 50;
