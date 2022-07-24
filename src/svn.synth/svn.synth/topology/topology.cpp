@@ -265,10 +265,10 @@ cv_route_params[cv_route_param::count] =
 
 struct part_group_t { enum value { audio, cv, route, global, count }; };
 typedef part_group_t::value part_group;
-static ui_color const 
-group_colors[part_group::count] = { 0x00BFFF, 0x00E5DC, 0xADF88B, 0xF9F871 };
-            
-part_descriptor const         
+static ui_color const  
+group_colors[part_group::count] = { 0x00ffff, 0x00dcff, 0x55b4fc, 0x8a8bd4 };
+              
+part_descriptor const          
 part_descriptors[part_type::count] =            
 {         
   { "{5C9D2CD3-2D4C-4205-893E-6B5DE9D62ADE}", { L"Osc", L"Oscillator" }, part_type::oscillator, false, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 0, 3, 0, 0, active_param::oscillator, L"Voice audio", group_colors[part_group::audio] }},
