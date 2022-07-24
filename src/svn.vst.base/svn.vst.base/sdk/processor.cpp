@@ -226,10 +226,12 @@ processor::process_output_parameters(
   if (!data.outputParameterChanges) return;
   if (data.processContext == nullptr) return;
   int64_t block_end_samples = data.processContext->projectTimeSamples + data.numSamples;
+  if(block_end_samples <= _previous_block_end_samples) _output_param_update_samples = 0;
   std::int32_t update_block_size = output_param_update_msec * data.processContext->sampleRate / 1000;
-  if(block_end_samples < output_param_update_samples + update_block_size) return;
+  if(block_end_samples < _output_param_update_samples + update_block_size) return;
   
-  output_param_update_samples = block_end_samples;
+  _output_param_update_samples = block_end_samples;
+  _previous_block_end_samples = block_end_samples;
   std::int32_t input_count = _processor->topology()->input_param_count;
   for (std::int32_t p = 0; p < _processor->topology()->output_param_count; p++)
   { 

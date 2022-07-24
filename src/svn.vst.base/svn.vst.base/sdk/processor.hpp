@@ -37,7 +37,8 @@ private:
   // For sample accurate.
   std::vector<Parameter> _accurate_parameters;
   // Don't update output too often.
-  std::int64_t output_param_update_samples = 0;
+  std::int64_t _previous_block_end_samples = 0;
+  std::int64_t _output_param_update_samples = 0;
   // Need topology for parameter dsp bounds etc.
   svn::base::topology_info const* const _topology;
   // Where it happens. We just translate automation and audio values from/to vst3 format.
