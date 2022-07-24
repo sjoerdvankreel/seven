@@ -25,7 +25,7 @@ envelope::generate_slope(base::automation_view const& automation,
     assert(slope == envelope_slope::logarithmic);
     break;
   }
-  float mid = automation.get(mid_param, s).real;
+  float mid = automation.get_as_dsp(mid_param, s);
   return sanity_unipolar(std::pow(stage_pos, std::log(mid) * inv_log_half));
 }
 
@@ -69,11 +69,11 @@ envelope::setup_stages(automation_view const& automation, std::int32_t s,
 {
   if (automation.get(envelope_param::synced, s).discrete == 0)
   { 
-    delay = automation.get(envelope_param::delay_time, s).real * _sample_rate;
-    attack = automation.get(envelope_param::attack_time, s).real * _sample_rate;
-    hold = automation.get(envelope_param::hold_time, s).real * _sample_rate;
-    decay = automation.get(envelope_param::decay_time, s).real * _sample_rate;
-    release = automation.get(envelope_param::release_time, s).real * _sample_rate;
+    delay = automation.get_as_dsp(envelope_param::delay_time, s) * _sample_rate;
+    attack = automation.get_as_dsp(envelope_param::attack_time, s) * _sample_rate;
+    hold = automation.get_as_dsp(envelope_param::hold_time, s) * _sample_rate;
+    decay = automation.get_as_dsp(envelope_param::decay_time, s) * _sample_rate;
+    release = automation.get_as_dsp(envelope_param::release_time, s) * _sample_rate;
     return;
   }
   delay = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.get(envelope_param::delay_sync, s).discrete]);
@@ -95,7 +95,7 @@ envelope::process_block(voice_input const& input, std::int32_t index,
     if (_ended) { cv_out[s] = _end_sample; continue; }
     cv_out[s] = { 0.0f, false };
     if(index > 0 && automation.get(envelope_param::on, s).discrete == 0) return s;
-    float sustain = automation.get(envelope_param::sustain_level, s).real;
+    float sustain = automation.get_as_dsp(envelope_param::sustain_level, s);
     bool unipolar = automation.get(envelope_param::bipolar, s).discrete == 0;
     bool dahdsr = automation.get(envelope_param::type, s).discrete == envelope_type::dahdsr;
     setup_stages(automation, s, input.bpm, delay, attack, hold, decay, release);
