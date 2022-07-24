@@ -107,11 +107,11 @@ std::int32_t
 lfo_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 {
   std::int32_t const cycles = 2;
-  std::int32_t begin = topology()->param_bounds[part_type::lfo][part_index()];  
-  float samples = state[begin + lfo_param::period_time].real * lfo_graph_rate;
-  if(state[begin + lfo_param::synced].discrete != 0)
+  state_view view(topology(), state, part_type::lfo, part_index());
+  float samples = view.get_real_dsp(lfo_param::period_time) * lfo_graph_rate;
+  if(view.get_discrete(lfo_param::synced) != 0)
   {
-    float timesig = lfo_timesig_values[state[begin + lfo_param::period_sync].discrete];
+    float timesig = lfo_timesig_values[view.get_discrete(lfo_param::period_sync)];
     samples = timesig_to_samples(lfo_graph_rate, bpm, timesig);
   }
   return static_cast<std::int32_t>(std::ceil(cycles * samples));
@@ -141,7 +141,8 @@ amp_graph::dsp_to_plot(
 {
   bipolar = false;
   plot.resize(dsp.size());
-  float amp = state[topology()->param_bounds[part_type::amplitude][amplitude_param::level]].real;
+  state_view view(topology(), state, part_type::amplitude, 0);
+  float amp = view.get_real_dsp(amplitude_param::level);
   for(std::size_t i = 0; i < dsp.size(); i++)
     plot[i] = (dsp[i].bipolar? (dsp[i].value + 1.0f) * 0.5f: dsp[i].value) * amp;
 }
@@ -252,10 +253,10 @@ oscillator_wave_graph::sample_count(
   param_value const* state, float sample_rate, float bpm) const
 {
   std::int32_t const cycles = 2;
-  std::int32_t begin = topology()->param_bounds[part_type::oscillator][part_index()];
-  float cent = state[begin + oscillator_param::cent].real;
-  std::int32_t note = state[begin + oscillator_param::note].discrete;
-  std::int32_t octave = state[begin + oscillator_param::octave].discrete;
+  state_view view(topology(), state, part_type::oscillator, part_index());
+  float cent = view.get_real_dsp(oscillator_param::cent);
+  std::int32_t note = view.get_discrete(oscillator_param::note);
+  std::int32_t octave = view.get_discrete(oscillator_param::octave);
   float frequency = note_to_frequency(12 * (octave + 1) + note + cent);
   return static_cast<std::int32_t>(std::ceil(cycles * sample_rate / frequency));
 } 
@@ -308,8 +309,8 @@ std::int32_t
 filter_ir_graph::sample_count(
   param_value const* state, float sample_rate, float bpm) const
 {
-  std::int32_t begin = topology()->param_bounds[part_type::filter][part_index()];
-  std::int32_t type = state[begin + filter_param::type].discrete;
+  state_view view(topology(), state, part_type::filter, part_index());
+  std::int32_t type = view.get_discrete(filter_param::type);
   std::int32_t length_ms = type == filter_type::state_var? 5: 50;
   return static_cast<std::int32_t>(std::ceil(length_ms * sample_rate / 1000.0f));
 }
@@ -362,8 +363,8 @@ cv_route_graph::dsp_to_plot(
 std::int32_t
 cv_route_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 { 
-  std::int32_t begin = topology()->param_bounds[part_type::cv_route][part_index()];
-  float seconds = state[begin + cv_route_param::plot_time].real;
+  state_view view(topology(), state, part_type::cv_route, part_index());
+  float seconds = view.get_real_dsp(cv_route_param::plot_time);
   return static_cast<std::int32_t>(std::ceil(seconds * cv_route_graph_rate));
 }
 

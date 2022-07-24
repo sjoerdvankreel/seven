@@ -21,6 +21,34 @@ struct cv_sample
   bool bipolar = false;
 };
 
+// Simplify access to static state.
+struct state_view
+{
+  topology_info const* const topology;
+  param_value const* const state;
+  std::int32_t const part_type;
+  std::int32_t const part_index;
+
+  float get_real_dsp(std::int32_t param) const;
+  std::int32_t get_discrete(std::int32_t param) const;
+};
+
+inline std::int32_t
+state_view::get_discrete(std::int32_t param) const
+{
+  std::int32_t index = topology->param_bounds[part_type][part_index] + param;
+  assert(topology->params[index].descriptor->type != param_type::real);
+  return state[index].discrete;
+}
+
+inline float
+state_view::get_real_dsp(std::int32_t param) const
+{
+  std::int32_t index = topology->param_bounds[part_type][part_index] + param;
+  assert(topology->params[index].descriptor->type == param_type::real);
+  return topology->params[index].descriptor->real.dsp.to_range(state[index].real);
+}
+
 // Note including cents.
 inline float
 note_to_frequency(float note)
