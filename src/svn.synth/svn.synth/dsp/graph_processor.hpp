@@ -51,6 +51,7 @@ public:
   svn::base::graph_processor<base::cv_sample>(topology, 0), _env(topology, 0) {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;
+  base::param_value transform_param(std::int32_t rt_index, param_value value) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
   void process_dsp_core(block_input const& input, base::cv_sample* output, float sample_rate, float bpm) override;
   void dsp_to_plot(base::param_value const* state, std::vector<base::cv_sample> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) override;
@@ -80,6 +81,7 @@ public:
   svn::base::graph_processor<base::audio_sample32>(topology, part_index) {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;
+  base::param_value transform_param(std::int32_t rt_index, param_value value) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
   void process_dsp_core(block_input const& input, base::audio_sample32* output, float sample_rate, float bpm) override;
   void dsp_to_plot(base::param_value const* state, std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) override;
@@ -98,6 +100,7 @@ public:
   _mono(), _wave(topology, part_index), _analyzer() {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;
+  base::param_value transform_param(std::int32_t rt_index, param_value value) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
   void process_dsp_core(block_input const& input, base::audio_sample32* output, float sample_rate, float bpm) override;
   void dsp_to_plot(base::param_value const* state, std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) override;
@@ -112,6 +115,7 @@ public:
   svn::base::graph_processor<base::audio_sample32>(topology, part_index), _audio_in() {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;
+  base::param_value transform_param(std::int32_t rt_index, param_value value) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
   void process_dsp_core(block_input const& input, base::audio_sample32* output, float sample_rate, float bpm) override;
   void dsp_to_plot(base::param_value const* state, std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) override;
@@ -128,6 +132,7 @@ public:
   svn::base::graph_processor<base::audio_sample32>(topology, part_index), _fft(), _ir(topology, part_index), _mono() {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;
+  base::param_value transform_param(std::int32_t rt_index, param_value value) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;
   void process_dsp_core(block_input const& input, base::audio_sample32* output, float sample_rate, float bpm) override;
   void dsp_to_plot(base::param_value const* state, std::vector<base::audio_sample32> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) override;

@@ -18,7 +18,7 @@ graph_processor<T>::process_dsp(param_value const* state, float sample_rate, flo
 
   for (std::int32_t p = 0; p < topology()->input_param_count; p++)
     for (std::int32_t s = 0; s < samples; s++)
-      _automation_buffer.push_back(state[p]);
+      _automation_buffer.push_back(transform_param(p, state[p]));
   for (std::int32_t p = 0; p < topology()->input_param_count; p++)
     _automation.push_back(_automation_buffer.data() + static_cast<std::size_t>(p * samples));
 

@@ -75,6 +75,15 @@ setup_graph_voice_input(
   return result;
 }
 
+param_value
+disable_modulation(topology_info const* topology, std::int32_t rt_index, param_value value)
+{
+  for(std::int32_t cv = 0; cv < cv_route_count; cv++)
+    if(rt_index == topology->param_bounds[part_type::cv_route][cv] + cv_route_param::on)
+      return param_value(0);
+  return value;
+}
+
 bool
 lfo_graph::needs_repaint(std::int32_t runtime_param) const
 {
@@ -116,6 +125,10 @@ lfo_graph::sample_count(param_value const* state, float sample_rate, float bpm) 
   }
   return static_cast<std::int32_t>(std::ceil(cycles * samples));
 }  
+
+param_value 
+amp_graph::transform_param(std::int32_t rt_index, param_value value) const
+{ return disable_modulation(topology(), rt_index, value); }
 
 std::int32_t
 amp_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
@@ -212,6 +225,10 @@ oscillator_spectrum_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
 { return _wave.process_dsp_core(input, output, sample_rate, bpm); }
 
+param_value 
+oscillator_spectrum_graph::transform_param(std::int32_t rt_index, param_value value) const
+{ return _wave.transform_param(rt_index, value); }
+
 std::int32_t
 oscillator_spectrum_graph::sample_count(
   param_value const* state, float sample_rate, float bpm) const
@@ -230,6 +247,10 @@ oscillator_spectrum_graph::dsp_to_plot(
   for(std::size_t i = 0; i < spectrum_analyzer::bucket_count; i++)
     plot.push_back(spectrum[i]);
 }
+
+param_value 
+oscillator_wave_graph::transform_param(std::int32_t rt_index, param_value value) const
+{ return disable_modulation(topology(), rt_index, value); }
 
 bool 
 oscillator_wave_graph::needs_repaint(std::int32_t runtime_param) const
@@ -282,6 +303,10 @@ bool
 filter_fr_graph::needs_repaint(std::int32_t runtime_param) const
 { return _ir.needs_repaint(runtime_param); }
 
+param_value 
+filter_fr_graph::transform_param(std::int32_t rt_index, param_value value) const
+{ return _ir.transform_param(rt_index, value); }
+
 void 
 filter_fr_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
@@ -304,6 +329,10 @@ filter_fr_graph::dsp_to_plot(
   for (std::size_t i = 0; i < fft.size(); i++)
     plot.push_back(std::abs(fft[i].real()) / max);
 }
+
+param_value 
+filter_ir_graph::transform_param(std::int32_t rt_index, param_value value) const
+{ return disable_modulation(topology(), rt_index, value); }
 
 std::int32_t
 filter_ir_graph::sample_count(

@@ -77,6 +77,8 @@ public:
 
   // Need to know size up front.
   virtual std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const = 0;
+  // May be used to process graph specific requirements, e.g. disable modulation.
+  virtual param_value transform_param(std::int32_t rt_index, param_value value) const { return value; }
   // Renders data in sample_count samples.
   virtual void process_dsp_core(block_input const& input, T* output, float sample_rate, float bpm) = 0;
   // Transforms raw data to plot in (0, 1).
