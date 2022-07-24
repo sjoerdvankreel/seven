@@ -22,9 +22,9 @@ audio_sample32
 filter::process_state_variable(
   automation_view const& automation, audio_sample32 source, std::int32_t sample)
 {
-  float res = automation.get(filter_param::state_var_res, sample).real;
-  float kbd = automation.get(filter_param::state_var_kbd, sample).real;
-  float freq = automation.get(filter_param::state_var_freq, sample).real;
+  float res = automation.get_as_dsp(filter_param::state_var_res, sample);
+  float kbd = automation.get_as_dsp(filter_param::state_var_kbd, sample);
+  float freq = automation.get_as_dsp(filter_param::state_var_freq, sample);
   std::int32_t type = automation.get(filter_param::state_var_type, sample).discrete;
 
   if (kbd > 0.0f) freq = (1.0f - kbd) * freq + kbd * freq * _state_var.kbd_track_base;
@@ -62,10 +62,10 @@ audio_sample32
 filter::process_comb(
   automation_view const& automation, audio_sample32 source, std::int32_t sample)
 {
-  float dly_min_sec = automation.get(filter_param::comb_dly_min, sample).real;
-  float dly_plus_sec = automation.get(filter_param::comb_dly_plus, sample).real;
-  float gain_min = automation.get(filter_param::comb_gain_min, sample).real;
-  float gain_plus = automation.get(filter_param::comb_gain_plus, sample).real;
+  float dly_min_sec = automation.get_as_dsp(filter_param::comb_dly_min, sample);
+  float dly_plus_sec = automation.get_as_dsp(filter_param::comb_dly_plus, sample);
+  float gain_min = automation.get_as_dsp(filter_param::comb_gain_min, sample);
+  float gain_plus = automation.get_as_dsp(filter_param::comb_gain_plus, sample);
   std::int32_t dly_min_samples = static_cast<std::int32_t>(dly_min_sec * _sample_rate);
   std::int32_t dly_plus_samples = static_cast<std::int32_t>(dly_plus_sec * _sample_rate);
   audio_sample32 min = _comb.output.get(dly_min_samples) * gain_min;
