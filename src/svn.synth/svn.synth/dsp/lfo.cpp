@@ -21,7 +21,7 @@ lfo::process_block(voice_input const& input, std::int32_t index, base::cv_sample
     cv_out[s] = { 0.0f, false }; 
     if(automation.get(lfo_param::on, s).discrete == 0) continue;
     if(automation.get(lfo_param::synced, s).discrete == 0)
-      frequency = 1.0f / automation.get(lfo_param::period_time, s).real;
+      frequency = 1.0f / automation.get_as_dsp(lfo_param::period_time, s);
     else 
     {   
       float timesig = lfo_timesig_values[automation.get(lfo_param::period_sync, s).discrete];
