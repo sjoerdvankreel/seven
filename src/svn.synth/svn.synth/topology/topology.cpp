@@ -103,7 +103,7 @@ static param_relevance const envelope_attack_log_relevance[1] = { { envelope_par
 static param_relevance const envelope_release_log_relevance[1] = { { envelope_param::release_slope, { envelope_slope::logarithmic } } };
  
 static param_descriptor const 
-envelope_params[envelope_param::count] =   
+envelope_params[envelope_param::count] =    
 {   
   { "{FC3CE4BC-D8F0-487E-9BB6-826988B4B812}", { L"On", L"Enabled" }, false, { -1, 0, nullptr, 0 } },
   { "{D622D344-A08E-4109-84D8-C310B81C2769}", { L"Type", L"Type" }, L"", false, &envelope_types, 0, { 0, 0, nullptr, 0}},
@@ -113,7 +113,7 @@ envelope_params[envelope_param::count] =
   { "{70C49337-7141-42BC-B336-78B28F4770E3}", { L"Delay", L"Delay sync" }, L"", true, &env_timesig_names, 0, { 1, 2, envelope_sync_relevance, 1}},
   { "{AADD118E-B9CE-464E-83C0-1FAE5A62F530}", { L"Hold", L"Hold time" }, L"Sec", { 0.0f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 2, 2, envelope_time_relevance, 1 } },
   { "{AC5D88B7-8CDB-4401-9FB0-20EF0195ABD8}", { L"Hold", L"Hold sync" }, L"", true, &env_timesig_names, 0, { 2, 2, envelope_sync_relevance, 1 } },
-  { "{721AFEB5-A17E-4C37-BF3A-94F645234B73}", { L"Sustain", L"Sustain level" }, L"dB", { 0.5f, 2, real_bounds::unit(), real_bounds::decibel() }, { 3, 2, nullptr, 0 } },
+  { "{721AFEB5-A17E-4C37-BF3A-94F645234B73}", { L"Sustain", L"Sustain level" }, L"dB", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { 3, 2, nullptr, 0 } },
   { "{E0A45A06-3C0C-4409-BBFA-A2834F0C7BAD}", { L"Attack", L"Attack time" }, L"Sec", { 0.05f, 2, real_bounds::quadratic(0.0f, 10.0f), real_bounds::quadratic(0.0f, 10.0f) }, { 6, 2, envelope_time_relevance, 1 } },
   { "{E0CFCBB7-B050-4C47-B78C-2511AD2EE6B6}", { L"Attack", L"Attack sync" }, L"", true, &env_timesig_names, 1, { 6, 2, envelope_sync_relevance, 1 } },
   { "{1400CEB5-25B1-42B1-ADA1-B5FDF8C6D1E5}", { L"Slope", L"Attack slope" }, L"", false, &envelope_slopes, 0, { 7, 1, nullptr, 0 } },
@@ -127,7 +127,7 @@ envelope_params[envelope_param::count] =
   { "{6B978A93-54D1-4990-BD2E-BC143EA816AF}", { L"Slope", L"Release slope" }, L"", false, &envelope_slopes, 0, { 13, 1, nullptr, 0 } },
   { "{4E2A6D8B-275C-4E1E-84BE-B21FE16E1E0F}", { L"Mid", L"Release log midpoint" }, L"", { 0.5f, 2, real_bounds::unit(), real_bounds::unit() }, { 14, 1, envelope_release_log_relevance, 1 } }
 }; 
-  
+   
 // ---- filter ---- 
   
 static graph_descriptor const

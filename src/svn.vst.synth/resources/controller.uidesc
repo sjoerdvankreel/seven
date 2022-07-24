@@ -7703,7 +7703,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "max-value": "1",
+                                                    "max-value": "2",
                                                     "font-color": "color_00DCFFFF",
                                                     "back-color": "color_00DCFF40",
                                                     "shadow-color": "color_00DCFF80"
@@ -9059,7 +9059,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "max-value": "1",
+                                                    "max-value": "2",
                                                     "font-color": "color_00DCFFFF",
                                                     "back-color": "color_00DCFF40",
                                                     "shadow-color": "color_00DCFF80"
@@ -10415,7 +10415,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "max-value": "1",
+                                                    "max-value": "2",
                                                     "font-color": "color_00DCFFFF",
                                                     "back-color": "color_00DCFF40",
                                                     "shadow-color": "color_00DCFF80"
@@ -11771,7 +11771,7 @@
                                                     "font": "~ NormalFontSmall",
                                                     "text-inset": "3, 0",
                                                     "round-rect-radius": "3",
-                                                    "max-value": "1",
+                                                    "max-value": "2",
                                                     "font-color": "color_00DCFFFF",
                                                     "back-color": "color_00DCFF40",
                                                     "shadow-color": "color_00DCFF80"
