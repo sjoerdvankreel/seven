@@ -379,6 +379,7 @@ cv_route_graph::process_dsp_core(
     lfo(cv_route_graph_rate).process_block(vinput, i, state.lfo[i].data());
   for (std::int32_t i = 0; i < envelope_count; i++)
     envelope(cv_route_graph_rate).process_block(vinput, i, state.envelope[i].data(), input.sample_count, ended);
+  std::fill(state.velocity.begin(), state.velocity.begin() + input.sample_count, base::cv_sample({ cv_route_graph_velocity, false }));
 
   std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> output_table_out
     = zip_list_table_init_out(cv_route_output_counts, cv_route_output_target_counts, cv_route_output::count);

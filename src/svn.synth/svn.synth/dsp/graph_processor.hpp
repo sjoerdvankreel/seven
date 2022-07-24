@@ -60,6 +60,7 @@ class cv_route_graph:
 public svn::base::graph_processor<float>
 {
   static inline float constexpr cv_route_graph_rate = 1000.0f;
+  static inline float constexpr cv_route_graph_velocity = 0.5f;
 
 public:
   cv_route_graph(topology_info const* topology, std::int32_t part_index) :

@@ -223,10 +223,10 @@ audio_route_params[audio_route_param::count] =
 // ---- cv route ----                
     
 static graph_descriptor const cv_route_graph = { -1, 0, 1, 2, 2, L"CV" };
-static wchar_t const* const cv_route_input_names[cv_route_input::count] = { L"Off", L"Env", L"LFO" };
-static list_item_info const cv_route_input_infos[cv_route_input::count] = { nullptr, envelope_item_info, nullptr };
+static wchar_t const* const cv_route_input_names[cv_route_input::count] = { L"Off", L"Velocity", L"Env", L"LFO"};
+static list_item_info const cv_route_input_infos[cv_route_input::count] = { nullptr, nullptr, envelope_item_info, nullptr };
 static wchar_t const* const cv_route_input_op_name[cv_route_input_op::count] = { L"Add", L"Mul" };
-static wchar_t const* const* const cv_route_input_op_names[cv_route_input::count] = { nullptr, cv_route_input_op_name, cv_route_input_op_name };
+static wchar_t const* const* const cv_route_input_op_names[cv_route_input::count] = { nullptr, cv_route_input_op_name, cv_route_input_op_name, cv_route_input_op_name };
 static wchar_t const* const cv_route_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Filter", L"Amp", L"Audio" };
 static wchar_t const* const cv_route_amp_output_names[cv_route_amp_output::count] = { L"Lvl", L"Pan" };
 static wchar_t const* const cv_route_audio_output_names[cv_route_audio_output::count] = { L"Amt1", L"Amt2", L"Amt3" };
@@ -261,9 +261,9 @@ cv_route_params[cv_route_param::count] =
   { "{4E840E8E-ADDD-4C43-A48F-901EEFA616C8}", { L"Out6", L"Output 6" }, L"", false, &cv_route_output_names_list, 0, { 18, 2, nullptr, 0 } },
   { "{645B184E-6AEF-4119-8933-4623749D6280}", { L"Amt6", L"Amount 6" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 19, 2, nullptr, 0 } }
 };   
-                
-// ---- global topo ----    
-
+                 
+// ---- global topo ----     
+ 
 struct part_group_t { enum value { audio, cv, route, global, count }; };
 typedef part_group_t::value part_group;
 static ui_color const  

@@ -27,6 +27,7 @@ class cv_state
 
 public:
   explicit cv_state(std::int32_t max_sample_count);
+  std::vector<base::cv_sample> velocity;
   std::array<std::vector<base::cv_sample>, lfo_count> lfo;
   std::array<std::vector<base::cv_sample>, envelope_count> envelope;
   double modulate(voice_input const& input, base::automation_view const& automated, std::int32_t const* mapping, 

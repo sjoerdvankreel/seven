@@ -14,7 +14,8 @@ std::vector<std::vector<std::vector<std::int32_t>>> const cv_state::output_table
 
 cv_state::
 cv_state(std::int32_t max_sample_count) :
-  envelope(), lfo(), scratch(), scratch_buffer()
+  envelope(), lfo(), scratch(), scratch_buffer(),
+  velocity(static_cast<std::size_t>(max_sample_count))
 {
   std::vector<base::cv_sample> cv(static_cast<std::size_t>(max_sample_count));
   lfo.fill(cv);
@@ -34,6 +35,7 @@ cv_state::input_buffer(std::int32_t input, std::int32_t index) const
   {
   case cv_route_input::off: return nullptr;
   case cv_route_input::lfo: return lfo[index].data();
+  case cv_route_input::velocity: return velocity.data();
   case cv_route_input::envelope: return envelope[index].data();
   default: assert(false); return nullptr;
   }

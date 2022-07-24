@@ -30,6 +30,9 @@ synth_voice::process_block(voice_input const& input, cv_state& cv,
   assert(release_sample >= -1);
   assert(release_sample < input.sample_count);
 
+  // Set velocity.
+  std::fill(cv.velocity.begin(), cv.velocity.begin() + input.sample_count, base::cv_sample({_velocity, false}));
+
   // Run lfo's.
   for(std::int32_t i = 0; i < lfo_count; i++)
     usage.lfo += _lfos[i].process_block(input, i, cv.lfo[i].data());
@@ -65,6 +68,6 @@ synth_voice::process_block(voice_input const& input, cv_state& cv,
   usage.audio += audio.mix(input, audio_route_output::amp, 0, audio_in);
   usage.amp += _amplitude.process_block(input, cv.envelope[0].data(), audio_in, audio.amplitude.data());
   return ended;
-} 
+}  
  
 } // namespace svn::synth
