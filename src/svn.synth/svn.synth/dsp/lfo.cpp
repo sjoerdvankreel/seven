@@ -19,16 +19,16 @@ lfo::process_block(voice_input const& input, std::int32_t index, base::cv_sample
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
     cv_out[s] = { 0.0f, false }; 
-    if(automation.get(lfo_param::on, s).discrete == 0) continue;
-    if(automation.get(lfo_param::synced, s).discrete == 0)
-      frequency = 1.0f / automation.get_as_dsp(lfo_param::period_time, s);
+    if(automation.get_discrete(lfo_param::on, s) == 0) continue;
+    if(automation.get_discrete(lfo_param::synced, s) == 0)
+      frequency = 1.0f / automation.get_real_dsp(lfo_param::period_time, s);
     else 
     {   
-      float timesig = lfo_timesig_values[automation.get(lfo_param::period_sync, s).discrete];
+      float timesig = lfo_timesig_values[automation.get_discrete(lfo_param::period_sync, s)];
       frequency = timesig_to_frequency(_sample_rate, input.bpm, timesig);
     }
     float sample = sanity_bipolar(std::sin(2.0f * std::numbers::pi * _phase));
-    if (automation.get(lfo_param::bipolar, s).discrete == 0) cv_out[s] = { (sample + 1.0f) * 0.5f, false };
+    if (automation.get_discrete(lfo_param::bipolar, s) == 0) cv_out[s] = { (sample + 1.0f) * 0.5f, false };
     else cv_out[s] = { sample, true }; 
     _phase += frequency / _sample_rate; 
     _phase -= std::floor(_phase);

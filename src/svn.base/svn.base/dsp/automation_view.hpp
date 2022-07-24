@@ -26,11 +26,17 @@ class automation_view
 
 public:
   automation_view() = default;
-  float to_dsp(std::int32_t param, float val) const;
-  param_value get(std::int32_t param, std::int32_t sample) const;
-  float get_as_dsp(std::int32_t param, std::int32_t sample) const;
+  
+  float get_real(std::int32_t param, std::int32_t sample) const;
+  param_value get_param(std::int32_t param, std::int32_t sample) const;
+  std::int32_t get_discrete(std::int32_t param, std::int32_t sample) const;
+
   automation_view rearrange_params(std::int32_t part_type, std::int32_t part_index) const;
   automation_view rearrange_samples(std::int32_t sample_offset, std::int32_t sample_fixed_at) const;
+
+  float to_dsp(std::int32_t param, float val) const;
+  float get_real_dsp(std::int32_t param, std::int32_t sample) const;
+  float get_modulated_dsp(std::int32_t param, std::int32_t sample, float const* const* modulated) const;
 
   automation_view(
     topology_info const* topology, param_value const* fixed, param_value const* const* automation,
@@ -63,15 +69,28 @@ _sample_count(sample_count), _sample_offset(sample_offset), _sample_fixed_at(sam
 }
 
 inline param_value
-automation_view::get(std::int32_t param, std::int32_t sample) const
+automation_view::get_param(std::int32_t param, std::int32_t sample) const
 {
   assert(param >= 0);
   assert(param < _part_param_count);
   assert(sample >= 0);
   assert(sample < _sample_count - _sample_offset);
-  assert(_topology->params[param + _part_param_offset].descriptor->type == param_type::real);
   if (sample >= _sample_fixed_at) return _fixed[_part_param_offset + param];
   return _automation[param + _part_param_offset][sample + _sample_offset];
+}
+
+inline float
+automation_view::get_real(std::int32_t param, std::int32_t sample) const
+{ 
+  assert(_topology->params[param + _part_param_offset].descriptor->type == param_type::real); 
+  return get_param(param, sample).real;
+}
+
+inline std::int32_t
+automation_view::get_discrete(std::int32_t param, std::int32_t sample) const
+{ 
+  assert(_topology->params[param + _part_param_offset].descriptor->type != param_type::real);
+  return get_param(param, sample).discrete; 
 }
 
 inline float
@@ -83,14 +102,15 @@ automation_view::to_dsp(std::int32_t param, float val) const
 }
 
 inline float
-automation_view::get_as_dsp(std::int32_t param, std::int32_t sample) const
-{
-  assert(param >= 0);
-  assert(param < _part_param_count);
+automation_view::get_real_dsp(std::int32_t param, std::int32_t sample) const
+{ return to_dsp(param, get_real(param, sample)); }
+
+inline float 
+automation_view::get_modulated_dsp(std::int32_t param, std::int32_t sample, float const* const* modulated) const
+{ 
   assert(sample >= 0);
   assert(sample < _sample_count - _sample_offset);
-  assert(_topology->params[param + _part_param_offset].descriptor->type == param_type::real);
-  return to_dsp(param, get(param, sample).real);
+  return to_dsp(param, modulated[param][sample]);
 }
 
 inline automation_view
