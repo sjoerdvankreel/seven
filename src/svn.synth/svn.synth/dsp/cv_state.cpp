@@ -62,14 +62,14 @@ cv_state::modulate(voice_input const& input, base::automation_view const& automa
           if (in == input_off) continue;
           std::int32_t out = automation.get(i * 3 + cv_route_param_offset + 1, s).discrete;
           if (out != output_id) continue;
-          float amt = automation.get(i * 3 + cv_route_param_offset + 2, s).real;
+          float amt = automation.get_as_dsp(i * 3 + cv_route_param_offset + 2, s);
           std::tuple<std::int32_t, std::int32_t, std::int32_t> input_ids(input_table_out[in]);
           float cv = input_buffer(std::get<0>(input_ids), std::get<1>(input_ids))[s].value * amt;
           bool multiply = std::get<2>(input_ids) == cv_route_input_op::multiply;
           if(multiply) scratch[mapping[p]][s] *= cv;
           else scratch[mapping[p]][s] += cv;
         }
-      }
+      } 
       scratch[mapping[p]][s] = std::clamp(scratch[mapping[p]][s], 0.0f, 1.0f);
     }
   }

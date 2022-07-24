@@ -53,7 +53,7 @@ audio_state::mix(voice_input const& input, audio_route_output route_output,
         if (in == input_off) continue;
         std::int32_t out = automation.get(audio_route_param_offset + i * 3 + 1, s).discrete;
         if (out != output_id) continue;
-        float amt = automation.get(audio_route_param_offset + i * 3 + 2, s).real;
+        float amt = automation.get_as_dsp(audio_route_param_offset + i * 3 + 2, s);
         std::pair<std::int32_t, std::int32_t> input_ids(input_table_out[in]);
         scratch[s] = base::sanity_audio(scratch[s] + input_buffer(input_ids.first, input_ids.second)[s] * amt);
       }
