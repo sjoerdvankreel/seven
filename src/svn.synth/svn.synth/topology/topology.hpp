@@ -10,13 +10,14 @@ namespace svn::synth {
 
 inline std::int32_t constexpr lfo_count = 6;
 inline std::int32_t constexpr filter_count = 4;
+inline std::int32_t constexpr cv_route_count = 3;
 inline std::int32_t constexpr envelope_count = 4;
 inline std::int32_t constexpr oscillator_count = 4;
 inline std::int32_t constexpr audio_route_count = 4;
 
 extern base::part_descriptor const part_descriptors[];
 inline std::int32_t constexpr synth_polyphony = 32;
-inline std::int32_t constexpr synth_max_ui_height = 800;
+inline std::int32_t constexpr synth_max_ui_height = 560;
 inline base::ui_color constexpr synth_ui_end_color = { 0x6E, 0xFA, 0xD5 };
 inline base::ui_color constexpr synth_ui_start_color = { 0xB7, 0xC3, 0xFD }; 
 
@@ -24,13 +25,13 @@ struct part_type_t { enum value { oscillator, envelope, lfo, amplitude, filter, 
 typedef part_type_t::value part_type;
   
 // ---- amp ----
-
+ 
 struct amplitude_param_t { enum value { level, pan, count }; };
 typedef amplitude_param_t::value amplitude_param;
 
 // ---- active ----
 
-struct active_param_t { enum value { oscillator, lfo, filter, envelope, audio_route, count }; };
+struct active_param_t { enum value { oscillator, lfo, filter, envelope, audio_route, cv_route, count }; };
 typedef active_param_t::value active_param;
 
 // ---- output ----
@@ -125,14 +126,14 @@ inline std::int32_t constexpr audio_route_input_counts[audio_route_input::count]
 
 // ---- cv route ----
 
+struct cv_route_input_op_t { enum value { add, multiply, count }; };
 struct cv_route_input_t { enum value { off, envelope, lfo, count }; };
-struct cv_route_input_op_t { enum value { add, mul, count }; };
 
-struct cv_route_amp_output_t { enum value { lvl, pan, count }; };
 struct cv_route_output_t { enum value { off, osc, filter, amp, count }; };
+struct cv_route_amp_output_t { enum value { lvl, pan, count }; };
 struct cv_route_osc_output_t { enum value { amp, pan, anlg_pw, dsf_distance, dsf_rolloff, cent, uni_detune, uni_spread, count }; };
 struct cv_route_filter_output_t { enum value { state_var_freq, state_var_res, state_var_kbd, comb_dly_plus, comb_gain_plus, comb_dly_min, comb_gain_min, count }; };
-struct cv_route_param_t { enum value { plot_tgt, plot_time, in1, out1, amt1, in2, out2, amt2, in3, out3, amt3, in4, out4, amt4, in5, out5, amt5, in6, out6, amt6, in7, out7, amt7, in8, out8, amt8, in9, out9, amt9, in10, out10, amt10, in11, out11, amt11, in12, out12, amt12, in13, out13, amt13, in14, out14, amt14, in15, out15, amt15, count }; };
+struct cv_route_param_t { enum value { on, plot_tgt, plot_time, in1, out1, amt1, in2, out2, amt2, in3, out3, amt3, in4, out4, amt4, in5, out5, amt5, in6, out6, amt6, count }; };
 
 typedef cv_route_param_t::value cv_route_param;
 typedef cv_route_input_t::value cv_route_input;
@@ -148,15 +149,13 @@ inline std::int32_t constexpr cv_route_osc_mapping[cv_route_osc_output::count] =
 inline std::int32_t constexpr cv_route_filter_mapping[cv_route_filter_output::count] = { filter_param::state_var_freq, filter_param::state_var_res, filter_param::state_var_kbd, filter_param::comb_dly_plus, filter_param::comb_gain_plus, filter_param::comb_dly_min, filter_param::comb_gain_min };
 inline std::int32_t const* const cv_route_param_mapping[cv_route_output_t::count] = { nullptr, cv_route_osc_mapping , cv_route_filter_mapping, cv_route_amp_mapping };
 
-inline std::int32_t constexpr cv_route_count = 15;
-inline std::int32_t constexpr cv_route_param_offset = 2; // for plot params
-inline std::int32_t constexpr cv_input_counts[cv_route_input::count] = { 1, envelope_count, lfo_count };
-inline std::int32_t constexpr cv_input_op_counts[cv_route_input::count] = { 0, cv_route_input_op::count, cv_route_input_op::count };
-inline std::int32_t constexpr cv_inputs_count = 1 + envelope_count * cv_route_input_op::count + lfo_count * cv_route_input_op::count;
-inline std::int32_t constexpr cv_output_counts[cv_route_output::count] = { 1, oscillator_count, filter_count, 1 };
-inline std::int32_t constexpr cv_output_modulated_counts[cv_route_output::count] = { 0, oscillator_param::count, filter_param::count, amplitude_param::count };
-inline std::int32_t constexpr cv_output_target_counts[cv_route_output::count] = { 0, cv_route_osc_output::count, cv_route_filter_output::count, cv_route_amp_output::count };
-inline std::int32_t constexpr cv_outputs_count = 1 + cv_route_amp_output_t::count + cv_route_osc_output::count * oscillator_count + cv_route_filter_output::count * filter_count;
+inline std::int32_t constexpr cv_route_route_count = 6;
+inline std::int32_t constexpr cv_route_param_offset = 3; // for enabled + plot params
+inline std::int32_t constexpr cv_route_input_counts[cv_route_input::count] = { 1 /* off */, envelope_count, lfo_count};
+inline std::int32_t constexpr cv_route_input_op_counts[cv_route_input::count] = { 0 /* off */, cv_route_input_op::count, cv_route_input_op::count};
+inline std::int32_t constexpr cv_route_output_counts[cv_route_output::count] = { 1 /* off */, oscillator_count, filter_count, 1};
+inline std::int32_t constexpr cv_route_output_modulated_counts[cv_route_output::count] = { 0 /* off */, oscillator_param::count, filter_param::count, amplitude_param::count};
+inline std::int32_t constexpr cv_route_output_target_counts[cv_route_output::count] = { 0 /* off */, cv_route_osc_output::count, cv_route_filter_output::count, cv_route_amp_output::count };
 
 } // namespace svn::synth
 #endif // SVN_SYNTH_TOPOLOGY_TOPOLOGY_HPP

@@ -12,6 +12,7 @@ wchar_t const* envelope_item_info(std::int32_t index)
  
 static std::vector<std::wstring> const active_lfo_names = list_names(L"LFO", lfo_count, nullptr);
 static std::vector<std::wstring> const active_filter_names = list_names(L"Filter", filter_count, nullptr);
+static std::vector<std::wstring> const active_cv_route_names = list_names(L"CV", cv_route_count, nullptr);
 static std::vector<std::wstring> const active_oscillator_names = list_names(L"Osc", oscillator_count, nullptr);
 static std::vector<std::wstring> const active_audio_route_names = list_names(L"Audio", audio_route_count, nullptr);
 static std::vector<std::wstring> const active_envelope_names = list_names(L"Env", envelope_count, envelope_item_info);
@@ -24,6 +25,7 @@ active_params[active_param::count] =
   { "{D5DD0DFC-AC9D-42E6-9D2B-924786382825}", { L"Filter", L"Filter" }, L"", false, &active_filter_names, 0, param_no_ui },
   { "{556BF692-55B0-48B4-BD6A-E2CEFA17B012}", { L"Envelope", L"Envelope" }, L"", false, &active_envelope_names, 0, param_no_ui },
   { "{556BF692-55B0-48B4-BD6A-E2CEFA17B012}", { L"Audio", L"Audio route" }, L"", false, &active_audio_route_names, 0, param_no_ui },
+  { "{BFCAD318-CB76-4AF7-9B43-3F1776144813}", { L"CV", L"CV route" }, L"", false, &active_cv_route_names, 0, param_no_ui },
 };
          
 // ---- output ----  
@@ -198,108 +200,82 @@ oscillator_params[oscillator_param::count] =
   
 // ---- audio route ---- 
  
-static wchar_t const* const audio_input_names[audio_route_input::count] = { L"Off", L"Osc", L"Filter" }; 
-static wchar_t const* const audio_output_names[audio_route_output::count] = { L"Off", L"Filter", L"Amp" };
-static std::vector<std::wstring> const audio_input_names_list = multi_list_names(audio_input_names, audio_route_input_counts, audio_route_input::count);
-static std::vector<std::wstring> const audio_output_names_list = multi_list_names(audio_output_names, audio_route_output_counts, audio_route_output::count);
+static wchar_t const* const audio_route_input_names[audio_route_input::count] = { L"Off", L"Osc", L"Filter" };
+static wchar_t const* const audio_route_output_names[audio_route_output::count] = { L"Off", L"Filter", L"Amp" };
+static std::vector<std::wstring> const audio_route_input_names_list = multi_list_names(audio_route_input_names, audio_route_input_counts, audio_route_input::count);
+static std::vector<std::wstring> const audio_route_output_names_list = multi_list_names(audio_route_output_names, audio_route_output_counts, audio_route_output::count);
 
 static param_descriptor const
 audio_route_params[audio_route_param::count] =
 {
   { "{14096099-485D-4EB9-B055-E393DE2E993C}", { L"On", L"Enabled" }, false, { -1, 0, nullptr, 0 } },
-  { "{2E9F0478-B911-43DF-BB51-0C5836E4853F}", { L"In1", L"Input 1" }, L"", false, &audio_input_names_list, 0, { 0, 0, nullptr, 0}},
-  { "{295DC5F0-FB32-4D43-8799-D79F23FD3AA9}", { L"Out1", L"Output 1" }, L"", false, &audio_output_names_list, 0, { 1, 0, nullptr, 0 } },
+  { "{2E9F0478-B911-43DF-BB51-0C5836E4853F}", { L"In1", L"Input 1" }, L"", false, &audio_route_input_names_list, 0, { 0, 0, nullptr, 0}},
+  { "{295DC5F0-FB32-4D43-8799-D79F23FD3AA9}", { L"Out1", L"Output 1" }, L"", false, &audio_route_output_names_list, 0, { 1, 0, nullptr, 0 } },
   { "{A3B15FE9-56DB-493B-A4E1-31A004F3C937}", { L"Amt1", L"Amount 1" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 2, 0, nullptr, 0 } },
-  { "{A3A59082-CF73-4C28-A3FC-037729C9CB42}", { L"In2", L"Input 2" }, L"", false, &audio_input_names_list, 0, { 3, 1, nullptr, 0 } },
-  { "{843EB41C-199F-4FAC-ACC4-841B3663248D}", { L"Out2", L"Output 2" }, L"", false, &audio_output_names_list, 0, { 4, 1, nullptr, 0 } },
+  { "{A3A59082-CF73-4C28-A3FC-037729C9CB42}", { L"In2", L"Input 2" }, L"", false, &audio_route_input_names_list, 0, { 3, 1, nullptr, 0 } },
+  { "{843EB41C-199F-4FAC-ACC4-841B3663248D}", { L"Out2", L"Output 2" }, L"", false, &audio_route_output_names_list, 0, { 4, 1, nullptr, 0 } },
   { "{810B55DF-6230-45C7-B478-7A3569DC9127}", { L"Amt2", L"Amount 2" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 5, 1, nullptr, 0 } },
-  { "{A8E6882A-8945-4F59-92B9-78004EAF5818}", { L"In3", L"Input 3" }, L"", false, &audio_input_names_list, 0, { 6, 2, nullptr, 0 } },
-  { "{D2E34E63-DE9E-4620-924D-1897614BF983}", { L"Out3", L"Output 3" }, L"", false, &audio_output_names_list, 0, { 7, 2, nullptr, 0 } },
+  { "{A8E6882A-8945-4F59-92B9-78004EAF5818}", { L"In3", L"Input 3" }, L"", false, &audio_route_input_names_list, 0, { 6, 2, nullptr, 0 } },
+  { "{D2E34E63-DE9E-4620-924D-1897614BF983}", { L"Out3", L"Output 3" }, L"", false, &audio_route_output_names_list, 0, { 7, 2, nullptr, 0 } },
   { "{6721B1EC-9688-48A3-B5B8-0ADD0A9CF16B}", { L"Amt3", L"Amount 3" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 8, 2, nullptr, 0 } }
 }; 
 
 // ---- cv route ----                
     
 static graph_descriptor const cv_route_graph = { -1, 0, 1, 2, 2, L"CV" };
-static wchar_t const* const cv_input_names[cv_route_input::count] = { L"Off", L"Env", L"LFO" };
-static list_item_info const cv_input_infos[cv_route_input::count] = { nullptr, envelope_item_info, nullptr };
-static wchar_t const* const cv_input_op_name[cv_route_input_op::count] = { L"Add", L"Mul" };
-static wchar_t const* const* const cv_input_op_names[cv_route_input::count] = { nullptr, cv_input_op_name, cv_input_op_name };
-static wchar_t const* const cv_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Filter", L"Amp" };
-static wchar_t const* const cv_amp_output_names[cv_route_amp_output::count] = { L"Lvl", L"Pan" };
-static wchar_t const* const cv_filter_output_names[cv_route_filter_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
-static wchar_t const* const cv_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"PW", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
-static wchar_t const* const* const cv_output_target_names[cv_route_output::count] = { nullptr, cv_osc_output_names, cv_filter_output_names, cv_amp_output_names };
-static std::vector<std::wstring> const cv_input_names_list = zip_list_names(cv_input_names, cv_input_infos, cv_input_counts, cv_input_op_names, cv_input_op_counts, cv_route_input::count);
-static std::vector<std::wstring> const cv_output_names_list = zip_list_names(cv_output_names, nullptr, cv_output_counts, cv_output_target_names, cv_output_target_counts, cv_route_output::count);
+static wchar_t const* const cv_route_input_names[cv_route_input::count] = { L"Off", L"Env", L"LFO" };
+static list_item_info const cv_route_input_infos[cv_route_input::count] = { nullptr, envelope_item_info, nullptr };
+static wchar_t const* const cv_route_input_op_name[cv_route_input_op::count] = { L"Add", L"Mul" };
+static wchar_t const* const* const cv_route_input_op_names[cv_route_input::count] = { nullptr, cv_route_input_op_name, cv_route_input_op_name };
+static wchar_t const* const cv_route_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Filter", L"Amp" };
+static wchar_t const* const cv_route_amp_output_names[cv_route_amp_output::count] = { L"Lvl", L"Pan" };
+static wchar_t const* const cv_route_filter_output_names[cv_route_filter_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
+static wchar_t const* const cv_route_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"PW", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
+static wchar_t const* const* const cv_route_output_target_names[cv_route_output::count] = { nullptr, cv_route_osc_output_names, cv_route_filter_output_names, cv_route_amp_output_names };
+static std::vector<std::wstring> const cv_route_input_names_list = zip_list_names(cv_route_input_names, cv_route_input_infos, cv_route_input_counts, cv_route_input_op_names, cv_route_input_op_counts, cv_route_input::count);
+static std::vector<std::wstring> const cv_route_output_names_list = zip_list_names(cv_route_output_names, nullptr, cv_route_output_counts, cv_route_output_target_names, cv_route_output_target_counts, cv_route_output::count);
      
 static param_descriptor const  
 cv_route_params[cv_route_param::count] =  
 {  
-  { "{CE1DC1C7-72C5-4811-8C35-8485FFAFFABC}", { L"Plot", L"Plot target" }, L"", false, &cv_output_names_list, 0, { 0, 1, nullptr, 0 } },
+  { "{1F6DEE15-DEE7-443B-B9F8-E65BFF9C9C4A}", { L"On", L"Enabled" }, false, { -1, 0, nullptr, 0 } },
+  { "{CE1DC1C7-72C5-4811-8C35-8485FFAFFABC}", { L"Plot", L"Plot target" }, L"", false, &cv_route_output_names_list, 0, { 0, 1, nullptr, 0 } },
   { "{41FB9033-220C-4DA7-836A-22808E17167F}", { L"Time", L"Plot length" }, L"Sec", { 0.5f, 2, real_bounds::quadratic(0.01f, 10.0f), real_bounds::quadratic(0.01f, 10.0f) }, { 1, 1, nullptr, 0 } },
-  { "{3B025C6A-0230-491A-A51F-7CF1C81B69C9}", { L"In1", L"Input 1" }, L"", false, &cv_input_names_list, 0, { 2, 0, nullptr, 0} },
-  { "{5FDD8C86-8F2D-4613-BB98-BB673F502412}", { L"Out1", L"Output 1" }, L"", false, &cv_output_names_list, 0, { 3, 0, nullptr, 0 } },
+  { "{3B025C6A-0230-491A-A51F-7CF1C81B69C9}", { L"In1", L"Input 1" }, L"", false, &cv_route_input_names_list, 0, { 2, 0, nullptr, 0} },
+  { "{5FDD8C86-8F2D-4613-BB98-BB673F502412}", { L"Out1", L"Output 1" }, L"", false, &cv_route_output_names_list, 0, { 3, 0, nullptr, 0 } },
   { "{469D130F-2E4A-4960-871D-032B6F588313}", { L"Amt1", L"Amount 1" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 4, 0, nullptr, 0 } },
-  { "{2833E378-210B-404F-A4CB-0D6204A72CF0}", { L"In2", L"Input 2" }, L"", false, &cv_input_names_list, 0, { 5, 0, nullptr, 0 } },
-  { "{D0B28D9E-8888-42EB-8D3C-177FB4585E42}", { L"Out2", L"Output 2" }, L"", false, &cv_output_names_list, 0, { 6, 0, nullptr, 0 } },
+  { "{2833E378-210B-404F-A4CB-0D6204A72CF0}", { L"In2", L"Input 2" }, L"", false, &cv_route_input_names_list, 0, { 5, 0, nullptr, 0 } },
+  { "{D0B28D9E-8888-42EB-8D3C-177FB4585E42}", { L"Out2", L"Output 2" }, L"", false, &cv_route_output_names_list, 0, { 6, 0, nullptr, 0 } },
   { "{58AFE21F-7945-4919-BB67-60CE8892A8AF}", { L"Amt2", L"Amount 2" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 7, 0, nullptr, 0 } },
-  { "{25041AB5-2A06-4305-8009-C26D56311D26}", { L"In3", L"Input 3" }, L"", false, &cv_input_names_list, 0, { 8, 0, nullptr, 0 } },
-  { "{37420523-6A9D-4125-BAAB-24A28B9E0992}", { L"Out3", L"Output 3" }, L"", false, &cv_output_names_list, 0, { 9, 0, nullptr, 0 } },
-  { "{9C1F6472-6D48-42E6-B79E-3A00F33F70F5}", { L"Amt3", L"Amount 3" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 10, 0, nullptr, 0 } },
-  { "{958C1FF6-54BA-4933-9454-125357EE854E}", { L"In4", L"Input 4" }, L"", false, &cv_input_names_list, 0, { 11, 0, nullptr, 0 } },
-  { "{13056333-4562-4D49-9A1E-7EF8FD074956}", { L"Out4", L"Output 4" }, L"", false, &cv_output_names_list, 0, { 12, 0, nullptr, 0 } },
-  { "{7A8C3621-D7B9-4D63-9856-DFE2C9396FCD}", { L"Amt4", L"Amount 4" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 13, 0, nullptr, 0 } },
-  { "{DE0CBCF0-A808-4379-A044-2F4C5CFAC9CF}", { L"In5", L"Input 5" }, L"", false, &cv_input_names_list, 0, { 14, 0, nullptr, 0 } },
-  { "{B043E6E9-2207-4AF7-8AB0-F30B8B722F2C}", { L"Out5", L"Output 5" }, L"", false, &cv_output_names_list, 0, { 15, 0, nullptr, 0 } },
-  { "{FA974BFF-3DD9-4B42-9FAD-49B9F8196D46}", { L"Amt5", L"Amount 5" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 16, 0, nullptr, 0 } },
-  { "{2E34D57F-7277-48D6-9C7E-63897D735005}", { L"In6", L"Input 6" }, L"", false, &cv_input_names_list, 0, { 17, 1, nullptr, 0 } },
-  { "{4E840E8E-ADDD-4C43-A48F-901EEFA616C8}", { L"Out6", L"Output 6" }, L"", false, &cv_output_names_list, 0, { 18, 1, nullptr, 0 } },
-  { "{645B184E-6AEF-4119-8933-4623749D6280}", { L"Amt6", L"Amount 6" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 19, 1, nullptr, 0 } },
-  { "{11B875C8-815C-48DD-B6FC-4B2F6509D1B6}", { L"In7", L"Input 7" }, L"", false, &cv_input_names_list, 0, { 20, 1, nullptr, 0 } },
-  { "{B0C99125-73D5-493C-B1A4-A145BAF71455}", { L"Out7", L"Output 7" }, L"", false, &cv_output_names_list, 0, { 21, 1, nullptr, 0 } },
-  { "{5E433D4A-6E06-46DC-82DA-6F20A6C5652C}", { L"Amt7", L"Amount 7" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 22, 1, nullptr, 0 } },
-  { "{A72F92CE-A125-42A1-A1BE-2C45D96F7420}", { L"In8", L"Input 8" }, L"", false, &cv_input_names_list, 0, { 23, 1, nullptr, 0 } },
-  { "{65C29F9C-BC32-4087-94BC-21E524ED2840}", { L"Out8", L"Output 8" }, L"", false, &cv_output_names_list, 0, { 24, 1, nullptr, 0 } },
-  { "{E5E5897C-0818-49F5-B099-7778760B91A9}", { L"Amt8", L"Amount 8" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 25, 1, nullptr, 0 } },
-  { "{68B976D6-3C1A-4D6F-B1FD-AEEF8FD95F4B}", { L"In9", L"Input 9" }, L"", false, &cv_input_names_list, 0, { 26, 1, nullptr, 0 } },
-  { "{B7E00C89-2899-4F98-9C1B-C89801D6CFB3}", { L"Out9", L"Output 9" }, L"", false, &cv_output_names_list, 0, { 27, 1, nullptr, 0 } },
-  { "{2A24302A-C793-41AC-BAEE-9BF154C63504}", { L"Amt9", L"Amount 9" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 28, 1, nullptr, 0 } },
-  { "{0991AAF8-9BB5-4BDF-885A-93231158D717}", { L"In10", L"Input 10" }, L"", false, &cv_input_names_list, 0, { 29, 1, nullptr, 0 } },
-  { "{5D776DFF-11F0-48F0-8F05-2E43589C5556}", { L"Out10", L"Output 10" }, L"", false, &cv_output_names_list, 0, { 30, 1, nullptr, 0 } },
-  { "{02DF43DA-3D49-4571-87FC-F4DF12A0ADBE}", { L"Amt10", L"Amount 10" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 31, 1, nullptr, 0 } },
-  { "{60B208B7-771B-4DFD-B9C0-97E097C340BF}", { L"In11", L"Input 11" }, L"", false, &cv_input_names_list, 0, { 32, 2, nullptr, 0 } },
-  { "{9CC8A1E9-A060-41DC-AA0E-685D9BC65CAF}", { L"Out11", L"Output 11" }, L"", false, &cv_output_names_list, 0, { 33, 2, nullptr, 0 } },
-  { "{C1F0E288-FB7F-4762-BA3F-03A2508813B5}", { L"Amt11", L"Amount 11" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 34, 2, nullptr, 0 } },
-  { "{C5F2A2F7-33D0-4B82-903D-82214B938FD2}", { L"In12", L"Input 12" }, L"", false, &cv_input_names_list, 0, { 35, 2, nullptr, 0 } },
-  { "{6C10DABE-1531-4138-AE21-92794637E535}", { L"Out12", L"Output 12" }, L"", false, &cv_output_names_list, 0, { 36, 2, nullptr, 0 } },
-  { "{213502CD-8FEF-45AB-8FDF-69350CC67F72}", { L"Amt12", L"Amount 12" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 37, 2, nullptr, 0 } },
-  { "{570C4799-B355-4EDB-AB38-32AECDE1C07C}", { L"In13", L"Input 13" }, L"", false, &cv_input_names_list, 0, { 38, 2, nullptr, 0 } },
-  { "{DE40B39E-2744-44AD-B9EB-A56ECBEB27FF}", { L"Out13", L"Output 13" }, L"", false, &cv_output_names_list, 0, { 39, 2, nullptr, 0 } },
-  { "{11DC6780-F5F5-4455-90D7-7E387C8F18E0}", { L"Amt13", L"Amount 13" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 40, 2, nullptr, 0 } },
-  { "{37EFEDDD-336C-4ACB-A3CB-499D3A2F6427}", { L"In14", L"Input 14" }, L"", false, &cv_input_names_list, 0, { 41, 2, nullptr, 0 } },
-  { "{D0069229-060E-4652-9ECE-CB1474FA791D}", { L"Out14", L"Output 14" }, L"", false, &cv_output_names_list, 0, { 42, 2, nullptr, 0 } },
-  { "{C96385B6-30B7-44BB-9987-30003367804E}", { L"Amt14", L"Amount 14" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 43, 2, nullptr, 0 } },
-  { "{4DA00E54-7133-4AC4-9B22-286A7F2CD3E7}", { L"In15", L"Input 15" }, L"", false, &cv_input_names_list, 0, { 44, 2, nullptr, 0 } },
-  { "{DF96C8A8-43D8-4515-922D-E7F7F4511AD0}", { L"Out15", L"Output 15" }, L"", false, &cv_output_names_list, 0, { 45, 2, nullptr, 0 } },
-  { "{F6DA01D0-6BFD-4F14-9776-95250FC57CA6}", { L"Amt15", L"Amount 15" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 46, 2, nullptr, 0 } }
+  { "{25041AB5-2A06-4305-8009-C26D56311D26}", { L"In3", L"Input 3" }, L"", false, &cv_route_input_names_list, 0, { 8, 1, nullptr, 0 } },
+  { "{37420523-6A9D-4125-BAAB-24A28B9E0992}", { L"Out3", L"Output 3" }, L"", false, &cv_route_output_names_list, 0, { 9, 1, nullptr, 0 } },
+  { "{9C1F6472-6D48-42E6-B79E-3A00F33F70F5}", { L"Amt3", L"Amount 3" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 10, 1, nullptr, 0 } },
+  { "{958C1FF6-54BA-4933-9454-125357EE854E}", { L"In4", L"Input 4" }, L"", false, &cv_route_input_names_list, 0, { 11, 1, nullptr, 0 } },
+  { "{13056333-4562-4D49-9A1E-7EF8FD074956}", { L"Out4", L"Output 4" }, L"", false, &cv_route_output_names_list, 0, { 12, 1, nullptr, 0 } },
+  { "{7A8C3621-D7B9-4D63-9856-DFE2C9396FCD}", { L"Amt4", L"Amount 4" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 13, 1, nullptr, 0 } },
+  { "{DE0CBCF0-A808-4379-A044-2F4C5CFAC9CF}", { L"In5", L"Input 5" }, L"", false, &cv_route_input_names_list, 0, { 14, 2, nullptr, 0 } },
+  { "{B043E6E9-2207-4AF7-8AB0-F30B8B722F2C}", { L"Out5", L"Output 5" }, L"", false, &cv_route_output_names_list, 0, { 15, 2, nullptr, 0 } },
+  { "{FA974BFF-3DD9-4B42-9FAD-49B9F8196D46}", { L"Amt5", L"Amount 5" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 16, 2, nullptr, 0 } },
+  { "{2E34D57F-7277-48D6-9C7E-63897D735005}", { L"In6", L"Input 6" }, L"", false, &cv_route_input_names_list, 0, { 17, 2, nullptr, 0 } },
+  { "{4E840E8E-ADDD-4C43-A48F-901EEFA616C8}", { L"Out6", L"Output 6" }, L"", false, &cv_route_output_names_list, 0, { 18, 2, nullptr, 0 } },
+  { "{645B184E-6AEF-4119-8933-4623749D6280}", { L"Amt6", L"Amount 6" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 19, 2, nullptr, 0 } }
 };   
-               
-// ---- global topo ----   
+                
+// ---- global topo ----    
        
 part_descriptor const      
-part_descriptors[part_type::count] =       
-{   
+part_descriptors[part_type::count] =        
+{      
   { "{5C9D2CD3-2D4C-4205-893E-6B5DE9D62ADE}", { L"Osc", L"Oscillator" }, part_type::oscillator, false, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 0, 3, 0, 0, active_param::oscillator, L"Voice audio" } },
-  { "{FC4885FE-431C-477A-B5B7-84863DB8C07D}", { L"Env", L"Envelope" }, part_type::envelope, false, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 3, 3, 0, 1, active_param::envelope, L"Voice CV" } },
-  { "{56DE75BB-BE73-4B27-B37F-77F6E408F986}", { L"LFO", L"LFO" }, part_type::lfo, false, false, lfo_count, lfo_params, lfo_param::count, &lfo_graph, 1, { 4, 3, 0, 0, active_param::lfo, L"Voice CV" } },
-  { "{E6344937-C1F7-4F2A-83E7-EA27D48DEC4E}", { L"Amp", L"Amplitude" }, part_type::amplitude, false, false, 1, amplitude_params, amplitude_param::count, &amp_graph, 1, { 2, 3, -1, -1, -1, L"Voice audio" } },
+  { "{FC4885FE-431C-477A-B5B7-84863DB8C07D}", { L"Env", L"Envelope" }, part_type::envelope, false, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 2, 3, 0, 1, active_param::envelope, L"Voice CV" } },
+  { "{56DE75BB-BE73-4B27-B37F-77F6E408F986}", { L"LFO", L"LFO" }, part_type::lfo, false, false, lfo_count, lfo_params, lfo_param::count, &lfo_graph, 1, { 3, 3, 0, 0, active_param::lfo, L"Voice CV" } },
+  { "{E6344937-C1F7-4F2A-83E7-EA27D48DEC4E}", { L"Amp", L"Amplitude" }, part_type::amplitude, false, false, 1, amplitude_params, amplitude_param::count, &amp_graph, 1, { 4, 3, -1, -1, -1, L"Voice audio" } },
   { "{2C377544-C124-48F5-A4F4-1E301B108C58}", { L"Filter", L"Filter" }, part_type::filter, false, false, filter_count, filter_params, filter_param::count, filter_graphs, filter_graph::count, { 1, 3, 0, 0, active_param::filter, L"Voice audio" } },
-  { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, audio_route_count, audio_route_params, audio_route_param::count, nullptr, 0, { 7, 3, 0, 0, active_param::audio_route, L"Voice route" } },
-  { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, false, 1, cv_route_params, cv_route_param::count, &cv_route_graph, 1, { 8, 3, -1, -1, -1, L"Voice route" } },
+  { "{7A77C027-FC8F-4425-9BF0-393267D92F0C}", { L"Audio", L"Audio route" }, part_type::audio_route, false, false, audio_route_count, audio_route_params, audio_route_param::count, nullptr, 0, { 5, 3, 0, 0, active_param::audio_route, L"Voice route" } },
+  { "{E6814824-7F56-4A9C-92B6-F5EB001B9513}", { L"CV", L"CV route" }, part_type::cv_route, false, false, cv_route_count, cv_route_params, cv_route_param::count, &cv_route_graph, 1, { 6, 3, 0, 0, active_param::cv_route, L"Voice route" } },
   { "{C972E264-1739-4DB6-B1DB-5D31057BD218}", { L"Active", L"Active" }, part_type::active, false, true, 1, active_params, active_param::count, nullptr, -1, part_no_ui },
-  { "{FEEBA3F5-F248-4C1B-BD8C-F3A492D084E2}", { L"Output", L"Output" }, part_type::output, true, false, 1, output_params, output_param::count, nullptr, 0, { 5, 3, -1, -1, -1, L"Global" } },
-  { "{93F3BCD1-30CC-4CC4-BFA8-B363786DBEAB}", { L"CPU", L"CPU usage" }, part_type::cpu, true, false, 1, cpu_params, cpu_param::count, nullptr, 0, { 6, 3, -1, -1, -1, L"Global" } }
+  { "{FEEBA3F5-F248-4C1B-BD8C-F3A492D084E2}", { L"Output", L"Output" }, part_type::output, true, false, 1, output_params, output_param::count, nullptr, 0, { 7, 3, -1, -1, -1, L"Global" } },
+  { "{93F3BCD1-30CC-4CC4-BFA8-B363786DBEAB}", { L"CPU", L"CPU usage" }, part_type::cpu, true, false, 1, cpu_params, cpu_param::count, nullptr, 0, { 8, 3, -1, -1, -1, L"Global" } }
 };    
         
-} // namespace svn::synth            
+} // namespace svn::synth             

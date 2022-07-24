@@ -380,7 +380,7 @@ cv_route_graph::process_dsp_core(
     envelope(cv_route_graph_rate).process_block(vinput, i, state.envelope[i].data(), input.sample_count, ended);
 
   std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> output_table_out
-    = zip_list_table_init_out(cv_output_counts, cv_output_target_counts, cv_route_output::count);
+    = zip_list_table_init_out(cv_route_output_counts, cv_route_output_target_counts, cv_route_output::count);
   automation_view automation = vinput.automation.rearrange_params(part_type::cv_route, 0);
   std::int32_t target_id = automation.get(cv_route_param::plot_tgt, 0).discrete;
   auto param_ids = output_table_out[target_id];
