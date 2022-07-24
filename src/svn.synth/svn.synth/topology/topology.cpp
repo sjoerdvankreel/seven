@@ -227,11 +227,12 @@ static wchar_t const* const cv_route_input_names[cv_route_input::count] = { L"Of
 static list_item_info const cv_route_input_infos[cv_route_input::count] = { nullptr, envelope_item_info, nullptr };
 static wchar_t const* const cv_route_input_op_name[cv_route_input_op::count] = { L"Add", L"Mul" };
 static wchar_t const* const* const cv_route_input_op_names[cv_route_input::count] = { nullptr, cv_route_input_op_name, cv_route_input_op_name };
-static wchar_t const* const cv_route_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Filter", L"Amp" };
+static wchar_t const* const cv_route_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Filter", L"Amp", L"Audio" };
 static wchar_t const* const cv_route_amp_output_names[cv_route_amp_output::count] = { L"Lvl", L"Pan" };
+static wchar_t const* const cv_route_audio_output_names[cv_route_audio_output::count] = { L"Amt1", L"Amt2", L"Amt3" };
 static wchar_t const* const cv_route_filter_output_names[cv_route_filter_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
 static wchar_t const* const cv_route_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"PW", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
-static wchar_t const* const* const cv_route_output_target_names[cv_route_output::count] = { nullptr, cv_route_osc_output_names, cv_route_filter_output_names, cv_route_amp_output_names };
+static wchar_t const* const* const cv_route_output_target_names[cv_route_output::count] = { nullptr, cv_route_osc_output_names, cv_route_filter_output_names, cv_route_amp_output_names, cv_route_audio_output_names };
 static std::vector<std::wstring> const cv_route_input_names_list = zip_list_names(cv_route_input_names, cv_route_input_infos, cv_route_input_counts, cv_route_input_op_names, cv_route_input_op_counts, cv_route_input::count);
 static std::vector<std::wstring> const cv_route_output_names_list = zip_list_names(cv_route_output_names, nullptr, cv_route_output_counts, cv_route_output_target_names, cv_route_output_target_counts, cv_route_output::count);
      
