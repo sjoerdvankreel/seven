@@ -29,11 +29,6 @@ typedef part_type_t::value part_type;
 struct amplitude_param_t { enum value { level, pan, count }; };
 typedef amplitude_param_t::value amplitude_param;
 
-// ---- active ----
-
-struct active_param_t { enum value { oscillator, lfo, filter, envelope, audio_route, cv_route, count }; };
-typedef active_param_t::value active_param;
-
 // ---- output ----
 
 struct output_param_t { enum value { clip, drain, voices, count }; };
@@ -43,6 +38,11 @@ typedef output_param_t::value output_param;
 
 struct cpu_param_t { enum value { total, osc, lfo, filter, env, amp, audio, cv, aux, count }; };
 typedef cpu_param_t::value cpu_param;
+
+// ---- active ----
+
+struct active_param_t { enum value { oscillator, lfo, filter, envelope, audio_route, cv_route, count }; };
+typedef active_param_t::value active_param;
 
 // ---- lfo ----
 
@@ -55,22 +55,6 @@ struct lfo_param_t { enum value { on, type, bipolar, synced, period_time, period
 
 typedef lfo_type_t::value lfo_type;
 typedef lfo_param_t::value lfo_param;
-
-// ---- envelope ----
-
-extern std::vector<float> const env_timesig_values;
-struct envelope_type_t { enum value { dahdsr, dahdr, count }; };
-struct envelope_slope_t { enum value { linear, quadratic, inverted, logarithmic, count }; };
-struct envelope_param_t { enum value { 
-  on, type, bipolar, synced, 
-  delay_time, delay_sync, hold_time, hold_sync, sustain_level, 
-  attack_time, attack_sync, attack_slope, attack_mid, 
-  decay_time, decay_sync, decay_slope, decay_mid, 
-  release_time, release_sync, release_slope, release_mid, count }; };
-
-typedef envelope_type_t::value envelope_type;
-typedef envelope_slope_t::value envelope_slope;
-typedef envelope_param_t::value envelope_param;
 
 // ---- filter ----
 
@@ -108,6 +92,22 @@ typedef oscillator_type_t::value oscillator_type;
 typedef oscillator_param_t::value oscillator_param;
 typedef oscillator_graph_t::value oscillator_graph;
 typedef oscillator_analog_type_t::value oscillator_analog_type;
+
+// ---- envelope ----
+
+extern std::vector<float> const env_timesig_values;
+struct envelope_type_t { enum value { dahdsr, dahdr, count }; };
+struct envelope_slope_t { enum value { linear, quadratic, inverted, logarithmic, count }; };
+struct envelope_param_t { enum value { 
+  on, type, bipolar, synced, 
+  delay_time, delay_sync, hold_time, hold_sync, sustain_level, 
+  attack_time, attack_sync, attack_slope, attack_mid, 
+  decay_time, decay_sync, decay_slope, decay_mid, 
+  release_time, release_sync, release_slope, release_mid, count }; };
+
+typedef envelope_type_t::value envelope_type;
+typedef envelope_slope_t::value envelope_slope;
+typedef envelope_param_t::value envelope_param;
 
 // ---- audio route ----
 
