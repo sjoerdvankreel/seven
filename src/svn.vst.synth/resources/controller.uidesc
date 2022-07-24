@@ -7346,7 +7346,7 @@
                     "origin": "0, 0",
                     "size": "369, 172",
                     "name": "4",
-                    "background-offset": "0, 50"
+                    "background-offset": "25, 0"
                 },
                 "children": {
                     "view_container_fix": {
@@ -8673,7 +8673,7 @@
                     "origin": "0, 0",
                     "size": "369, 172",
                     "name": "5",
-                    "background-offset": "0, 50"
+                    "background-offset": "25, 0"
                 },
                 "children": {
                     "view_container_fix": {
@@ -10029,7 +10029,7 @@
                     "origin": "0, 0",
                     "size": "369, 172",
                     "name": "6",
-                    "background-offset": "0, 50"
+                    "background-offset": "25, 0"
                 },
                 "children": {
                     "view_container_fix": {
@@ -11385,7 +11385,7 @@
                     "origin": "0, 0",
                     "size": "369, 172",
                     "name": "7",
-                    "background-offset": "0, 50"
+                    "background-offset": "25, 0"
                 },
                 "children": {
                     "view_container_fix": {
@@ -12741,7 +12741,7 @@
                     "origin": "0, 0",
                     "size": "369, 76",
                     "name": "8",
-                    "background-offset": "25, 0"
+                    "background-offset": "25, 25"
                 },
                 "children": {
                     "view_container_fix": {
@@ -13158,7 +13158,7 @@
                     "origin": "0, 0",
                     "size": "369, 76",
                     "name": "9",
-                    "background-offset": "25, 0"
+                    "background-offset": "25, 25"
                 },
                 "children": {
                     "view_container_fix": {
@@ -13575,7 +13575,7 @@
                     "origin": "0, 0",
                     "size": "369, 76",
                     "name": "10",
-                    "background-offset": "25, 0"
+                    "background-offset": "25, 25"
                 },
                 "children": {
                     "view_container_fix": {
@@ -13992,7 +13992,7 @@
                     "origin": "0, 0",
                     "size": "369, 76",
                     "name": "11",
-                    "background-offset": "25, 0"
+                    "background-offset": "25, 25"
                 },
                 "children": {
                     "view_container_fix": {
@@ -14409,7 +14409,7 @@
                     "origin": "0, 0",
                     "size": "369, 76",
                     "name": "12",
-                    "background-offset": "25, 0"
+                    "background-offset": "25, 25"
                 },
                 "children": {
                     "view_container_fix": {
@@ -14826,7 +14826,7 @@
                     "origin": "0, 0",
                     "size": "369, 76",
                     "name": "13",
-                    "background-offset": "25, 0"
+                    "background-offset": "25, 25"
                 },
                 "children": {
                     "view_container_fix": {
@@ -21864,9 +21864,9 @@
             },
             "view": {
                 "attributes": {
-                    "size": "1119, 535",
-                    "minSize": "1119, 535",
-                    "maxSize": "1119, 535",
+                    "size": "747, 590",
+                    "minSize": "747, 590",
+                    "maxSize": "747, 590",
                     "class": "view_container_fix"
                 },
                 "children": {
@@ -21958,90 +21958,6 @@
                         "attributes": {
                             "class": "view_container_fix",
                             "origin": "3, 281",
-                            "size": "369, 172"
-                        },
-                        "children": {
-                            "UIViewSwitchContainer": {
-                                "attributes": {
-                                    "animation-time": "0",
-                                    "template-switch-control": "active_0_envelope",
-                                    "origin": "0, 0",
-                                    "template-names": "4,5,6,7",
-                                    "class": "UIViewSwitchContainer",
-                                    "size": "369, 172"
-                                }
-                            },
-                            "COptionMenu": {
-                                "attributes": {
-                                    "class": "COptionMenu",
-                                    "size": "75, 21",
-                                    "origin": "3, 2",
-                                    "control-tag": "active_0_envelope",
-                                    "tooltip": "Active Envelope",
-                                    "min-value": "0",
-                                    "default-value": "0",
-                                    "text-alignment": "left",
-                                    "style-no-frame": "true",
-                                    "style-round-rect": "true",
-                                    "menu-popup-style": "true",
-                                    "menu-check-style": "false",
-                                    "font": "~ NormalFontSmall",
-                                    "text-inset": "3, 0",
-                                    "round-rect-radius": "3",
-                                    "max-value": "3",
-                                    "font-color": "color_00DCFFFF",
-                                    "back-color": "color_00DCFF40",
-                                    "shadow-color": "color_00DCFF80"
-                                }
-                            }
-                        }
-                    },
-                    "view_container_fix": {
-                        "attributes": {
-                            "class": "view_container_fix",
-                            "origin": "3, 456",
-                            "size": "369, 76"
-                        },
-                        "children": {
-                            "UIViewSwitchContainer": {
-                                "attributes": {
-                                    "animation-time": "0",
-                                    "template-switch-control": "active_0_lfo",
-                                    "origin": "0, 0",
-                                    "template-names": "8,9,10,11,12,13",
-                                    "class": "UIViewSwitchContainer",
-                                    "size": "369, 76"
-                                }
-                            },
-                            "COptionMenu": {
-                                "attributes": {
-                                    "class": "COptionMenu",
-                                    "size": "75, 21",
-                                    "origin": "3, 2",
-                                    "control-tag": "active_0_lfo",
-                                    "tooltip": "Active LFO",
-                                    "min-value": "0",
-                                    "default-value": "0",
-                                    "text-alignment": "left",
-                                    "style-no-frame": "true",
-                                    "style-round-rect": "true",
-                                    "menu-popup-style": "true",
-                                    "menu-check-style": "false",
-                                    "font": "~ NormalFontSmall",
-                                    "text-inset": "3, 0",
-                                    "round-rect-radius": "3",
-                                    "max-value": "5",
-                                    "font-color": "color_00DCFFFF",
-                                    "back-color": "color_00DCFF40",
-                                    "shadow-color": "color_00DCFF80"
-                                }
-                            }
-                        }
-                    },
-                    "view_container_fix": {
-                        "attributes": {
-                            "class": "view_container_fix",
-                            "origin": "375, 3",
                             "size": "369, 52"
                         },
                         "children": {
@@ -22052,7 +21968,7 @@
                                     "origin": "0, 0",
                                     "size": "369, 52",
                                     "name": "14",
-                                    "background-offset": "25, 25"
+                                    "background-offset": "0, 50"
                                 },
                                 "children": {
                                     "view_container_fix": {
@@ -22294,7 +22210,91 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "375, 58",
+                            "origin": "3, 336",
+                            "size": "369, 172"
+                        },
+                        "children": {
+                            "UIViewSwitchContainer": {
+                                "attributes": {
+                                    "animation-time": "0",
+                                    "template-switch-control": "active_0_envelope",
+                                    "origin": "0, 0",
+                                    "template-names": "4,5,6,7",
+                                    "class": "UIViewSwitchContainer",
+                                    "size": "369, 172"
+                                }
+                            },
+                            "COptionMenu": {
+                                "attributes": {
+                                    "class": "COptionMenu",
+                                    "size": "75, 21",
+                                    "origin": "3, 2",
+                                    "control-tag": "active_0_envelope",
+                                    "tooltip": "Active Envelope",
+                                    "min-value": "0",
+                                    "default-value": "0",
+                                    "text-alignment": "left",
+                                    "style-no-frame": "true",
+                                    "style-round-rect": "true",
+                                    "menu-popup-style": "true",
+                                    "menu-check-style": "false",
+                                    "font": "~ NormalFontSmall",
+                                    "text-inset": "3, 0",
+                                    "round-rect-radius": "3",
+                                    "max-value": "3",
+                                    "font-color": "color_00DCFFFF",
+                                    "back-color": "color_00DCFF40",
+                                    "shadow-color": "color_00DCFF80"
+                                }
+                            }
+                        }
+                    },
+                    "view_container_fix": {
+                        "attributes": {
+                            "class": "view_container_fix",
+                            "origin": "3, 511",
+                            "size": "369, 76"
+                        },
+                        "children": {
+                            "UIViewSwitchContainer": {
+                                "attributes": {
+                                    "animation-time": "0",
+                                    "template-switch-control": "active_0_lfo",
+                                    "origin": "0, 0",
+                                    "template-names": "8,9,10,11,12,13",
+                                    "class": "UIViewSwitchContainer",
+                                    "size": "369, 76"
+                                }
+                            },
+                            "COptionMenu": {
+                                "attributes": {
+                                    "class": "COptionMenu",
+                                    "size": "75, 21",
+                                    "origin": "3, 2",
+                                    "control-tag": "active_0_lfo",
+                                    "tooltip": "Active LFO",
+                                    "min-value": "0",
+                                    "default-value": "0",
+                                    "text-alignment": "left",
+                                    "style-no-frame": "true",
+                                    "style-round-rect": "true",
+                                    "menu-popup-style": "true",
+                                    "menu-check-style": "false",
+                                    "font": "~ NormalFontSmall",
+                                    "text-inset": "3, 0",
+                                    "round-rect-radius": "3",
+                                    "max-value": "5",
+                                    "font-color": "color_00DCFFFF",
+                                    "back-color": "color_00DCFF40",
+                                    "shadow-color": "color_00DCFF80"
+                                }
+                            }
+                        }
+                    },
+                    "view_container_fix": {
+                        "attributes": {
+                            "class": "view_container_fix",
+                            "origin": "375, 3",
                             "size": "369, 172"
                         },
                         "children": {
@@ -22336,7 +22336,7 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "375, 233",
+                            "origin": "375, 178",
                             "size": "369, 220"
                         },
                         "children": {
@@ -22378,8 +22378,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "375, 456",
-                            "size": "369, 76"
+                            "origin": "375, 401",
+                            "size": "369, 52"
                         },
                         "children": {
                             "view_container_fix": {
@@ -22387,7 +22387,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "369, 76",
+                                    "size": "369, 52",
                                     "name": "25",
                                     "background-offset": "50, 25"
                                 },
@@ -22396,7 +22396,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "369, 76",
+                                            "size": "369, 52",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -22464,7 +22464,7 @@
                                                     "frame-color": "color_7390E980",
                                                     "back-color": "color_00000000",
                                                     "origin": "0, 25",
-                                                    "size": "369, 51"
+                                                    "size": "369, 27"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -22472,7 +22472,7 @@
                                                     "class": "view_container_fix",
                                                     "background-color": "color_7390E920",
                                                     "origin": "0, 25",
-                                                    "size": "369, 51"
+                                                    "size": "369, 27"
                                                 },
                                                 "children": {
                                                     "view_container_fix": {
@@ -22647,8 +22647,8 @@
                     "view_container_fix": {
                         "attributes": {
                             "class": "view_container_fix",
-                            "origin": "747, 3",
-                            "size": "369, 529"
+                            "origin": "375, 456",
+                            "size": "369, 131"
                         },
                         "children": {
                             "view_container_fix": {
@@ -22656,7 +22656,7 @@
                                     "bitmap": "background",
                                     "class": "view_container_fix",
                                     "origin": "0, 0",
-                                    "size": "369, 529",
+                                    "size": "369, 131",
                                     "name": "26",
                                     "background-offset": "50, 50"
                                 },
@@ -22665,7 +22665,7 @@
                                         "attributes": {
                                             "class": "view_container_fix",
                                             "origin": "0, 0",
-                                            "size": "369, 529",
+                                            "size": "369, 131",
                                             "background-color": "color_00000080"
                                         },
                                         "children": {
@@ -22733,7 +22733,7 @@
                                                     "frame-color": "color_7390E980",
                                                     "back-color": "color_00000000",
                                                     "origin": "0, 25",
-                                                    "size": "369, 504"
+                                                    "size": "369, 106"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -22741,7 +22741,7 @@
                                                     "class": "view_container_fix",
                                                     "background-color": "color_7390E920",
                                                     "origin": "0, 25",
-                                                    "size": "369, 504"
+                                                    "size": "369, 106"
                                                 },
                                                 "children": {
                                                     "view_container_fix": {

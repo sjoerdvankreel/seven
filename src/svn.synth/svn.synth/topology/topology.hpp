@@ -17,7 +17,7 @@ inline std::int32_t constexpr audio_route_count = 2;
 
 extern base::part_descriptor const part_descriptors[];
 inline std::int32_t constexpr synth_polyphony = 32;
-inline std::int32_t constexpr synth_max_ui_height = 560;
+inline std::int32_t constexpr synth_max_ui_height = 600;
 
 struct part_type_t { enum value { oscillator, envelope, lfo, amplitude, filter, audio_route, cv_route, active, output, cpu, count }; };
 typedef part_type_t::value part_type;
