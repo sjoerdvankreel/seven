@@ -66,7 +66,7 @@ synth_voice::process_block(voice_input const& input, cv_state& cv,
   // Run amp section.
   base::audio_sample32 const* audio_in;
   usage.audio += audio.mix(input, audio_route_output::amp, 0, audio_in);
-  usage.amp += _amplitude.process_block(input, cv.envelope[0].data(), audio_in, audio.amplitude.data());
+  usage.amp += _amplitude.process_block(input, cv, cv.envelope[0].data(), audio_in, audio.amplitude.data(), usage.cv);
   return ended;
 }  
  
