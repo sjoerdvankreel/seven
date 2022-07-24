@@ -59,13 +59,13 @@ synth_voice::process_block(voice_input const& input, cv_state& cv,
   for (std::int32_t i = 0; i < filter_count; i++)
   {
     base::audio_sample32 const* audio_in;
-    usage.audio += audio.mix(input, audio_route_output::filter, i, audio_in);
+    usage.audio += audio.mix(input, cv, audio_route_output::filter, i, audio_in, usage.cv);
     usage.filter += _filters[i].process_block(input, i, cv, audio_in, audio.filter[i].data(), usage.cv);
   }
 
   // Run amp section.
   base::audio_sample32 const* audio_in;
-  usage.audio += audio.mix(input, audio_route_output::amp, 0, audio_in);
+  usage.audio += audio.mix(input, cv, audio_route_output::amp, 0, audio_in, usage.cv);
   usage.amp += _amplitude.process_block(input, cv, cv.envelope[0].data(), audio_in, audio.amplitude.data(), usage.cv);
   return ended;
 }  
