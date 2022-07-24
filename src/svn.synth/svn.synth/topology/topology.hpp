@@ -94,7 +94,7 @@ typedef oscillator_analog_type_t::value oscillator_analog_type;
 // ---- envelope ----
 
 extern std::vector<float> const env_timesig_values;
-struct envelope_type_t { enum value { dahdsr, dahdr, count }; };
+struct envelope_type_t { enum value { dahdsr, dahdr1, dahdr2, count }; };
 struct envelope_slope_t { enum value { linear, quadratic, inverted, logarithmic, count }; };
 struct envelope_param_t { enum value { 
   on, type, bipolar, synced, 

@@ -55,11 +55,15 @@ envelope::generate_stage(base::automation_view const& automation, std::int32_t s
   if(dahdsr && !_released) return std::make_pair(
     envelope_stage::sustain, sustain);
   stage = std::ceil(stage + decay);
-  if(pos < stage + release) return std::make_pair(
-    envelope_stage::release,
-    sanity_unipolar(_release_level - generate_slope(
-    automation, envelope_param::release_slope,
-    envelope_param::release_mid, s, (pos - stage) / release) * _release_level));
+  if(pos < stage + release) 
+  {
+    _released = true;
+    return std::make_pair(
+      envelope_stage::release,
+      sanity_unipolar(_release_level - generate_slope(
+      automation, envelope_param::release_slope,
+      envelope_param::release_mid, s, (pos - stage) / release) * _release_level));
+  }
   return std::make_pair(envelope_stage::end, 0.0f);
 }
 
@@ -97,16 +101,27 @@ envelope::process_block(voice_input const& input, std::int32_t index,
     if(index > 0 && automation.get_discrete(envelope_param::on, s) == 0) return s;
     float sustain = automation.get_real_dsp(envelope_param::sustain_level, s);
     bool unipolar = automation.get_discrete(envelope_param::bipolar, s) == 0;
-    bool dahdsr = automation.get_discrete(envelope_param::type, s) == envelope_type::dahdsr;
+    std::int32_t type = automation.get_discrete(envelope_param::type, s);
     setup_stages(automation, s, input.bpm, delay, attack, hold, decay, release);
-    auto stage = generate_stage(automation, s, dahdsr, delay, attack, hold, decay, sustain, release);
+    auto stage = generate_stage(automation, s, type == envelope_type::dahdsr, delay, attack, hold, decay, sustain, release);
     if(unipolar) cv_out[s] = { sanity_unipolar(stage.second), false };
     else cv_out[s] = { sanity_bipolar(stage.second * 2.0f - 1.0f), true };
     _end_sample = unipolar ? cv_sample({ 0.0f, false }) : cv_sample({ -1.0f, true });
     if(stage.first == envelope_stage::end) { _ended = true; cv_out[s] = _end_sample; continue; }
     if(stage.first != envelope_stage::release) _release_level = stage.second;
-    if(s == release_sample) _released = true, _position = static_cast<int32_t>(std::ceil(delay + attack + hold + decay));
-    else if(!dahdsr || stage.first != envelope_stage::sustain) _position++;
+
+    if (s == release_sample && !_released)
+    {
+      if(type != envelope_type::dahdr2)
+      {
+        _released = true;
+        _position = static_cast<int32_t>(std::ceil(delay + attack + hold + decay));
+      }
+      continue;
+    }
+    
+    if(type != envelope_type::dahdsr || stage.first != envelope_stage::sustain)
+      _position++;
   }
   result = _ended;
   return performance_counter() - start_time;
