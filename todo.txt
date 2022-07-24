@@ -1,3 +1,4 @@
 * Speed up osc & cv
 * Drop windows dependencies
 * freqmod
+* clip only in ui, dont touch the sound, host will clip

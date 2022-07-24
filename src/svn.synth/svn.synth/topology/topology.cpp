@@ -212,13 +212,22 @@ audio_route_params[audio_route_param::count] =
   { "{2E9F0478-B911-43DF-BB51-0C5836E4853F}", { L"In1", L"Input 1" }, L"", false, &audio_route_input_names_list, 0, { 0, 0, nullptr, 0}},
   { "{295DC5F0-FB32-4D43-8799-D79F23FD3AA9}", { L"Out1", L"Output 1" }, L"", false, &audio_route_output_names_list, 0, { 1, 0, nullptr, 0 } },
   { "{A3B15FE9-56DB-493B-A4E1-31A004F3C937}", { L"Amt1", L"Amount 1" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 2, 0, nullptr, 0 } },
-  { "{A3A59082-CF73-4C28-A3FC-037729C9CB42}", { L"In2", L"Input 2" }, L"", false, &audio_route_input_names_list, 0, { 3, 1, nullptr, 0 } },
-  { "{843EB41C-199F-4FAC-ACC4-841B3663248D}", { L"Out2", L"Output 2" }, L"", false, &audio_route_output_names_list, 0, { 4, 1, nullptr, 0 } },
-  { "{810B55DF-6230-45C7-B478-7A3569DC9127}", { L"Amt2", L"Amount 2" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 5, 1, nullptr, 0 } },
-  { "{A8E6882A-8945-4F59-92B9-78004EAF5818}", { L"In3", L"Input 3" }, L"", false, &audio_route_input_names_list, 0, { 6, 2, nullptr, 0 } },
-  { "{D2E34E63-DE9E-4620-924D-1897614BF983}", { L"Out3", L"Output 3" }, L"", false, &audio_route_output_names_list, 0, { 7, 2, nullptr, 0 } },
-  { "{6721B1EC-9688-48A3-B5B8-0ADD0A9CF16B}", { L"Amt3", L"Amount 3" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 8, 2, nullptr, 0 } }
-}; 
+  { "{A3A59082-CF73-4C28-A3FC-037729C9CB42}", { L"In2", L"Input 2" }, L"", false, &audio_route_input_names_list, 0, { 3, 0, nullptr, 0 } },
+  { "{843EB41C-199F-4FAC-ACC4-841B3663248D}", { L"Out2", L"Output 2" }, L"", false, &audio_route_output_names_list, 0, { 4, 0, nullptr, 0 } },
+  { "{810B55DF-6230-45C7-B478-7A3569DC9127}", { L"Amt2", L"Amount 2" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 5, 0, nullptr, 0 } },
+  { "{A8E6882A-8945-4F59-92B9-78004EAF5818}", { L"In3", L"Input 3" }, L"", false, &audio_route_input_names_list, 0, { 6, 1, nullptr, 0 } },
+  { "{D2E34E63-DE9E-4620-924D-1897614BF983}", { L"Out3", L"Output 3" }, L"", false, &audio_route_output_names_list, 0, { 7, 1, nullptr, 0 } },
+  { "{6721B1EC-9688-48A3-B5B8-0ADD0A9CF16B}", { L"Amt3", L"Amount 3" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 8, 1, nullptr, 0 } },
+  { "{7DFD9AF0-7419-4B06-B875-F18D9C344D42}", { L"In4", L"Input 4" }, L"", false,& audio_route_input_names_list, 0, { 9, 1, nullptr, 0 } },
+  { "{C2C5B9BC-81B6-4D3E-947E-E0B900447BDF}", { L"Out4", L"Output 4" }, L"", false, &audio_route_output_names_list, 0, { 10, 1, nullptr, 0 } },
+  { "{51E69AB1-37F7-4361-84B9-2F1727F66C4A}", { L"Amt4", L"Amount 4" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 11, 1, nullptr, 0 } },
+  { "{EAF04775-5BC9-436F-A2D5-466E55234599}", { L"In5", L"Input 5" }, L"", false, &audio_route_input_names_list, 0, { 12, 2, nullptr, 0 } },
+  { "{367315C2-A6FC-4606-AB47-CC5A38E5EFDA}", { L"Out5", L"Output 5" }, L"", false, &audio_route_output_names_list, 0, { 13, 2, nullptr, 0 } },
+  { "{49F2DB0D-3804-4CFE-80F9-8F6610790F4C}", { L"Amt5", L"Amount 5" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 14, 2, nullptr, 0 } },
+  { "{CAD48046-D201-4B79-A5D0-25BBB1F1A8BF}", { L"In6", L"Input 6" }, L"", false, &audio_route_input_names_list, 0, { 15, 2, nullptr, 0 } },
+  { "{C58E3918-9B8A-4F1F-AA3D-3EE75D5BB5FD}", { L"Out6", L"Output 6" }, L"", false, &audio_route_output_names_list, 0, { 16, 2, nullptr, 0 } },
+  { "{36C4C49C-1C5A-41EF-B360-12787F082998}", { L"Amt6", L"Amount 6" }, L"dB", { 1.0f, 1, real_bounds::unit(), real_bounds::decibel() }, { 17, 2, nullptr, 0 } },
+};
 
 // ---- cv route ----                
     
@@ -229,7 +238,7 @@ static wchar_t const* const cv_route_input_op_name[cv_route_input_op::count] = {
 static wchar_t const* const* const cv_route_input_op_names[cv_route_input::count] = { nullptr, cv_route_input_op_name, cv_route_input_op_name, cv_route_input_op_name };
 static wchar_t const* const cv_route_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Filter", L"Amp", L"Audio" };
 static wchar_t const* const cv_route_amp_output_names[cv_route_amp_output::count] = { L"Lvl", L"Pan" };
-static wchar_t const* const cv_route_audio_output_names[cv_route_audio_output::count] = { L"Amt1", L"Amt2", L"Amt3" };
+static wchar_t const* const cv_route_audio_output_names[cv_route_audio_output::count] = { L"Amt1", L"Amt2", L"Amt3", L"Amt4", L"Amt5", L"Amt6" };
 static wchar_t const* const cv_route_filter_output_names[cv_route_filter_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
 static wchar_t const* const cv_route_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"PW", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
 static wchar_t const* const* const cv_route_output_target_names[cv_route_output::count] = { nullptr, cv_route_osc_output_names, cv_route_filter_output_names, cv_route_amp_output_names, cv_route_audio_output_names };
@@ -261,7 +270,7 @@ cv_route_params[cv_route_param::count] =
   { "{4E840E8E-ADDD-4C43-A48F-901EEFA616C8}", { L"Out6", L"Output 6" }, L"", false, &cv_route_output_names_list, 0, { 18, 2, nullptr, 0 } },
   { "{645B184E-6AEF-4119-8933-4623749D6280}", { L"Amt6", L"Amount 6" }, L"%", { 0.5f, 0, real_bounds::linear(-1.0f, 1.0f), real_bounds::linear(-100.0f, 100.0f) }, { 19, 2, nullptr, 0 } }
 };   
-                 
+                  
 // ---- global topo ----     
  
 struct part_group_t { enum value { audio, cv, route, global, count }; };
