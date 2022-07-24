@@ -62,8 +62,8 @@ public svn::base::graph_processor<float>
   static inline float constexpr cv_route_graph_rate = 1000.0f;
 
 public:
-  cv_route_graph(topology_info const* topology) :
-  svn::base::graph_processor<float>(topology, 0) {}
+  cv_route_graph(topology_info const* topology, std::int32_t part_index) :
+  svn::base::graph_processor<float>(topology, part_index) {}
 
   bool needs_repaint(std::int32_t runtime_param) const override;
   std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const override;

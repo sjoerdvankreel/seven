@@ -23,10 +23,10 @@ svn_create_graph_processor(svn::base::topology_info const* topology,
   {
   case svn::synth::part_type::amplitude:
     return new svn::synth::amp_graph(topology);
-  case svn::synth::part_type::cv_route:
-    return new svn::synth::cv_route_graph(topology);
   case svn::synth::part_type::lfo:
     return new svn::synth::lfo_graph(topology, part_index);
+  case svn::synth::part_type::cv_route:
+    return new svn::synth::cv_route_graph(topology, part_index);
   case svn::synth::part_type::envelope:
     return new svn::synth::envelope_graph(topology, part_index);
   case svn::synth::part_type::filter:
@@ -362,7 +362,7 @@ cv_route_graph::dsp_to_plot(
 std::int32_t
 cv_route_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 { 
-  std::int32_t begin = topology()->param_bounds[part_type::cv_route][0];
+  std::int32_t begin = topology()->param_bounds[part_type::cv_route][part_index()];
   float seconds = state[begin + cv_route_param::plot_time].real;
   return static_cast<std::int32_t>(std::ceil(seconds * cv_route_graph_rate));
 }
@@ -381,13 +381,13 @@ cv_route_graph::process_dsp_core(
 
   std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> output_table_out
     = zip_list_table_init_out(cv_route_output_counts, cv_route_output_target_counts, cv_route_output::count);
-  automation_view automation = vinput.automation.rearrange_params(part_type::cv_route, 0);
+  automation_view automation = vinput.automation.rearrange_params(part_type::cv_route, part_index());
   std::int32_t target_id = automation.get(cv_route_param::plot_tgt, 0).discrete;
   auto param_ids = output_table_out[target_id];
   std::memset(output, 0, input.sample_count * sizeof(float));
   if (std::get<0>(param_ids) == -1 || std::get<2>(param_ids) == -1) return;
 
-  float const* const* modulated;
+  float const* const* modulated; 
   std::int32_t rt_part_index = std::get<1>(param_ids);
   std::int32_t cv_route_output_id = std::get<0>(param_ids);
   std::int32_t cv_route_target = std::get<2>(param_ids);
