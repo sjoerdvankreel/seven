@@ -7,6 +7,14 @@
 
 namespace svn::base {
 
+// Can't be const because of ui generator.
+struct ui_color
+{
+  std::uint8_t r;
+  std::uint8_t g;
+  std::uint8_t b;
+};
+
 // Optional single graph within 1 part.
 struct graph_descriptor
 {
@@ -27,6 +35,7 @@ struct part_ui_descriptor
   std::int32_t const enabled_relevant_if_rt_index_gt; // Enabled param has no effect if rt part index < N.
   std::int32_t const selector_param; // Index into selector params which identifies the part index switch param if this part type has more then 1 runtime part, or -1 if part count is 1.
   wchar_t const* const info; // Extra info for part header ui.
+  ui_color const color;
 };
 
 // For selector.

@@ -11,21 +11,11 @@
 
 namespace svn::base {
 
-// Can't be const because of ui generator.
-struct ui_color
-{
-  std::uint8_t r;
-  std::uint8_t g;
-  std::uint8_t b;
-};
-
 // For ui generator.
 struct topology_ui_info
 {
   std::int32_t max_height; // Max controller ui height.
   std::vector<std::vector<std::int32_t>> param_dependencies; // Toggles visibility.
-  ui_color start_color; // Gradient.
-  ui_color end_color; // Gradient.
 };
 
 // Runtime part info (e.g. osc 2).
@@ -63,8 +53,9 @@ struct topology_info
   void init_defaults(param_value* state) const;
   void state_check(param_value const* state) const;
   // Output params must follow input params.
-  static topology_info const* create(part_descriptor const* static_parts, std::int32_t part_count, 
-  std::int32_t max_notes, std::int32_t max_ui_height, ui_color start_ui_color, ui_color end_ui_color);
+  static topology_info const* create(
+    part_descriptor const* static_parts, std::int32_t part_count, 
+    std::int32_t max_notes, std::int32_t max_ui_height);
 };
 
 } // namespace svn::base

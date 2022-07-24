@@ -115,8 +115,8 @@ part_type_ui_description::create(
   result.selector_param.row = -1;
   result.selector_param.column = -1;
   result.selector_param.runtime_param_index = -1;
+  result.color = descriptor.ui.color;
   result.name = descriptor.static_name.short_;
-  result.color = ui_color_gradient(topology, descriptor.ui.part_index);
   for(std::int32_t i = 0; i < descriptor.part_count; i++)
     result.parts.push_back(part_ui_description::create(topology, i, runtime_part_indices[i]));
   if (descriptor.ui.selector_param != -1)
