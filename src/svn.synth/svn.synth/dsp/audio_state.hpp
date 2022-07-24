@@ -2,7 +2,6 @@
 #define SVN_SYNTH_DSP_AUDIO_STATE_HPP
 
 #include <svn.synth/dsp/support.hpp>
-#include <svn.synth/dsp/cv_state.hpp>
 #include <svn.base/dsp/audio_sample.hpp>
 #include <svn.synth/topology/topology.hpp>
 
@@ -30,8 +29,8 @@ public:
   std::array<std::vector<base::audio_sample32>, oscillator_count> oscillator;
   
   explicit audio_state(std::int32_t max_sample_count);
-  double mix(voice_input const& input, cv_state const& cv, audio_route_output route_output,
-    std::int32_t route_index, svn::base::audio_sample32 const*& result, double& mod_time);
+  double mix(voice_input const& input, audio_route_output route_output, 
+    std::int32_t route_index, svn::base::audio_sample32 const*& result);
 };
 
 } // namespace svn::base
