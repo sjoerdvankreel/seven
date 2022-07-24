@@ -42,14 +42,14 @@ audio_state::mix(
   double start_time = base::performance_counter();
   std::int32_t input_off = input_table_in[audio_route_input::off][0];
   std::int32_t output_id = output_table_in[route_output][route_index];
-  for(std::int32_t s = 0; s < input.sample_count; s++)
+  std::memset(scratch.data(), 0, input.sample_count * sizeof(base::audio_sample32));
+  for (std::int32_t r = 0; r < audio_route_count; r++)
   {
-    scratch[s] = { 0.0f, 0.0f };
-    for(std::int32_t r = 0; r < audio_route_count; r++)
+    float const* const* modulated;
+    base::automation_view automation(input.automation.rearrange_params(part_type::audio_route, r));
+    mod_time += cv.modulate(input, automation, cv_route_audio_mapping, cv_route_output::audio, r, modulated);
+    for(std::int32_t s = 0; s < input.sample_count; s++)
     {
-      float const* const* modulated;
-      base::automation_view automation(input.automation.rearrange_params(part_type::audio_route, r));
-      mod_time += cv.modulate(input, automation, cv_route_audio_mapping, cv_route_output::audio, r, modulated);
       if(automation.get_discrete(audio_route_param::on, s) == 0) continue;
       for (std::int32_t i = 0; i < audio_route_route_count; i++)
       {
