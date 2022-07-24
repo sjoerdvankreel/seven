@@ -16,8 +16,8 @@
             "color_00FFFF00": "#00FFFF00",
             "color_55B4FC00": "#55B4FC00",
             "color_55B4FC00": "#55B4FC00",
-            "color_8A8BD400": "#8A8BD400",
-            "color_8A8BD400": "#8A8BD400",
+            "color_7390E900": "#7390E900",
+            "color_7390E900": "#7390E900",
             "color_FFFFFF20": "#FFFFFF20",
             "color_00000020": "#00000020",
             "color_00FFFF20": "#00FFFF20",
@@ -27,8 +27,8 @@
             "color_00FFFF20": "#00FFFF20",
             "color_55B4FC20": "#55B4FC20",
             "color_55B4FC20": "#55B4FC20",
-            "color_8A8BD420": "#8A8BD420",
-            "color_8A8BD420": "#8A8BD420",
+            "color_7390E920": "#7390E920",
+            "color_7390E920": "#7390E920",
             "color_FFFFFF40": "#FFFFFF40",
             "color_00000040": "#00000040",
             "color_00FFFF40": "#00FFFF40",
@@ -38,8 +38,8 @@
             "color_00FFFF40": "#00FFFF40",
             "color_55B4FC40": "#55B4FC40",
             "color_55B4FC40": "#55B4FC40",
-            "color_8A8BD440": "#8A8BD440",
-            "color_8A8BD440": "#8A8BD440",
+            "color_7390E940": "#7390E940",
+            "color_7390E940": "#7390E940",
             "color_FFFFFF80": "#FFFFFF80",
             "color_00000080": "#00000080",
             "color_00FFFF80": "#00FFFF80",
@@ -49,8 +49,8 @@
             "color_00FFFF80": "#00FFFF80",
             "color_55B4FC80": "#55B4FC80",
             "color_55B4FC80": "#55B4FC80",
-            "color_8A8BD480": "#8A8BD480",
-            "color_8A8BD480": "#8A8BD480",
+            "color_7390E980": "#7390E980",
+            "color_7390E980": "#7390E980",
             "color_FFFFFFFF": "#FFFFFFFF",
             "color_000000FF": "#000000FF",
             "color_00FFFFFF": "#00FFFFFF",
@@ -60,8 +60,8 @@
             "color_00FFFFFF": "#00FFFFFF",
             "color_55B4FCFF": "#55B4FCFF",
             "color_55B4FCFF": "#55B4FCFF",
-            "color_8A8BD4FF": "#8A8BD4FF",
-            "color_8A8BD4FF": "#8A8BD4FF"
+            "color_7390E9FF": "#7390E9FF",
+            "color_7390E9FF": "#7390E9FF"
         },
         "control-tags": {
             "oscillator_0_enabled": "0",
@@ -22638,7 +22638,7 @@
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
                                                     "size": "369, 26",
-                                                    "background-color": "color_8A8BD440"
+                                                    "background-color": "color_7390E940"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -22649,7 +22649,7 @@
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
                                                     "size": "369, 26",
-                                                    "frame-color": "color_8A8BD480"
+                                                    "frame-color": "color_7390E980"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -22668,8 +22668,8 @@
                                                             "font": "~ NormalFont",
                                                             "text-alignment": "left",
                                                             "origin": "0, -2",
-                                                            "font-color": "color_8A8BD4FF",
-                                                            "background-color": "color_8A8BD480",
+                                                            "font-color": "color_7390E9FF",
+                                                            "background-color": "color_7390E980",
                                                             "size": "122, 25"
                                                         }
                                                     },
@@ -22681,8 +22681,8 @@
                                                             "font": "~ NormalFont",
                                                             "text-alignment": "right",
                                                             "origin": "241, -2",
-                                                            "font-color": "color_8A8BD4FF",
-                                                            "background-color": "color_8A8BD480",
+                                                            "font-color": "color_7390E9FF",
+                                                            "background-color": "color_7390E980",
                                                             "size": "122, 25"
                                                         }
                                                     }
@@ -22693,7 +22693,7 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "frame-color": "color_8A8BD480",
+                                                    "frame-color": "color_7390E980",
                                                     "back-color": "color_00000000",
                                                     "origin": "0, 25",
                                                     "size": "369, 27"
@@ -22702,7 +22702,7 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "background-color": "color_8A8BD420",
+                                                    "background-color": "color_7390E920",
                                                     "origin": "0, 25",
                                                     "size": "369, 27"
                                                 },
@@ -22736,7 +22736,7 @@
                                                     },
                                                     "view_container_fix": {
                                                         "attributes": {
-                                                            "background-color": "color_8A8BD420",
+                                                            "background-color": "color_7390E920",
                                                             "class": "view_container_fix",
                                                             "origin": "246, 2",
                                                             "background-color-draw-style": "filled",
@@ -22768,7 +22768,7 @@
                                                                     "transparent": "true",
                                                                     "font": "~ NormalFont",
                                                                     "text-alignment": "left",
-                                                                    "font-color": "color_8A8BD4FF",
+                                                                    "font-color": "color_7390E9FF",
                                                                     "title": "Clip"
                                                                 }
                                                             },
@@ -22783,9 +22783,9 @@
                                                                     "frame-width": "1",
                                                                     "draw-crossbox": "true",
                                                                     "round-rect-radius": "3",
-                                                                    "boxfill-color": "color_8A8BD440",
-                                                                    "boxframe-color": "color_8A8BD4FF",
-                                                                    "checkmark-color": "color_8A8BD4FF"
+                                                                    "boxfill-color": "color_7390E940",
+                                                                    "boxframe-color": "color_7390E9FF",
+                                                                    "checkmark-color": "color_7390E9FF"
                                                                 }
                                                             }
                                                         }
@@ -22806,7 +22806,7 @@
                                                                     "transparent": "true",
                                                                     "font": "~ NormalFont",
                                                                     "text-alignment": "left",
-                                                                    "font-color": "color_8A8BD4FF",
+                                                                    "font-color": "color_7390E9FF",
                                                                     "title": "Drain"
                                                                 }
                                                             },
@@ -22821,9 +22821,9 @@
                                                                     "frame-width": "1",
                                                                     "draw-crossbox": "true",
                                                                     "round-rect-radius": "3",
-                                                                    "boxfill-color": "color_8A8BD440",
-                                                                    "boxframe-color": "color_8A8BD4FF",
-                                                                    "checkmark-color": "color_8A8BD4FF"
+                                                                    "boxfill-color": "color_7390E940",
+                                                                    "boxframe-color": "color_7390E9FF",
+                                                                    "checkmark-color": "color_7390E9FF"
                                                                 }
                                                             }
                                                         }
@@ -22844,7 +22844,7 @@
                                                                     "transparent": "true",
                                                                     "font": "~ NormalFont",
                                                                     "text-alignment": "left",
-                                                                    "font-color": "color_8A8BD4FF",
+                                                                    "font-color": "color_7390E9FF",
                                                                     "title": "Voices"
                                                                 }
                                                             },
@@ -22863,7 +22863,7 @@
                                                                     "round-rect-radius": "3",
                                                                     "value-precision": "32",
                                                                     "back-color": "color_00000020",
-                                                                    "font-color": "color_8A8BD4FF"
+                                                                    "font-color": "color_7390E9FF"
                                                                 }
                                                             }
                                                         }
@@ -22907,7 +22907,7 @@
                                                     "origin": "0, 0",
                                                     "background-color-draw-style": "filled",
                                                     "size": "369, 26",
-                                                    "background-color": "color_8A8BD440"
+                                                    "background-color": "color_7390E940"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -22918,7 +22918,7 @@
                                                     "round-rect-radius": "3",
                                                     "back-color": "color_00000000",
                                                     "size": "369, 26",
-                                                    "frame-color": "color_8A8BD480"
+                                                    "frame-color": "color_7390E980"
                                                 }
                                             },
                                             "view_container_fix": {
@@ -22937,8 +22937,8 @@
                                                             "font": "~ NormalFont",
                                                             "text-alignment": "left",
                                                             "origin": "0, -2",
-                                                            "font-color": "color_8A8BD4FF",
-                                                            "background-color": "color_8A8BD480",
+                                                            "font-color": "color_7390E9FF",
+                                                            "background-color": "color_7390E980",
                                                             "size": "122, 25"
                                                         }
                                                     },
@@ -22950,8 +22950,8 @@
                                                             "font": "~ NormalFont",
                                                             "text-alignment": "right",
                                                             "origin": "241, -2",
-                                                            "font-color": "color_8A8BD4FF",
-                                                            "background-color": "color_8A8BD480",
+                                                            "font-color": "color_7390E9FF",
+                                                            "background-color": "color_7390E980",
                                                             "size": "122, 25"
                                                         }
                                                     }
@@ -22962,7 +22962,7 @@
                                                     "class": "CTextLabel",
                                                     "style-round-rect": "true",
                                                     "round-rect-radius": "3",
-                                                    "frame-color": "color_8A8BD480",
+                                                    "frame-color": "color_7390E980",
                                                     "back-color": "color_00000000",
                                                     "origin": "0, 25",
                                                     "size": "369, 75"
@@ -22971,7 +22971,7 @@
                                             "view_container_fix": {
                                                 "attributes": {
                                                     "class": "view_container_fix",
-                                                    "background-color": "color_8A8BD420",
+                                                    "background-color": "color_7390E920",
                                                     "origin": "0, 25",
                                                     "size": "369, 75"
                                                 },
@@ -23050,7 +23050,7 @@
                                                     },
                                                     "view_container_fix": {
                                                         "attributes": {
-                                                            "background-color": "color_8A8BD420",
+                                                            "background-color": "color_7390E920",
                                                             "class": "view_container_fix",
                                                             "origin": "2, 50",
                                                             "background-color-draw-style": "filled",
@@ -23068,7 +23068,7 @@
                                                     },
                                                     "view_container_fix": {
                                                         "attributes": {
-                                                            "background-color": "color_8A8BD420",
+                                                            "background-color": "color_7390E920",
                                                             "class": "view_container_fix",
                                                             "origin": "124, 50",
                                                             "background-color-draw-style": "filled",
@@ -23086,7 +23086,7 @@
                                                     },
                                                     "view_container_fix": {
                                                         "attributes": {
-                                                            "background-color": "color_8A8BD420",
+                                                            "background-color": "color_7390E920",
                                                             "class": "view_container_fix",
                                                             "origin": "246, 50",
                                                             "background-color-draw-style": "filled",
@@ -23118,7 +23118,7 @@
                                                                     "transparent": "true",
                                                                     "font": "~ NormalFont",
                                                                     "text-alignment": "left",
-                                                                    "font-color": "color_8A8BD4FF",
+                                                                    "font-color": "color_7390E9FF",
                                                                     "title": "Osc"
                                                                 }
                                                             },
@@ -23137,7 +23137,7 @@
                                                                     "round-rect-radius": "3",
                                                                     "value-precision": "100",
                                                                     "back-color": "color_00000020",
-                                                                    "font-color": "color_8A8BD4FF"
+                                                                    "font-color": "color_7390E9FF"
                                                                 }
                                                             }
                                                         }
@@ -23158,7 +23158,7 @@
                                                                     "transparent": "true",
                                                                     "font": "~ NormalFont",
                                                                     "text-alignment": "left",
-                                                                    "font-color": "color_8A8BD4FF",
+                                                                    "font-color": "color_7390E9FF",
                                                                     "title": "Filter"
                                                                 }
                                                             },
@@ -23177,7 +23177,7 @@
                                                                     "round-rect-radius": "3",
                                                                     "value-precision": "100",
                                                                     "back-color": "color_00000020",
-                                                                    "font-color": "color_8A8BD4FF"
+                                                                    "font-color": "color_7390E9FF"
                                                                 }
                                                             }
                                                         }
@@ -23198,7 +23198,7 @@
                                                                     "transparent": "true",
                                                                     "font": "~ NormalFont",
                                                                     "text-alignment": "left",
-                                                                    "font-color": "color_8A8BD4FF",
+                                                                    "font-color": "color_7390E9FF",
                                                                     "title": "Total"
                                                                 }
                                                             },
@@ -23217,7 +23217,7 @@
                                                                     "round-rect-radius": "3",
                                                                     "value-precision": "100",
                                                                     "back-color": "color_00000020",
-                                                                    "font-color": "color_8A8BD4FF"
+                                                                    "font-color": "color_7390E9FF"
                                                                 }
                                                             }
                                                         }
@@ -23238,7 +23238,7 @@
                                                                     "transparent": "true",
                                                                     "font": "~ NormalFont",
                                                                     "text-alignment": "left",
-                                                                    "font-color": "color_8A8BD4FF",
+                                                                    "font-color": "color_7390E9FF",
                                                                     "title": "Amp"
                                                                 }
                                                             },
@@ -23257,7 +23257,7 @@
                                                                     "round-rect-radius": "3",
                                                                     "value-precision": "100",
                                                                     "back-color": "color_00000020",
-                                                                    "font-color": "color_8A8BD4FF"
+                                                                    "font-color": "color_7390E9FF"
                                                                 }
                                                             }
                                                         }
@@ -23278,7 +23278,7 @@
                                                                     "transparent": "true",
                                                                     "font": "~ NormalFont",
                                                                     "text-alignment": "left",
-                                                                    "font-color": "color_8A8BD4FF",
+                                                                    "font-color": "color_7390E9FF",
                                                                     "title": "Audio"
                                                                 }
                                                             },
@@ -23297,7 +23297,7 @@
                                                                     "round-rect-radius": "3",
                                                                     "value-precision": "100",
                                                                     "back-color": "color_00000020",
-                                                                    "font-color": "color_8A8BD4FF"
+                                                                    "font-color": "color_7390E9FF"
                                                                 }
                                                             }
                                                         }
@@ -23318,7 +23318,7 @@
                                                                     "transparent": "true",
                                                                     "font": "~ NormalFont",
                                                                     "text-alignment": "left",
-                                                                    "font-color": "color_8A8BD4FF",
+                                                                    "font-color": "color_7390E9FF",
                                                                     "title": "Aux"
                                                                 }
                                                             },
@@ -23337,7 +23337,7 @@
                                                                     "round-rect-radius": "3",
                                                                     "value-precision": "100",
                                                                     "back-color": "color_00000020",
-                                                                    "font-color": "color_8A8BD4FF"
+                                                                    "font-color": "color_7390E9FF"
                                                                 }
                                                             }
                                                         }
@@ -23358,7 +23358,7 @@
                                                                     "transparent": "true",
                                                                     "font": "~ NormalFont",
                                                                     "text-alignment": "left",
-                                                                    "font-color": "color_8A8BD4FF",
+                                                                    "font-color": "color_7390E9FF",
                                                                     "title": "Env"
                                                                 }
                                                             },
@@ -23377,7 +23377,7 @@
                                                                     "round-rect-radius": "3",
                                                                     "value-precision": "100",
                                                                     "back-color": "color_00000020",
-                                                                    "font-color": "color_8A8BD4FF"
+                                                                    "font-color": "color_7390E9FF"
                                                                 }
                                                             }
                                                         }
@@ -23398,7 +23398,7 @@
                                                                     "transparent": "true",
                                                                     "font": "~ NormalFont",
                                                                     "text-alignment": "left",
-                                                                    "font-color": "color_8A8BD4FF",
+                                                                    "font-color": "color_7390E9FF",
                                                                     "title": "LFO"
                                                                 }
                                                             },
@@ -23417,7 +23417,7 @@
                                                                     "round-rect-radius": "3",
                                                                     "value-precision": "100",
                                                                     "back-color": "color_00000020",
-                                                                    "font-color": "color_8A8BD4FF"
+                                                                    "font-color": "color_7390E9FF"
                                                                 }
                                                             }
                                                         }
@@ -23438,7 +23438,7 @@
                                                                     "transparent": "true",
                                                                     "font": "~ NormalFont",
                                                                     "text-alignment": "left",
-                                                                    "font-color": "color_8A8BD4FF",
+                                                                    "font-color": "color_7390E9FF",
                                                                     "title": "CV"
                                                                 }
                                                             },
@@ -23457,7 +23457,7 @@
                                                                     "round-rect-radius": "3",
                                                                     "value-precision": "100",
                                                                     "back-color": "color_00000020",
-                                                                    "font-color": "color_8A8BD4FF"
+                                                                    "font-color": "color_7390E9FF"
                                                                 }
                                                             }
                                                         }
