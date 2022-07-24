@@ -266,10 +266,10 @@ cv_route_params[cv_route_param::count] =
 struct part_group_t { enum value { audio, cv, route, global, count }; };
 typedef part_group_t::value part_group;
 static ui_color const 
-group_colors[part_group::count] = { { 0xFF, 0x8C, 0x00 }, { 0x00, 0xFF, 0x00 }, { 0x00, 0x00, 0xFF }, { 0xFF, 0xFF, 0x00 } };
-       
+group_colors[part_group::count] = { { 0x00, 0xBF, 0xFF }, { 0x00, 0xFA, 0x9A }, { 0x00, 0x00, 0xFF }, { 0xFF, 0xFF, 0x00 } };
+         
 part_descriptor const       
-part_descriptors[part_type::count] =         
+part_descriptors[part_type::count] =          
 {      
   { "{5C9D2CD3-2D4C-4205-893E-6B5DE9D62ADE}", { L"Osc", L"Oscillator" }, part_type::oscillator, false, false, oscillator_count, oscillator_params, oscillator_param::count, oscillator_graphs, oscillator_graph::count, { 0, 3, 0, 0, active_param::oscillator, L"Voice audio", group_colors[part_group::audio] }},
   { "{FC4885FE-431C-477A-B5B7-84863DB8C07D}", { L"Env", L"Envelope" }, part_type::envelope, false, false, envelope_count, envelope_params, envelope_param::count, &envelope_graph, 1, { 2, 3, 0, 1, active_param::envelope, L"Voice CV", group_colors[part_group::cv] } },
