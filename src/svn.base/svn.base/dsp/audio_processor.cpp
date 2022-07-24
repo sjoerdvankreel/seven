@@ -38,7 +38,6 @@ audio_processor::process_block()
 {
   _topology->state_check(_state);
   automation_check(_input.sample_count);
-  transform_automation();
   std::uint64_t state = disable_denormals();
   process_block(_input, _output);
   restore_denormals(state);
@@ -70,14 +69,6 @@ audio_processor::prepare_block(std::int32_t sample_count)
         _input.automation[p][s].discrete = _state[p].discrete;
   }
   return _input;
-}
-
-void
-audio_processor::transform_automation()
-{
-  for (std::int32_t p = 0; p < _topology->input_param_count; p++)
-    for (std::int32_t s = 0; s < _input.sample_count; s++)
-      _input.automation[p][s] = transform_to_dsp(_topology, p, _input.automation[p][s]);
 }
 
 void

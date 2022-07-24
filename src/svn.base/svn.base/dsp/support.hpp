@@ -113,14 +113,5 @@ add_audio(audio_sample32* x, audio_sample32 const* y, std::int32_t sample_count)
     x[s] += y[s];
 }
 
-inline param_value
-transform_to_dsp(topology_info const* topology, std::int32_t param, param_value val)
-{
-  auto const& descriptor = *topology->params[param].descriptor;
-  if(descriptor.type == param_type::real)
-    return param_value(descriptor.real.dsp.to_range(val.real));
-  return param_value(val.discrete);
-}
-
 } // namespace svn::base
 #endif // SVN_BASE_DSP_SUPPORT_HPP

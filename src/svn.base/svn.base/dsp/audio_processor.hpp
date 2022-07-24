@@ -31,7 +31,6 @@ private:
   std::vector<param_value> _output_param_buffer;
 
 private:
-  void transform_automation();
   void automation_check(std::int32_t sample_count);
 
 public:

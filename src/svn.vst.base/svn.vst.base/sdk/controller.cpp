@@ -45,10 +45,7 @@ controller::update_state(std::int32_t param)
 {
   double normalized = getParamNormalized(param);
   auto const& descriptor = *_topology->params[param].descriptor;
-  // This is in regular base format e.g. (0..1) or discrete.
   _state[param] = vst_normalized_to_base(_topology, param, normalized);
-  // This is in dsp base format suitable for direct audio processing (which is what graph components do).
-  _state[param] = transform_to_dsp(_topology, param, _state[param]);
 }
 
 IPlugView* PLUGIN_API

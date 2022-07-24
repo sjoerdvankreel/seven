@@ -26,7 +26,9 @@ class automation_view
 
 public:
   automation_view() = default;
+  float to_dsp(std::int32_t param, float val) const;
   param_value get(std::int32_t param, std::int32_t sample) const;
+  float get_as_dsp(std::int32_t param, std::int32_t sample) const;
   automation_view rearrange_params(std::int32_t part_type, std::int32_t part_index) const;
   automation_view rearrange_samples(std::int32_t sample_offset, std::int32_t sample_fixed_at) const;
 
@@ -67,8 +69,28 @@ automation_view::get(std::int32_t param, std::int32_t sample) const
   assert(param < _part_param_count);
   assert(sample >= 0);
   assert(sample < _sample_count - _sample_offset);
+  assert(_topology->params[param + _part_param_offset].descriptor->type == param_type::real);
   if (sample >= _sample_fixed_at) return _fixed[_part_param_offset + param];
   return _automation[param + _part_param_offset][sample + _sample_offset];
+}
+
+inline float
+automation_view::to_dsp(std::int32_t param, float val) const
+{
+  assert(param >= 0);
+  assert(param < _part_param_count);
+  return _topology->params[param + _part_param_offset].descriptor->real.dsp.to_range(val);
+}
+
+inline float
+automation_view::get_as_dsp(std::int32_t param, std::int32_t sample) const
+{
+  assert(param >= 0);
+  assert(param < _part_param_count);
+  assert(sample >= 0);
+  assert(sample < _sample_count - _sample_offset);
+  assert(_topology->params[param + _part_param_offset].descriptor->type == param_type::real);
+  return to_dsp(param, get(param, sample).real);
 }
 
 inline automation_view

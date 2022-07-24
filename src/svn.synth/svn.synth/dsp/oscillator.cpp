@@ -75,7 +75,7 @@ float
 oscillator::generate_blep_pulse(
   automation_view const& automation, std::int32_t sample, float phase, float increment) const
 {
-  float pw = (min_pw + (1.0f - min_pw) * automation.get(oscillator_param::analog_pw, sample).real) * 0.5f;
+  float pw = (min_pw + (1.0f - min_pw) * automation.get_as_dsp(oscillator_param::analog_pw, sample)) * 0.5f;
   float saw1 = generate_blep_saw(phase, increment);
   float saw2 = generate_blep_saw(phase + pw, increment);
   return (saw1 - saw2) * 0.5f;
@@ -103,8 +103,8 @@ oscillator::generate_dsf(
 {
   float const scale_factor = 0.975f;
   float const rolloff_range = 0.99f;
-  float rolloff = automation.get(oscillator_param::dsf_rolloff, sample).real;
-  float distance = frequency * automation.get(oscillator_param::dsf_distance, sample).real;
+  float rolloff = automation.get_as_dsp(oscillator_param::dsf_rolloff, sample);
+  float distance = frequency * automation.get_as_dsp(oscillator_param::dsf_distance, sample);
   std::int32_t partials = automation.get(oscillator_param::dsf_partials, sample).discrete;
   float max_partials = (_sample_rate * 0.5f - frequency) / distance;
   partials = std::min(partials, static_cast<std::int32_t>(max_partials));
@@ -148,8 +148,8 @@ oscillator::generate_unison(
   }
 
   base::audio_sample32 result = { 0.0f, 0.0f };
-  float detune = automation.get(oscillator_param::unison_detune, s).real;
-  float spread = automation.get(oscillator_param::unison_spread, s).real;
+  float detune = automation.get_as_dsp(oscillator_param::unison_detune, s);
+  float spread = automation.get_as_dsp(oscillator_param::unison_spread, s);
   float pan_range = panning < 0.5f? panning: 1.0f - panning;
   float pan_min = panning - spread * pan_range;
   float pan_max = panning + spread * pan_range;
@@ -180,13 +180,13 @@ oscillator::process_block(voice_input const& input, std::int32_t index,
     bool on = automation.get(oscillator_param::on, s).discrete != 0;
     if(!on) continue;
         
-    float cent = automation.get(oscillator_param::cent, s).real;
+    float cent = automation.get_as_dsp(oscillator_param::cent, s);
     std::int32_t note = automation.get(oscillator_param::note, s).discrete;
     std::int32_t octave = automation.get(oscillator_param::octave, s).discrete;
     float midi = 12 * (octave + 1) + note + cent + _midi_note - 60;
     float frequency = note_to_frequency(midi);
-    float amp = automation.get(oscillator_param::amp, s).real;
-    float pan = automation.get(oscillator_param::pan, s).real;
+    float amp = automation.get_as_dsp(oscillator_param::amp, s);
+    float pan = automation.get_as_dsp(oscillator_param::pan, s);
     audio_sample32 sample = generate_unison(automation, s, midi, frequency, pan);
     audio_out[s].left = sanity_bipolar(sample.left * amp);
     audio_out[s].right = sanity_bipolar(sample.right * amp);
