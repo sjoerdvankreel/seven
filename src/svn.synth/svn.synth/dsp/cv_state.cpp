@@ -56,8 +56,7 @@ cv_state::modulate(
   {
     // cv_route_param_offset = enabled + plot parameters
     std::int32_t output_id = output_table_in[route_output][route_index][p] - cv_route_param_offset;
-    for (std::int32_t s = 0; s < input.sample_count; s++)
-      _scratch[mapping[p]][s] = automated.get_real(mapping[p], s);
+    automated.get_real(mapping[p], _scratch[mapping[p]], input.sample_count);
   }
 
   // Find out relevant modulation targets.

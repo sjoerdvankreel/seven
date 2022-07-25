@@ -30,6 +30,7 @@ public:
   float get_real(std::int32_t param, std::int32_t sample) const;
   param_value get_param(std::int32_t param, std::int32_t sample) const;
   std::int32_t get_discrete(std::int32_t param, std::int32_t sample) const;
+  void get_real(std::int32_t param, float* cv_out, std::int32_t count) const;
 
   automation_view rearrange_params(std::int32_t part_type, std::int32_t part_index) const;
   automation_view rearrange_samples(std::int32_t sample_offset, std::int32_t sample_fixed_at) const;
@@ -131,6 +132,23 @@ automation_view::rearrange_samples(std::int32_t sample_offset, std::int32_t samp
     _topology, _fixed, _automation,
     _total_param_count, _part_param_count, _part_param_offset,
     _sample_count, sample_offset, sample_fixed_at);
+}
+
+inline void
+automation_view::get_real(std::int32_t param, float* cv_out, std::int32_t count) const
+{
+  assert(param >= 0);
+  assert(param < _part_param_count);
+  assert(count >= 0);
+  assert(count <= _sample_count - _sample_offset);
+  assert(_topology->params[param + _part_param_offset].descriptor->type == param_type::real);
+  std::int32_t automated_count = std::min(count, _sample_fixed_at);
+  // Better hope punning works everywhere.
+  float const* automated = reinterpret_cast<float const*>(_automation[param + _part_param_offset]);
+  std::copy(automated, automated + automated_count, cv_out);
+  std::int32_t fixed_count = std::max(0, count - _sample_fixed_at);
+  assert(fixed_count == 0 || _fixed != nullptr);
+  if(fixed_count > 0) std::fill(cv_out + automated_count, cv_out + automated_count + fixed_count, _fixed[_part_param_offset + param].real);
 }
 
 } // namespace svn::base
