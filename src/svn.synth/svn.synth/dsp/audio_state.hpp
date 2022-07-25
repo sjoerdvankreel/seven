@@ -14,6 +14,13 @@
 
 namespace svn::synth {
 
+struct audio_route_indices
+{
+  std::int32_t bank_index;
+  std::int32_t route_index;
+  std::pair<std::int32_t, std::int32_t> input_ids;
+};
+
 // Internal audio outputs.
 class audio_state
 {
@@ -22,6 +29,13 @@ class audio_state
   static std::vector<std::pair<std::int32_t, std::int32_t>> const input_table_out;
 
   std::vector<base::audio_sample32> scratch;
+
+  std::int32_t _relevant_indices_count = 0;
+  std::array<base::automation_view, audio_route_count> _bank_automation;
+  // Of size audio banks * audio routes per bank.
+  // On begin of mix(), we calculate relevant stuff for the current runtime part.
+  std::array<audio_route_indices, audio_route_count * audio_route_route_count> _relevant_indices;
+
   base::audio_sample32 const* input_buffer(std::int32_t input, std::int32_t index) const;
 
 public:
