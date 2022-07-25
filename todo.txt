@@ -2,3 +2,4 @@
 * Drop windows dependencies
 * freqmod
 * clip only in ui, dont touch the sound, host will clip
+* fix last active voice automation
