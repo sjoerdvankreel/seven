@@ -13,7 +13,7 @@
 
 namespace svn::synth {
 
-struct route_indices
+struct cv_route_indices
 {
   std::int32_t bank_index;
   std::int32_t route_index;
@@ -36,7 +36,7 @@ class cv_state
   std::array<base::automation_view, cv_route_count> _bank_automation;
   // Of size cv banks * cv routes per bank.
   // On begin of modulate(), we calculate relevant stuff for the current runtime part.
-  std::array<route_indices, cv_route_count * cv_route_route_count> _relevant_indices;
+  std::array<cv_route_indices, cv_route_count * cv_route_route_count> _relevant_indices;
 
   base::cv_sample const* input_buffer(std::int32_t input, std::int32_t index) const;
 

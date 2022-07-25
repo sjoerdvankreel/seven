@@ -75,7 +75,7 @@ cv_state::modulate(
         std::int32_t output_id = output_table_in[route_output][route_index][p] - cv_route_param_offset;
         if(output_id == output_off) continue;
         if(_bank_automation[r].get_discrete(i * 3 + cv_route_param_offset + 1, 0) != output_id) continue;
-        route_indices indices;
+        cv_route_indices indices;
         indices.bank_index = r;
         indices.route_index = i;
         indices.target_index = p;
@@ -88,7 +88,7 @@ cv_state::modulate(
   // Apply modulation.
   for (std::int32_t m = 0; m < _relevant_indices_count; m++)
   {
-    route_indices indices = _relevant_indices[m];
+    cv_route_indices indices = _relevant_indices[m];
     for (std::int32_t s = 0; s < input.sample_count; s++)
     {
       float amt = _bank_automation[indices.bank_index].get_real_dsp(indices.route_index * 3 + cv_route_param_offset + 2, s);
