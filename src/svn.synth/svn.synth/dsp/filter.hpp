@@ -43,7 +43,7 @@ private:
 public:
   filter() = default;
   filter(float sample_rate, std::int32_t midi_note);
-  double process_block(voice_input const& input, std::int32_t index, cv_state const& cv, 
+  double process_block(voice_input const& input, std::int32_t index, cv_state& cv, 
     base::audio_sample32 const* audio_in, base::audio_sample32* audio_out, double& mod_time);
 };
 

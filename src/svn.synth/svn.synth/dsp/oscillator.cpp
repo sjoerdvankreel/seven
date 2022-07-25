@@ -174,8 +174,9 @@ oscillator::generate_unison(
 }
 
 double
-oscillator::process_block(voice_input const& input, std::int32_t index, 
-  cv_state const& cv, audio_sample32* audio_out, double& mod_time)
+oscillator::process_block(
+  voice_input const& input, std::int32_t index, 
+  cv_state& cv, audio_sample32* audio_out, double& mod_time)
 {
   float const* const* modulated;
   automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));

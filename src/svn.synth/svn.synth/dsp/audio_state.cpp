@@ -35,7 +35,7 @@ audio_state::input_buffer(std::int32_t input, std::int32_t index) const
 
 double
 audio_state::mix(
-  voice_input const& input, cv_state const& cv, audio_route_output route_output,
+  voice_input const& input, cv_state& cv, audio_route_output route_output,
   std::int32_t route_index, svn::base::audio_sample32 const*& result, double& mod_time)
 {
   double start_mod_time = mod_time;

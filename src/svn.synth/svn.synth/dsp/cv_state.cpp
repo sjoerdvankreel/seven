@@ -14,7 +14,8 @@ std::vector<std::vector<std::vector<std::int32_t>>> const cv_state::output_table
 
 cv_state::
 cv_state(std::int32_t max_sample_count) :
-  envelope(), lfo(), scratch(), scratch_buffer(),
+  envelope(), lfo(), _scratch(), _scratch_buffer(), 
+  _relevant_indices(), _bank_automation(),
   velocity(static_cast<std::size_t>(max_sample_count))
 {
   std::vector<base::cv_sample> cv(static_cast<std::size_t>(max_sample_count));
@@ -23,9 +24,9 @@ cv_state(std::int32_t max_sample_count) :
   std::int32_t max_param_count = 0;
   for(std::int32_t i = 0; i < cv_route_output::count; i++)
     max_param_count = std::max(max_param_count, cv_route_output_modulated_counts[i]);
-  scratch_buffer.resize(static_cast<std::size_t>(max_param_count * max_sample_count));
+  _scratch_buffer.resize(static_cast<std::size_t>(max_param_count * max_sample_count));
   for (std::int32_t p = 0; p < max_param_count; p++)
-    scratch.push_back(scratch_buffer.data() + p * max_sample_count);
+    _scratch.push_back(_scratch_buffer.data() + p * max_sample_count);
 }
 
 base::cv_sample const*
@@ -42,11 +43,13 @@ cv_state::input_buffer(std::int32_t input, std::int32_t index) const
 }
 
 double 
-cv_state::modulate(voice_input const& input, base::automation_view const& automated,
-  std::int32_t const* mapping, cv_route_output route_output, std::int32_t route_index, float const* const*& result) const
+cv_state::modulate(
+  voice_input const& input, base::automation_view const& automated, std::int32_t const* mapping, 
+  cv_route_output route_output, std::int32_t route_index, float const* const*& result)
 {
   double start_time = base::performance_counter();
   std::int32_t input_off = input_table_in[cv_route_input::off][0][0];
+  std::int32_t output_off = output_table_in[cv_route_output::off][0][0];
 
   // Set scratch to current values.
   for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
@@ -54,35 +57,51 @@ cv_state::modulate(voice_input const& input, base::automation_view const& automa
     // cv_route_param_offset = enabled + plot parameters
     std::int32_t output_id = output_table_in[route_output][route_index][p] - cv_route_param_offset;
     for (std::int32_t s = 0; s < input.sample_count; s++)
-      scratch[mapping[p]][s] = automated.get_real(mapping[p], s);
+      _scratch[mapping[p]][s] = automated.get_real(mapping[p], s);
   }
 
-  // Apply modulation banks.
-  for (std::int32_t r = 0; r < cv_route_count; r++)
+  // Find out relevant modulation targets.
+  // Note: discrete automation per block, not per sample!
+  _relevant_indices_count = 0;
+  for(std::int32_t r = 0; r < cv_route_count; r++)
   {
-    base::automation_view automation = input.automation.rearrange_params(part_type::cv_route, r);
-    for (std::int32_t s = 0; s < input.sample_count; s++)
+    _bank_automation[r] = input.automation.rearrange_params(part_type::cv_route, r);
+    if(_bank_automation[r].get_discrete(cv_route_param::on, 0) == 0) continue;
+    for (std::int32_t i = 0; i < cv_route_route_count; i++)
     {
-      if (automation.get_discrete(cv_route_param::on, s) != 0)
-        for (std::int32_t i = 0; i < cv_route_route_count; i++)
-          for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
-          {
-            std::int32_t output_id = output_table_in[route_output][route_index][p] - cv_route_param_offset;
-            std::int32_t in = automation.get_discrete(i * 3 + cv_route_param_offset, s);
-            if (in == input_off) continue;
-            std::int32_t out = automation.get_discrete(i * 3 + cv_route_param_offset + 1, s);
-            if (out != output_id) continue;
-            float amt = automation.get_real_dsp(i * 3 + cv_route_param_offset + 2, s);
-            std::tuple<std::int32_t, std::int32_t, std::int32_t> input_ids(input_table_out[in]);
-            float cv = input_buffer(std::get<0>(input_ids), std::get<1>(input_ids))[s].value * amt;
-            bool multiply = std::get<2>(input_ids) == cv_route_input_op::multiply;
-            if (multiply) scratch[mapping[p]][s] *= cv;
-            else scratch[mapping[p]][s] += cv;
-            scratch[mapping[p]][s] = std::clamp(scratch[mapping[p]][s], 0.0f, 1.0f);
-          }
+      std::int32_t input_id = _bank_automation[r].get_discrete(i * 3 + cv_route_param_offset, 0);
+      if(input_id == input_off) continue;
+      for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
+      {
+        std::int32_t output_id = output_table_in[route_output][route_index][p] - cv_route_param_offset;
+        if(output_id == output_off) continue;
+        if(_bank_automation[r].get_discrete(i * 3 + cv_route_param_offset + 1, 0) != output_id) continue;
+        route_indices indices;
+        indices.bank_index = r;
+        indices.route_index = i;
+        indices.target_index = p;
+        indices.input_ids = input_table_out[input_id];
+        _relevant_indices[_relevant_indices_count++] = indices;
+      }
     }
   }
-  result = scratch.data();
+
+  // Apply modulation.
+  for (std::int32_t m = 0; m < _relevant_indices_count; m++)
+  {
+    route_indices indices = _relevant_indices[m];
+    for (std::int32_t s = 0; s < input.sample_count; s++)
+    {
+      float amt = _bank_automation[indices.bank_index].get_real_dsp(indices.route_index * 3 + cv_route_param_offset + 2, s);
+      float cv = input_buffer(std::get<0>(indices.input_ids), std::get<1>(indices.input_ids))[s].value * amt;
+      bool multiply = std::get<2>(indices.input_ids) == cv_route_input_op::multiply;
+      if (multiply) _scratch[mapping[indices.target_index]][s] *= cv;
+      else _scratch[mapping[indices.target_index]][s] += cv;
+      _scratch[mapping[indices.target_index]][s] = std::clamp(_scratch[mapping[indices.target_index]][s], 0.0f, 1.0f);
+    }
+  }
+
+  result = _scratch.data();
   return base::performance_counter() - start_time;
 }
 
