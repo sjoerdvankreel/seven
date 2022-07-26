@@ -89,14 +89,16 @@ cv_state::modulate(
   for (std::int32_t m = 0; m < _relevant_indices_count; m++)
   {
     cv_route_indices indices = _relevant_indices[m];
+    float* cv_output = _scratch[mapping[indices.target_index]];
+    bool multiply = std::get<2>(indices.input_ids) == cv_route_input_op::multiply;
+    base::cv_sample const* cv_input = input_buffer(std::get<0>(indices.input_ids), std::get<1>(indices.input_ids));
     for (std::int32_t s = 0; s < input.sample_count; s++)
     {
       float amt = _bank_automation[indices.bank_index].get_real_dsp(indices.route_index * 3 + cv_route_param_offset + 2, s);
-      float cv = input_buffer(std::get<0>(indices.input_ids), std::get<1>(indices.input_ids))[s].value * amt;
-      bool multiply = std::get<2>(indices.input_ids) == cv_route_input_op::multiply;
-      if (multiply) _scratch[mapping[indices.target_index]][s] *= cv;
-      else _scratch[mapping[indices.target_index]][s] += cv;
-      _scratch[mapping[indices.target_index]][s] = std::clamp(_scratch[mapping[indices.target_index]][s], 0.0f, 1.0f);
+      float cv = cv_input[s].value * amt;
+      if (multiply) cv_output[s] *= cv;
+      else cv_output[s] += cv;
+      cv_output[s] = std::clamp(cv_output[s], 0.0f, 1.0f);
     }
   }
 

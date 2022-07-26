@@ -71,12 +71,13 @@ audio_state::mix(
   for (std::int32_t a = 0; a < _relevant_indices_count; a++)
   {
     audio_route_indices indices = _relevant_indices[a];
+    base::audio_sample32 const* audio = input_buffer(indices.input_ids.first, indices.input_ids.second);
     if(indices.bank_index != previous_bank_index)
       mod_time += cv.modulate(input, _bank_automation[indices.bank_index], cv_route_audio_mapping, cv_route_output::audio, indices.bank_index, modulated);
     for (std::int32_t s = 0; s < input.sample_count; s++)
     {
       float amt = _bank_automation[indices.bank_index].get_modulated_dsp(audio_route_param_offset + indices.route_index * 3 + 2, s, modulated);
-      scratch[s] = base::sanity_audio(scratch[s] + input_buffer(indices.input_ids.first, indices.input_ids.second)[s] * std::clamp(amt, 0.0f, 1.0f));
+      scratch[s] = base::sanity_audio(scratch[s] + audio[s] * std::clamp(amt, 0.0f, 1.0f));
     }
   }
 
