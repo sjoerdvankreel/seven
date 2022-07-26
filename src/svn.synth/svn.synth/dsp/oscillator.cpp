@@ -202,12 +202,75 @@ oscillator::process_block2(
   return performance_counter() - start_time_sec;
 }
 
+void
+oscillator::generate_blep_saw(
+  voice_input const& input, svn::base::automation_view const& automation, 
+  float const* const* modulated, float midi, base::audio_sample32* audio_out)
+{
+  for (std::int32_t s = 0; s < input.sample_count; s++)
+  {
+    float amp = automation.get_modulated_dsp(oscillator_param::amp, s, modulated);
+    float pan = automation.get_modulated_dsp(oscillator_param::pan, s, modulated);
+    float cent = automation.get_modulated_dsp(oscillator_param::cent, s, modulated);
+    float frequency = note_to_frequency(midi + cent);
+    float increment = frequency / _sample_rate;
+    float phase = _phases[0];
+
+    // Start at 0 instead of 0.5.
+    float blep = 0.0f;
+    phase += 0.5f;
+    phase -= std::floor(phase);
+    
+    // https://www.kvraudio.com/forum/viewtopic.php?t=375517
+    if (phase < increment)
+    {
+      blep = phase / increment;
+      blep = (2.0f - blep) * blep - 1.0f;
+    }
+    else if (phase >= 1.0f - increment)
+    {
+      blep = (phase - 1.0f) / increment;
+      blep = (blep + 2.0f) * blep + 1.0f;
+    }
+
+    float sample = ((2.0f * phase - 1.0f) - blep) * amp;
+    audio_out[s] = { sample * (1.0f - pan), sample * pan };
+
+    _phases[0] += frequency / _sample_rate;
+    _phases[0] -= std::floor(_phases[0]);
+  }
+}
+
 double
 oscillator::process_block(
   voice_input const& input, std::int32_t index,
   cv_state& cv, audio_sample32* audio_out, double& mod_time)
 {
   return process_block2(input, index, cv, audio_out, mod_time);
+  
+  // Note: discrete automation per block, not per sample!
+  automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
+  std::int32_t on = automation.get_discrete(oscillator_param::on, 0);
+  if (on == 0)
+  {
+    std::memset(audio_out, 0, input.sample_count * sizeof(audio_sample32));
+    return 0.0;
+  }
+
+  double start_time = performance_counter();
+  std::int32_t type = automation.get_discrete(oscillator_param::type, 0);
+  std::int32_t note = automation.get_discrete(oscillator_param::note, 0);
+  std::int32_t voices = automation.get_discrete(oscillator_param::unison, 0);
+  std::int32_t octave = automation.get_discrete(oscillator_param::octave, 0);
+  std::int32_t partials = automation.get_discrete(oscillator_param::dsf_partials, 0);
+  std::int32_t analog_type = automation.get_discrete(oscillator_param::analog_type, 0);
+
+  float const* const* modulated;
+  double start_mod_time = mod_time;
+  mod_time += cv.modulate(input, automation, cv_route_osc_mapping, cv_route_output::osc, index, modulated);
+  float midi = 12 * (octave + 1) + note + _midi_note - 60;
+  generate_blep_saw(input, automation, modulated, midi, audio_out);
+  return base::performance_counter() - start_time - (mod_time - start_mod_time);
 }
 
 } // namespace svn::synth
