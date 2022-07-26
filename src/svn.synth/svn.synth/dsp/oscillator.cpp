@@ -76,7 +76,7 @@ oscillator::generate_blep_pulse2(
   automation_view const& automation, float const* const* modulated, 
   std::int32_t sample, float phase, float increment) const
 {
-  float pw = (min_pw + (1.0f - min_pw) * automation.get_modulated_dsp(oscillator_param::analog_pw, sample, modulated)) * 0.5f;
+  float pw = (min_pw + (1.0f - min_pw) * modulated[oscillator_param::analog_pw][sample]) * 0.5f;
   float saw1 = generate_blep_saw2(phase, increment);
   float saw2 = generate_blep_saw2(phase + pw, increment);
   return (saw1 - saw2) * 0.5f;
@@ -106,8 +106,8 @@ oscillator::generate_dsf2(
 {
   float const scale_factor = 0.975f;
   float const rolloff_range = 0.99f;
-  float rolloff = automation.get_modulated_dsp(oscillator_param::dsf_rolloff, sample, modulated);
-  float distance = frequency * automation.get_modulated_dsp(oscillator_param::dsf_distance, sample, modulated);
+  float rolloff = modulated[oscillator_param::dsf_rolloff][sample];
+  float distance = frequency * modulated[oscillator_param::dsf_distance][sample];
   std::int32_t partials = automation.get_discrete(oscillator_param::dsf_partials, sample);
   float max_partials = (_sample_rate * 0.5f - frequency) / distance;
   partials = std::min(partials, static_cast<std::int32_t>(max_partials));
@@ -153,8 +153,8 @@ oscillator::generate_unison2(
   }
 
   base::audio_sample32 result = { 0.0f, 0.0f };
-  float detune = automation.get_modulated_dsp(oscillator_param::unison_detune, s, modulated);
-  float spread = automation.get_modulated_dsp(oscillator_param::unison_spread, s, modulated);
+  float detune = modulated[oscillator_param::unison_detune][s];
+  float spread = modulated[oscillator_param::unison_spread][s];
   float pan_range = panning < 0.5f? panning: 1.0f - panning;
   float pan_min = panning - spread * pan_range;
   float pan_max = panning + spread * pan_range;
@@ -188,13 +188,13 @@ oscillator::process_block2(
     bool on = automation.get_discrete(oscillator_param::on, s) != 0;
     if(!on) continue;
         
-    float cent = automation.get_modulated_dsp(oscillator_param::cent, s, modulated);
+    float cent = modulated[oscillator_param::cent][s];
     std::int32_t note = automation.get_discrete(oscillator_param::note, s);
     std::int32_t octave = automation.get_discrete(oscillator_param::octave, s);
     float midi = 12 * (octave + 1) + note + cent + _midi_note - 60;
     float frequency = note_to_frequency_table(midi);
-    float amp = automation.get_modulated_dsp(oscillator_param::amp, s, modulated);
-    float pan = automation.get_modulated_dsp(oscillator_param::pan, s, modulated);
+    float amp = modulated[oscillator_param::amp][s];
+    float pan = modulated[oscillator_param::pan][s];
     audio_sample32 sample = generate_unison2(automation, modulated, s, midi, frequency, pan);
     audio_out[s].left = sanity_bipolar(sample.left * amp);
     audio_out[s].right = sanity_bipolar(sample.right * amp);
@@ -207,12 +207,12 @@ oscillator::generate_blep_saw(
   voice_input const& input, svn::base::automation_view const& automation, 
   float const* const* modulated, std::int32_t midi, base::audio_sample32* audio_out)
 {
+  float const* amp = modulated[oscillator_param::amp];
+  float const* pan = modulated[oscillator_param::pan];
+  float const* cent = modulated[oscillator_param::cent];
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
-    float amp = automation.get_modulated_dsp(oscillator_param::amp, s, modulated);
-    float pan = automation.get_modulated_dsp(oscillator_param::pan, s, modulated);
-    float cent = automation.get_modulated_dsp(oscillator_param::cent, s, modulated);
-    float frequency = note_to_frequency_table(midi + cent);
+    float frequency = note_to_frequency_table(midi + cent[s]);
     float increment = frequency / _sample_rate;
     float phase = _phases[0];
 
@@ -233,8 +233,8 @@ oscillator::generate_blep_saw(
       blep = (blep + 2.0f) * blep + 1.0f;
     }
 
-    float sample = ((2.0f * phase - 1.0f) - blep) * amp;
-    audio_out[s] = { sample * (1.0f - pan), sample * pan };
+    float sample = ((2.0f * phase - 1.0f) - blep) * amp[s];
+    audio_out[s] = { sample * (1.0f - pan[s]), sample * pan[s] };
 
     _phases[0] += frequency / _sample_rate;
     _phases[0] -= std::floor(_phases[0]);

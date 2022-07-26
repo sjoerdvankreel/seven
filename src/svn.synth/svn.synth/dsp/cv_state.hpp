@@ -45,6 +45,8 @@ public:
   std::vector<base::cv_sample> velocity;
   std::array<std::vector<base::cv_sample>, lfo_count> lfo;
   std::array<std::vector<base::cv_sample>, envelope_count> envelope;
+
+  // Note: CV in [0, 1] on input, parameter dsp range on output.
   double modulate(
     voice_input const& input, base::automation_view const& automated, std::int32_t const* mapping, 
     cv_route_output route_output, std::int32_t route_index, float const* const*& result);

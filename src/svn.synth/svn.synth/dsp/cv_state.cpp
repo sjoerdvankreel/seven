@@ -102,6 +102,16 @@ cv_state::modulate(
     }
   }
 
+  // Scale [0, 1] to dsp.
+  for (std::int32_t m = 0; m < _relevant_indices_count; m++)
+  {
+    cv_route_indices indices = _relevant_indices[m];
+    std::int32_t param = mapping[indices.target_index];
+    float* cv_output = _scratch[mapping[indices.target_index]];
+    for (std::int32_t s = 0; s < input.sample_count; s++)
+      cv_output[s] = automated.to_dsp(param, cv_output[s]);
+  }
+
   result = _scratch.data();
   return base::performance_counter() - start_time;
 }

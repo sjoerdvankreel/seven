@@ -106,12 +106,15 @@ inline float
 automation_view::get_real_dsp(std::int32_t param, std::int32_t sample) const
 { return to_dsp(param, get_real(param, sample)); }
 
+// TODO REMOVE
 inline float 
 automation_view::get_modulated_dsp(std::int32_t param, std::int32_t sample, float const* const* modulated) const
 { 
+  assert(param >= 0);
   assert(sample >= 0);
+  assert(param < _part_param_count);
   assert(sample < _sample_count - _sample_offset);
-  return to_dsp(param, modulated[param][sample]);
+  return modulated[param][sample];
 }
 
 inline automation_view
