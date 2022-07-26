@@ -245,7 +245,7 @@ oscillator::generate_blep_saw(
     __m256 phase_lt_inc = _mm256_cmp_ps(phase, increment, _CMP_LT_OQ);
     __m256 blep_lt = _mm256_div_ps(phase, increment);
     blep_lt = _mm256_sub_ps(_mm256_mul_ps(_mm256_sub_ps(vector_2, blep_lt), blep_lt), vector_1);
-    __m256 phase_gte_1_min_inc = _mm256_cmp_ps(phase, _mm256_sub_ps(vector_1, increment), _CMP_LT_OQ);
+    __m256 phase_gte_1_min_inc = _mm256_cmp_ps(phase, _mm256_sub_ps(vector_1, increment), _CMP_GE_OQ);
     __m256 blep_gte = _mm256_div_ps(_mm256_sub_ps(phase, vector_1), increment);
     blep_gte = _mm256_add_ps(_mm256_mul_ps(_mm256_add_ps(blep_gte, vector_2), blep_gte), vector_1);
     __m256 blep = _mm256_blendv_ps(vector_0, blep_lt, phase_lt_inc);
