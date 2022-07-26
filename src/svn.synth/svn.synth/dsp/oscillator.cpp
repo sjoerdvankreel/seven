@@ -257,8 +257,8 @@ oscillator::generate_blep_saw(
     __m256 right = _mm256_mul_ps(sample, pan);
     for(std::int32_t lane = 0; lane < 8; lane++)
     {
-      lane_audio_out[lane].left = left.m256_f32[7 - lane];
-      lane_audio_out[lane].right = right.m256_f32[7 - lane];
+      lane_audio_out[lane].left = left.m256_f32[lane];
+      lane_audio_out[lane].right = right.m256_f32[lane];
     }
 #else
     for(std::int32_t lane = 0; lane < 8; lane++)
