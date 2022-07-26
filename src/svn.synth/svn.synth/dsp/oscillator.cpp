@@ -164,7 +164,7 @@ oscillator::generate_unison2(
   {
     float this_pan = pan_min + (pan_max - pan_min) * i / static_cast<float>(voices - 1);
     float this_midi = midi_min + (midi_max - midi_min) * i / static_cast<float>(voices - 1);
-    float this_frequency = note_to_frequency(this_midi);
+    float this_frequency = note_to_frequency_table(this_midi);
     float sample = generate_wave2(automation, modulated, s, _phases[i], this_frequency, this_frequency / _sample_rate);
     result += audio_sample32({ sample * (1.0f - this_pan), sample * this_pan });
     _phases[i] += this_frequency / _sample_rate;
@@ -192,7 +192,7 @@ oscillator::process_block2(
     std::int32_t note = automation.get_discrete(oscillator_param::note, s);
     std::int32_t octave = automation.get_discrete(oscillator_param::octave, s);
     float midi = 12 * (octave + 1) + note + cent + _midi_note - 60;
-    float frequency = note_to_frequency(midi);
+    float frequency = note_to_frequency_table(midi);
     float amp = automation.get_modulated_dsp(oscillator_param::amp, s, modulated);
     float pan = automation.get_modulated_dsp(oscillator_param::pan, s, modulated);
     audio_sample32 sample = generate_unison2(automation, modulated, s, midi, frequency, pan);
