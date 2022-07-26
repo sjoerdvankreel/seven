@@ -67,14 +67,14 @@ inline float
 note_to_frequency(float midi)
 { return 440.0f * std::pow(2.0f, (midi - 69.0f) / 12.0f); }
 inline float
-note_to_frequency_table(std::int32_t midi, float cent)
+note_to_frequency_table(float midi)
 {
-  float target = (midi + cent) * note_to_frequency_table_init::cent_count;
-  std::int32_t cent_low = std::max(0, static_cast<std::int32_t>(target));
+  float midi_cent = midi * note_to_frequency_table_init::cent_count;
+  std::int32_t cent_low = std::max(0, static_cast<std::int32_t>(midi_cent));
   std::int32_t cent_high = std::min(note_to_frequency_table_init::frequency_count - 1, cent_low + 1);
-  float mix = target - cent_low;
   float freq_low = note_to_frequency_table_init::init.table[cent_low];
   float freq_high = note_to_frequency_table_init::init.table[cent_high];
+  float mix = midi_cent - cent_low;
   return (1.0f - mix) * freq_low + mix * freq_high;
 }
 

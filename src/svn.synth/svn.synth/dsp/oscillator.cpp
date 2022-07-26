@@ -212,7 +212,7 @@ oscillator::generate_blep_saw(
     float amp = automation.get_modulated_dsp(oscillator_param::amp, s, modulated);
     float pan = automation.get_modulated_dsp(oscillator_param::pan, s, modulated);
     float cent = automation.get_modulated_dsp(oscillator_param::cent, s, modulated);
-    float frequency = note_to_frequency_table(midi, cent);
+    float frequency = note_to_frequency_table(midi + cent);
     float increment = frequency / _sample_rate;
     float phase = _phases[0];
 
