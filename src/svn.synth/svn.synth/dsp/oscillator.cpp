@@ -210,34 +210,56 @@ oscillator::generate_blep_saw(
   float const* amp = modulated[oscillator_param::amp];
   float const* pan = modulated[oscillator_param::pan];
   float const* cent = modulated[oscillator_param::cent];
-  for (std::int32_t s = 0; s < input.sample_count; s++)
+
+  for (std::int32_t simd = 0; simd < input.sample_count / 8; simd++)
   {
-    float frequency = note_to_frequency_table(midi + cent[s]);
-    float increment = frequency / _sample_rate;
-    float phase = _phases[0];
+    float lane_freqs[8];
+    float lane_phases[8];
+    float const* lane_amp = amp + simd * 8;
+    float const* lane_pan = pan + simd * 8;
+    base::audio_sample32* lane_audio_out = audio_out + simd * 8;
 
-    // Start at 0 instead of 0.5.
-    float blep = 0.0f;
-    phase += 0.5f;
-    phase -= std::floor(phase);
+    for (std::int32_t lane = 0; lane < 8; lane++)
+    {
+      std::int32_t s = simd * 8 + lane;
+      lane_freqs[lane] = note_to_frequency_table(midi + cent[s]);
+      lane_phases[lane] = _phases[0] + lane * lane_freqs[lane] / _sample_rate;
+      lane_phases[lane] -= std::floor(lane_phases[lane]);
+    }
+
+    for(std::int32_t lane = 0; lane < 8; lane++)
+    {
+      // std::int32_t s = simd * 8 + lane;
     
-    // https://www.kvraudio.com/forum/viewtopic.php?t=375517
-    if (phase < increment)
-    {
-      blep = phase / increment;
-      blep = (2.0f - blep) * blep - 1.0f;
-    }
-    else if (phase >= 1.0f - increment)
-    {
-      blep = (phase - 1.0f) / increment;
-      blep = (blep + 2.0f) * blep + 1.0f;
+      //float frequency = note_to_frequency_table(midi + cent[s]);
+      float frequency = lane_freqs[lane];
+      float increment = frequency / _sample_rate;
+      //float phase = _phases[0];
+      float phase = lane_phases[lane];
+
+      // Start at 0 instead of 0.5.
+      float blep = 0.0f;
+      phase += 0.5f;
+      phase -= std::floor(phase);
+    
+      // https://www.kvraudio.com/forum/viewtopic.php?t=375517
+      if (phase < increment)
+      {
+        blep = phase / increment;
+        blep = (2.0f - blep) * blep - 1.0f;
+      }
+      else if (phase >= 1.0f - increment)
+      {
+        blep = (phase - 1.0f) / increment;
+        blep = (blep + 2.0f) * blep + 1.0f;
+      }
+
+      float sample = ((2.0f * phase - 1.0f) - blep) * lane_amp[lane];
+      lane_audio_out[lane] = { sample * (1.0f - lane_pan[lane]), sample * lane_pan[lane] };
     }
 
-    float sample = ((2.0f * phase - 1.0f) - blep) * amp[s];
-    audio_out[s] = { sample * (1.0f - pan[s]), sample * pan[s] };
-
-    _phases[0] += frequency / _sample_rate;
-    _phases[0] -= std::floor(_phases[0]);
+    _phases[0] = lane_phases[7] + lane_freqs[7] / _sample_rate;
+    _phases[0] -= std::floor(lane_phases[7]);
   }
 }
 
