@@ -205,14 +205,14 @@ oscillator::process_block2(
 void
 oscillator::generate_blep_saw(
   voice_input const& input, svn::base::automation_view const& automation, 
-  float const* const* modulated, float midi, base::audio_sample32* audio_out)
+  float const* const* modulated, std::int32_t midi, base::audio_sample32* audio_out)
 {
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
     float amp = automation.get_modulated_dsp(oscillator_param::amp, s, modulated);
     float pan = automation.get_modulated_dsp(oscillator_param::pan, s, modulated);
     float cent = automation.get_modulated_dsp(oscillator_param::cent, s, modulated);
-    float frequency = note_to_frequency(midi + cent);
+    float frequency = note_to_frequency_table(midi, cent);
     float increment = frequency / _sample_rate;
     float phase = _phases[0];
 
@@ -246,7 +246,7 @@ oscillator::process_block(
   voice_input const& input, std::int32_t index,
   cv_state& cv, audio_sample32* audio_out, double& mod_time)
 {
-  return process_block2(input, index, cv, audio_out, mod_time);
+  //return process_block2(input, index, cv, audio_out, mod_time);
   
   // Note: discrete automation per block, not per sample!
   automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
@@ -268,7 +268,7 @@ oscillator::process_block(
   float const* const* modulated;
   double start_mod_time = mod_time;
   mod_time += cv.modulate(input, automation, cv_route_osc_mapping, cv_route_output::osc, index, modulated);
-  float midi = 12 * (octave + 1) + note + _midi_note - 60;
+  std::int32_t midi = 12 * (octave + 1) + note + _midi_note - 60;
   generate_blep_saw(input, automation, modulated, midi, audio_out);
   return base::performance_counter() - start_time - (mod_time - start_mod_time);
 }

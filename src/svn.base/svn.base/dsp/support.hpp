@@ -49,10 +49,34 @@ state_view::get_real_dsp(std::int32_t param) const
   return topology->params[index].descriptor->real.dsp.to_range(state[index].real);
 }
 
+// Midi -> frequency lookup.
+struct note_to_frequency_table_init
+{
+  static inline constexpr std::int32_t note_count = 12;
+  static inline constexpr std::int32_t cent_count = 100;
+  static inline constexpr std::int32_t octave_count = 12;
+  static inline constexpr std::int32_t frequency_count = octave_count * note_count * cent_count;
+
+  float table[frequency_count];
+  note_to_frequency_table_init();
+  static note_to_frequency_table_init const init;
+};
+
 // Note including cents.
 inline float
-note_to_frequency(float note)
-{ return 440.0f * std::pow(2.0f, (note - 69.0f) / 12.0f); }
+note_to_frequency(float midi)
+{ return 440.0f * std::pow(2.0f, (midi - 69.0f) / 12.0f); }
+inline float
+note_to_frequency_table(std::int32_t midi, float cent)
+{
+  float target = (midi * note_to_frequency_table_init::cent_count) + cent;
+  std::int32_t cent_low = std::max(0, static_cast<std::int32_t>(target));
+  std::int32_t cent_high = std::min(note_to_frequency_table_init::frequency_count - 1, cent_low + 1);
+  float mix = target - cent_low;
+  float freq_low = note_to_frequency_table_init::init.table[cent_low];
+  float freq_high = note_to_frequency_table_init::init.table[cent_high];
+  return (1.0f - mix) * freq_low + mix * freq_high;
+}
 
 // E.g. "3/4" -> sample count.
 inline float
