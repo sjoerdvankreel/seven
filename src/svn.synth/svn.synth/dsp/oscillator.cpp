@@ -203,7 +203,8 @@ oscillator::process_block2(
   return performance_counter() - start_time_sec;
 }
 
-#define SVN_ENABLE_AVX2 1
+#define SVN_ENABLE_AVX2 0
+#define SVN_ENABLE_NOT_BLOCKSIZE 1
 
 // https://www.kvraudio.com/forum/viewtopic.php?t=375517
 void
@@ -211,6 +212,42 @@ oscillator::generate_blep_saw(
   voice_input const& input, svn::base::automation_view const& automation, 
   float const* const* modulated, std::int32_t midi, base::audio_sample32* audio_out)
 {
+#if SVN_ENABLE_NOT_BLOCKSIZE
+  float const* amp = modulated[oscillator_param::amp];
+  float const* pan = modulated[oscillator_param::pan];
+  float const* cent = modulated[oscillator_param::cent];
+  for (std::int32_t s = 0; s < input.sample_count; s++)
+  {
+    float frequency = note_to_frequency_table(midi + cent[s]);
+    float increment = frequency / _sample_rate;
+    float phase = _phases[0];
+
+    // Start at 0 instead of 0.5.
+    float blep = 0.0f;
+    phase += 0.5f;
+    phase -= std::floor(phase);
+
+    // https://www.kvraudio.com/forum/viewtopic.php?t=375517
+    if (phase < increment)
+    {
+      blep = phase / increment;
+      blep = (2.0f - blep) * blep - 1.0f;
+    }
+    else if (phase >= 1.0f - increment)
+    {
+      blep = (phase - 1.0f) / increment;
+      blep = (blep + 2.0f) * blep + 1.0f;
+    }
+
+    float sample = ((2.0f * phase - 1.0f) - blep) * amp[s];
+    audio_out[s] = { sample * (1.0f - pan[s]), sample * pan[s] };
+
+    _phases[0] += frequency / _sample_rate;
+    _phases[0] -= std::floor(_phases[0]);
+  }
+#endif
+
+#if !SVN_ENABLE_NOT_BLOCKSIZE
   float const* amp = modulated[oscillator_param::amp];
   float const* pan = modulated[oscillator_param::pan];
   float const* cent = modulated[oscillator_param::cent];
@@ -286,7 +323,8 @@ oscillator::generate_blep_saw(
 
     _phases[0] = lane_phases[7] + lane_freqs[7] / _sample_rate;
     _phases[0] -= std::floor(lane_phases[7]);
-  }
+ }
+#endif
 }
 
 double
@@ -294,7 +332,7 @@ oscillator::process_block(
   voice_input const& input, std::int32_t index,
   cv_state& cv, audio_sample32* audio_out, double& mod_time)
 {
-  //return process_block2(input, index, cv, audio_out, mod_time);
+  return process_block2(input, index, cv, audio_out, mod_time);
   
   // Note: discrete automation per block, not per sample!
   automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
