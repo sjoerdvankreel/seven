@@ -69,7 +69,7 @@ note_to_frequency(float midi)
 inline float
 note_to_frequency_table(std::int32_t midi, float cent)
 {
-  float target = (midi * note_to_frequency_table_init::cent_count) + cent;
+  float target = (midi + cent) * note_to_frequency_table_init::cent_count;
   std::int32_t cent_low = std::max(0, static_cast<std::int32_t>(target));
   std::int32_t cent_high = std::min(note_to_frequency_table_init::frequency_count - 1, cent_low + 1);
   float mix = target - cent_low;
