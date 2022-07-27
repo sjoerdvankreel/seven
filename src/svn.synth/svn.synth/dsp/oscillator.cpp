@@ -203,19 +203,16 @@ oscillator::process_block2(
   return performance_counter() - start_time_sec;
 }
 
-#define SVN_ENABLE_AVX2 0
-#define SVN_ENABLE_NOT_BLOCKSIZE 1
-
 // https://www.kvraudio.com/forum/viewtopic.php?t=375517
 void
 oscillator::generate_blep_saw(
   voice_input const& input, svn::base::automation_view const& automation, 
   float const* const* modulated, std::int32_t midi, base::audio_sample32* audio_out)
 {
-#if SVN_ENABLE_NOT_BLOCKSIZE
   float const* amp = modulated[oscillator_param::amp];
   float const* pan = modulated[oscillator_param::pan];
   float const* cent = modulated[oscillator_param::cent];
+
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
     float frequency = note_to_frequency_table(midi + cent[s]);
@@ -245,86 +242,6 @@ oscillator::generate_blep_saw(
     _phases[0] += frequency / _sample_rate;
     _phases[0] -= std::floor(_phases[0]);
   }
-#endif
-
-#if !SVN_ENABLE_NOT_BLOCKSIZE
-  float const* amp = modulated[oscillator_param::amp];
-  float const* pan = modulated[oscillator_param::pan];
-  float const* cent = modulated[oscillator_param::cent];
-
-  __m256 vector_0 = _mm256_set1_ps(0.0f);
-  __m256 vector_1 = _mm256_set1_ps(1.0f);
-  __m256 vector_2 = _mm256_set1_ps(2.0f);
-  __m256 vector_sample_rate = _mm256_set1_ps(_sample_rate);
-
-  for (std::int32_t simd = 0; simd < input.sample_count / 8; simd++)
-  {
-    float lane_freqs[8];
-    float lane_phases[8];
-    float const* lane_amp = amp + simd * 8;
-    float const* lane_pan = pan + simd * 8;
-    base::audio_sample32* lane_audio_out = audio_out + simd * 8;
-
-    for (std::int32_t lane = 0; lane < 8; lane++)
-    {
-      std::int32_t s = simd * 8 + lane;
-      lane_freqs[lane] = note_to_frequency_table(midi + cent[s]);
-      lane_phases[lane] = _phases[0] + lane * lane_freqs[lane] / _sample_rate;
-      lane_phases[lane] -= std::floor(lane_phases[lane]);
-    }
-
-#if SVN_ENABLE_AVX2
-    __m256 frequency = _mm256_load_ps(lane_freqs);
-    __m256 increment = _mm256_div_ps(frequency, vector_sample_rate);
-    __m256 phase = _mm256_load_ps(lane_phases);
-    phase = _mm256_add_ps(phase, _mm256_set1_ps(0.5f));
-    phase = _mm256_sub_ps(phase, _mm256_floor_ps(phase));
-    __m256 phase_lt_inc = _mm256_cmp_ps(phase, increment, _CMP_LT_OQ);
-    __m256 blep_lt = _mm256_div_ps(phase, increment);
-    blep_lt = _mm256_sub_ps(_mm256_mul_ps(_mm256_sub_ps(vector_2, blep_lt), blep_lt), vector_1);
-    __m256 phase_gte_1_min_inc = _mm256_cmp_ps(phase, _mm256_sub_ps(vector_1, increment), _CMP_GE_OQ);
-    __m256 blep_gte = _mm256_div_ps(_mm256_sub_ps(phase, vector_1), increment);
-    blep_gte = _mm256_add_ps(_mm256_mul_ps(_mm256_add_ps(blep_gte, vector_2), blep_gte), vector_1);
-    __m256 blep = _mm256_blendv_ps(vector_0, blep_lt, phase_lt_inc);
-    blep = _mm256_blendv_ps(blep, blep_gte, phase_gte_1_min_inc);
-    __m256 amp = _mm256_load_ps(lane_amp);
-    __m256 pan = _mm256_load_ps(lane_pan);
-    __m256 sample = _mm256_mul_ps(_mm256_sub_ps(_mm256_sub_ps(_mm256_mul_ps(vector_2, phase), vector_1), blep), amp);
-    __m256 left = _mm256_mul_ps(sample, _mm256_sub_ps(vector_1, pan));
-    __m256 right = _mm256_mul_ps(sample, pan);
-    for(std::int32_t lane = 0; lane < 8; lane++)
-    {
-      lane_audio_out[lane].left = left.m256_f32[lane];
-      lane_audio_out[lane].right = right.m256_f32[lane];
-    }
-#else
-    for(std::int32_t lane = 0; lane < 8; lane++)
-    {
-      float frequency = lane_freqs[lane];
-      float increment = frequency / _sample_rate;
-      float phase = lane_phases[lane];
-      float blep = 0.0f;
-      phase += 0.5f;
-      phase -= std::floor(phase);    
-      if (phase < increment)
-      {
-        blep = phase / increment;
-        blep = (2.0f - blep) * blep - 1.0f;
-      }
-      else if (phase >= 1.0f - increment)
-      {
-        blep = (phase - 1.0f) / increment;
-        blep = (blep + 2.0f) * blep + 1.0f;
-      }
-      float sample = ((2.0f * phase - 1.0f) - blep) * lane_amp[lane];
-      lane_audio_out[lane] = { sample * (1.0f - lane_pan[lane]), sample * lane_pan[lane] };
-    }
-#endif
-
-    _phases[0] = lane_phases[7] + lane_freqs[7] / _sample_rate;
-    _phases[0] -= std::floor(lane_phases[7]);
- }
-#endif
 }
 
 double
@@ -332,7 +249,7 @@ oscillator::process_block(
   voice_input const& input, std::int32_t index,
   cv_state& cv, audio_sample32* audio_out, double& mod_time)
 {
-  return process_block2(input, index, cv, audio_out, mod_time);
+  //return process_block2(input, index, cv, audio_out, mod_time);
   
   // Note: discrete automation per block, not per sample!
   automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
