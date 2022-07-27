@@ -3,7 +3,6 @@
 
 #include <cmath>
 #include <limits>
-#include <cassert>
 
 namespace svn::base {
 
@@ -21,6 +20,7 @@ struct real_bounds
   float to_range(float val) const;
   float from_range(float val) const;
   void to_range(float* vals, std::int32_t count) const;
+  void from_range(float* vals, std::int32_t count) const;
 
   static inline real_bounds unit() 
   { return { 0.0, 1.0, 0.0, real_slope::linear }; }
@@ -57,33 +57,6 @@ real_bounds::from_range(float val) const
   case real_slope::decibel: return std::exp(std::log(10.0f) * val / 20.0f);
   case real_slope::logarithmic: return std::pow((val - min) / (max - min), 1.0f / exp);
   default: assert(false); return 0.0f;
-  }
-}
-
-inline void
-real_bounds::to_range(float* vals, std::int32_t count) const
-{
-  switch (slope)
-  {
-  case real_slope::linear: 
-    for (std::int32_t i = 0; i < count; i++)
-      vals[i] = min + (max - min) * vals[i]; 
-    break;
-  case real_slope::decibel: 
-    for (std::int32_t i = 0; i < count; i++)
-      vals[i] = 20.0f * std::log10(vals[i]); 
-    break;
-  case real_slope::quadratic: 
-    for (std::int32_t i = 0; i < count; i++)
-      vals[i] = min + (max - min) * vals[i] * vals[i]; 
-    break;
-  case real_slope::logarithmic: 
-    for (std::int32_t i = 0; i < count; i++)
-      vals[i] = std::pow(vals[i], exp) * (max - min) + min; 
-    break;
-  default: 
-    assert(false); 
-    break;
   }
 }
 
