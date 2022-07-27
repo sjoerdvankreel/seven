@@ -1,5 +1,4 @@
 #include <svn.base/topology/real_bounds.hpp>
-#include <cassert>
 
 namespace svn::base {
 

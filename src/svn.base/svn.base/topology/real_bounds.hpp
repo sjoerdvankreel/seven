@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <limits>
+#include <cassert>
 
 namespace svn::base {
 
