@@ -77,6 +77,7 @@ oscillator::generate_blep_pulse2(
   automation_view const& automation, float const* const* modulated, 
   std::int32_t sample, float phase, float increment) const
 {
+  float min_pw = 0.05f;
   float pw = (min_pw + (1.0f - min_pw) * modulated[oscillator_param::analog_pw][sample]) * 0.5f;
   float saw1 = generate_blep_saw2(phase, increment);
   float saw2 = generate_blep_saw2(phase + pw, increment);
@@ -203,6 +204,13 @@ oscillator::process_block2(
   return performance_counter() - start_time_sec;
 }
 
+struct sine_generator
+{
+  __forceinline float 
+  operator()(float phase, float increment, float const* const* modulated, std::int32_t sample) const
+  { return std::sin(2.0f * std::numbers::pi * phase); }
+};
+
 // https://www.kvraudio.com/forum/viewtopic.php?t=375517
 struct blep_saw_generator
 {
@@ -216,11 +224,26 @@ struct blep_saw_generator
   }
 
   __forceinline float 
-  operator()(float phase, float increment) const
+  operator()(float phase, float increment, float const* const* modulated, std::int32_t sample) const
   {
     phase += 0.5f;
     phase -= std::floor(phase);
     return ((2.0f * phase - 1.0f) - generate_blep(phase, increment));
+  }
+};
+
+struct blep_pulse_generator
+{
+  static inline float const min_pw = 0.05;
+
+  __forceinline float 
+  operator()(float phase, float increment, float const* const* modulated, std::int32_t sample) const
+  {
+    blep_saw_generator saw_generator;
+    float pw = (min_pw + (1.0f - min_pw) * modulated[oscillator_param::analog_pw][sample]) * 0.5f;
+    float saw1 = saw_generator(phase, increment, modulated, sample);
+    float saw2 = saw_generator(phase + pw, increment, modulated, sample);
+    return (saw1 - saw2) * 0.5f;
   }
 };
 
@@ -248,7 +271,7 @@ struct blamp_triangle_generator
   }
 
   __forceinline float 
-  operator()(float phase, float increment) const
+  operator()(float phase, float increment, float const* const* modulated, std::int32_t sample) const
   {
     phase = phase + 0.75f;
     phase -= std::floor(phase);
@@ -290,7 +313,7 @@ oscillator::generate_unison(
       float this_frequency = note_to_frequency_table(this_midi);
       float this_increment = this_frequency / _sample_rate;
       float this_pan = pan_min + (pan_max - pan_min) * v / voice_range;
-      float this_sample = sample_generator(_phases[v], this_increment) * amp[s];
+      float this_sample = sample_generator(_phases[v], this_increment, modulated, s) * amp[s];
       audio_out[s] += { this_sample * (1.0f - this_pan), this_sample * this_pan };
       _phases[v] += this_increment;
       _phases[v] -= std::floor(_phases[v]);
@@ -334,8 +357,14 @@ oscillator::process_block(
   case oscillator_type::analog:
     switch (analog_type)
     {
+    case oscillator_analog_type::sine:
+      generate_unison(input, automation, modulated, voices, midi, sine_generator(), audio_out);
+      break;
     case oscillator_analog_type::saw:
       generate_unison(input, automation, modulated, voices, midi, blep_saw_generator(), audio_out);
+      break;
+    case oscillator_analog_type::pulse:
+      generate_unison(input, automation, modulated, voices, midi, blep_pulse_generator(), audio_out);
       break;
     case oscillator_analog_type::triangle:
       generate_unison(input, automation, modulated, voices, midi, blamp_triangle_generator(), audio_out);

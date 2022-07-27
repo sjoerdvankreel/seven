@@ -17,8 +17,6 @@ class oscillator
   std::int32_t _midi_note = -1;
   std::array<float, oscillator_max_voices> _phases;
 
-  static inline float const min_pw = 0.05;
-
 public:
   oscillator() = default;
   oscillator(float sample_rate, std::int32_t midi_note);
