@@ -216,6 +216,7 @@ oscillator::process_block(
       assert(false);
       break;
     }
+    break;
   case oscillator_type::dsf:
     generate_unison(input, automation, modulated, voices, midi, dsf_generator(partials), audio_out);
     break;
