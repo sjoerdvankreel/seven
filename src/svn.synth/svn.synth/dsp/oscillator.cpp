@@ -241,7 +241,7 @@ oscillator::generate_blep_saw(voice_input const& input,
     //float this_midi = midi_min + (midi_max - midi_min) * v / voice_range;
     __m256 this_pan = _mm256_add_ps(pan_min, _mm256_div_ps(_mm256_mul_ps(_mm256_sub_ps(pan_max, pan_min), voice_index), voice_range));
     __m256 this_midi = _mm256_add_ps(midi_min, _mm256_div_ps(_mm256_mul_ps(_mm256_sub_ps(midi_max, midi_min), voice_index), voice_range));
-    __m256 this_frequency = _mm256_set_ps(
+   /* __m256 this_frequency = _mm256_set_ps(
       note_to_frequency_table(this_midi.m256_f32[7]),
       note_to_frequency_table(this_midi.m256_f32[6]),
       note_to_frequency_table(this_midi.m256_f32[5]),
@@ -251,6 +251,11 @@ oscillator::generate_blep_saw(voice_input const& input,
       note_to_frequency_table(this_midi.m256_f32[1]),
       note_to_frequency_table(this_midi.m256_f32[0])
     );
+    */
+    __m256 this_frequency = vector_0;
+    for(std::int32_t v = 0; v < unison_voices; v++)
+      this_frequency.m256_f32[7-v] = note_to_frequency_table(this_midi.m256_f32[7 - v]);
+
     __m256 this_increment = _mm256_div_ps(this_frequency, vector_rate);
 
     // Start at 0 instead of 0.5.
@@ -260,6 +265,7 @@ oscillator::generate_blep_saw(voice_input const& input,
       _phases[4] + 0.5f, _phases[5] + 0.5f, _phases[6] + 0.5f, _phases[7] + 0.5f);
     this_phase = _mm256_sub_ps(this_phase, _mm256_floor_ps(this_phase));
 
+    /*
     __m256 blep_low = _mm256_div_ps(this_phase, this_increment);
     blep_low = _mm256_sub_ps(_mm256_mul_ps(_mm256_sub_ps(vector_2, blep_low), blep_low), vector_1);
     __m256 phase_lt_inc = _mm256_cmp_ps(this_phase, this_increment, _CMP_LT_OQ);
@@ -268,6 +274,7 @@ oscillator::generate_blep_saw(voice_input const& input,
     __m256 phase_ge_1_min_inc = _mm256_cmp_ps(this_phase, _mm256_sub_ps(vector_1, this_increment), _CMP_GE_OQ);
     this_blep = _mm256_blendv_ps(this_blep, blep_low, phase_lt_inc);
     this_blep = _mm256_blendv_ps(this_blep, blep_hi, phase_ge_1_min_inc);
+    */
 
     __m256 this_sample = _mm256_mul_ps(_mm256_sub_ps(_mm256_sub_ps(_mm256_mul_ps(vector_2, this_phase), vector_1), this_blep), _mm256_set1_ps(amp[s]));
     left = _mm256_mul_ps(this_sample, _mm256_sub_ps(vector_1, this_pan));
