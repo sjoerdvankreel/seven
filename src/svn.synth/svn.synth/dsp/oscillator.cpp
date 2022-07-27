@@ -18,7 +18,7 @@ _sample_rate(sample_rate), _midi_note(midi_note), _phases()
 
 struct sine_generator
 {
-  __forceinline float operator()(
+  float operator()(
     float frequency, float phase, float increment, float sample_rate, 
     float const* const* modulated, std::int32_t sample) const
   { return std::sin(2.0f * std::numbers::pi * phase); }
@@ -27,7 +27,7 @@ struct sine_generator
 // https://www.kvraudio.com/forum/viewtopic.php?t=375517
 struct blep_saw_generator
 {
-  __forceinline float
+  float
   generate_blep(float phase, float increment) const
   {
     float blep;
@@ -36,7 +36,7 @@ struct blep_saw_generator
     return 0.0f;
   }
 
-  __forceinline float operator()(
+  float operator()(
     float frequency, float phase, float increment, float sample_rate, 
     float const* const* modulated, std::int32_t sample) const
   {
@@ -50,7 +50,7 @@ struct blep_pulse_generator
 {
   static inline float const min_pw = 0.05;
 
-  __forceinline float operator()(
+  float operator()(
     float frequency, float phase, float increment, float sample_rate, 
     float const* const* modulated, std::int32_t sample) const
   {
@@ -65,7 +65,7 @@ struct blep_pulse_generator
 // https://dsp.stackexchange.com/questions/54790/polyblamp-anti-aliasing-in-c
 struct blamp_triangle_generator
 {
-  __forceinline float
+  float
   generate_blamp(float phase, float increment) const
   {
     float y = 0.0f;
@@ -85,7 +85,7 @@ struct blamp_triangle_generator
     return y * increment / 15;
   }
 
-  __forceinline float operator()(
+  float operator()(
     float frequency, float phase, float increment, float sample_rate, 
     float const* const* modulated, std::int32_t sample) const
   {
@@ -107,7 +107,7 @@ struct dsf_generator
   std::int32_t const _partials;
   dsf_generator(std::int32_t partials): _partials(partials) {}
 
-  __forceinline float operator()(
+  float operator()(
     float frequency, float phase, float increment, float sample_rate, 
     float const* const* modulated, std::int32_t sample) const
   {
