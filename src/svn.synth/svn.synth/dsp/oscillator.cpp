@@ -88,7 +88,7 @@ oscillator::generate_analog2(
   automation_view const& automation, float const* const* modulated, 
   std::int32_t sample, float phase, float increment) const
 {
-  std::int32_t type = automation.get_discrete(oscillator_param::analog_type, sample);
+  std::int32_t type = automation.input_discrete(oscillator_param::analog_type, sample);
   switch (type)
   {
   case oscillator_analog_type::saw: return generate_blep_saw2(phase, increment);
@@ -109,7 +109,7 @@ oscillator::generate_dsf2(
   float const rolloff_range = 0.99f;
   float rolloff = modulated[oscillator_param::dsf_rolloff][sample];
   float distance = frequency * modulated[oscillator_param::dsf_distance][sample];
-  std::int32_t partials = automation.get_discrete(oscillator_param::dsf_partials, sample);
+  std::int32_t partials = automation.input_discrete(oscillator_param::dsf_partials, sample);
   float max_partials = (_sample_rate * 0.5f - frequency) / distance;
   partials = std::min(partials, static_cast<std::int32_t>(max_partials));
    
@@ -130,7 +130,7 @@ oscillator::generate_wave2(
   automation_view const& automation, float const* const* modulated, 
   std::int32_t sample, float phase, float frequency, float increment) const
 {
-  std::int32_t type = automation.get_discrete(oscillator_param::type, sample);
+  std::int32_t type = automation.input_discrete(oscillator_param::type, sample);
   switch (type)
   {
   case oscillator_type::dsf: return generate_dsf2(automation, modulated, sample, phase, frequency);
@@ -144,7 +144,7 @@ oscillator::generate_unison2(
   automation_view const& automation, float const* const* modulated, 
   std::int32_t s, float midi, float frequency, float panning)
 {
-  std::int32_t voices = automation.get_discrete(oscillator_param::unison, s);
+  std::int32_t voices = automation.input_discrete(oscillator_param::unison, s);
   if (voices == 1) 
   { 
     float sample = generate_wave2(automation, modulated, s, _phases[0], frequency, frequency / _sample_rate);
@@ -186,12 +186,12 @@ oscillator::process_block2(
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {  
     audio_out[s] = 0.0f;
-    bool on = automation.get_discrete(oscillator_param::on, s) != 0;
+    bool on = automation.input_discrete(oscillator_param::on, s) != 0;
     if(!on) continue;
         
     float cent = modulated[oscillator_param::cent][s];
-    std::int32_t note = automation.get_discrete(oscillator_param::note, s);
-    std::int32_t octave = automation.get_discrete(oscillator_param::octave, s);
+    std::int32_t note = automation.input_discrete(oscillator_param::note, s);
+    std::int32_t octave = automation.input_discrete(oscillator_param::octave, s);
     float midi = 12 * (octave + 1) + note + cent + _midi_note - 60;
     float frequency = note_to_frequency_table(midi);
     float amp = modulated[oscillator_param::amp][s];
@@ -268,7 +268,7 @@ oscillator::process_block(
   
   // Note: discrete automation per block, not per sample!
   automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
-  std::int32_t on = automation.get_discrete(oscillator_param::on, 0);
+  std::int32_t on = automation.input_discrete(oscillator_param::on, 0);
   if (on == 0)
   {
     std::memset(audio_out, 0, input.sample_count * sizeof(audio_sample32));
@@ -276,12 +276,12 @@ oscillator::process_block(
   }
 
   double start_time = performance_counter();
-  std::int32_t type = automation.get_discrete(oscillator_param::type, 0);
-  std::int32_t note = automation.get_discrete(oscillator_param::note, 0);
-  std::int32_t voices = automation.get_discrete(oscillator_param::unison, 0);
-  std::int32_t octave = automation.get_discrete(oscillator_param::octave, 0);
-  std::int32_t partials = automation.get_discrete(oscillator_param::dsf_partials, 0);
-  std::int32_t analog_type = automation.get_discrete(oscillator_param::analog_type, 0);
+  std::int32_t type = automation.input_discrete(oscillator_param::type, 0);
+  std::int32_t note = automation.input_discrete(oscillator_param::note, 0);
+  std::int32_t voices = automation.input_discrete(oscillator_param::unison, 0);
+  std::int32_t octave = automation.input_discrete(oscillator_param::octave, 0);
+  std::int32_t partials = automation.input_discrete(oscillator_param::dsf_partials, 0);
+  std::int32_t analog_type = automation.input_discrete(oscillator_param::analog_type, 0);
 
   float const* const* modulated;
   double start_mod_time = mod_time;

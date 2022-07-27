@@ -27,14 +27,17 @@ class automation_view
 public:
   automation_view() = default;
   
-  float get_real(std::int32_t param, std::int32_t sample) const;
-  param_value get_param(std::int32_t param, std::int32_t sample) const;
-  std::int32_t get_discrete(std::int32_t param, std::int32_t sample) const;
-  void get_real(std::int32_t param, float* cv_out, std::int32_t count) const;
+  // Input stuff takes care of _fixed.
+  float input_real(std::int32_t param, std::int32_t sample) const;
+  param_value input_param(std::int32_t param, std::int32_t sample) const;
+  std::int32_t input_discrete(std::int32_t param, std::int32_t sample) const;
+  void input_real(std::int32_t param, float* cv_out, std::int32_t count) const;
 
+  // Rearrange part or sample indices.
   automation_view rearrange_params(std::int32_t part_type, std::int32_t part_index) const;
   automation_view rearrange_samples(std::int32_t sample_offset, std::int32_t sample_fixed_at) const;
 
+  // Clean up later.
   float to_dsp(std::int32_t param, float val) const;
   float from_dsp(std::int32_t param, float val) const;
   float get_real_dsp(std::int32_t param, std::int32_t sample) const;
@@ -71,7 +74,7 @@ _sample_count(sample_count), _sample_offset(sample_offset), _sample_fixed_at(sam
 }
 
 inline param_value
-automation_view::get_param(std::int32_t param, std::int32_t sample) const
+automation_view::input_param(std::int32_t param, std::int32_t sample) const
 {
   assert(param >= 0);
   assert(param < _part_param_count);
@@ -82,17 +85,35 @@ automation_view::get_param(std::int32_t param, std::int32_t sample) const
 }
 
 inline float
-automation_view::get_real(std::int32_t param, std::int32_t sample) const
+automation_view::input_real(std::int32_t param, std::int32_t sample) const
 { 
   assert(_topology->params[param + _part_param_offset].descriptor->type == param_type::real); 
-  return get_param(param, sample).real;
+  return input_param(param, sample).real;
 }
 
+// TODO - always get at sample 0
 inline std::int32_t
-automation_view::get_discrete(std::int32_t param, std::int32_t sample) const
+automation_view::input_discrete(std::int32_t param, std::int32_t sample) const
 { 
   assert(_topology->params[param + _part_param_offset].descriptor->type != param_type::real);
-  return get_param(param, sample).discrete; 
+  return input_param(param, sample).discrete;
+}
+
+inline void
+automation_view::input_real(std::int32_t param, float* cv_out, std::int32_t count) const
+{
+  assert(param >= 0);
+  assert(param < _part_param_count);
+  assert(count >= 0);
+  assert(count <= _sample_count - _sample_offset);
+  assert(_topology->params[param + _part_param_offset].descriptor->type == param_type::real);
+  std::int32_t automated_count = std::min(count, _sample_fixed_at);
+  // Better hope punning works everywhere.
+  float const* automated = reinterpret_cast<float const*>(_automation[param + _part_param_offset]);
+  std::copy(automated, automated + automated_count, cv_out);
+  std::int32_t fixed_count = std::max(0, count - _sample_fixed_at);
+  assert(fixed_count == 0 || _fixed != nullptr);
+  if (fixed_count > 0) std::fill(cv_out + automated_count, cv_out + automated_count + fixed_count, _fixed[_part_param_offset + param].real);
 }
 
 inline float
@@ -111,9 +132,10 @@ automation_view::from_dsp(std::int32_t param, float val) const
   return _topology->params[param + _part_param_offset].descriptor->real.dsp.from_range(val);
 }
 
+// TODO REMOVE - does both _fixed and then returns output
 inline float
 automation_view::get_real_dsp(std::int32_t param, std::int32_t sample) const
-{ return to_dsp(param, get_real(param, sample)); }
+{ return to_dsp(param, input_real(param, sample)); }
 
 // TODO REMOVE
 inline float 
@@ -144,23 +166,6 @@ automation_view::rearrange_samples(std::int32_t sample_offset, std::int32_t samp
     _topology, _fixed, _automation,
     _total_param_count, _part_param_count, _part_param_offset,
     _sample_count, sample_offset, sample_fixed_at);
-}
-
-inline void
-automation_view::get_real(std::int32_t param, float* cv_out, std::int32_t count) const
-{
-  assert(param >= 0);
-  assert(param < _part_param_count);
-  assert(count >= 0);
-  assert(count <= _sample_count - _sample_offset);
-  assert(_topology->params[param + _part_param_offset].descriptor->type == param_type::real);
-  std::int32_t automated_count = std::min(count, _sample_fixed_at);
-  // Better hope punning works everywhere.
-  float const* automated = reinterpret_cast<float const*>(_automation[param + _part_param_offset]);
-  std::copy(automated, automated + automated_count, cv_out);
-  std::int32_t fixed_count = std::max(0, count - _sample_fixed_at);
-  assert(fixed_count == 0 || _fixed != nullptr);
-  if(fixed_count > 0) std::fill(cv_out + automated_count, cv_out + automated_count + fixed_count, _fixed[_part_param_offset + param].real);
 }
 
 } // namespace svn::base
