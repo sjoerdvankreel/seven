@@ -26,8 +26,9 @@ public:
   double process_block2(voice_input const& input, std::int32_t index, cv_state& cv, base::audio_sample32* audio_out, double& mod_time);
 
 private:
-  void generate_blep_saw(voice_input const& input, svn::base::automation_view const& automation, 
-    float const* const* modulated, std::int32_t unison_voices, std::int32_t midi, base::audio_sample32* audio_out);
+  template <class sample_generator_type>
+  void generate_unison(voice_input const& input, svn::base::automation_view const& automation, float const* const* modulated, 
+    std::int32_t unison_voices, std::int32_t midi, sample_generator_type sample_generator, base::audio_sample32* audio_out);
 
   float generate_blep_saw2(float phase, float increment) const;
   float generate_poly_blep2(float phase, float increment) const;
