@@ -203,6 +203,8 @@ oscillator::process_block2(
   return performance_counter() - start_time_sec;
 }
 
+#define SVN_SYNTH_ENABLE_AVX2 1
+
 // https://www.kvraudio.com/forum/viewtopic.php?t=375517
 void
 oscillator::generate_blep_saw(voice_input const& input, 
@@ -215,8 +217,6 @@ oscillator::generate_blep_saw(voice_input const& input,
   float const* detune = modulated[oscillator_param::unison_detune];
   float const* spread = modulated[oscillator_param::unison_spread];
 
-  //assert(false);
-
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
     float pan_range = pan[s] < 0.5f ? pan[s] : 1.0f - pan[s];
@@ -224,10 +224,11 @@ oscillator::generate_blep_saw(voice_input const& input,
     float pan_max = pan[s] + spread[s] * pan_range;
     float midi_min = midi - detune[s] * 0.5f;
     float midi_max = midi + detune[s] * 0.5f;
+    float left[8] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+    float right[8] = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
     float voice_range = unison_voices == 1 ? 1.0f : static_cast<float>(unison_voices - 1);
 
-    audio_out[s] = { 0.0f, 0.0f };
-    for(std::int32_t v = 0; v < unison_voices; v++)
+    for(std::int32_t v = 0; v < 8; v++)
     {
       float this_pan = pan_min + (pan_max - pan_min) * v / voice_range;
       float this_midi = midi_min + (midi_max - midi_min) * v / voice_range;
@@ -252,12 +253,18 @@ oscillator::generate_blep_saw(voice_input const& input,
       }
 
       float this_sample = ((2.0f * this_phase - 1.0f) - this_blep) * amp[s];
-      audio_out[s] += { this_sample * (1.0f - this_pan), this_sample * this_pan };
-
+      left[v] = this_sample * (1.0f - this_pan);
+      right[v] = this_sample * this_pan;
       _phases[v] += this_increment;
       _phases[v] -= std::floor(_phases[v]);
     }
 
+    audio_out[s] = 0.0f;
+    for (std::int32_t v = 0; v < unison_voices; v++)
+    {
+      audio_out[s].left += left[v];
+      audio_out[s].right += right[v];
+    }
     audio_out[s] = sanity_audio(audio_out[s] / static_cast<float>(unison_voices));
   }
 }
