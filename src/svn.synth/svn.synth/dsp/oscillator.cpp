@@ -206,24 +206,21 @@ oscillator::process_block2(
 // https://www.kvraudio.com/forum/viewtopic.php?t=375517
 struct blep_saw_generator
 {
+  __forceinline float
+  generate_blep(float phase, float increment) const
+  {
+    float blep;
+    if (phase < increment) return blep = phase / increment, (2.0f - blep) * blep - 1.0f;
+    if (phase >= 1.0f - increment) return blep = (phase - 1.0f) / increment, (blep + 2.0f) * blep + 1.0f;
+    return 0.0f;
+  }
+
   __forceinline float 
   operator()(float phase, float increment) const
   {
-    // Start at 0 instead of 0.5.
     phase += 0.5f;
     phase -= std::floor(phase);
-    float blep = 0.0f;
-    if (phase < increment)
-    {
-      blep = phase / increment;
-      blep = (2.0f - blep) * blep - 1.0f;
-    }
-    else if (phase >= 1.0f - increment)
-    {
-      blep = (phase - 1.0f) / increment;
-      blep = (blep + 2.0f) * blep + 1.0f;
-    }
-    return ((2.0f * phase - 1.0f) - blep);
+    return ((2.0f * phase - 1.0f) - generate_blep(phase, increment));
   }
 };
 
