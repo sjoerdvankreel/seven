@@ -252,7 +252,7 @@ oscillator::generate_blep_saw(voice_input const& input,
       }
 
       float this_sample = ((2.0f * this_phase - 1.0f) - this_blep) * amp[s];
-      audio_out[s] += { this_sample * (1.0f - pan[s]), this_sample * pan[s] };
+      audio_out[s] += { this_sample * (1.0f - this_pan), this_sample * this_pan };
 
       _phases[v] += this_increment;
       _phases[v] -= std::floor(_phases[v]);
