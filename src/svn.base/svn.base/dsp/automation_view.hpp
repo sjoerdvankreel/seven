@@ -36,6 +36,7 @@ public:
   automation_view rearrange_samples(std::int32_t sample_offset, std::int32_t sample_fixed_at) const;
 
   float to_dsp(std::int32_t param, float val) const;
+  float from_dsp(std::int32_t param, float val) const;
   float get_real_dsp(std::int32_t param, std::int32_t sample) const;
   float get_modulated_dsp(std::int32_t param, std::int32_t sample, float const* const* modulated) const;
 
@@ -100,6 +101,14 @@ automation_view::to_dsp(std::int32_t param, float val) const
   assert(param >= 0);
   assert(param < _part_param_count);
   return _topology->params[param + _part_param_offset].descriptor->real.dsp.to_range(val);
+}
+
+inline float
+automation_view::from_dsp(std::int32_t param, float val) const
+{
+  assert(param >= 0);
+  assert(param < _part_param_count);
+  return _topology->params[param + _part_param_offset].descriptor->real.dsp.from_range(val);
 }
 
 inline float

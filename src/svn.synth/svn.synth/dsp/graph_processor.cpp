@@ -430,7 +430,7 @@ cv_route_graph::process_dsp_core(
   state.modulate(vinput, automated_view, cv_route_param_mapping[cv_route_output_id], 
     static_cast<cv_route_output>(cv_route_output_id), rt_part_index, modulated);
   for (std::int32_t i = 0; i < input.sample_count; i++)
-    output[i] = modulated[param_index][i];
+    output[i] = automated_view.from_dsp(param_index, modulated[param_index][i]);
 }
  
 } // namespace svn::synth

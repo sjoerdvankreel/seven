@@ -205,42 +205,60 @@ oscillator::process_block2(
 
 // https://www.kvraudio.com/forum/viewtopic.php?t=375517
 void
-oscillator::generate_blep_saw(
-  voice_input const& input, svn::base::automation_view const& automation, 
-  float const* const* modulated, std::int32_t midi, base::audio_sample32* audio_out)
+oscillator::generate_blep_saw(voice_input const& input, 
+  svn::base::automation_view const& automation, float const* const* modulated,
+  std::int32_t unison_voices, std::int32_t midi, base::audio_sample32* audio_out)
 {
   float const* amp = modulated[oscillator_param::amp];
   float const* pan = modulated[oscillator_param::pan];
   float const* cent = modulated[oscillator_param::cent];
+  float const* detune = modulated[oscillator_param::unison_detune];
+  float const* spread = modulated[oscillator_param::unison_spread];
+
+  //assert(false);
 
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
-    float frequency = note_to_frequency_table(midi + cent[s]);
-    float increment = frequency / _sample_rate;
-    float phase = _phases[0];
+    float pan_range = pan[s] < 0.5f ? pan[s] : 1.0f - pan[s];
+    float pan_min = pan[s] - spread[s] * pan_range;
+    float pan_max = pan[s] + spread[s] * pan_range;
+    float midi_min = midi - detune[s] * 0.5f;
+    float midi_max = midi + detune[s] * 0.5f;
+    float voice_range = unison_voices == 1 ? 1.0f : static_cast<float>(unison_voices - 1);
 
-    // Start at 0 instead of 0.5.
-    float blep = 0.0f;
-    phase += 0.5f;
-    phase -= std::floor(phase);
-
-    // https://www.kvraudio.com/forum/viewtopic.php?t=375517
-    if (phase < increment)
+    audio_out[s] = { 0.0f, 0.0f };
+    for(std::int32_t v = 0; v < unison_voices; v++)
     {
-      blep = phase / increment;
-      blep = (2.0f - blep) * blep - 1.0f;
-    }
-    else if (phase >= 1.0f - increment)
-    {
-      blep = (phase - 1.0f) / increment;
-      blep = (blep + 2.0f) * blep + 1.0f;
+      float this_pan = pan_min + (pan_max - pan_min) * v / voice_range;
+      float this_midi = midi_min + (midi_max - midi_min) * v / voice_range;
+      float this_frequency = note_to_frequency_table(this_midi);
+      float this_increment = this_frequency / _sample_rate;
+
+      // Start at 0 instead of 0.5.
+      float this_blep = 0.0f;
+      float this_phase = _phases[v] + 0.5f;
+      this_phase -= std::floor(this_phase);
+
+      // https://www.kvraudio.com/forum/viewtopic.php?t=375517
+      if (this_phase < this_increment)
+      {
+        this_blep = this_phase / this_increment;
+        this_blep = (2.0f - this_blep) * this_blep - 1.0f;
+      }
+      else if (this_phase >= 1.0f - this_increment)
+      {
+        this_blep = (this_phase - 1.0f) / this_increment;
+        this_blep = (this_blep + 2.0f) * this_blep + 1.0f;
+      }
+
+      float this_sample = ((2.0f * this_phase - 1.0f) - this_blep) * amp[s];
+      audio_out[s] += { this_sample * (1.0f - pan[s]), this_sample * pan[s] };
+
+      _phases[v] += this_increment;
+      _phases[v] -= std::floor(_phases[v]);
     }
 
-    float sample = ((2.0f * phase - 1.0f) - blep) * amp[s];
-    audio_out[s] = { sample * (1.0f - pan[s]), sample * pan[s] };
-
-    _phases[0] += frequency / _sample_rate;
-    _phases[0] -= std::floor(_phases[0]);
+    audio_out[s] = sanity_audio(audio_out[s] / static_cast<float>(unison_voices));
   }
 }
 
@@ -272,7 +290,7 @@ oscillator::process_block(
   double start_mod_time = mod_time;
   mod_time += cv.modulate(input, automation, cv_route_osc_mapping, cv_route_output::osc, index, modulated);
   std::int32_t midi = 12 * (octave + 1) + note + _midi_note - 60;
-  generate_blep_saw(input, automation, modulated, midi, audio_out);
+  generate_blep_saw(input, automation, modulated, voices, midi, audio_out);
   return base::performance_counter() - start_time - (mod_time - start_mod_time);
 }
 

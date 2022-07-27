@@ -51,13 +51,10 @@ cv_state::modulate(
   std::int32_t input_off = input_table_in[cv_route_input::off][0][0];
   std::int32_t output_off = output_table_in[cv_route_output::off][0][0];
 
-  // Set scratch to current values.
+  // Set scratch to current values in [0, 1].
+  // cv_route_param_offset = enabled + plot parameters
   for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
-  {
-    // cv_route_param_offset = enabled + plot parameters
-    std::int32_t output_id = output_table_in[route_output][route_index][p] - cv_route_param_offset;
     automated.get_real(mapping[p], _scratch[mapping[p]], input.sample_count);
-  }
 
   // Find out relevant modulation targets.
   // Note: discrete automation per block, not per sample!
@@ -85,7 +82,7 @@ cv_state::modulate(
     }
   }
 
-  // Apply modulation.
+  // Apply modulation (can scale beyond [0, 1], we apply clipping just before transform to dsp domain).
   for (std::int32_t m = 0; m < _relevant_indices_count; m++)
   {
     cv_route_indices indices = _relevant_indices[m];
@@ -98,19 +95,15 @@ cv_state::modulate(
       float cv = cv_input[s].value * amt;
       if (multiply) cv_output[s] *= cv;
       else cv_output[s] += cv;
-      cv_output[s] = std::clamp(cv_output[s], 0.0f, 1.0f);
     }
   }
 
-  // Scale [0, 1] to dsp.
-  for (std::int32_t m = 0; m < _relevant_indices_count; m++)
-  {
-    cv_route_indices indices = _relevant_indices[m];
-    std::int32_t param = mapping[indices.target_index];
-    float* cv_output = _scratch[mapping[indices.target_index]];
+  // Scale [0, 1] to dsp. Note: scale everything, also stuff that wasn't modulated.
+  // On end of modulate(), each series should be in it's own domain for dsp processing.
+  // cv_route_param_offset = enabled + plot parameters.
+  for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
     for (std::int32_t s = 0; s < input.sample_count; s++)
-      cv_output[s] = automated.to_dsp(param, cv_output[s]);
-  }
+      _scratch[mapping[p]][s] = automated.to_dsp(mapping[p], std::clamp(_scratch[mapping[p]][s], 0.0f, 1.0f));
 
   result = _scratch.data();
   return base::performance_counter() - start_time;
