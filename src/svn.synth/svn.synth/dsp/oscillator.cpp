@@ -217,8 +217,76 @@ oscillator::generate_blep_saw(voice_input const& input,
   float const* detune = modulated[oscillator_param::unison_detune];
   float const* spread = modulated[oscillator_param::unison_spread];
 
+  __m256 vector_0 = _mm256_set1_ps(0.0f);
+  __m256 vector_1 = _mm256_set1_ps(1.0f);
+  __m256 vector_2 = _mm256_set1_ps(2.0f);
+  __m256 vector_rate = _mm256_set1_ps(_sample_rate);
+  __m256 voice_index = _mm256_set_ps(0.0f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f);
+
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
+#if SVN_SYNTH_ENABLE_AVX2
+    float pan_range = pan[s] < 0.5f ? pan[s] : 1.0f - pan[s];
+    __m256 pan_min = _mm256_set1_ps(pan[s] - spread[s] * pan_range);
+    __m256 pan_max = _mm256_set1_ps(pan[s] + spread[s] * pan_range);
+    __m256 midi_min = _mm256_set1_ps(midi - detune[s] * 0.5f);
+    __m256 midi_max = _mm256_set1_ps(midi + detune[s] * 0.5f);
+    __m256 left = vector_0;
+    __m256 right = vector_0;
+    __m256 voice_range = _mm256_set1_ps(unison_voices == 1 ? 1.0f : static_cast<float>(unison_voices - 1));
+
+    __m256 this_pan = _mm256_add_ps(pan_min, _mm256_div_ps(_mm256_mul_ps(_mm256_sub_ps(pan_max, pan_min), voice_index), voice_range));
+    __m256 this_midi = _mm256_add_ps(midi_min, _mm256_div_ps(_mm256_mul_ps(_mm256_sub_ps(midi_max, midi_min), voice_index), voice_range));
+    __m256 this_frequency = _mm256_set_ps(
+      note_to_frequency_table(this_midi.m256_f32[0]),
+      note_to_frequency_table(this_midi.m256_f32[1]),
+      note_to_frequency_table(this_midi.m256_f32[2]),
+      note_to_frequency_table(this_midi.m256_f32[3]),
+      note_to_frequency_table(this_midi.m256_f32[4]),
+      note_to_frequency_table(this_midi.m256_f32[5]),
+      note_to_frequency_table(this_midi.m256_f32[6]),
+      note_to_frequency_table(this_midi.m256_f32[7])
+    );
+    __m256 this_increment = _mm256_div_ps(this_frequency, vector_rate);
+
+    // Start at 0 instead of 0.5.
+    __m256 this_blep = vector_0;
+    __m256 this_phase = _mm256_set_ps(
+      _phases[0] + 0.5f, _phases[1] + 0.5f, _phases[2] + 0.5f, _phases[3] + 0.5f, 
+      _phases[4] + 0.5f, _phases[5] + 0.5f, _phases[6] + 0.5f, _phases[7] + 0.5f);
+    this_phase = _mm256_floor_ps(this_phase);
+
+    __m256 blep_low = _mm256_div_ps(this_phase, this_increment);
+    blep_low = _mm256_sub_ps(_mm256_mul_ps(_mm256_sub_ps(vector_2, blep_low), blep_low), vector_1);
+    __m256 phase_lt_inc = _mm256_cmp_ps(this_phase, this_increment, _CMP_LT_OQ);
+    __m256 blep_hi = _mm256_div_ps(_mm256_sub_ps(this_phase, vector_1), this_increment);
+    blep_hi = _mm256_add_ps(_mm256_mul_ps(_mm256_add_ps(blep_hi, vector_2), blep_hi), vector_1);
+    __m256 phase_ge_1_min_inc = _mm256_cmp_ps(this_phase, _mm256_sub_ps(vector_1, this_increment), _CMP_GE_OQ);
+    this_blep = _mm256_blendv_ps(this_blep, blep_low, phase_lt_inc);
+    this_blep = _mm256_blendv_ps(this_blep, blep_hi, phase_ge_1_min_inc);
+
+    __m256 this_sample = _mm256_mul_ps(_mm256_sub_ps(_mm256_sub_ps(_mm256_mul_ps(vector_2, this_phase), vector_1), this_blep), _mm256_set1_ps(amp[s]));
+    left = _mm256_mul_ps(this_sample, _mm256_sub_ps(vector_1, this_pan));
+    right = _mm256_mul_ps(this_sample, this_pan);
+    this_phase = _mm256_add_ps(this_phase, this_increment);
+    this_phase = _mm256_floor_ps(this_phase);
+    _phases[0] = this_phase.m256_f32[0];
+    _phases[1] = this_phase.m256_f32[1];
+    _phases[2] = this_phase.m256_f32[2];
+    _phases[3] = this_phase.m256_f32[3];
+    _phases[4] = this_phase.m256_f32[4];
+    _phases[5] = this_phase.m256_f32[5];
+    _phases[6] = this_phase.m256_f32[6];
+    _phases[7] = this_phase.m256_f32[7];
+
+    audio_out[s] = 0.0f;
+    for (std::int32_t v = 0; v < unison_voices; v++)
+    {
+      audio_out[s].left += left.m256_f32[v];
+      audio_out[s].right += right.m256_f32[v];
+    }
+
+#else
     float pan_range = pan[s] < 0.5f ? pan[s] : 1.0f - pan[s];
     float pan_min = pan[s] - spread[s] * pan_range;
     float pan_max = pan[s] + spread[s] * pan_range;
@@ -265,6 +333,7 @@ oscillator::generate_blep_saw(voice_input const& input,
       audio_out[s].left += left[v];
       audio_out[s].right += right[v];
     }
+#endif
     audio_out[s] = sanity_audio(audio_out[s] / static_cast<float>(unison_voices));
   }
 }
