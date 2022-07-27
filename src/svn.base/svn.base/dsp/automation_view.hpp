@@ -10,6 +10,7 @@
 namespace svn::base {
 
 // View into automation buffer.
+// TODO make everything array based.
 class automation_view
 {
   std::int32_t _sample_count = 0;
@@ -32,6 +33,9 @@ public:
   param_value input_param(std::int32_t param, std::int32_t sample) const;
   std::int32_t input_discrete(std::int32_t param, std::int32_t sample) const;
   void input_real(std::int32_t param, float* cv_out, std::int32_t count) const;
+
+  // Output stuff assumes _fixed has already been taken care of.
+  void output_real_to_dsp(std::int32_t param, float* cv_inout, std::int32_t count) const;
 
   // Rearrange part or sample indices.
   automation_view rearrange_params(std::int32_t part_type, std::int32_t part_index) const;
@@ -114,6 +118,17 @@ automation_view::input_real(std::int32_t param, float* cv_out, std::int32_t coun
   std::int32_t fixed_count = std::max(0, count - _sample_fixed_at);
   assert(fixed_count == 0 || _fixed != nullptr);
   if (fixed_count > 0) std::fill(cv_out + automated_count, cv_out + automated_count + fixed_count, _fixed[_part_param_offset + param].real);
+}
+
+inline void 
+automation_view::output_real_to_dsp(std::int32_t param, float* cv_inout, std::int32_t count) const
+{
+  assert(param >= 0);
+  assert(param < _part_param_count);
+  assert(count >= 0);
+  assert(count <= _sample_count - _sample_offset);
+  assert(_topology->params[param + _part_param_offset].descriptor->type == param_type::real);
+  _topology->params[param + _part_param_offset].descriptor->real.dsp.to_range(cv_inout, count);
 }
 
 inline float

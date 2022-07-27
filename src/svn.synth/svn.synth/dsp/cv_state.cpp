@@ -95,6 +95,8 @@ cv_state::modulate(
       float cv = cv_input[s].value * amt;
       if (multiply) cv_output[s] *= cv;
       else cv_output[s] += cv;
+      if (m == _relevant_indices_count - 1)
+        cv_output[s] = std::clamp(cv_output[s], 0.0f, 1.0f);
     }
   }
 
@@ -102,8 +104,7 @@ cv_state::modulate(
   // On end of modulate(), each series should be in it's own domain for dsp processing.
   // cv_route_param_offset = enabled + plot parameters.
   for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
-    for (std::int32_t s = 0; s < input.sample_count; s++)
-      _scratch[mapping[p]][s] = automated.to_dsp(mapping[p], std::clamp(_scratch[mapping[p]][s], 0.0f, 1.0f));
+    automated.output_real_to_dsp(mapping[p], _scratch[mapping[p]], input.sample_count);
 
   result = _scratch.data();
   return base::performance_counter() - start_time;
