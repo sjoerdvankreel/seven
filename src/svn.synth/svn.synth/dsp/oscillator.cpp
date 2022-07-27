@@ -224,6 +224,45 @@ struct blep_saw_generator
   }
 };
 
+// https://dsp.stackexchange.com/questions/54790/polyblamp-anti-aliasing-in-c
+struct blamp_triangle_generator
+{
+  __forceinline float
+  generate_blamp(float phase, float increment) const
+  {
+    float y = 0.0f;
+    if (0.0f <= phase && phase < 2.0f * increment)
+    {
+      float x = phase / increment;
+      float u = 2.0f - x;
+      u *= u * u * u * u;
+      y -= u;
+      if (phase < increment)
+      {
+        float v = 1.0f - x;
+        v *= v * v * v * v;
+        y += 4 * v;
+      }
+    }
+    return y * increment / 15;
+  }
+
+  __forceinline float 
+  operator()(float phase, float increment) const
+  {
+    phase = phase + 0.75f;
+    phase -= std::floor(phase);
+    float triangle = 2.0f * std::abs(2.0f * phase - 1.0f) - 1.0f;
+    triangle += generate_blamp(phase, increment);
+    triangle += generate_blamp(1.0f - phase, increment);
+    phase += 0.5f;
+    phase -= std::floor(phase);
+    triangle += generate_blamp(phase, increment);
+    triangle += generate_blamp(1.0f - phase, increment);
+    return triangle;
+  }
+};
+
 template <class sample_generator_type> void
 oscillator::generate_unison(
   voice_input const& input, svn::base::automation_view const& automation, float const* const* modulated,
@@ -289,7 +328,23 @@ oscillator::process_block(
   double start_mod_time = mod_time;
   mod_time += cv.modulate(input, automation, cv_route_osc_mapping, cv_route_output::osc, index, modulated);
   std::int32_t midi = 12 * (octave + 1) + note + _midi_note - 60;
-  generate_unison(input, automation, modulated, voices, midi, blep_saw_generator(), audio_out);
+  switch (type)
+  {
+  case oscillator_type::dsf: break;
+  case oscillator_type::analog:
+    switch (analog_type)
+    {
+    case oscillator_analog_type::saw:
+      generate_unison(input, automation, modulated, voices, midi, blep_saw_generator(), audio_out);
+      break;
+    case oscillator_analog_type::triangle:
+      generate_unison(input, automation, modulated, voices, midi, blamp_triangle_generator(), audio_out);
+      break;
+    default:
+      break;
+    }
+  default: break;
+  }
   return base::performance_counter() - start_time - (mod_time - start_mod_time);
 }
 
