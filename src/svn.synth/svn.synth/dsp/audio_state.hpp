@@ -45,7 +45,7 @@ public:
   
   explicit audio_state(std::int32_t max_sample_count);
   double mix(voice_input const& input, cv_state& cv, audio_route_output route_output,
-    std::int32_t route_index, svn::base::audio_sample32 const*& result, double& mod_time);
+    std::int32_t route_index, svn::base::audio_sample32 const*& result, double& cv_time);
 };
 
 } // namespace svn::base

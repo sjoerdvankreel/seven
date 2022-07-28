@@ -14,7 +14,7 @@ synthesizer(
   base::topology_info const* topology, float sample_rate,
   std::int32_t max_sample_count, base::param_value* state):
 audio_processor(topology, sample_rate, max_sample_count, state),
-_cv(max_sample_count), _voice_audio(max_sample_count),
+_cv(topology, max_sample_count), _voice_audio(max_sample_count),
 _automation_fixed(static_cast<std::size_t>(synth_polyphony)),
 _automation_fixed_buffer(static_cast<std::size_t>(synth_polyphony * topology->input_param_count)),
 _last_automation_previous_block(static_cast<std::size_t>(topology->input_param_count)),

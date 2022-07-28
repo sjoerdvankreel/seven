@@ -286,12 +286,12 @@ void
 oscillator_wave_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
 {
-  double mod_time = 0.0; 
-  cv_state cv(input.sample_count);
+  double cv_time = 0.0;
+  cv_state cv(topology(), input.sample_count);
   oscillator osc(sample_rate, midi_note_c4);
   std::memset(output, 0, input.sample_count * sizeof(audio_sample32));
   voice_input vinput = setup_graph_voice_input(input, topology());
-  osc.process_block(vinput, part_index(), cv, output, mod_time);
+  osc.process_block(vinput, part_index(), cv, output, cv_time);
 }
 
 std::int32_t
@@ -369,12 +369,12 @@ filter_ir_graph::process_dsp_core(
   _audio_in.resize(input.sample_count);
   _audio_in[0] = 1.0f;
 
-  double mod_time = 0.0;
-  cv_state cv(input.sample_count);
+  double cv_time = 0.0;
+  cv_state cv(topology(), input.sample_count);
   std::memset(output, 0, input.sample_count * sizeof(audio_sample32));
   voice_input vinput = setup_graph_voice_input(input, topology());
   auto flt = std::make_unique<filter>(sample_rate, midi_note_c4);
-  flt->process_block(vinput, part_index(), cv, _audio_in.data(), output, mod_time);
+  flt->process_block(vinput, part_index(), cv, _audio_in.data(), output, cv_time);
 }
 
 bool
@@ -404,7 +404,7 @@ cv_route_graph::process_dsp_core(
   block_input const& input, float* output, float sample_rate, float bpm)
 {
   bool ended = false;
-  cv_state state(input.sample_count);  
+  cv_state state(topology(), input.sample_count);
   voice_input vinput = setup_graph_voice_input(input, topology());
   for(std::int32_t i = 0; i < lfo_count; i++)
     lfo(cv_route_graph_rate).process_block(vinput, i, state.lfo[i].data());
@@ -420,17 +420,17 @@ cv_route_graph::process_dsp_core(
   std::memset(output, 0, input.sample_count * sizeof(float));
   if (std::get<0>(param_ids) == -1 || std::get<2>(param_ids) == -1) return;
 
-  float const* const* modulated; 
+  float const* const* transformed_cv;
   std::int32_t rt_part_index = std::get<1>(param_ids);
   std::int32_t cv_route_output_id = std::get<0>(param_ids);
   std::int32_t cv_route_target = std::get<2>(param_ids);
   std::int32_t part_type = cv_route_part_mapping[cv_route_output_id];
   std::int32_t param_index = cv_route_param_mapping[cv_route_output_id][cv_route_target];
   automation_view automated_view = vinput.automation.rearrange_params(part_type, rt_part_index);
-  state.modulate(vinput, automated_view, cv_route_param_mapping[cv_route_output_id], 
-    static_cast<cv_route_output>(cv_route_output_id), rt_part_index, modulated);
+  state.transform(vinput, automated_view, cv_route_param_mapping[cv_route_output_id], 
+    static_cast<cv_route_output>(cv_route_output_id), rt_part_index, transformed_cv);
   for (std::int32_t i = 0; i < input.sample_count; i++)
-    output[i] = automated_view.from_dsp(param_index, modulated[param_index][i]);
+    output[i] = automated_view.from_dsp(param_index, transformed_cv[param_index][i]);
 }
  
 } // namespace svn::synth

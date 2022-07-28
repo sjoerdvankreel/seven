@@ -36,9 +36,9 @@ audio_state::input_buffer(std::int32_t input, std::int32_t index) const
 double
 audio_state::mix(
   voice_input const& input, cv_state& cv, audio_route_output route_output,
-  std::int32_t route_index, svn::base::audio_sample32 const*& result, double& mod_time)
+  std::int32_t route_index, svn::base::audio_sample32 const*& result, double& cv_time)
 {
-  double start_mod_time = mod_time;
+  double start_cv_time = cv_time;
   double start_time = base::performance_counter();
   std::int32_t input_off = input_table_in[audio_route_input::off][0];
   std::int32_t output_id = output_table_in[route_output][route_index];
@@ -66,23 +66,23 @@ audio_state::mix(
   }
 
   // Apply routing.
-  float const* const* modulated;
+  float const* const* transformed_cv;
   std::int32_t previous_bank_index = -1;
   for (std::int32_t a = 0; a < _relevant_indices_count; a++)
   {
     audio_route_indices indices = _relevant_indices[a];
     base::audio_sample32 const* audio = input_buffer(indices.input_ids.first, indices.input_ids.second);
     if(indices.bank_index != previous_bank_index)
-      mod_time += cv.modulate(input, _bank_automation[indices.bank_index], cv_route_audio_mapping, cv_route_output::audio, indices.bank_index, modulated);
+      cv_time += cv.transform(input, _bank_automation[indices.bank_index], cv_route_audio_mapping, cv_route_output::audio, indices.bank_index, transformed_cv);
     for (std::int32_t s = 0; s < input.sample_count; s++)
     {
-      float amt = _bank_automation[indices.bank_index].get_modulated_dsp(audio_route_param_offset + indices.route_index * 3 + 2, s, modulated);
+      float amt = _bank_automation[indices.bank_index].get_transformed_dsp(audio_route_param_offset + indices.route_index * 3 + 2, s, transformed_cv);
       scratch[s] = base::sanity_audio(scratch[s] + audio[s] * std::clamp(amt, 0.0f, 1.0f));
     }
   }
 
   result = scratch.data();
-  return base::performance_counter() - start_time - (mod_time - start_mod_time);
+  return base::performance_counter() - start_time - (cv_time - start_cv_time);
 }
 
 } // namespace svn::synth

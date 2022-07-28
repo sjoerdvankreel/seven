@@ -13,7 +13,7 @@ std::vector<std::vector<std::vector<std::int32_t>>> const cv_state::output_table
 = svn::base::zip_list_table_init_in(cv_route_output_counts, cv_route_output_target_counts, cv_route_output::count, cv_route_param_offset);
 
 cv_state::
-cv_state(std::int32_t max_sample_count) :
+cv_state(base::topology_info const* topology, std::int32_t max_sample_count) :
   envelope(), lfo(), _scratch(), _scratch_buffer(), 
   _relevant_indices(), _bank_automation(),
   velocity(static_cast<std::size_t>(max_sample_count))
@@ -22,8 +22,11 @@ cv_state(std::int32_t max_sample_count) :
   lfo.fill(cv);
   envelope.fill(cv);
   std::int32_t max_param_count = 0;
-  for(std::int32_t i = 0; i < cv_route_output::count; i++)
-    max_param_count = std::max(max_param_count, cv_route_output_modulated_counts[i]);
+  // Make room for every part type, even if it's never modulated.
+  // This is because we also handle transformation to dsp range here,
+  // for example for the envelope parameters which are not modulated.
+  for(std::int32_t i = 0; i < part_type::count; i++)
+    max_param_count = std::max(max_param_count, topology->parts[i].descriptor->param_count);
   _scratch_buffer.resize(static_cast<std::size_t>(max_param_count * max_sample_count));
   for (std::int32_t p = 0; p < max_param_count; p++)
     _scratch.push_back(_scratch_buffer.data() + p * max_sample_count);
@@ -43,7 +46,7 @@ cv_state::input_buffer(std::int32_t input, std::int32_t index) const
 }
 
 double 
-cv_state::modulate(
+cv_state::transform(
   voice_input const& input, base::automation_view const& automated, std::int32_t const* mapping, 
   cv_route_output route_output, std::int32_t route_index, float const* const*& result)
 {
@@ -101,7 +104,7 @@ cv_state::modulate(
   }
 
   // Scale [0, 1] to dsp. Note: scale everything, also stuff that wasn't modulated.
-  // On end of modulate(), each series should be in it's own domain for dsp processing.
+  // On end of transform(), each series should be in it's own domain for dsp processing.
   // cv_route_param_offset = enabled + plot parameters.
   for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
     automated.output_real_to_dsp(mapping[p], _scratch[mapping[p]], input.sample_count);

@@ -45,7 +45,7 @@ public:
   float to_dsp(std::int32_t param, float val) const;
   float from_dsp(std::int32_t param, float val) const;
   float get_real_dsp(std::int32_t param, std::int32_t sample) const;
-  float get_modulated_dsp(std::int32_t param, std::int32_t sample, float const* const* modulated) const;
+  float get_transformed_dsp(std::int32_t param, std::int32_t sample, float const* const* transformed_cv) const;
 
   automation_view(
     topology_info const* topology, param_value const* fixed, param_value const* const* automation,
@@ -154,13 +154,13 @@ automation_view::get_real_dsp(std::int32_t param, std::int32_t sample) const
 
 // TODO REMOVE
 inline float 
-automation_view::get_modulated_dsp(std::int32_t param, std::int32_t sample, float const* const* modulated) const
+automation_view::get_transformed_dsp(std::int32_t param, std::int32_t sample, float const* const* transformed_cv) const
 { 
   assert(param >= 0);
   assert(sample >= 0);
   assert(param < _part_param_count);
   assert(sample < _sample_count - _sample_offset);
-  return modulated[param][sample];
+  return transformed_cv[param][sample];
 }
 
 inline automation_view

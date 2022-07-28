@@ -20,7 +20,7 @@ struct sine_generator
 {
   float operator()(
     float frequency, float phase, float increment, float sample_rate, 
-    float const* const* modulated, std::int32_t sample) const
+    float const* const* transformed_cv, std::int32_t sample) const
   { return std::sin(2.0f * std::numbers::pi * phase); }
 };
 
@@ -38,7 +38,7 @@ struct blep_saw_generator
 
   float operator()(
     float frequency, float phase, float increment, float sample_rate, 
-    float const* const* modulated, std::int32_t sample) const
+    float const* const* transformed_cv, std::int32_t sample) const
   {
     phase += 0.5f;
     phase -= std::floor(phase);
@@ -52,12 +52,12 @@ struct blep_pulse_generator
 
   float operator()(
     float frequency, float phase, float increment, float sample_rate, 
-    float const* const* modulated, std::int32_t sample) const
+    float const* const* transformed_cv, std::int32_t sample) const
   {
     blep_saw_generator saw_generator;
-    float pw = (min_pw + (1.0f - min_pw) * modulated[oscillator_param::analog_pw][sample]) * 0.5f;
-    float saw1 = saw_generator(frequency, phase, increment, sample_rate, modulated, sample);
-    float saw2 = saw_generator(frequency, phase + pw, increment, sample_rate, modulated, sample);
+    float pw = (min_pw + (1.0f - min_pw) * transformed_cv[oscillator_param::analog_pw][sample]) * 0.5f;
+    float saw1 = saw_generator(frequency, phase, increment, sample_rate, transformed_cv, sample);
+    float saw2 = saw_generator(frequency, phase + pw, increment, sample_rate, transformed_cv, sample);
     return (saw1 - saw2) * 0.5f;
   }
 };
@@ -87,7 +87,7 @@ struct blamp_triangle_generator
 
   float operator()(
     float frequency, float phase, float increment, float sample_rate, 
-    float const* const* modulated, std::int32_t sample) const
+    float const* const* transformed_cv, std::int32_t sample) const
   {
     phase = phase + 0.75f;
     phase -= std::floor(phase);
@@ -109,13 +109,13 @@ struct dsf_generator
 
   float operator()(
     float frequency, float phase, float increment, float sample_rate, 
-    float const* const* modulated, std::int32_t sample) const
+    float const* const* transformed_cv, std::int32_t sample) const
   {
     std::int32_t partials = _partials;
     float const scale_factor = 0.975f;
     float const rolloff_range = 0.99f;
-    float rolloff = modulated[oscillator_param::dsf_rolloff][sample];
-    float distance = frequency * modulated[oscillator_param::dsf_distance][sample];
+    float rolloff = transformed_cv[oscillator_param::dsf_rolloff][sample];
+    float distance = frequency * transformed_cv[oscillator_param::dsf_distance][sample];
     float max_partials = (sample_rate * 0.5f - frequency) / distance;
     partials = std::min(partials, static_cast<std::int32_t>(max_partials));
 
@@ -134,14 +134,14 @@ struct dsf_generator
 
 template <class sample_generator_type> void
 oscillator::generate_unison(
-  voice_input const& input, svn::base::automation_view const& automation, float const* const* modulated,
+  voice_input const& input, svn::base::automation_view const& automation, float const* const* transformed_cv,
   std::int32_t unison_voices, std::int32_t midi, sample_generator_type sample_generator, base::audio_sample32* audio_out)
 {
-  float const* amp = modulated[oscillator_param::amp];
-  float const* pan = modulated[oscillator_param::pan];
-  float const* cent = modulated[oscillator_param::cent];
-  float const* detune = modulated[oscillator_param::unison_detune];
-  float const* spread = modulated[oscillator_param::unison_spread];
+  float const* amp = transformed_cv[oscillator_param::amp];
+  float const* pan = transformed_cv[oscillator_param::pan];
+  float const* cent = transformed_cv[oscillator_param::cent];
+  float const* detune = transformed_cv[oscillator_param::unison_detune];
+  float const* spread = transformed_cv[oscillator_param::unison_spread];
 
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
@@ -159,7 +159,7 @@ oscillator::generate_unison(
       float this_frequency = note_to_frequency_table(this_midi);
       float this_increment = this_frequency / _sample_rate;
       float this_pan = pan_min + (pan_max - pan_min) * v / voice_range;
-      float this_sample = sample_generator(this_frequency, _phases[v], this_increment, _sample_rate, modulated, s) * amp[s];
+      float this_sample = sample_generator(this_frequency, _phases[v], this_increment, _sample_rate, transformed_cv, s) * amp[s];
       audio_out[s] += { this_sample * (1.0f - this_pan), this_sample * this_pan };
       _phases[v] += this_increment;
       _phases[v] -= std::floor(_phases[v]);
@@ -172,7 +172,7 @@ oscillator::generate_unison(
 double
 oscillator::process_block(
   voice_input const& input, std::int32_t index,
-  cv_state& cv, audio_sample32* audio_out, double& mod_time)
+  cv_state& cv, audio_sample32* audio_out, double& cv_time)
 {  
   // Note: discrete automation per block, not per sample!
   automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
@@ -191,9 +191,9 @@ oscillator::process_block(
   std::int32_t partials = automation.input_discrete(oscillator_param::dsf_partials, 0);
   std::int32_t analog_type = automation.input_discrete(oscillator_param::analog_type, 0);
 
-  float const* const* modulated;
-  double start_mod_time = mod_time;
-  mod_time += cv.modulate(input, automation, cv_route_osc_mapping, cv_route_output::osc, index, modulated);
+  float const* const* transformed_cv;
+  double start_cv_time = cv_time;
+  cv_time += cv.transform(input, automation, cv_route_osc_mapping, cv_route_output::osc, index, transformed_cv);
   std::int32_t midi = 12 * (octave + 1) + note + _midi_note - 60;
   switch (type)
   {
@@ -201,16 +201,16 @@ oscillator::process_block(
     switch (analog_type)
     {
     case oscillator_analog_type::sine:
-      generate_unison(input, automation, modulated, voices, midi, sine_generator(), audio_out);
+      generate_unison(input, automation, transformed_cv, voices, midi, sine_generator(), audio_out);
       break;
     case oscillator_analog_type::saw:
-      generate_unison(input, automation, modulated, voices, midi, blep_saw_generator(), audio_out);
+      generate_unison(input, automation, transformed_cv, voices, midi, blep_saw_generator(), audio_out);
       break;
     case oscillator_analog_type::pulse:
-      generate_unison(input, automation, modulated, voices, midi, blep_pulse_generator(), audio_out);
+      generate_unison(input, automation, transformed_cv, voices, midi, blep_pulse_generator(), audio_out);
       break;
     case oscillator_analog_type::triangle:
-      generate_unison(input, automation, modulated, voices, midi, blamp_triangle_generator(), audio_out);
+      generate_unison(input, automation, transformed_cv, voices, midi, blamp_triangle_generator(), audio_out);
       break;
     default:
       assert(false);
@@ -218,12 +218,12 @@ oscillator::process_block(
     }
     break;
   case oscillator_type::dsf:
-    generate_unison(input, automation, modulated, voices, midi, dsf_generator(partials), audio_out);
+    generate_unison(input, automation, transformed_cv, voices, midi, dsf_generator(partials), audio_out);
     break;
   default:
     break;
   }
-  return base::performance_counter() - start_time - (mod_time - start_mod_time);
+  return base::performance_counter() - start_time - (cv_time - start_cv_time);
 }
 
 } // namespace svn::synth

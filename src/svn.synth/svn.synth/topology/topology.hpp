@@ -175,7 +175,6 @@ inline std::int32_t constexpr cv_route_param_offset = 3; // for enabled + plot p
 inline std::int32_t constexpr cv_route_input_counts[cv_route_input::count] = { 1 /* off */, 1 /* velocity */, envelope_count, lfo_count};
 inline std::int32_t constexpr cv_route_input_op_counts[cv_route_input::count] = { 0 /* off */, cv_route_input_op::count, cv_route_input_op::count, cv_route_input_op::count};
 inline std::int32_t constexpr cv_route_output_counts[cv_route_output::count] = { 1 /* off */, oscillator_count, filter_count, 1 /* amp */, audio_route_count };
-inline std::int32_t constexpr cv_route_output_modulated_counts[cv_route_output::count] = { 0 /* off */, oscillator_param::count, filter_param::count, amplitude_param::count, audio_route_param::count };
 inline std::int32_t constexpr cv_route_output_target_counts[cv_route_output::count] = { 0 /* off */, cv_route_osc_output::count, cv_route_filter_output::count, cv_route_amp_output::count, cv_route_audio_output::count };
 
 } // namespace svn::synth
