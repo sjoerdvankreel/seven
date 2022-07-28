@@ -176,7 +176,7 @@ oscillator::process_block(
 {  
   // Note: discrete automation per block, not per sample!
   automation_view automation(input.automation.rearrange_params(part_type::oscillator, index));
-  std::int32_t on = automation.input_discrete(oscillator_param::on, 0);
+  std::int32_t on = automation.automation_discrete(oscillator_param::on, 0);
   if (on == 0)
   {
     std::memset(audio_out, 0, input.sample_count * sizeof(audio_sample32));
@@ -187,12 +187,12 @@ oscillator::process_block(
   cv_time += cv.transform_modulated(input, automation, cv_route_output::osc, index, cv_route_osc_mapping, transformed_cv);
 
   double start_time = performance_counter();
-  std::int32_t type = automation.input_discrete(oscillator_param::type, 0);
-  std::int32_t note = automation.input_discrete(oscillator_param::note, 0);
-  std::int32_t voices = automation.input_discrete(oscillator_param::unison, 0);
-  std::int32_t octave = automation.input_discrete(oscillator_param::octave, 0);
-  std::int32_t partials = automation.input_discrete(oscillator_param::dsf_partials, 0);
-  std::int32_t analog_type = automation.input_discrete(oscillator_param::analog_type, 0);
+  std::int32_t type = automation.automation_discrete(oscillator_param::type, 0);
+  std::int32_t note = automation.automation_discrete(oscillator_param::note, 0);
+  std::int32_t voices = automation.automation_discrete(oscillator_param::unison, 0);
+  std::int32_t octave = automation.automation_discrete(oscillator_param::octave, 0);
+  std::int32_t partials = automation.automation_discrete(oscillator_param::dsf_partials, 0);
+  std::int32_t analog_type = automation.automation_discrete(oscillator_param::analog_type, 0);
   std::int32_t midi = 12 * (octave + 1) + note + _midi_note - 60;
 
   switch (type)

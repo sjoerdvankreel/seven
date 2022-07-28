@@ -50,12 +50,12 @@ audio_state::mix(
   for (std::int32_t r = 0; r < audio_route_count; r++)
   {
     _bank_automation[r] = input.automation.rearrange_params(part_type::audio_route, r);
-    if (_bank_automation[r].input_discrete(audio_route_param::on, 0) == 0) continue;
+    if (_bank_automation[r].automation_discrete(audio_route_param::on, 0) == 0) continue;
     for (std::int32_t i = 0; i < audio_route_route_count; i++)
     {
-      std::int32_t input_id = _bank_automation[r].input_discrete(i * 3 + audio_route_param_offset, 0);
+      std::int32_t input_id = _bank_automation[r].automation_discrete(i * 3 + audio_route_param_offset, 0);
       if (input_id == input_off) continue;
-      std::int32_t this_output_id = _bank_automation[r].input_discrete(i * 3 + 1 + audio_route_param_offset, 0);
+      std::int32_t this_output_id = _bank_automation[r].automation_discrete(i * 3 + 1 + audio_route_param_offset, 0);
       if (output_id != this_output_id) continue;
       audio_route_indices indices;
       indices.bank_index = r;

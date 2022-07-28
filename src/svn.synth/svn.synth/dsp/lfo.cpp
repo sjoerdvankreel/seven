@@ -22,16 +22,16 @@ lfo::process_block(
 
   double start_time = performance_counter();
   // Note: discrete automation per block, not per sample!
-  if (automation.input_discrete(lfo_param::on, 0) == 0)
+  if (automation.automation_discrete(lfo_param::on, 0) == 0)
   {
     std::memset(cv_out, 0, input.sample_count * sizeof(cv_sample));
     return 0.0;
   }
 
   float const* period_time = transformed_cv[lfo_param::period_time];
-  std::int32_t synced = automation.input_discrete(lfo_param::synced, 0);
-  std::int32_t bipolar = automation.input_discrete(lfo_param::bipolar, 0);
-  std::int32_t period_sync = automation.input_discrete(lfo_param::period_sync, 0);
+  std::int32_t synced = automation.automation_discrete(lfo_param::synced, 0);
+  std::int32_t bipolar = automation.automation_discrete(lfo_param::bipolar, 0);
+  std::int32_t period_sync = automation.automation_discrete(lfo_param::period_sync, 0);
   float timesig = lfo_timesig_values[period_sync];
   float sync_frequency = timesig_to_frequency(_sample_rate, input.bpm, timesig);
   

@@ -28,11 +28,11 @@ class automation_view
 public:
   automation_view() = default;
   
-  // Input stuff takes care of _fixed.
-  float input_real(std::int32_t param, std::int32_t sample) const;
-  param_value input_param(std::int32_t param, std::int32_t sample) const;
-  std::int32_t input_discrete(std::int32_t param, std::int32_t sample) const;
-  void input_real(std::int32_t param, float* cv_out, std::int32_t count) const;
+  // Automation stuff takes care of _fixed.
+  float automation_real(std::int32_t param, std::int32_t sample) const;
+  param_value automation_param(std::int32_t param, std::int32_t sample) const;
+  std::int32_t automation_discrete(std::int32_t param, std::int32_t sample) const;
+  void automation_real(std::int32_t param, float* cv_out, std::int32_t count) const;
 
   // Output stuff assumes _fixed has already been taken care of.
   void output_real_to_dsp(std::int32_t param, float* cv_inout, std::int32_t count) const;
@@ -78,7 +78,7 @@ _sample_count(sample_count), _sample_offset(sample_offset), _sample_fixed_at(sam
 }
 
 inline param_value
-automation_view::input_param(std::int32_t param, std::int32_t sample) const
+automation_view::automation_param(std::int32_t param, std::int32_t sample) const
 {
   assert(param >= 0);
   assert(param < _part_param_count);
@@ -89,22 +89,22 @@ automation_view::input_param(std::int32_t param, std::int32_t sample) const
 }
 
 inline float
-automation_view::input_real(std::int32_t param, std::int32_t sample) const
+automation_view::automation_real(std::int32_t param, std::int32_t sample) const
 { 
   assert(_topology->params[param + _part_param_offset].descriptor->type == param_type::real); 
-  return input_param(param, sample).real;
+  return automation_param(param, sample).real;
 }
 
 // TODO - always get at sample 0
 inline std::int32_t
-automation_view::input_discrete(std::int32_t param, std::int32_t sample) const
+automation_view::automation_discrete(std::int32_t param, std::int32_t sample) const
 { 
   assert(_topology->params[param + _part_param_offset].descriptor->type != param_type::real);
-  return input_param(param, sample).discrete;
+  return automation_param(param, sample).discrete;
 }
 
 inline void
-automation_view::input_real(std::int32_t param, float* cv_out, std::int32_t count) const
+automation_view::automation_real(std::int32_t param, float* cv_out, std::int32_t count) const
 {
   assert(param >= 0);
   assert(param < _part_param_count);
@@ -150,7 +150,7 @@ automation_view::from_dsp(std::int32_t param, float val) const
 // TODO REMOVE - does both _fixed and then returns output
 inline float
 automation_view::get_real_dsp(std::int32_t param, std::int32_t sample) const
-{ return to_dsp(param, input_real(param, sample)); }
+{ return to_dsp(param, automation_real(param, sample)); }
 
 // TODO REMOVE
 inline float 

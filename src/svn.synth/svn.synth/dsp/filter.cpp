@@ -25,7 +25,7 @@ filter::process_state_variable(automation_view const& automation,
   float res = automation.get_transformed_dsp(filter_param::state_var_res, sample, transformed_cv);
   float kbd = automation.get_transformed_dsp(filter_param::state_var_kbd, sample, transformed_cv);
   float freq = automation.get_transformed_dsp(filter_param::state_var_freq, sample, transformed_cv);
-  std::int32_t type = automation.input_discrete(filter_param::state_var_type, sample);
+  std::int32_t type = automation.automation_discrete(filter_param::state_var_type, sample);
 
   if (kbd > 0.0f) freq = (1.0f - kbd) * freq + kbd * freq * _state_var.kbd_track_base;
   if (kbd < 0.0f) freq = (1.0f + kbd) * freq - kbd * freq / _state_var.kbd_track_base;
@@ -86,9 +86,9 @@ filter::process_block(voice_input const& input, std::int32_t index, cv_state& cv
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
     audio_out[s] = audio_in[s];
-    bool on = automation.input_discrete(filter_param::on, s) != 0;
+    bool on = automation.automation_discrete(filter_param::on, s) != 0;
     if (!on) continue;
-    std::int32_t type = automation.input_discrete(filter_param::type, s);
+    std::int32_t type = automation.automation_discrete(filter_param::type, s);
     switch (type)
     {
     case filter_type::comb: 

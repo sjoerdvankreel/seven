@@ -56,7 +56,7 @@ cv_state::transform_unmodulated(voice_input const& input,
   for(std::int32_t p = 0; p < _topology->static_parts[type].param_count; p++)
     if(_topology->static_parts[type].params[p].type == base::param_type::real)
     {
-      automated.input_real(p, _scratch[p], input.sample_count);
+      automated.automation_real(p, _scratch[p], input.sample_count);
       automated.output_real_to_dsp(p, _scratch[p], input.sample_count);
     }
   result = _scratch.data();
@@ -75,7 +75,7 @@ cv_state::transform_modulated(
   // Set scratch to current values in [0, 1].
   // cv_route_param_offset = enabled + plot parameters
   for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
-    automated.input_real(output_mapping[p], _scratch[output_mapping[p]], input.sample_count);
+    automated.automation_real(output_mapping[p], _scratch[output_mapping[p]], input.sample_count);
 
   // Find out relevant modulation targets.
   // Note: discrete automation per block, not per sample!
@@ -83,16 +83,16 @@ cv_state::transform_modulated(
   for(std::int32_t r = 0; r < cv_route_count; r++)
   {
     _bank_automation[r] = input.automation.rearrange_params(part_type::cv_route, r);
-    if(_bank_automation[r].input_discrete(cv_route_param::on, 0) == 0) continue;
+    if(_bank_automation[r].automation_discrete(cv_route_param::on, 0) == 0) continue;
     for (std::int32_t i = 0; i < cv_route_route_count; i++)
     {
-      std::int32_t input_id = _bank_automation[r].input_discrete(i * 3 + cv_route_param_offset, 0);
+      std::int32_t input_id = _bank_automation[r].automation_discrete(i * 3 + cv_route_param_offset, 0);
       if(input_id == input_off) continue;
       for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
       {
         std::int32_t output_id = output_table_in[route_output][part_index][p] - cv_route_param_offset;
         if(output_id == output_off) continue;
-        if(_bank_automation[r].input_discrete(i * 3 + cv_route_param_offset + 1, 0) != output_id) continue;
+        if(_bank_automation[r].automation_discrete(i * 3 + cv_route_param_offset + 1, 0) != output_id) continue;
         cv_route_indices indices;
         indices.bank_index = r;
         indices.route_index = i;

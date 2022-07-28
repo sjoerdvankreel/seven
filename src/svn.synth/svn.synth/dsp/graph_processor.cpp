@@ -418,7 +418,7 @@ cv_route_graph::process_dsp_core(
   std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> output_table_out
     = zip_list_table_init_out(cv_route_output_counts, cv_route_output_target_counts, cv_route_output::count);
   automation_view automation = vinput.automation.rearrange_params(part_type::cv_route, part_index());
-  std::int32_t target_id = automation.input_discrete(cv_route_param::plot_tgt, 0);
+  std::int32_t target_id = automation.automation_discrete(cv_route_param::plot_tgt, 0);
   auto param_ids = output_table_out[target_id];
   std::memset(output, 0, input.sample_count * sizeof(float));
   if (std::get<0>(param_ids) == -1 || std::get<2>(param_ids) == -1) return;
