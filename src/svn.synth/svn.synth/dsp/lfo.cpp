@@ -15,19 +15,19 @@ lfo::process_block(
   voice_input const& input, std::int32_t index, 
   cv_state& cv, base::cv_sample* cv_out, double& cv_time)
 {
-  float frequency = 0.0f;
-  float const* const* transformed_cv;
-  automation_view automation(input.automation.rearrange_params(part_type::lfo, index));
-  cv_time += cv.transform_unmodulated(input, automation, part_type::lfo, transformed_cv);
-
-  double start_time = performance_counter();
   // Note: discrete automation per block, not per sample!
+  automation_view automation(input.automation.rearrange_params(part_type::lfo, index));
   if (automation.automation_discrete(lfo_param::on, 0) == 0)
   {
     std::memset(cv_out, 0, input.sample_count * sizeof(cv_sample));
     return 0.0;
   }
 
+  float frequency = 0.0f;
+  float const* const* transformed_cv;
+  cv_time += cv.transform_unmodulated(input, automation, part_type::lfo, transformed_cv);
+
+  double start_time = performance_counter();
   float const* period_time = transformed_cv[lfo_param::period_time];
   std::int32_t synced = automation.automation_discrete(lfo_param::synced, 0);
   std::int32_t bipolar = automation.automation_discrete(lfo_param::bipolar, 0);
