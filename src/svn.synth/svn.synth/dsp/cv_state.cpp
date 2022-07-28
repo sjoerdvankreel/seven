@@ -57,7 +57,7 @@ cv_state::transform_unmodulated(voice_input const& input,
     if(_topology->static_parts[type].params[p].type == base::param_type::real)
     {
       automated.automation_real(p, _scratch[p], input.sample_count);
-      automated.output_real_to_dsp(p, _scratch[p], input.sample_count);
+      automated.transform_real(p, _scratch[p], input.sample_count);
     }
   result = _scratch.data();
   return base::performance_counter() - start_time;
@@ -125,7 +125,7 @@ cv_state::transform_modulated(
   // On end of transform(), each series should be in it's own domain for dsp processing.
   // cv_route_param_offset = enabled + plot parameters.
   for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
-    automated.output_real_to_dsp(output_mapping[p], _scratch[output_mapping[p]], input.sample_count);
+    automated.transform_real(output_mapping[p], _scratch[output_mapping[p]], input.sample_count);
 
   result = _scratch.data();
   return base::performance_counter() - start_time;

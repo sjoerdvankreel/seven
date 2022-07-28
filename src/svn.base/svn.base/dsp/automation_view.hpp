@@ -34,8 +34,8 @@ public:
   std::int32_t automation_discrete(std::int32_t param, std::int32_t sample) const;
   void automation_real(std::int32_t param, float* cv_out, std::int32_t count) const;
 
-  // Output stuff assumes _fixed has already been taken care of.
-  void output_real_to_dsp(std::int32_t param, float* cv_inout, std::int32_t count) const;
+  // Transform stuff assumes _fixed has already been taken care of.
+  void transform_real(std::int32_t param, float* cv_inout, std::int32_t count) const;
 
   // Rearrange part or sample indices.
   automation_view rearrange_params(std::int32_t part_type, std::int32_t part_index) const;
@@ -121,7 +121,7 @@ automation_view::automation_real(std::int32_t param, float* cv_out, std::int32_t
 }
 
 inline void 
-automation_view::output_real_to_dsp(std::int32_t param, float* cv_inout, std::int32_t count) const
+automation_view::transform_real(std::int32_t param, float* cv_inout, std::int32_t count) const
 {
   assert(param >= 0);
   assert(param < _part_param_count);
