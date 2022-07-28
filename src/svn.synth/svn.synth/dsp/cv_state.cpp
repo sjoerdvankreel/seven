@@ -14,8 +14,8 @@ std::vector<std::vector<std::vector<std::int32_t>>> const cv_state::output_table
 
 cv_state::
 cv_state(base::topology_info const* topology, std::int32_t max_sample_count) :
-  envelope(), lfo(), _scratch(), _scratch_buffer(), 
-  _relevant_indices(), _bank_automation(),
+  _topology(topology), envelope(), lfo(), _scratch(), 
+  _scratch_buffer(), _relevant_indices(), _bank_automation(),
   velocity(static_cast<std::size_t>(max_sample_count))
 {
   std::vector<base::cv_sample> cv(static_cast<std::size_t>(max_sample_count));
@@ -47,8 +47,8 @@ cv_state::input_buffer(std::int32_t input, std::int32_t index) const
 
 double 
 cv_state::transform(
-  voice_input const& input, base::automation_view const& automated, std::int32_t const* mapping, 
-  cv_route_output route_output, std::int32_t route_index, float const* const*& result)
+  voice_input const& input, base::automation_view const& automated, cv_route_output route_output, 
+  std::int32_t part_index, std::int32_t const* output_mapping, float const* const*& result)
 {
   double start_time = base::performance_counter();
   std::int32_t input_off = input_table_in[cv_route_input::off][0][0];
@@ -57,7 +57,7 @@ cv_state::transform(
   // Set scratch to current values in [0, 1].
   // cv_route_param_offset = enabled + plot parameters
   for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
-    automated.input_real(mapping[p], _scratch[mapping[p]], input.sample_count);
+    automated.input_real(output_mapping[p], _scratch[output_mapping[p]], input.sample_count);
 
   // Find out relevant modulation targets.
   // Note: discrete automation per block, not per sample!
@@ -72,7 +72,7 @@ cv_state::transform(
       if(input_id == input_off) continue;
       for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
       {
-        std::int32_t output_id = output_table_in[route_output][route_index][p] - cv_route_param_offset;
+        std::int32_t output_id = output_table_in[route_output][part_index][p] - cv_route_param_offset;
         if(output_id == output_off) continue;
         if(_bank_automation[r].input_discrete(i * 3 + cv_route_param_offset + 1, 0) != output_id) continue;
         cv_route_indices indices;
@@ -89,7 +89,7 @@ cv_state::transform(
   for (std::int32_t m = 0; m < _relevant_indices_count; m++)
   {
     cv_route_indices indices = _relevant_indices[m];
-    float* cv_output = _scratch[mapping[indices.target_index]];
+    float* cv_output = _scratch[output_mapping[indices.target_index]];
     bool multiply = std::get<2>(indices.input_ids) == cv_route_input_op::multiply;
     base::cv_sample const* cv_input = input_buffer(std::get<0>(indices.input_ids), std::get<1>(indices.input_ids));
     for (std::int32_t s = 0; s < input.sample_count; s++)
@@ -107,7 +107,7 @@ cv_state::transform(
   // On end of transform(), each series should be in it's own domain for dsp processing.
   // cv_route_param_offset = enabled + plot parameters.
   for (std::int32_t p = 0; p < cv_route_output_target_counts[route_output]; p++)
-    automated.output_real_to_dsp(mapping[p], _scratch[mapping[p]], input.sample_count);
+    automated.output_real_to_dsp(output_mapping[p], _scratch[output_mapping[p]], input.sample_count);
 
   result = _scratch.data();
   return base::performance_counter() - start_time;

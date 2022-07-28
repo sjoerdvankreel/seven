@@ -427,8 +427,8 @@ cv_route_graph::process_dsp_core(
   std::int32_t part_type = cv_route_part_mapping[cv_route_output_id];
   std::int32_t param_index = cv_route_param_mapping[cv_route_output_id][cv_route_target];
   automation_view automated_view = vinput.automation.rearrange_params(part_type, rt_part_index);
-  state.transform(vinput, automated_view, cv_route_param_mapping[cv_route_output_id], 
-    static_cast<cv_route_output>(cv_route_output_id), rt_part_index, transformed_cv);
+  state.transform(vinput, automated_view, static_cast<cv_route_output>(cv_route_output_id), 
+    rt_part_index, cv_route_param_mapping[cv_route_output_id], transformed_cv);
   for (std::int32_t i = 0; i < input.sample_count; i++)
     output[i] = automated_view.from_dsp(param_index, transformed_cv[param_index][i]);
 }

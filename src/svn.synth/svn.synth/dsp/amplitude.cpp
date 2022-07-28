@@ -14,7 +14,7 @@ amplitude::process_block(
 {
   float const* const* transformed_cv;
   automation_view automation(input.automation.rearrange_params(part_type::amplitude, 0));
-  cv_time += cv.transform(input, automation, cv_route_amp_mapping, cv_route_output::amp, 0, transformed_cv);
+  cv_time += cv.transform(input, automation, cv_route_output::amp, 0, cv_route_amp_mapping, transformed_cv);
   double start_time = performance_counter();
   for (std::int32_t s = 0; s < input.sample_count; s++)
   { 

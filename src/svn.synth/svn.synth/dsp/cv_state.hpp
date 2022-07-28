@@ -34,6 +34,7 @@ class cv_state
   std::vector<float*> _scratch;
   std::vector<float> _scratch_buffer;
   
+  base::topology_info const* const _topology;
   std::int32_t _relevant_indices_count = 0;
   std::array<base::automation_view, cv_route_count> _bank_automation;
   // Of size cv banks * cv routes per bank.
@@ -51,8 +52,8 @@ public:
   // Note: CV in [0, 1] on input, parameter dsp range on output.
   // Apply optional modulation and rescale to dsp range.
   double transform(
-    voice_input const& input, base::automation_view const& automated, std::int32_t const* mapping, 
-    cv_route_output route_output, std::int32_t route_index, float const* const*& result);
+    voice_input const& input, base::automation_view const& automated, cv_route_output route_output, 
+    std::int32_t part_index, std::int32_t const* output_mapping, float const* const*& result);
 };
 
 } // namespace svn::synth

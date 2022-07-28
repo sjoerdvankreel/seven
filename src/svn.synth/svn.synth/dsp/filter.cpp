@@ -81,7 +81,7 @@ filter::process_block(voice_input const& input, std::int32_t index, cv_state& cv
 {
   float const* const* transformed_cv;
   automation_view automation(input.automation.rearrange_params(part_type::filter, index));
-  cv_time += cv.transform(input, automation, cv_route_filter_mapping, cv_route_output::filter, index, transformed_cv);
+  cv_time += cv.transform(input, automation, cv_route_output::filter, index, cv_route_filter_mapping, transformed_cv);
   double start_time = performance_counter();
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {

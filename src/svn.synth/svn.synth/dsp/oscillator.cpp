@@ -193,7 +193,7 @@ oscillator::process_block(
 
   float const* const* transformed_cv;
   double start_cv_time = cv_time;
-  cv_time += cv.transform(input, automation, cv_route_osc_mapping, cv_route_output::osc, index, transformed_cv);
+  cv_time += cv.transform(input, automation, cv_route_output::osc, index, cv_route_osc_mapping, transformed_cv);
   std::int32_t midi = 12 * (octave + 1) + note + _midi_note - 60;
   switch (type)
   {
