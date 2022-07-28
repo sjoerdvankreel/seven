@@ -45,8 +45,26 @@ cv_state::input_buffer(std::int32_t input, std::int32_t index) const
   }
 }
 
+// Note: we skip over discrete params, 
+// they are not taken into account in result, 
+// but their positions are taken (so we waste some space).
 double 
-cv_state::transform(
+cv_state::transform_unmodulated(voice_input const& input, 
+  base::automation_view const& automated, part_type type, float const* const*& result)
+{
+  double start_time = base::performance_counter();
+  for(std::int32_t p = 0; p < _topology->static_parts[type].param_count; p++)
+    if(_topology->static_parts[type].params[p].type == base::param_type::real)
+    {
+      automated.input_real(p, _scratch[p], input.sample_count);
+      automated.output_real_to_dsp(p, _scratch[p], input.sample_count);
+    }
+  result = _scratch.data();
+  return base::performance_counter() - start_time;
+}
+
+double 
+cv_state::transform_modulated(
   voice_input const& input, base::automation_view const& automated, cv_route_output route_output, 
   std::int32_t part_index, std::int32_t const* output_mapping, float const* const*& result)
 {

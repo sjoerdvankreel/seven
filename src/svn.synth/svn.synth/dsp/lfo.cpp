@@ -11,24 +11,36 @@ using namespace svn::base;
 namespace svn::synth {
 
 double
-lfo::process_block(voice_input const& input, std::int32_t index, base::cv_sample* cv_out)
+lfo::process_block(
+  voice_input const& input, std::int32_t index, 
+  cv_state& cv, base::cv_sample* cv_out, double& cv_time)
 {
   float frequency = 0.0f;
-  double start_time = performance_counter();
+  float const* const* transformed_cv;
   automation_view automation(input.automation.rearrange_params(part_type::lfo, index));
+  cv_time += cv.transform_unmodulated(input, automation, part_type::lfo, transformed_cv);
+
+  double start_time = performance_counter();
+  // Note: discrete automation per block, not per sample!
+  if (automation.input_discrete(lfo_param::on, 0) == 0)
+  {
+    std::memset(cv_out, 0, input.sample_count * sizeof(cv_sample));
+    return 0.0;
+  }
+
+  float const* period_time = transformed_cv[lfo_param::period_time];
+  std::int32_t synced = automation.input_discrete(lfo_param::synced, 0);
+  std::int32_t bipolar = automation.input_discrete(lfo_param::bipolar, 0);
+  std::int32_t period_sync = automation.input_discrete(lfo_param::period_sync, 0);
+  float timesig = lfo_timesig_values[period_sync];
+  float sync_frequency = timesig_to_frequency(_sample_rate, input.bpm, timesig);
+  
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
-    cv_out[s] = { 0.0f, false }; 
-    if(automation.input_discrete(lfo_param::on, s) == 0) continue;
-    if(automation.input_discrete(lfo_param::synced, s) == 0)
-      frequency = 1.0f / automation.get_real_dsp(lfo_param::period_time, s);
-    else 
-    {   
-      float timesig = lfo_timesig_values[automation.input_discrete(lfo_param::period_sync, s)];
-      frequency = timesig_to_frequency(_sample_rate, input.bpm, timesig);
-    }
+    if(synced == 0) frequency = 1.0f / period_time[s];
+    else frequency = sync_frequency;
     float sample = sanity_bipolar(std::sin(2.0f * std::numbers::pi * _phase));
-    if (automation.input_discrete(lfo_param::bipolar, s) == 0) cv_out[s] = { (sample + 1.0f) * 0.5f, false };
+    if (bipolar == 0) cv_out[s] = { (sample + 1.0f) * 0.5f, false };
     else cv_out[s] = { sample, true }; 
     _phase += frequency / _sample_rate; 
     _phase -= std::floor(_phase);

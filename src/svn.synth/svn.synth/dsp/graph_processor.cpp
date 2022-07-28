@@ -95,10 +95,12 @@ void
 lfo_graph::process_dsp_core(
   block_input const& input, base::cv_sample* output, float sample_rate, float bpm)
 {
+  double cv_time = 0.0f;
   lfo lfo(lfo_graph_rate);
+  cv_state cv(topology(), input.sample_count);
   std::memset(output, 0, input.sample_count * sizeof(base::cv_sample));
   voice_input vinput = setup_graph_voice_input(input, topology());
-  lfo.process_block(vinput, part_index(), output);
+  lfo.process_block(vinput, part_index(), cv, output, cv_time);
 }
 
 void
@@ -287,8 +289,8 @@ oscillator_wave_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
 {
   double cv_time = 0.0;
-  cv_state cv(topology(), input.sample_count);
   oscillator osc(sample_rate, midi_note_c4);
+  cv_state cv(topology(), input.sample_count);
   std::memset(output, 0, input.sample_count * sizeof(audio_sample32));
   voice_input vinput = setup_graph_voice_input(input, topology());
   osc.process_block(vinput, part_index(), cv, output, cv_time);
@@ -404,10 +406,11 @@ cv_route_graph::process_dsp_core(
   block_input const& input, float* output, float sample_rate, float bpm)
 {
   bool ended = false;
+  double cv_time = 0.0f;
   cv_state state(topology(), input.sample_count);
   voice_input vinput = setup_graph_voice_input(input, topology());
   for(std::int32_t i = 0; i < lfo_count; i++)
-    lfo(cv_route_graph_rate).process_block(vinput, i, state.lfo[i].data());
+    lfo(cv_route_graph_rate).process_block(vinput, i, state, state.lfo[i].data(), cv_time);
   for (std::int32_t i = 0; i < envelope_count; i++)
     envelope(cv_route_graph_rate).process_block(vinput, i, state.envelope[i].data(), input.sample_count, ended);
   std::fill(state.velocity.begin(), state.velocity.begin() + input.sample_count, base::cv_sample({ cv_route_graph_velocity, false }));
@@ -427,7 +430,7 @@ cv_route_graph::process_dsp_core(
   std::int32_t part_type = cv_route_part_mapping[cv_route_output_id];
   std::int32_t param_index = cv_route_param_mapping[cv_route_output_id][cv_route_target];
   automation_view automated_view = vinput.automation.rearrange_params(part_type, rt_part_index);
-  state.transform(vinput, automated_view, static_cast<cv_route_output>(cv_route_output_id), 
+  state.transform_modulated(vinput, automated_view, static_cast<cv_route_output>(cv_route_output_id),
     rt_part_index, cv_route_param_mapping[cv_route_output_id], transformed_cv);
   for (std::int32_t i = 0; i < input.sample_count; i++)
     output[i] = automated_view.from_dsp(param_index, transformed_cv[param_index][i]);

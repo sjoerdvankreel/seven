@@ -50,8 +50,12 @@ public:
   cv_state(base::topology_info const* topology, std::int32_t max_sample_count);
 
   // Note: CV in [0, 1] on input, parameter dsp range on output.
-  // Apply optional modulation and rescale to dsp range.
-  double transform(
+  double transform_unmodulated(voice_input const& input, 
+    base::automation_view const& automated, part_type type, float const* const*& result);
+
+  // Note: CV in [0, 1] on input, parameter dsp range on output.
+  // Apply modulation and rescale to dsp range.
+  double transform_modulated(
     voice_input const& input, base::automation_view const& automated, cv_route_output route_output, 
     std::int32_t part_index, std::int32_t const* output_mapping, float const* const*& result);
 };

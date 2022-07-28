@@ -35,7 +35,7 @@ synth_voice::process_block(voice_input const& input, cv_state& cv,
 
   // Run lfo's.
   for(std::int32_t i = 0; i < lfo_count; i++)
-    usage.lfo += _lfos[i].process_block(input, i, cv.lfo[i].data());
+    usage.lfo += _lfos[i].process_block(input, i, cv, cv.lfo[i].data(), usage.cv);
 
   // Run envelopes.
   bool ended = false;

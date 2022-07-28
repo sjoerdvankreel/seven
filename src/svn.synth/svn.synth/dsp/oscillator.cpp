@@ -183,6 +183,9 @@ oscillator::process_block(
     return 0.0;
   }
 
+  float const* const* transformed_cv;
+  cv_time += cv.transform_modulated(input, automation, cv_route_output::osc, index, cv_route_osc_mapping, transformed_cv);
+
   double start_time = performance_counter();
   std::int32_t type = automation.input_discrete(oscillator_param::type, 0);
   std::int32_t note = automation.input_discrete(oscillator_param::note, 0);
@@ -190,11 +193,8 @@ oscillator::process_block(
   std::int32_t octave = automation.input_discrete(oscillator_param::octave, 0);
   std::int32_t partials = automation.input_discrete(oscillator_param::dsf_partials, 0);
   std::int32_t analog_type = automation.input_discrete(oscillator_param::analog_type, 0);
-
-  float const* const* transformed_cv;
-  double start_cv_time = cv_time;
-  cv_time += cv.transform(input, automation, cv_route_output::osc, index, cv_route_osc_mapping, transformed_cv);
   std::int32_t midi = 12 * (octave + 1) + note + _midi_note - 60;
+
   switch (type)
   {
   case oscillator_type::analog:
@@ -223,7 +223,7 @@ oscillator::process_block(
   default:
     break;
   }
-  return base::performance_counter() - start_time - (cv_time - start_cv_time);
+  return base::performance_counter() - start_time;
 }
 
 } // namespace svn::synth
