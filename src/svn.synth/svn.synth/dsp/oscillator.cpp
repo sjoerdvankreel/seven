@@ -134,8 +134,8 @@ struct dsf_generator
 
 template <class sample_generator_type> void
 oscillator::generate_unison(
-  voice_input const& input, svn::base::automation_view const& automation, float const* const* transformed_cv,
-  std::int32_t unison_voices, std::int32_t midi, sample_generator_type sample_generator, base::audio_sample32* audio_out)
+  voice_input const& input, std::int32_t unison_voices, std::int32_t midi, 
+  float const* const* transformed_cv, sample_generator_type sample_generator, base::audio_sample32* audio_out)
 {
   float const* amp = transformed_cv[oscillator_param::amp];
   float const* pan = transformed_cv[oscillator_param::pan];
@@ -200,28 +200,15 @@ oscillator::process_block(
   case oscillator_type::analog:
     switch (analog_type)
     {
-    case oscillator_analog_type::sine:
-      generate_unison(input, automation, transformed_cv, voices, midi, sine_generator(), audio_out);
-      break;
-    case oscillator_analog_type::saw:
-      generate_unison(input, automation, transformed_cv, voices, midi, blep_saw_generator(), audio_out);
-      break;
-    case oscillator_analog_type::pulse:
-      generate_unison(input, automation, transformed_cv, voices, midi, blep_pulse_generator(), audio_out);
-      break;
-    case oscillator_analog_type::triangle:
-      generate_unison(input, automation, transformed_cv, voices, midi, blamp_triangle_generator(), audio_out);
-      break;
-    default:
-      assert(false);
-      break;
+    case oscillator_analog_type::sine: generate_unison(input, voices, midi, transformed_cv, sine_generator(), audio_out); break;
+    case oscillator_analog_type::saw:  generate_unison(input, voices, midi, transformed_cv, blep_saw_generator(), audio_out); break;
+    case oscillator_analog_type::pulse: generate_unison(input, voices, midi, transformed_cv, blep_pulse_generator(), audio_out); break;
+    case oscillator_analog_type::triangle: generate_unison(input, voices, midi, transformed_cv, blamp_triangle_generator(), audio_out); break;
+    default: assert(false); break;
     }
     break;
-  case oscillator_type::dsf:
-    generate_unison(input, automation, transformed_cv, voices, midi, dsf_generator(partials), audio_out);
-    break;
-  default:
-    break;
+  case oscillator_type::dsf: generate_unison(input, voices, midi, transformed_cv, dsf_generator(partials), audio_out); break;
+  default: assert(false); break;
   }
   return base::performance_counter() - start_time;
 }
