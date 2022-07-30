@@ -79,7 +79,8 @@ filter::process_comb(
     audio_sample32 min = _comb.output.get(dly_min_samples) * gain_min[s];
     audio_sample32 plus = _comb.input.get(dly_plus_samples) * gain_plus[s];
     _comb.input.push(audio_in[s]);
-    _comb.output.push(sanity_audio(audio_in[s] + plus + min));
+    _comb.output.push(audio_in[s] + plus + min);
+    audio_out[s] = base::sanity_audio(_comb.output.get(0));
   }
 }
 
