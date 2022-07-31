@@ -29,7 +29,7 @@ vst_io_stream::read_string(std::string& val)
 bool
 vst_io_stream::read_wstring(std::wstring& val)
 {  
-  char16_t chr;
+  wchar_t chr;
   Steinberg::int32 size;  
   val.clear();
   if(!_streamer->readInt32(size)) return false;

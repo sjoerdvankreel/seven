@@ -58,7 +58,7 @@ struct param_descriptor
   std::string const guid; // Unique param id for serialization.
   item_name const static_name; // Static name, e.g. "Frequency", "Resonance".
   param_type const type; // Parameter type.
-  char16_t const* const unit; // Parameter unit, e.g. "dB", "Hz".
+  wchar_t const* const unit; // Parameter unit, e.g. "dB", "Hz".
   param_ui_descriptor const ui; // For ui generator. 
   union 
   {
@@ -66,12 +66,12 @@ struct param_descriptor
     discrete_descriptor const discrete; // Discrete valued specific data.
   };
 
-  bool parse(char16_t const* buffer, param_value& val) const;
-  std::size_t format(param_value val, char16_t* buffer, std::size_t size) const;
+  bool parse(wchar_t const* buffer, param_value& val) const;
+  std::size_t format(param_value val, wchar_t* buffer, std::size_t size) const;
 
   // Real.
   param_descriptor(std::string const& guid, item_name const& static_name, 
-    char16_t const* unit, real_descriptor const& real, param_ui_descriptor const& ui) :
+  wchar_t const* unit, real_descriptor const& real, param_ui_descriptor const& ui) :
   guid(guid), static_name(static_name), type(param_type::real), unit(unit), ui(ui), real(real) {}
 
   // Toggle.
@@ -81,13 +81,13 @@ struct param_descriptor
   unit(L""), ui(ui), discrete(discrete_descriptor({0, 1, default_,  nullptr})) {}
 
   // Knob/text.
-  param_descriptor(std::string const& guid, item_name const& static_name, char16_t const* unit,
+  param_descriptor(std::string const& guid, item_name const& static_name, wchar_t const* unit,
   bool knob, std::int32_t min, std::int32_t max, std::int32_t default_, param_ui_descriptor const& ui) :
   guid(guid), static_name(static_name), type(knob? param_type::knob: param_type::text),
   unit(unit), ui(ui), discrete(discrete_descriptor({min, max, default_, nullptr})) {}
    
   // List/knob list with item list.
-  param_descriptor(std::string const& guid, item_name const& static_name, char16_t const* unit,
+  param_descriptor(std::string const& guid, item_name const& static_name, wchar_t const* unit, 
   bool knob, std::vector<std::wstring> const* items, std::int32_t default_, param_ui_descriptor const& ui) :
   guid(guid), static_name(static_name), type(knob? param_type::knob_list: param_type::list),
   unit(unit), ui(ui), discrete(discrete_descriptor({ static_cast<std::int32_t>(0), static_cast<std::int32_t>(items->size() - 1), default_, items })) {}

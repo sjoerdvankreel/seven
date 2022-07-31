@@ -44,7 +44,7 @@ amplitude_params[amplitude_param::count] =
 
 // ---- active ----  
 
-char16_t const* envelope_item_info(std::int32_t index)
+wchar_t const* envelope_item_info(std::int32_t index)
 { return index > 0? nullptr: L"Amp"; };
  
 static std::vector<std::wstring> const active_lfo_names = list_names(L"LFO", lfo_count, nullptr);
@@ -200,8 +200,8 @@ oscillator_params[oscillator_param::count] =
   
 // ---- audio route ---- 
  
-static char16_t const* const audio_route_input_names[audio_route_input::count] = { L"Off", L"Osc", L"Filter" };
-static char16_t const* const audio_route_output_names[audio_route_output::count] = { L"Off", L"Filter", L"Amp" };
+static wchar_t const* const audio_route_input_names[audio_route_input::count] = { L"Off", L"Osc", L"Filter" };
+static wchar_t const* const audio_route_output_names[audio_route_output::count] = { L"Off", L"Filter", L"Amp" };
 static std::vector<std::wstring> const audio_route_input_names_list = multi_list_names(audio_route_input_names, audio_route_input_counts, audio_route_input::count);
 static std::vector<std::wstring> const audio_route_output_names_list = multi_list_names(audio_route_output_names, audio_route_output_counts, audio_route_output::count);
 
@@ -232,16 +232,16 @@ audio_route_params[audio_route_param::count] =
 // ---- cv route ----                 
     
 static graph_descriptor const cv_route_graph = { -1, 0, 1, 2, 2, L"CV" };
-static char16_t const* const cv_route_input_names[cv_route_input::count] = { L"Off", L"Velocity", L"Env", L"LFO"};
+static wchar_t const* const cv_route_input_names[cv_route_input::count] = { L"Off", L"Velocity", L"Env", L"LFO"};
 static list_item_info const cv_route_input_infos[cv_route_input::count] = { nullptr, nullptr, envelope_item_info, nullptr };
-static char16_t const* const cv_route_input_op_name[cv_route_input_op::count] = { L"Add", L"Mul" };
-static char16_t const* const* const cv_route_input_op_names[cv_route_input::count] = { nullptr, cv_route_input_op_name, cv_route_input_op_name, cv_route_input_op_name };
-static char16_t const* const cv_route_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Filter", L"Amp", L"Audio" };
-static char16_t const* const cv_route_amp_output_names[cv_route_amp_output::count] = { L"Lvl", L"Pan" };
-static char16_t const* const cv_route_audio_output_names[cv_route_audio_output::count] = { L"Amt1", L"Amt2", L"Amt3", L"Amt4", L"Amt5", L"Amt6" };
-static char16_t const* const cv_route_filter_output_names[cv_route_filter_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
-static char16_t const* const cv_route_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"PW", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
-static char16_t const* const* const cv_route_output_target_names[cv_route_output::count] = { nullptr, cv_route_osc_output_names, cv_route_filter_output_names, cv_route_amp_output_names, cv_route_audio_output_names };
+static wchar_t const* const cv_route_input_op_name[cv_route_input_op::count] = { L"Add", L"Mul" };
+static wchar_t const* const* const cv_route_input_op_names[cv_route_input::count] = { nullptr, cv_route_input_op_name, cv_route_input_op_name, cv_route_input_op_name };
+static wchar_t const* const cv_route_output_names[cv_route_output::count] = { L"Off", L"Osc", L"Filter", L"Amp", L"Audio" };
+static wchar_t const* const cv_route_amp_output_names[cv_route_amp_output::count] = { L"Lvl", L"Pan" };
+static wchar_t const* const cv_route_audio_output_names[cv_route_audio_output::count] = { L"Amt1", L"Amt2", L"Amt3", L"Amt4", L"Amt5", L"Amt6" };
+static wchar_t const* const cv_route_filter_output_names[cv_route_filter_output::count] = { L"Frq", L"Res", L"Kbd", L"Dly+", L"Gn+", L"Dly-", L"Gn-" };
+static wchar_t const* const cv_route_osc_output_names[cv_route_osc_output::count] = { L"Amp", L"Pan", L"PW", L"Dist", L"Roll", L"Cent", L"Dtn", L"Sprd" };
+static wchar_t const* const* const cv_route_output_target_names[cv_route_output::count] = { nullptr, cv_route_osc_output_names, cv_route_filter_output_names, cv_route_amp_output_names, cv_route_audio_output_names };
 static std::vector<std::wstring> const cv_route_input_names_list = zip_list_names(cv_route_input_names, cv_route_input_infos, cv_route_input_counts, cv_route_input_op_names, cv_route_input_op_counts, cv_route_input::count);
 static std::vector<std::wstring> const cv_route_output_names_list = zip_list_names(cv_route_output_names, nullptr, cv_route_output_counts, cv_route_output_target_names, cv_route_output_target_counts, cv_route_output::count);
      

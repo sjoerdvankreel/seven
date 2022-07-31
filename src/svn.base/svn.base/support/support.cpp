@@ -28,8 +28,8 @@ restore_denormals(std::uint64_t state)
 
 bool
 list_parser(
-  std::u16string const& val,
-  std::vector<std::u16string> const& names,
+  std::wstring const& val,
+  std::vector<std::wstring> const& names,
   std::int32_t& result)
 {
   for(std::size_t i = 0; i < names.size(); i++)
@@ -108,64 +108,64 @@ zip_list_table_init_out(
   return result;
 }
 
-std::vector<std::u16string>
-list_names(char16_t const* name, std::int32_t count, list_item_info info)
+std::vector<std::wstring>
+list_names(wchar_t const* name, std::int32_t count, list_item_info info)
 {
-  std::vector<std::u16string> result;
+  std::vector<std::wstring> result;
   for (std::int32_t i = 0; i < count; i++)
   {
-    std::u16string item = name + std::u16string(L" ") + std::to_u16string(i + 1);
+    std::wstring item = name + std::wstring(L" ") + std::to_wstring(i + 1);
     if (info != nullptr)
     {
-      char16_t const* extra = info(i);
+      wchar_t const* extra = info(i);
       if (extra != nullptr)
-        item = std::u16string(extra) + L" " + name;
+        item = std::wstring(extra) + L" " + name;
     }
     result.push_back(item);
   }
   return result;
 }
 
-std::vector<std::u16string>
+std::vector<std::wstring>
 multi_list_names(
-  char16_t const* const* names,
+  wchar_t const* const* names,
   std::int32_t const* counts, std::int32_t count)
 {
-  std::vector<std::u16string> result;
+  std::vector<std::wstring> result;
   for(std::int32_t i = 0; i < count; i++)
     for(std::int32_t j = 0; j < counts[i]; j++)
     {
-      std::u16string name = names[i];
+      std::wstring name = names[i];
       if(counts[i] > 1) name += L" " + std::to_wstring(j + 1);
       result.push_back(name);
     }
   return result;
 } 
 
-std::vector<std::u16string>
+std::vector<std::wstring>
 zip_list_names(
-  char16_t const* const* names1, list_item_info const* infos, std::int32_t const* counts1,
-  char16_t const* const* const* names2, std::int32_t const* counts2,
+  wchar_t const* const* names1, list_item_info const* infos, std::int32_t const* counts1,
+  wchar_t const* const* const* names2, std::int32_t const* counts2,
   std::int32_t count)
 {
-  std::vector<std::u16string> result;
+  std::vector<std::wstring> result;
   for (std::int32_t i = 0; i < count; i++)
     for (std::int32_t j = 0; j < counts1[i]; j++)
       if (counts2[i] == 0)
       {
-        std::u16string name = names1[i];
+        std::wstring name = names1[i];
         if (counts1[i] > 1) name += L" " + std::to_wstring(j + 1);
         result.push_back(name);
       }
       else for(std::int32_t k = 0; k < counts2[i]; k++)
       {
-        std::u16string name = names1[i];
+        std::wstring name = names1[i];
         if(counts1[i] > 1)
         { 
           name += L" " + std::to_wstring(j + 1);
           if (infos != nullptr && infos[i] != nullptr)
           {
-            char16_t const* extra = infos[i](j);
+            wchar_t const* extra = infos[i](j);
             if(extra != nullptr)
               name = std::wstring(extra) + L" " + names1[i];
           }

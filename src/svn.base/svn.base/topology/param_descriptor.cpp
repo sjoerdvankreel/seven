@@ -8,7 +8,7 @@
 namespace svn::base {
 
 bool 
-param_descriptor::parse(char16_t const* buffer, param_value& val) const
+param_descriptor::parse(wchar_t const* buffer, param_value& val) const
 {
   std::int32_t discrete_val;
   std::wstringstream str(buffer);
@@ -45,7 +45,7 @@ param_descriptor::parse(char16_t const* buffer, param_value& val) const
 }  
 
 std::size_t 
-param_descriptor::format(param_value val, char16_t* buffer, std::size_t size) const
+param_descriptor::format(param_value val, wchar_t* buffer, std::size_t size) const
 {
   std::wstringstream stream;
   switch (type) 
@@ -58,7 +58,7 @@ param_descriptor::format(param_value val, char16_t* buffer, std::size_t size) co
   }
   std::wstring str = stream.str();
   if(buffer == nullptr || size == 0) return str.length() + 1;
-  std::memset(buffer, 0, size * sizeof(char16_t));
+  std::memset(buffer, 0, size * sizeof(wchar_t));
   std::wcsncpy(buffer, str.c_str(), size - 1);
   return str.length() + 1;
 } 
