@@ -33,7 +33,7 @@ lfo::process_block(
   std::int32_t bipolar = automation.automation_discrete(lfo_param::bipolar, 0);
   std::int32_t period_sync = automation.automation_discrete(lfo_param::period_sync, 0);
   float timesig = lfo_timesig_values[period_sync];
-  float sync_frequency = timesig_to_frequency(_sample_rate, input.bpm, timesig);
+  float sync_frequency = timesig_to_frequency(input.bpm, timesig);
   
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {

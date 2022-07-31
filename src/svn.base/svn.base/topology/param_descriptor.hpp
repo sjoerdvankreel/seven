@@ -72,25 +72,25 @@ struct param_descriptor
   // Real.
   param_descriptor(std::string const& guid, item_name const& static_name, 
   wchar_t const* unit, real_descriptor const& real, param_ui_descriptor const& ui) :
-  guid(guid), static_name(static_name), type(param_type::real), unit(unit), real(real), ui(ui) {}
+  guid(guid), static_name(static_name), type(param_type::real), unit(unit), ui(ui), real(real) {}
 
   // Toggle.
   param_descriptor(std::string const& guid, item_name const& static_name, 
   bool default_, param_ui_descriptor const& ui) :
   guid(guid), static_name(static_name), type(param_type::toggle),
-  unit(L""), discrete(discrete_descriptor(0, 1, default_,  nullptr)), ui(ui) {}
+  unit(L""), ui(ui), discrete(discrete_descriptor(0, 1, default_,  nullptr)) {}
 
   // Knob/text.
   param_descriptor(std::string const& guid, item_name const& static_name, wchar_t const* unit,
   bool knob, std::int32_t min, std::int32_t max, std::int32_t default_, param_ui_descriptor const& ui) :
   guid(guid), static_name(static_name), type(knob? param_type::knob: param_type::text),
-  unit(unit), discrete(discrete_descriptor(min, max, default_, nullptr)), ui(ui) {}
+  unit(unit), ui(ui), discrete(discrete_descriptor(min, max, default_, nullptr)) {}
    
   // List/knob list with item list.
   param_descriptor(std::string const& guid, item_name const& static_name, wchar_t const* unit, 
   bool knob, std::vector<std::wstring> const* items, std::int32_t default_, param_ui_descriptor const& ui) :
   guid(guid), static_name(static_name), type(knob? param_type::knob_list: param_type::list),
-  unit(unit), discrete(discrete_descriptor(0, static_cast<std::int32_t>(items->size() - 1), default_, items)), ui(ui) {}
+  unit(unit), ui(ui), discrete(discrete_descriptor(0, static_cast<std::int32_t>(items->size() - 1), default_, items)) {}
 };
 
 } // namespace svn::base

@@ -83,7 +83,7 @@ inline float
 timesig_to_samples(float sample_rate, float bpm, float timesig_val)
 { return sample_rate * 60.0f / bpm * timesig_val; }
 inline float
-timesig_to_frequency(float sample_rate, float bpm, float timesig_val)
+timesig_to_frequency(float bpm, float timesig_val)
 { return bpm / (60.0f * timesig_val) ; }
 
 template <class T> inline T
