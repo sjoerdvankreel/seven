@@ -53,18 +53,6 @@ public:
     std::int32_t sample_count, std::int32_t sample_offset, std::int32_t sample_fixed_at);
 };
 
-std::int32_t _sample_count = 0;
-std::int32_t _sample_offset = 0;
-std::int32_t _sample_fixed_at = 0;
-
-std::int32_t _total_param_count = 0;
-std::int32_t _part_param_count = 0;
-std::int32_t _part_param_offset = 0;
-
-param_value const* _fixed = nullptr;
-topology_info const* _topology = nullptr;
-param_value const* const* _automation = nullptr;
-
 inline automation_view::
 automation_view(
   topology_info const* topology, param_value const* fixed, param_value const* const* automation,
