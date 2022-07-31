@@ -66,9 +66,9 @@ rotary_knob::draw(VSTGUI::CDrawContext* context)
   for (std::int32_t i = 0; i < light_parts; i++)
   {
     std::int32_t alpha_index = i <= light_top_index ? i: light_top_index - (i - light_top_index);
-    double angle1 = 180.0 + i * 90.0 / light_parts;
-    double angle2 = 180.0 + (i + 1) * 90.0 / light_parts;
-    context->setFrameColor(CColor(255, 255, 255, (alpha_index + 1) * highlight_part_alpha_contrib));
+    float angle1 = 180.0f + i * 90.0f / light_parts;
+    float angle2 = 180.0f + (i + 1) * 90.0f / light_parts;
+    context->setFrameColor(CColor(255, 255, 255, static_cast<std::uint8_t>((alpha_index + 1) * highlight_part_alpha_contrib)));
     context->drawArc(CRect(CPoint(1, 1), size - CPoint(2, 2)), angle1, angle2, kDrawStroked);
   }
 
@@ -78,9 +78,9 @@ rotary_knob::draw(VSTGUI::CDrawContext* context)
   for (std::int32_t i = 0; i < light_parts; i++)
   {
     std::int32_t alpha_index = i <= light_top_index ? i : light_top_index - (i - light_top_index);
-    double angle1 = i * 90.0 / light_parts;
-    double angle2 = (i + 1) * 90.0 / light_parts;
-    context->setFrameColor(CColor(0, 0, 0, (alpha_index + 1) * shadow_part_alpha_contrib));
+    float angle1 = i * 90.0f / light_parts;
+    float angle2 = (i + 1) * 90.0f / light_parts;
+    context->setFrameColor(CColor(0, 0, 0, static_cast<std::uint8_t>((alpha_index + 1) * shadow_part_alpha_contrib)));
     context->drawArc(CRect(CPoint(1, 1), size - CPoint(2, 2)), angle1, angle2, kDrawStroked);
   }
 } 

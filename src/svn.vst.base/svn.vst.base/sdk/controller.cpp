@@ -44,7 +44,6 @@ void
 controller::update_state(std::int32_t param)
 {
   double normalized = getParamNormalized(param);
-  auto const& descriptor = *_topology->params[param].descriptor;
   _state[param] = vst_normalized_to_base(_topology, param, normalized);
 }
 

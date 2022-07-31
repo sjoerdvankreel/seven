@@ -7,9 +7,9 @@ namespace svn::vst::base {
 CColor 
 color_darken(CColor const& color, float amt, std::uint8_t new_alpha)
 {
-  float r = static_cast<std::uint8_t>(color.red * (1.0f - amt));
-  float g = static_cast<std::uint8_t>(color.green * (1.0f - amt));
-  float b = static_cast<std::uint8_t>(color.blue * (1.0f - amt));
+  std::uint8_t r = static_cast<std::uint8_t>(color.red * (1.0f - amt));
+  std::uint8_t g = static_cast<std::uint8_t>(color.green * (1.0f - amt));
+  std::uint8_t b = static_cast<std::uint8_t>(color.blue * (1.0f - amt));
   return CColor(r, g, b, new_alpha);
 }
 

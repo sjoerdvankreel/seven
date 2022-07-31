@@ -153,7 +153,6 @@ build_ui_param_label(
   std::string const& alignment, std::int32_t left, std::int32_t width, Document::AllocatorType& allocator)
 {
   Value result(build_ui_param_item_base("CTextLabel", left, width, -1, allocator));
-  auto const& descriptor = *topology.params[param.runtime_param_index].descriptor;
   add_attribute(result, "transparent", "true", allocator);
   add_attribute(result, "font", "~ NormalFont", allocator);
   add_attribute(result, "text-alignment", alignment, allocator);
