@@ -26,9 +26,9 @@ output_param_update_msec = 200;
 
 processor::
 processor(topology_info const* topology, FUID controller_id):
-_topology(topology), _processor(),
 _state(static_cast<std::size_t>(topology->input_param_count)),
-_accurate_parameters(static_cast<std::size_t>(topology->input_param_count))
+_accurate_parameters(static_cast<std::size_t>(topology->input_param_count)),
+_topology(topology), _processor()
 {
 	setControllerClass(controller_id);
   topology->init_defaults(_state.data());
@@ -148,8 +148,11 @@ processor::process_notes(block_input& input, ProcessData const& data)
   int32 count = data.inputEvents->getEventCount();
   std::int32_t capacity = _processor->topology()->max_note_events;
   for (std::int32_t i = 0; i < count; i++)
+  {
     if (data.inputEvents->getEvent(i, event) == kResultOk)
+    {
       if (event.type == Event::kNoteOnEvent || event.type == Event::kNoteOffEvent)
+      {
         if (input.note_count == capacity) break;
         else
         {
@@ -173,6 +176,9 @@ processor::process_notes(block_input& input, ProcessData const& data)
             break;
           }
         }
+      }
+    }
+  }
 }
 
 // Translate from vst3 automation events using the last queued values.
