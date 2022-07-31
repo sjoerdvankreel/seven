@@ -10,7 +10,7 @@ namespace svn::synth {
 
 filter::
 filter(float sample_rate, std::int32_t midi_note) :
-_state_var(), _comb(), _sample_rate(sample_rate)
+_sample_rate(sample_rate), _comb(), _state_var()
 {
   float this_frequency = note_to_frequency(midi_note);
   float base_frequency = note_to_frequency(midi_note_c4);
