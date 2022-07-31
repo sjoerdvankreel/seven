@@ -68,7 +68,7 @@ topology_info::create(
       if(static_parts[t].output) result->output_param_count += static_parts[t].param_count;
       else result->input_param_count += static_parts[t].param_count;
       if (static_parts[t].part_count > 1) runtime_name += std::wstring(L" ") + std::to_wstring(i + 1);
-      result->parts.push_back(part_info(type_index++, runtime_name, param_index, &static_parts[t]));
+      result->parts.push_back(part_info({ type_index++, runtime_name, param_index, &static_parts[t] }));
       part_index++;
       param_index += static_parts[t].param_count;
     }
@@ -81,7 +81,7 @@ topology_info::create(
     {
       auto const& descriptor = result->parts[part].descriptor->params[p];
       std::wstring runtime_name = part_name + L" " + descriptor.static_name.detail;
-      result->params.push_back(param_info(part, runtime_name, &descriptor));
+      result->params.push_back(param_info({ part, runtime_name, &descriptor }));
     }
   }
 

@@ -118,7 +118,7 @@ std::int32_t
 lfo_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 {
   std::int32_t const cycles = 2;
-  state_view view(topology(), state, part_type::lfo, part_index());
+  state_view view({ topology(), state, part_type::lfo, part_index() });
   float samples = view.get_real_dsp(lfo_param::period_time) * lfo_graph_rate;
   if(view.get_discrete(lfo_param::synced) != 0)
   {
@@ -156,7 +156,7 @@ amp_graph::dsp_to_plot(
 {
   bipolar = false;
   plot.resize(dsp.size());
-  state_view view(topology(), state, part_type::amplitude, 0);
+  state_view view({ topology(), state, part_type::amplitude, 0 });
   float amp = view.get_real_dsp(amplitude_param::level);
   for(std::size_t i = 0; i < dsp.size(); i++)
     plot[i] = (dsp[i].bipolar? (dsp[i].value + 1.0f) * 0.5f: dsp[i].value) * amp;
@@ -282,7 +282,7 @@ oscillator_wave_graph::sample_count(
   param_value const* state, float sample_rate, float bpm) const
 {
   std::int32_t const cycles = 2;
-  state_view view(topology(), state, part_type::oscillator, part_index());
+  state_view view({ topology(), state, part_type::oscillator, part_index() });
   float cent = view.get_real_dsp(oscillator_param::cent);
   std::int32_t note = view.get_discrete(oscillator_param::note);
   std::int32_t octave = view.get_discrete(oscillator_param::octave);
@@ -346,7 +346,7 @@ std::int32_t
 filter_ir_graph::sample_count(
   param_value const* state, float sample_rate, float bpm) const
 {
-  state_view view(topology(), state, part_type::filter, part_index());
+  state_view view({ topology(), state, part_type::filter, part_index() });
   std::int32_t type = view.get_discrete(filter_param::type);
   std::int32_t length_ms = type == filter_type::state_var? 5: 50;
   return static_cast<std::int32_t>(std::ceil(length_ms * sample_rate / 1000.0f));
@@ -402,7 +402,7 @@ cv_route_graph::dsp_to_plot(
 std::int32_t
 cv_route_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 { 
-  state_view view(topology(), state, part_type::cv_route, part_index());
+  state_view view({ topology(), state, part_type::cv_route, part_index() });
   float seconds = view.get_real_dsp(cv_route_param::plot_time);
   return static_cast<std::int32_t>(std::ceil(seconds * cv_route_graph_rate));
 }

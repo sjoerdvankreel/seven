@@ -4,6 +4,7 @@
 #include <cmath>
 #include <limits>
 #include <cassert>
+#include <cstdint>
 
 namespace svn::base {
 
