@@ -59,15 +59,15 @@ topology_info::create(
     std::int32_t type_index = 0;   
     result->part_bounds.push_back(std::vector<std::int32_t>());
     result->param_bounds.push_back(std::vector<std::int32_t>());
-    std::wstring type_name(static_parts[t].static_name.short_);
+    std::string type_name(static_parts[t].static_name.short_);
     for (std::int32_t i = 0; i < static_parts[t].part_count; i++)
     {   
       result->part_bounds[t].push_back(part_index);
       result->param_bounds[t].push_back(param_index);
-      std::wstring runtime_name = type_name;
+      std::string runtime_name = type_name;
       if(static_parts[t].output) result->output_param_count += static_parts[t].param_count;
       else result->input_param_count += static_parts[t].param_count;
-      if (static_parts[t].part_count > 1) runtime_name += std::wstring(L" ") + std::to_wstring(i + 1);
+      if (static_parts[t].part_count > 1) runtime_name += std::string(" ") + std::to_string(i + 1);
       result->parts.push_back(part_info({ type_index++, runtime_name, param_index, &static_parts[t] }));
       part_index++;
       param_index += static_parts[t].param_count;
@@ -76,11 +76,11 @@ topology_info::create(
 
   for (std::int32_t part = 0; part < result->parts.size(); part++)
   {
-    std::wstring part_name = result->parts[part].runtime_name;
+    std::string part_name = result->parts[part].runtime_name;
     for (std::int32_t p = 0; p < result->parts[part].descriptor->param_count; p++)
     {
       auto const& descriptor = result->parts[part].descriptor->params[p];
-      std::wstring runtime_name = part_name + L" " + descriptor.static_name.detail;
+      std::string runtime_name = part_name + " " + descriptor.static_name.detail;
       result->params.push_back(param_info({ part, runtime_name, &descriptor }));
     }
   }

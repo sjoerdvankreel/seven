@@ -22,7 +22,7 @@ struct topology_ui_info
 struct part_info
 {
   std::int32_t const type_index; // Part index within this type, e.g. 0/1 in case of 2 filters.
-  std::wstring const runtime_name; // Runtime name, e.g. "Filter 1", "Filter 2". Equals static name when part count is 1.
+  std::string const runtime_name; // Runtime name, e.g. "Filter 1", "Filter 2". Equals static name when part count is 1.
   std::int32_t const runtime_param_start; // Index into topology.
   part_descriptor const* const descriptor; // Pointer to static part information.
 };
@@ -31,7 +31,7 @@ struct part_info
 struct param_info
 {
   std::int32_t const part_index; // Index into runtime_part array, e.g. 0/1/2/3 when 2 oscillators + 2 filters.
-  std::wstring const runtime_name; // Runtime parameter name, e.g. "Filter 2 frequency".
+  std::string const runtime_name; // Runtime parameter name, e.g. "Filter 2 frequency".
   param_descriptor const* const descriptor; // Pointer to static parameter information.
 };
 

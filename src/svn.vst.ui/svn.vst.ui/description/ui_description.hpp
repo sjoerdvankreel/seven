@@ -48,8 +48,8 @@ struct part_type_ui_description
   std::int32_t width;
   std::int32_t height;
   std::int32_t column; // Own column.
-  wchar_t const* info; // Extra header info.
-  wchar_t const* name; // Extra header info.
+  char const* info; // Extra header info.
+  char const* name; // Extra header info.
   svn::base::ui_color color; // Type color.
   param_ui_description selector_param; // Osc1/2 etc.
   std::vector<part_ui_description> parts;

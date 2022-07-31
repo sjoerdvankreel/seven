@@ -23,9 +23,7 @@ public:
   // Base needs these.
   bool read_int32(std::int32_t& val) override;
   bool read_string(std::string& val) override;
-  bool read_wstring(std::wstring& val) override;
   bool write_string(std::string const& val) override;
-  bool write_wstring(std::wstring const& val) override;
 
   bool read_float(float& val) override { return _streamer->readFloat(val); }
   bool write_float(float val) override { return _streamer->writeFloat(val); }

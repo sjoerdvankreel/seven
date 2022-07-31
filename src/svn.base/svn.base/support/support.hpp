@@ -22,15 +22,15 @@ union param_value
 // Generic short name/detailed description.
 struct item_name
 {
-  wchar_t const* const short_; // Short name, e.g. "Pw".
-  wchar_t const* const detail; // Long name, e.g. "Pulse width".
-  item_name(wchar_t const* short_, wchar_t const* detail): short_(short_), detail(detail) {}
+  char const* const short_; // Short name, e.g. "Pw".
+  char const* const detail; // Long name, e.g. "Pulse width".
+  item_name(char const* short_, char const* detail): short_(short_), detail(detail) {}
 };
 
-typedef wchar_t const* (*list_item_info)(std::int32_t index);
+typedef char const* (*list_item_info)(std::int32_t index);
 
 // Somebody's bound to need this.
-inline std::vector<std::wstring> const note_names = { L"C", L"C#", L"D", L"D#", L"E", L"F", L"F#", L"G", L"G#", L"A", L"A#", L"B" };
+inline std::vector<std::string> const note_names = { "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" };
 
 // Toggle daz/ftz.
 std::uint64_t disable_denormals();
@@ -39,28 +39,28 @@ void restore_denormals(std::uint64_t state);
 // Returns index of item.
 bool
 list_parser(
-  std::wstring const& val, 
-  std::vector<std::wstring> const& names,
+  std::string const& val, 
+  std::vector<std::string> const& names,
   std::int32_t& result);
 
 // E.g. "Osc", 2 -> "Osc 1", "Osc 2".
-std::vector<std::wstring>
-list_names(wchar_t const* name, std::int32_t count, list_item_info info);
+std::vector<std::string>
+list_names(char const* name, std::int32_t count, list_item_info info);
 
 // Pass list of names with count per name.
 // E.g. ["Osc", "Flt"], [2, 1] -> ["Osc 1", "Osc 2", "Flt"].
-std::vector<std::wstring>
+std::vector<std::string>
 multi_list_names(
-  wchar_t const* const* names, 
+  char const* const* names,
   std::int32_t const* counts, std::int32_t count);
 
 // Pass list of names with count per name plus second list specific to item in first.
 // E.g. ["Osc", "Flt"], [2, 1], ["Amp", "Pan"], ["Freq", "Res"] 
 // -> ["Osc 1 Amp", "Osc 1 Pan", "Osc 2 Amp", "Osc 2 Pan", "Flt Freq", "Flt Res"] 
-std::vector<std::wstring>
+std::vector<std::string>
 zip_list_names(
-  wchar_t const* const* names1, list_item_info const* infos, std::int32_t const* counts1,
-  wchar_t const* const* const* names2, std::int32_t const* counts2,
+  char const* const* names1, list_item_info const* infos, std::int32_t const* counts1,
+  char const* const* const* names2, std::int32_t const* counts2,
   std::int32_t count);
 
 // (Part x, index y) <-> multi list index.
@@ -87,7 +87,7 @@ beat_synced_timesig(
 std::vector<float>
 beat_synced_timesig_values(
   std::vector<std::pair<std::int32_t, std::int32_t>> const& timesig);
-std::vector<std::wstring>
+std::vector<std::string>
 beat_synced_timesig_names(
   std::vector<std::pair<std::int32_t, std::int32_t>> const& timesig);
 

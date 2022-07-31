@@ -30,7 +30,7 @@ struct graph_descriptor
   std::int32_t const column; // Columns in ui grid.
   std::int32_t const row_span; // Row count in ui grid.
   std::int32_t const column_span; // Column count in ui grid.
-  wchar_t const* const description;
+  char const* const description;
 };
 
 // For ui generator.
@@ -41,7 +41,7 @@ struct part_ui_descriptor
   std::int32_t const enabled_param; // Index into own params which identifies the part on/off switch, or -1 if always on.
   std::int32_t const enabled_relevant_if_rt_index_gt; // Enabled param has no effect if rt part index < N.
   std::int32_t const selector_param; // Index into selector params which identifies the part index switch param if this part type has more then 1 runtime part, or -1 if part count is 1.
-  wchar_t const* const info; // Extra info for part header ui.
+  char const* const info; // Extra info for part header ui.
   ui_color const color;
 };
 

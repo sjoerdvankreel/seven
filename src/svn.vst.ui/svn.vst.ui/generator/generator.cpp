@@ -52,9 +52,9 @@ build_ui_control_tags(
   for (std::size_t p = 0; p < topology.params.size(); p++)
   {    
     auto const& param = topology.params[p];
-    std::wstring tag_name = topology.parts[param.part_index].descriptor->static_name.detail;
-    tag_name += L"_" + topology.parts[param.part_index].type_index;
-    tag_name += L"_" + std::wstring(param.descriptor->static_name.detail);
+    std::string tag_name = topology.parts[param.part_index].descriptor->static_name.detail;
+    tag_name += "_" + topology.parts[param.part_index].type_index;
+    tag_name += "_" + std::string(param.descriptor->static_name.detail);
     std::string tag = get_control_tag(topology, p);
     add_member(result, get_control_tag(topology, p), std::to_string(p), allocator);
   }
