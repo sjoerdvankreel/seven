@@ -51,16 +51,11 @@ public graph_processor_base
   std::vector<param_value*> _automation;
   std::vector<param_value> _automation_buffer;
 
-  // Saves some typing in derived class headers.
-protected:
-  using param_value = svn::base::param_value;
-  using block_input = svn::base::block_input;
-  using topology_info = svn::base::topology_info;
-
 protected:
   graph_processor(topology_info const* topology, std::int32_t part_index): 
-  _automation(), _automation_buffer(), _part_index(part_index),
-  _raw_data(), _plot_data(), _graph_data(), _topology(topology) {}
+  _part_index(part_index), _topology(topology),
+  _raw_data(), _plot_data(), _graph_data(),
+  _automation(), _automation_buffer() {}
 
 private:
   // Do the full dsp stuff without transforming to plot.
@@ -77,10 +72,10 @@ public:
 
   // Need to know size up front.
   virtual std::int32_t sample_count(param_value const* state, float sample_rate, float bpm) const = 0;
-  // May be used to process graph specific requirements, e.g. disable modulation.
-  virtual param_value transform_param(std::int32_t rt_index, param_value value) const { return value; }
   // Renders data in sample_count samples.
   virtual void process_dsp_core(block_input const& input, T* output, float sample_rate, float bpm) = 0;
+  // May be used to process graph specific requirements, e.g. disable modulation.
+  virtual param_value transform_param(std::int32_t rt_index, param_value value) const { (void)rt_index; return value; }
   // Transforms raw data to plot in (0, 1).
   virtual void dsp_to_plot(param_value const* state, std::vector<T> const& dsp, std::vector<float>& plot, float sample_rate, bool& bipolar) = 0;
 };
