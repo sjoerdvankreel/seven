@@ -10,7 +10,6 @@ namespace svn::base {
 bool 
 param_descriptor::parse(char const* buffer, param_value& val) const
 {
-  std::int32_t discrete_val;
   std::stringstream str(buffer);
   float inf = std::numeric_limits<float>::infinity();
   switch (type)

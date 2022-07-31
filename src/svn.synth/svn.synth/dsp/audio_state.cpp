@@ -13,7 +13,8 @@ std::vector<std::pair<std::int32_t, std::int32_t>> const audio_state::input_tabl
 
 audio_state::
 audio_state(std::int32_t max_sample_count):  
-oscillator(), filter(), _relevant_indices(), _bank_automation()
+scratch(), _relevant_indices_count(0), _bank_automation(),
+_relevant_indices(), amplitude(), filter(), oscillator()
 {
   std::vector<base::audio_sample32> audio(static_cast<std::size_t>(max_sample_count));
   scratch = audio;
