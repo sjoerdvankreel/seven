@@ -32,8 +32,8 @@ public VSTGUI::VST3Editor
 
 public:
   // Keeping track of graphs and controls by tag for fast access.
-  void onViewAdded(CFrame* frame, CView* view) override;
-  void onViewRemoved(CFrame* frame, CView* view) override;
+  void onViewAdded(CFrame* view_frame, CView* view) override;
+  void onViewRemoved(CFrame* view_frame, CView* view) override;
 
   // Update visibility of dependent views and rerender graphs.
   void controllerEndEdit(ParamID tag);

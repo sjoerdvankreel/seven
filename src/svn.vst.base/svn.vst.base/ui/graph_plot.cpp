@@ -92,8 +92,8 @@ graph_plot::draw(VSTGUI::CDrawContext* context)
   // Path.
   context->setLineWidth(1.0);
   context->setDrawMode(kAntiAliasing);
-  context->setFillColor(color_lighten(_color, 0.25, 96));
-  context->setFrameColor(color_lighten(_color, 0.33, 255));
+  context->setFillColor(color_lighten(_color, 0.25f, 96));
+  context->setFrameColor(color_lighten(_color, 0.33f, 255));
   CGraphicsPath* stroke_path = context->createGraphicsPath();
   stroke_path->beginSubpath(CPoint(graph_data[0].x + padx, render_size.y - graph_data[0].y + pady));
   for (std::size_t i = 1; i < graph_data.size(); i++)

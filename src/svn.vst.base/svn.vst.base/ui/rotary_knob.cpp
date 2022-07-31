@@ -45,14 +45,14 @@ rotary_knob::draw(VSTGUI::CDrawContext* context)
   context->drawEllipse(CRect(CPoint(2, 2), size - CPoint(4, 4)), kDrawStroked);
    
   // marker
-  float center = (size.x - 1.0f) / 2.0f;
-  float radius = center - 3.0f;
-  float start = getStartAngle();
-  float range = getRangeAngle();
-  float angle = getValueNormalized();
-  float theta = -(start + angle * range);
-  float x = radius * std::sin(theta) + center;
-  float y = radius * std::cos(theta) + center;
+  double center = (size.x - 1.0) / 2.0;
+  double radius = center - 3.0;
+  double start = getStartAngle();
+  double range = getRangeAngle();
+  double angle = getValueNormalized();
+  double theta = -(start + angle * range);
+  double x = radius * std::sin(theta) + center;
+  double y = radius * std::cos(theta) + center;
   context->setFrameColor(color_lighten(_color, 0.5f, 192));
   context->drawLine(CPoint(center, center), CPoint(x, y));
 
@@ -66,8 +66,8 @@ rotary_knob::draw(VSTGUI::CDrawContext* context)
   for (std::int32_t i = 0; i < light_parts; i++)
   {
     std::int32_t alpha_index = i <= light_top_index ? i: light_top_index - (i - light_top_index);
-    float angle1 = 180.0f + i * 90.0f / light_parts;
-    float angle2 = 180.0f + (i + 1) * 90.0f / light_parts;
+    double angle1 = 180.0 + i * 90.0 / light_parts;
+    double angle2 = 180.0 + (i + 1) * 90.0 / light_parts;
     context->setFrameColor(CColor(255, 255, 255, (alpha_index + 1) * highlight_part_alpha_contrib));
     context->drawArc(CRect(CPoint(1, 1), size - CPoint(2, 2)), angle1, angle2, kDrawStroked);
   }
@@ -78,8 +78,8 @@ rotary_knob::draw(VSTGUI::CDrawContext* context)
   for (std::int32_t i = 0; i < light_parts; i++)
   {
     std::int32_t alpha_index = i <= light_top_index ? i : light_top_index - (i - light_top_index);
-    float angle1 = 0.0f + i * 90.0f / light_parts;
-    float angle2 = 0.0f + (i + 1) * 90.0f / light_parts;
+    double angle1 = i * 90.0 / light_parts;
+    double angle2 = (i + 1) * 90.0 / light_parts;
     context->setFrameColor(CColor(0, 0, 0, (alpha_index + 1) * shadow_part_alpha_contrib));
     context->drawArc(CRect(CPoint(1, 1), size - CPoint(2, 2)), angle1, angle2, kDrawStroked);
   }

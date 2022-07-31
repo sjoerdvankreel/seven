@@ -97,7 +97,7 @@ topology_info::create(
     {
       std::int32_t that_param = this_param.descriptor->ui.relevance[i].if_param;
       std::int32_t that_index = result->param_bounds[type][index] + that_param;
-      result->ui.param_dependencies[that_index].push_back(p);
+      result->ui.param_dependencies[that_index].push_back(static_cast<std::int32_t>(p));
     }
   }
    

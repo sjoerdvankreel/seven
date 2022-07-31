@@ -91,7 +91,7 @@ controller::initialize(FUnknown* context)
       to_vst_string(_topology->parts[p].runtime_name.c_str()).c_str(), 
       static_cast<Steinberg::int32>(p + 1), kRootUnitId));
   // Add all runtime parameters.
-  for (std::size_t p = 0; p < _topology->params.size(); p++)
+  for (std::int32_t p = 0; p < _topology->params.size(); p++)
   {
     part_info const* part = &_topology->parts[_topology->params[p].part_index];
     parameters.addParameter(new parameter(p, part, &_topology->params[p]));

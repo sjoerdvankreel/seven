@@ -189,7 +189,7 @@ beat_synced_timesig(std::int32_t sig_count, bool with_zero)
   // Filter out equivalents (e.g. 2/4 == 4/8).
   bool seen_this;
   std::vector<float> seen;
-  float const epsilon = 1.0e-3;
+  float const epsilon = 1.0e-3f;
   std::vector<std::pair<std::int32_t, std::int32_t>> result;
   for (std::size_t i = 0; i < all.size(); i++)
   {

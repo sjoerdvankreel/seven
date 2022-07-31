@@ -69,6 +69,9 @@ inline float
 note_to_frequency(float midi)
 { return 440.0f * std::pow(2.0f, (midi - 69.0f) / 12.0f); }
 inline float
+note_to_frequency(std::int32_t midi)
+{ return note_to_frequency(static_cast<float>(midi)); }
+inline float
 note_to_frequency_table(float midi)
 {
   float midi_cent = midi * note_to_frequency_table_init::cent_count;

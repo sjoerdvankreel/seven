@@ -49,8 +49,8 @@ spectrum_analyzer::power_at_note(
 {
   float result = 0.0f;
   float freq_to_bin = sample_rate / (fft.size() * 2.0f);
-  std::size_t bin1 = static_cast<size_t>(note_to_frequency(midi) * freq_to_bin);
-  std::size_t bin2 = static_cast<size_t>(note_to_frequency(midi + 1) * freq_to_bin);
+  std::size_t bin1 = static_cast<size_t>(note_to_frequency(static_cast<float>(midi * freq_to_bin)));
+  std::size_t bin2 = static_cast<size_t>(note_to_frequency(static_cast<float>(midi + 1) * freq_to_bin));
   for (std::size_t i = bin1; i < bin2 && i < fft.size(); i++)
   {
     float real2 = fft[i].real() * fft[i].real();

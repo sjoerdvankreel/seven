@@ -34,9 +34,9 @@ editor::open(void* parent, const PlatformType& type)
 }
 
 void 
-editor::onViewAdded(CFrame* frame, CView* view)
+editor::onViewAdded(CFrame* view_frame, CView* view)
 {
-  VST3Editor::onViewAdded(frame, view);
+  VST3Editor::onViewAdded(view_frame, view);
 
   // Keep track of graphs.
   graph_plot* graph = dynamic_cast<graph_plot*>(view);
@@ -44,19 +44,19 @@ editor::onViewAdded(CFrame* frame, CView* view)
     _graphs.push_back(graph);
     
   // Keep track of controls by tag.
-  auto* controller = static_cast<svn::vst::base::controller*>(getController());
+  auto* view_controller = static_cast<svn::vst::base::controller*>(getController());
   CControl* control = dynamic_cast<CControl*>(view);
   if (control != nullptr && control->getTag() >= 0)
   {
     // Control loses its value if removed and re-added.
     _controls[control->getTag()].push_back(control);
-    param_value val = controller->state()[control->getTag()];
+    param_value val = view_controller->state()[control->getTag()];
     control->setValue(base_to_vst_normalized(_topology, control->getTag(), val));
   }
 }
  
 void 
-editor::onViewRemoved(CFrame* frame, CView* view)
+editor::onViewRemoved(CFrame* view_frame, CView* view)
 {
   // Keep track of graphs.
   graph_plot* graph = dynamic_cast<graph_plot*>(view);
@@ -71,11 +71,11 @@ editor::onViewRemoved(CFrame* frame, CView* view)
   CControl* control = dynamic_cast<CControl*>(view);
   if (control != nullptr && control->getTag() >= 0)
     for(std::size_t param = 0; param < _controls.size(); param++)
-      for (std::size_t control = 0; control < _controls[param].size(); control++)
-        if(_controls[param][control] == view)
-          _controls[param].erase(_controls[param].begin() + control);
+      for (std::size_t c = 0; c < _controls[param].size(); c++)
+        if(_controls[param][c] == view)
+          _controls[param].erase(_controls[param].begin() + c);
 
-  VST3Editor::onViewRemoved(frame, view);
+  VST3Editor::onViewRemoved(view_frame, view);
 }
     
 void               
@@ -99,12 +99,12 @@ editor::controllerEndEdit(ParamID tag)
       auto const& param = _topology->params[dependents[d]];
       for (std::int32_t i = 0; i < param.descriptor->ui.relevance_count; i++)
       {
-        auto controller = static_cast<svn::vst::base::controller*>(getController());
+        auto edit_controller = static_cast<svn::vst::base::controller*>(getController());
         std::int32_t part_index = _topology->parts[param.part_index].type_index;
         std::int32_t part_type = _topology->parts[param.part_index].descriptor->type;
         std::int32_t offset = _topology->param_bounds[part_type][part_index];
         std::int32_t that_param = param.descriptor->ui.relevance[i].if_param;
-        double normalized = controller->getParamNormalized(that_param + offset);
+        double normalized = edit_controller->getParamNormalized(that_param + offset);
         std::int32_t value = vst_normalized_to_base(_topology, that_param + offset, normalized).discrete;
         auto const& if_values = _topology->params[dependents[d]].descriptor->ui.relevance[i].if_values;
         visible &= std::find(if_values.begin(), if_values.end(), value) != if_values.end();
