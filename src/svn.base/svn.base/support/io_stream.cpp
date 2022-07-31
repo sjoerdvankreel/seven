@@ -13,7 +13,7 @@ bool
 io_stream::save(topology_info const& topology, param_value const* state)
 {
   std::size_t chars;
-  std::vector<wchar_t> str;
+  std::vector<char16_t> str;
   
   assert(state != nullptr);
   topology.state_check(state);
@@ -47,7 +47,7 @@ io_stream::save(topology_info const& topology, param_value const* state)
       chars = param.format(state[p], nullptr, 0);
       str.reserve(chars);
       param.format(state[p], str.data(), chars);
-      if(!write_wstring(std::wstring(str.data()))) return false;
+      if(!write_u16string(std::u16string(str.data()))) return false;
       break;
     default:
       assert(false);
@@ -64,7 +64,7 @@ io_stream::load(topology_info const& topology, param_value* state)
   param_value value;
   std::string part_guid;
   std::string param_guid;
-  std::wstring str_value;
+  std::u16string str_value;
 
   std::int32_t temp;
   std::int32_t type_index;
@@ -93,7 +93,7 @@ io_stream::load(topology_info const& topology, param_value* state)
       break;
     case param_type::list:
     case param_type::knob_list:
-      if (!read_wstring(str_value)) return false;
+      if (!read_u16string(str_value)) return false;
       break;
     case param_type::text:
     case param_type::knob:

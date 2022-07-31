@@ -22,12 +22,12 @@ union param_value
 // Generic short name/detailed description.
 struct item_name
 {
-  wchar_t const* const short_; // Short name, e.g. "Pw".
-  wchar_t const* const detail; // Long name, e.g. "Pulse width".
-  item_name(wchar_t const* short_, wchar_t const* detail): short_(short_), detail(detail) {}
+  char16_t const* const short_; // Short name, e.g. "Pw".
+  char16_t const* const detail; // Long name, e.g. "Pulse width".
+  item_name(char16_t const* short_, char16_t const* detail): short_(short_), detail(detail) {}
 };
 
-typedef wchar_t const* (*list_item_info)(std::int32_t index);
+typedef char16_t const* (*list_item_info)(std::int32_t index);
 
 // Somebody's bound to need this.
 inline std::vector<std::wstring> const note_names = { L"C", L"C#", L"D", L"D#", L"E", L"F", L"F#", L"G", L"G#", L"A", L"A#", L"B" };
@@ -45,13 +45,13 @@ list_parser(
 
 // E.g. "Osc", 2 -> "Osc 1", "Osc 2".
 std::vector<std::wstring>
-list_names(wchar_t const* name, std::int32_t count, list_item_info info);
+list_names(char16_t const* name, std::int32_t count, list_item_info info);
 
 // Pass list of names with count per name.
 // E.g. ["Osc", "Flt"], [2, 1] -> ["Osc 1", "Osc 2", "Flt"].
 std::vector<std::wstring>
 multi_list_names(
-  wchar_t const* const* names, 
+  char16_t const* const* names,
   std::int32_t const* counts, std::int32_t count);
 
 // Pass list of names with count per name plus second list specific to item in first.
@@ -59,8 +59,8 @@ multi_list_names(
 // -> ["Osc 1 Amp", "Osc 1 Pan", "Osc 2 Amp", "Osc 2 Pan", "Flt Freq", "Flt Res"] 
 std::vector<std::wstring>
 zip_list_names(
-  wchar_t const* const* names1, list_item_info const* infos, std::int32_t const* counts1,
-  wchar_t const* const* const* names2, std::int32_t const* counts2,
+  char16_t const* const* names1, list_item_info const* infos, std::int32_t const* counts1,
+  char16_t const* const* const* names2, std::int32_t const* counts2,
   std::int32_t count);
 
 // (Part x, index y) <-> multi list index.
