@@ -54,7 +54,7 @@ envelope::process_block(
   automation_view automation(input.automation.rearrange_params(part_type::envelope, index));
 
   // Always run envelope 0, it's hardwired to the voice amp section.
-  if (index > 0 && automation.automation_discrete(envelope_param::on, 0))
+  if (index > 0 && automation.automation_discrete(envelope_param::on, 0) == 0)
   {
     std::memset(cv_out, 0, input.sample_count * sizeof(cv_sample));
     return 0.0;
