@@ -79,7 +79,7 @@ parameter::fromString(TChar const* string, ParamValue& normalized) const
   std::vector<char> str8;
   while(*string != static_cast<TChar>(0))
     str8.push_back(static_cast<char>(*string++));
-  str8.push_back('0');
+  str8.push_back('\0');
   if (!_descriptor->parse(str8.data(), value)) return false;
   switch (_descriptor->type)
   {
