@@ -121,14 +121,6 @@ sanity_audio(audio_sample<T> val)
   return val;
 }
 
-template <class T> inline audio_sample<T>
-sanity_audio_bipolar(audio_sample<T> val)
-{
-  sanity_bipolar(val.left);
-  sanity_bipolar(val.right);
-  return val;
-}
-
 inline std::uint64_t
 next_pow2(std::uint64_t x)
 {
@@ -139,20 +131,18 @@ next_pow2(std::uint64_t x)
   return 1ULL << result;
 }
 
+// Don't actually clip, host may still attenuate.
 inline bool
-clip_audio(audio_sample32* audio, std::int32_t sample_count)
+audio_may_clip(audio_sample32* audio, std::int32_t sample_count)
 {
-  bool result = false;
   for (std::int32_t s = 0; s < sample_count; s++)
   {
-    result |= audio[s].left < -1.0f;
-    result |= audio[s].left > 1.0f;
-    result |= audio[s].right < -1.0f;
-    result |= audio[s].right > 1.0f;
-    audio[s].left = std::clamp(audio[s].left, -1.0f, 1.0f);
-    audio[s].right = std::clamp(audio[s].right, -1.0f, 1.0f);
+    if (audio[s].left > 1.0f) return true;
+    if(audio[s].left < -1.0f) return true;
+    if (audio[s].right > 1.0f) return true;
+    if(audio[s].right < -1.0f) return true;
   }
-  return result;
+  return false;
 }
 
 inline void

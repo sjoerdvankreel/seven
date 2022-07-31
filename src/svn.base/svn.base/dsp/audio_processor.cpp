@@ -42,7 +42,7 @@ audio_processor::process_block()
   process_block(_input, _output);
   restore_denormals(state);
   for(std::int32_t s = 0; s < _input.sample_count; s++)
-    sanity_audio_bipolar(_output.audio[s]);
+    sanity_audio(_output.audio[s]);
   return _output;
 }
 

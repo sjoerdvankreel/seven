@@ -174,7 +174,7 @@ synthesizer::process_block(block_input const& input, block_output& output)
     _last_automation_previous_block[p] = input.automation[p][input.sample_count - 1];
   
   // Clip and set output info.
-  bool clip = base::clip_audio(output.audio, input.sample_count);
+  bool clip = base::audio_may_clip(output.audio, input.sample_count);
   std::int32_t output_start = topology()->param_bounds[part_type::output][0] - topology()->input_param_count;
   output.output_params[output_start + output_param::clip].discrete = clip ? 1 : 0;
   output.output_params[output_start + output_param::voices].discrete = voice_count;
