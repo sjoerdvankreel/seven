@@ -27,6 +27,7 @@ add_compile_options(-Wextra)
 add_compile_options(-Werror)
 add_compile_options(-Wno-sign-compare)
 add_compile_options(-Wno-unused-parameter)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 endif()
 
 # VST SDK debug binaries.
