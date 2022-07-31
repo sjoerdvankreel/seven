@@ -2,10 +2,14 @@
 #define SVN_VST_BASE_SUPPORT_SUPPORT_HPP
 
 #include <svn.base/topology/topology_info.hpp>
+#include <pluginterfaces/base/ftypes.h>
 #include <algorithm>
 #include <cassert>
 
 namespace svn::vst::base {
+
+std::basic_string<Steinberg::Vst::TChar>
+to_vst_string(char const* str);
 
 inline double 
 discrete_to_vst_normalized(

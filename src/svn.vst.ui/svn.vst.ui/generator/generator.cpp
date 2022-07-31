@@ -1,4 +1,3 @@
-#include <svn.vst.ui/support/support.hpp>
 #include <svn.vst.ui/generator/support.hpp>
 #include <svn.vst.ui/generator/generator.hpp>
 #include <svn.base/topology/part_descriptor.hpp>
@@ -83,9 +82,9 @@ build_ui_param_control_base(
   std::string tag = get_control_tag(topology, runtime_param_index);
   add_attribute(result, "control-tag", tag, allocator);
   auto const& rt_param = topology.params[runtime_param_index];
-  std::string tooltip = narrow_assume_ascii(rt_param.runtime_name);
-  std::string unit = std::string(" (") + narrow_assume_ascii(rt_param.descriptor->unit) + ")";
-  if (std::wcslen(rt_param.descriptor->unit) > 0) tooltip += unit;
+  std::string tooltip = rt_param.runtime_name;
+  std::string unit = std::string(" (") + rt_param.descriptor->unit + ")";
+  if (std::strlen(rt_param.descriptor->unit) > 0) tooltip += unit;
   add_attribute(result, "tooltip", tooltip, allocator);
   return result;
 }
@@ -159,7 +158,7 @@ build_ui_param_label(
   add_attribute(result, "font", "~ NormalFont", allocator);
   add_attribute(result, "text-alignment", alignment, allocator);
   add_attribute(result, "font-color", get_color_name(type.color, color_alpha::opaque), allocator);
-  std::string title = narrow_assume_ascii(topology.params[param.runtime_param_index].descriptor->static_name.short_);
+  std::string title = topology.params[param.runtime_param_index].descriptor->static_name.short_;
   add_attribute(result, "title", title, allocator);
   return result;
 }
@@ -318,12 +317,12 @@ build_ui_part_graph(
   std::int32_t top = graph.row * (param_row_height + margin) + 2 * padding_param_group;
   std::int32_t height = graph.row_span * param_row_height + (graph.row_span - 1) * margin + 2 * padding_param_group;
   add_attribute(result, "class", "seven_graph_plot", allocator);
+  add_attribute(result, "tooltip", graph.description, allocator);
   add_attribute(result, "origin", size_to_string(left, top), allocator);
   add_attribute(result, "size", size_to_string(width, height), allocator);
   add_attribute(result, "graph-type", std::to_string(graph.type), allocator);
   add_attribute(result, "row-span", std::to_string(graph.row_span), allocator);
   add_attribute(result, "column-span", std::to_string(graph.column_span), allocator);
-  add_attribute(result, "tooltip", narrow_assume_ascii(graph.description), allocator);
   add_attribute(result, "part-index", std::to_string(part_desc.type_index), allocator);
   add_attribute(result, "part-type", std::to_string(part_desc.descriptor->type), allocator);
   add_attribute(result, "color", get_color_name(type.color, color_alpha::opaque), allocator);
@@ -427,7 +426,7 @@ build_ui_part_header_container(
   add_attribute(result, "background-color", get_color_name(black, color_alpha::half), allocator);
 
   std::int32_t selector_offset = type.selector_param.runtime_param_index == -1? 0: param_col1_width + param_col2_width + margin;
-  std::string title = " " + narrow_assume_ascii(topology.parts[part.runtime_part_index].runtime_name);
+  std::string title = " " + topology.parts[part.runtime_part_index].runtime_name;
   if (part.enabled_param.runtime_param_index != -1 && part.enabled_param_relevant)
   {
     Value enabled_box = build_ui_param_checkbox(
@@ -440,7 +439,7 @@ build_ui_part_header_container(
     add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", title, selector_offset, allocator), allocator);
 
   std::int32_t info_left = part.width - param_total_width - 2 * margin;
-  std::string info = " " + narrow_assume_ascii(topology.parts[part.runtime_part_index].descriptor->ui.info);
+  std::string info = " " + topology.parts[part.runtime_part_index].descriptor->ui.info;
   add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "right", info, info_left, allocator), allocator);
   return result;
 }

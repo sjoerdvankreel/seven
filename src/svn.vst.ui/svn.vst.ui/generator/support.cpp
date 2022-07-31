@@ -1,4 +1,3 @@
-#include <svn.vst.ui/support/support.hpp>
 #include <svn.vst.ui/generator/support.hpp>
 #include <svn.base/topology/param_descriptor.hpp>
 
@@ -83,10 +82,9 @@ std::string
 get_control_tag(topology_info const& topology, std::size_t p)
 {
   auto const& param = topology.params[p];
-  std::string tag_name = topology.parts[param.part_index].descriptor->static_name.detail;
-  tag_name += "_" + std::to_string(topology.parts[param.part_index].type_index);
-  tag_name += "_" + std::string(param.descriptor->static_name.detail);
-  std::string result = narrow_assume_ascii(tag_name);
+  std::string result = topology.parts[param.part_index].descriptor->static_name.detail;
+  result += "_" + std::to_string(topology.parts[param.part_index].type_index);
+  result += "_" + std::string(param.descriptor->static_name.detail);
   for (std::size_t c = 0; c < result.length(); c++)
   {
     if (std::isspace(result[c])) result[c] = '_';

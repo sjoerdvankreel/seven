@@ -1,5 +1,4 @@
 #include <svn.base/topology/part_descriptor.hpp>
-#include <svn.vst.ui/support/support.hpp>
 #include <svn.vst.ui/description/support.hpp>
 #include <svn.vst.ui/description/ui_description.hpp>
 
@@ -217,14 +216,14 @@ controller_ui_description::print(svn::base::topology_info const& topology, std::
   for (std::size_t part_type = 0; part_type < part_types.size(); part_type++)
   {
     os << "\tPart type " << part_type << ":\n";
-    os << "\t\tName: " << narrow_assume_ascii(part_types[part_type].name) << "\n";
+    os << "\t\tName: " << part_types[part_type].name << "\n";
     os << "\t\tTop: " << part_types[part_type].top << "\n";
     os << "\t\tLeft: " << part_types[part_type].left << "\n";
     os << "\t\tWidth: " << part_types[part_type].width << "\n";
     os << "\t\tHeight: " << part_types[part_type].height << "\n";
     os << "\t\tColumn: " << part_types[part_type].column << "\n";
     os << "\t\tSelector: " << part_types[part_type].selector_param.runtime_param_index << "\n";
-    os << "\t\tInfo: " << narrow_assume_ascii(part_types[part_type].info) << "\n";
+    os << "\t\tInfo: " << part_types[part_type].info << "\n";
     os << "\t\tColor:";
     os << " " << static_cast<std::int32_t>(part_types[part_type].color.r);
     os << " " << static_cast<std::int32_t>(part_types[part_type].color.g);
@@ -236,7 +235,7 @@ controller_ui_description::print(svn::base::topology_info const& topology, std::
       auto const& part_desc = part_types[part_type].parts[part];
       std::int32_t rt_index = part_desc.runtime_part_index;
       os << "\t\tPart " << part << ":\n";
-      os << "\t\t\tName: " << narrow_assume_ascii(topology.parts[rt_index].runtime_name) << "\n";
+      os << "\t\t\tName: " << topology.parts[rt_index].runtime_name << "\n";
       os << "\t\t\tParams: " << part_desc.params.size() << "\n";
       os << "\t\t\tColumns: " << part_desc.columns << "\n";
       os << "\t\t\tRows: " << part_desc.rows << "\n";
@@ -263,7 +262,7 @@ controller_ui_description::print(svn::base::topology_info const& topology, std::
         if(param_ui.runtime_param_index != -1)
         {
           auto const& descriptor = *topology.params[param_ui.runtime_param_index].descriptor;
-          name = narrow_assume_ascii(descriptor.static_name.short_);
+          name = descriptor.static_name.short_;
         }
         std::cout << "\t\t\t\t" << name << " (" << param_ui.row << ", " << param_ui.column << ")\n";
       }
