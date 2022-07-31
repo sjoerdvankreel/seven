@@ -1,5 +1,7 @@
 #include <svn.synth/dsp/filter.hpp>
 #include <svn.base/dsp/support.hpp>
+#include <svn.base/support/platform.hpp>
+
 #include <cassert>
 
 using namespace svn::base;

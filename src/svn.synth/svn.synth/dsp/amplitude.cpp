@@ -1,4 +1,5 @@
 #include <svn.base/dsp/support.hpp>
+#include <svn.base/support/platform.hpp>
 #include <svn.synth/dsp/amplitude.hpp>
 #include <svn.synth/topology/topology.hpp>
 #include <cassert>

@@ -1,5 +1,6 @@
 #include <svn.synth/dsp/audio_state.hpp>
 #include <svn.base/dsp/support.hpp>
+#include <svn.base/support/platform.hpp>
 
 namespace svn::synth {
 

@@ -1,7 +1,4 @@
 #include <svn.base/support/support.hpp>
-
-#define NOMINMAX 1
-#include <Windows.h>
 #include <immintrin.h>
 
 #include <cassert>
@@ -27,19 +24,6 @@ restore_denormals(std::uint64_t state)
   std::uint32_t ftz = static_cast<std::uint32_t>((state & 0xFFFFFFFF00000000) >> 32);
   _MM_SET_FLUSH_ZERO_MODE(ftz);
   _MM_SET_DENORMALS_ZERO_MODE(daz);
-}
-
-double
-performance_counter()
-{
-  bool ok;
-  LARGE_INTEGER counter;
-  LARGE_INTEGER frequency;
-  ok = QueryPerformanceCounter(&counter);
-  assert(ok);
-  ok = QueryPerformanceFrequency(&frequency);
-  assert(ok);
-  return static_cast<double>(counter.QuadPart) / static_cast<double>(frequency.QuadPart);
 }
 
 bool

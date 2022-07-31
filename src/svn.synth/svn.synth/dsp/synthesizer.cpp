@@ -1,5 +1,6 @@
 #include <svn.base/dsp/support.hpp>
 #include <svn.synth/dsp/synthesizer.hpp>
+#include <svn.base/support/platform.hpp>
 
 #include <Windows.h>
 #include <cassert>

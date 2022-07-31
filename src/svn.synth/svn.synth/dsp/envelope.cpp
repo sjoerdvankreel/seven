@@ -1,6 +1,7 @@
 #include <svn.base/dsp/support.hpp>
 #include <svn.synth/topology/topology.hpp>
 #include <svn.synth/dsp/envelope.hpp>
+#include <svn.base/support/platform.hpp>
 
 #include <cmath>
 #include <cassert>
