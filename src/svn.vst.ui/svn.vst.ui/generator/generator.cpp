@@ -439,7 +439,7 @@ build_ui_part_header_container(
     add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "left", title, selector_offset, allocator), allocator);
 
   std::int32_t info_left = part.width - param_total_width - 2 * margin;
-  std::string info = " " + topology.parts[part.runtime_part_index].descriptor->ui.info;
+  std::string info = std::string(" ") + topology.parts[part.runtime_part_index].descriptor->ui.info;
   add_child(result, "CTextLabel", build_ui_part_header_label(topology, type, "right", info, info_left, allocator), allocator);
   return result;
 }

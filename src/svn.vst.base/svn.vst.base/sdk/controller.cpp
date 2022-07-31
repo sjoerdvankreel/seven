@@ -87,7 +87,9 @@ controller::initialize(FUnknown* context)
 
   // Add parts as units.
   for (std::size_t p = 0; p < _topology->parts.size(); p++)
-    addUnit(new Unit(_topology->parts[p].runtime_name.c_str(), static_cast<Steinberg::int32>(p + 1), kRootUnitId));
+    addUnit(new Unit(
+      to_vst_string(_topology->parts[p].runtime_name.c_str()).c_str(), 
+      static_cast<Steinberg::int32>(p + 1), kRootUnitId));
   // Add all runtime parameters.
   for (std::size_t p = 0; p < _topology->params.size(); p++)
   {

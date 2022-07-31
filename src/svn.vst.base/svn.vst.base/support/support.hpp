@@ -8,8 +8,15 @@
 
 namespace svn::vst::base {
 
-std::basic_string<Steinberg::Vst::TChar>
-to_vst_string(char const* str);
+inline std::basic_string<Steinberg::Vst::TChar>
+to_vst_string(char const* str)
+{
+  std::vector<Steinberg::Vst::TChar> result;
+  while(*str != '0')
+    result.push_back(*str++);
+  result.push_back(static_cast<Steinberg::Vst::TChar>('0'));
+  return std::basic_string<Steinberg::Vst::TChar>(result.data());
+}
 
 inline double 
 discrete_to_vst_normalized(

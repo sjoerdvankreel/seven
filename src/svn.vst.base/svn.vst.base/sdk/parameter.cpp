@@ -42,11 +42,14 @@ parameter(std::int32_t index,
   svn::base::part_info const* part, 
   svn::base::param_info const* param) :
   Parameter(
-    param->runtime_name.c_str(), index, param->descriptor->unit,
+    to_vst_string(param->runtime_name.c_str()).c_str(),
+    index, 
+    to_vst_string(param->descriptor->unit).c_str(),
     param_default_to_vst_normalized(*param->descriptor),
     param_step_count(*param->descriptor),
     param_flags(param->descriptor->type, part->descriptor->output),
-    param->part_index + 1, param->descriptor->static_name.short_),
+    param->part_index + 1, 
+    to_vst_string(param->descriptor->static_name.short_).c_str()),
   _descriptor(param->descriptor)
 {    
   assert(index >= 0);
@@ -58,19 +61,26 @@ void
 parameter::toString(ParamValue normalized, String128 string) const
 {
   param_value value;
+  char str8[128] = { 0 };
   switch (_descriptor->type)
   {
   case param_type::real: value.real = toPlain(normalized); break;
   default: value.discrete = vst_normalized_to_discrete(*_descriptor, normalized); break;
   }
-  _descriptor->format(value, string, 128);
+  _descriptor->format(value, str8, 128);
+  for(std::size_t i = 0; i < 128; i++)  
+    string[i] = str8[i];
 }
  
 bool
 parameter::fromString(TChar const* string, ParamValue& normalized) const
 {
   param_value value;
-  if (!_descriptor->parse(string, value)) return false;
+  std::vector<char> str8;
+  while(*string != static_cast<TChar>(0))
+    str8.push_back(static_cast<char>(*string++));
+  str8.push_back('0');
+  if (!_descriptor->parse(str8.data(), value)) return false;
   switch (_descriptor->type)
   {
   case param_type::real: normalized = toNormalized(value.real); break;
