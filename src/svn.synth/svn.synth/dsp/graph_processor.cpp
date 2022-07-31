@@ -220,8 +220,8 @@ envelope_graph::setup_stages(
   base::automation_view view(topology(), nullptr, automation,
     topology()->input_param_count, topology()->input_param_count, 0, 1, 0, 1);
   automation_view env_view = view.rearrange_params(part_type::envelope, part_index());
-   cv.transform_unmodulated(view, part_type::envelope, 1, transformed_cv);
-  env.setup_stages(env_view, 0, bpm, delay, attack, hold, decay, release);
+  cv.transform_unmodulated(env_view, part_type::envelope, 1, transformed_cv);
+  env.setup_stages(env_view, transformed_cv, bpm, delay, attack, hold, decay, release);
 }
 
 bool 
