@@ -60,6 +60,13 @@ envelope::process_block(
     return 0.0;
   }
 
+  // Shortcut if we're done already.
+  if (_ended)
+  {
+    std::fill(cv_out, cv_out + input.sample_count, _end_sample);
+    return 0.0;
+  }
+
   // We need only 1 sample per block.
   float const* const* transformed_cv;
   cv_time += cv.transform_unmodulated(automation, part_type::envelope, 1, transformed_cv);
@@ -96,57 +103,53 @@ envelope::process_block(
     {
       stage_id = envelope_stage::delay;
       env = 0.0f;
+      goto sample_generated;
     }
-    else
+
+    stage_pos = std::ceil(stage_pos + delay);
+    if (position < stage_pos + attack)
     {
-      stage_pos = std::ceil(stage_pos + delay);
-      if (position < stage_pos + attack)
-      {
-        stage_id = envelope_stage::attack;
-        env = generate_slope(attack_slope, (position - stage_pos) / attack, attack_exp);
-      }
-      else
-      {
-        stage_pos = std::ceil(stage_pos + attack);
-        if (position < stage_pos + hold)
-        {
-          stage_id = envelope_stage::hold;
-          env = 1.0f;
-        }
-        else
-        {
-          stage_pos = std::ceil(stage_pos + hold);
-          if (position < stage_pos + decay)
-          {
-            stage_id = envelope_stage::decay,
-            env = 1.0f - generate_slope(decay_slope, (position - stage_pos) / decay, decay_exp) * (1.0f - sustain);
-          }
-          else
-          {
-            if (type == envelope_type::dahdsr && !_released)
-            {
-              stage_id = envelope_stage::sustain;
-              env = sustain;
-            }
-            else
-            {
-              stage_pos = std::ceil(stage_pos + decay);
-              if (position < stage_pos + release)
-              {
-                _released = true;
-                stage_id = envelope_stage::release;
-                env = _release_level - generate_slope(release_slope, (position - stage_pos) / release, release_exp) * _release_level;
-              }
-              else
-              {
-                stage_id = envelope_stage::end;
-                env = 0.0f;
-              }
-            }
-          }
-        }
-      }
+      stage_id = envelope_stage::attack;
+      env = generate_slope(attack_slope, (position - stage_pos) / attack, attack_exp);
+      goto sample_generated;
     }
+
+    stage_pos = std::ceil(stage_pos + attack);
+    if (position < stage_pos + hold)
+    {
+      stage_id = envelope_stage::hold;
+      env = 1.0f;
+      goto sample_generated;
+    }
+
+    stage_pos = std::ceil(stage_pos + hold);
+    if (position < stage_pos + decay)
+    {
+      stage_id = envelope_stage::decay,
+      env = 1.0f - generate_slope(decay_slope, (position - stage_pos) / decay, decay_exp) * (1.0f - sustain);
+      goto sample_generated;
+    }
+
+    if (type == envelope_type::dahdsr && !_released)
+    {
+      stage_id = envelope_stage::sustain;
+      env = sustain;
+      goto sample_generated;
+    }
+
+    stage_pos = std::ceil(stage_pos + decay);
+    if (position < stage_pos + release)
+    {
+      _released = true;
+      stage_id = envelope_stage::release;
+      env = _release_level - generate_slope(release_slope, (position - stage_pos) / release, release_exp) * _release_level;
+      goto sample_generated;
+    }
+
+    stage_id = envelope_stage::end;
+    env = 0.0f;
+
+sample_generated:
     
     // Fill output buffer.
     if(bipolar == 0) cv_out[s] = { sanity_unipolar(env), false };
@@ -157,8 +160,8 @@ envelope::process_block(
     if(stage_id == envelope_stage::end) 
     { 
       _ended = true; 
-      cv_out[s] = _end_sample; 
-      continue; 
+      std::fill(cv_out + s, cv_out + input.sample_count, _end_sample);
+      break;
     }
     
     // Keep track of last sample in case of early release (during the attack or decay stages).
