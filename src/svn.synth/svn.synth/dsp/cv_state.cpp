@@ -15,9 +15,9 @@ std::vector<std::vector<std::vector<std::int32_t>>> const cv_state::output_table
 
 cv_state::
 cv_state(base::topology_info const* topology, std::int32_t max_sample_count) :
-  _topology(topology), envelope(), lfo(), _scratch(), 
-  _scratch_buffer(), _relevant_indices(), _bank_automation(),
-  velocity(static_cast<std::size_t>(max_sample_count))
+_scratch(), _scratch_buffer(), _topology(topology),
+_relevant_indices_count(0), _bank_automation(), _relevant_indices(),
+velocity(static_cast<std::size_t>(max_sample_count)), lfo(), envelope()
 {
   std::vector<base::cv_sample> cv(static_cast<std::size_t>(max_sample_count));
   lfo.fill(cv);
