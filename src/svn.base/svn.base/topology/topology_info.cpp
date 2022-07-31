@@ -26,6 +26,7 @@ topology_info::state_check(param_value const* state) const
     else
     {
       std::int32_t val = state[p].discrete;
+      (void)val;
       assert(descriptor.discrete.min <= val && val <= descriptor.discrete.max);
     }
   }

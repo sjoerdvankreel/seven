@@ -83,6 +83,7 @@ audio_processor::automation_check(std::int32_t sample_count)
       else
       {
         std::int32_t val = _input.automation[p][s].discrete;
+        (void)val;
         assert(descriptor.discrete.min <= val && val <= descriptor.discrete.max);
       }
   }
