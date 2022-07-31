@@ -6,12 +6,21 @@
 
 namespace svn::synth {
 
+  float _velocity;
+  amplitude _amplitude;
+  base::topology_info const* _topology;
+  std::array<lfo, lfo_count> _lfos;
+  std::array<filter, filter_count> _filters;
+  std::array<envelope, envelope_count> _envelopes;
+  std::array<oscillator, oscillator_count> _oscillators;
+
+
 synth_voice::
 synth_voice(
   base::topology_info const* topology,
   float sample_rate, float velocity, std::int32_t midi_note):
-_envelopes(), _filters(), _oscillators(), _lfos(),
-_topology(topology), _velocity(velocity), _amplitude(sample_rate)
+_velocity(velocity), _amplitude(sample_rate), _topology(topology),
+_lfos(), _filters(), _envelopes(), _oscillators()
 {
   assert(topology != nullptr);  
   assert(0 <= midi_note && midi_note < 128);

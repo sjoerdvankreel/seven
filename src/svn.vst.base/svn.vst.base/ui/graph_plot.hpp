@@ -27,7 +27,7 @@ public:
   _row_span(row_span), _column_span(column_span), _processor(processor) { }
 public:
   ~graph_plot() override { delete _processor; }
-  svn::base::graph_processor_base* const processor() const { return _processor; }
+  svn::base::graph_processor_base* processor() const { return _processor; }
 };
 
 // VSTGUI graph factory.

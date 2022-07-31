@@ -19,8 +19,8 @@ inline double constexpr pi64 = 3.14159265358979323846264338327950288f;
 // Any cv input e.g. lfos, envelopes.
 struct cv_sample
 {
-  float value = 0.0f;
-  bool bipolar = false;
+  float value;
+  bool bipolar;
 };
 
 // Simplify access to static state.
