@@ -1,9 +1,7 @@
 #include <svn.vst.base/ui/support.hpp>
 #include <svn.vst.base/ui/rotary_knob.hpp>
 #include <vstgui/uidescription/uiviewcreator.h>
-
 #include <cassert>
-#include <numbers>
 
 using namespace VSTGUI;
 

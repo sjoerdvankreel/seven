@@ -1,7 +1,5 @@
 #include <svn.base/dsp/fft.hpp>
 #include <svn.base/dsp/support.hpp>
-
-#include <numbers>
 #include <cassert>
 
 namespace svn::base {
@@ -21,7 +19,7 @@ fft::transform(std::complex<float>* inout,
   transform(even, inout, count / 2);
   for (std::size_t i = 0; i < count / 2; i++)
   {
-    float im = -2.0f * std::numbers::pi * i / count;
+    float im = -2.0f * pi32 * i / count;
     std::complex<float> t = std::polar(1.0f, im) * odd[i];
     inout[i] = even[i] + t;
     inout[i + count / 2] = even[i] - t;
@@ -59,7 +57,7 @@ spectrum_analyzer::power_at_note(
     float imag2 = fft[i].imag() * fft[i].imag();
     result += real2 + imag2;
   }
-  return sanity(std::sqrtf(result));
+  return sanity(std::sqrt(result));
 }
 
 float const*

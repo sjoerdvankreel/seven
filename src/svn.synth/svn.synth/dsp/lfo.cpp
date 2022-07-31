@@ -4,7 +4,6 @@
 
 #include <cmath>
 #include <cassert>
-#include <numbers>
 
 using namespace svn::base;
 
@@ -39,7 +38,7 @@ lfo::process_block(
   {
     if(synced == 0) frequency = 1.0f / period_time[s];
     else frequency = sync_frequency;
-    float sample = sanity_bipolar(std::sin(2.0f * std::numbers::pi * _phase));
+    float sample = sanity_bipolar(std::sin(2.0f * pi32 * _phase));
     if (bipolar == 0) cv_out[s] = { (sample + 1.0f) * 0.5f, false };
     else cv_out[s] = { sample, true }; 
     _phase += frequency / _sample_rate; 

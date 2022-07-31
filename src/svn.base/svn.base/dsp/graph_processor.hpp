@@ -24,7 +24,7 @@ struct graph_point { float x, y; };
 class graph_processor_base
 {
 public:
-  virtual ~graph_processor_base() = 0 {}
+  virtual ~graph_processor_base() {}
 
   // Allow for some reuse between graphs.
   // Repaint if that parameter changes?

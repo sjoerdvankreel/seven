@@ -11,8 +11,10 @@
 
 namespace svn::base {
 
-inline float constexpr sanity_epsilon = 1.0e-5f;
 inline std::int32_t constexpr midi_note_c4 = 60;
+inline float constexpr sanity_epsilon = 1.0e-5f;
+inline float constexpr pi32 = 3.14159265358979323846264338327950288f;
+inline double constexpr pi64 = 3.14159265358979323846264338327950288f;
 
 // Any cv input e.g. lfos, envelopes.
 struct cv_sample

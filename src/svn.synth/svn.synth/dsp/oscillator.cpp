@@ -4,7 +4,6 @@
 
 #include <cmath>
 #include <cassert>
-#include <numbers>
 #include <immintrin.h>
 
 using namespace svn::base;
@@ -21,7 +20,7 @@ struct sine_generator
   float operator()(
     float frequency, float phase, float increment, float sample_rate, 
     float const* const* transformed_cv, std::int32_t sample) const
-  { return std::sin(2.0f * std::numbers::pi * phase); }
+  { return std::sin(2.0f * pi32 * phase); }
 };
 
 // https://www.kvraudio.com/forum/viewtopic.php?t=375517
@@ -122,8 +121,8 @@ struct dsf_generator
     float n = partials;
     float w = (1.0f - rolloff) * rolloff_range;
     float w_pow_np1 = std::pow(w, n + 1);
-    float u = 2.0f * std::numbers::pi * phase;
-    float v = 2.0f * std::numbers::pi * distance * phase / frequency;
+    float u = 2.0f * pi32 * phase;
+    float v = 2.0f * pi32 * distance * phase / frequency;
     float a = w * std::sin(u + n * v) - std::sin(u + (n + 1) * v);
     float x = (w * std::sin(v - u) + std::sin(u)) + w_pow_np1 * a;
     float y = 1 + w * w - 2 * w * std::cos(v);

@@ -1,8 +1,6 @@
 #include <svn.synth/dsp/filter.hpp>
 #include <svn.base/dsp/support.hpp>
-
 #include <cassert>
-#include <numbers>
 
 using namespace svn::base;
 
@@ -34,7 +32,7 @@ filter::process_state_variable(voice_input const& input,
     if (kbd[s] < 0.0f) frequency = (1.0f + kbd[s]) * frequency - kbd[s] * frequency / _state_var.kbd_track_base;
     frequency = std::clamp(frequency, filter_min_freq, filter_max_freq);
 
-    double g = std::tan(std::numbers::pi * frequency / _sample_rate);
+    double g = std::tan(pi64 * frequency / _sample_rate);
     double k = 2.0 - 2.0 * res[s];
     double a1 = 1.0 / (1.0 + g * (g + k));
     double a2 = g * a1;
