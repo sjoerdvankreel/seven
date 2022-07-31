@@ -69,7 +69,7 @@ active_params[active_param::count] =
 
 static std::vector<std::pair<std::int32_t, std::int32_t>> const lfo_timesig = beat_synced_timesig(16, false);
 static std::vector<std::wstring> const lfo_timesig_names = beat_synced_timesig_names(lfo_timesig);
-static std::vector<float> const lfo_timesig_values = beat_synced_timesig_values(lfo_timesig);
+std::vector<float> const lfo_timesig_values = beat_synced_timesig_values(lfo_timesig);
 
 static graph_descriptor const lfo_graph = { -1, 0, 2, 2, 1, L"LFO" };
 static std::vector<std::wstring> const lfo_types = { L"Sine", L"Custom", L"Random" };
@@ -91,7 +91,7 @@ lfo_params[lfo_param::count] =
 
 static std::vector<std::pair<std::int32_t, std::int32_t>> const env_timesig = beat_synced_timesig(16, true);
 static std::vector<std::wstring> const env_timesig_names = beat_synced_timesig_names(env_timesig); 
-static std::vector<float> const env_timesig_values = beat_synced_timesig_values(env_timesig);
+std::vector<float> const env_timesig_values = beat_synced_timesig_values(env_timesig);
 
 static graph_descriptor const envelope_graph = { -1, 0, 2, 3, 1, L"Envelope" };
 static std::vector<std::wstring> const envelope_types = { L"DAHDSR", L"DAHDR1", L"DAHDR2" };
