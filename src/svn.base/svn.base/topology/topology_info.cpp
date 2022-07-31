@@ -74,7 +74,7 @@ topology_info::create(
     }
   }
 
-  for (std::size_t part = 0; part < result->parts.size(); part++)
+  for (std::int32_t part = 0; part < result->parts.size(); part++)
   {
     std::wstring part_name = result->parts[part].runtime_name;
     for (std::int32_t p = 0; p < result->parts[part].descriptor->param_count; p++)

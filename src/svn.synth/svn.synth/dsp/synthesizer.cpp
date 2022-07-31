@@ -94,7 +94,7 @@ synthesizer::process_block(block_input const& input, block_output& output)
 {
   voice_input vinput;
   vinput.bpm = input.bpm;
-  cpu_usage usage = { 0.0 };
+  cpu_usage usage = { };
   double start_time = performance_counter();
    
   // Correct voice info for leftovers from previous round.
