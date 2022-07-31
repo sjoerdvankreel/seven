@@ -15,6 +15,7 @@ add_compile_options(/wd26812)
 else ()
 add_compile_options(-std=c++2a)
 add_compile_options(-Wall)
+add_compile_options(-Wextra)
 add_compile_options(-Wno-sign-compare)
 endif()
 
