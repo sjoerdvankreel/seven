@@ -15,7 +15,7 @@ else ()
 add_compile_options(-W)
 add_compile_options(-Wall)
 add_compile_options(-Wextra)
-add_compile_options(-std=c++17)
+add_compile_options(-std=c++2a)
 endif()
 
 # VST SDK debug binaries.
