@@ -3,9 +3,14 @@
 #include <vstgui/uidescription/rapidjson/include/rapidjson/prettywriter.h>
 #include <vstgui/uidescription/rapidjson/include/rapidjson/ostreamwrapper.h>
 
+#if WIN32
 #define NOMINMAX 1
 #include <Windows.h>
 #undef GetObject
+#else
+#include <dlfcn.h>
+#endif
+
 #include <fstream>
 #include <iostream>
 
@@ -16,24 +21,44 @@ using namespace svn::vst::ui;
 typedef bool (*svn_init_exit_dll_t)(void);
 typedef topology_info const* (*svn_get_topology_t)(void);
 
+static void*
+load_library(char const* file)
+{
+#if WIN32
+  return LoadLibraryA(file);
+#else
+  return dlopen(file, RTLD_NOW);
+#endif
+}
+
+static void*
+get_proc_address(void* module, char const* name)
+{
+#if WIN32
+  return GetProcAddress(static_cast<HMODULE>(module), name);
+#else
+  return dlsym(module, name);
+#endif
+}
+
 int
 main(int argc, char** argv)
 {
-  HMODULE library;
-  FARPROC init_dll;
-  FARPROC exit_dll;
-  FARPROC get_topology;
+  void* library;
+  void* init_dll;
+  void* exit_dll;
+  void* get_topology;
   topology_info const* topology;
 
   if (argc != 3)
     return std::cout << "Usage: seven.vst.ui <full\\path\\to\\plugin.vst3> (dll) <full\\path\\to\\file.uidesc> (json)\n", 1;
-  if ((library = LoadLibraryA(argv[1])) == nullptr)
+  if ((library = load_library(argv[1])) == nullptr)
     return std::cout << "Library " << argv[1] << " not found.\n", 1;
-  if ((init_dll = GetProcAddress(library, "InitDll")) == nullptr)
+  if ((init_dll = get_proc_address(library, "InitDll")) == nullptr)
     return std::cout << argv[1] << " does not export InitDll.\n", 1;
-  if ((exit_dll = GetProcAddress(library, "ExitDll")) == nullptr)
+  if ((exit_dll = get_proc_address(library, "ExitDll")) == nullptr)
     return std::cout << argv[1] << " does not export ExitDll.\n", 1;
-  if ((get_topology = GetProcAddress(library, "svn_vst_get_topology")) == nullptr)
+  if ((get_topology = get_proc_address(library, "svn_vst_get_topology")) == nullptr)
     return std::cout << argv[1] << " does not export svn_vst_get_topology.\n", 1;
   if (!reinterpret_cast<svn_init_exit_dll_t>(init_dll)())
     return std::cout << "InitDll returned false.\n", 1;
