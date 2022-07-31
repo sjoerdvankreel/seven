@@ -34,7 +34,9 @@ set(SVN_BASE_SRC_DIR "src/svn.base")
 file(GLOB_RECURSE SVN_BASE_SRC "${SVN_BASE_SRC_DIR}/*.*")
 add_library(seven.base STATIC ${SVN_BASE_SRC})
 target_include_directories(seven.base PRIVATE ${SVN_BASE_SRC_DIR})
-source_group(TREE "../../../${SVN_BASE_SRC_DIR}" FILES ${SVN_BASE_SRC})
+if (WIN32)
+source_group(TREE "../../${SVN_BASE_SRC_DIR}" FILES ${SVN_BASE_SRC})
+endif()
 
 # Svn synth library.
 set(SVN_SYNTH_SRC_DIR "src/svn.synth")
@@ -43,7 +45,9 @@ add_library(seven.synth STATIC ${SVN_SYNTH_SRC})
 target_include_directories(seven.synth PRIVATE ${SVN_BASE_SRC_DIR})
 target_include_directories(seven.synth PRIVATE ${SVN_SYNTH_SRC_DIR})
 target_link_libraries(seven.synth seven.base)
-source_group(TREE "../../../${SVN_SYNTH_SRC_DIR}" FILES ${SVN_SYNTH_SRC})
+if (WIN32)
+source_group(TREE "../../${SVN_SYNTH_SRC_DIR}" FILES ${SVN_SYNTH_SRC})
+endif()
 
 # Svn vst base library.
 set(SVN_VST_BASE_SRC_DIR "src/svn.vst.base")
@@ -62,7 +66,9 @@ target_link_libraries(seven.vst.base debug "${PLUGINTERFACES_LIB_Debug}" optimiz
 target_link_libraries(seven.vst.base debug "${VSTGUI_LIB_Debug}" optimized "${VSTGUI_LIB_Release}")
 target_link_libraries(seven.vst.base debug "${VSTGUI_SUPPORT_LIB_Debug}" optimized "${VSTGUI_SUPPORT_LIB_Release}")
 target_link_libraries(seven.vst.base debug "${VSTGUI_UIDESCRIPTION_LIB_Debug}" optimized "${VSTGUI_UIDESCRIPTION_LIB_Release}")
-source_group(TREE "../../../${SVN_VST_BASE_SRC_DIR}" FILES ${SVN_VST_BASE_SRC})
+if (WIN32)
+source_group(TREE "../../${SVN_VST_BASE_SRC_DIR}" FILES ${SVN_VST_BASE_SRC})
+endif()
 
 # Svn vst synth.
 set(SVN_VST_SYNTH_SRC_DIR "src/svn.vst.synth")
@@ -84,7 +90,9 @@ add_custom_target(copy-resources-synth-release ALL DEPENDS seven.vst.synth COMMA
 add_custom_target(copy-resources-synth-debug ALL DEPENDS seven.vst.synth COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/src/svn.vst.synth/resources ${CMAKE_BINARY_DIR}/Debug/seven.vst.synth.vst3/Contents/Resources)
 add_custom_target(copy-resources-synth-base-release ALL DEPENDS seven.vst.synth COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/src/svn.vst.base/resources ${CMAKE_BINARY_DIR}/Release/seven.vst.synth.vst3/Contents/Resources)
 add_custom_target(copy-resources-synth-base-debug ALL DEPENDS seven.vst.synth COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/src/svn.vst.base/resources ${CMAKE_BINARY_DIR}/Debug/seven.vst.synth.vst3/Contents/Resources)
-source_group(TREE "../../../${SVN_VST_SYNTH_SRC_DIR}" FILES ${SVN_VST_SYNTH_SRC})
+if (WIN32)
+source_group(TREE "../../${SVN_VST_SYNTH_SRC_DIR}" FILES ${SVN_VST_SYNTH_SRC})
+endif()
 
 # Svn vst ui generator.
 set(SVN_VST_UI_SRC_DIR "src/svn.vst.ui")
@@ -94,4 +102,6 @@ target_include_directories(seven.vst.ui PRIVATE ${SVN_BASE_SRC_DIR})
 target_include_directories(seven.vst.ui PRIVATE ${SVN_VST_UI_SRC_DIR})
 target_include_directories(seven.vst.ui PRIVATE ${VST_SDK_375_SRC_DIR}/vstgui4)
 target_link_libraries(seven.vst.ui seven.base)
-source_group(TREE "../../../${SVN_VST_UI_SRC_DIR}" FILES ${SVN_VST_UI_SRC})
+if (WIN32)
+source_group(TREE "../../${SVN_VST_UI_SRC_DIR}" FILES ${SVN_VST_UI_SRC})
+endif()
