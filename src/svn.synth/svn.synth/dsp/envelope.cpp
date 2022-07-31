@@ -69,7 +69,7 @@ envelope::process_block(
   }
 
   // We need only 1 sample per block.
-  float const* const* transformed_cv;
+  float const* const* transformed_cv = nullptr;
   cv_time += cv.transform_unmodulated(automation, part_type::envelope, 1, transformed_cv);
 
   double start_time = performance_counter();

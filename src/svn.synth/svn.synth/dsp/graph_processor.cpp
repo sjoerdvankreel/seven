@@ -95,6 +95,8 @@ void
 lfo_graph::process_dsp_core(
   block_input const& input, base::cv_sample* output, float sample_rate, float bpm)
 {
+  (void)bpm;
+  (void)sample_rate;
   double cv_time = 0.0f;
   lfo lfo(lfo_graph_rate);
   cv_state cv(topology(), input.sample_count);
@@ -108,6 +110,8 @@ lfo_graph::dsp_to_plot(
   param_value const* state, std::vector<base::cv_sample> const& dsp,
   std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
+  (void)state;
+  (void)sample_rate;
   plot.resize(dsp.size());
   bipolar = dsp[0].bipolar;
   for(std::size_t i = 0; i < dsp.size(); i++)
@@ -117,6 +121,7 @@ lfo_graph::dsp_to_plot(
 std::int32_t
 lfo_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 {
+  (void)sample_rate;
   std::int32_t const cycles = 2;
   state_view view({ topology(), state, part_type::lfo, part_index() });
   float samples = view.get_real_dsp(lfo_param::period_time) * lfo_graph_rate;
@@ -154,6 +159,7 @@ amp_graph::dsp_to_plot(
   param_value const* state, std::vector<base::cv_sample> const& dsp,
   std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
+  (void)sample_rate;
   bipolar = false;
   plot.resize(dsp.size());
   state_view view({ topology(), state, part_type::amplitude, 0 });
@@ -174,6 +180,8 @@ envelope_graph::dsp_to_plot(
   param_value const* state, std::vector<base::cv_sample> const& dsp,
   std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
+  (void)state;
+  (void)sample_rate;
   plot.resize(dsp.size());
   bipolar = dsp[0].bipolar;
   for (std::size_t i = 0; i < dsp.size(); i++)
@@ -183,6 +191,7 @@ envelope_graph::dsp_to_plot(
 std::int32_t 
 envelope_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 { 
+  (void)sample_rate;
   cv_state cv(topology(), 1);
   float delay, attack, hold, decay, release;
   std::vector<param_value const*> automation(
@@ -198,6 +207,7 @@ void
 envelope_graph::process_dsp_core(
   block_input const& input, base::cv_sample* output, float sample_rate, float bpm)
 {
+  (void)sample_rate;
   bool ended = false;
   double cv_time = 0.0;
   float delay, attack, hold, decay, release;
@@ -216,7 +226,7 @@ envelope_graph::setup_stages(
   float& delay, float& attack, float& hold, float& decay, float& release) const
 {
   envelope env(env_graph_rate);
-  float const* const* transformed_cv;
+  float const* const* transformed_cv = nullptr;
   base::automation_view view(topology(), nullptr, automation,
     topology()->input_param_count, topology()->input_param_count, 0, 1, 0, 1);
   automation_view env_view = view.rearrange_params(part_type::envelope, part_index());
@@ -240,13 +250,18 @@ oscillator_spectrum_graph::transform_param(std::int32_t rt_index, param_value va
 std::int32_t
 oscillator_spectrum_graph::sample_count(
   param_value const* state, float sample_rate, float bpm) const
-{ return static_cast<std::int32_t>(std::ceil(sample_rate)); }
+{ 
+  (void)bpm;
+  (void)state;
+  return static_cast<std::int32_t>(std::ceil(sample_rate)); 
+}
 
 void
 oscillator_spectrum_graph::dsp_to_plot(
   param_value const* state, std::vector<audio_sample32> const& dsp, 
   std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
+  (void)state;
   bipolar = false;
   _mono.clear();
   for(std::size_t s = 0; s < dsp.size(); s++)
@@ -272,6 +287,8 @@ oscillator_wave_graph::dsp_to_plot(
   param_value const* state, std::vector<base::audio_sample32> const& dsp, 
   std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
+  (void)state;
+  (void)sample_rate;
   bipolar = true;
   for (std::size_t s = 0; s < dsp.size(); s++) 
     plot.push_back((dsp[s].mono() + 1.0f) * 0.5f);
@@ -281,6 +298,7 @@ std::int32_t
 oscillator_wave_graph::sample_count(
   param_value const* state, float sample_rate, float bpm) const
 {
+  (void)bpm;
   std::int32_t const cycles = 2;
   state_view view({ topology(), state, part_type::oscillator, part_index() });
   float cent = view.get_real_dsp(oscillator_param::cent);
@@ -294,6 +312,7 @@ void
 oscillator_wave_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
 {
+  (void)bpm;
   double cv_time = 0.0;
   oscillator osc(sample_rate, midi_note_c4);
   cv_state cv(topology(), input.sample_count);
@@ -326,6 +345,8 @@ filter_fr_graph::dsp_to_plot(
   param_value const* state, std::vector<audio_sample32> const& dsp, 
   std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
+  (void)state;
+  (void)sample_rate;
   bipolar = false;
   _mono.clear();
   float max = 0.0f;
@@ -346,6 +367,7 @@ std::int32_t
 filter_ir_graph::sample_count(
   param_value const* state, float sample_rate, float bpm) const
 {
+  (void)bpm;
   state_view view({ topology(), state, part_type::filter, part_index() });
   std::int32_t type = view.get_discrete(filter_param::type);
   std::int32_t length_ms = type == filter_type::state_var? 5: 50;
@@ -364,6 +386,8 @@ filter_ir_graph::dsp_to_plot(
   param_value const* state, std::vector<base::audio_sample32> const& dsp, 
   std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
+  (void)state;
+  (void)sample_rate;
   bipolar = true;
   for (std::size_t s = 0; s < dsp.size(); s++)
     plot.push_back(std::clamp((dsp[s].mono() + 1.0f) * 0.5f, 0.0f, 1.0f));
@@ -373,6 +397,8 @@ void
 filter_ir_graph::process_dsp_core(
   block_input const& input, base::audio_sample32* output, float sample_rate, float bpm)
 {
+  (void)bpm;
+
   _audio_in.clear();
   _audio_in.resize(input.sample_count);
   _audio_in[0] = 1.0f;
@@ -387,13 +413,18 @@ filter_ir_graph::process_dsp_core(
 
 bool
 cv_route_graph::needs_repaint(std::int32_t runtime_param) const
-{ return true; } 
+{ 
+  (void)runtime_param;
+  return true; 
+} 
 
 void
 cv_route_graph::dsp_to_plot(
   param_value const* state, std::vector<float> const& dsp, 
   std::vector<float>& plot, float sample_rate, bool& bipolar)
 {
+  (void)state;
+  (void)sample_rate;
   bipolar = false;
   plot.resize(dsp.size());
   std::copy(dsp.begin(), dsp.end(), plot.begin());
@@ -402,6 +433,8 @@ cv_route_graph::dsp_to_plot(
 std::int32_t
 cv_route_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 { 
+  (void)bpm;
+  (void)sample_rate;
   state_view view({ topology(), state, part_type::cv_route, part_index() });
   float seconds = view.get_real_dsp(cv_route_param::plot_time);
   return static_cast<std::int32_t>(std::ceil(seconds * cv_route_graph_rate));
@@ -411,6 +444,8 @@ void
 cv_route_graph::process_dsp_core(
   block_input const& input, float* output, float sample_rate, float bpm)
 {
+  (void)bpm;
+  (void)sample_rate;
   bool ended = false;
   double cv_time = 0.0f;
   cv_state state(topology(), input.sample_count);
@@ -429,7 +464,7 @@ cv_route_graph::process_dsp_core(
   std::memset(output, 0, input.sample_count * sizeof(float));
   if (std::get<0>(param_ids) == -1 || std::get<2>(param_ids) == -1) return;
 
-  float const* const* transformed_cv;
+  float const* const* transformed_cv = nullptr;
   std::int32_t rt_part_index = std::get<1>(param_ids);
   std::int32_t cv_route_output_id = std::get<0>(param_ids);
   std::int32_t cv_route_target = std::get<2>(param_ids);

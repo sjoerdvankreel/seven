@@ -10,9 +10,9 @@ namespace svn::synth {
 // Voice block input.
 struct voice_input
 {
-  float bpm;
-  std::int32_t sample_count;
-  std::int64_t stream_position;
+  float bpm = 0.0f;
+  std::int32_t sample_count = 0;
+  std::int64_t stream_position = 0;
   base::automation_view automation;
 };
 
