@@ -3,11 +3,14 @@
 #include <svn.vst.base/ui/view_container_fix.hpp>
 #include <svn.vst.base/support/bootstrap.hpp>
 #include <vstgui/vstgui_uidescription.h>
-#include <windows.h>
+
+#if WIN32
+#include <Windows.h>
+void* moduleHandle = nullptr;
+#endif
 
 extern bool InitModule();
 extern bool DeinitModule();
-void* moduleHandle = nullptr;
 
 static std::int32_t _svn_module_counter = 0;
 static svn::base::topology_info const* _topology = nullptr;
@@ -20,6 +23,7 @@ extern "C" {
 svn::base::topology_info const* 
 svn_vst_get_topology() { return _topology; }
 
+#if WIN32
 BOOL WINAPI
 DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
 {
@@ -27,6 +31,7 @@ DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
   moduleHandle = instance;
   return TRUE;
 }
+#endif
 
 SMTG_EXPORT_SYMBOL
 bool InitDll()
