@@ -79,7 +79,6 @@ target_link_libraries(seven.vst.base debug "${VSTGUI_UIDESCRIPTION_LIB_Debug}" o
 if (MSVC)
 source_group(TREE "../../${SVN_VST_BASE_SRC_DIR}" FILES ${SVN_VST_BASE_SRC})
 target_compile_options(seven.vst.base PRIVATE /external:I ${VST_SDK_375_SRC_DIR_WIN32})
-target_compile_options(seven.vst.base PRIVATE /external:I ${VST_SDK_375_SRC_DIR_WIN32}\\vstgui4)
 endif()
 
 # Svn vst synth.
@@ -105,7 +104,6 @@ add_custom_target(copy-resources-synth-base-debug ALL DEPENDS seven.vst.synth CO
 if (MSVC)
 source_group(TREE "../../${SVN_VST_SYNTH_SRC_DIR}" FILES ${SVN_VST_SYNTH_SRC})
 target_compile_options(seven.vst.synth PRIVATE /external:I ${VST_SDK_375_SRC_DIR_WIN32})
-target_compile_options(seven.vst.synth PRIVATE /external:I ${VST_SDK_375_SRC_DIR_WIN32}\\vstgui4)
 endif()
 
 # Svn vst ui generator.
@@ -118,5 +116,5 @@ target_include_directories(seven.vst.ui SYSTEM PRIVATE ${VST_SDK_375_SRC_DIR}/vs
 target_link_libraries(seven.vst.ui seven.base)
 if (MSVC)
 source_group(TREE "../../${SVN_VST_UI_SRC_DIR}" FILES ${SVN_VST_UI_SRC})
-target_compile_options(seven.vst.ui PRIVATE /external:I ${VST_SDK_375_SRC_DIR_WIN32}\\vstgui4)
+target_compile_options(seven.vst.synth PRIVATE /external:I ${VST_SDK_375_SRC_DIR_WIN32})
 endif()
