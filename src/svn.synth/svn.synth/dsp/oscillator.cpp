@@ -48,7 +48,7 @@ struct blep_saw_generator
 
 struct blep_pulse_generator
 {
-  static inline float const min_pw = 0.05f;
+  static inline float const min_pw = 0.05;
 
   float operator()(
     float frequency, float phase, float increment, float sample_rate, 
@@ -119,7 +119,7 @@ struct dsf_generator
     float max_partials = (sample_rate * 0.5f - frequency) / distance;
     partials = std::min(partials, static_cast<std::int32_t>(max_partials));
 
-    float n = static_cast<float>(partials);
+    float n = partials;
     float w = (1.0f - rolloff) * rolloff_range;
     float w_pow_np1 = std::pow(w, n + 1);
     float u = 2.0f * pi32 * phase;
@@ -183,7 +183,7 @@ oscillator::process_block(
     return 0.0;
   }
 
-  float const* const* transformed_cv = nullptr;
+  float const* const* transformed_cv;
   cv_time += cv.transform_modulated(input, automation, cv_route_output::osc, index, cv_route_osc_mapping, transformed_cv);
 
   double start_time = performance_counter();

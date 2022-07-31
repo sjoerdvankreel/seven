@@ -24,7 +24,7 @@ lfo::process_block(
   }
 
   float frequency = 0.0f;
-  float const* const* transformed_cv = nullptr;
+  float const* const* transformed_cv;
   cv_time += cv.transform_unmodulated(automation, part_type::lfo, input.sample_count, transformed_cv);
 
   double start_time = performance_counter();

@@ -8,7 +8,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release")
 
 if (MSVC)
-add_compile_options(/W4)
 add_compile_options(/wd26451)
 add_compile_options(/wd26498)
 add_compile_options(/wd26812)

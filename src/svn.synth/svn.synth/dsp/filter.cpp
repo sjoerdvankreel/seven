@@ -12,8 +12,8 @@ filter::
 filter(float sample_rate, std::int32_t midi_note) :
 _state_var(), _comb(), _sample_rate(sample_rate)
 {
-  float this_frequency = note_to_frequency(static_cast<float>(midi_note));
-  float base_frequency = note_to_frequency(static_cast<float>(midi_note_c4));
+  float this_frequency = note_to_frequency(midi_note);
+  float base_frequency = note_to_frequency(midi_note_c4);
   _state_var.kbd_track_base = this_frequency / base_frequency;
 }
 
@@ -96,7 +96,7 @@ filter::process_block(voice_input const& input, std::int32_t index, cv_state& cv
     return 0.0;
   }
 
-  float const* const* transformed_cv = nullptr;
+  float const* const* transformed_cv;
   cv_time += cv.transform_modulated(input, automation, cv_route_output::filter, index, cv_route_filter_mapping, transformed_cv);  
   double start_time = performance_counter();
   std::int32_t type = automation.automation_discrete(filter_param::type, 0);

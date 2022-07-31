@@ -67,8 +67,8 @@ audio_state::mix(
   }
 
   // Apply routing.
+  float const* const* transformed_cv;
   std::int32_t previous_bank_index = -1;
-  float const* const* transformed_cv = nullptr;
   for (std::int32_t a = 0; a < _relevant_indices_count; a++)
   {
     audio_route_indices indices = _relevant_indices[a];

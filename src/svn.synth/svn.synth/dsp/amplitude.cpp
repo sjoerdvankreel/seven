@@ -13,7 +13,7 @@ amplitude::process_block(
   voice_input const& input, cv_state& cv, base::cv_sample const* env1_cv,
   base::audio_sample32 const* audio_in, base::audio_sample32* audio_out, double& cv_time)
 {
-  float const* const* transformed_cv = nullptr;
+  float const* const* transformed_cv;
   automation_view automation(input.automation.rearrange_params(part_type::amplitude, 0));
   cv_time += cv.transform_modulated(input, automation, cv_route_output::amp, 0, cv_route_amp_mapping, transformed_cv);  
   double start_time = performance_counter();
