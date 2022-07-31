@@ -13,7 +13,7 @@ public svn::base::graph_processor<base::cv_sample>
   static inline float constexpr env_graph_rate = 1000.0f;
 
 private:
-  void setup_stages(param_value const* const* automation, float bpm, 
+  void setup_stages(param_value const* const* automation, cv_state& cv, float bpm, 
     float& delay, float& attack, float& hold, float& decay, float& release) const;
 
 public:

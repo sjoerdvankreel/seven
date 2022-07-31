@@ -3,6 +3,7 @@
 
 #include <svn.base/dsp/support.hpp>
 #include <svn.synth/dsp/support.hpp>
+#include <svn.synth/dsp/cv_state.hpp>
 #include <svn.synth/topology/topology.hpp>
 
 namespace svn::synth {
@@ -19,20 +20,19 @@ class envelope
   std::int32_t _position = 0;
   float _release_level = 0.0f;
   base::cv_sample _end_sample = {};
+
 public:
   envelope() = default;
   explicit envelope(float sample_rate) : _sample_rate(sample_rate) {}
-public:
-  // True if done.
-  double process_block(voice_input const& input, std::int32_t index,
-    base::cv_sample* cv_out, std::int32_t release_sample, bool& result);
-  void setup_stages(base::automation_view const& automation, std::int32_t s,
-    float bpm, float& delay, float& attack, float& hold, float& decay, float& release);
+
 private:
-  float generate_slope(base::automation_view const& automation,
-    std::int32_t slope_param, std::int32_t mid_param, std::int32_t s, float stage_pos);
-  std::pair<envelope_stage, float> generate_stage(base::automation_view const& automation,
-    std::int32_t s, bool dahdsr, float delay, float attack, float hold, float decay, float sustain, float release);
+  float generate_slope(std::int32_t slope, float stage_pos, float exp);
+
+public:
+  void setup_stages(base::automation_view const& automation, float const* const* transformed_cv,
+    float bpm, float& delay, float& attack, float& hold, float& decay, float& release);
+  double process_block(voice_input const& input, std::int32_t index,
+    cv_state& cv, base::cv_sample* cv_out, std::int32_t release_sample, bool& ended, double& cv_time);
 };
 
 } // namespace svn::synth

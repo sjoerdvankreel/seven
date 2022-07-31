@@ -12,104 +12,160 @@ namespace svn::synth {
 static const float inv_log_half = 1.0f / std::log(0.5f);
  
 float 
-envelope::generate_slope(base::automation_view const& automation,
-  std::int32_t slope_param, std::int32_t mid_param, std::int32_t s, float stage_pos)
+envelope::generate_slope(std::int32_t slope, float stage_pos, float exp)
 {
-  std::int32_t slope = automation.automation_discrete(slope_param, s);
   switch (slope)
   {
   case envelope_slope::linear: return stage_pos;
   case envelope_slope::inverted: return sanity_unipolar(std::sqrt(stage_pos));
   case envelope_slope::quadratic: return sanity_unipolar(stage_pos * stage_pos);
-  default:
-    assert(slope == envelope_slope::logarithmic);
-    break;
+  case envelope_slope::logarithmic: return sanity_unipolar(std::pow(stage_pos, exp));
+  default: assert(false); return 0.0f;
   }
-  float mid = automation.get_real_dsp(mid_param, s);
-  return sanity_unipolar(std::pow(stage_pos, std::log(mid) * inv_log_half));
-}
-
-std::pair<envelope_stage, float>
-envelope::generate_stage(base::automation_view const& automation, std::int32_t s, 
-  bool dahdsr, float delay, float attack, float hold, float decay, float sustain, float release)
-{
-  float pos = static_cast<float>(_position);
-
-  float stage = 0.0f;
-  if (pos < stage + delay) return std::make_pair(
-    envelope_stage::delay, 0.0f);
-  stage = std::ceil(stage + delay);
-  if(pos < stage + attack) return std::make_pair(
-    envelope_stage::attack, 
-    generate_slope(automation, envelope_param::attack_slope, 
-    envelope_param::attack_mid, s, (pos - stage) / attack));
-  stage = std::ceil(stage + attack);
-  if(pos < stage + hold) return std::make_pair(
-    envelope_stage::hold, 1.0f);
-  stage = std::ceil(stage + hold);
-  if(pos < stage + decay) return std::make_pair(
-    envelope_stage::decay,
-    sanity_unipolar(1.0f - generate_slope(
-    automation, envelope_param::decay_slope,
-    envelope_param::decay_mid, s, (pos - stage) / decay) * (1.0f - sustain)));
-  if(dahdsr && !_released) return std::make_pair(
-    envelope_stage::sustain, sustain);
-  stage = std::ceil(stage + decay);
-  if(pos < stage + release) 
-  {
-    _released = true;
-    return std::make_pair(
-      envelope_stage::release,
-      sanity_unipolar(_release_level - generate_slope(
-      automation, envelope_param::release_slope,
-      envelope_param::release_mid, s, (pos - stage) / release) * _release_level));
-  }
-  return std::make_pair(envelope_stage::end, 0.0f);
 }
 
 void 
-envelope::setup_stages(automation_view const& automation, std::int32_t s,
+envelope::setup_stages(
+  automation_view const& automation, float const* const* transformed_cv,
   float bpm, float& delay, float& attack, float& hold, float& decay, float& release)
 {
-  if (automation.automation_discrete(envelope_param::synced, s) == 0)
+  if (automation.automation_discrete(envelope_param::synced, 0) == 0)
   { 
-    delay = automation.get_real_dsp(envelope_param::delay_time, s) * _sample_rate;
-    attack = automation.get_real_dsp(envelope_param::attack_time, s) * _sample_rate;
-    hold = automation.get_real_dsp(envelope_param::hold_time, s) * _sample_rate;
-    decay = automation.get_real_dsp(envelope_param::decay_time, s) * _sample_rate;
-    release = automation.get_real_dsp(envelope_param::release_time, s) * _sample_rate;
+    delay = transformed_cv[envelope_param::delay_time][0] * _sample_rate;
+    attack = transformed_cv[envelope_param::attack_time][0] * _sample_rate;
+    hold = transformed_cv[envelope_param::hold_time][0] * _sample_rate;
+    decay = transformed_cv[envelope_param::decay_time][0] * _sample_rate;
+    release = transformed_cv[envelope_param::release_time][0] * _sample_rate;
     return;
   }
-  delay = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.automation_discrete(envelope_param::delay_sync, s)]);
-  attack = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.automation_discrete(envelope_param::attack_sync, s)]);
-  hold = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.automation_discrete(envelope_param::hold_sync, s)]);
-  decay = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.automation_discrete(envelope_param::decay_sync, s)]);
-  release = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.automation_discrete(envelope_param::release_sync, s)]);
+  delay = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.automation_discrete(envelope_param::delay_sync, 0)]);
+  attack = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.automation_discrete(envelope_param::attack_sync, 0)]);
+  hold = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.automation_discrete(envelope_param::hold_sync, 0)]);
+  decay = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.automation_discrete(envelope_param::decay_sync, 0)]);
+  release = timesig_to_samples(_sample_rate, bpm, env_timesig_values[automation.automation_discrete(envelope_param::release_sync, 0)]);
 }
 
 double
-envelope::process_block(voice_input const& input, std::int32_t index, 
-  base::cv_sample* cv_out, std::int32_t release_sample, bool& result)
+envelope::process_block(
+  voice_input const& input, std::int32_t index, cv_state& cv, 
+  base::cv_sample* cv_out, std::int32_t release_sample, bool& ended, double& cv_time)
 {
-  float delay, attack, hold, decay, release;
-  double start_time = performance_counter();
+  // Note: all automation per block, not per sample!
   automation_view automation(input.automation.rearrange_params(part_type::envelope, index));
+
+  // Always run envelope 0, it's hardwired to the voice amp section.
+  if (index > 0 && automation.automation_discrete(envelope_param::on, 0))
+  {
+    std::memset(cv_out, 0, input.sample_count * sizeof(cv_sample));
+    return 0.0;
+  }
+
+  // We need only 1 sample per block.
+  float const* const* transformed_cv;
+  cv_time += cv.transform_unmodulated(automation, part_type::envelope, 1, transformed_cv);
+
+  double start_time = performance_counter();
+  float delay, attack, hold, decay, release;
+  float sustain = transformed_cv[envelope_param::sustain_level][0];
+  setup_stages(automation, transformed_cv, input.bpm, delay, attack, hold, decay, release);
+  float decay_exp = std::log(transformed_cv[envelope_param::decay_mid][0]) * inv_log_half;
+  float attack_exp = std::log(transformed_cv[envelope_param::attack_mid][0]) * inv_log_half;
+  float release_exp = std::log(transformed_cv[envelope_param::release_mid][0]) * inv_log_half;
+
+  std::int32_t type = automation.automation_discrete(envelope_param::type, 0);
+  std::int32_t bipolar = automation.automation_discrete(envelope_param::bipolar, 0);
+  std::int32_t decay_slope = automation.automation_discrete(envelope_param::decay_slope, 0);
+  std::int32_t attack_slope = automation.automation_discrete(envelope_param::attack_slope, 0);
+  std::int32_t release_slope = automation.automation_discrete(envelope_param::release_slope, 0);
+
+  float env = 0.0f;
+  float position = 0.0f;
+  float stage_pos = 0.0f;
+  envelope_stage stage_id = static_cast<envelope_stage>(-1);
+
   for (std::int32_t s = 0; s < input.sample_count; s++)
   {
     if (_ended) { cv_out[s] = _end_sample; continue; }
-    cv_out[s] = { 0.0f, false };
-    if(index > 0 && automation.automation_discrete(envelope_param::on, s) == 0) return s;
-    float sustain = automation.get_real_dsp(envelope_param::sustain_level, s);
-    bool unipolar = automation.automation_discrete(envelope_param::bipolar, s) == 0;
-    std::int32_t type = automation.automation_discrete(envelope_param::type, s);
-    setup_stages(automation, s, input.bpm, delay, attack, hold, decay, release);
-    auto stage = generate_stage(automation, s, type == envelope_type::dahdsr, delay, attack, hold, decay, sustain, release);
-    if(unipolar) cv_out[s] = { sanity_unipolar(stage.second), false };
-    else cv_out[s] = { sanity_bipolar(stage.second * 2.0f - 1.0f), true };
-    _end_sample = unipolar ? cv_sample({ 0.0f, false }) : cv_sample({ -1.0f, true });
-    if(stage.first == envelope_stage::end) { _ended = true; cv_out[s] = _end_sample; continue; }
-    if(stage.first != envelope_stage::release) _release_level = stage.second;
 
+    stage_pos = 0.0f;
+    position = static_cast<float>(_position);
+    stage_id = static_cast<envelope_stage>(-1);
+
+    // Cycle through the envelope stages.
+    if (position < stage_pos + delay)
+    {
+      stage_id = envelope_stage::delay;
+      env = 0.0f;
+    }
+    else
+    {
+      stage_pos = std::ceil(stage_pos + delay);
+      if (position < stage_pos + attack)
+      {
+        stage_id = envelope_stage::attack;
+        env = generate_slope(attack_slope, (position - stage_pos) / attack, attack_exp);
+      }
+      else
+      {
+        stage_pos = std::ceil(stage_pos + attack);
+        if (position < stage_pos + hold)
+        {
+          stage_id = envelope_stage::hold;
+          env = 1.0f;
+        }
+        else
+        {
+          stage_pos = std::ceil(stage_pos + hold);
+          if (position < stage_pos + decay)
+          {
+            stage_id = envelope_stage::decay,
+            env = 1.0f - generate_slope(decay_slope, (position - stage_pos) / decay, decay_exp) * (1.0f - sustain);
+          }
+          else
+          {
+            if (type == envelope_type::dahdsr && !_released)
+            {
+              stage_id = envelope_stage::sustain;
+              env = sustain;
+            }
+            else
+            {
+              stage_pos = std::ceil(stage_pos + decay);
+              if (position < stage_pos + release)
+              {
+                _released = true;
+                stage_id = envelope_stage::release;
+                env = _release_level - generate_slope(release_slope, (position - stage_pos) / release, release_exp) * _release_level;
+              }
+              else
+              {
+                stage_id = envelope_stage::end;
+                env = 0.0f;
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    // Fill output buffer.
+    if(bipolar == 0) cv_out[s] = { sanity_unipolar(env), false };
+    else cv_out[s] = { sanity_bipolar(env * 2.0f - 1.0f), true };
+    _end_sample = bipolar == 0 ? cv_sample({ 0.0f, false }) : cv_sample({ -1.0f, true });
+
+    // We're done, fill the rest of the buffer with the last sample.
+    if(stage_id == envelope_stage::end) 
+    { 
+      _ended = true; 
+      cv_out[s] = _end_sample; 
+      continue; 
+    }
+    
+    // Keep track of last sample in case of early release (during the attack or decay stages).
+    if(stage_id != envelope_stage::release)
+      _release_level = env;
+
+    // Starting release section, except dahdr2 which just unconditionally follows the envelope stages.
     if (s == release_sample && !_released)
     {
       if(type != envelope_type::dahdr2)
@@ -120,10 +176,13 @@ envelope::process_block(voice_input const& input, std::int32_t index,
       continue;
     }
     
-    if(type != envelope_type::dahdsr || stage.first != envelope_stage::sustain)
+    // Increment counter ("where are we in the current section"),
+    // except for sustain which could go on forever.
+    if(type != envelope_type::dahdsr || stage_id != envelope_stage::sustain)
       _position++;
   }
-  result = _ended;
+  
+  ended = _ended;
   return performance_counter() - start_time;
 } 
  

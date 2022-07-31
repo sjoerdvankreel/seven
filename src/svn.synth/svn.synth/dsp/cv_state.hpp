@@ -50,8 +50,8 @@ public:
   cv_state(base::topology_info const* topology, std::int32_t max_sample_count);
 
   // Note: CV in [0, 1] on input, parameter dsp range on output.
-  double transform_unmodulated(voice_input const& input, 
-    base::automation_view const& automated, part_type type, float const* const*& result);
+  double transform_unmodulated(base::automation_view const& automated,
+    part_type type, std::int32_t sample_count, float const* const*& result);
 
   // Note: CV in [0, 1] on input, parameter dsp range on output.
   // Apply modulation and rescale to dsp range.

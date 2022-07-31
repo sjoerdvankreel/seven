@@ -49,15 +49,15 @@ cv_state::input_buffer(std::int32_t input, std::int32_t index) const
 // they are not taken into account in result, 
 // but their positions are taken (so we waste some space).
 double 
-cv_state::transform_unmodulated(voice_input const& input, 
-  base::automation_view const& automated, part_type type, float const* const*& result)
+cv_state::transform_unmodulated(base::automation_view const& automated, 
+  part_type type, std::int32_t sample_count, float const* const*& result)
 {
   double start_time = base::performance_counter();
   for(std::int32_t p = 0; p < _topology->static_parts[type].param_count; p++)
     if(_topology->static_parts[type].params[p].type == base::param_type::real)
     {
-      automated.automation_real(p, _scratch[p], input.sample_count);
-      automated.transform_real(p, _scratch[p], input.sample_count);
+      automated.automation_real(p, _scratch[p], sample_count);
+      automated.transform_real(p, _scratch[p], sample_count);
     }
   result = _scratch.data();
   return base::performance_counter() - start_time;

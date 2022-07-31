@@ -183,12 +183,13 @@ envelope_graph::dsp_to_plot(
 std::int32_t 
 envelope_graph::sample_count(param_value const* state, float sample_rate, float bpm) const
 { 
+  cv_state cv(topology(), 1);
   float delay, attack, hold, decay, release;
   std::vector<param_value const*> automation(
     static_cast<std::size_t>(topology()->input_param_count));
   for (std::int32_t i = 0; i < topology()->input_param_count; i++)
     automation[i] = &state[i];
-  setup_stages(automation.data(), bpm, delay, attack, hold, decay, release);
+  setup_stages(automation.data(), cv, bpm, delay, attack, hold, decay, release);
   std::int32_t result = static_cast<std::int32_t>(std::ceil(delay + attack + hold + decay + release));
   return result;
 }
@@ -198,23 +199,28 @@ envelope_graph::process_dsp_core(
   block_input const& input, base::cv_sample* output, float sample_rate, float bpm)
 {
   bool ended = false;
+  double cv_time = 0.0;
   float delay, attack, hold, decay, release;
-  setup_stages(input.automation, bpm, delay, attack, hold, decay, release);
+  cv_state cv(topology(), input.sample_count);
+  setup_stages(input.automation, cv, bpm, delay, attack, hold, decay, release);
   std::int32_t release_sample = static_cast<std::int32_t>(std::ceil(delay + attack + hold + decay));
   envelope env(env_graph_rate);
   std::memset(output, 0, input.sample_count * sizeof(base::cv_sample));
   voice_input vinput = setup_graph_voice_input(input, topology());
-  env.process_block(vinput, part_index(), output, release_sample, ended);
+  env.process_block(vinput, part_index(), cv, output, release_sample, ended, cv_time);
 }
 
 void
-envelope_graph::setup_stages(param_value const* const* automation, float bpm, 
+envelope_graph::setup_stages(
+  param_value const* const* automation, cv_state& cv, float bpm, 
   float& delay, float& attack, float& hold, float& decay, float& release) const
 {
   envelope env(env_graph_rate);
+  float const* const* transformed_cv;
   base::automation_view view(topology(), nullptr, automation,
     topology()->input_param_count, topology()->input_param_count, 0, 1, 0, 1);
   automation_view env_view = view.rearrange_params(part_type::envelope, part_index());
+   cv.transform_unmodulated(view, part_type::envelope, 1, transformed_cv);
   env.setup_stages(env_view, 0, bpm, delay, attack, hold, decay, release);
 }
 
@@ -412,7 +418,7 @@ cv_route_graph::process_dsp_core(
   for(std::int32_t i = 0; i < lfo_count; i++)
     lfo(cv_route_graph_rate).process_block(vinput, i, state, state.lfo[i].data(), cv_time);
   for (std::int32_t i = 0; i < envelope_count; i++)
-    envelope(cv_route_graph_rate).process_block(vinput, i, state.envelope[i].data(), input.sample_count, ended);
+    envelope(cv_route_graph_rate).process_block(vinput, i, state, state.envelope[i].data(), input.sample_count, ended, cv_time);
   std::fill(state.velocity.begin(), state.velocity.begin() + input.sample_count, base::cv_sample({ cv_route_graph_velocity, false }));
 
   std::vector<std::tuple<std::int32_t, std::int32_t, std::int32_t>> output_table_out
