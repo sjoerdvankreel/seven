@@ -7,9 +7,16 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release")
 
+if (MSVC)
 add_compile_options(/wd26451)
 add_compile_options(/wd26498)
 add_compile_options(/wd26812)
+else ()
+add_compile_options(-W)
+add_compile_options(-Wall)
+add_compile_options(-Wextra)
+add_compile_options(-std=c++17)
+endif()
 
 # VST SDK debug binaries.
 find_library(BASE_LIB_Debug base PATHS "${VST_SDK_375_BUILD_DEBUG_DIR}")
