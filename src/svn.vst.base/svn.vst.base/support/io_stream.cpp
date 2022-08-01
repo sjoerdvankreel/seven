@@ -27,6 +27,21 @@ vst_io_stream::read_string(std::string& val)
 }
 
 bool
+vst_io_stream::read_wstring(std::wstring& val)
+{
+  wchar_t chr;
+  Steinberg::int32 size;
+  val.clear();
+  if (!_streamer->readInt32(size)) return false;
+  for (std::int32_t i = 0; i < size; i++)
+  {
+    if (!_streamer->readChar16(chr)) return false;
+    val.append(1, chr);
+  }
+  return true;
+}
+
+bool
 vst_io_stream::write_string(std::string const& val)
 {
   auto size = static_cast<std::int32_t>(val.size());

@@ -6,7 +6,7 @@
 
 namespace svn::base {
 
-static std::int32_t const version = 1;
+static std::int32_t const version = 2;
 static std::int32_t const magic = 192235685;
 
 bool
@@ -65,14 +65,16 @@ io_stream::load(topology_info const& topology, param_value* state)
   std::string str_value;
   std::string part_guid;
   std::string param_guid;
+  std::wstring wstr_value;
 
-  std::int32_t temp;
+  std::int32_t file_magic;
   std::int32_t type_index;
   std::int32_t param_count;
+  std::int32_t file_version;
 
   assert(state != nullptr);
-  if(!read_int32(temp) || temp != magic) return false;
-  if(!read_int32(temp) || temp > version || temp <= 0) return false;
+  if(!read_int32(file_magic) || file_magic != magic) return false;
+  if(!read_int32(file_version) || file_version > version || file_version <= 0) return false;
   if(!read_int32(param_count) || param_count <= 0) return false;
 
   // Set defaults in case some params are missing or invalid.
@@ -93,7 +95,8 @@ io_stream::load(topology_info const& topology, param_value* state)
       break;
     case param_type::list:
     case param_type::knob_list:
-      if (!read_string(str_value)) return false;
+      if(file_version == 1 && !read_wstring(wstr_value)) return false;
+      if(file_version == 2 && !read_string(str_value)) return false;
       break;
     case param_type::text:
     case param_type::knob:
@@ -103,6 +106,16 @@ io_stream::load(topology_info const& topology, param_value* state)
     default:
       assert(false);
       break;
+    }
+
+    if (file_version == 1)
+    {
+      str_value.clear();
+      for (std::size_t i = 0; i < wstr_value.length(); i++)
+      {
+        assert(wstr_value[i] < 128);
+        str_value.push_back(static_cast<char>(wstr_value[i]));
+      }
     }
 
     for (std::int32_t rp = 0; rp < topology.input_param_count; rp++)

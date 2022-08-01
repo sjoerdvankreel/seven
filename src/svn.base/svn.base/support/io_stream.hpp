@@ -16,7 +16,8 @@ public:
   // Plugin format must provide these.
   virtual bool read_float(float& val) = 0;
   virtual bool read_int32(std::int32_t& val) = 0;
-  virtual bool read_string(std::string& val) = 0;
+  virtual bool read_string(std::string& val) = 0; 
+  virtual bool read_wstring(std::wstring& val) = 0;
 
   virtual bool write_float(float val) = 0;
   virtual bool write_int32(std::int32_t val) = 0;
