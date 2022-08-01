@@ -1,3 +1,4 @@
 * freqmod
 * fix last active voice automation
-* custom tabview ui
+* custom tabview ui ?
+* fix ui update bug on part select

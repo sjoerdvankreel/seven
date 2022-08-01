@@ -29,14 +29,14 @@ vst_io_stream::read_string(std::string& val)
 bool
 vst_io_stream::read_wstring(std::wstring& val)
 {
-  wchar_t chr;
-  Steinberg::int32 size;
   val.clear();
+  Steinberg::int32 size;
+  Steinberg::char16 chr;
   if (!_streamer->readInt32(size)) return false;
   for (std::int32_t i = 0; i < size; i++)
   {
     if (!_streamer->readChar16(chr)) return false;
-    val.append(1, chr);
+    val.append(1, static_cast<Steinberg::char16>(chr));
   }
   return true;
 }
