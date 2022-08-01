@@ -14,7 +14,7 @@ class view_switch_container_fix :
 public VSTGUI::UIViewSwitchContainer
 {
 public:
-  CLASS_METHODS(view_switch_container_fix, UIViewSwitchContainer)
+  CLASS_METHODS(view_switch_container_fix, VSTGUI::UIViewSwitchContainer)
   view_switch_container_fix(): UIViewSwitchContainer(VSTGUI::CRect(0, 0, 0, 0)) {}
 };
 
@@ -22,8 +22,11 @@ public:
 class view_switch_controller_fix :
 public VSTGUI::UIDescriptionViewSwitchController
 {
+protected:
+  void valueChanged(VSTGUI::CControl* control) override;
 public:
-  view_switch_controller_fix(UIViewSwitchContainer* view_switch, IUIDescription const* desc, IController* controller):
+  view_switch_controller_fix(VSTGUI::UIViewSwitchContainer* view_switch, 
+    VSTGUI::IUIDescription const* desc, VSTGUI::IController* controller):
   UIDescriptionViewSwitchController(view_switch, desc, controller) {}
 };
 
