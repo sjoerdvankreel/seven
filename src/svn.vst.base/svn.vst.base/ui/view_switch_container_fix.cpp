@@ -11,7 +11,7 @@ view_switch_container_fix_creator::create(
   UIAttributes const& attrs, IUIDescription const* desc) const
 { 
   auto result = new view_switch_container_fix();
-  new UIDescriptionViewSwitchController(result, desc, desc->getController());
+  new view_switch_controller_fix(result, desc, desc->getController());
   return result;
 }
 

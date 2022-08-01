@@ -18,6 +18,15 @@ public:
   view_switch_container_fix(): UIViewSwitchContainer(VSTGUI::CRect(0, 0, 0, 0)) {}
 };
 
+// View switch container triggering repaint for conditional visibility.
+class view_switch_controller_fix :
+public VSTGUI::UIDescriptionViewSwitchController
+{
+public:
+  view_switch_controller_fix(UIViewSwitchContainer* view_switch, IUIDescription const* desc, IController* controller):
+  UIDescriptionViewSwitchController(view_switch, desc, controller) {}
+};
+
 // VSTGUI container factory.
 class view_switch_container_fix_creator :
 public VSTGUI::UIViewCreator::UIViewSwitchContainerCreator
