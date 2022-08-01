@@ -519,12 +519,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Waveform",
                                             "origin": "124, 2",
                                             "size": "121, 71",
                                             "graph-type": "0",
                                             "row-span": "3",
                                             "column-span": "1",
-                                            "tooltip": "Waveform",
                                             "part-index": "0",
                                             "part-type": "0",
                                             "color": "color_00FFFFFF"
@@ -533,12 +533,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Frequency spectrum",
                                             "origin": "246, 2",
                                             "size": "121, 71",
                                             "graph-type": "1",
                                             "row-span": "3",
                                             "column-span": "1",
-                                            "tooltip": "Frequency spectrum",
                                             "part-index": "0",
                                             "part-type": "0",
                                             "color": "color_00FFFFFF"
@@ -1565,12 +1565,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Waveform",
                                             "origin": "124, 2",
                                             "size": "121, 71",
                                             "graph-type": "0",
                                             "row-span": "3",
                                             "column-span": "1",
-                                            "tooltip": "Waveform",
                                             "part-index": "1",
                                             "part-type": "0",
                                             "color": "color_00FFFFFF"
@@ -1579,12 +1579,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Frequency spectrum",
                                             "origin": "246, 2",
                                             "size": "121, 71",
                                             "graph-type": "1",
                                             "row-span": "3",
                                             "column-span": "1",
-                                            "tooltip": "Frequency spectrum",
                                             "part-index": "1",
                                             "part-type": "0",
                                             "color": "color_00FFFFFF"
@@ -2611,12 +2611,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Waveform",
                                             "origin": "124, 2",
                                             "size": "121, 71",
                                             "graph-type": "0",
                                             "row-span": "3",
                                             "column-span": "1",
-                                            "tooltip": "Waveform",
                                             "part-index": "2",
                                             "part-type": "0",
                                             "color": "color_00FFFFFF"
@@ -2625,12 +2625,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Frequency spectrum",
                                             "origin": "246, 2",
                                             "size": "121, 71",
                                             "graph-type": "1",
                                             "row-span": "3",
                                             "column-span": "1",
-                                            "tooltip": "Frequency spectrum",
                                             "part-index": "2",
                                             "part-type": "0",
                                             "color": "color_00FFFFFF"
@@ -3657,12 +3657,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Waveform",
                                             "origin": "124, 2",
                                             "size": "121, 71",
                                             "graph-type": "0",
                                             "row-span": "3",
                                             "column-span": "1",
-                                            "tooltip": "Waveform",
                                             "part-index": "3",
                                             "part-type": "0",
                                             "color": "color_00FFFFFF"
@@ -3671,12 +3671,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Frequency spectrum",
                                             "origin": "246, 2",
                                             "size": "121, 71",
                                             "graph-type": "1",
                                             "row-span": "3",
                                             "column-span": "1",
-                                            "tooltip": "Frequency spectrum",
                                             "part-index": "3",
                                             "part-type": "0",
                                             "color": "color_00FFFFFF"
@@ -4703,12 +4703,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Impulse response",
                                             "origin": "124, 2",
                                             "size": "121, 47",
                                             "graph-type": "0",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "Impulse response",
                                             "part-index": "0",
                                             "part-type": "4",
                                             "color": "color_00FFFFFF"
@@ -4717,12 +4717,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Frequency response",
                                             "origin": "246, 2",
                                             "size": "121, 47",
                                             "graph-type": "1",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "Frequency response",
                                             "part-index": "0",
                                             "part-type": "4",
                                             "color": "color_00FFFFFF"
@@ -5390,12 +5390,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Impulse response",
                                             "origin": "124, 2",
                                             "size": "121, 47",
                                             "graph-type": "0",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "Impulse response",
                                             "part-index": "1",
                                             "part-type": "4",
                                             "color": "color_00FFFFFF"
@@ -5404,12 +5404,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Frequency response",
                                             "origin": "246, 2",
                                             "size": "121, 47",
                                             "graph-type": "1",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "Frequency response",
                                             "part-index": "1",
                                             "part-type": "4",
                                             "color": "color_00FFFFFF"
@@ -6077,12 +6077,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Impulse response",
                                             "origin": "124, 2",
                                             "size": "121, 47",
                                             "graph-type": "0",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "Impulse response",
                                             "part-index": "2",
                                             "part-type": "4",
                                             "color": "color_00FFFFFF"
@@ -6091,12 +6091,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Frequency response",
                                             "origin": "246, 2",
                                             "size": "121, 47",
                                             "graph-type": "1",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "Frequency response",
                                             "part-index": "2",
                                             "part-type": "4",
                                             "color": "color_00FFFFFF"
@@ -6764,12 +6764,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Impulse response",
                                             "origin": "124, 2",
                                             "size": "121, 47",
                                             "graph-type": "0",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "Impulse response",
                                             "part-index": "3",
                                             "part-type": "4",
                                             "color": "color_00FFFFFF"
@@ -6778,12 +6778,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Frequency response",
                                             "origin": "246, 2",
                                             "size": "121, 47",
                                             "graph-type": "1",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "Frequency response",
                                             "part-index": "3",
                                             "part-type": "4",
                                             "color": "color_00FFFFFF"
@@ -7422,12 +7422,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Envelope",
                                             "origin": "246, 2",
                                             "size": "121, 71",
                                             "graph-type": "-1",
                                             "row-span": "3",
                                             "column-span": "1",
-                                            "tooltip": "Envelope",
                                             "part-index": "0",
                                             "part-type": "1",
                                             "color": "color_00DCFFFF"
@@ -8778,12 +8778,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Envelope",
                                             "origin": "246, 2",
                                             "size": "121, 71",
                                             "graph-type": "-1",
                                             "row-span": "3",
                                             "column-span": "1",
-                                            "tooltip": "Envelope",
                                             "part-index": "1",
                                             "part-type": "1",
                                             "color": "color_00DCFFFF"
@@ -10134,12 +10134,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Envelope",
                                             "origin": "246, 2",
                                             "size": "121, 71",
                                             "graph-type": "-1",
                                             "row-span": "3",
                                             "column-span": "1",
-                                            "tooltip": "Envelope",
                                             "part-index": "2",
                                             "part-type": "1",
                                             "color": "color_00DCFFFF"
@@ -11490,12 +11490,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "Envelope",
                                             "origin": "246, 2",
                                             "size": "121, 71",
                                             "graph-type": "-1",
                                             "row-span": "3",
                                             "column-span": "1",
-                                            "tooltip": "Envelope",
                                             "part-index": "3",
                                             "part-type": "1",
                                             "color": "color_00DCFFFF"
@@ -12846,12 +12846,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "LFO",
                                             "origin": "246, 2",
                                             "size": "121, 47",
                                             "graph-type": "-1",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "LFO",
                                             "part-index": "0",
                                             "part-type": "2",
                                             "color": "color_00DCFFFF"
@@ -13263,12 +13263,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "LFO",
                                             "origin": "246, 2",
                                             "size": "121, 47",
                                             "graph-type": "-1",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "LFO",
                                             "part-index": "1",
                                             "part-type": "2",
                                             "color": "color_00DCFFFF"
@@ -13680,12 +13680,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "LFO",
                                             "origin": "246, 2",
                                             "size": "121, 47",
                                             "graph-type": "-1",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "LFO",
                                             "part-index": "2",
                                             "part-type": "2",
                                             "color": "color_00DCFFFF"
@@ -14097,12 +14097,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "LFO",
                                             "origin": "246, 2",
                                             "size": "121, 47",
                                             "graph-type": "-1",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "LFO",
                                             "part-index": "3",
                                             "part-type": "2",
                                             "color": "color_00DCFFFF"
@@ -14514,12 +14514,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "LFO",
                                             "origin": "246, 2",
                                             "size": "121, 47",
                                             "graph-type": "-1",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "LFO",
                                             "part-index": "4",
                                             "part-type": "2",
                                             "color": "color_00DCFFFF"
@@ -14931,12 +14931,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "LFO",
                                             "origin": "246, 2",
                                             "size": "121, 47",
                                             "graph-type": "-1",
                                             "row-span": "2",
                                             "column-span": "1",
-                                            "tooltip": "LFO",
                                             "part-index": "5",
                                             "part-type": "2",
                                             "color": "color_00DCFFFF"
@@ -17822,12 +17822,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "CV",
                                             "origin": "124, 2",
                                             "size": "243, 47",
                                             "graph-type": "-1",
                                             "row-span": "2",
                                             "column-span": "2",
-                                            "tooltip": "CV",
                                             "part-index": "0",
                                             "part-type": "6",
                                             "color": "color_55B4FCFF"
@@ -19206,12 +19206,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "CV",
                                             "origin": "124, 2",
                                             "size": "243, 47",
                                             "graph-type": "-1",
                                             "row-span": "2",
                                             "column-span": "2",
-                                            "tooltip": "CV",
                                             "part-index": "1",
                                             "part-type": "6",
                                             "color": "color_55B4FCFF"
@@ -20590,12 +20590,12 @@
                                     "seven_graph_plot": {
                                         "attributes": {
                                             "class": "seven_graph_plot",
+                                            "tooltip": "CV",
                                             "origin": "124, 2",
                                             "size": "243, 47",
                                             "graph-type": "-1",
                                             "row-span": "2",
                                             "column-span": "2",
-                                            "tooltip": "CV",
                                             "part-index": "2",
                                             "part-type": "6",
                                             "color": "color_55B4FCFF"
@@ -21877,13 +21877,13 @@
                             "size": "369, 172"
                         },
                         "children": {
-                            "UIViewSwitchContainer": {
+                            "view_switch_container_fix": {
                                 "attributes": {
                                     "animation-time": "0",
                                     "template-switch-control": "active_0_oscillator",
                                     "origin": "0, 0",
                                     "template-names": "0,1,2,3",
-                                    "class": "UIViewSwitchContainer",
+                                    "class": "view_switch_container_fix",
                                     "size": "369, 172"
                                 }
                             },
@@ -21919,13 +21919,13 @@
                             "size": "369, 100"
                         },
                         "children": {
-                            "UIViewSwitchContainer": {
+                            "view_switch_container_fix": {
                                 "attributes": {
                                     "animation-time": "0",
                                     "template-switch-control": "active_0_filter",
                                     "origin": "0, 0",
                                     "template-names": "15,16,17,18",
-                                    "class": "UIViewSwitchContainer",
+                                    "class": "view_switch_container_fix",
                                     "size": "369, 100"
                                 }
                             },
@@ -22057,12 +22057,12 @@
                                                     "seven_graph_plot": {
                                                         "attributes": {
                                                             "class": "seven_graph_plot",
+                                                            "tooltip": "Amp",
                                                             "origin": "246, 2",
                                                             "size": "121, 23",
                                                             "graph-type": "-1",
                                                             "row-span": "1",
                                                             "column-span": "1",
-                                                            "tooltip": "Amp",
                                                             "part-index": "0",
                                                             "part-type": "3",
                                                             "color": "color_00FFFFFF"
@@ -22214,13 +22214,13 @@
                             "size": "369, 172"
                         },
                         "children": {
-                            "UIViewSwitchContainer": {
+                            "view_switch_container_fix": {
                                 "attributes": {
                                     "animation-time": "0",
                                     "template-switch-control": "active_0_envelope",
                                     "origin": "0, 0",
                                     "template-names": "4,5,6,7",
-                                    "class": "UIViewSwitchContainer",
+                                    "class": "view_switch_container_fix",
                                     "size": "369, 172"
                                 }
                             },
@@ -22256,13 +22256,13 @@
                             "size": "369, 76"
                         },
                         "children": {
-                            "UIViewSwitchContainer": {
+                            "view_switch_container_fix": {
                                 "attributes": {
                                     "animation-time": "0",
                                     "template-switch-control": "active_0_lfo",
                                     "origin": "0, 0",
                                     "template-names": "8,9,10,11,12,13",
-                                    "class": "UIViewSwitchContainer",
+                                    "class": "view_switch_container_fix",
                                     "size": "369, 76"
                                 }
                             },
@@ -22298,13 +22298,13 @@
                             "size": "369, 172"
                         },
                         "children": {
-                            "UIViewSwitchContainer": {
+                            "view_switch_container_fix": {
                                 "attributes": {
                                     "animation-time": "0",
                                     "template-switch-control": "active_0_audio_route",
                                     "origin": "0, 0",
                                     "template-names": "19,20",
-                                    "class": "UIViewSwitchContainer",
+                                    "class": "view_switch_container_fix",
                                     "size": "369, 172"
                                 }
                             },
@@ -22340,13 +22340,13 @@
                             "size": "369, 220"
                         },
                         "children": {
-                            "UIViewSwitchContainer": {
+                            "view_switch_container_fix": {
                                 "attributes": {
                                     "animation-time": "0",
                                     "template-switch-control": "active_0_cv_route",
                                     "origin": "0, 0",
                                     "template-names": "21,22,23",
-                                    "class": "UIViewSwitchContainer",
+                                    "class": "view_switch_container_fix",
                                     "size": "369, 220"
                                 }
                             },

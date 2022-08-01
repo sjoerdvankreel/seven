@@ -530,7 +530,7 @@ build_ui_part_switch_container(
   add_attribute(result, "template-switch-control", tag, allocator);
   add_attribute(result, "origin", size_to_string(0, 0), allocator);
   add_attribute(result, "template-names", template_names, allocator);
-  add_attribute(result, "class", "UIViewSwitchContainer", allocator);
+  add_attribute(result, "class", "view_switch_container_fix", allocator);
   add_attribute(result, "size", size_to_string(type.width, type.height), allocator);
   for (std::size_t i = 0; i < type.parts.size(); i++)
     add_member(templates_part, template_names_list[i], 
@@ -553,7 +553,7 @@ build_ui_part_type_container(
       add_child(result, "view_container_fix", build_ui_part_outer_container(topology, type, type_index, type.parts[i], allocator), allocator);
   else
   {
-    add_child(result, "UIViewSwitchContainer", build_ui_part_switch_container(topology, type, type_index, templates_part, allocator), allocator);
+    add_child(result, "view_switch_container_fix", build_ui_part_switch_container(topology, type, type_index, templates_part, allocator), allocator);
     add_child(result, "COptionMenu", build_ui_param_menu(topology, type, selector_index, margin, 2 * padding_param_group, allocator), allocator);
   }
   return result;
