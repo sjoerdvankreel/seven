@@ -1,4 +1,3 @@
-* fix performance
 * freqmod
 * fix last active voice automation
 * custom tabview ui
